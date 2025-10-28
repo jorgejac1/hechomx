@@ -1,0 +1,92 @@
+import Link from 'next/link';
+import Image from 'next/image';
+
+const categories = [
+  {
+    name: 'Arte',
+    image: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=600',
+    count: '2,453 productos',
+    href: '/productos?categoria=Arte'
+  },
+  {
+    name: 'Joyería',
+    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600',
+    count: '1,892 productos',
+    href: '/productos?categoria=Joyería'
+  },
+  {
+    name: 'Decoración del Hogar',
+    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800',
+    count: '3,124 productos',
+    href: '/productos?categoria=Decoración del Hogar'
+  },
+  {
+    name: 'Ropa',
+    image: 'https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=600',
+    count: '1,567 productos',
+    href: '/productos?categoria=Ropa'
+  },
+  {
+    name: 'Cocina',
+    image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=600',
+    count: '987 productos',
+    href: '/productos?categoria=Cocina'
+  },
+  {
+    name: 'Textiles',
+    image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=600',
+    count: '756 productos',
+    href: '/productos?categoria=Textiles'
+  }
+];
+
+export default function CategoriesSection() {
+  return (
+    <section className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Explora por Categoría
+          </h2>
+          <p className="text-gray-600 text-lg">
+            Descubre productos únicos organizados por categoría
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {categories.map((category) => (
+            <Link
+              key={category.name}
+              href={category.href}
+              className="group relative h-48 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+            >
+              {/* Background Image */}
+              <Image
+                src={category.image}
+                alt={category.name}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+              
+              {/* Consistent Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              
+              {/* Content */}
+              <div className="absolute inset-0 flex flex-col justify-end p-4">
+                <h3 className="text-white font-bold text-lg mb-1">
+                  {category.name}
+                </h3>
+                <p className="text-white/90 text-sm">
+                  {category.count}
+                </p>
+              </div>
+
+              {/* Hover Effect */}
+              <div className="absolute inset-0 bg-primary-600/0 group-hover:bg-primary-600/20 transition-colors duration-300" />
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

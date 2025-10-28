@@ -1,0 +1,1132 @@
+[
+  {
+    "id": "1",
+    "name": "Tajín de Barro Negro",
+    "description": "Tajín artesanal de barro negro de Oaxaca, perfecto para cocinar moles y guisos tradicionales. Elaborado con técnicas ancestrales que datan de más de 2000 años, cada pieza es única y funcional. El barro negro adquiere su característico color mediante un proceso de cocción especial en horno subterráneo.",
+    "price": 850,
+    "currency": "MXN",
+    "category": "Cocina",
+    "subcategory": "platos",
+    "state": "Oaxaca",
+    "maker": "Taller de Barro Negro",
+    "images": [
+      "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+      "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=800",
+      "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=800",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
+      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800"
+    ],
+    "videos": [
+      "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.8,
+    "reviewCount": 127,
+    "materials": [
+      "Barro negro natural de San Bartolo Coyotepec",
+      "100% libre de plomo y químicos",
+      "Pulido con cuarzo"
+    ],
+    "dimensions": {
+      "diameter": "25 cm",
+      "height": "15 cm",
+      "capacity": "2 litros"
+    },
+    "careInstructions": [
+      "Curar antes del primer uso con agua de cal",
+      "Lavar a mano con agua tibia",
+      "No usar en microondas",
+      "Ideal para cocción a fuego lento"
+    ],
+    "features": [
+      "Elaborado con técnica ancestral de más de 2000 años",
+      "Color negro natural sin tintes artificiales",
+      "Retiene calor uniformemente para cocción perfecta",
+      "Ideal para moles, guisos y caldos tradicionales"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Alebrije de Madera Tallada",
+    "description": "Alebrije artesanal de madera de copal, pintado a mano con colores vibrantes que representan la imaginación y tradición oaxaqueña. Cada alebrije es una criatura fantástica única, tallada con precisión y decorada con diseños tradicionales zapotecas.",
+    "price": 2500,
+    "currency": "MXN",
+    "category": "Arte",
+    "subcategory": "alebrijes",
+    "state": "Oaxaca",
+    "maker": "Alebrijes Don Pedro",
+    "images": [
+      "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800",
+      "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800",
+      "https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800",
+      "https://images.unsplash.com/photo-1615529162924-f8605388461d?w=800",
+      "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800",
+      "https://images.unsplash.com/photo-1582201942988-13e60e4556ee?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 5.0,
+    "reviewCount": 89,
+    "materials": [
+      "Madera de copal (Bursera glabrifolia)",
+      "Pinturas acrílicas de alta calidad",
+      "Barniz protector mate"
+    ],
+    "dimensions": {
+      "length": "30 cm",
+      "width": "15 cm",
+      "height": "25 cm"
+    },
+    "careInstructions": [
+      "Limpiar con plumero o paño seco suave",
+      "Evitar exposición directa al sol",
+      "Mantener alejado de humedad excesiva",
+      "No sumergir en agua"
+    ],
+    "features": [
+      "Tallado a mano por artesanos zapotecas de 3ra generación",
+      "Diseño único e irrepetible inspirado en sueños",
+      "Colores vibrantes con acabado profesional",
+      "Pieza decorativa de colección para exhibición"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Jarrón de Talavera",
+    "description": "Jarrón de cerámica de Talavera pintado a mano con diseños tradicionales de Puebla. Esta técnica milenaria combina influencias españolas, árabes, chinas e indígenas para crear piezas únicas de gran valor artístico.",
+    "price": 1800,
+    "currency": "MXN",
+    "category": "Decoración del Hogar",
+    "subcategory": "jarrones",
+    "state": "Puebla",
+    "maker": "Cerámica Uriarte",
+    "images": [
+      "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=800",
+      "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800",
+      "https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?w=800",
+      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800",
+      "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
+      "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.6,
+    "reviewCount": 94,
+    "materials": [
+      "Cerámica de alta temperatura",
+      "Esmalte de estaño tradicional",
+      "Pigmentos minerales naturales"
+    ],
+    "dimensions": {
+      "diameter": "20 cm",
+      "height": "35 cm",
+      "opening": "12 cm"
+    },
+    "careInstructions": [
+      "Lavar a mano con agua tibia y jabón suave",
+      "No usar en lavavajillas",
+      "Secar completamente antes de guardar",
+      "Ideal para flores frescas o secas"
+    ],
+    "features": [
+      "Certificación de Denominación de Origen Talavera",
+      "Pintado a mano por maestros artesanos",
+      "Diseños tradicionales del siglo XVI",
+      "Cocción a más de 1000°C para mayor durabilidad"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Huipil Bordado de Chiapas",
+    "description": "Huipil tradicional con bordados florales hechos a mano por artesanas tzotziles de Chiapas. Cada flor y diseño cuenta una historia ancestral transmitida de generación en generación. Esta prenda representa la identidad cultural de los pueblos originarios.",
+    "price": 2200,
+    "currency": "MXN",
+    "category": "Ropa",
+    "subcategory": "huipiles",
+    "state": "Chiapas",
+    "maker": "Bordados Tradicionales",
+    "images": [
+      "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+      "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800",
+      "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=800",
+      "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800"
+    ],
+    "videos": [
+      "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.9,
+    "reviewCount": 156,
+    "materials": [
+      "Manta de algodón 100% natural",
+      "Hilos de algodón mercerizado",
+      "Bordado en punto de cruz tradicional"
+    ],
+    "dimensions": {
+      "length": "75 cm",
+      "width": "65 cm",
+      "size": "Talla única (ajustable)"
+    },
+    "careInstructions": [
+      "Lavar a mano con agua fría",
+      "No usar blanqueador",
+      "Secar a la sombra",
+      "Planchar por el revés a temperatura media"
+    ],
+    "features": [
+      "Bordado a mano que toma aproximadamente 3 meses",
+      "Diseños florales tradicionales tzotziles",
+      "Cada huipil cuenta una historia única",
+      "Confeccionado por cooperativa de mujeres artesanas"
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Collar de Plata con Turquesa",
+    "description": "Collar artesanal de plata .925 con piedra de turquesa natural mexicana. Diseño inspirado en joyería prehispánica combinado con técnicas contemporáneas. La turquesa proviene de minas de Sonora, conocida mundialmente por su calidad excepcional.",
+    "price": 1500,
+    "currency": "MXN",
+    "category": "Joyería",
+    "subcategory": "collares",
+    "state": "Guerrero",
+    "maker": "Platería Taxco",
+    "images": [
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800",
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800",
+      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800",
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800",
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.9,
+    "reviewCount": 241,
+    "materials": [
+      "Plata .925 (Sterling Silver)",
+      "Turquesa natural de Sonora",
+      "Cadena de plata maciza"
+    ],
+    "dimensions": {
+      "length": "45 cm (ajustable)",
+      "pendant": "3 cm × 2 cm",
+      "weight": "12 gramos"
+    },
+    "careInstructions": [
+      "Evitar contacto con perfumes y químicos",
+      "Limpiar con paño de plata especializado",
+      "Guardar en bolsa antihumedad",
+      "Quitar antes de nadar o bañarse"
+    ],
+    "features": [
+      "Plata de ley .925 con sello de garantía",
+      "Turquesa natural engastada a mano",
+      "Diseño inspirado en códices prehispánicos",
+      "Cierre de mosquetón seguro y resistente"
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Hamaca Yucateca",
+    "description": "Hamaca tejida a mano con algodón 100% natural por artesanos mayas de Yucatán. Siguiendo técnicas ancestrales, cada hamaca toma varios días en completarse. Ideal para descanso y relajación al estilo tradicional mexicano.",
+    "price": 1100,
+    "currency": "MXN",
+    "category": "Decoración del Hogar",
+    "subcategory": "textiles",
+    "state": "Yucatán",
+    "maker": "Hamacas Mérida",
+    "images": [
+      "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
+      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800",
+      "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 4.7,
+    "reviewCount": 178,
+    "materials": [
+      "Algodón 100% natural",
+      "Hilos trenzados en técnica maya",
+      "Aros de madera maciza"
+    ],
+    "dimensions": {
+      "length": "4 metros",
+      "width": "2.5 metros",
+      "capacity": "Hasta 150 kg"
+    },
+    "careInstructions": [
+      "Lavar a mano o máquina en ciclo suave",
+      "Secar al aire libre extendida",
+      "No usar blanqueador",
+      "Almacenar en lugar seco"
+    ],
+    "features": [
+      "Tejido tradicional maya de doble vuelta",
+      "Diseño ergonómico que se adapta al cuerpo",
+      "Transpirable y fresca para climas cálidos",
+      "Capacidad para toda la familia"
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Máscara Ceremonial de Madera",
+    "description": "Máscara tradicional tallada y pintada a mano, utilizada en danzas ceremoniales. Representa figuras mitológicas de la cultura guerrerense. Cada máscara es una obra de arte funcional que preserva tradiciones centenarias.",
+    "price": 950,
+    "currency": "MXN",
+    "category": "Arte",
+    "subcategory": "mascaras",
+    "state": "Guerrero",
+    "maker": "Arte Popular Mexicano",
+    "images": [
+      "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800",
+      "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800",
+      "https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800",
+      "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800",
+      "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 4.5,
+    "reviewCount": 67,
+    "materials": [
+      "Madera de cedro rojo",
+      "Pinturas acrílicas tradicionales",
+      "Acabado con laca protectora"
+    ],
+    "dimensions": {
+      "height": "28 cm",
+      "width": "20 cm",
+      "depth": "12 cm"
+    },
+    "careInstructions": [
+      "Limpiar con plumero suave",
+      "No exponer a humedad directa",
+      "Ideal para exhibición en interior",
+      "Evitar luz solar directa prolongada"
+    ],
+    "features": [
+      "Tallada a mano en madera de cedro",
+      "Diseño basado en danzas tradicionales de Guerrero",
+      "Colores vivos con simbolismo cultural",
+      "Puede usarse en presentaciones o como decoración"
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Rebozo de Seda",
+    "description": "Rebozo tradicional tejido en telar de pedal con seda natural de Michoacán. Esta prenda icónica mexicana combina elegancia y funcionalidad. El proceso de elaboración puede tomar hasta 3 meses por la complejidad de sus diseños.",
+    "price": 3500,
+    "currency": "MXN",
+    "category": "Ropa",
+    "subcategory": "rebozos",
+    "state": "Michoacán",
+    "maker": "Telares de Santa Clara",
+    "images": [
+      "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=800",
+      "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
+      "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800",
+      "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=800",
+      "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.8,
+    "reviewCount": 92,
+    "materials": [
+      "Seda natural 100%",
+      "Flecos tejidos a mano (rapacejo)",
+      "Tintes naturales"
+    ],
+    "dimensions": {
+      "length": "2.5 metros",
+      "width": "70 cm",
+      "weight": "150 gramos"
+    },
+    "careInstructions": [
+      "Lavar en seco únicamente",
+      "No retorcer ni escurrir",
+      "Planchar a temperatura baja",
+      "Guardar doblado en papel de seda"
+    ],
+    "features": [
+      "Tejido en telar de pedal tradicional",
+      "Diseño de ikat (amarrado antes de teñir)",
+      "Flecos elaborados uno por uno a mano",
+      "Versatil: abrigo, chal o accesorio de moda"
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Aretes de Plata Oxidada",
+    "description": "Aretes artesanales con diseño prehispánico que combinan la elegancia de la plata .925 con la belleza natural de la turquesa mexicana. Cada pieza es única, elaborada a mano por artesanos oaxaqueños con técnicas ancestrales.",
+    "price": 650,
+    "currency": "MXN",
+    "category": "Joyería",
+    "subcategory": "aretes",
+    "state": "Oaxaca",
+    "maker": "Plata Oaxaqueña",
+    "images": [
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800",
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800",
+      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800",
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800"
+    ],
+    "videos": [
+      "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.8,
+    "reviewCount": 198,
+    "materials": [
+      "Plata .925 (Sterling Silver)",
+      "Turquesa natural mexicana",
+      "Acabado oxidado tradicional"
+    ],
+    "dimensions": {
+      "length": "2.5 cm",
+      "width": "1.5 cm",
+      "weight": "8 gramos (el par)"
+    },
+    "careInstructions": [
+      "Evitar contacto con agua y químicos",
+      "Limpiar con paño suave y seco",
+      "Guardar en lugar seco y protegido",
+      "El acabado oxidado es intencional"
+    ],
+    "features": [
+      "Diseño único inspirado en arte prehispánico mexicano",
+      "Acabado oxidado que resalta los detalles artesanales",
+      "Piedras de turquesa natural engastadas a mano",
+      "Cierre seguro con sistema de presión"
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Molcajete de Piedra Volcánica",
+    "description": "Molcajete tradicional tallado a mano en piedra volcánica auténtica. Herramienta esencial en la cocina mexicana para preparar salsas, guacamole y especias. La porosidad natural de la piedra realza los sabores de forma única.",
+    "price": 750,
+    "currency": "MXN",
+    "category": "Cocina",
+    "subcategory": "molcajetes",
+    "state": "Puebla",
+    "maker": "Canteras Mexicanas",
+    "images": [
+      "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=800",
+      "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+      "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=800",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
+      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 5.0,
+    "reviewCount": 189,
+    "materials": [
+      "Piedra volcánica natural (basalto)",
+      "Tallado a mano con cinceles",
+      "Base de tres patas tradicional"
+    ],
+    "dimensions": {
+      "diameter": "20 cm",
+      "height": "12 cm",
+      "capacity": "750 ml"
+    },
+    "careInstructions": [
+      "Curar antes del primer uso moliendo arroz seco",
+      "Lavar solo con agua y cepillo de cerdas",
+      "Nunca usar jabón (absorbe los sabores)",
+      "Secar completamente después de cada uso"
+    ],
+    "features": [
+      "Tallado de una sola pieza de piedra volcánica",
+      "Textura natural perfecta para moler",
+      "Base estable con tres patas",
+      "Incluye tejolote (mano de molcajete)"
+    ]
+  },
+  {
+    "id": "11",
+    "name": "Blusa Bordada de Oaxaca",
+    "description": "Blusa tradicional con bordados florales en punto de cruz, elaborada por artesanas zapotecas. Los diseños representan la flora de la región y cada color tiene un significado especial en la cosmovisión indígena.",
+    "price": 890,
+    "currency": "MXN",
+    "category": "Ropa",
+    "subcategory": "blusas",
+    "state": "Oaxaca",
+    "maker": "Textiles Oaxaqueños",
+    "images": [
+      "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+      "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800",
+      "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.9,
+    "reviewCount": 203,
+    "materials": [
+      "Manta de algodón 100%",
+      "Hilos de algodón mercerizado",
+      "Bordado en punto de cruz"
+    ],
+    "dimensions": {
+      "sizes": "S, M, L, XL disponibles",
+      "length": "65 cm",
+      "width": "Variable según talla"
+    },
+    "careInstructions": [
+      "Lavar a mano con agua fría",
+      "No usar blanqueador ni suavizante",
+      "Secar a la sombra",
+      "Planchar por el revés a temperatura baja"
+    ],
+    "features": [
+      "Bordado 100% a mano en punto de cruz",
+      "Diseños florales tradicionales zapotecas",
+      "Cada blusa toma 2-3 semanas en completarse",
+      "Cuello y mangas con acabados tradicionales"
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Vela Aromática de Cera de Abeja",
+    "description": "Vela artesanal con esencias naturales mexicanas y cera de abeja pura. Elaboradas en pequeños lotes, cada vela purifica el aire mientras arde y tiene un tiempo de quemado superior a las velas convencionales.",
+    "price": 380,
+    "currency": "MXN",
+    "category": "Decoración del Hogar",
+    "subcategory": "velas",
+    "state": "Ciudad de México",
+    "maker": "Aromas Mexicanos",
+    "images": [
+      "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=800",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
+      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800",
+      "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 4.9,
+    "reviewCount": 267,
+    "materials": [
+      "Cera de abeja 100% pura",
+      "Aceites esenciales naturales",
+      "Mecha de algodón sin plomo"
+    ],
+    "dimensions": {
+      "diameter": "8 cm",
+      "height": "10 cm",
+      "weight": "200 gramos"
+    },
+    "careInstructions": [
+      "Quemar mínimo 2 horas por uso",
+      "Recortar mecha a 0.5 cm antes de encender",
+      "No dejar encendida sin supervisión",
+      "Tiempo de quemado: aproximadamente 40 horas"
+    ],
+    "features": [
+      "Cera de abeja pura que purifica el aire",
+      "Aromas: lavanda, vainilla, canela o copal",
+      "Quema limpia sin humo negro",
+      "Vaso de vidrio reutilizable"
+    ]
+  },
+  {
+    "id": "13",
+    "name": "Pulsera de Chaquira Huichol",
+    "description": "Pulsera tejida a mano con chaquira tradicional por artesanos wixárikas (huicholes). Los diseños geométricos representan elementos sagrados de la cosmovisión huichol como el venado, el maíz y el peyote.",
+    "price": 450,
+    "currency": "MXN",
+    "category": "Joyería",
+    "subcategory": "pulseras",
+    "state": "Nayarit",
+    "maker": "Arte Huichol",
+    "images": [
+      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800",
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
+      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 4.9,
+    "reviewCount": 134,
+    "materials": [
+      "Chaquira checoslovaca de alta calidad",
+      "Hilo encerado resistente",
+      "Cierre ajustable tejido"
+    ],
+    "dimensions": {
+      "width": "2.5 cm",
+      "length": "Ajustable de 15 a 20 cm",
+      "weight": "15 gramos"
+    },
+    "careInstructions": [
+      "Evitar contacto con agua y perfumes",
+      "Limpiar suavemente con paño húmedo",
+      "Guardar en lugar seco",
+      "No jalar con fuerza el tejido"
+    ],
+    "features": [
+      "Tejida a mano cuenta por cuenta",
+      "Diseños simbólicos de la cultura wixárika",
+      "Colores vibrantes que no se decoloran",
+      "Cada pulsera toma 3-4 días en completarse"
+    ]
+  },
+  {
+    "id": "14",
+    "name": "Pintura Acrílico Abstracto",
+    "description": "Obra original inspirada en colores mexicanos y elementos de la cultura popular. Técnica mixta sobre lienzo que captura la energía y vitalidad de México contemporáneo.",
+    "price": 4500,
+    "currency": "MXN",
+    "category": "Arte",
+    "subcategory": "pinturas",
+    "state": "Jalisco",
+    "maker": "Arte Contemporáneo MX",
+    "images": [
+      "https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800",
+      "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800",
+      "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800",
+      "https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 4.6,
+    "reviewCount": 87,
+    "materials": [
+      "Acrílico de alta calidad",
+      "Lienzo de algodón 100%",
+      "Bastidor de madera de pino"
+    ],
+    "dimensions": {
+      "width": "60 cm",
+      "height": "80 cm",
+      "depth": "3 cm"
+    },
+    "careInstructions": [
+      "No exponer a luz solar directa prolongada",
+      "Limpiar con plumero suave",
+      "Colgar en lugar seco",
+      "Incluye certificado de autenticidad"
+    ],
+    "features": [
+      "Obra única y original firmada por el artista",
+      "Inspirada en la paleta de colores mexicana",
+      "Lista para colgar con sistema de montaje",
+      "Incluye certificado de autenticidad numerado"
+    ]
+  },
+  {
+    "id": "15",
+    "name": "Vestido Típico de Tehuana",
+    "description": "Vestido tradicional con flores bordadas inspirado en el traje de tehuana del Istmo de Tehuantepec. Símbolo de la cultura zapoteca y emblema del matriarcado oaxaqueño.",
+    "price": 1650,
+    "currency": "MXN",
+    "category": "Ropa",
+    "subcategory": "vestidos",
+    "state": "Oaxaca",
+    "maker": "Bordados Oaxaqueños",
+    "images": [
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+      "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
+      "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800",
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 4.7,
+    "reviewCount": 178,
+    "materials": [
+      "Terciopelo de alta calidad",
+      "Satín para el holán",
+      "Flores bordadas a máquina"
+    ],
+    "dimensions": {
+      "sizes": "CH, M, G, EG disponibles",
+      "length": "Variable según talla",
+      "holán": "Amplitud completa"
+    },
+    "careInstructions": [
+      "Lavar en seco únicamente",
+      "Guardar colgado en percha acolchada",
+      "Planchar con vapor a distancia",
+      "No usar blanqueador"
+    ],
+    "features": [
+      "Diseño tradicional del Istmo de Tehuantepec",
+      "Bordados florales vibrantes y detallados",
+      "Holán amplio con caída elegante",
+      "Ideal para eventos especiales y festividades"
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Anillo de Plata con Ópalo",
+    "description": "Anillo artesanal con ópalo de fuego mexicano, piedra preciosa característica de Querétaro. El ópalo de fuego es único de México y presenta destellos naranjas y rojos intensos.",
+    "price": 1200,
+    "currency": "MXN",
+    "category": "Joyería",
+    "subcategory": "anillos",
+    "state": "Querétaro",
+    "maker": "Platería del Centro",
+    "images": [
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800",
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.8,
+    "reviewCount": 167,
+    "materials": [
+      "Plata .925 (Sterling Silver)",
+      "Ópalo de fuego natural de Querétaro",
+      "Engaste tipo bisel"
+    ],
+    "dimensions": {
+      "sizes": "Tallas 5 a 9 disponibles",
+      "stone": "8 mm × 6 mm",
+      "weight": "6 gramos"
+    },
+    "careInstructions": [
+      "El ópalo es delicado, evitar golpes",
+      "Limpiar con paño húmedo suave",
+      "Evitar químicos y temperaturas extremas",
+      "Quitar antes de actividades físicas"
+    ],
+    "features": [
+      "Ópalo de fuego natural mexicano",
+      "Destellos únicos en tonos naranja y rojo",
+      "Diseño contemporáneo minimalista",
+      "Plata de ley con sello de garantía"
+    ]
+  },
+  {
+    "id": "17",
+    "name": "Taza de Barro Negro",
+    "description": "Taza tradicional hecha a mano en barro negro de San Bartolo Coyotepec. Ideal para bebidas calientes, mantiene la temperatura por más tiempo gracias a las propiedades térmicas del barro.",
+    "price": 280,
+    "currency": "MXN",
+    "category": "Cocina",
+    "subcategory": "tazas",
+    "state": "Oaxaca",
+    "maker": "Taller de Barro Negro",
+    "images": [
+      "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=800",
+      "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+      "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=800",
+      "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.8,
+    "reviewCount": 234,
+    "materials": [
+      "Barro negro natural",
+      "100% libre de plomo",
+      "Pulido con cuarzo"
+    ],
+    "dimensions": {
+      "height": "9 cm",
+      "diameter": "8 cm",
+      "capacity": "300 ml"
+    },
+    "careInstructions": [
+      "Curar antes del primer uso",
+      "Lavar a mano con agua tibia",
+      "No usar en microondas",
+      "Apta para bebidas calientes y frías"
+    ],
+    "features": [
+      "Hecha a mano con técnica ancestral",
+      "Color negro natural sin tintes",
+      "Mantiene temperatura de bebidas",
+      "Asa ergonómica y resistente"
+    ]
+  },
+  {
+    "id": "18",
+    "name": "Tapete Tejido a Mano",
+    "description": "Tapete de lana virgen con diseños geométricos tradicionales zapotecas. Tejido en telar de pedal, cada tapete es una obra de arte funcional con tintes naturales.",
+    "price": 1850,
+    "currency": "MXN",
+    "category": "Decoración del Hogar",
+    "subcategory": "textiles",
+    "state": "Tlaxcala",
+    "maker": "Telares Tradicionales",
+    "images": [
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
+      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.8,
+    "reviewCount": 156,
+    "materials": [
+      "Lana virgen 100%",
+      "Tintes naturales de origen vegetal",
+      "Tejido en telar de pedal"
+    ],
+    "dimensions": {
+      "length": "120 cm",
+      "width": "80 cm",
+      "thickness": "8 mm"
+    },
+    "careInstructions": [
+      "Lavar en seco profesional únicamente",
+      "Sacudir regularmente para quitar polvo",
+      "Aspirar en dirección del tejido",
+      "Rotar cada 6 meses para desgaste uniforme"
+    ],
+    "features": [
+      "Tejido 100% a mano en telar tradicional",
+      "Diseños geométricos zapotecas",
+      "Tintes naturales que no se decoloran",
+      "Reversible con diseño en ambos lados"
+    ]
+  },
+  {
+    "id": "19",
+    "name": "Collar con Nombre Personalizado",
+    "description": "Collar de plata con nombre grabado a mano según tu preferencia. Diseño elegante y minimalista que hace de cada pieza un regalo único y personal.",
+    "price": 850,
+    "currency": "MXN",
+    "category": "Joyería",
+    "subcategory": "collares",
+    "state": "Ciudad de México",
+    "maker": "Joyería Artesanal MX",
+    "images": [
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800",
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 4.7,
+    "reviewCount": 156,
+    "materials": [
+      "Plata .925 (Sterling Silver)",
+      "Cadena de plata ajustable",
+      "Grabado láser de precisión"
+    ],
+    "dimensions": {
+      "pendant": "Variable según nombre",
+      "chain": "40-45 cm ajustable",
+      "thickness": "1 mm"
+    },
+    "careInstructions": [
+      "Limpiar con paño de plata",
+      "Evitar contacto con perfumes",
+      "Guardar en bolsa antihumedad",
+      "Tiempo de elaboración: 5-7 días"
+    ],
+    "features": [
+      "Personalización con cualquier nombre",
+      "Tipografía elegante y legible",
+      "Cadena ajustable incluida",
+      "Regalo perfecto para toda ocasión"
+    ]
+  },
+  {
+    "id": "20",
+    "name": "Plato Decorativo de Talavera",
+    "description": "Plato pintado a mano con diseño tradicional de Talavera. Certificado con Denominación de Origen, garantizando autenticidad y calidad en cada pieza decorativa.",
+    "price": 680,
+    "currency": "MXN",
+    "category": "Decoración del Hogar",
+    "subcategory": "talavera",
+    "state": "Puebla",
+    "maker": "Talavera Uriarte",
+    "images": [
+      "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800",
+      "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=800",
+      "https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?w=800",
+      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800",
+      "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800"
+    ],
+    "videos": [
+      "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.9,
+    "reviewCount": 198,
+    "materials": [
+      "Cerámica de alta temperatura",
+      "Esmalte de estaño",
+      "Pigmentos minerales naturales"
+    ],
+    "dimensions": {
+      "diameter": "30 cm",
+      "depth": "4 cm",
+      "weight": "800 gramos"
+    },
+    "careInstructions": [
+      "Solo uso decorativo (no apto para alimentos)",
+      "Limpiar con paño húmedo suave",
+      "Colgar con sistema de plato incluido",
+      "Evitar exposición a humedad constante"
+    ],
+    "features": [
+      "Certificación Denominación de Origen Talavera",
+      "Pintado 100% a mano por maestros artesanos",
+      "Diseño tradicional del siglo XVII",
+      "Incluye sistema de montaje para pared"
+    ]
+  },
+  {
+    "id": "21",
+    "name": "Jarrón de Barro Negro",
+    "description": "Jarrón artesanal de barro negro de Oaxaca con acabado brillante característico. El brillo se logra mediante pulido con cuarzo durante el proceso de elaboración antes de la cocción.",
+    "price": 850,
+    "currency": "MXN",
+    "category": "Decoración del Hogar",
+    "subcategory": "jarrones",
+    "state": "Oaxaca",
+    "maker": "Alfarería San Bartolo",
+    "images": [
+      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
+      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.7,
+    "reviewCount": 124,
+    "materials": [
+      "Barro negro natural",
+      "Pulido con piedra de cuarzo",
+      "100% hecho a mano"
+    ],
+    "dimensions": {
+      "height": "30 cm",
+      "diameter": "18 cm",
+      "opening": "12 cm"
+    },
+    "careInstructions": [
+      "Limpiar con paño húmedo",
+      "No sumergir completamente en agua",
+      "Ideal para flores secas o decoración",
+      "El brillo es natural, no es barniz"
+    ],
+    "features": [
+      "Brillo natural logrado por pulido con cuarzo",
+      "Forma asimétrica característica del barro negro",
+      "Cada pieza es única",
+      "Técnica ancestral de San Bartolo Coyotepec"
+    ]
+  },
+  {
+    "id": "22",
+    "name": "Escultura de Barro Policromado",
+    "description": "Escultura artesanal con acabado tradicional policromado de Michoacán. Representa figuras típicas de la cultura purépecha con colores vibrantes y detalles meticulosos.",
+    "price": 2100,
+    "currency": "MXN",
+    "category": "Arte",
+    "subcategory": "esculturas",
+    "state": "Michoacán",
+    "maker": "Artesanos de Pátzcuaro",
+    "images": [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
+      "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 4.5,
+    "reviewCount": 56,
+    "materials": [
+      "Barro rojo natural",
+      "Pinturas acrílicas",
+      "Barniz protector"
+    ],
+    "dimensions": {
+      "height": "35 cm",
+      "width": "20 cm",
+      "depth": "15 cm"
+    },
+    "careInstructions": [
+      "Solo para exhibición interior",
+      "Limpiar con plumero suave",
+      "Evitar humedad y luz solar directa",
+      "Manipular con cuidado"
+    ],
+    "features": [
+      "Modelada y pintada a mano",
+      "Representa tradiciones purépechas",
+      "Colores vibrantes con acabado profesional",
+      "Base incluida para exhibición"
+    ]
+  },
+  {
+    "id": "23",
+    "name": "Juego de Platos de Barro",
+    "description": "Set de 6 platos artesanales vidriados de Tonalá, Jalisco. La cerámica de Tonalá es reconocida mundialmente por sus diseños únicos y acabados de alta calidad.",
+    "price": 950,
+    "currency": "MXN",
+    "category": "Cocina",
+    "subcategory": "platos",
+    "state": "Jalisco",
+    "maker": "Cerámica de Tonalá",
+    "images": [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
+      "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
+      "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=800",
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 4.6,
+    "reviewCount": 143,
+    "materials": [
+      "Barro de Tonalá",
+      "Esmalte vidriado libre de plomo",
+      "Pintado a mano"
+    ],
+    "dimensions": {
+      "diameter": "22 cm cada plato",
+      "quantity": "6 platos",
+      "weight": "2.5 kg el set"
+    },
+    "careInstructions": [
+      "Lavar a mano preferentemente",
+      "Apto para uso con alimentos",
+      "No usar en microondas",
+      "Secar completamente antes de guardar"
+    ],
+    "features": [
+      "Set de 6 platos decorativos y funcionales",
+      "Diseños tradicionales de Tonalá",
+      "Esmalte brillante y duradero",
+      "Certificado libre de plomo"
+    ]
+  },
+  {
+    "id": "24",
+    "name": "Falda Bordada de Yucatán",
+    "description": "Falda tradicional con bordados mayas elaborada por artesanas de Yucatán. Los diseños representan flores endémicas de la región y simbolismo maya ancestral.",
+    "price": 1340,
+    "currency": "MXN",
+    "category": "Ropa",
+    "subcategory": "faldas",
+    "state": "Yucatán",
+    "maker": "Artesanas Mayas",
+    "images": [
+      "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800",
+      "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
+      "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+      "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.7,
+    "reviewCount": 134,
+    "materials": [
+      "Manta de algodón",
+      "Hilos de algodón para bordado",
+      "Bordado en punto xocbil chuy"
+    ],
+    "dimensions": {
+      "length": "90 cm",
+      "waist": "Ajustable con cordón",
+      "sizes": "CH, M, G disponibles"
+    },
+    "careInstructions": [
+      "Lavar a mano con agua fría",
+      "No usar blanqueador",
+      "Secar a la sombra",
+      "Planchar por el revés"
+    ],
+    "features": [
+      "Bordado tradicional maya a mano",
+      "Diseños florales únicos de Yucatán",
+      "Confeccionada por cooperativa de mujeres",
+      "Cintura ajustable con cordón tradicional"
+    ]
+  },
+  {
+    "id": "25",
+    "name": "Broche de Plata con Filigrana",
+    "description": "Broche artesanal con técnica de filigrana oaxaqueña. La filigrana es un arte antiguo que requiere años de práctica para dominar, creando diseños delicados con hilos de plata.",
+    "price": 780,
+    "currency": "MXN",
+    "category": "Joyería",
+    "subcategory": "broches",
+    "state": "Oaxaca",
+    "maker": "Plata Filigrana",
+    "images": [
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800",
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800"
+    ],
+    "inStock": true,
+    "featured": false,
+    "verified": true,
+    "rating": 4.6,
+    "reviewCount": 87,
+    "materials": [
+      "Plata .925 (Sterling Silver)",
+      "Técnica de filigrana tradicional",
+      "Pasador de seguridad"
+    ],
+    "dimensions": {
+      "diameter": "5 cm",
+      "thickness": "5 mm",
+      "weight": "10 gramos"
+    },
+    "careInstructions": [
+      "Limpiar con paño de plata suave",
+      "Guardar en bolsa individual",
+      "Evitar perfumes y químicos",
+      "Manipular con delicadeza (filigrana es delicada)"
+    ],
+    "features": [
+      "Elaborado con técnica de filigrana centenaria",
+      "Cada hilo de plata soldado a mano",
+      "Diseño floral tradicional oaxaqueño",
+      "Pasador seguro y resistente"
+    ]
+  }
+]

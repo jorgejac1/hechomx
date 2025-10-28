@@ -1,0 +1,350 @@
+"use client";
+
+import { useState } from "react";
+import { Product } from "@/types";
+import {
+  Heart,
+  Share2,
+  ShoppingCart,
+  Minus,
+  Plus,
+  MapPin,
+  CheckCircle,
+  Package2,
+} from "lucide-react";
+import DeliveryEstimate from "./DeliveryEstimate";
+import TrustIndicators from "./TrustIndicators";
+import SellerBadge from "./SellerBadge";
+
+interface ProductInfoProps {
+  product: Product;
+  selectedQuantity: number;
+  onQuantityChange: (quantity: number) => void;
+}
+
+export default function ProductInfo({
+  product,
+  selectedQuantity,
+  onQuantityChange,
+}: ProductInfoProps) {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
+
+  const handleAddToCart = async () => {
+    setIsAdding(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsAdding(false);
+    alert(
+      `Agregado ${selectedQuantity} ${
+        selectedQuantity === 1 ? "unidad" : "unidades"
+      } al carrito`
+    );
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: product.name,
+          text: product.description,
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.log("Error sharing:", err);
+      }
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert("Link copiado al portapapeles");
+    }
+  };
+
+  const decreaseQuantity = () => {
+    if (selectedQuantity > 1) {
+      onQuantityChange(selectedQuantity - 1);
+    }
+  };
+
+  const increaseQuantity = () => {
+    onQuantityChange(selectedQuantity + 1);
+  };
+
+  return (
+    <div className="flex flex-col space-y-6">
+      {/* Seller Badge */}
+      <SellerBadge verified={product.verified ?? false} makerName={product.maker} />
+
+      {/* Badges */}
+      <div className="flex items-center gap-2 flex-wrap">
+        {product.featured && (
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
+            Destacado
+          </span>
+        )}
+        {product.verified && (
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+            <CheckCircle className="w-4 h-4" />
+            Verificado
+          </span>
+        )}
+        {product.inStock && (
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+            <Package2 className="w-4 h-4" />
+            Listo para enviar
+          </span>
+        )}
+      </div>
+
+      {/* Product Name */}
+      <div>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+          {product.name}
+        </h1>
+        <div className="flex items-center gap-4 text-sm text-gray-600">
+          <div className="flex items-center gap-1">
+            <MapPin className="w-4 h-4" />
+            <span>{product.state}, México</span>
+          </div>
+          <span className="text-gray-400">•</span>
+          <button className="font-semibold text-gray-900 hover:text-teal-600 transition-colors">
+            {product.maker}
+          </button>
+        </div>
+      </div>
+
+      {/* Rating */}
+      {product.rating && product.reviewCount && (
+        <div className="flex items-center gap-3 pb-4 border-b border-gray-200">
+          <div className="flex items-center gap-1">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <svg
+                  key={i}
+                  className={`w-5 h-5 ${
+                    i < Math.floor(product.rating!)
+                      ? "text-yellow-400 fill-current"
+                      : "text-gray-300"
+                  }`}
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                </svg>
+              ))}
+            </div>
+            <span className="font-bold text-lg text-gray-900">
+              {product.rating.toFixed(1)}
+            </span>
+          </div>
+          <a
+            href="#reviews"
+            className="text-teal-600 hover:text-teal-700 underline font-medium"
+          >
+            ({product.reviewCount.toLocaleString("es-MX")}{" "}
+            {product.reviewCount === 1 ? "reseña" : "reseñas"})
+          </a>
+        </div>
+      )}
+
+      {/* Price */}
+      <div className="py-4 border-b border-gray-200">
+        <div className="flex items-baseline gap-2 mb-2">
+          <span className="text-4xl font-bold text-gray-900">
+            ${product.price.toLocaleString("es-MX")}
+          </span>
+          <span className="text-xl text-gray-600">{product.currency}</span>
+        </div>
+        <p className="text-sm text-gray-600">Impuestos incluidos</p>
+      </div>
+
+      {/* Delivery Estimate */}
+      <DeliveryEstimate />
+
+      {/* Stock Status */}
+      <div>
+        {product.inStock ? (
+          <div className="flex items-center gap-2 text-green-600">
+            <CheckCircle className="w-5 h-5" />
+            <span className="font-medium">Disponible para envío</span>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 text-red-600">
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+            <span className="font-medium">Producto agotado</span>
+          </div>
+        )}
+      </div>
+
+      {/* Quantity Selector */}
+      {product.inStock && (
+        <div>
+          <label className="block text-sm font-semibold text-gray-900 mb-3">
+            Cantidad
+          </label>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={decreaseQuantity}
+              disabled={selectedQuantity <= 1}
+              className="p-2 border-2 border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              aria-label="Disminuir cantidad"
+            >
+              <Minus className="w-5 h-5 text-gray-600" />
+            </button>
+            <input
+              type="number"
+              min="1"
+              value={selectedQuantity}
+              onChange={(e) => {
+                const value = parseInt(e.target.value);
+                if (value > 0) onQuantityChange(value);
+              }}
+              className="w-20 text-center py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 font-semibold"
+            />
+            <button
+              onClick={increaseQuantity}
+              className="p-2 border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              aria-label="Aumentar cantidad"
+            >
+              <Plus className="w-5 h-5 text-gray-600" />
+            </button>
+            <span className="text-sm text-gray-600 ml-2">
+              {product.inStock ? "Disponible" : "Agotado"}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Action Buttons */}
+      <div className="flex flex-col gap-3">
+        {product.inStock ? (
+          <>
+            {/* Add to Cart - Teal Color */}
+            <button
+              onClick={handleAddToCart}
+              disabled={isAdding}
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-teal-600 hover:bg-teal-700 disabled:bg-teal-400 text-white font-bold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 text-lg"
+            >
+              {isAdding ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span>Agregando...</span>
+                </>
+              ) : (
+                <>
+                  <ShoppingCart className="w-5 h-5" />
+                  <span>Agregar al carrito</span>
+                </>
+              )}
+            </button>
+
+            {/* Buy Now Button - Teal Border */}
+            <button className="w-full px-6 py-4 border-2 border-teal-600 text-teal-600 hover:bg-teal-50 font-bold rounded-lg transition-colors text-lg">
+              Comprar ahora
+            </button>
+          </>
+        ) : (
+          <button
+            disabled
+            className="w-full px-6 py-4 bg-gray-300 text-gray-500 font-bold rounded-lg cursor-not-allowed"
+          >
+            No disponible
+          </button>
+        )}
+
+        {/* Secondary Actions */}
+        <div className="flex gap-3">
+          {/* Favorite Button */}
+          <button
+            onClick={() => setIsFavorite(!isFavorite)}
+            className={`flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 border-2 rounded-lg transition-colors font-medium ${
+              isFavorite
+                ? "border-red-500 bg-red-50 text-red-600"
+                : "border-gray-300 hover:border-gray-400 text-gray-700"
+            }`}
+            aria-label={
+              isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"
+            }
+          >
+            <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
+            <span className="hidden sm:inline">Favoritos</span>
+          </button>
+
+          {/* Share Button */}
+          <button
+            onClick={handleShare}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 border-2 border-gray-300 hover:border-gray-400 rounded-lg transition-colors font-medium text-gray-700"
+            aria-label="Compartir producto"
+          >
+            <Share2 className="w-5 h-5" />
+            <span className="hidden sm:inline">Compartir</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Additional Info */}
+      <div className="bg-gray-50 rounded-lg p-4 space-y-2 text-sm text-gray-600">
+        <div className="flex items-start gap-2">
+          <svg
+            className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>Producto 100% hecho a mano</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <svg
+            className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>Envío seguro a toda la República Mexicana</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <svg
+            className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <span>Apoyas directamente a artesanos mexicanos</span>
+        </div>
+      </div>
+
+      {/* Trust Indicators */}
+      <TrustIndicators />
+    </div>
+  );
+}
