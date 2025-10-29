@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Star, ThumbsUp, MessageSquare, Camera } from 'lucide-react';
 import ReviewPhotos from './ReviewPhotos';
 import RatingBreakdown from './RatingBreakdown';
+import Badge from '@/components/common/Badge';
+import Button from '@/components/common/Button';
 
 interface ReviewsSectionProps {
   productId: number;
@@ -100,7 +102,7 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
             </div>
           </div>
 
-          {/* Rating Breakdown - NEW */}
+          {/* Rating Breakdown */}
           <RatingBreakdown rating={rating} />
         </div>
 
@@ -124,7 +126,7 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
         </div>
       </div>
 
-      {/* Filter and Write Review - NEW */}
+      {/* Filter and Write Review */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2 text-gray-600">
@@ -156,10 +158,14 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
           </div>
         </div>
 
-        <button className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors">
-          <MessageSquare className="w-5 h-5" />
-          <span>Escribir una reseña</span>
-        </button>
+        {/* UPDATED: Write Review Button */}
+        <Button
+          variant="secondary"
+          size="md"
+          icon={<MessageSquare className="w-5 h-5" />}
+        >
+          Escribir una reseña
+        </Button>
       </div>
 
       {/* Reviews List */}
@@ -175,10 +181,11 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold text-gray-900">{review.author}</span>
+                    {/* UPDATED: Verified Purchase Badge */}
                     {review.verified && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                      <Badge variant="success" size="sm">
                         Compra verificada
-                      </span>
+                      </Badge>
                     )}
                   </div>
                   <div className="flex items-center gap-2 mt-1">
@@ -206,7 +213,7 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
               </div>
             </div>
 
-            {/* Review Photos - NEW */}
+            {/* Review Photos */}
             <ReviewPhotos photos={review.photos} />
 
             {/* Review Content */}
@@ -226,12 +233,14 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
       {/* Show More Button */}
       {reviews.length > 3 && filter === 'all' && (
         <div className="mt-8 text-center">
-          <button
+          {/* UPDATED: Show More Button */}
+          <Button
+            variant="secondary"
+            size="md"
             onClick={() => setShowAll(!showAll)}
-            className="px-6 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
           >
             {showAll ? 'Ver menos reseñas' : `Ver todas las reseñas (${reviews.length})`}
-          </button>
+          </Button>
         </div>
       )}
     </div>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { Product } from '@/types';
+import Button from '@/components/common/Button';
 
 interface StickyCartBarProps {
   product: Product;
@@ -15,7 +16,6 @@ export default function StickyCartBar({ product, selectedQuantity, onAddToCart }
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show sticky bar after scrolling 500px
       setIsVisible(window.scrollY > 500);
     };
 
@@ -34,13 +34,16 @@ export default function StickyCartBar({ product, selectedQuantity, onAddToCart }
             ${product.price.toLocaleString('es-MX')} {product.currency}
           </p>
         </div>
-        <button
+        
+        <Button
+          variant="primary"
+          size="md"
           onClick={onAddToCart}
-          className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg transition-colors"
+          icon={<ShoppingCart className="w-5 h-5" />}
+          className="flex-shrink-0"
         >
-          <ShoppingCart className="w-5 h-5" />
-          <span>Agregar</span>
-        </button>
+          Agregar
+        </Button>
       </div>
     </div>
   );

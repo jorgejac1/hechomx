@@ -1,6 +1,7 @@
 'use client';
 
 import { CheckCircle, MessageCircle, Store } from 'lucide-react';
+import Button from '@/components/common/Button';
 
 interface SellerProfileProps {
   maker: string;
@@ -53,14 +54,23 @@ export default function SellerProfile({ maker, verified, state }: SellerProfileP
 
       {/* Action Buttons */}
       <div className="flex gap-3">
-        <button className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-colors">
-          <Store className="w-5 h-5" />
-          <span>Ver tienda</span>
-        </button>
-        <button className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-semibold rounded-lg transition-colors">
-          <MessageCircle className="w-5 h-5" />
-          <span>Contactar</span>
-        </button>
+        <Button
+          variant="primary"
+          size="md"
+          icon={<Store className="w-5 h-5" />}
+          fullWidth
+        >
+          Ver tienda
+        </Button>
+        
+        <Button
+          variant="outline"
+          size="md"
+          icon={<MessageCircle className="w-5 h-5" />}
+          fullWidth
+        >
+          Contactar
+        </Button>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@
 import { useState, useRef, MouseEvent } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, ZoomIn, Play, X, Sparkles, Shield, Package } from 'lucide-react';
+import Badge from '@/components/common/Badge';
 
 interface ProductGalleryProps {
   images: string[];
@@ -178,20 +179,32 @@ export default function ProductGallery({ images, videos = [], productName }: Pro
         </div>
       </div>
 
-      {/* Info Badges */}
+      {/* Info Badges - UPDATED */}
       <div className="flex flex-wrap items-center justify-center gap-2 text-xs">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-50 text-primary-700 rounded-full font-medium border border-primary-100">
-          <Sparkles className="w-3.5 h-3.5" />
+        <Badge 
+          variant="primary" 
+          size="sm"
+          icon={<Sparkles className="w-3.5 h-3.5" />}
+        >
           100% Hecho a Mano
-        </span>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-50 text-green-700 rounded-full font-medium border border-green-100">
-          <Shield className="w-3.5 h-3.5" />
+        </Badge>
+        
+        <Badge 
+          variant="success" 
+          size="sm"
+          icon={<Shield className="w-3.5 h-3.5" />}
+        >
           Artesano Verificado
-        </span>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full font-medium border border-blue-100">
-          <Package className="w-3.5 h-3.5" />
+        </Badge>
+        
+        <Badge 
+          variant="info" 
+          size="sm"
+          icon={<Package className="w-3.5 h-3.5" />}
+        >
           Envío Nacional
-        </span>
+        </Badge>
+        
         <span className="text-gray-400 hidden sm:inline">•</span>
         <span className="text-gray-500 hidden sm:inline">
           {currentItem.type === 'image' ? 'Pasa el cursor para zoom' : 'Reproduce el video'}

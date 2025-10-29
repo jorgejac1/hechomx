@@ -10,7 +10,6 @@ interface SeasonalSectionProps {
   products: Product[];
 }
 
-// Imágenes de ejemplo por categoría
 const categoryImages = {
   'halloween': [
     { url: 'https://images.unsplash.com/photo-1509557965875-b88c97052f0e?w=400', price: 450, name: 'Decoración Halloween' },
@@ -38,7 +37,6 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
   const [displayImages, setDisplayImages] = useState<any[]>([]);
 
   useEffect(() => {
-    // Get all active themes for current time
     const active = seasonalThemes.filter(theme => {
       const current = getCurrentSeasonalTheme();
       return current?.id === theme.id || isUpcoming(theme);
@@ -58,7 +56,6 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
     const day = String(today.getDate()).padStart(2, '0');
     const currentDate = `${month}-${day}`;
     
-    // Show themes within 30 days
     const themeStart = theme.startDate;
     return themeStart >= currentDate && themeStart <= addDays(currentDate, 30);
   };
@@ -88,60 +85,63 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
   const currentTheme = activeThemes.find(t => t.id === selectedTheme) || activeThemes[0];
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-8 sm:py-10 md:py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Seasonal Filters */}
-        <div className="flex flex-wrap items-center gap-3 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Compra por temporada:</h2>
-          {activeThemes.map((theme) => (
-            <button
-              key={theme.id}
-              onClick={() => handleThemeChange(theme.id)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all ${
-                selectedTheme === theme.id
-                  ? `${theme.bgColor} ${theme.color} shadow-md`
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              {theme.icon} {theme.name}
-            </button>
-          ))}
+        {/* Seasonal Filters - Mobile Optimized */}
+        <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Compra por temporada:</h2>
+          <div className="flex flex-wrap gap-2 sm:gap-3">
+            {activeThemes.map((theme) => (
+              <button
+                key={theme.id}
+                onClick={() => handleThemeChange(theme.id)}
+                className={`px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-sm sm:text-base font-semibold transition-all ${
+                  selectedTheme === theme.id
+                    ? `${theme.bgColor} ${theme.color} shadow-md`
+                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                {theme.icon} {theme.name}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Collage Grid */}
-        <div className="grid grid-cols-12 gap-3 h-[400px]">
-          {/* Left Panel */}
-          <div className={`col-span-12 md:col-span-4 ${currentTheme.bgColor} rounded-2xl p-6 flex flex-col justify-between shadow-md`}>
+        {/* Collage Grid - Mobile: Vertical, Desktop: Horizontal */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-3 md:h-[400px]">
+          {/* Left Panel - Info Card */}
+          <div className={`md:col-span-4 ${currentTheme.bgColor} rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col justify-between shadow-md`}>
             <div>
-              <span className="inline-block bg-white px-3 py-1 rounded-full text-xs font-bold uppercase text-gray-900 mb-3">
+              <span className="inline-block bg-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold uppercase text-gray-900 mb-2 sm:mb-3">
                 {currentTheme.categories[0]}
               </span>
-              <h3 className={`text-2xl font-bold mb-3 ${currentTheme.color}`}>
+              <h3 className={`text-xl sm:text-2xl font-bold mb-2 sm:mb-3 ${currentTheme.color}`}>
                 Regalos especiales para {currentTheme.name}
               </h3>
-              <p className="text-gray-700 text-sm mb-4">
+              <p className="text-gray-700 text-sm mb-3 sm:mb-4">
                 {currentTheme.description}
               </p>
             </div>
             <Link
               href={`/productos?temporada=${currentTheme.id}`}
-              className="block bg-white text-center text-gray-900 px-5 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm shadow-sm"
+              className="block bg-white text-center text-gray-900 px-4 sm:px-5 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm shadow-sm"
             >
               Inspírate
             </Link>
           </div>
 
-          {/* Image Grid - Collage Style */}
-          <div className="col-span-12 md:col-span-8 grid grid-cols-6 gap-3">
+          {/* Image Grid - Mobile: 2 columns, Desktop: Complex grid */}
+          <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-3">
             {displayImages.map((item, index) => {
-              // Different sizes for collage effect
+              // Mobile: Simple 2-column grid
+              // Desktop: Complex collage sizes
               const sizes = [
-                'col-span-4 row-span-2', // Large
-                'col-span-2 row-span-1', // Small
-                'col-span-2 row-span-2', // Tall
-                'col-span-2 row-span-1', // Small
-                'col-span-2 row-span-1', // Small
-                'col-span-2 row-span-1', // Small
+                'md:col-span-4 md:row-span-2', // Large
+                'md:col-span-2 md:row-span-1', // Small
+                'md:col-span-2 md:row-span-2', // Tall
+                'md:col-span-2 md:row-span-1', // Small
+                'md:col-span-2 md:row-span-1', // Small
+                'md:col-span-2 md:row-span-1', // Small
               ];
               
               const sizeClass = sizes[index % sizes.length];
@@ -150,7 +150,7 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
                 <Link
                   key={index}
                   href={`/productos?temporada=${currentTheme.id}`}
-                  className={`${sizeClass} group relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300`}
+                  className={`${sizeClass} col-span-1 group relative rounded-lg sm:rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-32 sm:h-40 md:h-auto`}
                 >
                   {/* Image */}
                   <div className="relative w-full h-full">
@@ -160,18 +160,17 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    {/* Dark overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                   </div>
 
                   {/* Price Badge */}
-                  <div className="absolute top-2 left-2 bg-white text-gray-900 px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                  <div className="absolute top-1.5 sm:top-2 left-1.5 sm:left-2 bg-white text-gray-900 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-bold shadow-lg">
                     ${item.price}
                   </div>
 
-                  {/* Product Name on Hover */}
-                  <div className="absolute bottom-0 left-0 right-0 p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="font-semibold text-sm">{item.name}</p>
+                  {/* Product Name on Hover - Hidden on mobile */}
+                  <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 text-white sm:transform sm:translate-y-full sm:group-hover:translate-y-0 sm:transition-transform sm:duration-300 bg-gradient-to-t from-black/60 to-transparent sm:bg-transparent">
+                    <p className="font-semibold text-xs sm:text-sm line-clamp-1">{item.name}</p>
                   </div>
                 </Link>
               );
@@ -179,14 +178,14 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
           </div>
         </div>
 
-        {/* View All Link */}
-        <div className="mt-6 text-center">
+        {/* View All Link - Mobile Optimized */}
+        <div className="mt-4 sm:mt-6 text-center">
           <Link
             href={`/productos?temporada=${currentTheme.id}`}
-            className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold"
+            className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-sm sm:text-base"
           >
             Ver toda la colección
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>

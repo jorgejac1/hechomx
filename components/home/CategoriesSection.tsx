@@ -42,23 +42,25 @@ const categories = [
 
 export default function CategoriesSection() {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+        {/* Header - Mobile Optimized */}
+        <div className="text-center mb-6 sm:mb-8 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-4">
             Explora por Categoría
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 px-4">
             Descubre productos únicos organizados por categoría
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {/* Categories Grid - Mobile: 2 columns, Tablet: 3, Desktop: 6 */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           {categories.map((category) => (
             <Link
               key={category.name}
               href={category.href}
-              className="group relative h-48 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className="group relative h-40 sm:h-44 md:h-48 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
             >
               {/* Background Image */}
               <Image
@@ -72,11 +74,11 @@ export default function CategoriesSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
               
               {/* Content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-4">
-                <h3 className="text-white font-bold text-lg mb-1">
+              <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-4">
+                <h3 className="text-white font-bold text-base sm:text-lg mb-0.5 sm:mb-1">
                   {category.name}
                 </h3>
-                <p className="text-white/90 text-sm">
+                <p className="text-white/90 text-xs sm:text-sm">
                   {category.count}
                 </p>
               </div>

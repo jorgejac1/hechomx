@@ -1,7 +1,7 @@
 'use client';
 
 import { MapPin, CheckCircle, MessageCircle, Store } from 'lucide-react';
-import Link from 'next/link';
+import Button from '@/components/common/Button';
 
 interface ArtisanCardProps {
   artisanName: string;
@@ -60,17 +60,24 @@ export default function ArtisanCard({ artisanName, location, verified }: Artisan
 
           {/* Actions */}
           <div className="flex flex-wrap gap-3">
-            <Link
+            <Button
+              variant="primary"
+              size="md"
               href={`/artesanos/${artisanName.toLowerCase().replace(/\s+/g, '-')}`}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors"
+              icon={<Store className="w-4 h-4" />}
+              iconPosition="left"
             >
-              <Store className="w-4 h-4" />
-              <span>Ver tienda</span>
-            </Link>
-            <button className="inline-flex items-center gap-2 px-4 py-2 border-2 border-gray-300 hover:border-gray-400 text-gray-700 font-medium rounded-lg transition-colors">
-              <MessageCircle className="w-4 h-4" />
-              <span>Contactar</span>
-            </button>
+              Ver tienda
+            </Button>
+            
+            <Button
+              variant="outline"
+              size="md"
+              icon={<MessageCircle className="w-4 h-4" />}
+              iconPosition="left"
+            >
+              Contactar
+            </Button>
           </div>
         </div>
       </div>

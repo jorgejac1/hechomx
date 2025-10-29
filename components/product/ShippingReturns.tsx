@@ -1,6 +1,7 @@
 'use client';
 
 import { Truck, RotateCcw, Shield } from 'lucide-react';
+import Button from '@/components/common/Button';
 
 export default function ShippingReturns() {
   return (
@@ -38,9 +39,14 @@ export default function ShippingReturns() {
               Aceptamos devoluciones dentro de los 30 días posteriores a la entrega. 
               El producto debe estar en su estado original sin usar.
             </p>
-            <button className="mt-3 text-sm text-teal-600 hover:text-teal-700 font-medium underline">
+            <Button
+              variant="ghost"
+              size="sm"
+              href="/politicas/devoluciones"
+              className="mt-3 !px-0 underline"
+            >
               Ver política completa de devoluciones →
-            </button>
+            </Button>
           </div>
         </div>
 

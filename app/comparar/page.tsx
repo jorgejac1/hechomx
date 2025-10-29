@@ -2,8 +2,9 @@
 
 import { useComparison } from '@/contexts/ComparisonContext';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Button from '@/components/common/Button';
+import Badge from '@/components/common/Badge';
 
 export default function ComparePage() {
   const { comparisonProducts, clearComparison } = useComparison();
@@ -22,17 +23,22 @@ export default function ComparePage() {
             No hay productos para comparar
           </h1>
           <p className="text-gray-600 mb-8">
-            Selecciona productos desde el listado usando los checkboxes para compararlos aquí
+            Selecciona productos desde el listado usando los botones de comparación
           </p>
-          <Link
+          {/* UPDATED: Empty State Button */}
+          <Button
+            variant="primary"
+            size="lg"
             href="/productos"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition"
+            icon={
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            }
+            iconPosition="right"
           >
             Ver productos
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
+          </Button>
         </div>
       </div>
     );
@@ -61,21 +67,24 @@ export default function ComparePage() {
               Comparando {comparisonProducts.length} {comparisonProducts.length === 1 ? 'producto' : 'productos'}
             </p>
           </div>
+          {/* UPDATED: Header Action Buttons */}
           <div className="flex gap-3">
-            <button
+            <Button
+              variant="ghost"
+              size="md"
               onClick={clearComparison}
-              className="px-4 py-2 text-gray-700 hover:text-gray-900 font-medium transition focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-lg"
-              aria-label="Limpiar todos los productos de la comparación"
+              ariaLabel="Limpiar todos los productos de la comparación"
             >
               Limpiar todo
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="outline"
+              size="md"
               onClick={() => router.back()}
-              className="px-6 py-2 bg-gray-200 text-gray-900 rounded-lg font-medium hover:bg-gray-300 transition focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-              aria-label="Volver a la página anterior"
+              ariaLabel="Volver a la página anterior"
             >
               Volver
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -103,12 +112,20 @@ export default function ComparePage() {
                         <h3 className="font-bold text-gray-900 text-center mb-2 line-clamp-2">
                           {product.name}
                         </h3>
-                        <Link
+                        {/* UPDATED: Product Detail Link */}
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           href={`/productos/${product.id}`}
-                          className="text-primary-600 hover:text-primary-700 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
+                          icon={
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          }
+                          iconPosition="right"
                         >
-                          Ver detalles →
-                        </Link>
+                          Ver detalles
+                        </Button>
                       </div>
                     </th>
                   ))}
@@ -122,6 +139,7 @@ export default function ComparePage() {
                     </td>
                     {comparisonProducts.map((product) => (
                       <td key={product.id} className="p-4 text-center">
+                        {/* Price */}
                         {feature.key === 'price' && (
                           <div>
                             <span className="text-2xl font-bold text-gray-900">
@@ -130,14 +148,20 @@ export default function ComparePage() {
                             <span className="text-sm text-gray-500 ml-1">{product.currency}</span>
                           </div>
                         )}
+
+                        {/* State */}
                         {feature.key === 'state' && (
                           <span className="text-gray-700">{product.state}</span>
                         )}
+
+                        {/* Category - UPDATED */}
                         {feature.key === 'category' && (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                          <Badge variant="info" size="sm">
                             {product.category}
-                          </span>
+                          </Badge>
                         )}
+
+                        {/* Rating */}
                         {feature.key === 'rating' && product.rating && (
                           <div className="flex items-center justify-center gap-1">
                             <svg className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20" aria-hidden="true">
@@ -146,26 +170,37 @@ export default function ComparePage() {
                             <span className="font-semibold text-gray-900">{product.rating}</span>
                           </div>
                         )}
+
+                        {/* Review Count */}
                         {feature.key === 'reviewCount' && product.reviewCount && (
                           <span className="text-gray-600">
                             {product.reviewCount.toLocaleString('es-MX')} reseñas
                           </span>
                         )}
+
+                        {/* Maker */}
                         {feature.key === 'maker' && (
                           <span className="text-gray-700 font-medium">{product.maker}</span>
                         )}
+
+                        {/* In Stock - UPDATED */}
                         {feature.key === 'inStock' && (
                           product.inStock ? (
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                              <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
+                            <Badge 
+                              variant="success" 
+                              size="sm"
+                              icon={
+                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                              }
+                            >
                               Disponible
-                            </span>
+                            </Badge>
                           ) : (
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                            <Badge variant="danger" size="sm">
                               Agotado
-                            </span>
+                            </Badge>
                           )
                         )}
                       </td>

@@ -11,7 +11,6 @@ interface DealProduct extends Product {
   dealTag?: string;
 }
 
-// Move data OUTSIDE component to prevent recreation on each render
 const DEAL_PRODUCTS: DealProduct[] = [
   {
     id: '1',
@@ -154,19 +153,19 @@ export default function DealsSection() {
   };
 
   return (
-    <section className="py-12 bg-white">
+    <section className="py-8 sm:py-10 md:py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
-            <h2 className="text-3xl font-bold text-gray-900">
+        {/* Header - Mobile Optimized */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
               Ofertas del día
             </h2>
             <div className="flex items-center gap-2 text-gray-600">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span className="text-sm">
+              <span className="text-xs sm:text-sm">
                 Ofertas frescas en{' '}
                 <span className="font-mono font-bold">
                   {String(timeLeft.hours).padStart(2, '0')}:
@@ -177,15 +176,15 @@ export default function DealsSection() {
             </div>
           </div>
 
-          {/* Navigation Arrows */}
-          <div className="flex gap-2">
+          {/* Navigation Arrows - Hidden on mobile */}
+          <div className="hidden md:flex gap-2">
             <button
               onClick={handlePrev}
               disabled={currentIndex === 0}
               className="p-2 rounded-full border-2 border-gray-300 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition"
               aria-label="Anterior"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
@@ -195,92 +194,163 @@ export default function DealsSection() {
               className="p-2 rounded-full border-2 border-gray-300 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition"
               aria-label="Siguiente"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
           </div>
         </div>
 
-        {/* Products Carousel */}
+        {/* Products Carousel - Mobile: Horizontal Scroll, Desktop: Carousel */}
         <div className="overflow-hidden pb-2">
-          <div
-            className="flex gap-4 transition-transform duration-300 ease-in-out items-stretch"
-            style={{ transform: `translateX(-${currentIndex * 25.5}%)` }}
-          >
-            {DEAL_PRODUCTS.map((product) => (
-              <Link
-                key={product.id}
-                href={`/productos/${product.id}`}
-                className="flex-shrink-0 w-[calc(25%-12px)] min-w-[280px] group"
-              >
-                <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow flex flex-col h-full">
-                  {/* Image - Fixed Height */}
-                  <div className="relative h-64 bg-gray-200 overflow-hidden flex-shrink-0">
-                    <Image
-                      src={product.images[0]}
-                      alt={product.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+          {/* Mobile: Scrollable Grid */}
+          <div className="md:hidden overflow-x-auto scrollbar-hide -mx-4 px-4">
+            <div className="flex gap-3 pb-2">
+              {DEAL_PRODUCTS.map((product) => (
+                <Link
+                  key={product.id}
+                  href={`/productos/${product.id}`}
+                  className="flex-shrink-0 w-[70vw] max-w-[280px]"
+                >
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow h-full flex flex-col">
+                    {/* Image */}
+                    <div className="relative h-48 bg-gray-200 overflow-hidden flex-shrink-0">
+                      <Image
+                        src={product.images[0]}
+                        alt={product.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-3 flex-1 flex flex-col">
+                      {/* Product Name */}
+                      <h3 className="text-sm font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[40px]">
+                        {product.name}
+                      </h3>
+
+                      {/* Rating */}
+                      <div className="flex items-center gap-1 mb-2">
+                        <span className="text-sm font-bold">{product.rating}</span>
+                        <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                      </div>
+
+                      {/* Price */}
+                      <div className="flex items-center gap-2 mb-2 flex-wrap">
+                        <span className="text-xl font-bold text-primary-600">
+                          ${product.price}
+                        </span>
+                        <span className="text-xs text-gray-500 line-through">
+                          ${product.originalPrice}
+                        </span>
+                        <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded">
+                          {product.discount}% off
+                        </span>
+                      </div>
+
+                      {/* Tags */}
+                      <div className="mt-auto space-y-1">
+                        {product.dealTag && (
+                          <p className="text-xs text-gray-600 line-clamp-1">
+                            {product.dealTag}
+                          </p>
+                        )}
+                        {product.discount >= 30 && (
+                          <p className="text-xs text-gray-600 font-semibold">
+                            Envío gratis
+                          </p>
+                        )}
+                      </div>
+                    </div>
                   </div>
+                </Link>
+              ))}
+            </div>
+          </div>
 
-                  {/* Content - Flexible */}
-                  <div className="p-4 flex-1 flex flex-col min-h-0">
-                    {/* Product Name - Fixed height with clamp */}
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2 h-10 line-clamp-2 group-hover:text-primary-600 transition-colors">
-                      {product.name}
-                    </h3>
-
-                    {/* Rating - Single Star */}
-                    <div className="flex items-center gap-1 mb-3">
-                      <span className="text-sm font-bold">{product.rating}</span>
-                      <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
+          {/* Desktop: Carousel */}
+          <div className="hidden md:block">
+            <div
+              className="flex gap-4 lg:gap-6 transition-transform duration-300 ease-in-out items-stretch"
+              style={{ transform: `translateX(-${currentIndex * 25.5}%)` }}
+            >
+              {DEAL_PRODUCTS.map((product) => (
+                <Link
+                  key={product.id}
+                  href={`/productos/${product.id}`}
+                  className="flex-shrink-0 w-[calc(25%-18px)] min-w-[240px] group"
+                >
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow flex flex-col h-full">
+                    {/* Image */}
+                    <div className="relative h-56 lg:h-64 bg-gray-200 overflow-hidden flex-shrink-0">
+                      <Image
+                        src={product.images[0]}
+                        alt={product.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
 
-                    {/* Price */}
-                    <div className="flex items-center gap-2 mb-3 flex-wrap">
-                      <span className="text-2xl font-bold text-primary-600">
-                        ${product.price}
-                      </span>
-                      <span className="text-sm text-gray-500 line-through">
-                        ${product.originalPrice}
-                      </span>
-                      <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-1 rounded">
-                        {product.discount}% off
-                      </span>
-                    </div>
+                    {/* Content */}
+                    <div className="p-4 flex-1 flex flex-col min-h-0">
+                      {/* Product Name */}
+                      <h3 className="text-sm font-semibold text-gray-900 mb-2 h-10 line-clamp-2 group-hover:text-primary-600 transition-colors">
+                        {product.name}
+                      </h3>
 
-                    {/* Tags - Fixed space at bottom */}
-                    <div className="mt-auto space-y-1">
-                      {product.dealTag && (
-                        <p className="text-xs text-gray-600">
-                          {product.dealTag}
-                        </p>
-                      )}
-                      {product.discount >= 30 && (
-                        <p className="text-xs text-gray-600 font-semibold">
-                          Envío gratis
-                        </p>
-                      )}
+                      {/* Rating */}
+                      <div className="flex items-center gap-1 mb-3">
+                        <span className="text-sm font-bold">{product.rating}</span>
+                        <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                        </svg>
+                      </div>
+
+                      {/* Price */}
+                      <div className="flex items-center gap-2 mb-3 flex-wrap">
+                        <span className="text-2xl font-bold text-primary-600">
+                          ${product.price}
+                        </span>
+                        <span className="text-sm text-gray-500 line-through">
+                          ${product.originalPrice}
+                        </span>
+                        <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-1 rounded">
+                          {product.discount}% off
+                        </span>
+                      </div>
+
+                      {/* Tags */}
+                      <div className="mt-auto space-y-1">
+                        {product.dealTag && (
+                          <p className="text-xs text-gray-600">
+                            {product.dealTag}
+                          </p>
+                        )}
+                        {product.discount >= 30 && (
+                          <p className="text-xs text-gray-600 font-semibold">
+                            Envío gratis
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* View All Link */}
-        <div className="mt-8 text-center">
+        {/* View All Link - Mobile Optimized */}
+        <div className="mt-6 sm:mt-8 text-center">
           <Link
             href="/ofertas"
-            className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-lg"
+            className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-base sm:text-lg"
           >
             Ver todas las ofertas
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>

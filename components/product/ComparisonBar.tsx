@@ -1,8 +1,8 @@
 'use client';
 
 import { useComparison } from '@/contexts/ComparisonContext';
-import Link from 'next/link';
 import Image from 'next/image';
+import Button from '@/components/common/Button';
 
 export default function ComparisonBar() {
   const { comparisonProducts, removeFromComparison, clearComparison } = useComparison();
@@ -39,7 +39,7 @@ export default function ComparisonBar() {
                     />
                   </div>
                   
-                  {/* Remove button - AJUSTADO: más grande y más abajo */}
+                  {/* Remove button */}
                   <button
                     onClick={() => removeFromComparison(product.id)}
                     className="absolute top-0 right-0 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 transition-all shadow-md"
@@ -61,23 +61,23 @@ export default function ComparisonBar() {
 
           {/* Right: Actions */}
           <div className="flex items-center gap-3">
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={clearComparison}
-              className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-lg transition-colors"
-              aria-label="Limpiar comparación"
+              ariaLabel="Limpiar comparación"
             >
               Limpiar
-            </button>
+            </Button>
             
-            <Link
+            <Button
+              variant="primary"
+              size="md"
               href="/comparar"
-              className={`px-6 py-2.5 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors ${
-                comparisonProducts.length < 2 ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''
-              }`}
-              aria-disabled={comparisonProducts.length < 2}
+              disabled={comparisonProducts.length < 2}
             >
               Comparar productos
-            </Link>
+            </Button>
           </div>
         </div>
       </div>

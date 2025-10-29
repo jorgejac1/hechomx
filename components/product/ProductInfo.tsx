@@ -15,6 +15,8 @@ import {
 import DeliveryEstimate from "./DeliveryEstimate";
 import TrustIndicators from "./TrustIndicators";
 import SellerBadge from "./SellerBadge";
+import Badge from "@/components/common/Badge";
+import Button from "@/components/common/Button";
 
 interface ProductInfoProps {
   product: Product;
@@ -73,24 +75,30 @@ export default function ProductInfo({
       {/* Seller Badge */}
       <SellerBadge verified={product.verified ?? false} makerName={product.maker} />
 
-      {/* Badges */}
+      {/* Badges - UPDATED */}
       <div className="flex items-center gap-2 flex-wrap">
         {product.featured && (
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
+          <Badge variant="primary" size="md">
             Destacado
-          </span>
+          </Badge>
         )}
         {product.verified && (
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-            <CheckCircle className="w-4 h-4" />
+          <Badge 
+            variant="success" 
+            size="md"
+            icon={<CheckCircle className="w-4 h-4" />}
+          >
             Verificado
-          </span>
+          </Badge>
         )}
         {product.inStock && (
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-            <Package2 className="w-4 h-4" />
+          <Badge 
+            variant="info" 
+            size="md"
+            icon={<Package2 className="w-4 h-4" />}
+          >
             Listo para enviar
-          </span>
+          </Badge>
         )}
       </div>
 
@@ -228,66 +236,57 @@ export default function ProductInfo({
       <div className="flex flex-col gap-3">
         {product.inStock ? (
           <>
-            {/* Add to Cart - Teal Color */}
-            <button
+            <Button
+              variant="primary"
+              size="lg"
               onClick={handleAddToCart}
               disabled={isAdding}
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-teal-600 hover:bg-teal-700 disabled:bg-teal-400 text-white font-bold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 text-lg"
+              icon={isAdding ? undefined : <ShoppingCart className="w-5 h-5" />}
+              fullWidth
             >
-              {isAdding ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  <span>Agregando...</span>
-                </>
-              ) : (
-                <>
-                  <ShoppingCart className="w-5 h-5" />
-                  <span>Agregar al carrito</span>
-                </>
-              )}
-            </button>
+              {isAdding ? "Agregando..." : "Agregar al carrito"}
+            </Button>
 
-            {/* Buy Now Button - Teal Border */}
-            <button className="w-full px-6 py-4 border-2 border-teal-600 text-teal-600 hover:bg-teal-50 font-bold rounded-lg transition-colors text-lg">
+            <Button
+              variant="secondary"
+              size="lg"
+              fullWidth
+            >
               Comprar ahora
-            </button>
+            </Button>
           </>
         ) : (
-          <button
+          <Button
+            variant="primary"
+            size="lg"
             disabled
-            className="w-full px-6 py-4 bg-gray-300 text-gray-500 font-bold rounded-lg cursor-not-allowed"
+            fullWidth
           >
             No disponible
-          </button>
+          </Button>
         )}
 
         {/* Secondary Actions */}
         <div className="flex gap-3">
-          {/* Favorite Button */}
-          <button
+          <Button
+            variant={isFavorite ? "primary" : "outline"}
+            size="md"
             onClick={() => setIsFavorite(!isFavorite)}
-            className={`flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 border-2 rounded-lg transition-colors font-medium ${
-              isFavorite
-                ? "border-red-500 bg-red-50 text-red-600"
-                : "border-gray-300 hover:border-gray-400 text-gray-700"
-            }`}
-            aria-label={
-              isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"
-            }
+            icon={<Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />}
+            fullWidth
           >
-            <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
             <span className="hidden sm:inline">Favoritos</span>
-          </button>
+          </Button>
 
-          {/* Share Button */}
-          <button
+          <Button
+            variant="outline"
+            size="md"
             onClick={handleShare}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 border-2 border-gray-300 hover:border-gray-400 rounded-lg transition-colors font-medium text-gray-700"
-            aria-label="Compartir producto"
+            icon={<Share2 className="w-5 h-5" />}
+            fullWidth
           >
-            <Share2 className="w-5 h-5" />
             <span className="hidden sm:inline">Compartir</span>
-          </button>
+          </Button>
         </div>
       </div>
 

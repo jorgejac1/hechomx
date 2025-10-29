@@ -6,7 +6,7 @@ import SeasonalSection from "@/components/home/SeasonalSection";
 import CategoriesSection from "@/components/home/CategoriesSection";
 import DealsSection from "@/components/home/DealsSection";
 import LocalShopsSection from "@/components/home/LocalShopsSection";
-import HeroSlider from '@/components/home/HeroSlider';
+import HeroSlider from "@/components/home/HeroSlider";
 
 export default function Home() {
   const featuredProducts = getFeaturedProducts();
@@ -18,17 +18,12 @@ export default function Home() {
       <HeroSlider />
 
       {/* Features */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-8 sm:py-12 lg:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="text-center">
-              <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  className="w-8 h-8 text-primary-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+              <div className="bg-primary-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary-600">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -37,7 +32,9 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">100% Auténtico</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">
+                100% Auténtico
+              </h3>
               <p className="text-gray-600">
                 Todos los productos son verificados y hechos en México
               </p>
@@ -60,8 +57,8 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Apoya Artesanos</h3>
-              <p className="text-gray-600">
-                Compra directamente de creadores y artesanos locales
+              <p className="text-sm sm:text-base text-gray-600 px-2">
+                Todos los productos son verificados y hechos en México
               </p>
             </div>
 
@@ -114,15 +111,17 @@ export default function Home() {
       <AboutSection />
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary-600 text-white">
+      <section className="py-8 sm:py-12 lg:py-16 bg-primary-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">¿Eres Artesano o Creador?</h2>
-          <p className="text-xl mb-8 text-primary-50">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
+            ¿Eres Artesano o Creador?
+          </h2>
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-primary-50 px-4">
             Únete a nuestra plataforma y comparte tus creaciones con todo México
           </p>
           <Link
             href="/vendedores"
-            className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition inline-block"
+            className="inline-block bg-white text-primary-600 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-primary-50 transition"
           >
             Comienza a Vender
           </Link>
