@@ -73,29 +73,34 @@ export default function ProductInfo({
   return (
     <div className="flex flex-col space-y-6">
       {/* Seller Badge */}
-      <SellerBadge verified={product.verified ?? false} makerName={product.maker} />
+      <SellerBadge
+        verified={product.verified ?? false}
+        makerName={product.maker}
+      />
 
-      {/* Badges - UPDATED */}
+      {/* Badges */}
       <div className="flex items-center gap-2 flex-wrap">
         {product.featured && (
-          <Badge variant="primary" size="md">
+          <Badge variant="primary" size="sm" className="sm:text-sm">
             Destacado
           </Badge>
         )}
         {product.verified && (
-          <Badge 
-            variant="success" 
-            size="md"
-            icon={<CheckCircle className="w-4 h-4" />}
+          <Badge
+            variant="success"
+            size="sm"
+            icon={<CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />}
+            className="sm:text-sm"
           >
             Verificado
           </Badge>
         )}
         {product.inStock && (
-          <Badge 
-            variant="info" 
-            size="md"
-            icon={<Package2 className="w-4 h-4" />}
+          <Badge
+            variant="info"
+            size="sm"
+            icon={<Package2 className="w-3 h-3 sm:w-4 sm:h-4" />}
+            className="sm:text-sm"
           >
             Listo para enviar
           </Badge>
@@ -247,21 +252,12 @@ export default function ProductInfo({
               {isAdding ? "Agregando..." : "Agregar al carrito"}
             </Button>
 
-            <Button
-              variant="secondary"
-              size="lg"
-              fullWidth
-            >
+            <Button variant="secondary" size="lg" fullWidth>
               Comprar ahora
             </Button>
           </>
         ) : (
-          <Button
-            variant="primary"
-            size="lg"
-            disabled
-            fullWidth
-          >
+          <Button variant="primary" size="lg" disabled fullWidth>
             No disponible
           </Button>
         )}
@@ -272,7 +268,11 @@ export default function ProductInfo({
             variant={isFavorite ? "primary" : "outline"}
             size="md"
             onClick={() => setIsFavorite(!isFavorite)}
-            icon={<Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />}
+            icon={
+              <Heart
+                className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`}
+              />
+            }
             fullWidth
           >
             <span className="hidden sm:inline">Favoritos</span>

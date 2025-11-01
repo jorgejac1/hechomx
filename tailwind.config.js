@@ -45,7 +45,48 @@ module.exports = {
           900: '#713f12',
         }
       },
+      // NEW: Safe area spacing for mobile devices with notches
+      spacing: {
+        'safe': 'env(safe-area-inset-bottom)',
+        'safe-top': 'env(safe-area-inset-top)',
+        'safe-left': 'env(safe-area-inset-left)',
+        'safe-right': 'env(safe-area-inset-right)',
+      },
+      // NEW: Animation for slide-up effect
+      keyframes: {
+        'slide-up': {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'slide-up': 'slide-up 0.3s ease-out',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.pb-safe': {
+          paddingBottom: 'max(1rem, env(safe-area-inset-bottom))',
+        },
+        '.pt-safe': {
+          paddingTop: 'max(1rem, env(safe-area-inset-top))',
+        },
+        '.pl-safe': {
+          paddingLeft: 'max(1rem, env(safe-area-inset-left))',
+        },
+        '.pr-safe': {
+          paddingRight: 'max(1rem, env(safe-area-inset-right))',
+        },
+        '.p-safe': {
+          paddingTop: 'max(1rem, env(safe-area-inset-top))',
+          paddingRight: 'max(1rem, env(safe-area-inset-right))',
+          paddingBottom: 'max(1rem, env(safe-area-inset-bottom))',
+          paddingLeft: 'max(1rem, env(safe-area-inset-left))',
+        },
+      }
+      addUtilities(newUtilities)
+    },
+  ],
 }

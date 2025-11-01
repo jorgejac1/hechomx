@@ -26,20 +26,20 @@ export default function StickyCartBar({ product, selectedQuantity, onAddToCart }
   if (!isVisible || !product.inStock) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-40 md:hidden animate-slide-up">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-3">
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50 md:hidden animate-slide-up pb-safe">
+      <div className="container mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
         <div className="flex-1 min-w-0">
-          <p className="font-bold text-gray-900 truncate text-sm">{product.name}</p>
-          <p className="text-lg font-bold text-teal-600">
+          <p className="font-bold text-gray-900 truncate text-xs">{product.name}</p>
+          <p className="text-base font-bold text-teal-600">
             ${product.price.toLocaleString('es-MX')} {product.currency}
           </p>
         </div>
         
         <Button
           variant="primary"
-          size="md"
+          size="sm"
           onClick={onAddToCart}
-          icon={<ShoppingCart className="w-5 h-5" />}
+          icon={<ShoppingCart className="w-4 h-4" />}
           className="flex-shrink-0"
         >
           Agregar
