@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { Product } from "@/types";
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { Product } from '@/types';
 
 interface CartItem extends Product {
   quantity: number;
@@ -26,12 +26,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Load cart from localStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem("shopping-cart");
+    const savedCart = localStorage.getItem('shopping-cart');
     if (savedCart) {
       try {
         setCartItems(JSON.parse(savedCart));
       } catch (err) {
-        console.error("Error loading cart:", err);
+        console.error('Error loading cart:', err);
       }
     }
     setIsHydrated(true);
@@ -40,7 +40,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Save cart to localStorage whenever it changes
   useEffect(() => {
     if (isHydrated) {
-      localStorage.setItem("shopping-cart", JSON.stringify(cartItems));
+      localStorage.setItem('shopping-cart', JSON.stringify(cartItems));
     }
   }, [cartItems, isHydrated]);
 
@@ -51,13 +51,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addToCart = (product: Product, quantity: number = 1) => {
     setCartItems((prev) => {
       const existingItem = prev.find((item) => item.id === product.id);
-      
+
       if (existingItem) {
         // Update quantity if already in cart
         return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
+          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
         );
       } else {
         // Add new item
@@ -66,9 +64,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
 
     // Track analytics
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "add_to_cart", {
-        currency: "MXN",
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'add_to_cart', {
+        currency: 'MXN',
         value: product.price * quantity,
         items: [
           {
@@ -93,9 +91,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
 
     setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
-      )
+      prev.map((item) => (item.id === productId ? { ...item, quantity } : item))
     );
   };
 
@@ -128,7 +124,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 export function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error("useCart must be used within a CartProvider");
+    throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 }

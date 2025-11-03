@@ -20,7 +20,8 @@ const mockReviews = [
     author: 'María González',
     rating: 5,
     date: '2024-10-15',
-    comment: 'Hermoso producto, la calidad es excepcional. Se nota el trabajo artesanal y el cuidado en cada detalle. Llegó perfectamente empacado.',
+    comment:
+      'Hermoso producto, la calidad es excepcional. Se nota el trabajo artesanal y el cuidado en cada detalle. Llegó perfectamente empacado.',
     verified: true,
     helpful: 12,
     photos: [
@@ -33,7 +34,8 @@ const mockReviews = [
     author: 'Carlos Ramírez',
     rating: 4,
     date: '2024-10-10',
-    comment: 'Muy buen producto, aunque el envío tardó un poco más de lo esperado. La pieza es tal como se describe y las fotos no le hacen justicia.',
+    comment:
+      'Muy buen producto, aunque el envío tardó un poco más de lo esperado. La pieza es tal como se describe y las fotos no le hacen justicia.',
     verified: true,
     helpful: 8,
     photos: [],
@@ -43,26 +45,58 @@ const mockReviews = [
     author: 'Ana Martínez',
     rating: 5,
     date: '2024-10-05',
-    comment: '¡Excelente! Es el regalo perfecto. La artesanía mexicana en su máxima expresión. Definitivamente volveré a comprar.',
+    comment:
+      '¡Excelente! Es el regalo perfecto. La artesanía mexicana en su máxima expresión. Definitivamente volveré a comprar.',
     verified: false,
     helpful: 15,
-    photos: [
-      'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400',
-    ],
+    photos: ['https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400'],
   },
 ];
 
-export default function ReviewsSection({ productId, rating, reviewCount }: ReviewsSectionProps) {
+export default function ReviewsSection({
+  productId: _productId,
+  rating,
+  reviewCount,
+}: ReviewsSectionProps) {
   const [reviews, setReviews] = useState(mockReviews);
   const [showAll, setShowAll] = useState(false);
   const [filter, setFilter] = useState<'all' | 'photos'>('all');
+  const [helpfulReviews, setHelpfulReviews] = useState<Set<number>>(new Set());
 
   const displayedReviews = showAll ? reviews : reviews.slice(0, 3);
-  const filteredReviews = filter === 'photos' 
-    ? displayedReviews.filter(r => r.photos.length > 0)
-    : displayedReviews;
+  const filteredReviews =
+    filter === 'photos' ? displayedReviews.filter((r) => r.photos.length > 0) : displayedReviews;
 
-  const reviewsWithPhotos = reviews.filter(r => r.photos.length > 0).length;
+  const reviewsWithPhotos = reviews.filter((r) => r.photos.length > 0).length;
+
+  // Handle marking review as helpful
+  const handleHelpful = (reviewId: number) => {
+    if (helpfulReviews.has(reviewId)) {
+      // Already marked as helpful, remove it
+      setHelpfulReviews((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(reviewId);
+        return newSet;
+      });
+
+      setReviews((prevReviews) =>
+        prevReviews.map((review) =>
+          review.id === reviewId ? { ...review, helpful: review.helpful - 1 } : review
+        )
+      );
+    } else {
+      // Mark as helpful
+      setHelpfulReviews((prev) => new Set(prev).add(reviewId));
+
+      setReviews((prevReviews) =>
+        prevReviews.map((review) =>
+          review.id === reviewId ? { ...review, helpful: review.helpful + 1 } : review
+        )
+      );
+    }
+
+    // TODO: await markReviewHelpful(productId, reviewId);
+  };
 
   // Calculate rating distribution
   const ratingDistribution = [
@@ -89,9 +123,7 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
                   <Star
                     key={i}
                     className={`w-5 h-5 ${
-                      i < Math.floor(rating)
-                        ? 'text-yellow-400 fill-current'
-                        : 'text-gray-300'
+                      i < Math.floor(rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
                     }`}
                   />
                 ))}
@@ -103,7 +135,7 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
           </div>
 
           {/* Rating Breakdown */}
-          <RatingBreakdown rating={rating} />
+          <RatingBreakdown rating={rating} reviewCount={reviewCount} />
         </div>
 
         {/* Rating Distribution */}
@@ -133,7 +165,7 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
             <Camera className="w-5 h-5" />
             <span className="font-semibold">{reviewsWithPhotos} reseñas con fotos</span>
           </div>
-          
+
           <div className="flex gap-2">
             <button
               onClick={() => setFilter('all')}
@@ -159,86 +191,89 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
         </div>
 
         {/* Write Review Button */}
-        <Button
-          variant="secondary"
-          size="md"
-          icon={<MessageSquare className="w-5 h-5" />}
-        >
+        <Button variant="secondary" size="md" icon={<MessageSquare className="w-5 h-5" />}>
           Escribir una reseña
         </Button>
       </div>
 
       {/* Reviews List */}
       <div className="space-y-6">
-        {filteredReviews.map((review) => (
-          <div key={review.id} className="border-b border-gray-200 last:border-0 pb-6 last:pb-0">
-            {/* Review Header */}
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-700 font-semibold">
-                  {review.author.charAt(0)}
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-gray-900">{review.author}</span>
-                    {/* Verified Purchase Badge */}
-                    {review.verified && (
-                      <Badge variant="success" size="sm">
-                        Compra verificada
-                      </Badge>
-                    )}
+        {filteredReviews.map((review) => {
+          const isMarkedHelpful = helpfulReviews.has(review.id);
+
+          return (
+            <div key={review.id} className="border-b border-gray-200 last:border-0 pb-6 last:pb-0">
+              {/* Review Header */}
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-700 font-semibold">
+                    {review.author.charAt(0)}
                   </div>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-4 h-4 ${
-                            i < review.rating
-                              ? 'text-yellow-400 fill-current'
-                              : 'text-gray-300'
-                          }`}
-                        />
-                      ))}
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-gray-900">{review.author}</span>
+                      {/* Verified Purchase Badge */}
+                      {review.verified && (
+                        <Badge variant="success" size="sm">
+                          Compra verificada
+                        </Badge>
+                      )}
                     </div>
-                    <span className="text-sm text-gray-500">
-                      {new Date(review.date).toLocaleDateString('es-MX', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </span>
+                    <div className="flex items-center gap-2 mt-1">
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < review.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-sm text-gray-500">
+                        {new Date(review.date).toLocaleDateString('es-MX', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
+
+              {/* Review Photos */}
+              <ReviewPhotos photos={review.photos} />
+
+              {/* Review Content */}
+              <p className="text-gray-700 mb-3">{review.comment}</p>
+
+              {/* Review Actions */}
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => handleHelpful(review.id)}
+                  className={`inline-flex items-center gap-1 text-sm transition-colors ${
+                    isMarkedHelpful
+                      ? 'text-primary-600 font-medium'
+                      : 'text-gray-600 hover:text-primary-600'
+                  }`}
+                >
+                  <ThumbsUp className={`w-4 h-4 ${isMarkedHelpful ? 'fill-current' : ''}`} />
+                  <span>
+                    {isMarkedHelpful ? 'Marcado como útil' : 'Útil'} ({review.helpful})
+                  </span>
+                </button>
+              </div>
             </div>
-
-            {/* Review Photos */}
-            <ReviewPhotos photos={review.photos} />
-
-            {/* Review Content */}
-            <p className="text-gray-700 mb-3">{review.comment}</p>
-
-            {/* Review Actions */}
-            <div className="flex items-center gap-4">
-              <button className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-primary-600 transition-colors">
-                <ThumbsUp className="w-4 h-4" />
-                <span>Útil ({review.helpful})</span>
-              </button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Show More Button */}
       {reviews.length > 3 && filter === 'all' && (
         <div className="mt-8 text-center">
           {/* Show More Button */}
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={() => setShowAll(!showAll)}
-          >
+          <Button variant="secondary" size="md" onClick={() => setShowAll(!showAll)}>
             {showAll ? 'Ver menos reseñas' : `Ver todas las reseñas (${reviews.length})`}
           </Button>
         </div>

@@ -12,9 +12,10 @@ interface ProductListWithFiltersProps {
   products: Product[];
 }
 
-export default function ProductListWithFilters({
-  products,
-}: ProductListWithFiltersProps) {
+// Define sort options type
+type SortOption = 'relevance' | 'price-asc' | 'price-desc' | 'rating-desc' | 'newest' | 'popular';
+
+export default function ProductListWithFilters({ products }: ProductListWithFiltersProps) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const {
@@ -44,9 +45,7 @@ export default function ProductListWithFilters({
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
             Productos Artesanales
           </h1>
-          <p className="text-gray-600">
-            Descubre auténticas artesanías mexicanas
-          </p>
+          <p className="text-gray-600">Descubre auténticas artesanías mexicanas</p>
         </div>
 
         {/* Search and Filter Bar */}
@@ -68,7 +67,7 @@ export default function ProductListWithFilters({
             <div className="sm:w-64">
               <select
                 value={filters.sortBy}
-                onChange={(e) => updateSortBy(e.target.value as any)}
+                onChange={(e) => updateSortBy(e.target.value as SortOption)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white cursor-pointer transition-all"
               >
                 <option value="relevance">Más relevantes</option>
@@ -100,9 +99,7 @@ export default function ProductListWithFilters({
           {isFilterActive && (
             <div className="mt-4 pt-4 border-t border-gray-200">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-sm font-medium text-gray-700">
-                  Filtros activos:
-                </span>
+                <span className="text-sm font-medium text-gray-700">Filtros activos:</span>
                 {filters.categories.map((cat) => (
                   <span
                     key={cat}
@@ -182,8 +179,8 @@ export default function ProductListWithFilters({
               No se encontraron productos
             </h3>
             <p className="text-gray-600 mb-6 max-w-md mx-auto">
-              No hay productos que coincidan con tus criterios de búsqueda.
-              Intenta ajustar los filtros o realizar una búsqueda diferente.
+              No hay productos que coincidan con tus criterios de búsqueda. Intenta ajustar los
+              filtros o realizar una búsqueda diferente.
             </p>
             <Button variant="primary" size="lg" onClick={resetFilters}>
               Limpiar todos los filtros

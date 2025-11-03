@@ -1,10 +1,10 @@
 /**
  * Product-specific analytics tracking for gallery
- * 
+ *
  * @param productId - Product ID
  * @param productName - Product name
  * @returns Analytics event handlers
- * 
+ *
  * @example
  * const analytics = useProductGalleryAnalytics('123', 'Product Name');
  * analytics.trackImageView(0);
@@ -21,8 +21,8 @@ export function useProductGalleryAnalytics(
   productName: string
 ): ProductGalleryAnalytics {
   const trackImageView = (index: number) => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'product_image_view', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'product_image_view', {
         product_id: productId,
         product_name: productName,
         image_index: index,
@@ -31,8 +31,8 @@ export function useProductGalleryAnalytics(
   };
 
   const trackImageZoom = () => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'product_image_zoom', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'product_image_zoom', {
         product_id: productId,
         product_name: productName,
       });
@@ -40,8 +40,8 @@ export function useProductGalleryAnalytics(
   };
 
   const trackImageDownload = () => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'product_image_download', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'product_image_download', {
         product_id: productId,
         product_name: productName,
       });
@@ -49,8 +49,8 @@ export function useProductGalleryAnalytics(
   };
 
   const trackImageShare = (method: 'native' | 'clipboard') => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'product_image_share', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'product_image_share', {
         product_id: productId,
         product_name: productName,
         method,

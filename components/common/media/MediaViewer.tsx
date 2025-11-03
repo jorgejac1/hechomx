@@ -18,12 +18,7 @@ interface MediaViewerProps {
   className?: string;
 }
 
-export default function MediaViewer({
-  items,
-  currentIndex,
-  onIndexChange,
-  className = '',
-}: MediaViewerProps) {
+export default function MediaViewer({ items, currentIndex, className = '' }: MediaViewerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   if (!items.length) return null;

@@ -1,43 +1,37 @@
-"use client";
+'use client';
 
-import { useState, useMemo } from "react";
-import { useProductFilters } from "@/hooks/product/useProductFilters";
-import FiltersDrawer from "@/components/product/FiltersDrawer";
-import ProductsGrid from "@/components/product/ProductsGrid";
-import Button from "@/components/common/Button";
-import { Product } from "@/types";
-import { Filter, Grid3x3, List } from "lucide-react";
+import { useState, useMemo, useEffect, useRef } from 'react';
+import { useProductFilters } from '@/hooks/product/useProductFilters';
+import FiltersDrawer from '@/components/product/FiltersDrawer';
+import ProductsGrid from '@/components/product/ProductsGrid';
+import Button from '@/components/common/Button';
+import { Product } from '@/types';
+import { Filter, Grid3x3, List } from 'lucide-react';
 
 interface ProductsPageClientProps {
   products: Product[];
-  paginatedProducts: Product[];
-  categories: string[];
-  states: string[];
   currentCategory?: string;
   currentState?: string;
   currentQuery?: string;
   currentSort?: string;
-  currentPage: number;
-  totalPages: number;
 }
 
 const ITEMS_PER_PAGE = 20;
 
+// Define sort options type
+type SortOption = 'relevance' | 'price-asc' | 'price-desc' | 'rating-desc' | 'newest' | 'popular';
+
 export default function ProductsPageClient({
   products,
-  paginatedProducts,
-  categories,
-  states,
   currentCategory,
   currentState,
   currentQuery,
   currentSort,
-  currentPage: serverPage,
-  totalPages: serverTotalPages,
 }: ProductsPageClientProps) {
-  const [view, setView] = useState<"grid" | "list">("grid");
+  const [view, setView] = useState<'grid' | 'list'>('grid');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const hasInitialized = useRef(false);
 
   // Initialize filtering hook
   const {
@@ -57,13 +51,42 @@ export default function ProductsPageClient({
     resetFilters,
   } = useProductFilters(products);
 
+  // Initialize filters from URL params only once
+  useEffect(() => {
+    if (hasInitialized.current) return;
+
+    if (currentCategory && !filters.categories.includes(currentCategory)) {
+      toggleCategory(currentCategory);
+    }
+
+    if (currentState && !filters.states.includes(currentState)) {
+      toggleState(currentState);
+    }
+
+    if (currentSort && currentSort !== filters.sortBy) {
+      updateSortBy(currentSort as SortOption);
+    }
+
+    hasInitialized.current = true;
+  }, [
+    currentCategory,
+    currentState,
+    currentSort,
+    filters.categories,
+    filters.states,
+    filters.sortBy,
+    toggleCategory,
+    toggleState,
+    updateSortBy,
+  ]);
+
   // Calculate pagination for filtered products
   const { paginatedProducts: displayProducts, totalPages } = useMemo(() => {
     const total = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
     const paginated = filteredProducts.slice(startIndex, endIndex);
-    
+
     return {
       paginatedProducts: paginated,
       totalPages: total,
@@ -97,8 +120,7 @@ export default function ProductsPageClient({
             </button>
 
             <p className="text-base text-gray-600 font-medium">
-              <span className="font-bold text-gray-900">{filteredProducts.length}</span>{" "}
-              productos
+              <span className="font-bold text-gray-900">{filteredProducts.length}</span> productos
             </p>
           </div>
 
@@ -107,22 +129,18 @@ export default function ProductsPageClient({
             {/* View Toggle */}
             <div className="flex items-center bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
               <button
-                onClick={() => setView("grid")}
+                onClick={() => setView('grid')}
                 className={`p-2 transition-colors ${
-                  view === "grid"
-                    ? "bg-primary-600 text-white"
-                    : "text-gray-600 hover:bg-gray-50"
+                  view === 'grid' ? 'bg-primary-600 text-white' : 'text-gray-600 hover:bg-gray-50'
                 }`}
                 aria-label="Vista de cuadrícula"
               >
                 <Grid3x3 className="w-5 h-5" />
               </button>
               <button
-                onClick={() => setView("list")}
+                onClick={() => setView('list')}
                 className={`p-2 transition-colors ${
-                  view === "list"
-                    ? "bg-primary-600 text-white"
-                    : "text-gray-600 hover:bg-gray-50"
+                  view === 'list' ? 'bg-primary-600 text-white' : 'text-gray-600 hover:bg-gray-50'
                 }`}
                 aria-label="Vista de lista"
               >
@@ -135,7 +153,7 @@ export default function ProductsPageClient({
               <select
                 value={filters.sortBy}
                 onChange={(e) => {
-                  updateSortBy(e.target.value as any);
+                  updateSortBy(e.target.value as SortOption);
                   setCurrentPage(1);
                 }}
                 className="appearance-none pl-10 pr-10 py-2 bg-white border-2 border-gray-300 rounded-lg hover:border-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer transition-all font-medium text-gray-900 text-base min-w-[280px]"
@@ -147,7 +165,7 @@ export default function ProductsPageClient({
                 <option value="newest">Más Recientes</option>
                 <option value="popular">Más Populares</option>
               </select>
-              
+
               {/* Sort Icon */}
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
@@ -164,7 +182,7 @@ export default function ProductsPageClient({
                   />
                 </svg>
               </div>
-              
+
               {/* Chevron Icon */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <svg
@@ -186,19 +204,17 @@ export default function ProductsPageClient({
         </div>
 
         {/* Active Filters */}
-        {(filters.categories.length > 0 || 
-          filters.states.length > 0 || 
-          filters.minRating > 0 || 
-          filters.inStock !== null || 
-          filters.verified !== null || 
+        {(filters.categories.length > 0 ||
+          filters.states.length > 0 ||
+          filters.minRating > 0 ||
+          filters.inStock !== null ||
+          filters.verified !== null ||
           filters.featured !== null ||
           currentQuery) && (
           <div className="mt-4 p-4 bg-white rounded-xl border-2 border-gray-200">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-sm font-semibold text-gray-700">
-                Filtros activos:
-              </span>
-              
+              <span className="text-sm font-semibold text-gray-700">Filtros activos:</span>
+
               {/* Categories */}
               {filters.categories.map((category) => (
                 <span
@@ -220,7 +236,7 @@ export default function ProductsPageClient({
                   </button>
                 </span>
               ))}
-              
+
               {/* States */}
               {filters.states.map((state) => (
                 <span
@@ -252,7 +268,11 @@ export default function ProductsPageClient({
                     className="hover:text-yellow-900"
                   >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </button>
                 </span>
@@ -262,9 +282,16 @@ export default function ProductsPageClient({
               {filters.inStock === true && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-700 rounded-lg text-sm font-medium">
                   En stock
-                  <button onClick={() => handleFilterChange(toggleInStock)} className="hover:text-green-900">
+                  <button
+                    onClick={() => handleFilterChange(toggleInStock)}
+                    className="hover:text-green-900"
+                  >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </button>
                 </span>
@@ -274,9 +301,16 @@ export default function ProductsPageClient({
               {filters.verified === true && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium">
                   Verificados
-                  <button onClick={() => handleFilterChange(toggleVerified)} className="hover:text-purple-900">
+                  <button
+                    onClick={() => handleFilterChange(toggleVerified)}
+                    className="hover:text-purple-900"
+                  >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </button>
                 </span>
@@ -286,9 +320,16 @@ export default function ProductsPageClient({
               {filters.featured === true && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-100 text-orange-700 rounded-lg text-sm font-medium">
                   Destacados
-                  <button onClick={() => handleFilterChange(toggleFeatured)} className="hover:text-orange-900">
+                  <button
+                    onClick={() => handleFilterChange(toggleFeatured)}
+                    className="hover:text-orange-900"
+                  >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </button>
                 </span>
@@ -299,16 +340,22 @@ export default function ProductsPageClient({
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 text-primary-700 rounded-lg text-sm font-medium">
                   "{currentQuery}"
                   <button
-                    onClick={() => { window.location.href = '/productos'; }}
+                    onClick={() => {
+                      window.location.href = '/productos';
+                    }}
                     className="hover:text-primary-900"
                   >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </button>
                 </span>
               )}
-              
+
               <button
                 onClick={() => {
                   resetFilters();
@@ -328,7 +375,7 @@ export default function ProductsPageClient({
         {displayProducts.length > 0 ? (
           <>
             <ProductsGrid products={displayProducts} view={view} />
-            
+
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-2 mt-12">
@@ -416,13 +463,17 @@ export default function ProductsPageClient({
               No se encontraron productos
             </h3>
             <p className="text-gray-600 mb-6 max-w-md mx-auto">
-              No hay productos que coincidan con tus criterios de búsqueda.
-              Intenta ajustar los filtros o realizar una búsqueda diferente.
+              No hay productos que coincidan con tus criterios de búsqueda. Intenta ajustar los
+              filtros o realizar una búsqueda diferente.
             </p>
-            <Button variant="primary" size="lg" onClick={() => {
-              resetFilters();
-              setCurrentPage(1);
-            }}>
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => {
+                resetFilters();
+                setCurrentPage(1);
+              }}
+            >
               Limpiar todos los filtros
             </Button>
           </div>

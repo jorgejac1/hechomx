@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { X } from "lucide-react";
-import { usePrefersReducedMotion } from "@/hooks/common/usePrefersReducedMotion";
+import Image from 'next/image';
+import { X } from 'lucide-react';
+import { usePrefersReducedMotion } from '@/hooks/common/usePrefersReducedMotion';
 
 interface ProductGalleryImageProps {
   url: string;
@@ -24,13 +24,16 @@ export function ProductGalleryImage({
   hasError,
   onLoad,
   onError,
-  priority = false,
+  priority,
   sizes,
-  className = "",
+  className = '',
   style,
 }: ProductGalleryImageProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const transitionClass = prefersReducedMotion ? "duration-0" : "duration-300";
+  const transitionClass = prefersReducedMotion ? 'duration-0' : 'duration-300';
+
+  // Auto-prioritize first image if priority not explicitly set
+  const shouldPrioritize = priority !== undefined ? priority : index === 0;
 
   return (
     <>
@@ -50,14 +53,14 @@ export function ProductGalleryImage({
       ) : (
         <Image
           src={url}
-          alt={alt}
+          alt={`${alt} - Imagen ${index + 1}`}
           fill
           sizes={sizes}
           className={`object-contain transition-opacity ${transitionClass} ${
-            isLoaded ? "opacity-100" : "opacity-0"
+            isLoaded ? 'opacity-100' : 'opacity-0'
           } ${className}`}
           style={style}
-          priority={priority}
+          priority={shouldPrioritize}
           onLoad={onLoad}
           onError={onError}
         />

@@ -3,11 +3,29 @@
 import { X, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
 
+interface ProductFilters {
+  categories: string[];
+  states: string[];
+  priceRange: {
+    min: number;
+    max: number;
+  };
+  minRating: number;
+  inStock: boolean | null;
+  verified: boolean | null;
+  featured: boolean | null;
+}
+
+interface FilterOptions {
+  categories: string[];
+  states: string[];
+}
+
 interface FiltersDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  filters: any;
-  filterOptions: any;
+  filters: ProductFilters;
+  filterOptions: FilterOptions;
   priceRange: { min: number; max: number };
   onToggleCategory: (category: string) => void;
   onToggleState: (state: string) => void;
@@ -41,13 +59,11 @@ export default function FiltersDrawer({
   const [showAllStates, setShowAllStates] = useState(false);
 
   // Get visible items (first 3 or all)
-  const visibleCategories = showAllCategories 
-    ? filterOptions.categories 
+  const visibleCategories = showAllCategories
+    ? filterOptions.categories
     : filterOptions.categories.slice(0, 3);
 
-  const visibleStates = showAllStates 
-    ? filterOptions.states 
-    : filterOptions.states.slice(0, 3);
+  const visibleStates = showAllStates ? filterOptions.states : filterOptions.states.slice(0, 3);
 
   // Check if we have more than 3 items
   const hasMoreCategories = filterOptions.categories.length > 3;
@@ -125,8 +141,8 @@ export default function FiltersDrawer({
                     className="w-full text-left px-4 py-3 rounded-lg transition-colors text-base text-primary-600 hover:bg-primary-50 font-medium flex items-center justify-between"
                   >
                     <span>
-                      {showAllCategories 
-                        ? 'Ver menos' 
+                      {showAllCategories
+                        ? 'Ver menos'
                         : `Ver ${filterOptions.categories.length - 3} más`}
                     </span>
                     {showAllCategories ? (
@@ -180,9 +196,7 @@ export default function FiltersDrawer({
                     className="w-full text-left px-4 py-3 rounded-lg transition-colors text-base text-primary-600 hover:bg-primary-50 font-medium flex items-center justify-between"
                   >
                     <span>
-                      {showAllStates 
-                        ? 'Ver menos' 
-                        : `Ver ${filterOptions.states.length - 3} más`}
+                      {showAllStates ? 'Ver menos' : `Ver ${filterOptions.states.length - 3} más`}
                     </span>
                     {showAllStates ? (
                       <ChevronUp className="w-5 h-5" />
@@ -200,9 +214,7 @@ export default function FiltersDrawer({
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <div className="flex-1">
-                    <label className="block text-sm text-gray-600 mb-2 font-medium">
-                      Mínimo
-                    </label>
+                    <label className="block text-sm text-gray-600 mb-2 font-medium">Mínimo</label>
                     <input
                       type="number"
                       value={filters.priceRange.min}
@@ -219,9 +231,7 @@ export default function FiltersDrawer({
                   </div>
                   <span className="text-gray-400 mt-8">-</span>
                   <div className="flex-1">
-                    <label className="block text-sm text-gray-600 mb-2 font-medium">
-                      Máximo
-                    </label>
+                    <label className="block text-sm text-gray-600 mb-2 font-medium">Máximo</label>
                     <input
                       type="number"
                       value={filters.priceRange.max}
@@ -246,9 +256,7 @@ export default function FiltersDrawer({
 
             {/* Rating Section */}
             <div className="px-6 py-6 border-b border-gray-100">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
-                Calificación mínima
-              </h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Calificación mínima</h3>
               <div className="space-y-1">
                 {/* Clear rating filter */}
                 <button
@@ -278,9 +286,7 @@ export default function FiltersDrawer({
                           <svg
                             key={i}
                             className={`w-5 h-5 ${
-                              i < rating
-                                ? 'text-yellow-400 fill-current'
-                                : 'text-gray-300'
+                              i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
                             }`}
                             viewBox="0 0 20 20"
                           >
@@ -288,7 +294,9 @@ export default function FiltersDrawer({
                           </svg>
                         ))}
                       </div>
-                      <span className={`text-base ${filters.minRating === rating ? 'font-semibold' : ''}`}>
+                      <span
+                        className={`text-base ${filters.minRating === rating ? 'font-semibold' : ''}`}
+                      >
                         y más
                       </span>
                     </div>

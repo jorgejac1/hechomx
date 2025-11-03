@@ -4,9 +4,9 @@ import { ReactNode } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCarousel } from '@/hooks/media';
 
-interface CarouselProps {
-  items: any[];
-  renderItem: (item: any, index: number) => ReactNode;
+interface CarouselProps<T> {
+  items: T[];
+  renderItem: (item: T, index: number) => ReactNode;
   loop?: boolean;
   autoPlay?: boolean;
   autoPlayInterval?: number;
@@ -15,7 +15,7 @@ interface CarouselProps {
   className?: string;
 }
 
-export default function Carousel({
+export default function Carousel<T>({
   items,
   renderItem,
   loop = false,
@@ -24,11 +24,12 @@ export default function Carousel({
   showControls = true,
   showIndicators = true,
   className = '',
-}: CarouselProps) {
-  const { currentIndex, next, previous, goTo, isFirst, isLast } = useCarousel(
-    items.length,
-    { loop, autoPlay, autoPlayInterval }
-  );
+}: CarouselProps<T>) {
+  const { currentIndex, next, previous, goTo, isFirst, isLast } = useCarousel(items.length, {
+    loop,
+    autoPlay,
+    autoPlayInterval,
+  });
 
   if (!items.length) return null;
 
@@ -81,9 +82,7 @@ export default function Carousel({
               key={index}
               onClick={() => goTo(index)}
               className={`w-2 h-2 rounded-full transition-all ${
-                index === currentIndex
-                  ? 'bg-white w-6'
-                  : 'bg-white/50 hover:bg-white/75'
+                index === currentIndex ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/75'
               }`}
               aria-label={`Ir a slide ${index + 1}`}
             />

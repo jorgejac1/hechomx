@@ -2,7 +2,11 @@
 
 import { createContext, useContext, ReactNode } from 'react';
 import { Product } from '@/types';
-import { useProductComparison, UseProductComparisonReturn } from '@/hooks/product/useProductComparison';
+import {
+  useProductComparison,
+  UseProductComparisonReturn,
+} from '@/hooks/product/useProductComparison';
+import { useToast } from '@/contexts/ToastContext';
 
 type ComparisonContextType = UseProductComparisonReturn & {
   comparisonProducts: Product[];
@@ -15,11 +19,12 @@ type ComparisonContextType = UseProductComparisonReturn & {
 const ComparisonContext = createContext<ComparisonContextType | undefined>(undefined);
 
 export function ComparisonProvider({ children }: { children: ReactNode }) {
+  const { info } = useToast();
   const comparison = useProductComparison({
     maxProducts: 4,
     persistToStorage: true,
     onLimitReached: () => {
-      console.log('Maximum 4 products can be compared');
+      info('Máximo 4 productos en comparación. Quita uno para agregar otro.');
     },
   });
 
@@ -33,11 +38,7 @@ export function ComparisonProvider({ children }: { children: ReactNode }) {
     isInComparison: comparison.isComparing,
   };
 
-  return (
-    <ComparisonContext.Provider value={contextValue}>
-      {children}
-    </ComparisonContext.Provider>
-  );
+  return <ComparisonContext.Provider value={contextValue}>{children}</ComparisonContext.Provider>;
 }
 
 export function useComparison() {

@@ -13,16 +13,13 @@ interface ComparisonTableProps {
   showOnlyDifferences: boolean;
 }
 
-export default function ComparisonTable({
-  products,
-  showOnlyDifferences,
-}: ComparisonTableProps) {
+export default function ComparisonTable({ products, showOnlyDifferences }: ComparisonTableProps) {
   const { removeFromComparison } = useComparison();
   const { addToCart, isInCart } = useCart();
   const [stickyHeader, setStickyHeader] = useState(false);
 
-  // Calculate if values are different
-  const hasDifferentValues = (getAttribute: (p: Product) => any) => {
+  // Calculate if values are different - using generic type instead of any
+  const hasDifferentValues = <T,>(getAttribute: (p: Product) => T): boolean => {
     const values = products.map(getAttribute);
     return new Set(values).size > 1;
   };
@@ -100,9 +97,7 @@ export default function ComparisonTable({
                 sizes="128px"
               />
             </div>
-            <h3 className="font-bold text-sm line-clamp-2 px-2">
-              {product.name}
-            </h3>
+            <h3 className="font-bold text-sm line-clamp-2 px-2">{product.name}</h3>
             <a
               href={`/productos/${product.id}`}
               className="text-xs text-primary-600 hover:underline mt-1 inline-block"
@@ -195,16 +190,12 @@ export default function ComparisonTable({
                         <Star
                           key={star}
                           className={`w-5 h-5 ${
-                            star <= rating
-                              ? 'text-yellow-400 fill-current'
-                              : 'text-gray-300'
+                            star <= rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
                           }`}
                         />
                       ))}
                     </div>
-                    <span className="text-lg font-bold text-gray-900">
-                      {rating.toFixed(1)}
-                    </span>
+                    <span className="text-lg font-bold text-gray-900">{rating.toFixed(1)}</span>
                   </div>
                 </div>
               );
@@ -259,15 +250,9 @@ export default function ComparisonTable({
               <div key={p.id} className="text-center flex items-center justify-center">
                 <div className="flex items-center justify-center gap-2">
                   <div
-                    className={`w-3 h-3 rounded-full ${
-                      p.inStock ? 'bg-green-500' : 'bg-red-500'
-                    }`}
+                    className={`w-3 h-3 rounded-full ${p.inStock ? 'bg-green-500' : 'bg-red-500'}`}
                   />
-                  <span
-                    className={`font-medium ${
-                      p.inStock ? 'text-green-700' : 'text-red-700'
-                    }`}
-                  >
+                  <span className={`font-medium ${p.inStock ? 'text-green-700' : 'text-red-700'}`}>
                     {p.inStock ? 'Disponible' : 'Agotado'}
                   </span>
                 </div>
@@ -330,10 +315,11 @@ export default function ComparisonTable({
               >
                 <ShoppingCart className="w-4 h-4 flex-shrink-0" />
                 <span className="truncate">
-                  {product.inStock 
-                    ? (isInCart(product.id) ? 'Agregar más' : 'Agregar al carrito')
-                    : 'Agotado'
-                  }
+                  {product.inStock
+                    ? isInCart(product.id)
+                      ? 'Agregar más'
+                      : 'Agregar al carrito'
+                    : 'Agotado'}
                 </span>
               </button>
             </div>

@@ -12,10 +12,7 @@ interface ComparisonMobileViewProps {
   showOnlyDifferences: boolean;
 }
 
-export default function ComparisonMobileView({
-  products,
-  showOnlyDifferences,
-}: ComparisonMobileViewProps) {
+export default function ComparisonMobileView({ products }: ComparisonMobileViewProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { removeFromComparison } = useComparison();
 
@@ -173,11 +170,7 @@ function ProductColumn({
         </div>
         <div className="flex justify-between items-center">
           <span className="text-gray-600">Disponibilidad:</span>
-          <span
-            className={`font-medium ${
-              product.inStock ? 'text-green-700' : 'text-red-700'
-            }`}
-          >
+          <span className={`font-medium ${product.inStock ? 'text-green-700' : 'text-red-700'}`}>
             {product.inStock ? 'Disponible' : 'Agotado'}
           </span>
         </div>
@@ -188,12 +181,7 @@ function ProductColumn({
         <Button variant="primary" size="sm" href={`/productos/${product.id}`} className="w-full">
           Ver detalles
         </Button>
-        <Button
-          variant="secondary"
-          size="sm"
-          className="w-full"
-          disabled={!product.inStock}
-        >
+        <Button variant="secondary" size="sm" className="w-full" disabled={!product.inStock}>
           <ShoppingCart className="w-3 h-3 mr-1" />
           {product.inStock ? 'Agregar' : 'Agotado'}
         </Button>

@@ -7,11 +7,11 @@ import { useZoomControls } from './useZoomControls';
 /**
  * Complete image gallery state (composition hook)
  * Combines multiple hooks for full gallery functionality
- * 
+ *
  * @param images - Array of image URLs
  * @param options - Configuration options
  * @returns Complete gallery controls
- * 
+ *
  * @example
  * const gallery = useImageGallery(product.images, {
  *   enableZoom: true,
@@ -61,12 +61,8 @@ export function useImageGallery(
 
   // Use composed hooks
   const loading = useImageLoadingState(images.length);
-  
-  const zoom = useZoomControls(
-    enableZoom ? minZoom : 1,
-    enableZoom ? maxZoom : 1,
-    zoomStep
-  );
+
+  const zoom = useZoomControls(enableZoom ? minZoom : 1, enableZoom ? maxZoom : 1, zoomStep);
 
   const slideshow = useSlideshow(
     images.length,
@@ -74,10 +70,8 @@ export function useImageGallery(
     enableSlideshow ? setSelectedIndex : undefined
   );
 
-  // Preload adjacent images
-  if (enablePreload) {
-    useImagePreloader(images, selectedIndex, { adjacentCount: 2 });
-  }
+  // Always call the hook, but pass enabled option
+  useImagePreloader(enablePreload ? images : [], selectedIndex, { adjacentCount: 2 });
 
   const next = useCallback(() => {
     setSelectedIndex((prev) => (prev + 1) % images.length);

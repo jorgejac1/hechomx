@@ -11,7 +11,11 @@ interface StickyCartBarProps {
   onAddToCart: () => void;
 }
 
-export default function StickyCartBar({ product, selectedQuantity, onAddToCart }: StickyCartBarProps) {
+export default function StickyCartBar({
+  product,
+  selectedQuantity,
+  onAddToCart,
+}: StickyCartBarProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -25,16 +29,25 @@ export default function StickyCartBar({ product, selectedQuantity, onAddToCart }
 
   if (!isVisible || !product.inStock) return null;
 
+  const totalPrice = product.price * selectedQuantity;
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50 md:hidden animate-slide-up pb-safe">
       <div className="container mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
         <div className="flex-1 min-w-0">
           <p className="font-bold text-gray-900 truncate text-xs">{product.name}</p>
-          <p className="text-base font-bold text-teal-600">
-            ${product.price.toLocaleString('es-MX')} {product.currency}
-          </p>
+          <div className="flex items-baseline gap-2">
+            <p className="text-base font-bold text-teal-600">
+              ${totalPrice.toLocaleString('es-MX')}
+            </p>
+            {selectedQuantity > 1 && (
+              <span className="text-xs text-gray-600">
+                ({selectedQuantity} × ${product.price.toLocaleString('es-MX')})
+              </span>
+            )}
+          </div>
         </div>
-        
+
         <Button
           variant="primary"
           size="sm"
@@ -42,7 +55,7 @@ export default function StickyCartBar({ product, selectedQuantity, onAddToCart }
           icon={<ShoppingCart className="w-4 h-4" />}
           className="flex-shrink-0"
         >
-          Agregar
+          {selectedQuantity > 1 ? `Agregar (${selectedQuantity})` : 'Agregar'}
         </Button>
       </div>
     </div>

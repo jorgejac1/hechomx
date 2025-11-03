@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 /**
  * Persistent state in localStorage with SSR support
- * 
+ *
  * @param key - localStorage key
  * @param initialValue - Initial value if key doesn't exist
  * @returns [value, setValue] - Tuple like useState
- * 
+ *
  * @example
  * const [theme, setTheme] = useLocalStorage('theme', 'light');
  * const [cart, setCart] = useLocalStorage<Product[]>('cart', []);
@@ -35,9 +35,9 @@ export function useLocalStorage<T>(
     try {
       // Allow value to be a function so we have same API as useState
       const valueToStore = value instanceof Function ? value(storedValue) : value;
-      
+
       setStoredValue(valueToStore);
-      
+
       if (typeof window !== 'undefined') {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }

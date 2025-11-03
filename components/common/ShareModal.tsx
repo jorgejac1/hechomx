@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { X, Copy, Check, Mail, MessageCircle } from 'lucide-react';
+import { X, Copy, Check, Mail } from 'lucide-react';
 import { useToast } from '@/contexts/ToastContext';
 
 interface ShareModalProps {
@@ -12,13 +12,7 @@ interface ShareModalProps {
   text?: string;
 }
 
-export default function ShareModal({
-  isOpen,
-  onClose,
-  url,
-  title,
-  text = '',
-}: ShareModalProps) {
+export default function ShareModal({ isOpen, onClose, url, title, text = '' }: ShareModalProps) {
   const [copied, setCopied] = useState(false);
   const { success } = useToast();
 
@@ -91,8 +85,8 @@ export default function ShareModal({
   ];
 
   const trackShare = (platform: string) => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'share', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'share', {
         method: platform,
         content_type: 'product',
         item_id: url,
@@ -104,10 +98,7 @@ export default function ShareModal({
   return (
     <>
       {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black/50 z-50 animate-fade-in"
-        onClick={onClose}
-      />
+      <div className="fixed inset-0 bg-black/50 z-50 animate-fade-in" onClick={onClose} />
 
       {/* Modal */}
       <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md animate-scale-in">
@@ -139,9 +130,7 @@ export default function ShareModal({
                   >
                     {option.icon}
                   </div>
-                  <span className="text-xs font-medium text-gray-700">
-                    {option.name}
-                  </span>
+                  <span className="text-xs font-medium text-gray-700">{option.name}</span>
                 </button>
               ))}
             </div>
@@ -167,11 +156,7 @@ export default function ShareModal({
                       : 'bg-primary-600 text-white hover:bg-primary-700'
                   }`}
                 >
-                  {copied ? (
-                    <Check className="w-5 h-5" />
-                  ) : (
-                    <Copy className="w-5 h-5" />
-                  )}
+                  {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                 </button>
               </div>
             </div>

@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { useState, useRef, useEffect } from "react";
-import { useComparison } from "@/contexts/ComparisonContext";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useMediaQuery } from "@/hooks/common/useMediaQuery";
-import ComparisonTable from "./ComparisonTable";
-import ComparisonMobileView from "./ComparisonMobileView";
-import ComparisonProsCons from "./ComparisonProscons";
-import ComparisonActions from "./ComparisonActions";
-import Button from "@/components/common/Button";
-import EmptyState from "@/components/common/feedback/EmptyState";
-import LoadingSpinner from "@/components/common/feedback/LoadingSpinner";
-import { ArrowLeft } from "lucide-react";
+import { useState, useRef, useEffect } from 'react';
+import { useComparison } from '@/contexts/ComparisonContext';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useMediaQuery } from '@/hooks/common/useMediaQuery';
+import ComparisonTable from './ComparisonTable';
+import ComparisonMobileView from './ComparisonMobileView';
+import ComparisonProsCons from './ComparisonProscons';
+import ComparisonActions from './ComparisonActions';
+import Button from '@/components/common/Button';
+import EmptyState from '@/components/common/feedback/EmptyState';
+import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
+import { ArrowLeft } from 'lucide-react';
 
 export default function ComparisonPageClient() {
   const { comparisonProducts, clearComparison } = useComparison();
   const [showOnlyDifferences, setShowOnlyDifferences] = useState(false);
-  const [isHydrated, setIsHydrated] = useState(false); // Add hydration state
+  const [isHydrated, setIsHydrated] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const tableRef = useRef<HTMLDivElement>(null);
 
   // Wait for hydration to complete
@@ -29,17 +29,19 @@ export default function ComparisonPageClient() {
 
   // Load products from URL if shared
   useEffect(() => {
-    const productIds = searchParams.get("products");
-    if (productIds) {
-      console.log("Loading products:", productIds);
+    const productIds = searchParams.get('products');
+    if (productIds && comparisonProducts.length === 0) {
+      // TODO: Load products from API and add to comparison
+      // const ids = productIds.split(',');
+      // loadProductsAndAddToComparison(ids);
     }
-  }, [searchParams]);
+  }, [searchParams, comparisonProducts.length]);
 
   // Track page view
   useEffect(() => {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "page_view", {
-        page_title: "Comparison Page",
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_title: 'Comparison Page',
         products_count: comparisonProducts.length,
       });
     }
@@ -50,11 +52,9 @@ export default function ComparisonPageClient() {
   };
 
   const handleClearAll = () => {
-    if (
-      window.confirm("¿Estás seguro de que quieres limpiar la comparación?")
-    ) {
+    if (window.confirm('¿Estás seguro de que quieres limpiar la comparación?')) {
       clearComparison();
-      router.push("/productos");
+      router.push('/productos');
     }
   };
 
@@ -109,7 +109,7 @@ export default function ComparisonPageClient() {
               </h1>
               <p className="text-sm sm:text-base text-gray-600">
                 Comparando {comparisonProducts.length} producto
-                {comparisonProducts.length !== 1 ? "s" : ""}
+                {comparisonProducts.length !== 1 ? 's' : ''}
               </p>
             </div>
 
@@ -118,14 +118,12 @@ export default function ComparisonPageClient() {
                 onClick={() => setShowOnlyDifferences(!showOnlyDifferences)}
                 className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-lg border-2 transition-all ${
                   showOnlyDifferences
-                    ? "bg-primary-50 border-primary-600 text-primary-700"
-                    : "bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
+                    ? 'bg-primary-50 border-primary-600 text-primary-700'
+                    : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
                 }`}
               >
-                {showOnlyDifferences ? "✓ " : ""}
-                <span className="hidden sm:inline">
-                  Mostrar solo diferencias
-                </span>
+                {showOnlyDifferences ? '✓ ' : ''}
+                <span className="hidden sm:inline">Mostrar solo diferencias</span>
                 <span className="sm:hidden">Solo diferencias</span>
               </button>
 
@@ -157,9 +155,7 @@ export default function ComparisonPageClient() {
           )}
         </div>
 
-        {comparisonProducts.length >= 2 && (
-          <ComparisonProsCons products={comparisonProducts} />
-        )}
+        {comparisonProducts.length >= 2 && <ComparisonProsCons products={comparisonProducts} />}
 
         <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 md:p-8 mb-8">
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
@@ -167,10 +163,7 @@ export default function ComparisonPageClient() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {comparisonProducts.map((product) => (
-              <div
-                key={product.id}
-                className="border-l-4 border-primary-500 pl-3 sm:pl-4"
-              >
+              <div key={product.id} className="border-l-4 border-primary-500 pl-3 sm:pl-4">
                 <h3 className="font-bold text-sm sm:text-base text-gray-900 mb-2">
                   {product.name}
                 </h3>

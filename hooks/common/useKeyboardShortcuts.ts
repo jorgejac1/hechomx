@@ -2,10 +2,10 @@ import { useEffect, RefObject } from 'react';
 
 /**
  * Generic keyboard shortcut handler
- * 
+ *
  * @param shortcuts - Map of key combinations to handlers
  * @param options - Configuration options
- * 
+ *
  * @example
  * useKeyboardShortcuts({
  *   'ArrowLeft': goToPrevious,
@@ -34,7 +34,7 @@ export function useKeyboardShortcuts(
 
     const handleKeyDown = (event: KeyboardEvent) => {
       const handler = shortcuts[event.key];
-      
+
       if (handler) {
         if (preventDefault) {
           event.preventDefault();
@@ -43,11 +43,20 @@ export function useKeyboardShortcuts(
       }
     };
 
-    const element = target?.current || window;
-    element.addEventListener('keydown', handleKeyDown as any);
+    const element = target?.current;
 
-    return () => {
-      element.removeEventListener('keydown', handleKeyDown as any);
-    };
+    if (element) {
+      // Attach to specific element
+      element.addEventListener('keydown', handleKeyDown);
+      return () => {
+        element.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      // Attach to window
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
   }, [shortcuts, enabled, preventDefault, target]);
 }
