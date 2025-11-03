@@ -218,21 +218,24 @@ export default async function ProductsPage({
         )}
 
         {/* Quick Filters */}
-        <QuickFilters />
-
+        <Suspense fallback={<div className="h-12" />}>
+          <QuickFilters />
+        </Suspense>
         {/* Filters, View Toggle, Products Grid - Client Component */}
-        <ProductsPageClient
-          products={products}
-          paginatedProducts={paginatedProducts}
-          categories={categories}
-          states={states}
-          currentCategory={params.categoria}
-          currentState={params.estado}
-          currentQuery={params.q}
-          currentSort={params.ordenar}
-          currentPage={currentPage}
-          totalPages={totalPages}
-        />
+        <Suspense fallback={<div className="animate-pulse h-96 bg-gray-200 rounded-xl" />}>
+          <ProductsPageClient
+            products={products}
+            paginatedProducts={paginatedProducts}
+            categories={categories}
+            states={states}
+            currentCategory={params.categoria}
+            currentState={params.estado}
+            currentQuery={params.q}
+            currentSort={params.ordenar}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+        </Suspense>
       </div>
       
       {/* Scroll to Top Button */}
