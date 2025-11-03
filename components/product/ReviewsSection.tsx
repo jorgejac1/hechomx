@@ -158,7 +158,7 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
           </div>
         </div>
 
-        {/* UPDATED: Write Review Button */}
+        {/* Write Review Button */}
         <Button
           variant="secondary"
           size="md"
@@ -181,7 +181,7 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-semibold text-gray-900">{review.author}</span>
-                    {/* UPDATED: Verified Purchase Badge */}
+                    {/* Verified Purchase Badge */}
                     {review.verified && (
                       <Badge variant="success" size="sm">
                         Compra verificada
@@ -233,7 +233,7 @@ export default function ReviewsSection({ productId, rating, reviewCount }: Revie
       {/* Show More Button */}
       {reviews.length > 3 && filter === 'all' && (
         <div className="mt-8 text-center">
-          {/* UPDATED: Show More Button */}
+          {/* Show More Button */}
           <Button
             variant="secondary"
             size="md"

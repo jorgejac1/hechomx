@@ -161,7 +161,7 @@ export function useProductFilters(initialProducts: Product[] = []) {
     return filtered;
   }, [initialProducts, filters]);
 
-  // Update individual filter
+  // individual filter
   const updateFilter = useCallback(
     <K extends keyof ProductFilters>(key: K, value: ProductFilters[K]) => {
       setFilters((prev) => ({ ...prev, [key]: value }));
@@ -207,22 +207,22 @@ export function useProductFilters(initialProducts: Product[] = []) {
     }));
   }, []);
 
-  // Update price range
+  // price range
   const updatePriceRange = useCallback((range: PriceRange) => {
     setFilters((prev) => ({ ...prev, priceRange: range }));
   }, []);
 
-  // Update minimum rating
+  // minimum rating
   const updateMinRating = useCallback((rating: number) => {
     setFilters((prev) => ({ ...prev, minRating: rating }));
   }, []);
 
-  // Update sort option
+  // sort option
   const updateSortBy = useCallback((sortBy: SortOption) => {
     setFilters((prev) => ({ ...prev, sortBy }));
   }, []);
 
-  // Update search query
+  // search query
   const updateSearchQuery = useCallback((query: string) => {
     setFilters((prev) => ({ ...prev, searchQuery: query }));
   }, []);

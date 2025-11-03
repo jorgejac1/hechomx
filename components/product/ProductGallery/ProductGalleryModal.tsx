@@ -121,7 +121,7 @@ export function ProductGalleryModal({
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Zoom controls - updated to use zoom instead of zoomLevel */}
+          {/* Zoom controls - to use zoom instead of zoomLevel */}
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -150,7 +150,7 @@ export function ProductGalleryModal({
             <ZoomIn className="w-5 h-5" aria-hidden="true" />
           </button>
 
-          {/* Slideshow toggle - updated to use slideshow.isPlaying */}
+          {/* Slideshow toggle to use slideshow.isPlaying */}
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -206,7 +206,7 @@ export function ProductGalleryModal({
         </div>
       </div>
 
-      {/* Main image area - updated to use zoomControls.zoom */}
+      {/* Main image area to use zoomControls.zoom */}
       <div className="flex-1 flex items-center justify-center p-4 pt-20 pb-32">
         <div
           className="relative w-full h-full max-w-6xl"

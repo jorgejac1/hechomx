@@ -45,14 +45,14 @@ module.exports = {
           900: '#713f12',
         }
       },
-      // NEW: Safe area spacing for mobile devices with notches
+      // Safe area spacing for mobile devices with notches
       spacing: {
         'safe': 'env(safe-area-inset-bottom)',
         'safe-top': 'env(safe-area-inset-top)',
         'safe-left': 'env(safe-area-inset-left)',
         'safe-right': 'env(safe-area-inset-right)',
       },
-      // NEW: Animation for slide-up effect
+      // Animation for slide-up effect
       keyframes: {
         'slide-up': {
           '0%': { transform: 'translateY(100%)' },
