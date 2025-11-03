@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useToast } from "@/contexts/ToastContext";
+import ShareModal from "@/components/common/ShareModal";
 import { Product } from "@/types";
 import {
   Heart,
@@ -31,33 +33,23 @@ export default function ProductInfo({
 }: ProductInfoProps) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+  const { success } = useToast();
 
   const handleAddToCart = async () => {
     setIsAdding(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsAdding(false);
-    alert(
+    
+    success(
       `Agregado ${selectedQuantity} ${
         selectedQuantity === 1 ? "unidad" : "unidades"
       } al carrito`
     );
   };
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: product.name,
-          text: product.description,
-          url: window.location.href,
-        });
-      } catch (err) {
-        console.log("Error sharing:", err);
-      }
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert("Link copiado al portapapeles");
-    }
+  const handleShare = () => {
+    setShowShareModal(true);
   };
 
   const decreaseQuantity = () => {
@@ -344,6 +336,15 @@ export default function ProductInfo({
 
       {/* Trust Indicators */}
       <TrustIndicators />
+
+      {/* Share Modal */}
+      <ShareModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        url={typeof window !== 'undefined' ? window.location.href : ''}
+        title={product.name}
+        text={product.description}
+      />
     </div>
   );
 }

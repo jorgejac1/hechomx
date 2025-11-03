@@ -1,49 +1,40 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, ReactNode } from 'react';
 import { Product } from '@/types';
+import { useProductComparison, UseProductComparisonReturn } from '@/hooks/product/useProductComparison';
 
-interface ComparisonContextType {
+type ComparisonContextType = UseProductComparisonReturn & {
   comparisonProducts: Product[];
   addToComparison: (product: Product) => void;
   removeFromComparison: (productId: string) => void;
   clearComparison: () => void;
   isInComparison: (productId: string) => boolean;
-}
+};
 
 const ComparisonContext = createContext<ComparisonContextType | undefined>(undefined);
 
 export function ComparisonProvider({ children }: { children: ReactNode }) {
-  const [comparisonProducts, setComparisonProducts] = useState<Product[]>([]);
+  const comparison = useProductComparison({
+    maxProducts: 4,
+    persistToStorage: true,
+    onLimitReached: () => {
+      console.log('Maximum 4 products can be compared');
+    },
+  });
 
-  const addToComparison = (product: Product) => {
-    if (comparisonProducts.length < 4 && !isInComparison(product.id)) {
-      setComparisonProducts([...comparisonProducts, product]);
-    }
-  };
-
-  const removeFromComparison = (productId: string) => {
-    setComparisonProducts(comparisonProducts.filter(p => p.id !== productId));
-  };
-
-  const clearComparison = () => {
-    setComparisonProducts([]);
-  };
-
-  const isInComparison = (productId: string) => {
-    return comparisonProducts.some(p => p.id === productId);
+  // Create aliases for backward compatibility
+  const contextValue: ComparisonContextType = {
+    ...comparison,
+    comparisonProducts: comparison.products,
+    addToComparison: comparison.add,
+    removeFromComparison: comparison.remove,
+    clearComparison: comparison.clear,
+    isInComparison: comparison.isComparing,
   };
 
   return (
-    <ComparisonContext.Provider
-      value={{
-        comparisonProducts,
-        addToComparison,
-        removeFromComparison,
-        clearComparison,
-        isInComparison,
-      }}
-    >
+    <ComparisonContext.Provider value={contextValue}>
       {children}
     </ComparisonContext.Provider>
   );

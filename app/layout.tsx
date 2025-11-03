@@ -6,7 +6,8 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import ScrollToTop from '@/components/common/ScrollToTop'
 import { ComparisonProvider } from '@/contexts/ComparisonContext'
-import ComparisonBar from '@/components/product/ComparisonBar'
+import { ToastProvider } from '@/contexts/ToastContext'
+import ComparisonBar from '@/components/product/Comparison/ComparisonBar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,15 +24,17 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className}>
-        <ComparisonProvider>
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
-          <ScrollToTop />
-          <ComparisonBar />
-        </ComparisonProvider>
+        <ToastProvider>
+          <ComparisonProvider>
+            <Header />
+            <main className="min-h-screen">
+              {children}
+            </main>
+            <Footer />
+            <ScrollToTop />
+            <ComparisonBar />
+          </ComparisonProvider>
+        </ToastProvider>
         
         {/* Google Analytics */}
         <Script

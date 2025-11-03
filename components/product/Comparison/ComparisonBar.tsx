@@ -1,17 +1,30 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useComparison } from '@/contexts/ComparisonContext';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Button from '@/components/common/Button';
 
 export default function ComparisonBar() {
-  const { comparisonProducts, removeFromComparison, clearComparison } = useComparison();
+  const { comparisonProducts, removeFromComparison, clearComparison, isFull, canCompare } = useComparison();
+  const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
 
+  // Only render after hydration
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Don't render on server or before hydration
+  if (!mounted || pathname === '/comparar') return null;
+  
+  // Don't render if no products
   if (comparisonProducts.length === 0) return null;
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50 transition-transform"
+      className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50 animate-slide-up"
       role="region"
       aria-label="Productos en comparación"
     >
@@ -20,7 +33,12 @@ export default function ComparisonBar() {
           {/* Left: Products */}
           <div className="flex items-center gap-4 flex-1 overflow-x-auto">
             <span className="text-sm font-semibold text-gray-900 whitespace-nowrap">
-              Comparar ({comparisonProducts.length}/4):
+              Comparar ({comparisonProducts.length}/4)
+              {isFull && (
+                <span className="ml-2 text-xs text-amber-600 font-normal">
+                  • Máximo alcanzado
+                </span>
+              )}
             </span>
             
             <div className="flex gap-3">
@@ -74,7 +92,7 @@ export default function ComparisonBar() {
               variant="primary"
               size="md"
               href="/comparar"
-              disabled={comparisonProducts.length < 2}
+              disabled={!canCompare}
             >
               Comparar productos
             </Button>
