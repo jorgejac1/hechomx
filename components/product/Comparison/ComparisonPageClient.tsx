@@ -16,24 +16,21 @@ import { ArrowLeft } from "lucide-react";
 export default function ComparisonPageClient() {
   const { comparisonProducts, clearComparison } = useComparison();
   const [showOnlyDifferences, setShowOnlyDifferences] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false); // Add hydration state
   const router = useRouter();
   const searchParams = useSearchParams();
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const tableRef = useRef<HTMLDivElement>(
-    null
-  ) as React.RefObject<HTMLDivElement>;
+  const tableRef = useRef<HTMLDivElement>(null);
 
-  // Only render after hydration
+  // Wait for hydration to complete
   useEffect(() => {
-    setMounted(true);
+    setIsHydrated(true);
   }, []);
 
   // Load products from URL if shared
   useEffect(() => {
     const productIds = searchParams.get("products");
     if (productIds) {
-      // Logic to load products from IDs would go here
       console.log("Loading products:", productIds);
     }
   }, [searchParams]);
@@ -61,16 +58,18 @@ export default function ComparisonPageClient() {
     }
   };
 
-  // Show loading state during hydration
-  if (!mounted) {
+  // Show loading spinner during hydration
+  if (!isHydrated) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12 flex items-center justify-center">
-        <LoadingSpinner />
+      <div className="min-h-screen bg-gray-50 py-12">
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center">
+          <LoadingSpinner />
+        </div>
       </div>
     );
   }
 
-  // Show empty state after hydration if no products
+  // Show empty state if no products (only after hydration)
   if (comparisonProducts.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 py-12">
@@ -115,7 +114,6 @@ export default function ComparisonPageClient() {
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              {/* Show only differences toggle */}
               <button
                 onClick={() => setShowOnlyDifferences(!showOnlyDifferences)}
                 className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-lg border-2 transition-all ${
@@ -143,10 +141,8 @@ export default function ComparisonPageClient() {
           </div>
         </div>
 
-        {/* Comparison Actions (Print, Share, Export) */}
         <ComparisonActions products={comparisonProducts} tableRef={tableRef} />
 
-        {/* Comparison Table/View */}
         <div ref={tableRef} id="comparison-table" className="mb-8">
           {isMobile ? (
             <ComparisonMobileView
@@ -161,12 +157,10 @@ export default function ComparisonPageClient() {
           )}
         </div>
 
-        {/* Pros & Cons */}
         {comparisonProducts.length >= 2 && (
           <ComparisonProsCons products={comparisonProducts} />
         )}
 
-        {/* Descriptions */}
         <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6 md:p-8 mb-8">
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
             Descripciones

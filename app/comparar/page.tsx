@@ -1,11 +1,24 @@
-import { Metadata } from 'next';
-import { ComparisonPageClient } from '@/components/product/Comparison';
+import { Suspense } from 'react';
+import ComparisonPageClient from '@/components/product/Comparison/ComparisonPageClient';
+import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Comparar Productos - Hecho en México',
-  description: 'Compara productos artesanales mexicanos lado a lado para tomar la mejor decisión de compra.',
+  description: 'Compara productos artesanales mexicanos lado a lado',
 };
 
+function ComparisonLoading() {
+  return (
+    <div className="min-h-screen bg-gray-50 py-12 flex items-center justify-center">
+      <LoadingSpinner />
+    </div>
+  );
+}
+
 export default function ComparePage() {
-  return <ComparisonPageClient />;
+  return (
+    <Suspense fallback={<ComparisonLoading />}>
+      <ComparisonPageClient />
+    </Suspense>
+  );
 }

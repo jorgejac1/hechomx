@@ -8,7 +8,7 @@ import { Printer, Share2, Download } from "lucide-react";
 
 interface ComparisonActionsProps {
   products: Product[];
-  tableRef: RefObject<HTMLDivElement>;
+  tableRef: RefObject<HTMLDivElement | null>
 }
 
 export default function ComparisonActions({

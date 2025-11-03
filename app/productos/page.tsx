@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { getAllProducts, getCategories, getStates } from '@/lib/products';
 import { getSubcategories, getSubSubcategories } from '@/lib/subcategories';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
@@ -77,7 +78,6 @@ export default async function ProductsPage({
     );
   }
 
-  // NUEVO: Quick Filters
   // Filter by price
   if (params.precio) {
     const maxPrice = parseInt(params.precio);
