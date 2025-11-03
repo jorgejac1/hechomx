@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import SearchModal from '@/components/ui/SearchModal';
+import { useCart } from '@/contexts/CartContext';
 import { Product } from '@/types';
 
 export default function Header() {
@@ -10,7 +11,7 @@ export default function Header() {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-  const [cartCount] = useState(0);
+  const { cartCount } = useCart(); // Use cart from context
 
   useEffect(() => {
     fetch('/api/products')
@@ -192,8 +193,7 @@ export default function Header() {
                       d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                     />
                   </svg>
-                  <span className="hidden lg:inline">Vender</span>
-                  <span className="lg:hidden">Vender</span>
+                  <span>Vender</span>
                 </Link>
               </div>
 

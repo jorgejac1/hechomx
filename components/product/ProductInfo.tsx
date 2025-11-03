@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/contexts/ToastContext";
 import ShareModal from "@/components/common/ShareModal";
 import { Product } from "@/types";
@@ -32,20 +33,23 @@ export default function ProductInfo({
   onQuantityChange,
 }: ProductInfoProps) {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [isAdding, setIsAdding] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const { addToCart, isInCart } = useCart();
   const { success } = useToast();
 
-  const handleAddToCart = async () => {
-    setIsAdding(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsAdding(false);
-    
+  const handleAddToCart = () => {
+    addToCart(product, selectedQuantity);
     success(
       `Agregado ${selectedQuantity} ${
         selectedQuantity === 1 ? "unidad" : "unidades"
       } al carrito`
     );
+  };
+
+  const handleBuyNow = () => {
+    addToCart(product, selectedQuantity);
+    success("Producto agregado al carrito");
+    window.location.href = '/carrito';
   };
 
   const handleShare = () => {
@@ -237,14 +241,13 @@ export default function ProductInfo({
               variant="primary"
               size="lg"
               onClick={handleAddToCart}
-              disabled={isAdding}
-              icon={isAdding ? undefined : <ShoppingCart className="w-5 h-5" />}
+              icon={<ShoppingCart className="w-5 h-5" />}
               fullWidth
             >
-              {isAdding ? "Agregando..." : "Agregar al carrito"}
+              {isInCart(product.id) ? "Agregar más al carrito" : "Agregar al carrito"}
             </Button>
 
-            <Button variant="secondary" size="lg" fullWidth>
+            <Button variant="secondary" size="lg" onClick={handleBuyNow} fullWidth>
               Comprar ahora
             </Button>
           </>

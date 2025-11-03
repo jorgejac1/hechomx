@@ -6,6 +6,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import ScrollToTop from '@/components/common/ScrollToTop'
 import { ComparisonProvider } from '@/contexts/ComparisonContext'
+import { CartProvider } from '@/contexts/CartContext'
 import { ToastProvider } from '@/contexts/ToastContext'
 import ComparisonBar from '@/components/product/Comparison/ComparisonBar'
 
@@ -25,15 +26,17 @@ export default function RootLayout({
     <html lang="es">
       <body className={inter.className}>
         <ToastProvider>
-          <ComparisonProvider>
-            <Header />
-            <main className="min-h-screen">
-              {children}
-            </main>
-            <Footer />
-            <ScrollToTop />
-            <ComparisonBar />
-          </ComparisonProvider>
+          <CartProvider>
+            <ComparisonProvider>
+              <Header />
+              <main className="min-h-screen">
+                {children}
+              </main>
+              <Footer />
+              <ScrollToTop />
+              <ComparisonBar />
+            </ComparisonProvider>
+          </CartProvider>
         </ToastProvider>
         
         {/* Google Analytics */}

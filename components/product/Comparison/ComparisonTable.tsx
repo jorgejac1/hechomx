@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useComparison } from '@/contexts/ComparisonContext';
+import { useCart } from '@/contexts/CartContext';
 import { Product } from '@/types';
 import Button from '@/components/common/Button';
 import { X, Star, ShoppingCart } from 'lucide-react';
@@ -17,6 +18,7 @@ export default function ComparisonTable({
   showOnlyDifferences,
 }: ComparisonTableProps) {
   const { removeFromComparison } = useComparison();
+  const { addToCart, isInCart } = useCart();
   const [stickyHeader, setStickyHeader] = useState(false);
 
   // Calculate if values are different
@@ -324,12 +326,15 @@ export default function ComparisonTable({
                     : 'bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed'
                 }`}
                 disabled={!product.inStock}
-                onClick={() => {
-                  console.log('Add to cart:', product.id);
-                }}
+                onClick={() => addToCart(product, 1)}
               >
                 <ShoppingCart className="w-4 h-4 flex-shrink-0" />
-                <span className="truncate">{product.inStock ? 'Agregar al carrito' : 'Agotado'}</span>
+                <span className="truncate">
+                  {product.inStock 
+                    ? (isInCart(product.id) ? 'Agregar más' : 'Agregar al carrito')
+                    : 'Agotado'
+                  }
+                </span>
               </button>
             </div>
           ))}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useToast } from '@/contexts/ToastContext';
+import { useCart } from '@/contexts/CartContext';
 import { Product } from '@/types';
 import ProductGallery from './ProductGallery';
 import ProductInfo from './ProductInfo';
@@ -20,12 +20,10 @@ interface ProductDetailClientProps {
 
 export default function ProductDetailClient({ product, similarProducts }: ProductDetailClientProps) {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
-  const { success } = useToast();
+  const { addToCart } = useCart();
 
-  const handleAddToCart = async () => {
-    success(
-      `Agregado ${selectedQuantity} ${selectedQuantity === 1 ? 'unidad' : 'unidades'} al carrito`
-    );
+  const handleAddToCart = () => {
+    addToCart(product, selectedQuantity);
   };
 
   return (
