@@ -169,14 +169,22 @@ export function useProductFilters(initialProducts: Product[] = []) {
     []
   );
 
-  // Toggle category
+  // Toggle category - SINGLE SELECT
   const toggleCategory = useCallback((category: string) => {
-    setFilters((prev) => ({
-      ...prev,
-      categories: prev.categories.includes(category)
-        ? prev.categories.filter((c) => c !== category)
-        : [...prev.categories, category],
-    }));
+    setFilters((prev) => {
+      // If clicking the same category, deselect it
+      if (prev.categories.includes(category)) {
+        return {
+          ...prev,
+          categories: [],
+        };
+      }
+      // Otherwise, replace with the new category (single-select)
+      return {
+        ...prev,
+        categories: [category],
+      };
+    });
   }, []);
 
   // Toggle subcategory
@@ -189,7 +197,7 @@ export function useProductFilters(initialProducts: Product[] = []) {
     }));
   }, []);
 
-  // Toggle state
+  // Toggle state - MULTI SELECT
   const toggleState = useCallback((state: string) => {
     setFilters((prev) => ({
       ...prev,

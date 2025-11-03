@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useProductFilters } from "@/hooks/product/useProductFilters";
 import FiltersDrawer from "./FiltersDrawer";
 import SortDropdown from "./SortDropdown";
 import ViewToggle from "./ViewToggle";
-import Link from "next/link";
+import { Product } from "@/types";
 
 interface FiltersButtonProps {
+  products: Product[]; // Added products prop
   categories: string[];
   states: string[];
   currentCategory?: string;
@@ -19,6 +21,7 @@ interface FiltersButtonProps {
 }
 
 export default function FiltersButton({
+  products,
   categories,
   states,
   currentCategory,
@@ -30,6 +33,22 @@ export default function FiltersButton({
   onViewChange,
 }: FiltersButtonProps) {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+
+  // Initialize filtering hook
+  const {
+    filters,
+    activeFilterCount,
+    filterOptions,
+    priceRange,
+    toggleCategory,
+    toggleState,
+    updatePriceRange,
+    updateMinRating,
+    toggleInStock,
+    toggleVerified,
+    toggleFeatured,
+    resetFilters,
+  } = useProductFilters(products);
 
   return (
     <>
@@ -56,6 +75,11 @@ export default function FiltersButton({
                 />
               </svg>
               Filtros
+              {activeFilterCount > 0 && (
+                <span className="ml-1 px-2 py-0.5 text-xs font-semibold bg-primary-600 text-white rounded-full">
+                  {activeFilterCount}
+                </span>
+              )}
             </button>
 
             {/* Product Count */}
@@ -72,22 +96,28 @@ export default function FiltersButton({
           </div>
         </div>
 
-        {/* Active Filters */}
-        {(currentCategory || currentState || currentQuery) && (
+        {/* Active Filters - Now using the hook's filters */}
+        {(filters.categories.length > 0 || 
+          filters.states.length > 0 || 
+          filters.minRating > 0 || 
+          filters.inStock !== null || 
+          filters.verified !== null || 
+          filters.featured !== null ||
+          currentQuery) && (
           <div className="flex items-center gap-2 flex-wrap mt-4">
             <span className="text-sm text-gray-600 font-medium">
               Filtros activos:
             </span>
             
-            {currentCategory && (
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
-                Categoría: {currentCategory}
-                <Link
-                  href={
-                    currentState
-                      ? `/productos?estado=${currentState}`
-                      : "/productos"
-                  }
+            {/* Categories */}
+            {filters.categories.map((category) => (
+              <span
+                key={category}
+                className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-100 text-primary-700 rounded-full text-sm font-medium"
+              >
+                {category}
+                <button
+                  onClick={() => toggleCategory(category)}
                   className="hover:text-primary-900"
                 >
                   <svg
@@ -103,20 +133,20 @@ export default function FiltersButton({
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
-                </Link>
+                </button>
               </span>
-            )}
+            ))}
             
-            {currentState && (
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
-                Estado: {currentState}
-                <Link
-                  href={
-                    currentCategory
-                      ? `/productos?categoria=${currentCategory}`
-                      : "/productos"
-                  }
-                  className="hover:text-primary-900"
+            {/* States */}
+            {filters.states.map((state) => (
+              <span
+                key={state}
+                className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm font-medium"
+              >
+                {state}
+                <button
+                  onClick={() => toggleState(state)}
+                  className="hover:text-blue-900"
                 >
                   <svg
                     className="w-4 h-4"
@@ -131,19 +161,118 @@ export default function FiltersButton({
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
-                </Link>
+                </button>
+              </span>
+            ))}
+
+            {/* Rating */}
+            {filters.minRating > 0 && (
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-yellow-100 text-yellow-700 rounded-full text-sm font-medium">
+                {filters.minRating}+ ⭐
+                <button
+                  onClick={() => updateMinRating(0)}
+                  className="hover:text-yellow-900"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
               </span>
             )}
 
+            {/* In Stock */}
+            {filters.inStock === true && (
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+                En stock
+                <button
+                  onClick={toggleInStock}
+                  className="hover:text-green-900"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </span>
+            )}
+
+            {/* Verified */}
+            {filters.verified === true && (
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+                Verificados
+                <button
+                  onClick={toggleVerified}
+                  className="hover:text-purple-900"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </span>
+            )}
+
+            {/* Featured */}
+            {filters.featured === true && (
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
+                Destacados
+                <button
+                  onClick={toggleFeatured}
+                  className="hover:text-orange-900"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </span>
+            )}
+
+            {/* Search Query (from URL) */}
             {currentQuery && (
               <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
                 Búsqueda: "{currentQuery}"
-                <Link
-                  href={
-                    currentCategory || currentState
-                      ? `/productos?${currentCategory ? `categoria=${currentCategory}` : ''}${currentState ? `${currentCategory ? '&' : ''}estado=${currentState}` : ''}`
-                      : "/productos"
-                  }
+                <button
+                  onClick={() => {
+                    window.location.href = '/productos';
+                  }}
                   className="hover:text-primary-900"
                 >
                   <svg
@@ -159,16 +288,16 @@ export default function FiltersButton({
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
-                </Link>
+                </button>
               </span>
             )}
             
-            <Link
-              href="/productos"
+            <button
+              onClick={resetFilters}
               className="text-sm text-gray-600 hover:text-gray-900 font-medium underline"
             >
               Limpiar todo
-            </Link>
+            </button>
           </div>
         )}
       </div>
@@ -177,10 +306,18 @@ export default function FiltersButton({
       <FiltersDrawer
         isOpen={isFiltersOpen}
         onClose={() => setIsFiltersOpen(false)}
-        categories={categories}
-        states={states}
-        currentCategory={currentCategory}
-        currentState={currentState}
+        filters={filters}
+        filterOptions={filterOptions}
+        priceRange={priceRange}
+        onToggleCategory={toggleCategory}
+        onToggleState={toggleState}
+        onUpdatePriceRange={updatePriceRange}
+        onUpdateMinRating={updateMinRating}
+        onToggleInStock={toggleInStock}
+        onToggleVerified={toggleVerified}
+        onToggleFeatured={toggleFeatured}
+        onResetFilters={resetFilters}
+        activeFilterCount={activeFilterCount}
       />
     </>
   );

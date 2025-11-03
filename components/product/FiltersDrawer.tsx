@@ -1,6 +1,7 @@
 'use client';
 
-import { X } from 'lucide-react';
+import { X, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState } from 'react';
 
 interface FiltersDrawerProps {
   isOpen: boolean;
@@ -35,6 +36,23 @@ export default function FiltersDrawer({
   onResetFilters,
   activeFilterCount,
 }: FiltersDrawerProps) {
+  // State for show more/less
+  const [showAllCategories, setShowAllCategories] = useState(false);
+  const [showAllStates, setShowAllStates] = useState(false);
+
+  // Get visible items (first 3 or all)
+  const visibleCategories = showAllCategories 
+    ? filterOptions.categories 
+    : filterOptions.categories.slice(0, 3);
+
+  const visibleStates = showAllStates 
+    ? filterOptions.states 
+    : filterOptions.states.slice(0, 3);
+
+  // Check if we have more than 3 items
+  const hasMoreCategories = filterOptions.categories.length > 3;
+  const hasMoreStates = filterOptions.states.length > 3;
+
   return (
     <>
       {/* Backdrop */}
@@ -85,8 +103,8 @@ export default function FiltersDrawer({
                   Todas las categorías
                 </button>
 
-                {/* Category Options */}
-                {filterOptions.categories.map((category: string) => (
+                {/* Category Options (First 3 or All) */}
+                {visibleCategories.map((category: string) => (
                   <button
                     key={category}
                     onClick={() => onToggleCategory(category)}
@@ -99,6 +117,25 @@ export default function FiltersDrawer({
                     {category}
                   </button>
                 ))}
+
+                {/* Show More/Less Button for Categories */}
+                {hasMoreCategories && (
+                  <button
+                    onClick={() => setShowAllCategories(!showAllCategories)}
+                    className="w-full text-left px-4 py-3 rounded-lg transition-colors text-base text-primary-600 hover:bg-primary-50 font-medium flex items-center justify-between"
+                  >
+                    <span>
+                      {showAllCategories 
+                        ? 'Ver menos' 
+                        : `Ver ${filterOptions.categories.length - 3} más`}
+                    </span>
+                    {showAllCategories ? (
+                      <ChevronUp className="w-5 h-5" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5" />
+                    )}
+                  </button>
+                )}
               </div>
             </div>
 
@@ -121,8 +158,8 @@ export default function FiltersDrawer({
                   Todos los estados
                 </button>
 
-                {/* State Options */}
-                {filterOptions.states.map((state: string) => (
+                {/* State Options (First 3 or All) */}
+                {visibleStates.map((state: string) => (
                   <button
                     key={state}
                     onClick={() => onToggleState(state)}
@@ -135,6 +172,25 @@ export default function FiltersDrawer({
                     {state}
                   </button>
                 ))}
+
+                {/* Show More/Less Button for States */}
+                {hasMoreStates && (
+                  <button
+                    onClick={() => setShowAllStates(!showAllStates)}
+                    className="w-full text-left px-4 py-3 rounded-lg transition-colors text-base text-primary-600 hover:bg-primary-50 font-medium flex items-center justify-between"
+                  >
+                    <span>
+                      {showAllStates 
+                        ? 'Ver menos' 
+                        : `Ver ${filterOptions.states.length - 3} más`}
+                    </span>
+                    {showAllStates ? (
+                      <ChevronUp className="w-5 h-5" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5" />
+                    )}
+                  </button>
+                )}
               </div>
             </div>
 
