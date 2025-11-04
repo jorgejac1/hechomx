@@ -169,7 +169,7 @@ function ProductColumn({
           <span className="font-medium text-right truncate">{product.category}</span>
         </div>
         <div className="flex items-center justify-between gap-2">
-          <span className="text-gray-600 flex-shrink-0 whitespace-nowrap">Disponibilidad:</span>
+          <span className="text-gray-600 flex-shrink-0 whitespace-nowrap">Disp:</span>
           <span
             className={`font-semibold text-right flex-shrink-0 ${product.inStock ? 'text-green-600' : 'text-red-600'}`}
           >
