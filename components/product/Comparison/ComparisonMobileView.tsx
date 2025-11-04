@@ -131,7 +131,7 @@ function ProductColumn({
       </div>
 
       {/* Product Info */}
-      <h3 className="font-bold text-sm mb-2 line-clamp-2">{product.name}</h3>
+      <h3 className="font-bold text-sm mb-2 line-clamp-2 min-h-[2.5rem]">{product.name}</h3>
 
       {/* Price */}
       <div className="mb-3">
@@ -146,7 +146,7 @@ function ProductColumn({
       </div>
 
       {/* Rating */}
-      <div className="flex items-center justify-center gap-1 mb-2">
+      <div className="flex items-center justify-center gap-1 mb-3">
         {[1, 2, 3, 4, 5].map((star) => (
           <Star
             key={star}
@@ -158,32 +158,44 @@ function ProductColumn({
         <span className="text-sm font-bold ml-1">{rating.toFixed(1)}</span>
       </div>
 
-      {/* Details */}
-      <div className="space-y-2 mb-3 text-xs">
-        <div className="flex justify-between">
-          <span className="text-gray-600">Estado:</span>
-          <span className="font-medium">{product.state}</span>
+      {/* Details - FIXED OVERFLOW */}
+      <div className="space-y-1.5 mb-3 text-xs">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-gray-600 flex-shrink-0">Estado:</span>
+          <span className="font-medium text-right truncate">{product.state}</span>
         </div>
-        <div className="flex justify-between">
-          <span className="text-gray-600">Categoría:</span>
-          <span className="font-medium">{product.category}</span>
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-gray-600 flex-shrink-0">Categoría:</span>
+          <span className="font-medium text-right truncate">{product.category}</span>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-gray-600">Disponibilidad:</span>
-          <span className={`font-medium ${product.inStock ? 'text-green-700' : 'text-red-700'}`}>
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-gray-600 flex-shrink-0 whitespace-nowrap">Disponibilidad:</span>
+          <span
+            className={`font-semibold text-right flex-shrink-0 ${product.inStock ? 'text-green-600' : 'text-red-600'}`}
+          >
             {product.inStock ? 'Disponible' : 'Agotado'}
           </span>
         </div>
       </div>
 
-      {/* Actions */}
+      {/* Actions - FIXED BUTTON TEXT */}
       <div className="space-y-2">
-        <Button variant="primary" size="sm" href={`/productos/${product.id}`} className="w-full">
+        <Button
+          variant="primary"
+          size="sm"
+          href={`/productos/${product.id}`}
+          className="w-full text-xs"
+        >
           Ver detalles
         </Button>
-        <Button variant="secondary" size="sm" className="w-full" disabled={!product.inStock}>
-          <ShoppingCart className="w-3 h-3 mr-1" />
-          {product.inStock ? 'Agregar' : 'Agotado'}
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-full text-xs px-2"
+          disabled={!product.inStock}
+          icon={<ShoppingCart className="w-3.5 h-3.5" />}
+        >
+          <span className="whitespace-nowrap">{product.inStock ? 'Agregar' : 'Agotado'}</span>
         </Button>
       </div>
     </div>
