@@ -158,7 +158,7 @@ function ProductColumn({
         <span className="text-sm font-bold ml-1">{rating.toFixed(1)}</span>
       </div>
 
-      {/* Details - FIXED OVERFLOW */}
+      {/* Details - Mobile optimized */}
       <div className="space-y-1.5 mb-3 text-xs">
         <div className="flex items-center justify-between gap-2">
           <span className="text-gray-600 flex-shrink-0">Estado:</span>
@@ -168,8 +168,8 @@ function ProductColumn({
           <span className="text-gray-600 flex-shrink-0">Categoría:</span>
           <span className="font-medium text-right truncate">{product.category}</span>
         </div>
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-gray-600 flex-shrink-0 whitespace-nowrap">Disp:</span>
+        <div className="flex items-center justify-between gap-1.5">
+          <span className="text-gray-600 flex-shrink-0">Disp:</span>
           <span
             className={`font-semibold text-right flex-shrink-0 ${product.inStock ? 'text-green-600' : 'text-red-600'}`}
           >
@@ -178,7 +178,7 @@ function ProductColumn({
         </div>
       </div>
 
-      {/* Actions - FIXED BUTTON TEXT */}
+      {/* Actions */}
       <div className="space-y-2">
         <Button
           variant="primary"
