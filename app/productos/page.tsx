@@ -11,6 +11,8 @@ import ErrorBoundary from '@/components/common/feedback/ErrorBoundary';
 import FilterPresets from '@/components/product/FilterPresets';
 import { generateProductsMetadata } from '@/lib/utils/seo';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({
   searchParams,
 }: {
@@ -160,13 +162,8 @@ export default async function ProductsPage({
               />
             )}
 
-          <Suspense fallback={<div className="h-12" />}>
-            <FilterPresets />
-          </Suspense>
-
-          <Suspense fallback={<div className="h-12" />}>
-            <QuickFilters />
-          </Suspense>
+          <FilterPresets />
+          <QuickFilters />
 
           <Suspense fallback={<div className="animate-pulse h-96 bg-gray-200 rounded-xl" />}>
             <ProductsPageClient products={products} />

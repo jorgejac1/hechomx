@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
@@ -9,13 +10,13 @@ interface PaginationProps {
   baseUrl: string;
 }
 
-export default function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps) {
+function PaginationContent({ currentPage, totalPages, baseUrl }: PaginationProps) {
   const searchParams = useSearchParams();
 
   if (totalPages <= 1) return null;
 
   const buildUrl = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams?.toString() || '');
     if (page === 1) {
       params.delete('pagina');
     } else {
@@ -103,9 +104,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
               key={pageNumber}
               href={buildUrl(pageNumber)}
               className={`min-w-[40px] h-10 flex items-center justify-center rounded-lg font-medium transition ${
-                isActive
-                  ? 'bg-primary-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                isActive ? 'bg-primary-600 text-white' : 'text-gray-700 hover:bg-gray-100'
               }`}
             >
               {pageNumber}
@@ -135,5 +134,13 @@ export default function Pagination({ currentPage, totalPages, baseUrl }: Paginat
         Siguiente
       </Link>
     </div>
+  );
+}
+
+export default function Pagination(props: PaginationProps) {
+  return (
+    <Suspense fallback={<div className="h-12" />}>
+      <PaginationContent {...props} />
+    </Suspense>
   );
 }

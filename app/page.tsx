@@ -8,6 +8,8 @@ import DealsSection from '@/components/home/DealsSection';
 import LocalShopsSection from '@/components/home/LocalShopsSection';
 import HeroSlider from '@/components/home/HeroSlider';
 
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
   const featuredProducts = getFeaturedProducts();
   const allProducts = getAllProducts();

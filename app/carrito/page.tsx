@@ -2,6 +2,8 @@ import { Suspense } from 'react';
 import CartPageClient from '@/components/cart/CartPageClient';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Carrito de Compras - Hecho en México',
   description: 'Revisa tu carrito de compras y procede al pago',

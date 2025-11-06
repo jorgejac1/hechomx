@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
@@ -14,6 +15,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = defaultMetadata;
 
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
@@ -25,7 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <main className="min-h-screen">{children}</main>
               <Footer />
               <ScrollToTop />
-              <ComparisonBar />
+              <Suspense fallback={null}>
+                <ComparisonBar />
+              </Suspense>
             </ComparisonProvider>
           </CartProvider>
         </ToastProvider>

@@ -17,7 +17,7 @@ export const useUrlState = (baseUrl: string = '/productos') => {
       params: Record<string, string | number | boolean | undefined | null>,
       options: { scroll?: boolean } = { scroll: false }
     ) => {
-      const urlParams = new URLSearchParams(searchParams.toString());
+      const urlParams = new URLSearchParams(searchParams?.toString() || '');
 
       Object.entries(params).forEach(([key, value]) => {
         if (value === undefined || value === null || value === '') {
@@ -40,7 +40,7 @@ export const useUrlState = (baseUrl: string = '/productos') => {
    */
   const getUrlParam = useCallback(
     (key: string): string | null => {
-      return searchParams.get(key);
+      return searchParams?.get(key) || null;
     },
     [searchParams]
   );
@@ -50,7 +50,7 @@ export const useUrlState = (baseUrl: string = '/productos') => {
    */
   const removeUrlParams = useCallback(
     (keys: string[], options: { scroll?: boolean } = { scroll: false }) => {
-      const urlParams = new URLSearchParams(searchParams.toString());
+      const urlParams = new URLSearchParams(searchParams?.toString() || '');
 
       keys.forEach((key) => {
         urlParams.delete(key);
@@ -75,7 +75,7 @@ export const useUrlState = (baseUrl: string = '/productos') => {
   );
 
   return {
-    searchParams,
+    searchParams: searchParams || new URLSearchParams(),
     setUrlParams,
     getUrlParam,
     removeUrlParams,

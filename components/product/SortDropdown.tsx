@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, Suspense } from 'react';
 import { useUrlState } from '@/hooks/common/useUrlState';
 import { FILTER_PARAM_NAMES, SORT_OPTIONS } from '@/lib/constants/filters';
 import type { SortOption } from '@/types/filters';
@@ -9,7 +9,7 @@ interface SortDropdownProps {
   currentSort?: string;
 }
 
-export default function SortDropdown({ currentSort = 'relevance' }: SortDropdownProps) {
+function SortDropdownContent({ currentSort = 'relevance' }: SortDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { setUrlParams } = useUrlState('/productos');
@@ -61,7 +61,6 @@ export default function SortDropdown({ currentSort = 'relevance' }: SortDropdown
         </svg>
       </button>
 
-      {/* Dropdown Menu */}
       {isOpen && (
         <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-30">
           {SORT_OPTIONS.map((option) => (
@@ -80,5 +79,13 @@ export default function SortDropdown({ currentSort = 'relevance' }: SortDropdown
         </div>
       )}
     </div>
+  );
+}
+
+export default function SortDropdown({ currentSort }: SortDropdownProps) {
+  return (
+    <Suspense fallback={<div className="h-10 w-64 animate-pulse bg-gray-200 rounded-lg" />}>
+      <SortDropdownContent currentSort={currentSort} />
+    </Suspense>
   );
 }

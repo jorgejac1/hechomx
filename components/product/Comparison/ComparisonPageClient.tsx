@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { Suspense, useState, useRef, useEffect } from 'react';
 import { useComparison } from '@/contexts/ComparisonContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useMediaQuery } from '@/hooks/common/useMediaQuery';
@@ -13,7 +13,7 @@ import EmptyState from '@/components/common/feedback/EmptyState';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import { ArrowLeft } from 'lucide-react';
 
-export default function ComparisonPageClient() {
+function ComparisonPageContent() {
   const { comparisonProducts, clearComparison } = useComparison();
   const [showOnlyDifferences, setShowOnlyDifferences] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -29,7 +29,7 @@ export default function ComparisonPageClient() {
 
   // Load products from URL if shared
   useEffect(() => {
-    const productIds = searchParams.get('products');
+    const productIds = searchParams?.get('products');
     if (productIds && comparisonProducts.length === 0) {
       // TODO: Load products from API and add to comparison
       // const ids = productIds.split(',');
@@ -176,5 +176,21 @@ export default function ComparisonPageClient() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ComparisonPageClient() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 py-12">
+          <div className="max-w-7xl mx-auto px-4 flex items-center justify-center">
+            <LoadingSpinner />
+          </div>
+        </div>
+      }
+    >
+      <ComparisonPageContent />
+    </Suspense>
   );
 }

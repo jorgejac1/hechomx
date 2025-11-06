@@ -1,9 +1,10 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useUrlState } from '@/hooks/common/useUrlState';
 import { FILTER_PRESETS, matchesPreset } from '@/lib/constants/filterPresets';
 
-export default function FilterPresets() {
+function FilterPresetsContent() {
   const { searchParams, setUrlParams, clearUrlParams } = useUrlState('/productos');
 
   const handlePresetClick = (presetId: string) => {
@@ -44,5 +45,13 @@ export default function FilterPresets() {
         })}
       </div>
     </div>
+  );
+}
+
+export default function FilterPresets() {
+  return (
+    <Suspense fallback={<div className="h-16 animate-pulse bg-gray-200 rounded-lg" />}>
+      <FilterPresetsContent />
+    </Suspense>
   );
 }
