@@ -3,7 +3,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useComparison } from '@/contexts/ComparisonContext';
+import { useCart } from '@/contexts/CartContext';
+import { useToast } from '@/contexts/ToastContext';
 import { Product } from '@/types';
+import { formatCurrency } from '@/lib';
 import Button from '@/components/common/Button';
 import { ChevronLeft, ChevronRight, X, Star, ShoppingCart } from 'lucide-react';
 
@@ -15,6 +18,8 @@ interface ComparisonMobileViewProps {
 export default function ComparisonMobileView({ products }: ComparisonMobileViewProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { removeFromComparison } = useComparison();
+  const { addToCart, isInCart } = useCart();
+  const { success } = useToast();
 
   const nextProduct = () => {
     setCurrentIndex((prev) => (prev + 1) % products.length);
@@ -31,6 +36,11 @@ export default function ComparisonMobileView({ products }: ComparisonMobileViewP
 
   // Find min price
   const minPrice = Math.min(...products.map((p) => p.price));
+
+  const handleAddToCart = (product: Product) => {
+    addToCart(product, 1);
+    success(`${product.name} agregado al carrito`);
+  };
 
   return (
     <div className="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -64,6 +74,8 @@ export default function ComparisonMobileView({ products }: ComparisonMobileViewP
         <ProductColumn
           product={product1}
           onRemove={removeFromComparison}
+          onAddToCart={handleAddToCart}
+          isInCart={isInCart(product1.id)}
           isBestPrice={product1.price === minPrice}
         />
 
@@ -72,6 +84,8 @@ export default function ComparisonMobileView({ products }: ComparisonMobileViewP
           <ProductColumn
             product={product2}
             onRemove={removeFromComparison}
+            onAddToCart={handleAddToCart}
+            isInCart={isInCart(product2.id)}
             isBestPrice={product2.price === minPrice}
           />
         )}
@@ -100,10 +114,14 @@ export default function ComparisonMobileView({ products }: ComparisonMobileViewP
 function ProductColumn({
   product,
   onRemove,
+  onAddToCart,
+  isInCart,
   isBestPrice,
 }: {
   product: Product;
   onRemove: (id: string) => void;
+  onAddToCart: (product: Product) => void;
+  isInCart: boolean;
   isBestPrice: boolean;
 }) {
   const rating = product.rating || 0;
@@ -135,9 +153,7 @@ function ProductColumn({
 
       {/* Price */}
       <div className="mb-3">
-        <p className="text-xl font-bold text-primary-600">
-          ${product.price.toLocaleString('es-MX')}
-        </p>
+        <p className="text-xl font-bold text-primary-600">{formatCurrency(product.price)}</p>
         {isBestPrice && (
           <span className="inline-block mt-1 text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full font-medium">
             Mejor precio
@@ -188,15 +204,20 @@ function ProductColumn({
         >
           Ver detalles
         </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="w-full text-xs px-2"
+        <button
+          onClick={() => onAddToCart(product)}
           disabled={!product.inStock}
-          icon={<ShoppingCart className="w-3.5 h-3.5" />}
+          className={`w-full px-3 py-2 text-xs font-medium rounded-lg border-2 transition-all flex items-center justify-center gap-1.5 ${
+            product.inStock
+              ? 'bg-white border-primary-600 text-primary-600 hover:bg-primary-50'
+              : 'bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed'
+          }`}
         >
-          <span className="whitespace-nowrap">{product.inStock ? 'Agregar' : 'Agotado'}</span>
-        </Button>
+          <ShoppingCart className="w-3.5 h-3.5 flex-shrink-0" />
+          <span className="whitespace-nowrap">
+            {product.inStock ? (isInCart ? 'Agregar más' : 'Agregar') : 'Agotado'}
+          </span>
+        </button>
       </div>
     </div>
   );

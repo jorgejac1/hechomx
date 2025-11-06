@@ -1,76 +1,77 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useUrlState } from '@/hooks/common/useUrlState';
+import { FILTER_PARAM_NAMES, FILTER_PARAM_VALUES } from '@/lib/constants/filters';
+import { formatCurrency } from '@/lib';
+import { DollarSign, Diamond, Star, CheckCircle } from 'lucide-react';
 
 export default function QuickFilters() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const { searchParams, setUrlParams } = useUrlState('/productos');
 
-  const applyFilter = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    
-    // Toggle filter if already active
-    if (params.get(key) === value) {
-      params.delete(key);
-    } else {
-      params.set(key, value);
-    }
-    
-    // Reset to page 1 when filtering
-    params.delete('pagina');
-    
-    router.push(`/productos?${params.toString()}`);
+  const isActive = (paramName: string, value: string) => {
+    return searchParams.get(paramName) === value;
   };
 
-  const isActive = (key: string, value: string) => {
-    return searchParams.get(key) === value;
+  const handleQuickFilter = (paramName: string, value: string) => {
+    const currentValue = searchParams.get(paramName);
+    setUrlParams({
+      [paramName]: currentValue === value ? undefined : value,
+      [FILTER_PARAM_NAMES.PAGE]: undefined,
+    });
   };
+
+  const quickFilters = [
+    {
+      id: 'bajo-1000',
+      label: `Menos de ${formatCurrency(1000)}`,
+      icon: DollarSign,
+      param: FILTER_PARAM_NAMES.PRICE,
+      value: '1000',
+    },
+    {
+      id: 'bajo-5000',
+      label: `Menos de ${formatCurrency(5000)}`,
+      icon: Diamond,
+      param: FILTER_PARAM_NAMES.PRICE,
+      value: '5000',
+    },
+    {
+      id: 'destacados',
+      label: 'Destacados',
+      icon: Star,
+      param: FILTER_PARAM_NAMES.FEATURED,
+      value: FILTER_PARAM_VALUES.YES,
+    },
+    {
+      id: 'verificados',
+      label: 'Verificados',
+      icon: CheckCircle,
+      param: FILTER_PARAM_NAMES.VERIFIED,
+      value: FILTER_PARAM_VALUES.YES,
+    },
+  ];
 
   return (
     <div className="flex gap-2 flex-wrap mb-4">
-      <button
-        onClick={() => applyFilter('precio', '1000')}
-        className={`px-4 py-2 border-2 rounded-full text-sm font-medium transition ${
-          isActive('precio', '1000')
-            ? 'border-primary-600 bg-primary-50 text-primary-700'
-            : 'border-gray-300 text-gray-700 hover:border-primary-500 hover:text-primary-600 hover:bg-primary-50'
-        }`}
-      >
-        💰 Menos de $1,000
-      </button>
-      
-      <button
-        onClick={() => applyFilter('precio', '5000')}
-        className={`px-4 py-2 border-2 rounded-full text-sm font-medium transition ${
-          isActive('precio', '5000')
-            ? 'border-primary-600 bg-primary-50 text-primary-700'
-            : 'border-gray-300 text-gray-700 hover:border-primary-500 hover:text-primary-600 hover:bg-primary-50'
-        }`}
-      >
-        💎 Menos de $5,000
-      </button>
-      
-      <button
-        onClick={() => applyFilter('destacado', 'si')}
-        className={`px-4 py-2 border-2 rounded-full text-sm font-medium transition ${
-          isActive('destacado', 'si')
-            ? 'border-primary-600 bg-primary-50 text-primary-700'
-            : 'border-gray-300 text-gray-700 hover:border-primary-500 hover:text-primary-600 hover:bg-primary-50'
-        }`}
-      >
-        ⭐ Destacados
-      </button>
-      
-      <button
-        onClick={() => applyFilter('verificado', 'si')}
-        className={`px-4 py-2 border-2 rounded-full text-sm font-medium transition ${
-          isActive('verificado', 'si')
-            ? 'border-primary-600 bg-primary-50 text-primary-700'
-            : 'border-gray-300 text-gray-700 hover:border-primary-500 hover:text-primary-600 hover:bg-primary-50'
-        }`}
-      >
-        ✓ Verificados
-      </button>
+      {quickFilters.map((filter) => {
+        const Icon = filter.icon;
+        const active = isActive(filter.param, filter.value);
+
+        return (
+          <button
+            key={filter.id}
+            onClick={() => handleQuickFilter(filter.param, filter.value)}
+            className={`inline-flex items-center gap-2 px-4 py-2 border-2 rounded-full text-sm font-medium transition-all ${
+              active
+                ? 'border-primary-600 bg-primary-50 text-primary-700'
+                : 'border-gray-300 text-gray-700 hover:border-primary-500 hover:text-primary-600 hover:bg-primary-50'
+            }`}
+          >
+            <Icon className="w-4 h-4" />
+            {filter.label}
+          </button>
+        );
+      })}
     </div>
   );
 }

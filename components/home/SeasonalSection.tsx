@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Product } from '@/types';
-import { SeasonalTheme, getCurrentSeasonalTheme, seasonalThemes } from '../../lib/season';
+import { SeasonalTheme, getCurrentSeasonalTheme, seasonalThemes } from '@/lib';
 
 interface SeasonalSectionProps {
   products: Product[];

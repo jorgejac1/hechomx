@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { Product } from '@/types';
+import { formatCurrency } from '@/lib';
 import Button from '@/components/common/Button';
 
 interface StickyCartBarProps {
@@ -37,12 +38,10 @@ export default function StickyCartBar({
         <div className="flex-1 min-w-0">
           <p className="font-bold text-gray-900 truncate text-xs">{product.name}</p>
           <div className="flex items-baseline gap-2">
-            <p className="text-base font-bold text-teal-600">
-              ${totalPrice.toLocaleString('es-MX')}
-            </p>
+            <p className="text-base font-bold text-teal-600">{formatCurrency(totalPrice)}</p>
             {selectedQuantity > 1 && (
               <span className="text-xs text-gray-600">
-                ({selectedQuantity} × ${product.price.toLocaleString('es-MX')})
+                ({selectedQuantity} × {formatCurrency(product.price)})
               </span>
             )}
           </div>

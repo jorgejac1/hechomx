@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { useComparison } from '@/contexts/ComparisonContext';
 import { useCart } from '@/contexts/CartContext';
 import { Product } from '@/types';
+import { useToast } from '@/contexts/ToastContext';
+import { formatCurrency } from '@/lib';
 import Button from '@/components/common/Button';
 import { X, Star, ShoppingCart } from 'lucide-react';
 
@@ -16,6 +18,7 @@ interface ComparisonTableProps {
 export default function ComparisonTable({ products, showOnlyDifferences }: ComparisonTableProps) {
   const { removeFromComparison } = useComparison();
   const { addToCart, isInCart } = useCart();
+  const { success } = useToast();
   const [stickyHeader, setStickyHeader] = useState(false);
 
   // Calculate if values are different - using generic type instead of any
@@ -121,9 +124,7 @@ export default function ComparisonTable({ products, showOnlyDifferences }: Compa
           {products.map((p) => (
             <div key={p.id} className="text-center flex items-center justify-center">
               <div>
-                <p className="text-2xl font-bold text-primary-600">
-                  ${p.price.toLocaleString('es-MX')}
-                </p>
+                <p className="text-2xl font-bold text-primary-600">{formatCurrency(p.price)}</p>
                 <p className="text-xs text-gray-500">{p.currency}</p>
                 {p.price === minPrice && products.length > 1 && (
                   <span className="inline-block mt-1 text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full font-medium">
@@ -311,7 +312,10 @@ export default function ComparisonTable({ products, showOnlyDifferences }: Compa
                     : 'bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed'
                 }`}
                 disabled={!product.inStock}
-                onClick={() => addToCart(product, 1)}
+                onClick={() => {
+                  addToCart(product, 1);
+                  success(`${product.name} agregado al carrito`);
+                }}
               >
                 <ShoppingCart className="w-4 h-4 flex-shrink-0" />
                 <span className="truncate">

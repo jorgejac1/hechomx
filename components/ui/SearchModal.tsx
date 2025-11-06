@@ -3,7 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useUrlState } from '@/hooks/common/useUrlState';
+import { FILTER_PARAM_NAMES } from '@/lib/constants/filters';
 import { Product } from '@/types';
+import { formatCurrency } from '@/lib';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -17,6 +20,7 @@ export default function SearchModal({ isOpen, onClose, products, categories }: S
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { setUrlParams } = useUrlState('/productos');
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -33,17 +37,17 @@ export default function SearchModal({ isOpen, onClose, products, categories }: S
 
     const query = searchQuery.toLowerCase();
 
-    // Filter products
-    const matchingProducts = products.filter(
-      (product) =>
-        product.name.toLowerCase().includes(query) ||
-        product.description.toLowerCase().includes(query) ||
-        product.category.toLowerCase().includes(query) ||
-        product.state.toLowerCase().includes(query) ||
-        product.maker.toLowerCase().includes(query)
-    ).slice(0, 6); // Limit to 6 results
+    const matchingProducts = products
+      .filter(
+        (product) =>
+          product.name.toLowerCase().includes(query) ||
+          product.description.toLowerCase().includes(query) ||
+          product.category.toLowerCase().includes(query) ||
+          product.state.toLowerCase().includes(query) ||
+          product.maker.toLowerCase().includes(query)
+      )
+      .slice(0, 6);
 
-    // Filter categories
     const matchingCategories = categories.filter((category) =>
       category.toLowerCase().includes(query)
     );
@@ -59,19 +63,30 @@ export default function SearchModal({ isOpen, onClose, products, categories }: S
     onClose();
   };
 
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      setUrlParams({
+        [FILTER_PARAM_NAMES.QUERY]: searchQuery.trim(),
+        [FILTER_PARAM_NAMES.PAGE]: undefined,
+      });
+      handleClose();
+    }
+  };
+
   return (
     <>
       {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-40"
-        onClick={handleClose}
-      />
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={handleClose} />
 
-      {/* Modal - RESPONSIVE PADDING */}
+      {/* Modal */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-          {/* Search Input - RESPONSIVE SIZE */}
-          <div className="flex items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+          {/* Search Input */}
+          <form
+            onSubmit={handleSearchSubmit}
+            className="flex items-center gap-2 sm:gap-4 mb-4 sm:mb-6"
+          >
             <div className="flex-1 relative">
               <input
                 ref={inputRef}
@@ -96,27 +111,26 @@ export default function SearchModal({ isOpen, onClose, products, categories }: S
               </svg>
             </div>
             <button
+              type="button"
               onClick={handleClose}
               className="text-gray-500 hover:text-gray-700 text-sm sm:text-base font-medium whitespace-nowrap"
             >
               Cancelar
             </button>
-          </div>
+          </form>
 
-          {/* Results - RESPONSIVE HEIGHT */}
+          {/* Results */}
           <div className="max-h-[60vh] sm:max-h-[70vh] overflow-y-auto">
             {searchQuery.trim() === '' ? (
-              // Show all categories when no search
               <div>
                 <h3 className="text-xs sm:text-sm font-semibold text-gray-500 uppercase mb-3 sm:mb-4">
                   Buscar por Categoría
                 </h3>
-                {/* RESPONSIVE GRID */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
                   {categories.map((category) => (
                     <Link
                       key={category}
-                      href={`/productos?categoria=${encodeURIComponent(category)}`}
+                      href={`/productos?${FILTER_PARAM_NAMES.CATEGORY}=${encodeURIComponent(category)}`}
                       onClick={handleClose}
                       className="p-3 sm:p-4 border border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition text-center"
                     >
@@ -137,7 +151,7 @@ export default function SearchModal({ isOpen, onClose, products, categories }: S
                       {filteredCategories.map((category) => (
                         <Link
                           key={category}
-                          href={`/productos?categoria=${encodeURIComponent(category)}`}
+                          href={`/productos?${FILTER_PARAM_NAMES.CATEGORY}=${encodeURIComponent(category)}`}
                           onClick={handleClose}
                           className="px-3 sm:px-4 py-1.5 sm:py-2 bg-primary-100 text-primary-700 rounded-full hover:bg-primary-200 transition text-sm sm:text-base"
                         >
@@ -148,7 +162,7 @@ export default function SearchModal({ isOpen, onClose, products, categories }: S
                   </div>
                 )}
 
-                {/* Matching Products - RESPONSIVE CARDS */}
+                {/* Matching Products */}
                 {filteredProducts.length > 0 ? (
                   <div>
                     <h3 className="text-xs sm:text-sm font-semibold text-gray-500 uppercase mb-2 sm:mb-3">
@@ -178,14 +192,14 @@ export default function SearchModal({ isOpen, onClose, products, categories }: S
                               {product.category} • {product.state}
                             </p>
                             <p className="text-primary-600 font-bold text-sm sm:text-base">
-                              ${product.price.toLocaleString('es-MX')} MXN
+                              {formatCurrency(product.price)} MXN
                             </p>
                           </div>
                         </Link>
                       ))}
                     </div>
                     <Link
-                      href={`/productos?q=${encodeURIComponent(searchQuery)}`}
+                      href={`/productos?${FILTER_PARAM_NAMES.QUERY}=${encodeURIComponent(searchQuery)}`}
                       onClick={handleClose}
                       className="block mt-3 sm:mt-4 text-center py-2 sm:py-3 text-primary-600 hover:text-primary-700 font-medium text-sm sm:text-base"
                     >

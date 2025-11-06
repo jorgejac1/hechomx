@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Star, ThumbsUp, MessageSquare, Camera } from 'lucide-react';
+import { formatDate } from '@/lib';
 import ReviewPhotos from './ReviewPhotos';
 import RatingBreakdown from './RatingBreakdown';
 import Badge from '@/components/common/Badge';
@@ -128,9 +129,7 @@ export default function ReviewsSection({
                   />
                 ))}
               </div>
-              <p className="text-sm text-gray-600">
-                {reviewCount.toLocaleString('es-MX')} reseñas totales
-              </p>
+              <p className="text-sm text-gray-600">{reviewCount} reseñas totales</p>
             </div>
           </div>
 
@@ -231,7 +230,7 @@ export default function ReviewsSection({
                         ))}
                       </div>
                       <span className="text-sm text-gray-500">
-                        {new Date(review.date).toLocaleDateString('es-MX', {
+                        {formatDate(review.date, {
                           year: 'numeric',
                           month: 'long',
                           day: 'numeric',

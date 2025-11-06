@@ -1,28 +1,20 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-
-const SORT_OPTIONS = [
-  { value: 'featured', label: 'Destacados' },
-  { value: 'price-asc', label: 'Precio: Menor a Mayor' },
-  { value: 'price-desc', label: 'Precio: Mayor a Menor' },
-  { value: 'name-asc', label: 'Nombre: A-Z' },
-  { value: 'name-desc', label: 'Nombre: Z-A' },
-  { value: 'newest', label: 'Más Recientes' },
-];
+import { useUrlState } from '@/hooks/common/useUrlState';
+import { FILTER_PARAM_NAMES, SORT_OPTIONS } from '@/lib/constants/filters';
+import type { SortOption } from '@/types/filters';
 
 interface SortDropdownProps {
   currentSort?: string;
 }
 
-export default function SortDropdown({ currentSort = 'featured' }: SortDropdownProps) {
+export default function SortDropdown({ currentSort = 'relevance' }: SortDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const { setUrlParams } = useUrlState('/productos');
 
-  const currentOption = SORT_OPTIONS.find(opt => opt.value === currentSort) || SORT_OPTIONS[0];
+  const currentOption = SORT_OPTIONS.find((opt) => opt.value === currentSort) || SORT_OPTIONS[0];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,16 +27,11 @@ export default function SortDropdown({ currentSort = 'featured' }: SortDropdownP
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSort = (sortValue: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    
-    if (sortValue === 'featured') {
-      params.delete('ordenar');
-    } else {
-      params.set('ordenar', sortValue);
-    }
-    
-    router.push(`/productos?${params.toString()}`);
+  const handleSort = (sortValue: SortOption) => {
+    setUrlParams({
+      [FILTER_PARAM_NAMES.SORT]: sortValue === 'relevance' ? undefined : sortValue,
+      [FILTER_PARAM_NAMES.PAGE]: undefined,
+    });
     setIsOpen(false);
   };
 
@@ -55,14 +42,19 @@ export default function SortDropdown({ currentSort = 'featured' }: SortDropdownP
         className="inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-gray-300 rounded-lg font-medium text-gray-700 hover:border-primary-500 hover:text-primary-600 transition"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
+          />
         </svg>
         <span className="hidden sm:inline">Ordenar:</span>
         <span>{currentOption.label}</span>
-        <svg 
-          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
-          fill="none" 
-          stroke="currentColor" 
+        <svg
+          className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          fill="none"
+          stroke="currentColor"
           viewBox="0 0 24 24"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -75,9 +67,11 @@ export default function SortDropdown({ currentSort = 'featured' }: SortDropdownP
           {SORT_OPTIONS.map((option) => (
             <button
               key={option.value}
-              onClick={() => handleSort(option.value)}
+              onClick={() => handleSort(option.value as SortOption)}
               className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition ${
-                currentSort === option.value ? 'text-primary-600 font-medium bg-primary-50' : 'text-gray-700'
+                currentSort === option.value
+                  ? 'text-primary-600 font-medium bg-primary-50'
+                  : 'text-gray-700'
               }`}
             >
               {option.label}

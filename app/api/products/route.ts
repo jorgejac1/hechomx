@@ -4,7 +4,7 @@ import {
   getProductsByCategory,
   getProductsByState,
   searchProducts,
-} from '@/lib/products';
+} from '@/lib/server';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

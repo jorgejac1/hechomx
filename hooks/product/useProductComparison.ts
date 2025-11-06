@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Product } from '@/types';
+import { siteConfig } from '@/config';
 
 /**
  * Product comparison management hook
@@ -40,7 +41,7 @@ export function useProductComparison(
   options: UseProductComparisonOptions = {}
 ): UseProductComparisonReturn {
   const {
-    maxProducts = 4,
+    maxProducts = siteConfig.features.maxComparisonProducts,
     persistToStorage = true,
     storageKey = 'product-comparison',
     onAdd,

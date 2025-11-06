@@ -2,6 +2,7 @@
 
 import { X, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
+import { formatCurrency } from '@/lib';
 
 interface ProductFilters {
   categories: string[];
@@ -248,8 +249,8 @@ export default function FiltersDrawer({
                   </div>
                 </div>
                 <div className="text-sm text-gray-600 text-center bg-gray-50 py-2 rounded-lg">
-                  ${filters.priceRange.min.toLocaleString('es-MX')} - $
-                  {filters.priceRange.max.toLocaleString('es-MX')} MXN
+                  {formatCurrency(filters.priceRange.min)} -{' '}
+                  {formatCurrency(filters.priceRange.max)} MXN
                 </div>
               </div>
             </div>

@@ -1,12 +1,13 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { useCart } from "@/contexts/CartContext";
-import { useToast } from "@/contexts/ToastContext";
-import { Product } from "@/types";
-import { Minus, Plus, Trash2, MapPin } from "lucide-react";
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useCart } from '@/contexts/CartContext';
+import { useToast } from '@/contexts/ToastContext';
+import { Product } from '@/types';
+import { formatCurrency } from '@/lib';
+import { Minus, Plus, Trash2, MapPin } from 'lucide-react';
 
 interface CartItemCardProps {
   item: Product & { quantity: number };
@@ -98,11 +99,9 @@ export default function CartItemCard({ item }: CartItemCardProps) {
               >
                 <Minus className="w-4 h-4 text-gray-600" />
               </button>
-              
-              <span className="w-12 text-center font-semibold text-gray-900">
-                {item.quantity}
-              </span>
-              
+
+              <span className="w-12 text-center font-semibold text-gray-900">{item.quantity}</span>
+
               <button
                 onClick={increaseQuantity}
                 className="w-8 h-8 flex items-center justify-center border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
@@ -112,15 +111,13 @@ export default function CartItemCard({ item }: CartItemCardProps) {
               </button>
             </div>
 
-            {/* Price */}
+            {/* Price - UPDATED */}
             <div className="text-right">
               <p className="text-lg sm:text-xl font-bold text-primary-600">
-                ${itemTotal.toLocaleString('es-MX')}
+                {formatCurrency(itemTotal)}
               </p>
               {item.quantity > 1 && (
-                <p className="text-xs sm:text-sm text-gray-500">
-                  ${item.price.toLocaleString('es-MX')} c/u
-                </p>
+                <p className="text-xs sm:text-sm text-gray-500">{formatCurrency(item.price)} c/u</p>
               )}
             </div>
           </div>

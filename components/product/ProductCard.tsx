@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useComparison } from '@/contexts/ComparisonContext';
 import { Product } from '@/types';
+import { formatCurrency } from '@/lib';
 
 interface ProductCardProps {
   product: Product;
@@ -171,7 +172,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline gap-0.5 sm:gap-1 mb-0.5">
                   <span className="text-base sm:text-lg font-bold text-primary-600">
-                    ${product.price.toLocaleString('es-MX')}
+                    {formatCurrency(product.price)}
                   </span>
                   <span className="text-[10px] sm:text-xs text-gray-500">{product.currency}</span>
                 </div>

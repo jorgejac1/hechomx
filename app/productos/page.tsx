@@ -1,11 +1,44 @@
 import { Suspense } from 'react';
-import { getAllProducts } from '@/lib/products';
-import { getSubcategories, getSubSubcategories } from '@/lib/subcategories';
+import { getAllProducts } from '@/lib/server';
+import { getSubcategories, getSubSubcategories } from '@/lib/server';
+import { capitalize } from '@/lib';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import SubcategoriesGrid from '@/components/product/SubcategoriesGrid';
 import ScrollToTop from '@/components/common/ScrollToTop';
 import QuickFilters from '@/components/product/QuickFilters';
 import ProductsPageClient from '@/components/product/ProductsPageClient';
+import ErrorBoundary from '@/components/common/feedback/ErrorBoundary';
+import FilterPresets from '@/components/product/FilterPresets';
+import { generateProductsMetadata } from '@/lib/utils/seo';
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    categoria?: string;
+    estado?: string;
+    q?: string;
+    precio?: string;
+    destacado?: string;
+    verificado?: string;
+    enstock?: string;
+  }>;
+}) {
+  const params = await searchParams;
+  const products = getAllProducts();
+
+  const filters = {
+    categories: params.categoria ? [params.categoria] : [],
+    states: params.estado ? [params.estado] : [],
+    priceMax: params.precio ? parseInt(params.precio) : undefined,
+    featured: params.destacado === 'si',
+    verified: params.verificado === 'si',
+    inStock: params.enstock === 'si',
+    query: params.q,
+  };
+
+  return generateProductsMetadata(filters, products.length);
+}
 
 export default async function ProductsPage({
   searchParams,
@@ -17,19 +50,21 @@ export default async function ProductsPage({
     ordenar?: string;
     subcategoria?: string;
     subsubcategoria?: string;
+    precio?: string;
+    destacado?: string;
+    verificado?: string;
+    enstock?: string;
   }>;
 }) {
   const params = await searchParams;
   const products = getAllProducts();
 
-  // Get subcategories based on current level
   const subcategories = params.categoria ? getSubcategories(params.categoria) : [];
   const subSubcategories =
     params.categoria && params.subcategoria
       ? getSubSubcategories(params.categoria, params.subcategoria)
       : [];
 
-  // Build breadcrumbs dynamically with hierarchy
   const breadcrumbItems = [{ label: 'Productos', href: '/productos' }];
 
   if (params.categoria) {
@@ -47,7 +82,7 @@ export default async function ProductsPage({
     breadcrumbItems.push({
       label: params.subcategoria
         .split('-')
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .map((w) => capitalize(w))
         .join(' '),
       href: `/productos?${subcatUrl.toString()}`,
     });
@@ -62,7 +97,7 @@ export default async function ProductsPage({
     breadcrumbItems.push({
       label: params.subsubcategoria
         .split('-')
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .map((w) => capitalize(w))
         .join(' '),
       href: `/productos?${subsubcatUrl.toString()}`,
     });
@@ -75,23 +110,22 @@ export default async function ProductsPage({
     });
   }
 
-  // Build dynamic title
   const getTitle = () => {
     if (params.q) return `Resultados para "${params.q}"`;
     if (params.subsubcategoria) {
       const name = params.subsubcategoria
         .split('-')
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .map((w) => capitalize(w))
         .join(' ');
       return `${name} - ${params.subcategoria
         ?.split('-')
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .map((w) => capitalize(w))
         .join(' ')}`;
     }
     if (params.subcategoria) {
       const name = params.subcategoria
         .split('-')
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .map((w) => capitalize(w))
         .join(' ');
       return `${name} - ${params.categoria}`;
     }
@@ -101,53 +135,46 @@ export default async function ProductsPage({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Breadcrumbs */}
-        <Breadcrumbs items={breadcrumbItems} />
+    <ErrorBoundary>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <Breadcrumbs items={breadcrumbItems} />
 
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{getTitle()}</h1>
-          <p className="text-gray-600">Descubre productos auténticos hechos en México</p>
-        </div>
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">{getTitle()}</h1>
+            <p className="text-gray-600">Descubre productos auténticos hechos en México</p>
+          </div>
 
-        {/* First level subcategories - Only show if category selected and no subcategory */}
-        {params.categoria && !params.subcategoria && subcategories.length > 0 && (
-          <SubcategoriesGrid category={params.categoria} subcategories={subcategories} />
-        )}
-
-        {/* Second level subcategories - Only show if subcategory selected and has children */}
-        {params.categoria &&
-          params.subcategoria &&
-          !params.subsubcategoria &&
-          subSubcategories.length > 0 && (
-            <SubcategoriesGrid
-              category={params.categoria}
-              subcategories={subSubcategories}
-              currentSubcategory={params.subcategoria}
-            />
+          {params.categoria && !params.subcategoria && subcategories.length > 0 && (
+            <SubcategoriesGrid category={params.categoria} subcategories={subcategories} />
           )}
 
-        {/* Quick Filters */}
-        <Suspense fallback={<div className="h-12" />}>
-          <QuickFilters />
-        </Suspense>
+          {params.categoria &&
+            params.subcategoria &&
+            !params.subsubcategoria &&
+            subSubcategories.length > 0 && (
+              <SubcategoriesGrid
+                category={params.categoria}
+                subcategories={subSubcategories}
+                currentSubcategory={params.subcategoria}
+              />
+            )}
 
-        {/* Filters, View Toggle, Products Grid - Client Component */}
-        <Suspense fallback={<div className="animate-pulse h-96 bg-gray-200 rounded-xl" />}>
-          <ProductsPageClient
-            products={products}
-            currentCategory={params.categoria}
-            currentState={params.estado}
-            currentQuery={params.q}
-            currentSort={params.ordenar}
-          />
-        </Suspense>
+          <Suspense fallback={<div className="h-12" />}>
+            <FilterPresets />
+          </Suspense>
+
+          <Suspense fallback={<div className="h-12" />}>
+            <QuickFilters />
+          </Suspense>
+
+          <Suspense fallback={<div className="animate-pulse h-96 bg-gray-200 rounded-xl" />}>
+            <ProductsPageClient products={products} />
+          </Suspense>
+        </div>
+
+        <ScrollToTop />
       </div>
-
-      {/* Scroll to Top Button */}
-      <ScrollToTop />
-    </div>
+    </ErrorBoundary>
   );
 }

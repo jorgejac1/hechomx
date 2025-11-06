@@ -1,12 +1,12 @@
-import Link from "next/link";
-import { getFeaturedProducts, getAllProducts } from "@/lib/products";
-import ProductCarousel from "@/components/product/ProductCarousel";
-import AboutSection from "@/components/home/AboutSection";
-import SeasonalSection from "@/components/home/SeasonalSection";
-import CategoriesSection from "@/components/home/CategoriesSection";
-import DealsSection from "@/components/home/DealsSection";
-import LocalShopsSection from "@/components/home/LocalShopsSection";
-import HeroSlider from "@/components/home/HeroSlider";
+import Link from 'next/link';
+import { getFeaturedProducts, getAllProducts } from '@/lib/server';
+import ProductCarousel from '@/components/product/ProductCarousel';
+import AboutSection from '@/components/home/AboutSection';
+import SeasonalSection from '@/components/home/SeasonalSection';
+import CategoriesSection from '@/components/home/CategoriesSection';
+import DealsSection from '@/components/home/DealsSection';
+import LocalShopsSection from '@/components/home/LocalShopsSection';
+import HeroSlider from '@/components/home/HeroSlider';
 
 export default function Home() {
   const featuredProducts = getFeaturedProducts();
@@ -32,9 +32,7 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">
-                100% Auténtico
-              </h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">100% Auténtico</h3>
               <p className="text-gray-600">
                 Todos los productos son verificados y hechos en México
               </p>
@@ -79,9 +77,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">De Todo México</h3>
-              <p className="text-gray-600">
-                Productos de los 32 estados de la República Mexicana
-              </p>
+              <p className="text-gray-600">Productos de los 32 estados de la República Mexicana</p>
             </div>
           </div>
         </div>
@@ -113,9 +109,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-8 sm:py-12 lg:py-16 bg-primary-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
-            ¿Eres Artesano o Creador?
-          </h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">¿Eres Artesano o Creador?</h2>
           <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-primary-50 px-4">
             Únete a nuestra plataforma y comparte tus creaciones con todo México
           </p>

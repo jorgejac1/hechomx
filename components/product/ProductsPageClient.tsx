@@ -1,43 +1,61 @@
 'use client';
 
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useProductFilters } from '@/hooks/product/useProductFilters';
 import FiltersDrawer from '@/components/product/FiltersDrawer';
 import ProductsGrid from '@/components/product/ProductsGrid';
 import Button from '@/components/common/Button';
+import Pagination from '@/components/common/Pagination';
+import CardSkeleton from '@/components/common/loading/CardSkeleton';
 import { Product } from '@/types';
+import type { SortOption } from '@/types/filters';
 import { Filter, Grid3x3, List } from 'lucide-react';
+import { formatCurrency, pluralize, ROUTES } from '@/lib';
+import { FILTER_PARAM_NAMES, ITEMS_PER_PAGE, SORT_OPTIONS } from '@/lib/constants/filters';
+import { validatePriceParam, validateSortParam, validateBooleanParam } from '@/validators/product';
+import { removeFilterParam } from '@/lib/utils/filters';
+import {
+  trackFilterUsage,
+  trackSortChange,
+  trackFilterReset,
+  trackSearchQuery,
+} from '@/lib/utils/analytics';
 
 interface ProductsPageClientProps {
   products: Product[];
-  currentCategory?: string;
-  currentState?: string;
-  currentQuery?: string;
-  currentSort?: string;
 }
 
-const ITEMS_PER_PAGE = 20;
-
-// Define sort options type
-type SortOption = 'relevance' | 'price-asc' | 'price-desc' | 'rating-desc' | 'newest' | 'popular';
-
-export default function ProductsPageClient({
-  products,
-  currentCategory,
-  currentState,
-  currentQuery,
-  currentSort,
-}: ProductsPageClientProps) {
+export default function ProductsPageClient({ products }: ProductsPageClientProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [view, setView] = useState<'grid' | 'list'>('grid');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const hasInitialized = useRef(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Initialize filtering hook
+  // Read current page from URL
+  const currentPageFromUrl = parseInt(searchParams.get(FILTER_PARAM_NAMES.PAGE) || '1', 10);
+  const currentPage = isNaN(currentPageFromUrl) ? 1 : Math.max(1, currentPageFromUrl);
+
+  // Read and validate filter values from URL
+  const currentCategory = searchParams.get(FILTER_PARAM_NAMES.CATEGORY) || undefined;
+  const currentState = searchParams.get(FILTER_PARAM_NAMES.STATE) || undefined;
+  const currentQuery = searchParams.get(FILTER_PARAM_NAMES.QUERY) || undefined;
+  const currentSort = validateSortParam(searchParams.get(FILTER_PARAM_NAMES.SORT));
+  const currentPrice = validatePriceParam(searchParams.get(FILTER_PARAM_NAMES.PRICE));
+  const currentFeatured = searchParams.has(FILTER_PARAM_NAMES.FEATURED)
+    ? validateBooleanParam(searchParams.get(FILTER_PARAM_NAMES.FEATURED))
+    : null;
+  const currentVerified = searchParams.has(FILTER_PARAM_NAMES.VERIFIED)
+    ? validateBooleanParam(searchParams.get(FILTER_PARAM_NAMES.VERIFIED))
+    : null;
+  const currentInStock = searchParams.has(FILTER_PARAM_NAMES.IN_STOCK)
+    ? validateBooleanParam(searchParams.get(FILTER_PARAM_NAMES.IN_STOCK))
+    : null;
+
   const {
     filters,
     filteredProducts,
-    activeFilterCount,
     filterOptions,
     priceRange,
     toggleCategory,
@@ -51,36 +69,107 @@ export default function ProductsPageClient({
     resetFilters,
   } = useProductFilters(products);
 
-  // Initialize filters from URL params only once
+  // Track search query on mount/change
   useEffect(() => {
-    if (hasInitialized.current) return;
+    if (currentQuery) {
+      trackSearchQuery(currentQuery, filteredProducts.length);
+    }
+  }, [currentQuery, filteredProducts.length]);
 
+  // Sync filter state with URL params
+  useEffect(() => {
+    // Handle category filters
     if (currentCategory && !filters.categories.includes(currentCategory)) {
       toggleCategory(currentCategory);
+    } else if (!currentCategory && filters.categories.length > 0) {
+      filters.categories.forEach((cat) => toggleCategory(cat));
     }
 
+    // Handle state filters
     if (currentState && !filters.states.includes(currentState)) {
       toggleState(currentState);
+    } else if (!currentState && filters.states.length > 0) {
+      filters.states.forEach((state) => toggleState(state));
     }
 
+    // Handle sort with validation
     if (currentSort && currentSort !== filters.sortBy) {
-      updateSortBy(currentSort as SortOption);
+      updateSortBy(currentSort);
     }
 
-    hasInitialized.current = true;
+    // Handle price range with validation
+    if (currentPrice !== null) {
+      if (filters.priceRange.max !== currentPrice) {
+        updatePriceRange({ min: 0, max: currentPrice });
+      }
+    } else if (filters.priceRange.max !== priceRange.max) {
+      updatePriceRange(priceRange);
+    }
+
+    // Track transition state for boolean filters
+    const needsTransition =
+      currentFeatured !== filters.featured ||
+      currentVerified !== filters.verified ||
+      currentInStock !== filters.inStock;
+
+    if (needsTransition) {
+      setIsTransitioning(true);
+    }
+
+    // Toggle boolean filters until they match URL state
+    if (currentFeatured !== filters.featured) {
+      toggleFeatured();
+    }
+
+    if (currentVerified !== filters.verified) {
+      toggleVerified();
+    }
+
+    if (currentInStock !== filters.inStock) {
+      toggleInStock();
+    }
+
+    // Clear transition when all filters match
+    if (
+      currentFeatured === filters.featured &&
+      currentVerified === filters.verified &&
+      currentInStock === filters.inStock
+    ) {
+      setIsTransitioning(false);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     currentCategory,
     currentState,
     currentSort,
-    filters.categories,
-    filters.states,
-    filters.sortBy,
-    toggleCategory,
-    toggleState,
-    updateSortBy,
+    currentPrice,
+    currentFeatured,
+    currentVerified,
+    currentInStock,
+    filters.featured,
+    filters.verified,
+    filters.inStock,
   ]);
 
-  // Calculate pagination for filtered products
+  // Calculate active filter count
+  const getTotalActiveFilters = () => {
+    let count = 0;
+
+    count += filters.categories.length;
+    count += filters.states.length;
+
+    if (filters.priceRange.max < priceRange.max) count++;
+    if (filters.minRating > 0) count++;
+    if (filters.inStock === true) count++;
+    if (filters.verified === true) count++;
+    if (filters.featured === true) count++;
+    if (currentQuery) count++;
+
+    return count;
+  };
+
+  // Paginate filtered products
   const { paginatedProducts: displayProducts, totalPages } = useMemo(() => {
     const total = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -93,18 +182,54 @@ export default function ProductsPageClient({
     };
   }, [filteredProducts, currentPage]);
 
-  // Reset to page 1 when filters change
-  const handleFilterChange = (filterFn: () => void) => {
+  const handleFilterChange = (
+    filterFn: () => void,
+    filterType?: string,
+    filterValue?: string | number | boolean | { min: number; max: number }
+  ) => {
     filterFn();
-    setCurrentPage(1);
+
+    // Track filter usage
+    if (filterType && filterValue !== undefined) {
+      // Convert range object to trackable value
+      const trackableValue =
+        typeof filterValue === 'object'
+          ? filterValue.max // Track the max value for price ranges
+          : filterValue;
+
+      trackFilterUsage(filterType, trackableValue);
+    }
+  };
+
+  // Remove individual filter
+  const handleRemoveFilter = (filterType: 'featured' | 'verified' | 'inStock' | 'price') => {
+    const params = removeFilterParam(searchParams, filterType);
+    params.delete(FILTER_PARAM_NAMES.PAGE);
+    const queryString = params.toString();
+    const newUrl = queryString ? `/productos?${queryString}` : '/productos';
+
+    trackFilterUsage(filterType, 'removed');
+    router.push(newUrl, { scroll: false });
+  };
+
+  // Clear all filters
+  const handleResetFilters = () => {
+    resetFilters();
+    trackFilterReset();
+    router.push(ROUTES.PRODUCTS, { scroll: false });
+  };
+
+  // Handle sort change with analytics
+  const handleSortChange = (sortOption: SortOption) => {
+    updateSortBy(sortOption);
+    trackSortChange(sortOption);
   };
 
   return (
     <>
-      {/* Single Row Filter Bar */}
+      {/* Filter Bar */}
       <div className="mb-6">
         <div className="flex items-center justify-between gap-4 flex-wrap">
-          {/* Left: Filter Button + Product Count */}
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsFilterOpen(true)}
@@ -112,19 +237,19 @@ export default function ProductsPageClient({
             >
               <Filter className="w-5 h-5" />
               Filtros
-              {activeFilterCount > 0 && (
+              {getTotalActiveFilters() > 0 && (
                 <span className="ml-1 px-2 py-0.5 text-xs font-semibold bg-primary-600 text-white rounded-full">
-                  {activeFilterCount}
+                  {getTotalActiveFilters()}
                 </span>
               )}
             </button>
 
             <p className="text-base text-gray-600 font-medium">
-              <span className="font-bold text-gray-900">{filteredProducts.length}</span> productos
+              <span className="font-bold text-gray-900">{filteredProducts.length}</span>{' '}
+              {pluralize(filteredProducts.length, 'producto', 'productos')}
             </p>
           </div>
 
-          {/* Right: View Toggle + Sort Dropdown */}
           <div className="flex items-center gap-3">
             {/* View Toggle */}
             <div className="flex items-center bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
@@ -152,21 +277,16 @@ export default function ProductsPageClient({
             <div className="relative">
               <select
                 value={filters.sortBy}
-                onChange={(e) => {
-                  updateSortBy(e.target.value as SortOption);
-                  setCurrentPage(1);
-                }}
+                onChange={(e) => handleSortChange(e.target.value as SortOption)}
                 className="appearance-none pl-10 pr-10 py-2 bg-white border-2 border-gray-300 rounded-lg hover:border-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer transition-all font-medium text-gray-900 text-base min-w-[280px]"
               >
-                <option value="relevance">Relevancia</option>
-                <option value="price-asc">Precio: Menor a Mayor</option>
-                <option value="price-desc">Precio: Mayor a Menor</option>
-                <option value="rating-desc">Mejor Calificados</option>
-                <option value="newest">Más Recientes</option>
-                <option value="popular">Más Populares</option>
+                {SORT_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </select>
 
-              {/* Sort Icon */}
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
                   className="w-5 h-5 text-gray-600"
@@ -183,7 +303,6 @@ export default function ProductsPageClient({
                 </svg>
               </div>
 
-              {/* Chevron Icon */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <svg
                   className="w-5 h-5 text-gray-600"
@@ -203,19 +322,20 @@ export default function ProductsPageClient({
           </div>
         </div>
 
-        {/* Active Filters */}
+        {/* Active Filters Display */}
         {(filters.categories.length > 0 ||
           filters.states.length > 0 ||
           filters.minRating > 0 ||
-          filters.inStock !== null ||
-          filters.verified !== null ||
-          filters.featured !== null ||
+          filters.inStock === true ||
+          filters.verified === true ||
+          filters.featured === true ||
+          filters.priceRange.max < priceRange.max ||
           currentQuery) && (
           <div className="mt-4 p-4 bg-white rounded-xl border-2 border-gray-200">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-sm font-semibold text-gray-700">Filtros activos:</span>
 
-              {/* Categories */}
+              {/* Category Badges */}
               {filters.categories.map((category) => (
                 <span
                   key={category}
@@ -223,7 +343,9 @@ export default function ProductsPageClient({
                 >
                   {category}
                   <button
-                    onClick={() => handleFilterChange(() => toggleCategory(category))}
+                    onClick={() =>
+                      handleFilterChange(() => toggleCategory(category), 'category', category)
+                    }
                     className="hover:text-primary-900"
                   >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
@@ -237,7 +359,7 @@ export default function ProductsPageClient({
                 </span>
               ))}
 
-              {/* States */}
+              {/* State Badges */}
               {filters.states.map((state) => (
                 <span
                   key={state}
@@ -245,7 +367,7 @@ export default function ProductsPageClient({
                 >
                   {state}
                   <button
-                    onClick={() => handleFilterChange(() => toggleState(state))}
+                    onClick={() => handleFilterChange(() => toggleState(state), 'state', state)}
                     className="hover:text-blue-900"
                   >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
@@ -259,31 +381,12 @@ export default function ProductsPageClient({
                 </span>
               ))}
 
-              {/* Rating */}
-              {filters.minRating > 0 && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-100 text-yellow-700 rounded-lg text-sm font-medium">
-                  {filters.minRating}+ ⭐
-                  <button
-                    onClick={() => handleFilterChange(() => updateMinRating(0))}
-                    className="hover:text-yellow-900"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </span>
-              )}
-
-              {/* In Stock */}
-              {filters.inStock === true && (
+              {/* Price Badge */}
+              {filters.priceRange.max < priceRange.max && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-700 rounded-lg text-sm font-medium">
-                  En stock
+                  Menos de {formatCurrency(filters.priceRange.max)}
                   <button
-                    onClick={() => handleFilterChange(toggleInStock)}
+                    onClick={() => handleRemoveFilter('price')}
                     className="hover:text-green-900"
                   >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
@@ -297,12 +400,50 @@ export default function ProductsPageClient({
                 </span>
               )}
 
-              {/* Verified */}
+              {/* Rating Badge */}
+              {filters.minRating > 0 && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-100 text-yellow-700 rounded-lg text-sm font-medium">
+                  {filters.minRating}+ ⭐
+                  <button
+                    onClick={() => handleFilterChange(() => updateMinRating(0), 'rating', 0)}
+                    className="hover:text-yellow-900"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </span>
+              )}
+
+              {/* In Stock Badge */}
+              {filters.inStock === true && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-700 rounded-lg text-sm font-medium">
+                  En stock
+                  <button
+                    onClick={() => handleRemoveFilter('inStock')}
+                    className="hover:text-green-900"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </span>
+              )}
+
+              {/* Verified Badge */}
               {filters.verified === true && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium">
                   Verificados
                   <button
-                    onClick={() => handleFilterChange(toggleVerified)}
+                    onClick={() => handleRemoveFilter('verified')}
                     className="hover:text-purple-900"
                   >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
@@ -316,12 +457,12 @@ export default function ProductsPageClient({
                 </span>
               )}
 
-              {/* Featured */}
+              {/* Featured Badge */}
               {filters.featured === true && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-100 text-orange-700 rounded-lg text-sm font-medium">
                   Destacados
                   <button
-                    onClick={() => handleFilterChange(toggleFeatured)}
+                    onClick={() => handleRemoveFilter('featured')}
                     className="hover:text-orange-900"
                   >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
@@ -335,14 +476,12 @@ export default function ProductsPageClient({
                 </span>
               )}
 
-              {/* Search Query */}
+              {/* Search Query Badge */}
               {currentQuery && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 text-primary-700 rounded-lg text-sm font-medium">
                   "{currentQuery}"
                   <button
-                    onClick={() => {
-                      window.location.href = '/productos';
-                    }}
+                    onClick={() => router.push(ROUTES.PRODUCTS, { scroll: false })}
                     className="hover:text-primary-900"
                   >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
@@ -356,11 +495,9 @@ export default function ProductsPageClient({
                 </span>
               )}
 
+              {/* Clear All Button */}
               <button
-                onClick={() => {
-                  resetFilters();
-                  setCurrentPage(1);
-                }}
+                onClick={handleResetFilters}
                 className="text-sm text-primary-600 hover:text-primary-700 font-semibold hover:underline ml-auto"
               >
                 Limpiar todo
@@ -372,87 +509,16 @@ export default function ProductsPageClient({
 
       {/* Products Grid */}
       <div>
-        {displayProducts.length > 0 ? (
+        {isTransitioning ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, i) => (
+              <CardSkeleton key={i} />
+            ))}
+          </div>
+        ) : displayProducts.length > 0 ? (
           <>
             <ProductsGrid products={displayProducts} view={view} />
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2 mt-12">
-                {/* Previous Button */}
-                <button
-                  onClick={() => {
-                    setCurrentPage(Math.max(1, currentPage - 1));
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  disabled={currentPage === 1}
-                  className={`px-4 py-2 rounded-lg border font-medium transition ${
-                    currentPage === 1
-                      ? 'border-gray-200 text-gray-400 cursor-not-allowed'
-                      : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  Anterior
-                </button>
-
-                {/* Page Numbers - Desktop */}
-                <div className="hidden sm:flex items-center gap-1">
-                  {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
-                    let pageNum: number;
-                    if (totalPages <= 5) {
-                      pageNum = i + 1;
-                    } else if (currentPage <= 3) {
-                      pageNum = i + 1;
-                    } else if (currentPage >= totalPages - 2) {
-                      pageNum = totalPages - 4 + i;
-                    } else {
-                      pageNum = currentPage - 2 + i;
-                    }
-
-                    return (
-                      <button
-                        key={pageNum}
-                        onClick={() => {
-                          setCurrentPage(pageNum);
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
-                        className={`min-w-[40px] h-10 flex items-center justify-center rounded-lg font-medium transition ${
-                          pageNum === currentPage
-                            ? 'bg-primary-600 text-white'
-                            : 'text-gray-700 hover:bg-gray-100'
-                        }`}
-                      >
-                        {pageNum}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* Mobile: Just show current page */}
-                <div className="sm:hidden flex items-center gap-2">
-                  <span className="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium">
-                    {currentPage}
-                  </span>
-                  <span className="text-gray-600">de {totalPages}</span>
-                </div>
-
-                {/* Next Button */}
-                <button
-                  onClick={() => {
-                    setCurrentPage(Math.min(totalPages, currentPage + 1));
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  disabled={currentPage === totalPages}
-                  className={`px-4 py-2 rounded-lg border font-medium transition ${
-                    currentPage === totalPages
-                      ? 'border-gray-200 text-gray-400 cursor-not-allowed'
-                      : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  Siguiente
-                </button>
-              </div>
-            )}
+            <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/productos" />
           </>
         ) : (
           <div className="bg-white rounded-xl shadow-sm border-2 border-gray-200 p-12 text-center">
@@ -466,14 +532,7 @@ export default function ProductsPageClient({
               No hay productos que coincidan con tus criterios de búsqueda. Intenta ajustar los
               filtros o realizar una búsqueda diferente.
             </p>
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => {
-                resetFilters();
-                setCurrentPage(1);
-              }}
-            >
+            <Button variant="primary" size="lg" onClick={handleResetFilters}>
               Limpiar todos los filtros
             </Button>
           </div>
@@ -487,18 +546,19 @@ export default function ProductsPageClient({
         filters={filters}
         filterOptions={filterOptions}
         priceRange={priceRange}
-        onToggleCategory={(cat) => handleFilterChange(() => toggleCategory(cat))}
-        onToggleState={(state) => handleFilterChange(() => toggleState(state))}
-        onUpdatePriceRange={(range) => handleFilterChange(() => updatePriceRange(range))}
-        onUpdateMinRating={(rating) => handleFilterChange(() => updateMinRating(rating))}
-        onToggleInStock={() => handleFilterChange(toggleInStock)}
-        onToggleVerified={() => handleFilterChange(toggleVerified)}
-        onToggleFeatured={() => handleFilterChange(toggleFeatured)}
-        onResetFilters={() => {
-          resetFilters();
-          setCurrentPage(1);
-        }}
-        activeFilterCount={activeFilterCount}
+        onToggleCategory={(cat) => handleFilterChange(() => toggleCategory(cat), 'category', cat)}
+        onToggleState={(state) => handleFilterChange(() => toggleState(state), 'state', state)}
+        onUpdatePriceRange={(range) =>
+          handleFilterChange(() => updatePriceRange(range), 'price', range.max)
+        }
+        onUpdateMinRating={(rating) =>
+          handleFilterChange(() => updateMinRating(rating), 'rating', rating)
+        }
+        onToggleInStock={() => handleFilterChange(toggleInStock, 'inStock', !filters.inStock)}
+        onToggleVerified={() => handleFilterChange(toggleVerified, 'verified', !filters.verified)}
+        onToggleFeatured={() => handleFilterChange(toggleFeatured, 'featured', !filters.featured)}
+        onResetFilters={handleResetFilters}
+        activeFilterCount={getTotalActiveFilters()}
       />
     </>
   );

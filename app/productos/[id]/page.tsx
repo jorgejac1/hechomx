@@ -1,4 +1,4 @@
-import { getProductById, getAllProducts } from '@/lib/products';
+import { getProductById, getAllProducts } from '@/lib/server';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import { notFound } from 'next/navigation';
 import ProductDetailClient from '@/components/product/ProductDetailClient';
@@ -51,8 +51,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const breadcrumbItems = [
     { label: 'Inicio', href: '/' },
     { label: 'Productos', href: '/productos' },
-    { label: product.category, href: `/productos?category=${encodeURIComponent(product.category)}` },
-    { label: product.name }
+    {
+      label: product.category,
+      href: `/productos?category=${encodeURIComponent(product.category)}`,
+    },
+    { label: product.name },
   ];
 
   return (

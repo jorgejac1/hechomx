@@ -1,6 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Subcategory } from "@/lib/subcategories";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Subcategory } from '@/lib';
 
 interface SubcategoriesGridProps {
   category: string;
@@ -13,19 +13,19 @@ export default function SubcategoriesGrid({
   category,
   subcategories,
   currentSubcategory,
-  baseUrl = "/productos",
+  baseUrl = '/productos',
 }: SubcategoriesGridProps) {
   if (subcategories.length === 0) return null;
 
   const buildUrl = (slug: string) => {
     const params = new URLSearchParams();
-    params.set("categoria", category);
+    params.set('categoria', category);
 
     if (currentSubcategory) {
-      params.set("subcategoria", currentSubcategory);
-      params.set("subsubcategoria", slug);
+      params.set('subcategoria', currentSubcategory);
+      params.set('subsubcategoria', slug);
     } else {
-      params.set("subcategoria", slug);
+      params.set('subcategoria', slug);
     }
 
     return `${baseUrl}?${params.toString()}`;
@@ -34,7 +34,7 @@ export default function SubcategoriesGrid({
   return (
     <div className="mb-8 bg-white rounded-xl shadow-sm p-6">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">
-        {currentSubcategory ? "Refina tu búsqueda" : "Explora por tipo"}
+        {currentSubcategory ? 'Refina tu búsqueda' : 'Explora por tipo'}
       </h2>
 
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
@@ -74,9 +74,7 @@ export default function SubcategoriesGrid({
               <p className="text-xs font-medium text-gray-900 line-clamp-2 group-hover:text-primary-600 transition-colors">
                 {sub.name}
               </p>
-              {sub.count && (
-                <p className="text-xs text-gray-500 mt-0.5">{sub.count}</p>
-              )}
+              {sub.count && <p className="text-xs text-gray-500 mt-0.5">{sub.count}</p>}
             </div>
           </Link>
         ))}
