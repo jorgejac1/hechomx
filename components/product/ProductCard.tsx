@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useComparison } from '@/contexts/ComparisonContext';
 import { Product } from '@/types';
-import { formatCurrency } from '@/lib';
+import { formatCurrency, CATEGORY_ICONS, CATEGORY_COLORS, ROUTES } from '@/lib';
 
 interface ProductCardProps {
   product: Product;
@@ -26,11 +26,18 @@ export default function ProductCard({ product }: ProductCardProps) {
   const rating = product.rating || Math.random() * (5 - 4) + 4;
   const reviewCount = product.reviewCount || Math.floor(Math.random() * 500) + 50;
 
+  // Check if product is new (added within last 7 days)
+  const isNewProduct = (createdAt?: string): boolean => {
+    if (!createdAt) return false;
+    const created = new Date(createdAt);
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    return created > sevenDaysAgo;
+  };
+
   const handleComparisonToggle = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
-    // Show alert if trying to add when full
     if (isFull && !isComparing) {
       alert('Ya tienes 4 productos en comparación. Quita uno para agregar otro.');
       return;
@@ -41,12 +48,14 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const isDisabled = mounted ? !canAdd && !isComparing : false;
 
-  // Helper function for button title
   const getButtonTitle = () => {
     if (isComparing) return 'Quitar de comparación';
     if (isFull) return 'Comparación llena (máximo 4 productos)';
     return 'Agregar a comparación';
   };
+
+  const categoryIcon = CATEGORY_ICONS[product.category] || '🎨';
+  const categoryColor = CATEGORY_COLORS[product.category] || 'bg-gray-100 text-gray-700';
 
   return (
     <div className="group block h-full relative">
@@ -77,10 +86,8 @@ export default function ProductCard({ product }: ProductCardProps) {
               viewBox="0 0 24 24"
             >
               {isComparing ? (
-                // Checkmark when comparing
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               ) : (
-                // Balance/comparison icon when not comparing
                 <>
                   <path
                     strokeLinecap="round"
@@ -93,7 +100,6 @@ export default function ProductCard({ product }: ProductCardProps) {
             </svg>
           </button>
 
-          {/* Full indicator badge - only show when comparison is full and product not in it */}
           {isFull && !isComparing && (
             <div className="absolute top-12 right-2 z-10 bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-[10px] font-medium shadow-sm sm:opacity-0 sm:group-hover:opacity-100 opacity-100 whitespace-nowrap">
               Comparación llena
@@ -102,9 +108,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         </>
       )}
 
-      <Link href={`/productos/${product.id}`}>
+      <Link href={`${ROUTES.PRODUCTS}/${product.id}`}>
         <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
-          {/* Image - RESPONSIVE HEIGHT */}
+          {/* Image */}
           <div className="relative h-40 sm:h-48 md:h-56 bg-gray-200 overflow-hidden flex-shrink-0">
             <Image
               src={product.images[0]}
@@ -114,8 +120,15 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="object-cover group-hover:scale-110 transition-transform duration-300"
             />
 
-            {/* Left Side - Badges Group (Featured + Verified) */}
+            {/* Left Side - Badges Group (New + Featured + Verified) */}
             <div className="absolute top-1.5 sm:top-2 left-1.5 sm:left-2 z-[1] flex items-center gap-1.5 sm:gap-2">
+              {/* New Badge - First Priority */}
+              {isNewProduct(product.createdAt) && (
+                <span className="bg-blue-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-sm">
+                  Nuevo
+                </span>
+              )}
+
               {/* Featured Badge */}
               {product.featured && (
                 <span className="bg-primary-600 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-sm">
@@ -143,16 +156,35 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </div>
               )}
             </div>
+
+            {/* Category Badge - Bottom Left */}
+            <div className="absolute bottom-1.5 sm:bottom-2 left-1.5 sm:left-2 z-[1]">
+              <span
+                className={`inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium shadow-sm ${categoryColor}`}
+              >
+                <span className="text-xs sm:text-sm">{categoryIcon}</span>
+                <span className="hidden sm:inline">{product.category}</span>
+              </span>
+            </div>
           </div>
 
-          {/* Content - MORE COMPACT ON MOBILE */}
+          {/* Content */}
           <div className="p-2.5 sm:p-3 flex-1 flex flex-col">
-            {/* Product Name - SMALLER MIN-HEIGHT ON MOBILE */}
             <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-1 sm:mb-1.5 line-clamp-2 group-hover:text-primary-600 transition-colors leading-tight min-h-[2rem] sm:min-h-[2.5rem]">
               {product.name}
             </h3>
 
-            {/* Rating & Location - STACKED ON MOBILE */}
+            {/* Category - Mobile Only */}
+            <div className="sm:hidden mb-1">
+              <span
+                className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium ${categoryColor}`}
+              >
+                <span>{categoryIcon}</span>
+                <span>{product.category}</span>
+              </span>
+            </div>
+
+            {/* Rating & Location */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-0 mb-1.5 sm:mb-2 text-[10px] sm:text-xs">
               <div className="flex items-center gap-1">
                 <span className="font-bold text-gray-900">{rating.toFixed(1)}</span>

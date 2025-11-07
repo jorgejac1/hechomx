@@ -85,9 +85,7 @@ export function useProductFilters(initialProducts: Product[] = []) {
 
     // Categories
     if (filters.categories.length > 0) {
-      filtered = filtered.filter((product) =>
-        filters.categories.includes(product.category)
-      );
+      filtered = filtered.filter((product) => filters.categories.includes(product.category));
     }
 
     // Subcategories
@@ -99,16 +97,13 @@ export function useProductFilters(initialProducts: Product[] = []) {
 
     // States
     if (filters.states.length > 0) {
-      filtered = filtered.filter((product) =>
-        filters.states.includes(product.state)
-      );
+      filtered = filtered.filter((product) => filters.states.includes(product.state));
     }
 
     // Price range
     filtered = filtered.filter(
       (product) =>
-        product.price >= filters.priceRange.min &&
-        product.price <= filters.priceRange.max
+        product.price >= filters.priceRange.min && product.price <= filters.priceRange.max
     );
 
     // Rating
@@ -145,8 +140,12 @@ export function useProductFilters(initialProducts: Product[] = []) {
         filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
         break;
       case 'newest':
-        // Assuming products have an id that increases over time
-        filtered.sort((a, b) => Number(b.id) - Number(a.id));
+        // Sort by createdAt date (newest first)
+        filtered.sort((a, b) => {
+          const dateA = new Date(a.createdAt || 0).getTime();
+          const dateB = new Date(b.createdAt || 0).getTime();
+          return dateB - dateA;
+        });
         break;
       case 'popular':
         // Sort by review count
@@ -258,15 +257,12 @@ export function useProductFilters(initialProducts: Product[] = []) {
   }, [priceRange]);
 
   // Reset specific filter
-  const resetFilter = useCallback(
-    (key: keyof ProductFilters) => {
-      setFilters((prev) => ({
-        ...prev,
-        [key]: DEFAULT_FILTERS[key],
-      }));
-    },
-    []
-  );
+  const resetFilter = useCallback((key: keyof ProductFilters) => {
+    setFilters((prev) => ({
+      ...prev,
+      [key]: DEFAULT_FILTERS[key],
+    }));
+  }, []);
 
   return {
     // State
@@ -274,11 +270,11 @@ export function useProductFilters(initialProducts: Product[] = []) {
     filteredProducts,
     activeFilterCount,
     isFilterActive,
-    
+
     // Options
     filterOptions,
     priceRange,
-    
+
     // Actions
     updateFilter,
     toggleCategory,

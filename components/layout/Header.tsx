@@ -5,13 +5,15 @@ import { useState, useEffect } from 'react';
 import SearchModal from '@/components/ui/SearchModal';
 import { useCart } from '@/contexts/CartContext';
 import { Product } from '@/types';
+import { ROUTES } from '@/lib/constants/routes';
+import { SITE_NAME } from '@/config/site';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-  const { cartCount } = useCart(); // Use cart from context
+  const { cartCount } = useCart();
 
   useEffect(() => {
     fetch('/api/products')
@@ -30,17 +32,17 @@ export default function Header() {
       <header className="bg-white shadow-md sticky top-0 z-50">
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 justify-between items-center gap-3">
-            {/* Logo - RESPONSIVE TEXT */}
+            {/* Logo */}
             <div className="flex items-center flex-shrink-0">
-              <Link href="/" className="flex items-center gap-2">
+              <Link href={ROUTES.HOME} className="flex items-center gap-2">
                 <span className="text-2xl">🇲🇽</span>
                 <span className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 hidden sm:block">
-                  Hecho en México
+                  {SITE_NAME}
                 </span>
               </Link>
             </div>
 
-            {/* Search Bar - DESKTOP ONLY */}
+            {/* Search Bar - DESKTOP */}
             <div className="hidden lg:flex flex-1 max-w-xl xl:max-w-2xl mx-4">
               <button
                 onClick={() => setSearchModalOpen(true)}
@@ -63,9 +65,9 @@ export default function Header() {
               </button>
             </div>
 
-            {/* Right Side Container */}
+            {/* Right Side */}
             <div className="flex items-center gap-3 lg:gap-4">
-              {/* Search Icon - MEDIUM SCREENS ONLY (before nav icons) */}
+              {/* Search Icon - MEDIUM SCREENS */}
               <button
                 onClick={() => setSearchModalOpen(true)}
                 className="hidden md:flex lg:hidden text-gray-700 hover:text-primary-600 flex-shrink-0"
@@ -81,7 +83,7 @@ export default function Header() {
                 </svg>
               </button>
 
-              {/* Desktop Navigation - HIDE TEXT ON MEDIUM, SHOW ICONS ONLY */}
+              {/* Desktop Navigation */}
               <div className="hidden md:flex md:items-center md:gap-3 lg:gap-4 xl:gap-6">
                 {/* Regalos */}
                 <Link
@@ -107,7 +109,7 @@ export default function Header() {
 
                 {/* Productos */}
                 <Link
-                  href="/productos"
+                  href={ROUTES.PRODUCTS}
                   className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition"
                   title="Productos"
                 >
@@ -129,7 +131,7 @@ export default function Header() {
 
                 {/* Carrito */}
                 <Link
-                  href="/carrito"
+                  href={ROUTES.CART}
                   className="relative flex items-center text-gray-700 hover:text-primary-600 transition"
                   title="Carrito"
                 >
@@ -153,7 +155,7 @@ export default function Header() {
                   )}
                 </Link>
 
-                {/* Iniciar Sesión - ICON ONLY ON MEDIUM */}
+                {/* Iniciar Sesión */}
                 <Link
                   href="/login"
                   className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition"
@@ -175,7 +177,7 @@ export default function Header() {
                   <span className="font-medium hidden lg:block">Iniciar Sesión</span>
                 </Link>
 
-                {/* Vender Button - ALWAYS VISIBLE, RESPONSIVE SIZE */}
+                {/* Vender Button */}
                 <Link
                   href="/vender"
                   className="flex items-center gap-1.5 lg:gap-2 bg-primary-600 text-white px-3 lg:px-4 py-2 rounded-lg hover:bg-primary-700 transition font-medium text-sm lg:text-base whitespace-nowrap flex-shrink-0"
@@ -197,9 +199,9 @@ export default function Header() {
                 </Link>
               </div>
 
-              {/* Mobile Icons - SEARCH + CART + MENU */}
+              {/* Mobile Icons */}
               <div className="md:hidden flex items-center gap-3 sm:gap-4">
-                {/* Mobile Search Icon */}
+                {/* Mobile Search */}
                 <button
                   onClick={() => setSearchModalOpen(true)}
                   className="text-gray-700 hover:text-primary-600"
@@ -215,9 +217,9 @@ export default function Header() {
                   </svg>
                 </button>
 
-                {/* Mobile Cart Icon */}
+                {/* Mobile Cart */}
                 <Link
-                  href="/carrito"
+                  href={ROUTES.CART}
                   className="relative text-gray-700 hover:text-primary-600"
                   aria-label="Carrito"
                 >
@@ -285,7 +287,7 @@ export default function Header() {
                 </Link>
 
                 <Link
-                  href="/productos"
+                  href={ROUTES.PRODUCTS}
                   className="flex items-center gap-3 text-gray-700 hover:text-primary-600 font-medium py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -298,22 +300,6 @@ export default function Header() {
                     />
                   </svg>
                   Productos
-                </Link>
-
-                <Link
-                  href="/categorias"
-                  className="flex items-center gap-3 text-gray-700 hover:text-primary-600 font-medium py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                    />
-                  </svg>
-                  Categorías
                 </Link>
 
                 <Link

@@ -7,6 +7,7 @@ import CategoriesSection from '@/components/home/CategoriesSection';
 import DealsSection from '@/components/home/DealsSection';
 import LocalShopsSection from '@/components/home/LocalShopsSection';
 import HeroSlider from '@/components/home/HeroSlider';
+import StatesSection from '@/components/home/StatesSection';
 
 export const dynamic = 'force-dynamic';
 
@@ -98,6 +99,8 @@ export default function Home() {
         viewAllLink="/productos"
         itemsToShow={4}
       />
+
+      <StatesSection />
 
       {/* Categories Section */}
       <CategoriesSection />

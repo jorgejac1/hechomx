@@ -4,6 +4,7 @@
 
 import { z } from 'zod';
 import type { SortOption } from '@/types/filters';
+import { MEXICAN_STATES } from '@/lib';
 
 export const productSchema = z.object({
   id: z.string().min(1, 'ID es requerido'),
@@ -83,6 +84,19 @@ export const validateSortParam = (sort: string | null): SortOption => {
 export const validateBooleanParam = (param: string | null): boolean | null => {
   if (!param) return null;
   return param === 'si';
+};
+
+/**
+ * Validates state parameter against official Mexican states list
+ * Returns the state if valid, null if invalid or not provided
+ */
+export const validateStateParam = (state: string | null): string | null => {
+  if (!state) return null;
+
+  // Check if state exists in our constants
+  const isValid = (MEXICAN_STATES as readonly string[]).includes(state);
+
+  return isValid ? state : null;
 };
 
 export type ProductInput = z.infer<typeof productSchema>;

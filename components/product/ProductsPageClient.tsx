@@ -13,7 +13,12 @@ import type { SortOption } from '@/types/filters';
 import { Filter, Grid3x3, List } from 'lucide-react';
 import { formatCurrency, pluralize, ROUTES } from '@/lib';
 import { FILTER_PARAM_NAMES, ITEMS_PER_PAGE, SORT_OPTIONS } from '@/lib/constants/filters';
-import { validatePriceParam, validateSortParam, validateBooleanParam } from '@/validators/product';
+import {
+  validatePriceParam,
+  validateSortParam,
+  validateBooleanParam,
+  validateStateParam,
+} from '@/validators/product';
 import { removeFilterParam } from '@/lib/utils/filters';
 import {
   trackFilterUsage,
@@ -39,7 +44,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
 
   // Read and validate filter values from URL
   const currentCategory = searchParams.get(FILTER_PARAM_NAMES.CATEGORY) || undefined;
-  const currentState = searchParams.get(FILTER_PARAM_NAMES.STATE) || undefined;
+  const currentState = validateStateParam(searchParams.get(FILTER_PARAM_NAMES.STATE)) || undefined;
   const currentQuery = searchParams.get(FILTER_PARAM_NAMES.QUERY) || undefined;
   const currentSort = validateSortParam(searchParams.get(FILTER_PARAM_NAMES.SORT));
   const currentPrice = validatePriceParam(searchParams.get(FILTER_PARAM_NAMES.PRICE));

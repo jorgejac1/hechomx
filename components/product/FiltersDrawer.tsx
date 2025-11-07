@@ -2,7 +2,7 @@
 
 import { X, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
-import { formatCurrency } from '@/lib';
+import { formatCurrency, CATEGORY_ICONS } from '@/lib';
 
 interface ProductFilters {
   categories: string[];
@@ -89,7 +89,15 @@ export default function FiltersDrawer({
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-900">Filtros</h2>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">Filtros</h2>
+              {activeFilterCount > 0 && (
+                <p className="text-sm text-gray-600 mt-0.5">
+                  {activeFilterCount}{' '}
+                  {activeFilterCount === 1 ? 'filtro activo' : 'filtros activos'}
+                </p>
+              )}
+            </div>
             <button
               onClick={onClose}
               className="p-2 hover:bg-gray-100 rounded-full transition"
@@ -121,19 +129,23 @@ export default function FiltersDrawer({
                 </button>
 
                 {/* Category Options (First 3 or All) */}
-                {visibleCategories.map((category: string) => (
-                  <button
-                    key={category}
-                    onClick={() => onToggleCategory(category)}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base ${
-                      filters.categories.includes(category)
-                        ? 'bg-primary-100 text-primary-700 font-semibold'
-                        : 'text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
+                {visibleCategories.map((category: string) => {
+                  const icon = CATEGORY_ICONS[category] || '🎨';
+                  return (
+                    <button
+                      key={category}
+                      onClick={() => onToggleCategory(category)}
+                      className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base flex items-center gap-2 ${
+                        filters.categories.includes(category)
+                          ? 'bg-primary-100 text-primary-700 font-semibold'
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      <span className="text-lg">{icon}</span>
+                      <span>{category}</span>
+                    </button>
+                  );
+                })}
 
                 {/* Show More/Less Button for Categories */}
                 {hasMoreCategories && (
@@ -180,13 +192,14 @@ export default function FiltersDrawer({
                   <button
                     key={state}
                     onClick={() => onToggleState(state)}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base ${
+                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base flex items-center gap-2 ${
                       filters.states.includes(state)
                         ? 'bg-primary-100 text-primary-700 font-semibold'
                         : 'text-gray-700 hover:bg-gray-50'
                     }`}
                   >
-                    {state}
+                    <span>📍</span>
+                    <span>{state}</span>
                   </button>
                 ))}
 

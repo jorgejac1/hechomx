@@ -20,6 +20,8 @@ export interface Product {
   verified?: boolean;
   rating?: number;
   reviewCount?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface Category {
