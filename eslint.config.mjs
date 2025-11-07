@@ -64,7 +64,7 @@ export default [
       '@typescript-eslint/no-explicit-any': 'warn',
 
       // General rules
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-console': ['warn', { allow: ['log', 'warn', 'error'] }],
       'prefer-const': 'warn',
 
       // React Hooks rules

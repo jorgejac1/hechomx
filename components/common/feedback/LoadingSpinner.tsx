@@ -2,6 +2,8 @@ interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
   color?: 'primary' | 'white' | 'gray';
   className?: string;
+  fullScreen?: boolean;
+  text?: string;
 }
 
 const sizeClasses = {
@@ -20,8 +22,10 @@ export default function LoadingSpinner({
   size = 'md',
   color = 'primary',
   className = '',
+  fullScreen = false,
+  text,
 }: LoadingSpinnerProps) {
-  return (
+  const spinner = (
     <div
       className={`
         ${sizeClasses[size]}
@@ -36,4 +40,17 @@ export default function LoadingSpinner({
       <span className="sr-only">Cargando...</span>
     </div>
   );
+
+  if (fullScreen) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          {spinner}
+          {text && <p className="mt-4 text-gray-600">{text}</p>}
+        </div>
+      </div>
+    );
+  }
+
+  return spinner;
 }

@@ -9,6 +9,7 @@ import ScrollToTop from '@/components/common/ScrollToTop';
 import { ComparisonProvider } from '@/contexts/ComparisonContext';
 import { CartProvider } from '@/contexts/CartContext';
 import { ToastProvider } from '@/contexts/ToastContext';
+import { AuthProvider } from '@/contexts/AuthContext';
 import ComparisonBar from '@/components/product/Comparison/ComparisonBar';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -22,17 +23,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es">
       <body className={inter.className}>
         <ToastProvider>
-          <CartProvider>
-            <ComparisonProvider>
-              <Header />
-              <main className="min-h-screen">{children}</main>
-              <Footer />
-              <ScrollToTop />
-              <Suspense fallback={null}>
-                <ComparisonBar />
-              </Suspense>
-            </ComparisonProvider>
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              <ComparisonProvider>
+                <Header />
+                <main className="min-h-screen">{children}</main>
+                <Footer />
+                <ScrollToTop />
+                <Suspense fallback={null}>
+                  <ComparisonBar />
+                </Suspense>
+              </ComparisonProvider>
+            </CartProvider>
+          </AuthProvider>
         </ToastProvider>
 
         {/* Google Analytics */}

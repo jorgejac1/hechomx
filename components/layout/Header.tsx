@@ -2,30 +2,51 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import SearchModal from '@/components/ui/SearchModal';
 import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { Product } from '@/types';
 import { ROUTES } from '@/lib/constants/routes';
 import { SITE_NAME } from '@/config/site';
+import { User, LogOut, Heart, Package, ChevronDown } from 'lucide-react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const { cartCount } = useCart();
+  const { user, isAuthenticated, logout } = useAuth();
 
+  // Load products and categories for search
   useEffect(() => {
-    fetch('/api/products')
-      .then((res) => res.json())
-      .then((data: { data: Product[] }) => {
-        const productData = data.data || [];
-        setProducts(productData);
-        const uniqueCategories: string[] = [...new Set(productData.map((p) => p.category))];
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/products');
+        const result = await response.json();
+
+        // API returns { success, count, data }
+        const productsArray: Product[] = result.data || [];
+        setProducts(productsArray);
+
+        // Extract unique categories
+        const uniqueCategories: string[] = [...new Set(productsArray.map((p) => p.category))];
         setCategories(uniqueCategories);
-      })
-      .catch((err) => console.error('Error fetching products:', err));
+      } catch (error) {
+        console.error('Error loading products:', error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  const handleLogout = () => {
+    logout();
+    setIsUserMenuOpen(false);
+    setMobileMenuOpen(false);
+  };
 
   return (
     <>
@@ -155,27 +176,98 @@ export default function Header() {
                   )}
                 </Link>
 
-                {/* Iniciar Sesión */}
-                <Link
-                  href="/login"
-                  className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition"
-                  title="Iniciar Sesión"
-                >
-                  <svg
-                    className="w-5 h-5 lg:w-6 lg:h-6 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                {/* User Menu - Desktop */}
+                {isAuthenticated ? (
+                  <div className="relative">
+                    <button
+                      onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                      className="flex items-center gap-1.5 text-gray-700 hover:text-primary-600 transition"
+                      title={user?.name}
+                    >
+                      {user?.avatar ? (
+                        <Image
+                          src={user.avatar}
+                          alt={user.name}
+                          width={32}
+                          height={32}
+                          className="rounded-full"
+                        />
+                      ) : (
+                        <User className="w-6 h-6" />
+                      )}
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+
+                    {/* User Dropdown */}
+                    {isUserMenuOpen && (
+                      <>
+                        <div
+                          className="fixed inset-0 z-10"
+                          onClick={() => setIsUserMenuOpen(false)}
+                        />
+                        <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-20">
+                          <div className="px-4 py-3 border-b border-gray-200">
+                            <p className="text-sm font-semibold text-gray-900">{user?.name}</p>
+                            <p className="text-xs text-gray-600 truncate">{user?.email}</p>
+                          </div>
+                          <Link
+                            href={ROUTES.PROFILE}
+                            onClick={() => setIsUserMenuOpen(false)}
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          >
+                            <User className="w-4 h-4" />
+                            Mi Perfil
+                          </Link>
+                          <Link
+                            href={ROUTES.ORDERS}
+                            onClick={() => setIsUserMenuOpen(false)}
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          >
+                            <Package className="w-4 h-4" />
+                            Mis Pedidos
+                          </Link>
+                          <Link
+                            href={ROUTES.WISHLIST}
+                            onClick={() => setIsUserMenuOpen(false)}
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          >
+                            <Heart className="w-4 h-4" />
+                            Favoritos
+                          </Link>
+                          <div className="border-t border-gray-200 my-2" />
+                          <button
+                            onClick={handleLogout}
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 w-full text-left"
+                          >
+                            <LogOut className="w-4 h-4" />
+                            Cerrar Sesión
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    href={ROUTES.LOGIN}
+                    className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition"
+                    title="Iniciar Sesión"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-                  <span className="font-medium hidden lg:block">Iniciar Sesión</span>
-                </Link>
+                    <svg
+                      className="w-5 h-5 lg:w-6 lg:h-6 flex-shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
+                    </svg>
+                    <span className="font-medium hidden lg:block">Iniciar Sesión</span>
+                  </Link>
+                )}
 
                 {/* Vender Button */}
                 <Link
@@ -302,21 +394,72 @@ export default function Header() {
                   Productos
                 </Link>
 
-                <Link
-                  href="/login"
-                  className="flex items-center gap-3 text-gray-700 hover:text-primary-600 font-medium py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-                  Iniciar Sesión
-                </Link>
+                {isAuthenticated ? (
+                  <>
+                    <div className="flex items-center gap-3 pt-2 pb-4 border-t border-gray-200">
+                      {user?.avatar && (
+                        <Image
+                          src={user.avatar}
+                          alt={user.name}
+                          width={40}
+                          height={40}
+                          className="rounded-full"
+                        />
+                      )}
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900">{user?.name}</p>
+                        <p className="text-xs text-gray-600">{user?.email}</p>
+                      </div>
+                    </div>
+                    <Link
+                      href={ROUTES.PROFILE}
+                      className="flex items-center gap-3 text-gray-700 hover:text-primary-600 font-medium py-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <User className="w-5 h-5" />
+                      Mi Perfil
+                    </Link>
+                    <Link
+                      href={ROUTES.ORDERS}
+                      className="flex items-center gap-3 text-gray-700 hover:text-primary-600 font-medium py-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Package className="w-5 h-5" />
+                      Mis Pedidos
+                    </Link>
+                    <Link
+                      href={ROUTES.WISHLIST}
+                      className="flex items-center gap-3 text-gray-700 hover:text-primary-600 font-medium py-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Heart className="w-5 h-5" />
+                      Favoritos
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center gap-3 text-red-600 hover:text-red-700 font-medium py-2"
+                    >
+                      <LogOut className="w-5 h-5" />
+                      Cerrar Sesión
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href={ROUTES.LOGIN}
+                    className="flex items-center gap-3 text-gray-700 hover:text-primary-600 font-medium py-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
+                    </svg>
+                    Iniciar Sesión
+                  </Link>
+                )}
 
                 <Link
                   href="/vender"

@@ -13,6 +13,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'placeholder.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+      },
     ],
   },
   // Enable React strict mode
