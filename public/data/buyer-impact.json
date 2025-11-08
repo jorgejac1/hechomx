@@ -1,0 +1,172 @@
+{
+  "juan@ejemplo.com": {
+    "totalSpent": 12850,
+    "totalOrders": 8,
+    "artisansSupported": 5,
+    "statesRepresented": 3,
+    "joinDate": "2024-01-15T10:30:00Z",
+    "impactMetrics": {
+      "co2Saved": 45.5,
+      "treesEquivalent": 2.3,
+      "traditionalTechniquesPreserved": 4,
+      "artisanFamiliesSupported": 5
+    },
+    "supportedArtisans": [
+      {
+        "id": "3",
+        "name": "Sofía Ramírez",
+        "shopName": "Textiles Oaxaqueños",
+        "state": "Oaxaca",
+        "avatar": "https://i.pravatar.cc/150?img=47",
+        "specialty": "Tejido en telar de pedal",
+        "purchaseCount": 3,
+        "totalSpent": 5200,
+        "firstPurchase": "2024-02-10T00:00:00Z"
+      },
+      {
+        "id": "4",
+        "name": "Pedro Martínez",
+        "shopName": "Alebrijes Mágicos",
+        "state": "Oaxaca",
+        "avatar": "https://i.pravatar.cc/150?img=33",
+        "specialty": "Tallado en madera copal",
+        "purchaseCount": 2,
+        "totalSpent": 5600,
+        "firstPurchase": "2024-03-15T00:00:00Z"
+      },
+      {
+        "id": "5",
+        "name": "Carmen López",
+        "shopName": "Talavera Colonial",
+        "state": "Puebla",
+        "specialty": "Cerámica Talavera",
+        "purchaseCount": 1,
+        "totalSpent": 850,
+        "firstPurchase": "2024-04-20T00:00:00Z"
+      }
+    ],
+    "topCategories": [
+      { "category": "Textiles", "count": 4, "percentage": 50 },
+      { "category": "Alebrijes", "count": 2, "percentage": 25 },
+      { "category": "Cerámica", "count": 2, "percentage": 25 }
+    ],
+    "milestones": [
+      {
+        "id": "m1",
+        "title": "Primer Compra",
+        "description": "Comenzaste tu viaje apoyando artesanos",
+        "icon": "star",
+        "achieved": true,
+        "date": "2024-02-10T00:00:00Z"
+      },
+      {
+        "id": "m2",
+        "title": "5 Artesanos Apoyados",
+        "description": "Has comprado de 5 artesanos diferentes",
+        "icon": "users",
+        "achieved": true,
+        "date": "2024-04-20T00:00:00Z"
+      },
+      {
+        "id": "m3",
+        "title": "Explorador de Estados",
+        "description": "Has comprado de 3 estados diferentes",
+        "icon": "map",
+        "achieved": true,
+        "date": "2024-04-20T00:00:00Z"
+      },
+      {
+        "id": "m4",
+        "title": "10 Artesanos Apoyados",
+        "description": "Compra de 10 artesanos diferentes",
+        "icon": "award",
+        "achieved": false
+      }
+    ],
+    "recentPurchases": [
+      {
+        "id": "o1",
+        "productName": "Alebrije Búho Mediano",
+        "artisan": "Pedro Martínez",
+        "date": "2024-11-01T00:00:00Z",
+        "amount": 2800,
+        "image": "https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=400"
+      },
+      {
+        "id": "o2",
+        "productName": "Manta Tejida Artesanal",
+        "artisan": "Sofía Ramírez",
+        "date": "2024-10-15T00:00:00Z",
+        "amount": 1300,
+        "image": "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400"
+      }
+    ]
+  },
+  "maria@ejemplo.com": {
+    "totalSpent": 6750,
+    "totalOrders": 4,
+    "artisansSupported": 3,
+    "statesRepresented": 2,
+    "joinDate": "2024-02-20T14:20:00Z",
+    "impactMetrics": {
+      "co2Saved": 22.8,
+      "treesEquivalent": 1.1,
+      "traditionalTechniquesPreserved": 3,
+      "artisanFamiliesSupported": 3
+    },
+    "supportedArtisans": [
+      {
+        "id": "3",
+        "name": "Sofía Ramírez",
+        "shopName": "Textiles Oaxaqueños",
+        "state": "Oaxaca",
+        "avatar": "https://i.pravatar.cc/150?img=47",
+        "specialty": "Tejido en telar de pedal",
+        "purchaseCount": 2,
+        "totalSpent": 2600,
+        "firstPurchase": "2024-03-10T00:00:00Z"
+      },
+      {
+        "id": "5",
+        "name": "Carmen López",
+        "shopName": "Talavera Colonial",
+        "state": "Puebla",
+        "specialty": "Cerámica Talavera",
+        "purchaseCount": 2,
+        "totalSpent": 4150,
+        "firstPurchase": "2024-04-05T00:00:00Z"
+      }
+    ],
+    "topCategories": [
+      { "category": "Cerámica", "count": 2, "percentage": 50 },
+      { "category": "Textiles", "count": 2, "percentage": 50 }
+    ],
+    "milestones": [
+      {
+        "id": "m1",
+        "title": "Primer Compra",
+        "description": "Comenzaste tu viaje apoyando artesanos",
+        "icon": "star",
+        "achieved": true,
+        "date": "2024-03-10T00:00:00Z"
+      },
+      {
+        "id": "m2",
+        "title": "5 Artesanos Apoyados",
+        "description": "Has comprado de 5 artesanos diferentes",
+        "icon": "users",
+        "achieved": false
+      }
+    ],
+    "recentPurchases": [
+      {
+        "id": "o3",
+        "productName": "Plato Talavera Grande",
+        "artisan": "Carmen López",
+        "date": "2024-10-28T00:00:00Z",
+        "amount": 2100,
+        "image": "https://images.unsplash.com/photo-1578749556568-bc2c40e32b7a?w=400"
+      }
+    ]
+  }
+}

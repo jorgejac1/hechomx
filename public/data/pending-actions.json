@@ -1,0 +1,93 @@
+{
+  "sofia@ejemplo.com": {
+    "pendingOrders": [
+      {
+        "id": "o1",
+        "customerName": "Laura Sánchez",
+        "total": 1300,
+        "status": "processing",
+        "daysWaiting": 2,
+        "urgent": false
+      }
+    ],
+    "lowStockProducts": [
+      {
+        "id": "p3",
+        "name": "Canasta Macramé",
+        "currentStock": 0,
+        "recommendedStock": 5,
+        "urgency": "critical"
+      },
+      {
+        "id": "p1",
+        "name": "Manta Tejida Artesanal",
+        "currentStock": 5,
+        "recommendedStock": 10,
+        "urgency": "medium"
+      }
+    ],
+    "unansweredMessages": 2,
+    "pendingReviews": [
+      {
+        "id": "r3",
+        "buyerName": "María Fernández",
+        "rating": 4,
+        "daysAgo": 18,
+        "needsResponse": true
+      }
+    ],
+    "upcomingPromotions": [],
+    "recommendedActions": [
+      {
+        "type": "restock",
+        "priority": "high",
+        "title": "Reabastecer productos agotados",
+        "description": "Canasta Macramé está agotada y tiene demanda"
+      },
+      {
+        "type": "respond",
+        "priority": "medium",
+        "title": "Responder reseña pendiente",
+        "description": "María Fernández dejó una reseña hace 18 días"
+      }
+    ]
+  },
+  "pedro@ejemplo.com": {
+    "pendingOrders": [
+      {
+        "id": "ao1",
+        "customerName": "Hotel Boutique Oaxaca",
+        "total": 5600,
+        "status": "processing",
+        "daysWaiting": 1,
+        "urgent": false
+      }
+    ],
+    "lowStockProducts": [
+      {
+        "id": "ap1",
+        "name": "Alebrije León Grande",
+        "currentStock": 3,
+        "recommendedStock": 8,
+        "urgency": "medium"
+      }
+    ],
+    "unansweredMessages": 0,
+    "pendingReviews": [],
+    "upcomingPromotions": [
+      {
+        "name": "Descuento Día de Muertos",
+        "discount": 15,
+        "startsIn": 3
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "promote",
+        "priority": "medium",
+        "title": "Promocionar productos estrella",
+        "description": "Alebrije Búho Mediano tiene alta demanda, considera crear una promoción"
+      }
+    ]
+  }
+}

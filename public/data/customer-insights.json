@@ -1,0 +1,99 @@
+{
+  "sofia@ejemplo.com": {
+    "repeatCustomers": [
+      {
+        "id": "c1",
+        "name": "Ana López",
+        "avatar": "https://i.pravatar.cc/150?img=5",
+        "totalPurchases": 3,
+        "totalSpent": 2450,
+        "lastPurchase": "2024-10-28",
+        "favoriteProducts": ["Manta Tejida Artesanal", "Cojín Tejido Geometrico"],
+        "lifetimeValue": "high"
+      },
+      {
+        "id": "c2",
+        "name": "Carlos Méndez",
+        "totalPurchases": 2,
+        "totalSpent": 1050,
+        "lastPurchase": "2024-10-25",
+        "favoriteProducts": ["Cojín Tejido Geometrico"],
+        "lifetimeValue": "medium"
+      }
+    ],
+    "topCustomers": [
+      {
+        "id": "c1",
+        "name": "Ana López",
+        "totalSpent": 2450,
+        "purchases": 3
+      },
+      {
+        "id": "c3",
+        "name": "Laura Sánchez",
+        "totalSpent": 1950,
+        "purchases": 3
+      },
+      {
+        "id": "c2",
+        "name": "Carlos Méndez",
+        "totalSpent": 1050,
+        "purchases": 2
+      }
+    ],
+    "purchasePatterns": {
+      "averageTimeBetweenPurchases": 45,
+      "mostCommonCombinations": [["Manta Tejida Artesanal", "Cojín Tejido Geometrico"]],
+      "seasonalTrends": [
+        { "season": "Invierno", "increase": 35 },
+        { "season": "Primavera", "increase": 15 }
+      ]
+    },
+    "upcomingBirthdays": []
+  },
+  "pedro@ejemplo.com": {
+    "repeatCustomers": [
+      {
+        "id": "pc1",
+        "name": "Hotel Boutique Oaxaca",
+        "totalPurchases": 5,
+        "totalSpent": 28000,
+        "lastPurchase": "2024-11-06",
+        "favoriteProducts": ["Alebrije León Grande"],
+        "lifetimeValue": "vip"
+      },
+      {
+        "id": "pc2",
+        "name": "Jennifer Smith",
+        "totalPurchases": 2,
+        "totalSpent": 5600,
+        "lastPurchase": "2024-11-01",
+        "favoriteProducts": ["Alebrije León Grande"],
+        "lifetimeValue": "high"
+      }
+    ],
+    "topCustomers": [
+      {
+        "id": "pc1",
+        "name": "Hotel Boutique Oaxaca",
+        "totalSpent": 28000,
+        "purchases": 5
+      },
+      {
+        "id": "pc2",
+        "name": "Jennifer Smith",
+        "totalSpent": 5600,
+        "purchases": 2
+      }
+    ],
+    "purchasePatterns": {
+      "averageTimeBetweenPurchases": 30,
+      "mostCommonCombinations": [["Alebrije León Grande", "Alebrije Búho Mediano"]],
+      "seasonalTrends": [
+        { "season": "Día de Muertos", "increase": 85 },
+        { "season": "Navidad", "increase": 65 }
+      ]
+    },
+    "upcomingBirthdays": []
+  }
+}

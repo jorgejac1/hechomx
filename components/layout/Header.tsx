@@ -9,7 +9,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Product } from '@/types';
 import { ROUTES } from '@/lib/constants/routes';
 import { SITE_NAME } from '@/config/site';
-import { User, LogOut, Heart, Package, ChevronDown } from 'lucide-react';
+import { User, LogOut, Heart, Package, ChevronDown, Sparkles } from 'lucide-react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -234,6 +234,14 @@ export default function Header() {
                             <Heart className="w-4 h-4" />
                             Favoritos
                           </Link>
+                          <Link
+                            href={ROUTES.MI_IMPACTO}
+                            onClick={() => setIsUserMenuOpen(false)}
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          >
+                            <Sparkles className="w-4 h-4" />
+                            Mi Impacto
+                          </Link>
                           <div className="border-t border-gray-200 my-2" />
                           <button
                             onClick={handleLogout}
@@ -434,6 +442,14 @@ export default function Header() {
                     >
                       <Heart className="w-5 h-5" />
                       Favoritos
+                    </Link>
+                    <Link
+                      href={ROUTES.MI_IMPACTO}
+                      className="flex items-center gap-3 text-gray-700 hover:text-primary-600 font-medium py-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Sparkles className="w-5 h-5" />
+                      Mi Impacto
                     </Link>
                     <button
                       onClick={handleLogout}

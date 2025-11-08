@@ -1,0 +1,153 @@
+{
+  "sofia@ejemplo.com": {
+    "revenue": {
+      "today": 1250,
+      "yesterday": 980,
+      "thisWeek": 5430,
+      "lastWeek": 4200,
+      "thisMonth": 18750,
+      "lastMonth": 15600,
+      "thisYear": 125000
+    },
+    "salesTrend": [
+      { "date": "2024-11-01", "sales": 2, "revenue": 1300 },
+      { "date": "2024-11-02", "sales": 3, "revenue": 1950 },
+      { "date": "2024-11-03", "sales": 1, "revenue": 650 },
+      { "date": "2024-11-04", "sales": 4, "revenue": 2600 },
+      { "date": "2024-11-05", "sales": 2, "revenue": 1300 },
+      { "date": "2024-11-06", "sales": 5, "revenue": 3250 },
+      { "date": "2024-11-07", "sales": 3, "revenue": 1950 }
+    ],
+    "topProducts": [
+      {
+        "id": "p2",
+        "name": "Cojín Tejido Geometrico",
+        "sales": 45,
+        "revenue": 15750,
+        "trend": "up"
+      },
+      {
+        "id": "p1",
+        "name": "Manta Tejida Artesanal",
+        "sales": 23,
+        "revenue": 14950,
+        "trend": "up"
+      },
+      {
+        "id": "p3",
+        "name": "Canasta Macramé",
+        "sales": 18,
+        "revenue": 5040,
+        "trend": "down"
+      }
+    ],
+    "trafficSources": [
+      { "source": "Búsqueda directa", "visits": 1234, "conversions": 45, "percentage": 42 },
+      { "source": "Instagram", "visits": 856, "conversions": 32, "percentage": 29 },
+      { "source": "Facebook", "visits": 523, "conversions": 18, "percentage": 18 },
+      { "source": "Google", "visits": 312, "conversions": 12, "percentage": 11 }
+    ],
+    "peakTimes": {
+      "bestDay": "Sábado",
+      "bestHour": "14:00 - 16:00",
+      "weekdayVsWeekend": {
+        "weekday": 45,
+        "weekend": 55
+      }
+    },
+    "customerDemographics": {
+      "topCities": [
+        { "city": "Ciudad de México", "percentage": 35 },
+        { "city": "Monterrey", "percentage": 18 },
+        { "city": "Guadalajara", "percentage": 15 },
+        { "city": "Puebla", "percentage": 12 },
+        { "city": "Otros", "percentage": 20 }
+      ],
+      "ageGroups": [
+        { "range": "25-34", "percentage": 42 },
+        { "range": "35-44", "percentage": 28 },
+        { "range": "45-54", "percentage": 18 },
+        { "range": "18-24", "percentage": 8 },
+        { "range": "55+", "percentage": 4 }
+      ]
+    },
+    "conversionRate": 3.8,
+    "averageOrderValue": 825,
+    "forecast": {
+      "nextMonth": 21500,
+      "confidence": "high"
+    }
+  },
+  "pedro@ejemplo.com": {
+    "revenue": {
+      "today": 5600,
+      "yesterday": 2800,
+      "thisWeek": 28000,
+      "lastWeek": 25200,
+      "thisMonth": 98000,
+      "lastMonth": 87500,
+      "thisYear": 680000
+    },
+    "salesTrend": [
+      { "date": "2024-11-01", "sales": 4, "revenue": 11200 },
+      { "date": "2024-11-02", "sales": 3, "revenue": 8400 },
+      { "date": "2024-11-03", "sales": 2, "revenue": 5600 },
+      { "date": "2024-11-04", "sales": 5, "revenue": 14000 },
+      { "date": "2024-11-05", "sales": 3, "revenue": 8400 },
+      { "date": "2024-11-06", "sales": 6, "revenue": 16800 },
+      { "date": "2024-11-07", "sales": 4, "revenue": 11200 }
+    ],
+    "topProducts": [
+      {
+        "id": "ap2",
+        "name": "Alebrije Búho Mediano",
+        "sales": 89,
+        "revenue": 106800,
+        "trend": "up"
+      },
+      {
+        "id": "ap1",
+        "name": "Alebrije León Grande",
+        "sales": 45,
+        "revenue": 126000,
+        "trend": "stable"
+      }
+    ],
+    "trafficSources": [
+      { "source": "Recomendaciones", "visits": 2341, "conversions": 187, "percentage": 38 },
+      { "source": "Instagram", "visits": 1856, "conversions": 145, "percentage": 30 },
+      { "source": "Búsqueda directa", "visits": 1234, "conversions": 98, "percentage": 20 },
+      { "source": "Google", "visits": 734, "conversions": 57, "percentage": 12 }
+    ],
+    "peakTimes": {
+      "bestDay": "Viernes",
+      "bestHour": "10:00 - 12:00",
+      "weekdayVsWeekend": {
+        "weekday": 60,
+        "weekend": 40
+      }
+    },
+    "customerDemographics": {
+      "topCities": [
+        { "city": "Oaxaca", "percentage": 25 },
+        { "city": "Ciudad de México", "percentage": 22 },
+        { "city": "USA (Internacional)", "percentage": 20 },
+        { "city": "Guadalajara", "percentage": 15 },
+        { "city": "Otros", "percentage": 18 }
+      ],
+      "ageGroups": [
+        { "range": "35-44", "percentage": 38 },
+        { "range": "45-54", "percentage": 32 },
+        { "range": "25-34", "percentage": 18 },
+        { "range": "55+", "percentage": 10 },
+        { "range": "18-24", "percentage": 2 }
+      ]
+    },
+    "conversionRate": 8.2,
+    "averageOrderValue": 2450,
+    "forecast": {
+      "nextMonth": 112000,
+      "confidence": "high"
+    }
+  }
+}

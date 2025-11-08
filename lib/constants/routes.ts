@@ -17,6 +17,8 @@ export const ROUTES = {
   REGISTER: '/registro',
   FORGOT_PASSWORD: '/recuperar-password',
   PROFILE: '/perfil',
+  MI_IMPACTO: '/mi-impacto',
+  DASHBOARD: '/dashboard',
   ORDERS: '/pedidos',
   WISHLIST: '/favoritos',
 } as const;
@@ -30,4 +32,5 @@ export const API_ROUTES = {
   REGISTER: '/api/auth/register',
   LOGOUT: '/api/auth/logout',
   PROFILE: '/api/auth/profile',
+  DASHBOARD: '/dashboard',
 } as const;

@@ -103,15 +103,46 @@ export default function LoginPage() {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-lg sm:rounded-xl sm:px-10">
           {/* Demo credentials info */}
+          {/* Demo credentials info */}
           <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-sm font-semibold text-blue-900 mb-2">🔐 Credenciales de prueba:</p>
-            <div className="text-xs text-blue-800 space-y-1">
-              <p>
-                <strong>Email:</strong> juan@ejemplo.com
-              </p>
-              <p>
-                <strong>Password:</strong> Password123
-              </p>
+            <div className="text-xs text-blue-800 space-y-2">
+              <div>
+                <p className="font-semibold">Usuario Regular:</p>
+                <p>
+                  <strong>Email:</strong> juan@ejemplo.com
+                </p>
+                <p>
+                  <strong>Password:</strong> Password123
+                </p>
+              </div>
+              <div className="border-t border-blue-300 pt-2">
+                <p className="font-semibold">Vendedor Individual:</p>
+                <p>
+                  <strong>Email:</strong> sofia@ejemplo.com
+                </p>
+                <p>
+                  <strong>Password:</strong> Password123
+                </p>
+              </div>
+              <div className="border-t border-blue-300 pt-2">
+                <p className="font-semibold">Artesano:</p>
+                <p>
+                  <strong>Email:</strong> pedro@ejemplo.com
+                </p>
+                <p>
+                  <strong>Password:</strong> Password123
+                </p>
+              </div>
+              <div className="border-t border-blue-300 pt-2">
+                <p className="font-semibold">Empresa:</p>
+                <p>
+                  <strong>Email:</strong> ventas@artesaniasdemexico.com
+                </p>
+                <p>
+                  <strong>Password:</strong> Password123
+                </p>
+              </div>
             </div>
           </div>
 

@@ -3,8 +3,14 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/lib/constants/routes';
+import {
+  ExtendedMakerProfile,
+  mockIndividualSeller,
+  mockArtisan,
+  mockCompany,
+} from '@/lib/data/mockUsers';
 
-// Mock user type
+// User type with extended maker profile
 export interface User {
   id: string;
   name: string;
@@ -12,9 +18,10 @@ export interface User {
   avatar?: string;
   phone?: string;
   createdAt: string;
+  makerProfile?: ExtendedMakerProfile;
 }
 
-// Mock users database
+// Mock users database (basic users + seller users)
 const MOCK_USERS: User[] = [
   {
     id: '1',
@@ -32,12 +39,19 @@ const MOCK_USERS: User[] = [
     phone: '+52 555 987 6543',
     createdAt: '2024-02-20T14:20:00Z',
   },
+  // Add seller users
+  mockIndividualSeller,
+  mockArtisan,
+  mockCompany,
 ];
 
 // Mock passwords (in real app, these would be hashed on backend)
 const MOCK_PASSWORDS: Record<string, string> = {
   'juan@ejemplo.com': 'Password123',
   'maria@ejemplo.com': 'Password123',
+  'sofia@ejemplo.com': 'Password123',
+  'pedro@ejemplo.com': 'Password123',
+  'ventas@artesaniasdemexico.com': 'Password123',
 };
 
 interface AuthContextType {
