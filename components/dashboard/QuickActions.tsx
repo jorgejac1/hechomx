@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { PendingActionsData, getPendingActions } from '@/lib/api/sellerApi';
-import { formatCurrency } from '@/lib';
+import { formatCurrency, ROUTES } from '@/lib';
 import {
   Package,
   AlertTriangle,
@@ -18,6 +19,7 @@ interface QuickActionsProps {
 }
 
 export default function QuickActions({ userEmail }: QuickActionsProps) {
+  const router = useRouter();
   const [data, setData] = useState<PendingActionsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -73,10 +75,13 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
       <div className="space-y-3">
         {/* Pending Orders */}
         {data.pendingOrders.length > 0 && (
-          <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500 hover:bg-blue-100 transition cursor-pointer">
+          <button
+            onClick={() => router.push(ROUTES.ORDERS_MANAGEMENT)}
+            className="w-full p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500 hover:bg-blue-100 transition text-left"
+          >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <Package className="w-5 h-5 text-blue-600 mt-0.5" />
+                <Package className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">
                     {data.pendingOrders.length} pedido{data.pendingOrders.length > 1 ? 's' : ''} por
@@ -88,17 +93,20 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-blue-600" />
+              <ArrowRight className="w-5 h-5 text-blue-600 flex-shrink-0" />
             </div>
-          </div>
+          </button>
         )}
 
         {/* Low Stock */}
         {data.lowStockProducts.filter((p) => p.urgency === 'critical').length > 0 && (
-          <div className="p-4 bg-red-50 rounded-lg border-l-4 border-red-500 hover:bg-red-100 transition cursor-pointer">
+          <button
+            onClick={() => router.push(`${ROUTES.DASHBOARD}?tab=products`)}
+            className="w-full p-4 bg-red-50 rounded-lg border-l-4 border-red-500 hover:bg-red-100 transition text-left"
+          >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <AlertTriangle className="w-5 h-5 text-red-600 mt-0.5" />
+                <AlertTriangle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">Productos sin stock</p>
                   <p className="text-sm text-gray-600">
@@ -106,17 +114,20 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-red-600" />
+              <ArrowRight className="w-5 h-5 text-red-600 flex-shrink-0" />
             </div>
-          </div>
+          </button>
         )}
 
         {/* Unanswered Messages */}
         {data.unansweredMessages > 0 && (
-          <div className="p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500 hover:bg-yellow-100 transition cursor-pointer">
+          <button
+            onClick={() => router.push(ROUTES.MESSAGES)}
+            className="w-full p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500 hover:bg-yellow-100 transition text-left"
+          >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <MessageSquare className="w-5 h-5 text-yellow-600 mt-0.5" />
+                <MessageSquare className="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">
                     {data.unansweredMessages} mensaje{data.unansweredMessages > 1 ? 's' : ''} sin
@@ -127,17 +138,20 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-yellow-600" />
+              <ArrowRight className="w-5 h-5 text-yellow-600 flex-shrink-0" />
             </div>
-          </div>
+          </button>
         )}
 
         {/* Pending Reviews */}
         {data.pendingReviews.filter((r) => r.needsResponse).length > 0 && (
-          <div className="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500 hover:bg-purple-100 transition cursor-pointer">
+          <button
+            onClick={() => router.push(ROUTES.REVIEWS_MANAGEMENT)}
+            className="w-full p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500 hover:bg-purple-100 transition text-left"
+          >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <Star className="w-5 h-5 text-purple-600 mt-0.5" />
+                <Star className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">
                     {data.pendingReviews.filter((r) => r.needsResponse).length} reseña
@@ -149,25 +163,28 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-purple-600" />
+              <ArrowRight className="w-5 h-5 text-purple-600 flex-shrink-0" />
             </div>
-          </div>
+          </button>
         )}
 
         {/* Recommended Actions */}
         {urgentActions.length > 0 && (
-          <div className="p-4 bg-green-50 rounded-lg border-l-4 border-green-500 hover:bg-green-100 transition cursor-pointer">
+          <button
+            onClick={() => router.push(ROUTES.ORDERS_MANAGEMENT)}
+            className="w-full p-4 bg-green-50 rounded-lg border-l-4 border-green-500 hover:bg-green-100 transition text-left"
+          >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <TrendingUp className="w-5 h-5 text-green-600 mt-0.5" />
+                <TrendingUp className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">{urgentActions[0].title}</p>
                   <p className="text-sm text-gray-600">{urgentActions[0].description}</p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-green-600" />
+              <ArrowRight className="w-5 h-5 text-green-600 flex-shrink-0" />
             </div>
-          </div>
+          </button>
         )}
 
         {/* All Clear */}

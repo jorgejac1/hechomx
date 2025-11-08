@@ -19,6 +19,16 @@
         "lastPurchase": "2024-10-25",
         "favoriteProducts": ["Cojín Tejido Geometrico"],
         "lifetimeValue": "medium"
+      },
+      {
+        "id": "c3",
+        "name": "Laura Sánchez",
+        "avatar": "https://i.pravatar.cc/150?img=9",
+        "totalPurchases": 3,
+        "totalSpent": 1950,
+        "lastPurchase": "2024-11-02",
+        "favoriteProducts": ["Manta Tejida Artesanal"],
+        "lifetimeValue": "high"
       }
     ],
     "topCustomers": [
@@ -43,13 +53,24 @@
     ],
     "purchasePatterns": {
       "averageTimeBetweenPurchases": 45,
-      "mostCommonCombinations": [["Manta Tejida Artesanal", "Cojín Tejido Geometrico"]],
+      "mostCommonCombinations": [
+        ["Manta Tejida Artesanal", "Cojín Tejido Geometrico"],
+        ["Canasta Macramé", "Cojín Tejido Geometrico"]
+      ],
       "seasonalTrends": [
         { "season": "Invierno", "increase": 35 },
-        { "season": "Primavera", "increase": 15 }
+        { "season": "Primavera", "increase": 15 },
+        { "season": "Día de las Madres", "increase": 45 }
       ]
     },
-    "upcomingBirthdays": []
+    "upcomingBirthdays": [
+      {
+        "id": "c1",
+        "name": "Ana López",
+        "date": "2024-11-15",
+        "daysUntil": 8
+      }
+    ]
   },
   "pedro@ejemplo.com": {
     "repeatCustomers": [
@@ -65,11 +86,21 @@
       {
         "id": "pc2",
         "name": "Jennifer Smith",
+        "avatar": "https://i.pravatar.cc/150?img=20",
         "totalPurchases": 2,
         "totalSpent": 5600,
         "lastPurchase": "2024-11-01",
         "favoriteProducts": ["Alebrije León Grande"],
         "lifetimeValue": "high"
+      },
+      {
+        "id": "pc3",
+        "name": "Galería Arte Moderno",
+        "totalPurchases": 4,
+        "totalSpent": 12000,
+        "lastPurchase": "2024-10-20",
+        "favoriteProducts": ["Alebrije Dragón", "Alebrije Búho Mediano"],
+        "lifetimeValue": "vip"
       }
     ],
     "topCustomers": [
@@ -80,6 +111,12 @@
         "purchases": 5
       },
       {
+        "id": "pc3",
+        "name": "Galería Arte Moderno",
+        "totalSpent": 12000,
+        "purchases": 4
+      },
+      {
         "id": "pc2",
         "name": "Jennifer Smith",
         "totalSpent": 5600,
@@ -88,10 +125,87 @@
     ],
     "purchasePatterns": {
       "averageTimeBetweenPurchases": 30,
-      "mostCommonCombinations": [["Alebrije León Grande", "Alebrije Búho Mediano"]],
+      "mostCommonCombinations": [
+        ["Alebrije León Grande", "Alebrije Búho Mediano"],
+        ["Alebrije Dragón", "Alebrije Búho Mediano"]
+      ],
       "seasonalTrends": [
         { "season": "Día de Muertos", "increase": 85 },
-        { "season": "Navidad", "increase": 65 }
+        { "season": "Navidad", "increase": 65 },
+        { "season": "Verano (turismo)", "increase": 55 }
+      ]
+    },
+    "upcomingBirthdays": []
+  },
+  "ventas@artesaniasdemexico.com": {
+    "repeatCustomers": [
+      {
+        "id": "cc1",
+        "name": "Corporativo Santander",
+        "totalPurchases": 12,
+        "totalSpent": 156000,
+        "lastPurchase": "2024-11-05",
+        "favoriteProducts": ["Set Talavera Premium (6 piezas)", "Pack Artesanías Variadas"],
+        "lifetimeValue": "vip"
+      },
+      {
+        "id": "cc2",
+        "name": "Hotel Grand Fiesta Americana",
+        "totalPurchases": 8,
+        "totalSpent": 98000,
+        "lastPurchase": "2024-10-28",
+        "favoriteProducts": ["Colección Textiles Chiapanecos"],
+        "lifetimeValue": "vip"
+      },
+      {
+        "id": "cc3",
+        "name": "Embajada de México (España)",
+        "totalPurchases": 6,
+        "totalSpent": 75000,
+        "lastPurchase": "2024-10-15",
+        "favoriteProducts": ["Set Talavera Premium (6 piezas)"],
+        "lifetimeValue": "vip"
+      },
+      {
+        "id": "cc4",
+        "name": "Restaurante Pujol",
+        "totalPurchases": 10,
+        "totalSpent": 120000,
+        "lastPurchase": "2024-11-02",
+        "favoriteProducts": ["Set Talavera Premium (6 piezas)", "Colección Textiles Chiapanecos"],
+        "lifetimeValue": "vip"
+      }
+    ],
+    "topCustomers": [
+      {
+        "id": "cc1",
+        "name": "Corporativo Santander",
+        "totalSpent": 156000,
+        "purchases": 12
+      },
+      {
+        "id": "cc4",
+        "name": "Restaurante Pujol",
+        "totalSpent": 120000,
+        "purchases": 10
+      },
+      {
+        "id": "cc2",
+        "name": "Hotel Grand Fiesta Americana",
+        "totalSpent": 98000,
+        "purchases": 8
+      }
+    ],
+    "purchasePatterns": {
+      "averageTimeBetweenPurchases": 25,
+      "mostCommonCombinations": [
+        ["Set Talavera Premium (6 piezas)", "Pack Artesanías Variadas"],
+        ["Colección Textiles Chiapanecos", "Pack Artesanías Variadas"]
+      ],
+      "seasonalTrends": [
+        { "season": "Fin de Año Corporativo", "increase": 120 },
+        { "season": "Eventos Empresariales", "increase": 85 },
+        { "season": "Festividades Patrias", "increase": 95 }
       ]
     },
     "upcomingBirthdays": []

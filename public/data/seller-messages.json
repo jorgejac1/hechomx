@@ -1,0 +1,114 @@
+{
+  "sofia@ejemplo.com": [
+    {
+      "id": "msg1",
+      "from": {
+        "id": "c1",
+        "name": "Ana López",
+        "avatar": "https://i.pravatar.cc/150?img=5"
+      },
+      "subject": "Consulta sobre tiempos de entrega",
+      "message": "Hola, estoy interesada en la Manta Tejida Artesanal. ¿Cuánto tiempo tarda el envío a Monterrey?",
+      "date": "2024-11-06T14:30:00Z",
+      "status": "unread",
+      "orderId": null
+    },
+    {
+      "id": "msg2",
+      "from": {
+        "id": "c2",
+        "name": "Carlos Méndez"
+      },
+      "subject": "Pedido #ORD-2024-123",
+      "message": "Me gustaría saber si pueden personalizar el bordado del cojín con iniciales.",
+      "date": "2024-11-05T10:15:00Z",
+      "status": "unread",
+      "orderId": "ORD-2024-123"
+    }
+  ],
+  "pedro@ejemplo.com": [
+    {
+      "id": "msg3",
+      "from": {
+        "id": "pc1",
+        "name": "Hotel Boutique Oaxaca",
+        "avatar": "https://i.pravatar.cc/150?img=15"
+      },
+      "subject": "Pedido corporativo - Urgente",
+      "message": "Buenos días Pedro, necesitamos confirmar la fecha de entrega para el pedido de 5 alebrijes. Es para un evento el próximo viernes.",
+      "date": "2024-11-07T09:00:00Z",
+      "status": "read",
+      "orderId": "ao1",
+      "replies": [
+        {
+          "from": "seller",
+          "message": "Buenos días, el pedido estará listo para envío mañana. Llegará el jueves.",
+          "date": "2024-11-07T10:30:00Z"
+        }
+      ]
+    }
+  ],
+  "ventas@artesaniasdemexico.com": [
+    {
+      "id": "msg4",
+      "from": {
+        "id": "cc1",
+        "name": "Corporativo Santander",
+        "avatar": "https://i.pravatar.cc/150?img=25"
+      },
+      "subject": "Facturación - Pedido #co1",
+      "message": "Buen día, necesitamos que nos envíen la factura del pedido #co1 a la brevedad posible.",
+      "date": "2024-11-06T16:45:00Z",
+      "status": "unread",
+      "orderId": "co1"
+    },
+    {
+      "id": "msg5",
+      "from": {
+        "id": "cc4",
+        "name": "Restaurante Pujol"
+      },
+      "subject": "Consulta sobre productos personalizados",
+      "message": "Nos interesa hacer un pedido de 50 sets de Talavera con el logo del restaurante. ¿Es posible?",
+      "date": "2024-11-05T11:20:00Z",
+      "status": "unread",
+      "orderId": null
+    },
+    {
+      "id": "msg6",
+      "from": {
+        "id": "cc2",
+        "name": "Hotel Grand Fiesta Americana"
+      },
+      "subject": "Seguimiento de pedido",
+      "message": "Hola, ¿pueden confirmar el número de rastreo del pedido #co3? Necesitamos verificar la entrega.",
+      "date": "2024-11-04T14:00:00Z",
+      "status": "unread",
+      "orderId": "co3"
+    },
+    {
+      "id": "msg7",
+      "from": {
+        "id": "cc5",
+        "name": "Embajada de México (España)"
+      },
+      "subject": "Nueva orden - Evento diplomático",
+      "message": "Estimados, queremos realizar un pedido para un evento diplomático. ¿Pueden enviarnos catálogo actualizado?",
+      "date": "2024-11-03T09:30:00Z",
+      "status": "unread",
+      "orderId": null
+    },
+    {
+      "id": "msg8",
+      "from": {
+        "id": "cc6",
+        "name": "BBVA Bancomer"
+      },
+      "subject": "Cotización para regalo corporativo",
+      "message": "Buenos días, necesitamos cotización para 200 piezas artesanales como regalo de fin de año para empleados.",
+      "date": "2024-11-02T15:00:00Z",
+      "status": "unread",
+      "orderId": null
+    }
+  ]
+}

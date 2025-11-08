@@ -156,16 +156,19 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
             <BarChart3 className="w-4 h-4" />
             Tendencia de Ventas (Últimos 7 días)
           </h4>
-          <div className="flex items-end justify-between h-32 gap-2">
+          <div className="flex items-end justify-between gap-2" style={{ height: '128px' }}>
             {data.salesTrend.map((day, index) => {
               const maxRevenue = Math.max(...data.salesTrend.map((d) => Number(d.revenue)));
-              const height = maxRevenue > 0 ? (Number(day.revenue) / maxRevenue) * 100 : 0;
+              const heightPercentage =
+                maxRevenue > 0 ? (Number(day.revenue) / maxRevenue) * 100 : 0;
+              const heightPx = Math.max((heightPercentage / 100) * 128, 12); // Convert to pixels with min 12px
+
               return (
                 <div key={index} className="flex-1 flex flex-col items-center gap-2">
-                  <div className="relative w-full group">
+                  <div className="relative w-full group flex items-end" style={{ height: '128px' }}>
                     <div
                       className="w-full bg-gradient-to-t from-primary-600 to-primary-400 rounded-t-lg transition-all hover:from-primary-700 hover:to-primary-500 cursor-pointer"
-                      style={{ height: `${height}%`, minHeight: '8px' }}
+                      style={{ height: `${heightPx}px` }}
                     />
                     {/* Tooltip */}
                     <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">

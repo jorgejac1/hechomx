@@ -36,7 +36,13 @@
         "needsResponse": true
       }
     ],
-    "upcomingPromotions": [],
+    "upcomingPromotions": [
+      {
+        "name": "Descuento Día de las Madres",
+        "discount": 20,
+        "startsIn": 5
+      }
+    ],
     "recommendedActions": [
       {
         "type": "restock",
@@ -60,6 +66,14 @@
         "total": 5600,
         "status": "processing",
         "daysWaiting": 1,
+        "urgent": false
+      },
+      {
+        "id": "ao2",
+        "customerName": "Galería Arte Moderno",
+        "total": 2500,
+        "status": "confirmed",
+        "daysWaiting": 0,
         "urgent": false
       }
     ],
@@ -87,6 +101,99 @@
         "priority": "medium",
         "title": "Promocionar productos estrella",
         "description": "Alebrije Búho Mediano tiene alta demanda, considera crear una promoción"
+      }
+    ]
+  },
+  "ventas@artesaniasdemexico.com": {
+    "pendingOrders": [
+      {
+        "id": "co1",
+        "customerName": "Corporativo Santander",
+        "total": 45000,
+        "status": "processing",
+        "daysWaiting": 1,
+        "urgent": true
+      },
+      {
+        "id": "co2",
+        "customerName": "Restaurante Pujol",
+        "total": 12000,
+        "status": "confirmed",
+        "daysWaiting": 0,
+        "urgent": false
+      },
+      {
+        "id": "co3",
+        "customerName": "Hotel Grand Fiesta",
+        "total": 28000,
+        "status": "processing",
+        "daysWaiting": 3,
+        "urgent": true
+      }
+    ],
+    "lowStockProducts": [
+      {
+        "id": "comp1",
+        "name": "Set Talavera Premium (6 piezas)",
+        "currentStock": 8,
+        "recommendedStock": 20,
+        "urgency": "high"
+      },
+      {
+        "id": "comp2",
+        "name": "Colección Textiles Chiapanecos",
+        "currentStock": 12,
+        "recommendedStock": 25,
+        "urgency": "medium"
+      }
+    ],
+    "unansweredMessages": 5,
+    "pendingReviews": [
+      {
+        "id": "cr1",
+        "buyerName": "Corporativo Santander",
+        "rating": 5,
+        "daysAgo": 5,
+        "needsResponse": true
+      },
+      {
+        "id": "cr2",
+        "buyerName": "Hotel Grand Fiesta",
+        "rating": 4,
+        "daysAgo": 12,
+        "needsResponse": true
+      }
+    ],
+    "upcomingPromotions": [
+      {
+        "name": "Descuento Corporativo Black Friday",
+        "discount": 25,
+        "startsIn": 10
+      },
+      {
+        "name": "Promoción Fin de Año",
+        "discount": 30,
+        "startsIn": 45
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "urgent",
+        "priority": "critical",
+        "title": "Pedidos corporativos urgentes",
+        "description": "2 pedidos esperan más de 2 días - contactar clientes"
+      },
+      {
+        "type": "restock",
+        "priority": "high",
+        "title": "Reabastecer inventario premium",
+        "description": "Productos de alta rotación necesitan reabastecimiento"
+      },
+      {
+        "type": "respond",
+        "priority": "medium",
+        "title": "Responder reseñas corporativas",
+        "description": "2 clientes corporativos esperan respuesta"
       }
     ]
   }

@@ -306,3 +306,123 @@ export async function getBuyerOrders(userEmail: string): Promise<BuyerOrder[]> {
     return [];
   }
 }
+export interface SellerMessage {
+  id: string;
+  from: {
+    id: string;
+    name: string;
+    avatar?: string;
+  };
+  subject: string;
+  message: string;
+  date: string;
+  status: 'read' | 'unread';
+  orderId?: string | null;
+  replies?: Array<{
+    from: 'seller' | 'customer';
+    message: string;
+    date: string;
+  }>;
+}
+
+export async function getSellerMessages(userEmail: string): Promise<SellerMessage[]> {
+  try {
+    const response = await fetch('/data/seller-messages.json');
+    const data = await response.json();
+    return data[userEmail] || [];
+  } catch (error) {
+    console.error('Error loading seller messages:', error);
+    return [];
+  }
+}
+
+export interface SellerReview {
+  id: string;
+  buyer: {
+    id: string;
+    name: string;
+    avatar?: string;
+    verified: boolean;
+  };
+  product: {
+    id: string;
+    name: string;
+    image: string;
+  };
+  rating: number;
+  date: string;
+  review: string;
+  images?: string[];
+  helpful: number;
+  status: 'pending' | 'responded';
+  response?: {
+    text: string;
+    date: string;
+  };
+  daysAgo?: number;
+}
+
+export async function getSellerReviews(userEmail: string): Promise<SellerReview[]> {
+  try {
+    const response = await fetch('/data/seller-reviews.json');
+    const data = await response.json();
+    return data[userEmail] || [];
+  } catch (error) {
+    console.error('Error loading seller reviews:', error);
+    return [];
+  }
+}
+export interface SellerOrder {
+  id: string;
+  orderNumber: string;
+  customer: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+    avatar?: string;
+  };
+  status: 'processing' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
+  paymentStatus: 'pending' | 'paid' | 'refunded';
+  date: string;
+  total: number;
+  tracking?: string;
+  carrier?: string;
+  estimatedDelivery?: string;
+  actualDelivery?: string;
+  items: Array<{
+    id: string;
+    name: string;
+    image: string;
+    price: number;
+    quantity: number;
+    sku: string;
+  }>;
+  shippingAddress: {
+    name: string;
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country?: string;
+    phone: string;
+  };
+  timeline: Array<{
+    status: string;
+    date: string;
+    description: string;
+  }>;
+  notes?: string;
+  urgent: boolean;
+}
+
+export async function getSellerOrders(userEmail: string): Promise<SellerOrder[]> {
+  try {
+    const response = await fetch('/data/seller-orders.json');
+    const data = await response.json();
+    return data[userEmail] || [];
+  } catch (error) {
+    console.error('Error loading seller orders:', error);
+    return [];
+  }
+}

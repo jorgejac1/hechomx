@@ -21,6 +21,10 @@ export const ROUTES = {
   DASHBOARD: '/dashboard',
   ORDERS: '/pedidos',
   WISHLIST: '/favoritos',
+
+  MESSAGES: '/mensajes',
+  REVIEWS_MANAGEMENT: '/resenas-gestion',
+  ORDERS_MANAGEMENT: '/pedidos-gestion',
 } as const;
 
 export const API_ROUTES = {

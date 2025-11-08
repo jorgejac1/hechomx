@@ -43,6 +43,16 @@
         "purchaseCount": 1,
         "totalSpent": 850,
         "firstPurchase": "2024-04-20T00:00:00Z"
+      },
+      {
+        "id": "6",
+        "name": "Ana García",
+        "shopName": "Bordados Chiapanecos",
+        "state": "Chiapas",
+        "specialty": "Bordado tradicional",
+        "purchaseCount": 2,
+        "totalSpent": 1200,
+        "firstPurchase": "2024-05-10T00:00:00Z"
       }
     ],
     "topCategories": [
@@ -65,7 +75,7 @@
         "description": "Has comprado de 5 artesanos diferentes",
         "icon": "users",
         "achieved": true,
-        "date": "2024-04-20T00:00:00Z"
+        "date": "2024-05-10T00:00:00Z"
       },
       {
         "id": "m3",
@@ -73,13 +83,20 @@
         "description": "Has comprado de 3 estados diferentes",
         "icon": "map",
         "achieved": true,
-        "date": "2024-04-20T00:00:00Z"
+        "date": "2024-05-10T00:00:00Z"
       },
       {
         "id": "m4",
-        "title": "10 Artesanos Apoyados",
-        "description": "Compra de 10 artesanos diferentes",
+        "title": "Cliente Frecuente",
+        "description": "Realiza 10 compras",
         "icon": "award",
+        "achieved": false
+      },
+      {
+        "id": "m5",
+        "title": "Embajador Cultural",
+        "description": "Apoya 10 artesanos diferentes",
+        "icon": "heart",
         "achieved": false
       }
     ],
@@ -155,6 +172,13 @@
         "title": "5 Artesanos Apoyados",
         "description": "Has comprado de 5 artesanos diferentes",
         "icon": "users",
+        "achieved": false
+      },
+      {
+        "id": "m3",
+        "title": "Explorador de Estados",
+        "description": "Has comprado de 3 estados diferentes",
+        "icon": "map",
         "achieved": false
       }
     ],

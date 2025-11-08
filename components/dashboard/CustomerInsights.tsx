@@ -228,20 +228,24 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
             Tendencias Estacionales
           </h3>
           <div className="space-y-4">
-            {data.purchasePatterns.seasonalTrends.map((trend, index) => (
-              <div key={index}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold text-gray-900">{trend.season}</span>
-                  <span className="text-sm font-bold text-green-600">+{trend.increase}%</span>
+            {data.purchasePatterns.seasonalTrends.map((trend, index) => {
+              const displayWidth = Math.min(trend.increase, 100);
+
+              return (
+                <div key={index}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-semibold text-gray-900">{trend.season}</span>
+                    <span className="text-sm font-bold text-green-600">+{trend.increase}%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                    <div
+                      className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all"
+                      style={{ width: `${displayWidth}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
-                  <div
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all"
-                    style={{ width: `${trend.increase}%` }}
-                  />
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-4 p-4 bg-purple-50 rounded-lg border border-purple-200">

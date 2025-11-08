@@ -111,6 +111,13 @@
         "sales": 45,
         "revenue": 126000,
         "trend": "stable"
+      },
+      {
+        "id": "ap3",
+        "name": "Alebrije Dragón",
+        "sales": 34,
+        "revenue": 85000,
+        "trend": "up"
       }
     ],
     "trafficSources": [
@@ -147,6 +154,85 @@
     "averageOrderValue": 2450,
     "forecast": {
       "nextMonth": 112000,
+      "confidence": "high"
+    }
+  },
+  "ventas@artesaniasdemexico.com": {
+    "revenue": {
+      "today": 12500,
+      "yesterday": 9800,
+      "thisWeek": 67000,
+      "lastWeek": 58000,
+      "thisMonth": 245000,
+      "lastMonth": 210000,
+      "thisYear": 1850000
+    },
+    "salesTrend": [
+      { "date": "2024-11-01", "sales": 12, "revenue": 24500 },
+      { "date": "2024-11-02", "sales": 15, "revenue": 32000 },
+      { "date": "2024-11-03", "sales": 8, "revenue": 18500 },
+      { "date": "2024-11-04", "sales": 18, "revenue": 38000 },
+      { "date": "2024-11-05", "sales": 10, "revenue": 21000 },
+      { "date": "2024-11-06", "sales": 22, "revenue": 45000 },
+      { "date": "2024-11-07", "sales": 14, "revenue": 28000 }
+    ],
+    "topProducts": [
+      {
+        "id": "comp1",
+        "name": "Set Talavera Premium (6 piezas)",
+        "sales": 156,
+        "revenue": 468000,
+        "trend": "up"
+      },
+      {
+        "id": "comp2",
+        "name": "Colección Textiles Chiapanecos",
+        "sales": 98,
+        "revenue": 392000,
+        "trend": "up"
+      },
+      {
+        "id": "comp3",
+        "name": "Pack Artesanías Variadas",
+        "sales": 87,
+        "revenue": 261000,
+        "trend": "stable"
+      }
+    ],
+    "trafficSources": [
+      { "source": "Corporativo/B2B", "visits": 4523, "conversions": 412, "percentage": 45 },
+      { "source": "Google Ads", "visits": 3241, "conversions": 298, "percentage": 28 },
+      { "source": "LinkedIn", "visits": 1856, "conversions": 165, "percentage": 18 },
+      { "source": "Búsqueda directa", "visits": 945, "conversions": 89, "percentage": 9 }
+    ],
+    "peakTimes": {
+      "bestDay": "Martes",
+      "bestHour": "09:00 - 11:00",
+      "weekdayVsWeekend": {
+        "weekday": 85,
+        "weekend": 15
+      }
+    },
+    "customerDemographics": {
+      "topCities": [
+        { "city": "Ciudad de México", "percentage": 45 },
+        { "city": "Monterrey", "percentage": 25 },
+        { "city": "Guadalajara", "percentage": 15 },
+        { "city": "Querétaro", "percentage": 8 },
+        { "city": "Otros", "percentage": 7 }
+      ],
+      "ageGroups": [
+        { "range": "35-44", "percentage": 45 },
+        { "range": "45-54", "percentage": 35 },
+        { "range": "25-34", "percentage": 15 },
+        { "range": "55+", "percentage": 5 },
+        { "range": "18-24", "percentage": 0 }
+      ]
+    },
+    "conversionRate": 9.5,
+    "averageOrderValue": 3200,
+    "forecast": {
+      "nextMonth": 280000,
       "confidence": "high"
     }
   }
