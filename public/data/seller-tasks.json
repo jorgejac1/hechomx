@@ -1,0 +1,314 @@
+{
+  "sofia@ejemplo.com": [
+    {
+      "id": "task-1",
+      "type": "order",
+      "priority": "high",
+      "title": "Procesar pedido urgente",
+      "description": "Pedido de Ana López esperando confirmación",
+      "dueDate": "2024-11-08T23:59:59Z",
+      "status": "pending",
+      "actionUrl": "/pedidos-gestion",
+      "relatedId": "SO-2024-001",
+      "relatedData": {
+        "customerName": "Ana López",
+        "orderNumber": "ORD-2024-087",
+        "amount": 1300
+      },
+      "createdAt": "2024-11-06T10:30:00Z"
+    },
+    {
+      "id": "task-2",
+      "type": "message",
+      "priority": "medium",
+      "title": "Responder mensaje de Carlos Méndez",
+      "description": "Consulta sobre personalización de producto",
+      "dueDate": "2024-11-09T23:59:59Z",
+      "status": "pending",
+      "actionUrl": "/mensajes",
+      "relatedId": "msg2",
+      "createdAt": "2024-11-05T10:15:00Z"
+    },
+    {
+      "id": "task-3",
+      "type": "review",
+      "priority": "medium",
+      "title": "Responder reseña de cliente",
+      "description": "Reseña de 4 estrellas de Carlos Méndez hace 18 días",
+      "status": "pending",
+      "actionUrl": "/resenas-gestion",
+      "relatedId": "r2",
+      "relatedData": {
+        "buyerName": "Carlos Méndez",
+        "rating": 4,
+        "daysAgo": 18
+      },
+      "createdAt": "2024-10-20T14:15:00Z"
+    },
+    {
+      "id": "task-4",
+      "type": "inventory",
+      "priority": "critical",
+      "title": "Reabastecer producto agotado",
+      "description": "Canasta Macramé está agotada y tiene demanda",
+      "status": "pending",
+      "actionUrl": "/dashboard?tab=products",
+      "relatedId": "p3",
+      "relatedData": {
+        "productName": "Canasta Macramé",
+        "currentStock": 0,
+        "recommendedStock": 5
+      },
+      "createdAt": "2024-11-05T00:00:00Z"
+    },
+    {
+      "id": "task-5",
+      "type": "inventory",
+      "priority": "medium",
+      "title": "Stock bajo en Manta Tejida",
+      "description": "Solo quedan 5 unidades, se recomienda reabastecer",
+      "status": "pending",
+      "actionUrl": "/dashboard?tab=products",
+      "relatedId": "p1",
+      "relatedData": {
+        "productName": "Manta Tejida Artesanal",
+        "currentStock": 5,
+        "recommendedStock": 10
+      },
+      "createdAt": "2024-11-04T00:00:00Z"
+    },
+    {
+      "id": "task-6",
+      "type": "promotion",
+      "priority": "low",
+      "title": "Preparar promoción Día de las Madres",
+      "description": "Descuento del 20% comienza en 5 días",
+      "dueDate": "2024-11-13T00:00:00Z",
+      "status": "pending",
+      "actionUrl": "/dashboard",
+      "relatedData": {
+        "promotionName": "Descuento Día de las Madres",
+        "discount": 20,
+        "startsIn": 5
+      },
+      "createdAt": "2024-11-03T00:00:00Z"
+    }
+  ],
+  "pedro@ejemplo.com": [
+    {
+      "id": "task-7",
+      "type": "order",
+      "priority": "critical",
+      "title": "Pedido urgente - Hotel Boutique Oaxaca",
+      "description": "Cliente VIP solicita entrega para evento el viernes",
+      "dueDate": "2024-11-08T23:59:59Z",
+      "status": "pending",
+      "actionUrl": "/pedidos-gestion",
+      "relatedId": "PO-2024-001",
+      "relatedData": {
+        "customerName": "Hotel Boutique Oaxaca",
+        "orderNumber": "ORD-2024-092",
+        "amount": 5600,
+        "urgent": true
+      },
+      "createdAt": "2024-11-07T09:00:00Z"
+    },
+    {
+      "id": "task-8",
+      "type": "order",
+      "priority": "high",
+      "title": "Confirmar envío internacional",
+      "description": "Pedido de Jennifer Smith requiere documentación",
+      "status": "pending",
+      "actionUrl": "/pedidos-gestion",
+      "relatedId": "PO-2024-002",
+      "relatedData": {
+        "customerName": "Jennifer Smith",
+        "orderNumber": "ORD-2024-085",
+        "amount": 2800
+      },
+      "createdAt": "2024-11-05T11:30:00Z"
+    },
+    {
+      "id": "task-9",
+      "type": "inventory",
+      "priority": "medium",
+      "title": "Stock bajo en Alebrije León Grande",
+      "description": "Solo quedan 3 unidades de producto popular",
+      "status": "pending",
+      "actionUrl": "/dashboard?tab=products",
+      "relatedId": "ap1",
+      "relatedData": {
+        "productName": "Alebrije León Grande",
+        "currentStock": 3,
+        "recommendedStock": 8
+      },
+      "createdAt": "2024-11-06T00:00:00Z"
+    },
+    {
+      "id": "task-10",
+      "type": "promotion",
+      "priority": "medium",
+      "title": "Promoción Día de Muertos",
+      "description": "Descuento del 15% comienza en 3 días",
+      "dueDate": "2024-11-11T00:00:00Z",
+      "status": "pending",
+      "actionUrl": "/dashboard",
+      "relatedData": {
+        "promotionName": "Descuento Día de Muertos",
+        "discount": 15,
+        "startsIn": 3
+      },
+      "createdAt": "2024-11-05T00:00:00Z"
+    }
+  ],
+  "ventas@artesaniasdemexico.com": [
+    {
+      "id": "task-11",
+      "type": "order",
+      "priority": "critical",
+      "title": "Pedido corporativo urgente - Santander",
+      "description": "Requiere factura antes del envío. Esperando 1 día",
+      "dueDate": "2024-11-08T23:59:59Z",
+      "status": "pending",
+      "actionUrl": "/pedidos-gestion",
+      "relatedId": "CO-2024-001",
+      "relatedData": {
+        "customerName": "Corporativo Santander",
+        "orderNumber": "ORD-2024-095",
+        "amount": 45000,
+        "urgent": true,
+        "daysWaiting": 1
+      },
+      "createdAt": "2024-11-06T08:00:00Z"
+    },
+    {
+      "id": "task-12",
+      "type": "order",
+      "priority": "critical",
+      "title": "Seguimiento urgente - Hotel Grand Fiesta",
+      "description": "Cliente solicita número de rastreo. Esperando 3 días",
+      "dueDate": "2024-11-08T23:59:59Z",
+      "status": "pending",
+      "actionUrl": "/pedidos-gestion",
+      "relatedId": "CO-2024-003",
+      "relatedData": {
+        "customerName": "Hotel Grand Fiesta Americana",
+        "orderNumber": "ORD-2024-082",
+        "amount": 28000,
+        "urgent": true,
+        "daysWaiting": 3
+      },
+      "createdAt": "2024-11-02T14:00:00Z"
+    },
+    {
+      "id": "task-13",
+      "type": "message",
+      "priority": "high",
+      "title": "5 mensajes corporativos sin responder",
+      "description": "Clientes esperando respuesta sobre cotizaciones y pedidos",
+      "status": "pending",
+      "actionUrl": "/mensajes",
+      "relatedData": {
+        "messageCount": 5
+      },
+      "createdAt": "2024-11-02T15:00:00Z"
+    },
+    {
+      "id": "task-14",
+      "type": "review",
+      "priority": "high",
+      "title": "Responder reseña - Corporativo Santander",
+      "description": "Reseña de 5 estrellas hace 5 días",
+      "status": "pending",
+      "actionUrl": "/resenas-gestion",
+      "relatedId": "r7",
+      "relatedData": {
+        "buyerName": "Corporativo Santander",
+        "rating": 5,
+        "daysAgo": 5
+      },
+      "createdAt": "2024-11-02T09:00:00Z"
+    },
+    {
+      "id": "task-15",
+      "type": "review",
+      "priority": "medium",
+      "title": "Responder reseña - Hotel Grand Fiesta",
+      "description": "Reseña de 4 estrellas hace 12 días",
+      "status": "pending",
+      "actionUrl": "/resenas-gestion",
+      "relatedId": "r8",
+      "relatedData": {
+        "buyerName": "Hotel Grand Fiesta Americana",
+        "rating": 4,
+        "daysAgo": 12
+      },
+      "createdAt": "2024-10-26T14:30:00Z"
+    },
+    {
+      "id": "task-16",
+      "type": "inventory",
+      "priority": "high",
+      "title": "Reabastecer Set Talavera Premium",
+      "description": "Solo 8 unidades, recomendado 20 para demanda corporativa",
+      "status": "pending",
+      "actionUrl": "/dashboard?tab=products",
+      "relatedId": "comp1",
+      "relatedData": {
+        "productName": "Set Talavera Premium (6 piezas)",
+        "currentStock": 8,
+        "recommendedStock": 20
+      },
+      "createdAt": "2024-11-05T00:00:00Z"
+    },
+    {
+      "id": "task-17",
+      "type": "inventory",
+      "priority": "medium",
+      "title": "Stock medio - Colección Textiles",
+      "description": "12 unidades, recomendado 25 unidades",
+      "status": "pending",
+      "actionUrl": "/dashboard?tab=products",
+      "relatedId": "comp2",
+      "relatedData": {
+        "productName": "Colección Textiles Chiapanecos",
+        "currentStock": 12,
+        "recommendedStock": 25
+      },
+      "createdAt": "2024-11-04T00:00:00Z"
+    },
+    {
+      "id": "task-18",
+      "type": "promotion",
+      "priority": "medium",
+      "title": "Preparar Black Friday Corporativo",
+      "description": "Descuento del 25% comienza en 10 días",
+      "dueDate": "2024-11-18T00:00:00Z",
+      "status": "pending",
+      "actionUrl": "/dashboard",
+      "relatedData": {
+        "promotionName": "Descuento Corporativo Black Friday",
+        "discount": 25,
+        "startsIn": 10
+      },
+      "createdAt": "2024-11-01T00:00:00Z"
+    },
+    {
+      "id": "task-19",
+      "type": "promotion",
+      "priority": "low",
+      "title": "Planear Promoción Fin de Año",
+      "description": "Descuento del 30% comienza en 45 días",
+      "dueDate": "2024-12-23T00:00:00Z",
+      "status": "pending",
+      "actionUrl": "/dashboard",
+      "relatedData": {
+        "promotionName": "Promoción Fin de Año",
+        "discount": 30,
+        "startsIn": 45
+      },
+      "createdAt": "2024-10-30T00:00:00Z"
+    }
+  ]
+}

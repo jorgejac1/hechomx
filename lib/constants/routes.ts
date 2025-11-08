@@ -21,6 +21,7 @@ export const ROUTES = {
   DASHBOARD: '/dashboard',
   ORDERS: '/pedidos',
   WISHLIST: '/favoritos',
+  TASKS_CENTER: '/centro-tareas',
 
   MESSAGES: '/mensajes',
   REVIEWS_MANAGEMENT: '/resenas-gestion',

@@ -197,6 +197,15 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
             <p className="text-sm text-gray-600">No hay acciones pendientes en este momento</p>
           </div>
         )}
+
+        {/* View All Tasks Button */}
+        <button
+          onClick={() => router.push(ROUTES.TASKS_CENTER)}
+          className="w-full p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition text-center"
+        >
+          <p className="font-semibold text-gray-700">Ver Todas las Tareas</p>
+          <p className="text-sm text-gray-600 mt-1">Centro completo de gestión</p>
+        </button>
       </div>
     </div>
   );
