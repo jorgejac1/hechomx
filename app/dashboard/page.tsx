@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
@@ -44,14 +44,22 @@ export default function DashboardPage() {
     'overview' | 'analytics' | 'customers' | 'orders' | 'products' | 'reviews'
   >('overview');
 
-  // Redirect if not authenticated or no seller profile
-  if (!isAuthenticated && !isLoading) {
-    router.push(ROUTES.LOGIN);
-    return null;
-  }
+  useEffect(() => {
+    if (!isLoading) {
+      if (!isAuthenticated) {
+        router.push(ROUTES.LOGIN);
+      } else if (user && !user.makerProfile) {
+        router.push(ROUTES.HOME);
+      }
+    }
+  }, [isAuthenticated, isLoading, user, router]);
 
   if (isLoading || !user) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando dashboard..." />;
+  }
+
+  if (!isAuthenticated || !user.makerProfile) {
+    return null;
   }
 
   if (!user.makerProfile) {

@@ -11,3 +11,5 @@ export * from './seller/tasks';
 export * from './seller/actions';
 export * from './buyer/impact';
 export * from './buyer/orders';
+
+export * from './seller/artisan-story';

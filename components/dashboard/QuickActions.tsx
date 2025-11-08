@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { PendingActionsData, getPendingActions } from '@/lib/api/sellerApi';
+import { PendingActionsData, getPendingActions, getArtisanStory } from '@/lib/api/sellerApi';
 import { formatCurrency, ROUTES } from '@/lib';
 import {
   Package,
@@ -12,6 +12,7 @@ import {
   TrendingUp,
   ArrowRight,
   Loader2,
+  Sparkles,
 } from 'lucide-react';
 
 interface QuickActionsProps {
@@ -21,13 +22,18 @@ interface QuickActionsProps {
 export default function QuickActions({ userEmail }: QuickActionsProps) {
   const router = useRouter();
   const [data, setData] = useState<PendingActionsData | null>(null);
+  const [hasStory, setHasStory] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       setIsLoading(true);
-      const result = await getPendingActions(userEmail);
-      setData(result);
+      const [actionsData, storyData] = await Promise.all([
+        getPendingActions(userEmail),
+        getArtisanStory(userEmail),
+      ]);
+      setData(actionsData);
+      setHasStory(storyData !== null);
       setIsLoading(false);
     }
     loadData();
@@ -73,6 +79,46 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
       </div>
 
       <div className="space-y-3">
+        {/* Mi Historia Artesanal - Show if they don't have a story yet */}
+        {hasStory === false && (
+          <button
+            onClick={() => router.push(ROUTES.MY_STORY)}
+            className="w-full p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-2 border-purple-300 hover:from-purple-100 hover:to-pink-100 transition text-left"
+          >
+            <div className="flex items-start justify-between">
+              <div className="flex gap-3">
+                <Sparkles className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-gray-900">✨ Comparte Tu Historia Artesanal</p>
+                  <p className="text-sm text-gray-600">
+                    Conecta emocionalmente con tus clientes mostrando tu herencia y proceso
+                  </p>
+                </div>
+              </div>
+              <ArrowRight className="w-5 h-5 text-purple-600 flex-shrink-0" />
+            </div>
+          </button>
+        )}
+
+        {/* Edit Story - Show if they already have a story */}
+        {hasStory === true && (
+          <button
+            onClick={() => router.push(ROUTES.MY_STORY)}
+            className="w-full p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500 hover:bg-purple-100 transition text-left"
+          >
+            <div className="flex items-start justify-between">
+              <div className="flex gap-3">
+                <Sparkles className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-gray-900">Editar Mi Historia</p>
+                  <p className="text-sm text-gray-600">Actualiza tu historia artesanal y fotos</p>
+                </div>
+              </div>
+              <ArrowRight className="w-5 h-5 text-purple-600 flex-shrink-0" />
+            </div>
+          </button>
+        )}
+
         {/* Pending Orders */}
         {data.pendingOrders.length > 0 && (
           <button
@@ -188,7 +234,7 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
         )}
 
         {/* All Clear */}
-        {totalPendingTasks === 0 && (
+        {totalPendingTasks === 0 && hasStory === true && (
           <div className="text-center py-8">
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <Package className="w-8 h-8 text-green-600" />

@@ -23,6 +23,8 @@ export const ROUTES = {
   WISHLIST: '/favoritos',
   TASKS_CENTER: '/centro-tareas',
 
+  MY_STORY: '/mi-historia',
+
   MESSAGES: '/mensajes',
   REVIEWS_MANAGEMENT: '/resenas-gestion',
   ORDERS_MANAGEMENT: '/pedidos-gestion',
