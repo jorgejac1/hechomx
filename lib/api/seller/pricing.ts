@@ -2,7 +2,7 @@ import type { PricingCalculation, FairTradeRates } from '@/lib/types/pricing-cal
 
 export async function getFairTradeRates(region: string): Promise<FairTradeRates | null> {
   try {
-    const response = await fetch('/data/fair-trade-rates.json');
+    const response = await fetch('/api/pricing/fair-trade-rates');
     const data: {
       mexico: {
         country: string;

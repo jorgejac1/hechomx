@@ -2,7 +2,7 @@ import type { SellerReview } from '@/lib/types/seller';
 
 export async function getSellerReviews(userEmail: string): Promise<SellerReview[]> {
   try {
-    const response = await fetch('/data/seller-reviews.json');
+    const response = await fetch('/api/seller/reviews');
     const data = await response.json();
     return data[userEmail] || [];
   } catch (error) {

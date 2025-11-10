@@ -2,7 +2,7 @@ import { ArtisanStory } from '@/lib/types/artisan-story';
 
 export async function getArtisanStoryByEmail(email: string): Promise<ArtisanStory | null> {
   try {
-    const response = await fetch('/data/artisan-stories.json');
+    const response = await fetch('/api/artisan-stories');
     const data = await response.json();
 
     // Extract artisanId from email (sofia@ejemplo.com -> sofia)
@@ -17,7 +17,7 @@ export async function getArtisanStoryByEmail(email: string): Promise<ArtisanStor
 
 export async function getArtisanStoryById(artisanId: string): Promise<ArtisanStory | null> {
   try {
-    const response = await fetch('/data/artisan-stories.json');
+    const response = await fetch('/api/artisan-stories');
     const data = await response.json();
     return data[artisanId] || null;
   } catch (error) {
@@ -28,7 +28,7 @@ export async function getArtisanStoryById(artisanId: string): Promise<ArtisanSto
 
 export async function getAllArtisanStories(): Promise<Record<string, ArtisanStory>> {
   try {
-    const response = await fetch('/data/artisan-stories.json');
+    const response = await fetch('/api/artisan-stories');
     const data = await response.json();
     return data;
   } catch (error) {

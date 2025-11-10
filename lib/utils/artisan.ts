@@ -56,7 +56,7 @@ export function getArtisanIdFromMaker(makerName: string): string | null {
  */
 export async function getArtisanStoryById(artisanId: string): Promise<ArtisanStory | null> {
   try {
-    const response = await fetch('/data/artisan-stories.json');
+    const response = await fetch('/api/artisan-stories');
     const data: Record<string, ArtisanStory> = await response.json();
     return data[artisanId] || null;
   } catch (error) {

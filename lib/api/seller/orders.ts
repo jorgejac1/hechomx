@@ -2,7 +2,7 @@ import type { SellerOrder } from '@/lib/types/seller';
 
 export async function getSellerOrders(userEmail: string): Promise<SellerOrder[]> {
   try {
-    const response = await fetch('/data/seller-orders.json');
+    const response = await fetch('/api/seller/orders');
     const data = await response.json();
     return data[userEmail] || [];
   } catch (error) {

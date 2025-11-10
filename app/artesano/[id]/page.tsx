@@ -32,7 +32,7 @@ export default function ArtisanProfilePage() {
     async function loadStory() {
       setIsLoading(true);
       try {
-        const response = await fetch('/data/artisan-stories.json');
+        const response = await fetch('/api/artisan-stories');
         const data: Record<string, ArtisanStory> = await response.json();
 
         // Find story by artisanId - now using the key directly
