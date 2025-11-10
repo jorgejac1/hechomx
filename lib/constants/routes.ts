@@ -25,6 +25,8 @@ export const ROUTES = {
 
   MY_STORY: '/mi-historia',
 
+  PRICING_CALCULATOR: '/calculadora-precios',
+
   MESSAGES: '/mensajes',
   REVIEWS_MANAGEMENT: '/resenas-gestion',
   ORDERS_MANAGEMENT: '/pedidos-gestion',

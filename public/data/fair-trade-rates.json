@@ -1,0 +1,42 @@
+{
+  "mexico": {
+    "country": "México",
+    "regions": {
+      "oaxaca": {
+        "region": "Oaxaca",
+        "minimumWage": 248.93,
+        "livingWage": 350.0,
+        "recommendedHourlyRate": 45.0,
+        "currency": "MXN"
+      },
+      "chiapas": {
+        "region": "Chiapas",
+        "minimumWage": 248.93,
+        "livingWage": 320.0,
+        "recommendedHourlyRate": 42.0,
+        "currency": "MXN"
+      },
+      "puebla": {
+        "region": "Puebla",
+        "minimumWage": 248.93,
+        "livingWage": 340.0,
+        "recommendedHourlyRate": 44.0,
+        "currency": "MXN"
+      },
+      "michoacan": {
+        "region": "Michoacán",
+        "minimumWage": 248.93,
+        "livingWage": 330.0,
+        "recommendedHourlyRate": 43.0,
+        "currency": "MXN"
+      },
+      "guanajuato": {
+        "region": "Guanajuato",
+        "minimumWage": 248.93,
+        "livingWage": 345.0,
+        "recommendedHourlyRate": 44.0,
+        "currency": "MXN"
+      }
+    }
+  }
+}

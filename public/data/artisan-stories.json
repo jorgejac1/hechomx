@@ -1,11 +1,19 @@
 {
-  "sofia@ejemplo.com": {
+  "sofia": {
     "id": "story-sofia",
-    "artisanId": "sofia-ramirez",
+    "artisanId": "sofia",
     "artisanName": "Sofía Ramírez",
     "shopName": "Textiles Sofía",
     "avatar": "https://i.pravatar.cc/200?img=47",
     "coverImage": "https://images.unsplash.com/photo-1558769132-cb1aea3c4a55?w=1200",
+
+    "sellerType": "artisan_individual",
+    "craftCategory": "textiles",
+    "craftStyle": "traditional",
+    "indigenousConnection": "native",
+    "speaksIndigenousLanguage": true,
+    "indigenousLanguage": "Zapoteco",
+
     "location": {
       "city": "Teotitlán del Valle",
       "state": "Oaxaca",
@@ -14,10 +22,14 @@
     "specialty": "Textiles Tejidos a Mano",
     "yearsOfExperience": 15,
     "generationsOfCraft": 4,
+    "apprentices": 3,
+
     "personalStory": "Crecí rodeada del sonido rítmico del telar de cintura, observando a mi abuela y mi madre crear hermosos textiles zapotecas. Desde los 8 años, comencé a aprender el arte del tejido, primero con piezas pequeñas y gradualmente dominando técnicas más complejas. Cada pieza que creo lleva no solo mi trabajo, sino siglos de tradición zapoteca.",
     "heritageStory": "Mi familia ha tejido textiles zapotecas durante cuatro generaciones. Mi bisabuela aprendió de las tejedoras más respetadas de Teotitlán, y ese conocimiento ha pasado de madre a hija. Usamos técnicas prehispánicas combinadas con telares de pedal introducidos durante la época colonial, creando una fusión única que define nuestro estilo.",
     "craftTechnique": "Utilizo lana de borrego teñida con tintes naturales extraídos de plantas locales: cochinilla para rojos y rosas, índigo para azules, y muitle para púrpuras. El proceso completo de una pieza grande puede tomar hasta 3 meses, desde el hilado de la lana hasta el tejido final en el telar de pedal. Cada diseño geométrico tiene un significado: los rombos representan el universo, las grecas son montañas sagradas.",
     "dailyLife": "Mi día comienza a las 6 AM preparando el taller. Después del desayuno familiar, trabajo en el telar hasta el mediodía. Por las tardes, preparo tintes naturales o hilo lana mientras mis hijas hacen la tarea cerca de mí. Los fines de semana, recibo visitantes interesados en aprender sobre nuestro arte. Mi esposo maneja el lado comercial mientras yo me enfoco en la creación.",
+    "culturalSignificance": "Los textiles zapotecas son más que productos decorativos; son portadores de nuestra cosmovisión, historia y resistencia cultural. Cada patrón cuenta una historia de nuestros ancestros, de las montañas sagradas que nos rodean, y de nuestra conexión con la madre tierra. Al preservar estas técnicas, mantenemos viva nuestra lengua zapoteca y nuestras tradiciones.",
+
     "videoIntro": "https://www.youtube.com/embed/dQw4w9WgXcQ",
     "workshopPhotos": [
       "https://images.unsplash.com/photo-1558769132-cb1aea3c4a55?w=800",
@@ -33,6 +45,8 @@
       "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800",
       "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=800"
     ],
+    "teamPhotos": [],
+
     "awards": [
       {
         "title": "Premio Nacional de Textiles Tradicionales",
@@ -57,7 +71,6 @@
         "date": "2023-03-20"
       }
     ],
-    "culturalSignificance": "Los textiles zapotecas son más que productos decorativos; son portadores de nuestra cosmovisión, historia y resistencia cultural. Cada patrón cuenta una historia de nuestros ancestros, de las montañas sagradas que nos rodean, y de nuestra conexión con la madre tierra. Al preservar estas técnicas, mantenemos viva nuestra lengua zapoteca y nuestras tradiciones.",
     "traditionalTechniques": [
       "Teñido con cochinilla grana",
       "Tejido en telar de pedal",
@@ -82,7 +95,6 @@
         "language": "Zapoteco"
       }
     ],
-    "apprentices": 3,
     "communityProjects": [
       "Taller gratuito de tejido para jóvenes del pueblo",
       "Proyecto de rescate de tintes naturales ancestrales",
@@ -95,13 +107,20 @@
     "lastUpdated": "2024-11-01T00:00:00Z",
     "isPublished": true
   },
-  "pedro@ejemplo.com": {
+  "pedro": {
     "id": "story-pedro",
-    "artisanId": "pedro-hernandez",
+    "artisanId": "pedro",
     "artisanName": "Pedro Hernández",
     "shopName": "Alebrijes Don Pedro",
     "avatar": "https://i.pravatar.cc/200?img=12",
     "coverImage": "https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=1200",
+
+    "sellerType": "artisan_individual",
+    "craftCategory": "woodwork",
+    "craftStyle": "traditional",
+    "indigenousConnection": "descendant",
+    "speaksIndigenousLanguage": false,
+
     "location": {
       "city": "San Martín Tilcajete",
       "state": "Oaxaca",
@@ -110,10 +129,14 @@
     "specialty": "Alebrijes de Madera Tallada",
     "yearsOfExperience": 25,
     "generationsOfCraft": 3,
+    "apprentices": 5,
+
     "personalStory": "Mi abuelo fue uno de los primeros talladores de alebrijes en San Martín Tilcajete. Aprendí este arte a los 10 años, tallando figuras simples de copal. Con el tiempo, desarrollé mi propio estilo caracterizado por detalles intrincados y colores vibrantes. Cada alebrije que creo es único, una criatura fantástica que nace de mi imaginación y las tradiciones zapotecas.",
     "heritageStory": "Los alebrijes tienen su origen en los sueños febriles del maestro Pedro Linares en la Ciudad de México, pero en Oaxaca los transformamos en algo nuestro. Mi abuelo adoptó esta tradición en los años 60, combinándola con el tallado zapoteca de madera de copal. Tres generaciones después, continuamos innovando mientras honramos las raíces de este arte.",
     "craftTechnique": "Uso exclusivamente madera de copal (Bursera glabrifolia), un árbol sagrado de nuestra región. Después de secar la madera por 6 meses, tallo cada pieza a mano usando cuchillos y gubias tradicionales. El proceso de pintura es meticuloso: primero aplico una base blanca natural, luego pinto con óleos cada detalle, desde los puntos más pequeños hasta los patrones complejos que cubren el cuerpo de cada criatura.",
     "dailyLife": "Comienzo mis días en el taller a las 7 AM, aprovechando la luz natural. El tallado requiere concentración absoluta, así que trabajo en silencio o con música tradicional oaxaqueña. Mi esposa prepara los colores y pinceles mientras yo tallo. Por las tardes, mis hijos adolescentes me ayudan con detalles de pintura - están aprendiendo el oficio. Cerramos el taller al atardecer para la cena familiar.",
+    "culturalSignificance": "Los alebrijes representan el poder de la imaginación y la conexión entre el mundo real y el mundo de los sueños. En la cosmovisión zapoteca, cada animal tiene un significado espiritual, y al combinarlos en criaturas fantásticas, creamos nahuales protectores. Este arte mantiene viva nuestra tradición de tallado y nuestro respeto por la madera de copal, árbol sagrado usado en ceremonias ancestrales.",
+
     "videoIntro": "https://www.youtube.com/embed/dQw4w9WgXcQ",
     "workshopPhotos": [
       "https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=800",
@@ -126,6 +149,8 @@
       "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800"
     ],
     "familyPhotos": ["https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800"],
+    "teamPhotos": [],
+
     "awards": [
       {
         "title": "Gran Maestro del Arte Popular",
@@ -155,7 +180,6 @@
         "date": "2022-01-15"
       }
     ],
-    "culturalSignificance": "Los alebrijes representan el poder de la imaginación y la conexión entre el mundo real y el mundo de los sueños. En la cosmovisión zapoteca, cada animal tiene un significado espiritual, y al combinarlos en criaturas fantásticas, creamos nahuales protectores. Este arte mantiene viva nuestra tradición de tallado y nuestro respeto por la madera de copal, árbol sagrado usado en ceremonias ancestrales.",
     "traditionalTechniques": [
       "Tallado de madera de copal",
       "Secado natural de madera (6 meses)",
@@ -175,7 +199,6 @@
         "language": "Náhuatl"
       }
     ],
-    "apprentices": 5,
     "communityProjects": [
       "Escuela de tallado para jóvenes de San Martín",
       "Reforestación de árboles de copal",

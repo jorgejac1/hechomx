@@ -20,5 +20,14 @@ export * from './utils/seo';
 export * from './utils/season';
 export * from './utils/url';
 
+// Re-export API functions (safe for client - only fetches from public JSON)
+export * from './api/seller/artisan-story';
+
 // Re-export types (safe for client - types are removed at runtime)
 export type { Subcategory } from './data/subcategories';
+
+// Add new type exports
+export * from './types/seller-types';
+export * from './types/artisan-story';
+export * from './types/seller';
+export * from './types/buyer';

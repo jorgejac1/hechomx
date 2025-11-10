@@ -1,27 +1,38 @@
-import type { ArtisanStory } from '@/lib/types/artisan-story';
+import { ArtisanStory } from '@/lib/types/artisan-story';
 
-export async function getArtisanStory(userEmail: string): Promise<ArtisanStory | null> {
+export async function getArtisanStoryByEmail(email: string): Promise<ArtisanStory | null> {
   try {
     const response = await fetch('/data/artisan-stories.json');
     const data = await response.json();
-    return data[userEmail] || null;
+
+    // Extract artisanId from email (sofia@ejemplo.com -> sofia)
+    const artisanId = email.split('@')[0];
+
+    return data[artisanId] || null;
   } catch (error) {
     console.error('Error loading artisan story:', error);
     return null;
   }
 }
 
-export async function saveArtisanStory(
-  userEmail: string,
-  story: Partial<ArtisanStory>
-): Promise<boolean> {
+export async function getArtisanStoryById(artisanId: string): Promise<ArtisanStory | null> {
   try {
-    // In production, this would POST to your API
-    console.log('Saving artisan story for:', userEmail, story);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    return true;
+    const response = await fetch('/data/artisan-stories.json');
+    const data = await response.json();
+    return data[artisanId] || null;
   } catch (error) {
-    console.error('Error saving artisan story:', error);
-    return false;
+    console.error('Error loading artisan story:', error);
+    return null;
+  }
+}
+
+export async function getAllArtisanStories(): Promise<Record<string, ArtisanStory>> {
+  try {
+    const response = await fetch('/data/artisan-stories.json');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error loading artisan stories:', error);
+    return {};
   }
 }

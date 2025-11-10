@@ -1,30 +1,53 @@
+import { SellerType, CraftCategory, CraftStyle, IndigenousConnection } from './seller-types';
+
 export interface ArtisanStory {
   id: string;
   artisanId: string;
   artisanName: string;
   shopName: string;
   avatar: string;
-  coverImage: string;
+  coverImage?: string;
+
+  // Seller Classification
+  sellerType: SellerType;
+  craftCategory?: CraftCategory;
+  craftStyle?: CraftStyle;
+  indigenousConnection?: IndigenousConnection;
+  speaksIndigenousLanguage?: boolean;
+  indigenousLanguage?: string;
+
+  // Location
   location: {
     city: string;
     state: string;
-    region: string;
+    region?: string;
   };
+
+  // Basic Info
   specialty: string;
   yearsOfExperience: number;
-  generationsOfCraft: number;
 
-  // Story sections
-  personalStory: string;
-  heritageStory: string;
-  craftTechnique: string;
-  dailyLife: string;
+  // Type-specific fields
+  generationsOfCraft?: number; // artisan_individual, workshop
+  apprentices?: number; // artisan_individual
+  teamSize?: number; // workshop, company
+  foundingYear?: number; // company
+
+  // Stories (conditional based on seller type)
+  personalStory?: string; // all types
+  heritageStory?: string; // artisan_individual, workshop
+  craftTechnique?: string; // artisan_individual
+  productionProcess?: string; // hobby_maker, workshop, company
+  dailyLife?: string; // hobby_maker, artisan_individual, workshop
+  culturalSignificance?: string; // artisan_individual (if indigenous)
+  missionStatement?: string; // workshop, company
 
   // Media
   videoIntro?: string;
   workshopPhotos: string[];
   processPhotos: string[];
-  familyPhotos: string[];
+  familyPhotos?: string[];
+  teamPhotos?: string[];
 
   // Recognition
   awards: Array<{
@@ -37,27 +60,27 @@ export interface ArtisanStory {
     issuer: string;
     date: string;
   }>;
+  communityProjects: string[];
 
-  // Cultural context
-  culturalSignificance: string;
-  traditionalTechniques: string[];
+  // Artisan-specific
+  traditionalTechniques?: string[];
   indigenousLanguageTerms?: Array<{
     term: string;
     meaning: string;
     language: string;
   }>;
 
-  // Community impact
-  apprentices: number;
-  communityProjects: string[];
+  // Company-specific
+  sustainabilityPractices?: string[];
 
-  // Social
+  // Metadata
   socialMedia?: {
     instagram?: string;
     facebook?: string;
     youtube?: string;
+    tiktok?: string;
+    website?: string;
   };
-
   lastUpdated: string;
   isPublished: boolean;
 }

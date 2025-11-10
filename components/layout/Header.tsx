@@ -242,6 +242,47 @@ export default function Header() {
                             <Sparkles className="w-4 h-4" />
                             Mi Impacto
                           </Link>
+
+                          {/* Seller Tools Section - NEW */}
+                          {user?.makerProfile && (
+                            <>
+                              <div className="border-t border-gray-200 my-2" />
+                              <div className="px-4 py-2">
+                                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                  Herramientas
+                                </p>
+                              </div>
+                              <Link
+                                href={ROUTES.MY_STORY}
+                                onClick={() => setIsUserMenuOpen(false)}
+                                className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition"
+                              >
+                                <Sparkles className="w-4 h-4" />
+                                Mi Historia Artesanal
+                              </Link>
+                              <Link
+                                href={ROUTES.PRICING_CALCULATOR}
+                                onClick={() => setIsUserMenuOpen(false)}
+                                className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition"
+                              >
+                                <svg
+                                  className="w-4 h-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                                  />
+                                </svg>
+                                Calculadora de Precios
+                              </Link>
+                            </>
+                          )}
+
                           <div className="border-t border-gray-200 my-2" />
                           <button
                             onClick={handleLogout}
@@ -451,6 +492,45 @@ export default function Header() {
                       <Sparkles className="w-5 h-5" />
                       Mi Impacto
                     </Link>
+
+                    {/* Seller Tools - Mobile - NEW */}
+                    {user?.makerProfile && (
+                      <>
+                        <div className="border-t border-gray-200 my-2" />
+                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-3 py-2">
+                          Herramientas de Vendedor
+                        </p>
+                        <Link
+                          href={ROUTES.MY_STORY}
+                          className="flex items-center gap-3 text-purple-600 hover:text-purple-700 font-medium py-2"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <Sparkles className="w-5 h-5" />
+                          Mi Historia Artesanal
+                        </Link>
+                        <Link
+                          href={ROUTES.PRICING_CALCULATOR}
+                          className="flex items-center gap-3 text-blue-600 hover:text-blue-700 font-medium py-2"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                            />
+                          </svg>
+                          Calculadora de Precios
+                        </Link>
+                      </>
+                    )}
+
                     <button
                       onClick={handleLogout}
                       className="flex items-center gap-3 text-red-600 hover:text-red-700 font-medium py-2"

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
 import type { ArtisanStory } from '@/lib/types/artisan-story';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
@@ -34,10 +35,10 @@ export default function ArtisanProfilePage() {
         const response = await fetch('/data/artisan-stories.json');
         const data: Record<string, ArtisanStory> = await response.json();
 
-        // Find story by artisanId
-        const foundStory = Object.values(data).find((s) => s.artisanId === params.id);
+        // Find story by artisanId - now using the key directly
+        const foundStory = data[params.id as string] || null;
 
-        setStory(foundStory || null);
+        setStory(foundStory);
       } catch (error) {
         console.error('Error loading artisan story:', error);
         setStory(null);
@@ -58,12 +59,12 @@ export default function ArtisanProfilePage() {
           <Sparkles className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Historia No Encontrada</h2>
           <p className="text-gray-600 mb-6">Esta historia artesanal aún no está disponible.</p>
-          <button
-            onClick={() => router.push('/')}
-            className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
+          <Link
+            href="/"
+            className="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
           >
             Volver al Inicio
-          </button>
+          </Link>
         </div>
       </div>
     );
@@ -146,7 +147,11 @@ export default function ArtisanProfilePage() {
                 <div className="flex gap-3">
                   {story.socialMedia.instagram && (
                     <a
-                      href={`https://instagram.com/${story.socialMedia.instagram}`}
+                      href={
+                        story.socialMedia.instagram.startsWith('http')
+                          ? story.socialMedia.instagram
+                          : `https://instagram.com/${story.socialMedia.instagram.replace('@', '')}`
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition group"
@@ -157,7 +162,11 @@ export default function ArtisanProfilePage() {
                   )}
                   {story.socialMedia.facebook && (
                     <a
-                      href={`https://facebook.com/${story.socialMedia.facebook}`}
+                      href={
+                        story.socialMedia.facebook.startsWith('http')
+                          ? story.socialMedia.facebook
+                          : `https://facebook.com/${story.socialMedia.facebook}`
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition group"
@@ -168,7 +177,11 @@ export default function ArtisanProfilePage() {
                   )}
                   {story.socialMedia.youtube && (
                     <a
-                      href={`https://youtube.com/${story.socialMedia.youtube}`}
+                      href={
+                        story.socialMedia.youtube.startsWith('http')
+                          ? story.socialMedia.youtube
+                          : `https://youtube.com/${story.socialMedia.youtube}`
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition group"
@@ -197,11 +210,11 @@ export default function ArtisanProfilePage() {
             <p className="text-sm text-gray-600">Generaciones</p>
           </div>
           <div className="bg-white rounded-xl shadow-md p-4 text-center">
-            <p className="text-3xl font-bold text-primary-600">{story.apprentices}</p>
+            <p className="text-3xl font-bold text-primary-600">{story.apprentices || 0}</p>
             <p className="text-sm text-gray-600">Aprendices</p>
           </div>
           <div className="bg-white rounded-xl shadow-md p-4 text-center">
-            <p className="text-3xl font-bold text-primary-600">{story.awards.length}</p>
+            <p className="text-3xl font-bold text-primary-600">{story.awards?.length || 0}</p>
             <p className="text-sm text-gray-600">Premios</p>
           </div>
         </div>
@@ -290,7 +303,7 @@ export default function ArtisanProfilePage() {
                 )}
 
                 {/* Workshop Photos */}
-                {story.workshopPhotos.length > 0 && (
+                {story.workshopPhotos && story.workshopPhotos.length > 0 && (
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">Mi Taller</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -365,7 +378,7 @@ export default function ArtisanProfilePage() {
                 )}
 
                 {/* Traditional Techniques */}
-                {story.traditionalTechniques.length > 0 && (
+                {story.traditionalTechniques && story.traditionalTechniques.length > 0 && (
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">
                       Técnicas Tradicionales
@@ -385,7 +398,7 @@ export default function ArtisanProfilePage() {
                 )}
 
                 {/* Process Photos */}
-                {story.processPhotos.length > 0 && (
+                {story.processPhotos && story.processPhotos.length > 0 && (
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">Proceso Creativo</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -412,7 +425,7 @@ export default function ArtisanProfilePage() {
             {activeSection === 'recognition' && (
               <div className="space-y-8">
                 {/* Awards */}
-                {story.awards.length > 0 && (
+                {story.awards && story.awards.length > 0 && (
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">
                       Premios y Reconocimientos
@@ -436,7 +449,7 @@ export default function ArtisanProfilePage() {
                 )}
 
                 {/* Certifications */}
-                {story.certifications.length > 0 && (
+                {story.certifications && story.certifications.length > 0 && (
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">Certificaciones</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -464,7 +477,7 @@ export default function ArtisanProfilePage() {
                 )}
 
                 {/* Community Projects */}
-                {story.communityProjects.length > 0 && (
+                {story.communityProjects && story.communityProjects.length > 0 && (
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">
                       Proyectos Comunitarios
@@ -490,14 +503,12 @@ export default function ArtisanProfilePage() {
           <p className="text-primary-100 mb-6">
             Explora mi tienda y encuentra piezas únicas hechas a mano
           </p>
-          <button
-            onClick={() =>
-              router.push(`/tienda/${story.shopName.toLowerCase().replace(/\s+/g, '-')}`)
-            }
-            className="px-8 py-3 bg-white text-primary-600 rounded-lg hover:bg-gray-100 transition font-bold"
+          <Link
+            href={`/tienda/${story.shopName.toLowerCase().replace(/\s+/g, '-')}`}
+            className="inline-block px-8 py-3 bg-white text-primary-600 rounded-lg hover:bg-gray-100 transition font-bold"
           >
             Ver Mi Tienda
-          </button>
+          </Link>
         </div>
       </div>
     </div>

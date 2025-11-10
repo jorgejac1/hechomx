@@ -21,6 +21,9 @@ import {
   Landmark,
   Shield,
   TrendingUp,
+  DollarSign,
+  Sparkles,
+  BookOpen,
 } from 'lucide-react';
 import { formatCurrency } from '@/lib';
 
@@ -199,6 +202,88 @@ export default function SellerProfilePage() {
               <Store className="w-8 h-8 text-blue-600" />
             </div>
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          {/* Mi Historia Artesanal Card */}
+          <button
+            onClick={() => router.push(ROUTES.MY_STORY)}
+            className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl shadow-lg p-6 text-left hover:shadow-xl hover:scale-[1.02] transition-all group"
+          >
+            <div className="flex items-start justify-between mb-4">
+              <div className="p-3 bg-white/20 rounded-lg backdrop-blur-sm">
+                <Sparkles className="w-8 h-8 text-white" />
+              </div>
+              <svg
+                className="w-6 h-6 text-white/80 group-hover:text-white group-hover:translate-x-1 transition-all"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">Mi Historia Artesanal</h3>
+            <p className="text-purple-100 text-sm leading-relaxed">
+              Comparte tu herencia, proceso creativo y conecta emocionalmente con tus clientes
+              mostrando la autenticidad detrás de tus creaciones
+            </p>
+            <div className="mt-4 flex items-center gap-2 text-sm text-white/90">
+              <BookOpen className="w-4 h-4" />
+              <span>Historias, fotos, técnicas tradicionales</span>
+            </div>
+          </button>
+
+          {/* Pricing Calculator Card */}
+          <button
+            onClick={() => router.push(ROUTES.PRICING_CALCULATOR)}
+            className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-xl shadow-lg p-6 text-left hover:shadow-xl hover:scale-[1.02] transition-all group"
+          >
+            <div className="flex items-start justify-between mb-4">
+              <div className="p-3 bg-white/20 rounded-lg backdrop-blur-sm">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <svg
+                className="w-6 h-6 text-white/80 group-hover:text-white group-hover:translate-x-1 transition-all"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">Calculadora de Precios Justos</h3>
+            <p className="text-blue-100 text-sm leading-relaxed">
+              Calcula precios justos considerando materiales, tiempo de trabajo y salario digno
+              recomendado para tu región
+            </p>
+            <div className="mt-4 flex items-center gap-2 text-sm text-white/90">
+              <DollarSign className="w-4 h-4" />
+              <span>Materiales, mano de obra, márgenes</span>
+            </div>
+          </button>
         </div>
 
         {/* Tabs */}

@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { PendingActionsData, getPendingActions, getArtisanStory } from '@/lib/api/sellerApi';
+import { PendingActionsData, getPendingActions } from '@/lib/api/sellerApi';
+import { getArtisanStoryByEmail } from '@/lib';
 import { formatCurrency, ROUTES } from '@/lib';
 import {
   Package,
@@ -13,6 +14,7 @@ import {
   ArrowRight,
   Loader2,
   Sparkles,
+  Calculator,
 } from 'lucide-react';
 
 interface QuickActionsProps {
@@ -30,7 +32,7 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
       setIsLoading(true);
       const [actionsData, storyData] = await Promise.all([
         getPendingActions(userEmail),
-        getArtisanStory(userEmail),
+        getArtisanStoryByEmail(userEmail),
       ]);
       setData(actionsData);
       setHasStory(storyData !== null);
@@ -99,6 +101,25 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
             </div>
           </button>
         )}
+
+        {/* Pricing Calculator Promo */}
+        <button
+          onClick={() => router.push(ROUTES.PRICING_CALCULATOR)}
+          className="w-full p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-300 hover:from-blue-100 hover:to-cyan-100 transition text-left"
+        >
+          <div className="flex items-start justify-between">
+            <div className="flex gap-3">
+              <Calculator className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-gray-900">💰 Calcula Precios Justos</p>
+                <p className="text-sm text-gray-600">
+                  Herramienta para calcular precios con salario digno
+                </p>
+              </div>
+            </div>
+            <ArrowRight className="w-5 h-5 text-blue-600 flex-shrink-0" />
+          </div>
+        </button>
 
         {/* Edit Story - Show if they already have a story */}
         {hasStory === true && (
