@@ -3,6 +3,7 @@
 import { CheckCircle, MessageCircle, Store, BookOpen, Sparkles } from 'lucide-react';
 import Button from '@/components/common/Button';
 import { getArtisanIdFromMaker, hasArtisanStory } from '@/lib/utils/artisan';
+import { getShopUrlFromMaker, hasShop } from '@/lib/utils/shop';
 import { ROUTES } from '@/lib';
 
 interface SellerProfileProps {
@@ -14,6 +15,8 @@ interface SellerProfileProps {
 export default function SellerProfile({ maker, verified, state }: SellerProfileProps) {
   const artisanId = getArtisanIdFromMaker(maker);
   const hasStory = hasArtisanStory(maker);
+  const shopUrl = getShopUrlFromMaker(maker);
+  const makerHasShop = hasShop(maker);
 
   return (
     <div className="bg-white rounded-xl shadow-md p-6">
@@ -79,9 +82,27 @@ export default function SellerProfile({ maker, verified, state }: SellerProfileP
 
         {/* Other Actions */}
         <div className="flex gap-3">
-          <Button variant="outline" size="md" icon={<Store className="w-5 h-5" />} fullWidth>
-            Ver tienda
-          </Button>
+          {makerHasShop && shopUrl ? (
+            <Button
+              variant="outline"
+              size="md"
+              href={shopUrl}
+              icon={<Store className="w-5 h-5" />}
+              fullWidth
+            >
+              Ver tienda
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              size="md"
+              icon={<Store className="w-5 h-5" />}
+              fullWidth
+              disabled
+            >
+              Ver tienda
+            </Button>
+          )}
 
           <Button
             variant="outline"

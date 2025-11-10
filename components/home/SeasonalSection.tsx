@@ -152,6 +152,7 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
                           src={product.images[0]}
                           alt={product.name}
                           fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />

@@ -29,7 +29,7 @@ const DEAL_PRODUCTS: DealProduct[] = [
     verified: true,
     dealTag: 'Mayor venta en 60+ días',
     rating: 4.9,
-    reviewCount: 156
+    reviewCount: 156,
   },
   {
     id: '2',
@@ -48,7 +48,7 @@ const DEAL_PRODUCTS: DealProduct[] = [
     verified: true,
     dealTag: 'Mayor venta en 60+ días',
     rating: 4.9,
-    reviewCount: 203
+    reviewCount: 203,
   },
   {
     id: '3',
@@ -67,7 +67,7 @@ const DEAL_PRODUCTS: DealProduct[] = [
     verified: true,
     dealTag: 'Mayor venta en 60+ días',
     rating: 4.9,
-    reviewCount: 94
+    reviewCount: 94,
   },
   {
     id: '4',
@@ -86,7 +86,7 @@ const DEAL_PRODUCTS: DealProduct[] = [
     verified: true,
     dealTag: 'Mayor venta en 60+ días',
     rating: 4.9,
-    reviewCount: 178
+    reviewCount: 178,
   },
   {
     id: '5',
@@ -99,14 +99,14 @@ const DEAL_PRODUCTS: DealProduct[] = [
     category: 'Decoración del Hogar',
     state: 'Ciudad de México',
     maker: 'Aromas Mexicanos',
-    images: ['https://images.unsplash.com/photo-1602874801006-36c6b8c486d5?w=400'],
+    images: ['https://images.unsplash.com/photo-1603006905003-be475563bc59?w=200'],
     inStock: true,
     featured: true,
     verified: true,
     dealTag: 'Mayor venta en 60+ días',
     rating: 4.5,
-    reviewCount: 112
-  }
+    reviewCount: 112,
+  },
 ];
 
 const ITEMS_TO_SHOW = 4;
@@ -115,15 +115,15 @@ export default function DealsSection() {
   const [timeLeft, setTimeLeft] = useState({
     hours: 1,
     minutes: 47,
-    seconds: 32
+    seconds: 32,
   });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(prev => {
+      setTimeLeft((prev) => {
         let { hours, minutes, seconds } = prev;
-        
+
         if (seconds > 0) {
           seconds--;
         } else if (minutes > 0) {
@@ -134,7 +134,7 @@ export default function DealsSection() {
           minutes = 59;
           seconds = 59;
         }
-        
+
         return { hours, minutes, seconds };
       });
     }, 1000);
@@ -145,11 +145,11 @@ export default function DealsSection() {
   const maxIndex = Math.max(0, DEAL_PRODUCTS.length - ITEMS_TO_SHOW);
 
   const handlePrev = () => {
-    setCurrentIndex(prev => Math.max(0, prev - 1));
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex(prev => Math.min(maxIndex, prev + 1));
+    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
   };
 
   return (
@@ -158,12 +158,20 @@ export default function DealsSection() {
         {/* Header - Mobile Optimized */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Ofertas del día
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Ofertas del día</h2>
             <div className="flex items-center gap-2 text-gray-600">
-              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="w-4 h-4 sm:w-5 sm:h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
               <span className="text-xs sm:text-sm">
                 Ofertas frescas en{' '}
@@ -184,8 +192,18 @@ export default function DealsSection() {
               className="p-2 rounded-full border-2 border-gray-300 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition"
               aria-label="Anterior"
             >
-              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg
+                className="w-5 h-5 sm:w-6 sm:h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
             <button
@@ -194,8 +212,18 @@ export default function DealsSection() {
               className="p-2 rounded-full border-2 border-gray-300 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition"
               aria-label="Siguiente"
             >
-              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg
+                className="w-5 h-5 sm:w-6 sm:h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           </div>
@@ -219,6 +247,7 @@ export default function DealsSection() {
                         src={product.images[0]}
                         alt={product.name}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover"
                       />
                     </div>
@@ -240,9 +269,7 @@ export default function DealsSection() {
 
                       {/* Price */}
                       <div className="flex items-center gap-2 mb-2 flex-wrap">
-                        <span className="text-xl font-bold text-primary-600">
-                          ${product.price}
-                        </span>
+                        <span className="text-xl font-bold text-primary-600">${product.price}</span>
                         <span className="text-xs text-gray-500 line-through">
                           ${product.originalPrice}
                         </span>
@@ -254,14 +281,10 @@ export default function DealsSection() {
                       {/* Tags */}
                       <div className="mt-auto space-y-1">
                         {product.dealTag && (
-                          <p className="text-xs text-gray-600 line-clamp-1">
-                            {product.dealTag}
-                          </p>
+                          <p className="text-xs text-gray-600 line-clamp-1">{product.dealTag}</p>
                         )}
                         {product.discount >= 30 && (
-                          <p className="text-xs text-gray-600 font-semibold">
-                            Envío gratis
-                          </p>
+                          <p className="text-xs text-gray-600 font-semibold">Envío gratis</p>
                         )}
                       </div>
                     </div>
@@ -325,14 +348,10 @@ export default function DealsSection() {
                       {/* Tags */}
                       <div className="mt-auto space-y-1">
                         {product.dealTag && (
-                          <p className="text-xs text-gray-600">
-                            {product.dealTag}
-                          </p>
+                          <p className="text-xs text-gray-600">{product.dealTag}</p>
                         )}
                         {product.discount >= 30 && (
-                          <p className="text-xs text-gray-600 font-semibold">
-                            Envío gratis
-                          </p>
+                          <p className="text-xs text-gray-600 font-semibold">Envío gratis</p>
                         )}
                       </div>
                     </div>
@@ -350,8 +369,18 @@ export default function DealsSection() {
             className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-base sm:text-lg"
           >
             Ver todas las ofertas
-            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <svg
+              className="w-4 h-4 sm:w-5 sm:h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </Link>
         </div>

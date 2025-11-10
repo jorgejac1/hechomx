@@ -1,5 +1,5 @@
 import { Product } from '@/types';
-import productsData from '@/public/data/products.json';
+import productsData from './products.json';
 
 // Helper to generate random date within last N days
 function getRandomDate(daysAgo: number): string {
