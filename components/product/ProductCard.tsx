@@ -3,7 +3,10 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation'; // Add this import
+import { Sparkles } from 'lucide-react';
 import { useComparison } from '@/contexts/ComparisonContext';
+import { hasArtisanStory, getArtisanIdFromMaker } from '@/lib/utils/artisan';
 import { Product } from '@/types';
 import { formatCurrency, CATEGORY_ICONS, CATEGORY_COLORS, ROUTES } from '@/lib';
 
@@ -12,8 +15,11 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const router = useRouter(); // Add this
   const { toggle, isInComparison, canAdd, isFull } = useComparison();
   const [mounted, setMounted] = useState(false);
+  const hasStory = hasArtisanStory(product.maker);
+  const artisanId = getArtisanIdFromMaker(product.maker);
 
   // Only access comparison state after hydration
   useEffect(() => {
@@ -44,6 +50,15 @@ export default function ProductCard({ product }: ProductCardProps) {
     }
 
     toggle(product);
+  };
+
+  // Add handler for artisan story badge
+  const handleArtisanStoryClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (artisanId) {
+      router.push(`${ROUTES.ARTISAN}/${artisanId}`);
+    }
   };
 
   const isDisabled = mounted ? !canAdd && !isComparing : false;
@@ -208,7 +223,26 @@ export default function ProductCard({ product }: ProductCardProps) {
                   </span>
                   <span className="text-[10px] sm:text-xs text-gray-500">{product.currency}</span>
                 </div>
-                <p className="text-[10px] sm:text-xs text-gray-500 truncate">{product.maker}</p>
+
+                {/* Maker Name + Artisan Story Badge */}
+                <div className="flex items-center gap-1.5">
+                  <p className="text-[10px] sm:text-xs text-gray-500 truncate flex-shrink">
+                    {product.maker}
+                  </p>
+
+                  {/* Artisan Story Badge - Now using button instead of Link */}
+                  {hasStory && artisanId && (
+                    <button
+                      onClick={handleArtisanStoryClick}
+                      className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 py-0.5 bg-gradient-to-r from-amber-100 to-orange-100 hover:from-amber-200 hover:to-orange-200 text-amber-700 rounded-full text-[9px] sm:text-[10px] font-semibold transition-all duration-200 hover:scale-105 flex-shrink-0 shadow-sm"
+                      title="Ver historia del artesano"
+                      type="button"
+                    >
+                      <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                      <span className="hidden sm:inline">Historia</span>
+                    </button>
+                  )}
+                </div>
               </div>
 
               {product.inStock ? (

@@ -25,6 +25,10 @@ export const ROUTES = {
 
   MY_STORY: '/mi-historia',
 
+  SHOP: '/tienda',
+
+  ARTISAN: '/artesano',
+
   PRICING_CALCULATOR: '/calculadora-precios',
 
   MESSAGES: '/mensajes',

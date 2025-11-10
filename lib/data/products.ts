@@ -1,6 +1,5 @@
 import { Product } from '@/types';
-import fs from 'fs';
-import path from 'path';
+import productsData from '@/public/data/products.json';
 
 // Helper to generate random date within last N days
 function getRandomDate(daysAgo: number): string {
@@ -11,9 +10,7 @@ function getRandomDate(daysAgo: number): string {
 }
 
 export function getAllProducts(): Product[] {
-  const filePath = path.join(process.cwd(), 'public', 'data', 'products.json');
-  const jsonData = fs.readFileSync(filePath, 'utf-8');
-  const products = JSON.parse(jsonData) as Product[];
+  const products = productsData as Product[];
 
   // Add random createdAt dates to products (for demo)
   return products.map((product) => ({

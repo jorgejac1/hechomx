@@ -134,7 +134,7 @@ export const mockIndividualSeller: User = {
   phone: '+52 55 1234 5678',
   createdAt: '2024-03-15T10:00:00Z',
   makerProfile: {
-    shopName: 'Tejidos Sofia',
+    shopName: 'Tejidos Sofía',
     sellerType: 'individual',
     location: 'Ciudad de México, CDMX',
     description:

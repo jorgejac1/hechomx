@@ -31,3 +31,18 @@ export * from './types/seller-types';
 export * from './types/artisan-story';
 export * from './types/seller';
 export * from './types/buyer';
+
+export {
+  getArtisanIdFromMaker,
+  hasArtisanStory,
+  getArtisanStoryUrl,
+  getArtisanStoryById,
+} from './utils/artisan';
+
+export {
+  getShopSlug,
+  getShopBySlug,
+  getShopUrlFromMaker,
+  hasShop,
+  getAllShops,
+} from './utils/shop';

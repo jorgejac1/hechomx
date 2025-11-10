@@ -198,3 +198,15 @@ export function getSubSubcategories(category: string, subcategorySlug: string): 
   const subcategory = subcategories.find((s) => s.slug === subcategorySlug);
   return subcategory?.children || [];
 }
+
+export function getCategoryConfig(category: string) {
+  return {
+    category,
+    subcategories: getSubcategories(category),
+    count: getSubcategories(category).reduce((sum, sub) => sum + (sub.count || 0), 0),
+  };
+}
+
+export function getAllSubcategories(): Subcategory[] {
+  return Object.values(subcategoriesByCategory).flat();
+}

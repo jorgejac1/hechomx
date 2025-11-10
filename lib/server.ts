@@ -3,9 +3,28 @@
  * Only import in Server Components, API Routes, or server actions
  */
 
-// Server-only data fetching (uses fs)
-export * from './data/products';
-export * from './data/subcategories';
+// Direct re-exports from products
+export {
+  getAllProducts,
+  getProductById,
+  getProductsByCategory,
+  getProductsByState,
+  getFeaturedProducts,
+  searchProducts,
+  getCategories,
+  getStates,
+} from './data/products';
 
-// Re-export everything from main index (utilities and constants)
+// Direct re-exports from subcategories
+export {
+  getSubcategories,
+  getSubSubcategories,
+  getCategoryConfig,
+  getAllSubcategories,
+} from './data/subcategories';
+
+// Shop utilities that need products parameter (server-side)
+export { getProductsByShop } from './utils/shop';
+
+// Re-export client-safe utilities from main index
 export * from './index';
