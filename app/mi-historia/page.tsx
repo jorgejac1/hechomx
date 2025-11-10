@@ -111,7 +111,7 @@ export default function MiHistoriaPage() {
         }
 
         // If no saved edits, load from JSON file
-        const response = await fetch('/data/artisan-stories.json');
+        const response = await fetch('/api/artisan-stories');
         const data: Record<string, ArtisanStory> = await response.json();
         const story = data[artisanId];
 
