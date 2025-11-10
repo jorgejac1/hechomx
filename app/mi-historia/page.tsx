@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
@@ -21,10 +21,11 @@ import {
 import { Save, Eye, BookOpen } from 'lucide-react';
 import { SellerType, CraftCategory, IndigenousConnection } from '@/lib/types/seller-types';
 import { SELLER_TYPE_CONFIG } from '@/lib/types/seller-types';
+import type { ArtisanStory } from '@/lib/types/artisan-story';
 
 export default function MiHistoriaPage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading } = useAuth();
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const { showToast } = useToast();
 
   // Seller Classification
@@ -87,14 +88,107 @@ export default function MiHistoriaPage() {
     'classification' | 'basic' | 'story' | 'media' | 'recognition' | 'social'
   >('classification');
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoadingStory, setIsLoadingStory] = useState(true);
+
+  // Load existing story data when component mounts
+  useEffect(() => {
+    async function loadExistingStory() {
+      if (!user) return;
+
+      setIsLoadingStory(true);
+
+      try {
+        const artisanId = user.email.split('@')[0];
+
+        // First check localStorage for any saved edits
+        const savedStory = localStorage.getItem(`artisan_story_${artisanId}`);
+        if (savedStory) {
+          const story: ArtisanStory = JSON.parse(savedStory);
+          populateForm(story);
+          // Removed toast - silent load is better UX
+          setIsLoadingStory(false);
+          return;
+        }
+
+        // If no saved edits, load from JSON file
+        const response = await fetch('/data/artisan-stories.json');
+        const data: Record<string, ArtisanStory> = await response.json();
+        const story = data[artisanId];
+
+        if (story) {
+          populateForm(story);
+          // Removed toast - silent load is better UX
+        }
+      } catch (error) {
+        console.error('Error loading story:', error);
+        showToast('No se pudo cargar la historia', 'error'); // Keep error toast
+      }
+
+      setIsLoadingStory(false);
+    }
+
+    loadExistingStory();
+  }, [user, showToast]);
+
+  // Helper function to populate form with story data
+  const populateForm = (story: ArtisanStory) => {
+    // Seller Classification
+    setSellerType(story.sellerType || 'artisan_individual');
+    setCraftCategory(story.craftCategory);
+    setIndigenousConnection(story.indigenousConnection || 'none');
+
+    // Basic Info
+    setSpecialty(story.specialty || '');
+    setYearsOfExperience(story.yearsOfExperience || 0);
+    setGenerationsOfCraft(story.generationsOfCraft || 1);
+    setApprentices(story.apprentices || 0);
+    setTeamSize(story.teamSize || 0);
+    setFoundingYear(story.foundingYear || new Date().getFullYear());
+    setCity(story.location?.city || '');
+    setState(story.location?.state || '');
+    setRegion(story.location?.region || '');
+
+    // Stories
+    setPersonalStory(story.personalStory || '');
+    setHeritageStory(story.heritageStory || '');
+    setCraftTechnique(story.craftTechnique || '');
+    setProductionProcess(story.productionProcess || '');
+    setDailyLife(story.dailyLife || '');
+    setCulturalSignificance(story.culturalSignificance || '');
+    setMissionStatement(story.missionStatement || '');
+
+    // Arrays
+    setTraditionalTechniques(story.traditionalTechniques || []);
+    setSustainabilityPractices(story.sustainabilityPractices || []);
+    setIndigenousLanguageTerms(story.indigenousLanguageTerms || []);
+
+    // Media
+    setVideoIntro(story.videoIntro || '');
+    setWorkshopPhotos(story.workshopPhotos || []);
+    setProcessPhotos(story.processPhotos || []);
+    setFamilyPhotos(story.familyPhotos || []);
+    setTeamPhotos(story.teamPhotos || []);
+
+    // Recognition
+    setAwards(story.awards || []);
+    setCertifications(story.certifications || []);
+    setCommunityProjects(story.communityProjects || []);
+
+    // Social Media
+    setInstagram(story.socialMedia?.instagram || '');
+    setFacebook(story.socialMedia?.facebook || '');
+    setYoutubeChannel(story.socialMedia?.youtube || '');
+    setTiktok(story.socialMedia?.tiktok || '');
+    setWebsite(story.socialMedia?.website || '');
+  };
 
   // Redirect if not authenticated
-  if (!isAuthenticated && !isLoading) {
+  if (!isAuthenticated && !authLoading) {
     router.push(ROUTES.LOGIN);
     return null;
   }
 
-  if (isLoading || !user) {
+  if (authLoading || !user) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando..." />;
   }
 
@@ -239,14 +333,101 @@ export default function MiHistoriaPage() {
       return;
     }
 
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const artisanId = user.email.split('@')[0];
+
+      // Build the complete ArtisanStory object
+      const storyData: ArtisanStory = {
+        id: `story-${artisanId}`,
+        artisanId,
+        artisanName: user.name,
+        shopName: user.makerProfile?.shopName || user.name,
+        avatar: user.avatar || `https://i.pravatar.cc/150?u=${user.email}`,
+        coverImage: workshopPhotos[0] || processPhotos[0] || '',
+
+        // Seller Classification
+        sellerType,
+        craftCategory,
+        craftStyle: 'traditional',
+        indigenousConnection,
+        speaksIndigenousLanguage: indigenousLanguageTerms.length > 0,
+        indigenousLanguage:
+          indigenousLanguageTerms.length > 0 ? indigenousLanguageTerms[0].language : undefined,
+
+        // Basic Info
+        location: {
+          city,
+          state,
+          region: region || state,
+        },
+        specialty,
+        yearsOfExperience,
+        generationsOfCraft,
+        apprentices,
+        teamSize,
+        foundingYear,
+
+        // Stories
+        personalStory,
+        heritageStory,
+        craftTechnique,
+        productionProcess,
+        dailyLife,
+        culturalSignificance,
+        missionStatement,
+
+        // Arrays
+        traditionalTechniques,
+        sustainabilityPractices,
+        indigenousLanguageTerms,
+
+        // Media
+        videoIntro,
+        workshopPhotos,
+        processPhotos,
+        familyPhotos,
+        teamPhotos,
+
+        // Recognition
+        awards,
+        certifications,
+        communityProjects,
+
+        // Social Media
+        socialMedia: {
+          instagram,
+          facebook,
+          youtube: youtubeChannel,
+          tiktok,
+          website,
+        },
+
+        // Metadata
+        lastUpdated: new Date().toISOString(),
+        isPublished: true,
+      };
+
+      // Save to localStorage (simulating API call)
+      localStorage.setItem(`artisan_story_${artisanId}`, JSON.stringify(storyData));
+
+      // Simulate API delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       showToast('Historia guardada exitosamente', 'success');
-      setIsSaving(false);
-    }, 1500);
+    } catch (error) {
+      console.error('Error saving story:', error);
+      showToast('Error al guardar la historia', 'error');
+    }
+
+    setIsSaving(false);
   };
 
   const config = SELLER_TYPE_CONFIG[sellerType];
+
+  // Show loading state while loading story
+  if (isLoadingStory) {
+    return <LoadingSpinner size="lg" fullScreen text="Cargando tu historia..." />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-6 px-4">
