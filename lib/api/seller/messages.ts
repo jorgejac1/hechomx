@@ -1,4 +1,4 @@
-import type { SellerMessage } from '@/lib/types/seller';
+import type { SellerMessage } from '@/lib/types/seller-types';
 
 export async function getSellerMessages(userEmail: string): Promise<SellerMessage[]> {
   try {

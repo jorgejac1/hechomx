@@ -1,134 +1,344 @@
-export type SellerType =
-  | 'hobby_maker' // Makes things at home
-  | 'artisan_individual' // Professional artisan
-  | 'workshop' // Small team/taller
-  | 'company'; // Larger company
+// Import Order types from order.ts (for internal use only)
+import type { Order } from './order';
 
-export type CraftStyle = 'traditional' | 'contemporary' | 'mixed';
+// Re-export seller classification types and constants from seller.ts
+export type {
+  SellerType,
+  CraftStyle,
+  IndigenousConnection,
+  CraftCategory,
+  SellerClassification,
+} from './seller';
 
-export type IndigenousConnection =
-  | 'native' // Indigenous, speaks language
-  | 'descendant' // Indigenous descendant
-  | 'learned' // Learned techniques
-  | 'none'; // No connection
+export { SELLER_TYPE_CONFIG, CRAFT_CATEGORIES } from './seller';
 
-export type CraftCategory =
-  | 'textiles'
-  | 'jewelry'
-  | 'pottery'
-  | 'woodwork'
-  | 'metalwork'
-  | 'leather'
-  | 'paper'
-  | 'candles'
-  | 'food'
-  | 'crafts'
-  | 'mixed'
-  | 'other';
+// ============================================================================
+// BASIC SELLER TYPES FOR DASHBOARD
+// ============================================================================
 
-export interface SellerClassification {
-  sellerType: SellerType;
-  craftCategory?: CraftCategory;
-  craftStyle?: CraftStyle;
-  indigenousConnection?: IndigenousConnection;
-  speaksIndigenousLanguage?: boolean;
-  indigenousLanguage?: string;
+export interface SellerProduct {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  stock: number;
+  sold: number;
+  views: number;
+  favorites: number;
+  status: 'active' | 'out_of_stock' | 'draft';
 }
 
-export const SELLER_TYPE_CONFIG = {
-  hobby_maker: {
-    emoji: '🏠',
-    title: 'Hago cosas en casa',
-    subtitle: 'Vendo mis creaciones como hobby o negocio secundario',
-    examples: 'Bufandas tejidas, velas, jabones, manualidades',
-    storyTitle: 'Sobre Mí',
-    storySubtitle: 'Comparte un poco sobre ti y lo que haces',
-  },
-  artisan_individual: {
-    emoji: '🎨',
-    title: 'Soy artesano profesional',
-    subtitle: 'Dedicado a mi oficio, es mi profesión principal',
-    examples: 'Joyería, textiles tradicionales, cerámica, tallado',
-    storyTitle: 'Mi Historia Artesanal',
-    storySubtitle: 'Comparte tu historia, herencia y proceso creativo',
-  },
-  workshop: {
-    emoji: '👥',
-    title: 'Tengo un taller',
-    subtitle: 'Trabajo con un equipo pequeño (2-10 personas)',
-    examples: 'Taller familiar, cooperativa, equipo de producción',
-    storyTitle: 'Nuestra Historia',
-    storySubtitle: 'Comparte la historia de tu taller y equipo',
-  },
-  company: {
-    emoji: '🏢',
-    title: 'Soy una empresa',
-    subtitle: 'Negocio establecido con equipo grande',
-    examples: 'Fábrica, marca establecida, producción a escala',
-    storyTitle: 'Acerca de la Empresa',
-    storySubtitle: 'Historia, misión y valores de tu empresa',
-  },
-} as const;
+export interface Review {
+  id: string;
+  productId: string;
+  productName: string;
+  buyerId?: string;
+  buyerName: string;
+  buyerAvatar?: string;
+  rating: number;
+  comment: string;
+  date: string;
+  helpful: number;
+  response?: {
+    text: string;
+    date: string;
+  };
+}
 
-export const CRAFT_CATEGORIES = {
-  textiles: {
-    label: 'Textiles y Ropa',
-    icon: '🧵',
-    examples: 'Tejidos, bordados, rebozos, huipiles, bufandas',
-  },
-  jewelry: {
-    label: 'Joyería',
-    icon: '💍',
-    examples: 'Plata, cobre, filigrana, piedras, bisutería',
-  },
-  pottery: {
-    label: 'Cerámica y Alfarería',
-    icon: '🏺',
-    examples: 'Talavera, barro negro, cerámica vidriada',
-  },
-  woodwork: {
-    label: 'Madera',
-    icon: '🪵',
-    examples: 'Alebrijes, muebles, máscaras, tallados',
-  },
-  metalwork: {
-    label: 'Metalistería',
-    icon: '⚒️',
-    examples: 'Hojalata, herrería, latón',
-  },
-  leather: {
-    label: 'Piel y Cuero',
-    icon: '👜',
-    examples: 'Bolsas, cinturones, huaraches, talabartería',
-  },
-  paper: {
-    label: 'Papel Artesanal',
-    icon: '📄',
-    examples: 'Papel amate, papel picado, cartón',
-  },
-  candles: {
-    label: 'Velas y Jabones',
-    icon: '🕯️',
-    examples: 'Velas aromáticas, jabones artesanales',
-  },
-  food: {
-    label: 'Alimentos Artesanales',
-    icon: '🌮',
-    examples: 'Chocolates, moles, mezcal, conservas',
-  },
-  crafts: {
-    label: 'Manualidades',
-    icon: '✂️',
-    examples: 'Macramé, crochet, costura, bordado',
-  },
-  mixed: {
-    label: 'Varios',
-    icon: '🎨',
-    examples: 'Múltiples categorías',
-  },
-  other: {
-    label: 'Otros',
-    icon: '✨',
-    examples: 'Otras artesanías mexicanas',
-  },
-} as const;
+export interface MakerStats {
+  salesCount: number;
+  productsCount: number;
+  rating: number;
+  reviewsCount: number;
+  responseRate: number;
+}
+
+export interface MakerProfile {
+  shopName: string;
+  location: string;
+  bio?: string;
+  specialty?: string;
+  memberSince: string;
+  verified: boolean;
+  products: SellerProduct[];
+  reviews: Review[];
+  recentOrders: Order[];
+  stats: MakerStats;
+}
+
+// ============================================================================
+// SELLER ANALYTICS TYPES
+// ============================================================================
+
+export interface AnalyticsData {
+  revenue: {
+    today: number;
+    yesterday: number;
+    thisWeek: number;
+    lastWeek: number;
+    thisMonth: number;
+    lastMonth: number;
+    thisYear: number;
+  };
+  salesTrend: Array<{
+    date: string;
+    sales: number;
+    revenue: number;
+  }>;
+  topProducts: Array<{
+    id: string;
+    name: string;
+    sales: number;
+    revenue: number;
+    trend: 'up' | 'down' | 'stable';
+  }>;
+  trafficSources: Array<{
+    source: string;
+    visits: number;
+    conversions: number;
+    percentage: number;
+  }>;
+  peakTimes: {
+    bestDay: string;
+    bestHour: string;
+    weekdayVsWeekend: {
+      weekday: number;
+      weekend: number;
+    };
+  };
+  customerDemographics: {
+    topCities: Array<{
+      city: string;
+      percentage: number;
+    }>;
+    ageGroups: Array<{
+      range: string;
+      percentage: number;
+    }>;
+  };
+  conversionRate: number;
+  averageOrderValue: number;
+  forecast: {
+    nextMonth: number;
+    confidence: string;
+  };
+}
+
+// ============================================================================
+// SELLER ACTIONS TYPES
+// ============================================================================
+
+export interface PendingAction {
+  type: 'restock' | 'respond' | 'promote' | 'ship' | 'message';
+  priority: 'low' | 'medium' | 'high' | 'critical';
+  title: string;
+  description: string;
+}
+
+export interface PendingActionsData {
+  pendingOrders: Array<{
+    id: string;
+    customerName: string;
+    total: number;
+    status: string;
+    daysWaiting: number;
+    urgent: boolean;
+  }>;
+  lowStockProducts: Array<{
+    id: string;
+    name: string;
+    currentStock: number;
+    recommendedStock: number;
+    urgency: 'low' | 'medium' | 'high' | 'critical';
+  }>;
+  unansweredMessages: number;
+  pendingReviews: Array<{
+    id: string;
+    buyerName: string;
+    rating: number;
+    daysAgo: number;
+    needsResponse: boolean;
+  }>;
+  upcomingPromotions: Array<{
+    name: string;
+    discount: number;
+    startsIn: number;
+  }>;
+  recommendedActions: PendingAction[];
+}
+
+// ============================================================================
+// CUSTOMER INSIGHTS TYPES
+// ============================================================================
+
+export interface CustomerInsight {
+  id: string;
+  name: string;
+  avatar?: string;
+  totalPurchases: number;
+  totalSpent: number;
+  lastPurchase: string;
+  favoriteProducts: string[];
+  lifetimeValue: 'low' | 'medium' | 'high' | 'vip';
+}
+
+export interface CustomerInsightsData {
+  repeatCustomers: CustomerInsight[];
+  topCustomers: Array<{
+    id: string;
+    name: string;
+    totalSpent: number;
+    purchases: number;
+  }>;
+  purchasePatterns: {
+    averageTimeBetweenPurchases: number;
+    mostCommonCombinations: string[][];
+    seasonalTrends: Array<{
+      season: string;
+      increase: number;
+    }>;
+  };
+  upcomingBirthdays: Array<{
+    id: string;
+    name: string;
+    date: string;
+    daysUntil: number;
+  }>;
+}
+
+// ============================================================================
+// SELLER MESSAGES TYPES
+// ============================================================================
+
+export interface SellerMessage {
+  id: string;
+  from: {
+    id: string;
+    name: string;
+    avatar?: string;
+  };
+  subject: string;
+  message: string;
+  date: string;
+  status: 'read' | 'unread';
+  orderId?: string | null;
+  replies?: Array<{
+    from: 'seller' | 'customer';
+    message: string;
+    date: string;
+  }>;
+}
+
+// ============================================================================
+// SELLER REVIEWS TYPES
+// ============================================================================
+
+export interface SellerReview {
+  id: string;
+  buyer: {
+    id: string;
+    name: string;
+    avatar?: string;
+    verified: boolean;
+  };
+  product: {
+    id: string;
+    name: string;
+    image: string;
+  };
+  rating: number;
+  date: string;
+  review: string;
+  images?: string[];
+  helpful: number;
+  status: 'pending' | 'responded';
+  response?: {
+    text: string;
+    date: string;
+  };
+  daysAgo?: number;
+}
+
+// ============================================================================
+// SELLER ORDERS TYPES
+// ============================================================================
+
+export interface SellerOrder {
+  id: string;
+  orderNumber: string;
+  customer: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+    avatar?: string;
+  };
+  status: 'processing' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
+  paymentStatus: 'pending' | 'paid' | 'refunded';
+  date: string;
+  total: number;
+  tracking?: string;
+  carrier?: string;
+  estimatedDelivery?: string;
+  actualDelivery?: string;
+  items: Array<{
+    id: string;
+    name: string;
+    image: string;
+    price: number;
+    quantity: number;
+    sku: string;
+  }>;
+  shippingAddress: {
+    name: string;
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country?: string;
+    phone: string;
+  };
+  timeline: Array<{
+    status: string;
+    date: string;
+    description: string;
+  }>;
+  notes?: string;
+  urgent: boolean;
+}
+
+// ============================================================================
+// SELLER TASKS TYPES
+// ============================================================================
+
+export interface SellerTaskRelatedData {
+  customerName?: string;
+  orderNumber?: string;
+  amount?: number;
+  urgent?: boolean;
+  daysWaiting?: number;
+  buyerName?: string;
+  rating?: number;
+  daysAgo?: number;
+  productName?: string;
+  currentStock?: number;
+  recommendedStock?: number;
+  messageCount?: number;
+  promotionName?: string;
+  discount?: number;
+  startsIn?: number;
+}
+
+export interface SellerTask {
+  id: string;
+  type: 'order' | 'message' | 'review' | 'inventory' | 'promotion';
+  priority: 'critical' | 'high' | 'medium' | 'low';
+  title: string;
+  description: string;
+  dueDate?: string;
+  status: 'pending' | 'completed' | 'snoozed';
+  actionUrl: string;
+  relatedId?: string;
+  relatedData?: SellerTaskRelatedData;
+  createdAt: string;
+}

@@ -5,7 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { BuyerOrder, getBuyerOrders } from '@/lib/api/sellerApi';
+import { getBuyerOrders } from '@/lib/api/sellerApi';
+import type { BuyerOrder } from '@/lib/types/buyer';
 import { formatCurrency, formatRelativeTime, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {

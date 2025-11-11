@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { BuyerImpactData, getBuyerImpact } from '@/lib/api/sellerApi';
+import { getBuyerImpact } from '@/lib/api/sellerApi';
+import type { BuyerImpactData } from '@/lib/types/buyer';
 import { formatCurrency, formatRelativeTime } from '@/lib';
 import {
   Heart,

@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { PendingActionsData, getPendingActions } from '@/lib/api/sellerApi';
+import { getPendingActions } from '@/lib/api/sellerApi';
+import type { PendingActionsData } from '@/lib/types';
+import { getShopSlug } from '@/lib/utils/shop';
 import { getArtisanStoryByEmail } from '@/lib';
 import { formatCurrency, ROUTES } from '@/lib';
 import {
@@ -15,13 +17,16 @@ import {
   Loader2,
   Sparkles,
   Calculator,
+  Store,
+  ExternalLink,
 } from 'lucide-react';
 
 interface QuickActionsProps {
   userEmail: string;
+  shopName: string; // Added prop
 }
 
-export default function QuickActions({ userEmail }: QuickActionsProps) {
+export default function QuickActions({ userEmail, shopName }: QuickActionsProps) {
   const router = useRouter();
   const [data, setData] = useState<PendingActionsData | null>(null);
   const [hasStory, setHasStory] = useState<boolean | null>(null);
@@ -118,6 +123,23 @@ export default function QuickActions({ userEmail }: QuickActionsProps) {
               </div>
             </div>
             <ArrowRight className="w-5 h-5 text-blue-600 flex-shrink-0" />
+          </div>
+        </button>
+
+        {/* View My Shop - FIXED */}
+        <button
+          onClick={() => window.open(`/tienda/${getShopSlug(shopName)}`, '_blank')}
+          className="w-full p-4 bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg border-2 border-emerald-300 hover:from-emerald-100 hover:to-green-100 transition text-left"
+        >
+          <div className="flex items-start justify-between">
+            <div className="flex gap-3">
+              <Store className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-gray-900">🏪 Vista de Cliente</p>
+                <p className="text-sm text-gray-600">Ve cómo los clientes ven tu tienda</p>
+              </div>
+            </div>
+            <ExternalLink className="w-4 h-4 text-emerald-600 flex-shrink-0" />
           </div>
         </button>
 

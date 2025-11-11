@@ -26,6 +26,8 @@ export const ROUTES = {
   MY_STORY: '/mi-historia',
 
   SHOP: '/tienda',
+  PRODUCT_CREATE: '/productos/crear',
+  PRODUCT_MANAGE: '/productos/gestionar',
 
   ARTISAN: '/artesano',
 

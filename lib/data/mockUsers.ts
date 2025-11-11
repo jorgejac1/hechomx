@@ -1,54 +1,7 @@
 import { User } from '@/contexts/AuthContext';
+import type { SellerProduct, Order, Review } from '@/lib/types';
 
 export type SellerType = 'individual' | 'artisan' | 'company';
-
-export interface Review {
-  id: string;
-  buyerId: string;
-  buyerName: string;
-  buyerAvatar?: string;
-  rating: number;
-  comment: string;
-  date: string;
-  productId: string;
-  productName: string;
-  helpful: number;
-  response?: {
-    text: string;
-    date: string;
-  };
-}
-
-export interface Order {
-  id: string;
-  date: string;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  total: number;
-  items: {
-    productId: string;
-    name: string;
-    quantity: number;
-    price: number;
-    image: string;
-  }[];
-  customer: {
-    name: string;
-    email: string;
-  };
-  tracking?: string;
-}
-
-export interface SellerProduct {
-  id: string;
-  name: string;
-  price: number;
-  stock: number;
-  sold: number;
-  image: string;
-  status: 'active' | 'paused' | 'out_of_stock';
-  views: number;
-  favorites: number;
-}
 
 export interface BusinessHours {
   day: string;
@@ -283,16 +236,16 @@ export const mockIndividualSeller: User = {
     recentOrders: [
       {
         id: 'o1',
-        date: '2024-11-05T14:30:00Z',
+        createdAt: '2024-11-05T14:30:00Z',
         status: 'processing',
         total: 1300,
         items: [
           {
-            productId: 'p1',
+            id: 'p1',
             name: 'Manta Tejida Artesanal',
             quantity: 2,
             price: 650,
-            image: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=400',
+            images: ['https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=400'],
           },
         ],
         customer: {
@@ -302,16 +255,16 @@ export const mockIndividualSeller: User = {
       },
       {
         id: 'o2',
-        date: '2024-11-04T10:00:00Z',
+        createdAt: '2024-11-04T10:00:00Z',
         status: 'shipped',
         total: 700,
         items: [
           {
-            productId: 'p2',
+            id: 'p2',
             name: 'Cojín Tejido Geometrico',
             quantity: 2,
             price: 350,
-            image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400',
+            images: ['https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400'],
           },
         ],
         customer: {
@@ -457,16 +410,16 @@ export const mockArtisan: User = {
     recentOrders: [
       {
         id: 'ao1',
-        date: '2024-11-06T09:15:00Z',
+        createdAt: '2024-11-06T09:15:00Z',
         status: 'processing',
         total: 5600,
         items: [
           {
-            productId: 'ap1',
+            id: 'ap1',
             name: 'Alebrije León Grande',
             quantity: 2,
             price: 2800,
-            image: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400',
+            images: ['https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400'],
           },
         ],
         customer: {
@@ -594,16 +547,16 @@ export const mockCompany: User = {
     recentOrders: [
       {
         id: 'co1',
-        date: '2024-11-07T08:30:00Z',
+        createdAt: '2024-11-07T08:30:00Z',
         status: 'pending',
         total: 13500,
         items: [
           {
-            productId: 'cp1',
+            id: 'cp1',
             name: 'Set Vajilla Talavera 24 piezas',
             quantity: 3,
             price: 4500,
-            image: 'https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=400',
+            images: ['https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=400'],
           },
         ],
         customer: {

@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { ArtisanStory } from '@/lib/types/artisan-story';
+import { getShopSlug } from '@/lib/utils/shop';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {
   MapPin,
@@ -12,9 +13,9 @@ import {
   Users,
   Calendar,
   Heart,
-  Share2,
+  Instagram,
+  Facebook,
   Video,
-  MessageCircle,
   CheckCircle2,
   Sparkles,
   ArrowLeft,
@@ -23,7 +24,6 @@ import {
 
 export default function ArtisanProfilePage() {
   const params = useParams();
-  const router = useRouter();
   const [story, setStory] = useState<ArtisanStory | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState<'story' | 'process' | 'recognition'>('story');
@@ -35,7 +35,6 @@ export default function ArtisanProfilePage() {
         const response = await fetch('/api/artisan-stories');
         const data: Record<string, ArtisanStory> = await response.json();
 
-        // Find story by artisanId - now using the key directly
         const foundStory = data[params.id as string] || null;
 
         setStory(foundStory);
@@ -85,14 +84,14 @@ export default function ArtisanProfilePage() {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-        {/* Back Button */}
-        <button
-          onClick={() => router.back()}
+        {/* Back Button - Fixed */}
+        <Link
+          href="/"
           className="absolute top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-white transition text-gray-900 font-medium"
         >
           <ArrowLeft className="w-4 h-4" />
           Volver
-        </button>
+        </Link>
 
         {/* Artisan Info Overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
@@ -142,7 +141,7 @@ export default function ArtisanProfilePage() {
                 </div>
               </div>
 
-              {/* Social Media */}
+              {/* Social Media - Fixed Icons */}
               {story.socialMedia && (
                 <div className="flex gap-3">
                   {story.socialMedia.instagram && (
@@ -157,7 +156,7 @@ export default function ArtisanProfilePage() {
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition group"
                       title="Instagram"
                     >
-                      <Share2 className="w-5 h-5 text-white" />
+                      <Instagram className="w-5 h-5 text-white" />
                     </a>
                   )}
                   {story.socialMedia.facebook && (
@@ -172,7 +171,7 @@ export default function ArtisanProfilePage() {
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition group"
                       title="Facebook"
                     >
-                      <MessageCircle className="w-5 h-5 text-white" />
+                      <Facebook className="w-5 h-5 text-white" />
                     </a>
                   )}
                   {story.socialMedia.youtube && (
@@ -497,14 +496,14 @@ export default function ArtisanProfilePage() {
           </div>
         </div>
 
-        {/* CTA Section */}
+        {/* CTA Section - Fixed to use shop slug */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl shadow-lg p-8 text-center text-white">
           <h2 className="text-2xl font-bold mb-2">Descubre Mis Creaciones</h2>
           <p className="text-primary-100 mb-6">
             Explora mi tienda y encuentra piezas únicas hechas a mano
           </p>
           <Link
-            href={`/tienda/${story.shopName.toLowerCase().replace(/\s+/g, '-')}`}
+            href={`/tienda/${getShopSlug(story.shopName)}`}
             className="inline-block px-8 py-3 bg-white text-primary-600 rounded-lg hover:bg-gray-100 transition font-bold"
           >
             Ver Mi Tienda

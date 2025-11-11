@@ -12,13 +12,13 @@
       },
       "status": "processing",
       "paymentStatus": "paid",
-      "date": "2024-11-06T10:30:00Z",
+      "createdAt": "2024-11-06T10:30:00Z",
       "total": 1300,
       "items": [
         {
           "id": "p1",
           "name": "Manta Tejida Artesanal",
-          "image": "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400",
+          "images": ["https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400"],
           "price": 1300,
           "quantity": 1,
           "sku": "TEX-MAN-001"
@@ -53,7 +53,7 @@
       },
       "status": "shipped",
       "paymentStatus": "paid",
-      "date": "2024-11-02T14:20:00Z",
+      "createdAt": "2024-11-02T14:20:00Z",
       "total": 1050,
       "tracking": "MEX123789456",
       "carrier": "Estafeta",
@@ -62,7 +62,7 @@
         {
           "id": "p2",
           "name": "Cojín Tejido Geometrico",
-          "image": "https://images.unsplash.com/photo-1556228852-80a5de4b2fe3?w=400",
+          "images": ["https://images.unsplash.com/photo-1556228852-80a5de4b2fe3?w=400"],
           "price": 350,
           "quantity": 3,
           "sku": "TEX-COJ-002"
@@ -107,7 +107,7 @@
       },
       "status": "delivered",
       "paymentStatus": "paid",
-      "date": "2024-10-25T09:15:00Z",
+      "createdAt": "2024-10-25T09:15:00Z",
       "total": 1580,
       "tracking": "MEX987654321",
       "carrier": "DHL Express",
@@ -117,7 +117,7 @@
         {
           "id": "p1",
           "name": "Manta Tejida Artesanal",
-          "image": "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400",
+          "images": ["https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400"],
           "price": 1300,
           "quantity": 1,
           "sku": "TEX-MAN-001"
@@ -125,7 +125,7 @@
         {
           "id": "p3",
           "name": "Canasta Macramé",
-          "image": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400",
+          "images": ["https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400"],
           "price": 280,
           "quantity": 1,
           "sku": "TEX-CAN-003"
@@ -177,13 +177,13 @@
       },
       "status": "processing",
       "paymentStatus": "paid",
-      "date": "2024-11-07T09:00:00Z",
+      "createdAt": "2024-11-07T09:00:00Z",
       "total": 5600,
       "items": [
         {
           "id": "ap1",
           "name": "Alebrije León Grande",
-          "image": "https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=400",
+          "images": ["https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=400"],
           "price": 2800,
           "quantity": 2,
           "sku": "ALB-LEO-001"
@@ -219,13 +219,13 @@
       },
       "status": "confirmed",
       "paymentStatus": "paid",
-      "date": "2024-11-05T11:30:00Z",
+      "createdAt": "2024-11-05T11:30:00Z",
       "total": 2800,
       "items": [
         {
           "id": "ap2",
           "name": "Alebrije Búho Mediano",
-          "image": "https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=400",
+          "images": ["https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=400"],
           "price": 2800,
           "quantity": 1,
           "sku": "ALB-BUH-002"
@@ -266,7 +266,7 @@
       },
       "status": "delivered",
       "paymentStatus": "paid",
-      "date": "2024-10-20T10:15:00Z",
+      "createdAt": "2024-10-20T10:15:00Z",
       "total": 7500,
       "tracking": "MEX456789123",
       "carrier": "FedEx",
@@ -276,7 +276,7 @@
         {
           "id": "ap3",
           "name": "Alebrije Dragón",
-          "image": "https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=400",
+          "images": ["https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=400"],
           "price": 2500,
           "quantity": 3,
           "sku": "ALB-DRA-003"
@@ -328,13 +328,13 @@
       },
       "status": "processing",
       "paymentStatus": "paid",
-      "date": "2024-11-06T08:00:00Z",
+      "createdAt": "2024-11-06T08:00:00Z",
       "total": 45000,
       "items": [
         {
           "id": "comp1",
           "name": "Set Talavera Premium (6 piezas)",
-          "image": "https://images.unsplash.com/photo-1578749556568-bc2c40e32b7a?w=400",
+          "images": ["https://images.unsplash.com/photo-1578749556568-bc2c40e32b7a?w=400"],
           "price": 3000,
           "quantity": 15,
           "sku": "TAL-SET-001"
@@ -369,13 +369,13 @@
       },
       "status": "confirmed",
       "paymentStatus": "paid",
-      "date": "2024-11-04T10:30:00Z",
+      "createdAt": "2024-11-04T10:30:00Z",
       "total": 12000,
       "items": [
         {
           "id": "comp1",
           "name": "Set Talavera Premium (6 piezas)",
-          "image": "https://images.unsplash.com/photo-1578749556568-bc2c40e32b7a?w=400",
+          "images": ["https://images.unsplash.com/photo-1578749556568-bc2c40e32b7a?w=400"],
           "price": 3000,
           "quantity": 4,
           "sku": "TAL-SET-001"
@@ -415,13 +415,13 @@
       },
       "status": "processing",
       "paymentStatus": "paid",
-      "date": "2024-11-02T14:00:00Z",
+      "createdAt": "2024-11-02T14:00:00Z",
       "total": 28000,
       "items": [
         {
           "id": "comp2",
           "name": "Colección Textiles Chiapanecos",
-          "image": "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400",
+          "images": ["https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400"],
           "price": 4000,
           "quantity": 7,
           "sku": "TEX-COL-001"
@@ -456,7 +456,7 @@
       },
       "status": "delivered",
       "paymentStatus": "paid",
-      "date": "2024-10-15T09:00:00Z",
+      "createdAt": "2024-10-15T09:00:00Z",
       "total": 25000,
       "tracking": "INT789456123",
       "carrier": "DHL International",
@@ -466,7 +466,7 @@
         {
           "id": "comp1",
           "name": "Set Talavera Premium (6 piezas)",
-          "image": "https://images.unsplash.com/photo-1578749556568-bc2c40e32b7a?w=400",
+          "images": ["https://images.unsplash.com/photo-1578749556568-bc2c40e32b7a?w=400"],
           "price": 3000,
           "quantity": 5,
           "sku": "TAL-SET-001"
@@ -474,7 +474,7 @@
         {
           "id": "comp3",
           "name": "Pack Artesanías Variadas",
-          "image": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400",
+          "images": ["https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400"],
           "price": 2000,
           "quantity": 5,
           "sku": "VAR-PACK-001"

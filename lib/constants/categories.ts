@@ -34,3 +34,82 @@ export const CATEGORY_COLORS: Record<string, string> = {
   [CATEGORIES.METAL]: 'bg-gray-100 text-gray-700',
   [CATEGORIES.VIDRIO]: 'bg-cyan-100 text-cyan-700',
 };
+
+// NEW: Category structure with subcategories for forms
+export interface CategoryOption {
+  name: string;
+  subcategories: string[];
+}
+
+export const CATEGORY_OPTIONS: CategoryOption[] = [
+  {
+    name: CATEGORIES.TEXTILES,
+    subcategories: [
+      'Sarapes y Rebozos',
+      'Huipiles y Vestimenta',
+      'Bordados',
+      'Tapetes y Alfombras',
+      'Bolsas Tejidas',
+    ],
+  },
+  {
+    name: CATEGORIES.CERAMICA,
+    subcategories: [
+      'Talavera',
+      'Barro Negro',
+      'Cerámica de Alta Temperatura',
+      'Vajillas',
+      'Figuras Decorativas',
+    ],
+  },
+  {
+    name: CATEGORIES.JOYERIA,
+    subcategories: [
+      'Plata',
+      'Filigrana',
+      'Piedras Naturales',
+      'Collares',
+      'Aretes',
+      'Pulseras',
+      'Anillos',
+    ],
+  },
+  {
+    name: CATEGORIES.MADERA,
+    subcategories: [
+      'Alebrijes',
+      'Máscaras',
+      'Muebles',
+      'Utensilios de Cocina',
+      'Juguetes',
+      'Cajas',
+    ],
+  },
+  {
+    name: CATEGORIES.CUERO,
+    subcategories: ['Bolsas', 'Cinturones', 'Carteras', 'Huaraches', 'Mochilas'],
+  },
+  {
+    name: CATEGORIES.PAPEL,
+    subcategories: ['Papel Amate', 'Papel Picado', 'Cuadernos Artesanales', 'Piñatas'],
+  },
+  {
+    name: CATEGORIES.METAL,
+    subcategories: ['Herrería', 'Hojalata', 'Cobre Martillado', 'Esculturas', 'Lámparas'],
+  },
+  {
+    name: CATEGORIES.VIDRIO,
+    subcategories: ['Vidrio Soplado', 'Vitrales', 'Vajillas', 'Decoración'],
+  },
+];
+
+// Helper function to get subcategories by category name
+export function getSubcategoriesByCategory(categoryName: string): string[] {
+  const category = CATEGORY_OPTIONS.find((c) => c.name === categoryName);
+  return category?.subcategories || [];
+}
+
+// Helper to get all category names as array
+export function getCategoryNames(): string[] {
+  return Object.values(CATEGORIES);
+}

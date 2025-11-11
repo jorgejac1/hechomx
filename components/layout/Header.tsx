@@ -8,8 +8,18 @@ import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { Product } from '@/types';
 import { ROUTES } from '@/lib/constants/routes';
+import { getShopSlug } from '@/lib/utils/shop';
 import { SITE_NAME } from '@/config/site';
-import { User, LogOut, Heart, Package, ChevronDown, Sparkles } from 'lucide-react';
+import {
+  User,
+  LogOut,
+  Heart,
+  Package,
+  ChevronDown,
+  Sparkles,
+  ExternalLink,
+  Store,
+} from 'lucide-react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -218,6 +228,19 @@ export default function Header() {
                             <User className="w-4 h-4" />
                             Mi Perfil
                           </Link>
+                          {user?.makerProfile && (
+                            <Link
+                              href={`/tienda/${getShopSlug(user.makerProfile.shopName)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => setIsUserMenuOpen(false)}
+                              className="flex items-center gap-2 px-4 py-2 text-sm text-primary-600 hover:bg-primary-50 font-medium"
+                            >
+                              <Store className="w-4 h-4" />
+                              Ver Mi Tienda
+                              <ExternalLink className="w-3 h-3" />
+                            </Link>
+                          )}
                           <Link
                             href={ROUTES.ORDERS}
                             onClick={() => setIsUserMenuOpen(false)}
@@ -460,6 +483,19 @@ export default function Header() {
                         <p className="text-xs text-gray-600">{user?.email}</p>
                       </div>
                     </div>
+                    {user?.makerProfile && (
+                      <Link
+                        href={`/tienda/${getShopSlug(user.makerProfile.shopName)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 bg-primary-50 text-primary-700 px-4 py-2 rounded-lg hover:bg-primary-100 font-semibold"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <Store className="w-5 h-5" />
+                        Ver Mi Tienda
+                        <ExternalLink className="w-4 h-4 ml-auto" />
+                      </Link>
+                    )}
                     <Link
                       href={ROUTES.PROFILE}
                       className="flex items-center gap-3 text-gray-700 hover:text-primary-600 font-medium py-2"

@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { CustomerInsightsData, getCustomerInsights } from '@/lib/api/sellerApi';
+import { getCustomerInsights } from '@/lib/api/sellerApi';
+import type { CustomerInsightsData } from '@/lib/types';
 import { formatCurrency, formatRelativeTime } from '@/lib';
 import {
   Users,

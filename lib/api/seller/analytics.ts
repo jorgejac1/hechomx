@@ -1,4 +1,8 @@
-import type { AnalyticsData, PendingActionsData, CustomerInsightsData } from '@/lib/types/seller';
+import type {
+  AnalyticsData,
+  PendingActionsData,
+  CustomerInsightsData,
+} from '@/lib/types/seller-types';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

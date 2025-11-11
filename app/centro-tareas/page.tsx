@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { SellerTask, getSellerTasks } from '@/lib/api/sellerApi';
+import { getSellerTasks } from '@/lib/api/sellerApi';
+import type { SellerTask } from '@/lib/types';
 import { formatRelativeTime, formatCurrency, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {

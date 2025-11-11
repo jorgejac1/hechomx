@@ -70,3 +70,29 @@ export interface ProductImage {
   height?: number;
   isPrimary?: boolean;
 }
+
+export interface ProductFormData {
+  name: string;
+  category: string;
+  subcategory: string;
+  price: number;
+  description: string;
+  images: string[];
+  stock: number;
+  materials?: string[];
+  dimensions?: {
+    length: number;
+    width: number;
+    height: number;
+    unit: 'cm' | 'in';
+  };
+  weight?: {
+    value: number;
+    unit: 'kg' | 'lb';
+  };
+  customizable?: boolean;
+  productionTime?: number; // days
+  careInstructions?: string;
+  story?: string;
+  tags?: string[];
+}

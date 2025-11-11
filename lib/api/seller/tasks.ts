@@ -1,4 +1,4 @@
-import type { SellerTask } from '@/lib/types/seller';
+import type { SellerTask } from '@/lib/types/seller-types';
 
 export async function getSellerTasks(userEmail: string): Promise<SellerTask[]> {
   try {

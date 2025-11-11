@@ -109,11 +109,11 @@ export default function ShopHeader({ shop }: ShopHeaderProps) {
             <div className="flex flex-wrap gap-3">
               {hasStory && artisanId && (
                 <Button
-                  variant="primary"
+                  variant="ghost"
                   size="md"
                   href={`${ROUTES.ARTISAN}/${artisanId}`}
                   icon={<Sparkles className="w-5 h-5" />}
-                  className="bg-white text-primary-600 hover:bg-gray-100"
+                  className="bg-white text-primary-600 hover:bg-gray-100 border-2 border-white shadow-md !important"
                 >
                   Ver Historia Completa
                 </Button>

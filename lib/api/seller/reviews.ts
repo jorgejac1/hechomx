@@ -1,4 +1,4 @@
-import type { SellerReview } from '@/lib/types/seller';
+import type { SellerReview } from '@/lib/types/seller-types';
 
 export async function getSellerReviews(userEmail: string): Promise<SellerReview[]> {
   try {

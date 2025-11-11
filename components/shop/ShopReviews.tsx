@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Review } from '@/lib/data/mockUsers';
+import type { Review } from '@/lib/types';
 import { Star, ThumbsUp, MessageSquare } from 'lucide-react';
 import { formatRelativeTime } from '@/lib';
 

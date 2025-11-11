@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { AnalyticsData, getSellerAnalytics } from '@/lib/api/sellerApi';
+import { getSellerAnalytics } from '@/lib/api/sellerApi';
+import type { AnalyticsData } from '@/lib/types';
 import { formatCurrency } from '@/lib';
 import {
   TrendingUp,

@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
-import { SellerOrder, getSellerOrders } from '@/lib/api/sellerApi';
+import { getSellerOrders } from '@/lib/api/sellerApi';
+import type { SellerOrder } from '@/lib/types';
 import { formatCurrency, formatRelativeTime, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {

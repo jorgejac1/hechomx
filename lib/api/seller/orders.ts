@@ -1,4 +1,4 @@
-import type { SellerOrder } from '@/lib/types/seller';
+import type { SellerOrder } from '@/lib/types/seller-types';
 
 export async function getSellerOrders(userEmail: string): Promise<SellerOrder[]> {
   try {
