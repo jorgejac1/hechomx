@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {
@@ -42,7 +42,7 @@ interface Address {
 
 export default function SettingsPage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading } = useAuth();
+  const { isLoading } = useRequireAuth();
   const [activeTab, setActiveTab] = useState<'cards' | 'addresses' | 'security' | 'notifications'>(
     'cards'
   );
@@ -100,13 +100,7 @@ export default function SettingsPage() {
     setTimeout(() => setSuccessMessage(''), 3000);
   };
 
-  // Redirect if not authenticated
-  if (!isAuthenticated && !isLoading) {
-    router.push(ROUTES.LOGIN);
-    return null;
-  }
-
-  if (isLoading || !user) {
+  if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando configuración..." />;
   }
 

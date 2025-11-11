@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { getSellerOrders } from '@/lib/api/sellerApi';
 import type { SellerOrder } from '@/lib/types';
 import { formatCurrency, formatRelativeTime, ROUTES } from '@/lib';
@@ -56,7 +56,7 @@ const ORDER_STATUS_CONFIG = {
 
 export default function OrdersManagementPage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const [orders, setOrders] = useState<SellerOrder[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<SellerOrder[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -69,12 +69,6 @@ export default function OrdersManagementPage() {
     tracking: '',
     carrier: '',
   });
-
-  useEffect(() => {
-    if (!isAuthenticated && !authLoading) {
-      router.push(ROUTES.LOGIN);
-    }
-  }, [isAuthenticated, authLoading, router]);
 
   useEffect(() => {
     async function loadOrders() {
@@ -111,10 +105,6 @@ export default function OrdersManagementPage() {
 
   if (authLoading || isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando pedidos..." />;
-  }
-
-  if (!isAuthenticated || !user || !user.makerProfile) {
-    return null;
   }
 
   const pendingCount = orders.filter((o) => o.status === 'processing').length;
@@ -357,7 +347,6 @@ export default function OrdersManagementPage() {
                       ))}
                     </div>
 
-                    {/* Actions */}
                     {/* Actions */}
                     <div className="flex flex-wrap gap-3">
                       <button

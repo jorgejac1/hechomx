@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import { useToast } from '@/contexts/ToastContext';
@@ -18,14 +18,14 @@ import {
   RecognitionSection,
   SocialMediaSection,
 } from '@/components/artisan-story';
-import { Save, Eye, BookOpen } from 'lucide-react';
+import { Save, Eye } from 'lucide-react';
 import { SellerType, CraftCategory, IndigenousConnection } from '@/lib/types/seller-types';
 import { SELLER_TYPE_CONFIG } from '@/lib/types/seller-types';
 import type { ArtisanStory } from '@/lib/types/artisan-story';
 
 export default function MiHistoriaPage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const { showToast } = useToast();
 
   // Seller Classification
@@ -182,32 +182,9 @@ export default function MiHistoriaPage() {
     setWebsite(story.socialMedia?.website || '');
   };
 
-  // Redirect if not authenticated
-  if (!isAuthenticated && !authLoading) {
-    router.push(ROUTES.LOGIN);
-    return null;
-  }
-
-  if (authLoading || !user) {
-    return <LoadingSpinner size="lg" fullScreen text="Cargando..." />;
-  }
-
-  if (!user.makerProfile) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl shadow-lg p-8 max-w-md text-center">
-          <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Sin Tienda Activa</h2>
-          <p className="text-gray-600 mb-6">Necesitas activar tu tienda para crear tu historia.</p>
-          <button
-            onClick={() => router.push(ROUTES.PROFILE)}
-            className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
-          >
-            Activar Mi Tienda
-          </button>
-        </div>
-      </div>
-    );
+  // Show combined loading state
+  if (authLoading || isLoadingStory) {
+    return <LoadingSpinner size="lg" fullScreen text="Cargando tu historia..." />;
   }
 
   const handleUpdateField = (field: string, value: string | number) => {
@@ -334,15 +311,15 @@ export default function MiHistoriaPage() {
     }
 
     try {
-      const artisanId = user.email.split('@')[0];
+      const artisanId = user!.email.split('@')[0];
 
       // Build the complete ArtisanStory object
       const storyData: ArtisanStory = {
         id: `story-${artisanId}`,
         artisanId,
-        artisanName: user.name,
-        shopName: user.makerProfile?.shopName || user.name,
-        avatar: user.avatar || `https://i.pravatar.cc/150?u=${user.email}`,
+        artisanName: user!.name,
+        shopName: user!.makerProfile?.shopName || user!.name,
+        avatar: user!.avatar || `https://i.pravatar.cc/150?u=${user!.email}`,
         coverImage: workshopPhotos[0] || processPhotos[0] || '',
 
         // Seller Classification
@@ -423,11 +400,6 @@ export default function MiHistoriaPage() {
   };
 
   const config = SELLER_TYPE_CONFIG[sellerType];
-
-  // Show loading state while loading story
-  if (isLoadingStory) {
-    return <LoadingSpinner size="lg" fullScreen text="Cargando tu historia..." />;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-6 px-4">
@@ -653,7 +625,7 @@ export default function MiHistoriaPage() {
           </button>
 
           <Link
-            href={`/artesano/${user.email.split('@')[0]}`}
+            href={`/artesano/${user!.email.split('@')[0]}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition font-medium"

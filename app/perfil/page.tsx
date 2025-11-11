@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { updateProfileSchema, type UpdateProfileInput } from '@/validators';
 import { validate } from '@/validators/utils';
 import { ROUTES } from '@/lib';
@@ -37,7 +38,8 @@ interface MakerProfileData {
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading, logout, updateProfile } = useAuth();
+  const { user, isLoading } = useRequireAuth();
+  const { logout, updateProfile } = useAuth(); // Keep these for functionality
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -49,14 +51,7 @@ export default function ProfilePage() {
     phone: user?.phone || undefined,
   });
 
-  // Redirect if not authenticated
-  if (!isAuthenticated && !isLoading) {
-    router.push(ROUTES.LOGIN);
-    return null;
-  }
-
-  // Show loading
-  if (isLoading || !user) {
+  if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando tu perfil..." />;
   }
 
@@ -79,9 +74,9 @@ export default function ProfilePage() {
 
   const handleCancel = () => {
     setFormData({
-      name: user.name,
-      email: user.email,
-      phone: user.phone || undefined,
+      name: user!.name,
+      email: user!.email,
+      phone: user!.phone || undefined,
     });
     setIsEditing(false);
     setErrors({});
@@ -145,7 +140,7 @@ export default function ProfilePage() {
     }
   };
 
-  const memberSince = user.createdAt ? formatRelativeTime(user.createdAt) : 'Recientemente';
+  const memberSince = user!.createdAt ? formatRelativeTime(user!.createdAt) : 'Recientemente';
 
   return (
     <div className="min-h-screen bg-gray-50 py-6 sm:py-8 px-4">
@@ -179,10 +174,10 @@ export default function ProfilePage() {
               {/* Avatar */}
               <div className="flex flex-col items-center">
                 <div className="relative">
-                  {user.avatar ? (
+                  {user!.avatar ? (
                     <Image
-                      src={user.avatar}
-                      alt={user.name}
+                      src={user!.avatar}
+                      alt={user!.name}
                       width={120}
                       height={120}
                       className="rounded-full border-4 border-primary-100"
@@ -200,8 +195,8 @@ export default function ProfilePage() {
                   </button>
                 </div>
 
-                <h2 className="mt-4 text-xl font-bold text-gray-900 text-center">{user.name}</h2>
-                <p className="text-sm text-gray-600 text-center">{user.email}</p>
+                <h2 className="mt-4 text-xl font-bold text-gray-900 text-center">{user!.name}</h2>
+                <p className="text-sm text-gray-600 text-center">{user!.email}</p>
 
                 <div className="mt-3 px-3 py-1 bg-primary-50 rounded-full">
                   <p className="text-xs font-medium text-primary-700 flex items-center gap-1">
@@ -213,7 +208,7 @@ export default function ProfilePage() {
 
               {/* Quick Actions */}
               <div className="mt-6 space-y-2">
-                {user.makerProfile && (
+                {user!.makerProfile && (
                   <>
                     <button
                       onClick={() => router.push(ROUTES.DASHBOARD)}
@@ -345,7 +340,7 @@ export default function ProfilePage() {
                   ) : (
                     <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                       <User className="w-5 h-5 text-gray-500" />
-                      <p className="text-gray-900 font-medium">{user.name}</p>
+                      <p className="text-gray-900 font-medium">{user!.name}</p>
                     </div>
                   )}
                 </div>
@@ -382,7 +377,7 @@ export default function ProfilePage() {
                   ) : (
                     <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                       <Mail className="w-5 h-5 text-gray-500" />
-                      <p className="text-gray-900 font-medium">{user.email}</p>
+                      <p className="text-gray-900 font-medium">{user!.email}</p>
                     </div>
                   )}
                 </div>
@@ -419,7 +414,7 @@ export default function ProfilePage() {
                   ) : (
                     <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                       <Phone className="w-5 h-5 text-gray-500" />
-                      <p className="text-gray-900 font-medium">{user.phone || 'No registrado'}</p>
+                      <p className="text-gray-900 font-medium">{user!.phone || 'No registrado'}</p>
                     </div>
                   )}
                 </div>
@@ -433,7 +428,7 @@ export default function ProfilePage() {
                   <h3 className="text-lg font-bold text-gray-900">Perfil de Vendedor</h3>
                   <p className="text-sm text-gray-600 mt-1">Información de tu tienda o taller</p>
                 </div>
-                {user.makerProfile ? (
+                {user!.makerProfile ? (
                   <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3" />
                     Activo
@@ -448,24 +443,24 @@ export default function ProfilePage() {
                 )}
               </div>
 
-              {user.makerProfile ? (
+              {user!.makerProfile ? (
                 // Show existing maker profile
                 <div className="space-y-4">
                   <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
                     <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
                       <span className="text-2xl font-bold text-primary-700">
-                        {user.makerProfile.shopName.charAt(0)}
+                        {user!.makerProfile.shopName.charAt(0)}
                       </span>
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <h4 className="font-bold text-gray-900">{user.makerProfile.shopName}</h4>
-                        {user.makerProfile.verified && (
+                        <h4 className="font-bold text-gray-900">{user!.makerProfile.shopName}</h4>
+                        {user!.makerProfile.verified && (
                           <CheckCircle2 className="w-5 h-5 text-green-600" />
                         )}
                       </div>
-                      <p className="text-sm text-gray-600">{user.makerProfile.location}</p>
-                      <p className="text-sm text-gray-700 mt-2">{user.makerProfile.description}</p>
+                      <p className="text-sm text-gray-600">{user!.makerProfile.location}</p>
+                      <p className="text-sm text-gray-700 mt-2">{user!.makerProfile.description}</p>
                     </div>
                   </div>
 
@@ -473,19 +468,19 @@ export default function ProfilePage() {
                   <div className="grid grid-cols-3 gap-4">
                     <div className="text-center p-4 bg-gray-50 rounded-lg">
                       <p className="text-2xl font-bold text-gray-900">
-                        {user.makerProfile.stats.productsCount}+
+                        {user!.makerProfile.stats.productsCount}+
                       </p>
                       <p className="text-sm text-gray-600">Productos</p>
                     </div>
                     <div className="text-center p-4 bg-gray-50 rounded-lg">
                       <p className="text-2xl font-bold text-gray-900">
-                        {user.makerProfile.stats.rating}
+                        {user!.makerProfile.stats.rating}
                       </p>
                       <p className="text-sm text-gray-600">Calificación</p>
                     </div>
                     <div className="text-center p-4 bg-gray-50 rounded-lg">
                       <p className="text-2xl font-bold text-gray-900">
-                        {user.makerProfile.stats.salesCount}+
+                        {user!.makerProfile.stats.salesCount}+
                       </p>
                       <p className="text-sm text-gray-600">Ventas</p>
                     </div>

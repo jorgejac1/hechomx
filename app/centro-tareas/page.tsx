@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { getSellerTasks } from '@/lib/api/sellerApi';
 import type { SellerTask } from '@/lib/types';
 import { formatRelativeTime, formatCurrency, ROUTES } from '@/lib';
@@ -96,19 +96,13 @@ const PRIORITY_CONFIG = {
 
 export default function TasksCenterPage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const [tasks, setTasks] = useState<SellerTask[]>([]);
   const [filteredTasks, setFilteredTasks] = useState<SellerTask[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterPriority, setFilterPriority] = useState<string>('all');
   const [filterType, setFilterType] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-
-  useEffect(() => {
-    if (!isAuthenticated && !authLoading) {
-      router.push(ROUTES.LOGIN);
-    }
-  }, [isAuthenticated, authLoading, router]);
 
   useEffect(() => {
     async function loadTasks() {
@@ -154,10 +148,6 @@ export default function TasksCenterPage() {
 
   if (authLoading || isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando tareas..." />;
-  }
-
-  if (!isAuthenticated || !user || !user.makerProfile) {
-    return null;
   }
 
   const criticalCount = tasks.filter((t) => t.priority === 'critical').length;

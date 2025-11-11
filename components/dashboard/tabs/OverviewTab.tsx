@@ -36,11 +36,6 @@ export default function OverviewTab({
   products,
   recentOrders,
 }: OverviewTabProps) {
-  // DEBUG: Log the orders data
-  console.log('=== OverviewTab DEBUG ===');
-  console.log('Total orders:', recentOrders.length);
-  console.log('All orders:', JSON.stringify(recentOrders, null, 2));
-
   // Find trending products
   const trendingProducts = products
     .filter((p) => p.views > 100)
@@ -105,18 +100,11 @@ export default function OverviewTab({
         {recentOrders.length > 0 ? (
           <div className="space-y-3">
             {recentOrders.slice(0, 3).map((order) => {
-              // DEBUG: Log each order being processed
-              console.log('Processing order:', order.id);
-              console.log('Order items:', order.items);
-              console.log('First item:', order.items[0]);
-              console.log('First item images:', order.items[0]?.images);
-
               const statusConfig = ORDER_STATUS_CONFIG[order.status];
               const StatusIcon = statusConfig.icon;
 
               // Defensive: Check if items and images exist
               const firstImage = order.items?.[0]?.images?.[0] || '/placeholder.jpg';
-              console.log('Using image URL:', firstImage);
 
               return (
                 <div key={order.id} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">

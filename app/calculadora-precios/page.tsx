@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { getFairTradeRates, calculatePricing, savePricingCalculation } from '@/lib/api/sellerApi';
 import type {
   FairTradeRates,
@@ -25,7 +25,7 @@ import PricingSummary from '@/components/pricing/PricingSummary';
 
 export default function PricingCalculatorPage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
 
   // Product Info
   const [productName, setProductName] = useState('');
@@ -63,13 +63,6 @@ export default function PricingCalculatorPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
 
-  // Auth check
-  useEffect(() => {
-    if (!isAuthenticated && !authLoading) {
-      router.push(ROUTES.LOGIN);
-    }
-  }, [isAuthenticated, authLoading, router]);
-
   // Load fair trade rates
   useEffect(() => {
     async function loadRates() {
@@ -100,10 +93,6 @@ export default function PricingCalculatorPage() {
 
   if (authLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando calculadora..." />;
-  }
-
-  if (!isAuthenticated || !user || !user.makerProfile) {
-    return null;
   }
 
   // Material handlers
@@ -210,7 +199,7 @@ export default function PricingCalculatorPage() {
     };
 
     setIsSaving(true);
-    const success = await savePricingCalculation(user.email, calculation);
+    const success = await savePricingCalculation(user!.email, calculation);
     setIsSaving(false);
 
     if (success) {

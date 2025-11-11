@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { getBuyerOrders } from '@/lib/api/sellerApi';
 import type { BuyerOrder } from '@/lib/types/buyer';
 import { formatCurrency, formatRelativeTime, ROUTES } from '@/lib';
@@ -53,19 +53,13 @@ const ORDER_STATUS_CONFIG = {
 
 export default function OrdersPage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { user, isLoading: authLoading } = useRequireAuth();
   const [orders, setOrders] = useState<BuyerOrder[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<BuyerOrder[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedOrder, setSelectedOrder] = useState<BuyerOrder | null>(null);
-
-  useEffect(() => {
-    if (!isAuthenticated && !authLoading) {
-      router.push(ROUTES.LOGIN);
-    }
-  }, [isAuthenticated, authLoading, router]);
 
   useEffect(() => {
     async function loadOrders() {
@@ -103,10 +97,6 @@ export default function OrdersPage() {
 
   if (authLoading || isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando pedidos..." />;
-  }
-
-  if (!isAuthenticated || !user) {
-    return null;
   }
 
   const handleReorder = (order: BuyerOrder) => {

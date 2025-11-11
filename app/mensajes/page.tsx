@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { getSellerMessages } from '@/lib/api/sellerApi';
 import type { SellerMessage } from '@/lib/types';
 import { formatRelativeTime, ROUTES } from '@/lib';
@@ -22,7 +22,7 @@ import {
 
 export default function MessagesPage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const [messages, setMessages] = useState<SellerMessage[]>([]);
   const [filteredMessages, setFilteredMessages] = useState<SellerMessage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,12 +30,6 @@ export default function MessagesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMessage, setSelectedMessage] = useState<SellerMessage | null>(null);
   const [replyText, setReplyText] = useState('');
-
-  useEffect(() => {
-    if (!isAuthenticated && !authLoading) {
-      router.push(ROUTES.LOGIN);
-    }
-  }, [isAuthenticated, authLoading, router]);
 
   useEffect(() => {
     async function loadMessages() {
@@ -72,10 +66,6 @@ export default function MessagesPage() {
 
   if (authLoading || isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando mensajes..." />;
-  }
-
-  if (!isAuthenticated || !user || !user.makerProfile) {
-    return null;
   }
 
   const unreadCount = messages.filter((m) => m.status === 'unread').length;

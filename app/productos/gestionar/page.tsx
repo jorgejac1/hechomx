@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { ROUTES } from '@/lib/constants/routes';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import { formatCurrency } from '@/lib';
@@ -12,24 +12,14 @@ import { Plus, Edit, Trash2, Eye, Package, AlertCircle, Search, Filter } from 'l
 
 export default function ManageProductsPage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading } = useAuth();
+  const { user, isLoading } = useRequireAuth({ requireSeller: true });
   const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
-    if (!isLoading) {
-      if (!isAuthenticated) {
-        router.push(ROUTES.LOGIN);
-      } else if (user && !user.makerProfile) {
-        router.push(ROUTES.HOME);
-      }
-    }
-  }, [isAuthenticated, isLoading, user, router]);
-
-  if (isLoading || !user || !user.makerProfile) {
+  if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando..." />;
   }
 
-  const products = user.makerProfile.products || [];
+  const products = user!.makerProfile!.products || [];
   const filteredProducts = products.filter((p) =>
     p.name.toLowerCase().includes(searchQuery.toLowerCase())
   );

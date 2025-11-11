@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {
@@ -38,7 +38,7 @@ interface FinancialData {
 
 export default function SellerProfilePage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading } = useAuth();
+  const { user, isLoading } = useRequireAuth({ requireSeller: true });
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [activeSection, setActiveSection] = useState<'business' | 'financial' | 'policies'>(
@@ -58,37 +58,11 @@ export default function SellerProfilePage() {
   // Edit form state
   const [editForm, setEditForm] = useState<FinancialData>(financialData);
 
-  // Redirect if not authenticated
-  if (!isAuthenticated && !isLoading) {
-    router.push(ROUTES.LOGIN);
-    return null;
-  }
-
-  if (isLoading || !user) {
+  if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando perfil de vendedor..." />;
   }
 
-  if (!user.makerProfile) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl shadow-lg p-8 max-w-md text-center">
-          <Store className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Sin Tienda Activa</h2>
-          <p className="text-gray-600 mb-6">
-            Necesitas activar tu tienda para acceder al perfil de vendedor.
-          </p>
-          <button
-            onClick={() => router.push(ROUTES.PROFILE)}
-            className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
-          >
-            Activar Mi Tienda
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const { makerProfile } = user;
+  const { makerProfile } = user!;
 
   const handleEditStart = () => {
     setEditForm(financialData);
@@ -136,10 +110,10 @@ export default function SellerProfilePage() {
         {/* Shop Header Card */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-6">
           <div className="flex items-center gap-4">
-            {user.avatar ? (
+            {user!.avatar ? (
               <Image
-                src={user.avatar}
-                alt={user.name}
+                src={user!.avatar}
+                alt={user!.name}
                 width={80}
                 height={80}
                 className="rounded-full border-4 border-primary-100"
@@ -150,19 +124,19 @@ export default function SellerProfilePage() {
               </div>
             )}
             <div className="flex-1">
-              <h2 className="text-xl font-bold text-gray-900">{makerProfile.shopName}</h2>
-              <p className="text-gray-600">{makerProfile.location}</p>
+              <h2 className="text-xl font-bold text-gray-900">{makerProfile!.shopName}</h2>
+              <p className="text-gray-600">{makerProfile!.location}</p>
               <div className="flex items-center gap-2 mt-2">
-                {makerProfile.verified && (
+                {makerProfile!.verified && (
                   <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3" />
                     Verificado
                   </span>
                 )}
                 <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full capitalize">
-                  {makerProfile.sellerType === 'individual' && 'Individual'}
-                  {makerProfile.sellerType === 'artisan' && 'Artesano'}
-                  {makerProfile.sellerType === 'company' && 'Empresa'}
+                  {makerProfile!.sellerType === 'individual' && 'Individual'}
+                  {makerProfile!.sellerType === 'artisan' && 'Artesano'}
+                  {makerProfile!.sellerType === 'company' && 'Empresa'}
                 </span>
               </div>
             </div>
@@ -175,7 +149,7 @@ export default function SellerProfilePage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Ventas Totales</p>
-                <p className="text-2xl font-bold text-gray-900">{makerProfile.stats.salesCount}</p>
+                <p className="text-2xl font-bold text-gray-900">{makerProfile!.stats.salesCount}</p>
               </div>
               <TrendingUp className="w-8 h-8 text-green-600" />
             </div>
@@ -185,7 +159,7 @@ export default function SellerProfilePage() {
               <div>
                 <p className="text-sm text-gray-600 mb-1">Calificación</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {makerProfile.stats.rating.toFixed(1)}
+                  {makerProfile!.stats.rating.toFixed(1)}
                 </p>
               </div>
               <CheckCircle2 className="w-8 h-8 text-yellow-600" />
@@ -196,7 +170,7 @@ export default function SellerProfilePage() {
               <div>
                 <p className="text-sm text-gray-600 mb-1">Productos</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {makerProfile.stats.productsCount}
+                  {makerProfile!.stats.productsCount}
                 </p>
               </div>
               <Store className="w-8 h-8 text-blue-600" />
@@ -337,9 +311,9 @@ export default function SellerProfilePage() {
                       <div className="flex-1">
                         <p className="text-sm font-semibold text-gray-700">Tipo de Negocio</p>
                         <p className="text-gray-900 capitalize">
-                          {makerProfile.sellerType === 'individual' && 'Vendedor Individual'}
-                          {makerProfile.sellerType === 'artisan' && 'Artesano Certificado'}
-                          {makerProfile.sellerType === 'company' && 'Empresa'}
+                          {makerProfile!.sellerType === 'individual' && 'Vendedor Individual'}
+                          {makerProfile!.sellerType === 'artisan' && 'Artesano Certificado'}
+                          {makerProfile!.sellerType === 'company' && 'Empresa'}
                         </p>
                       </div>
                     </div>
@@ -348,35 +322,35 @@ export default function SellerProfilePage() {
                       <Store className="w-6 h-6 text-gray-600 mt-1" />
                       <div className="flex-1">
                         <p className="text-sm font-semibold text-gray-700">Nombre de la Tienda</p>
-                        <p className="text-gray-900">{makerProfile.shopName}</p>
+                        <p className="text-gray-900">{makerProfile!.shopName}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
                       <MapPin className="w-6 h-6 text-gray-600 mt-1" />
                       <div className="flex-1">
                         <p className="text-sm font-semibold text-gray-700">Ubicación</p>
-                        <p className="text-gray-900">{makerProfile.location}</p>
+                        <p className="text-gray-900">{makerProfile!.location}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
                       <FileText className="w-6 h-6 text-gray-600 mt-1" />
                       <div className="flex-1">
                         <p className="text-sm font-semibold text-gray-700">Descripción</p>
-                        <p className="text-gray-900">{makerProfile.description}</p>
+                        <p className="text-gray-900">{makerProfile!.description}</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Business Hours */}
-                {makerProfile.businessHours && (
+                {makerProfile!.businessHours && (
                   <div>
                     <div className="flex items-center gap-2 mb-4">
                       <Clock className="w-5 h-5 text-gray-600" />
                       <h3 className="text-lg font-bold text-gray-900">Horario de Atención</h3>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {makerProfile.businessHours.map((day) => (
+                      {makerProfile!.businessHours.map((day) => (
                         <div
                           key={day.day}
                           className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
@@ -396,11 +370,11 @@ export default function SellerProfilePage() {
                 )}
 
                 {/* Certifications */}
-                {makerProfile.certifications.length > 0 && (
+                {makerProfile!.certifications.length > 0 && (
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-4">Certificaciones</h3>
                     <div className="flex flex-wrap gap-2">
-                      {makerProfile.certifications.map((cert, idx) => (
+                      {makerProfile!.certifications.map((cert, idx) => (
                         <span
                           key={idx}
                           className="px-3 py-2 bg-green-50 text-green-800 rounded-full text-sm font-medium flex items-center gap-1"
@@ -414,11 +388,11 @@ export default function SellerProfilePage() {
                 )}
 
                 {/* Specialties */}
-                {makerProfile.specialties.length > 0 && (
+                {makerProfile!.specialties.length > 0 && (
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-4">Especialidades</h3>
                     <div className="flex flex-wrap gap-2">
-                      {makerProfile.specialties.map((specialty, idx) => (
+                      {makerProfile!.specialties.map((specialty, idx) => (
                         <span
                           key={idx}
                           className="px-3 py-2 bg-blue-50 text-blue-800 rounded-full text-sm font-medium"
@@ -609,7 +583,7 @@ export default function SellerProfilePage() {
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-4">Política de Devoluciones</h3>
                   <div className="p-4 bg-gray-50 rounded-lg">
-                    <p className="text-gray-900">{makerProfile.returnPolicy}</p>
+                    <p className="text-gray-900">{makerProfile!.returnPolicy}</p>
                   </div>
                 </div>
 
@@ -618,7 +592,7 @@ export default function SellerProfilePage() {
                     Política de Cancelaciones
                   </h3>
                   <div className="p-4 bg-gray-50 rounded-lg">
-                    <p className="text-gray-900">{makerProfile.cancellationPolicy}</p>
+                    <p className="text-gray-900">{makerProfile!.cancellationPolicy}</p>
                   </div>
                 </div>
 
@@ -631,17 +605,17 @@ export default function SellerProfilePage() {
                     </div>
                     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                       <span className="text-gray-900">Envío Internacional</span>
-                      {makerProfile.shippingOptions.international ? (
+                      {makerProfile!.shippingOptions.international ? (
                         <CheckCircle2 className="w-5 h-5 text-green-600" />
                       ) : (
                         <X className="w-5 h-5 text-red-600" />
                       )}
                     </div>
-                    {makerProfile.shippingOptions.freeShippingOver && (
+                    {makerProfile!.shippingOptions.freeShippingOver && (
                       <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
                         <p className="text-green-900">
                           <strong>Envío gratis</strong> en compras mayores a{' '}
-                          {formatCurrency(makerProfile.shippingOptions.freeShippingOver)}
+                          {formatCurrency(makerProfile!.shippingOptions.freeShippingOver)}
                         </p>
                       </div>
                     )}
@@ -653,7 +627,7 @@ export default function SellerProfilePage() {
                     Métodos de Pago Aceptados
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {makerProfile.paymentMethods.map((method, idx) => (
+                    {makerProfile!.paymentMethods.map((method, idx) => (
                       <span
                         key={idx}
                         className="px-4 py-2 bg-gray-100 text-gray-900 rounded-lg text-sm font-medium flex items-center gap-2"

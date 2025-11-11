@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRequireAuth } from '@/hooks/auth';
 import { getSellerReviews } from '@/lib/api/sellerApi';
 import type { SellerReview } from '@/lib/types';
 import { formatRelativeTime, ROUTES } from '@/lib';
@@ -24,7 +24,7 @@ import {
 
 export default function ReviewsManagementPage() {
   const router = useRouter();
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const [reviews, setReviews] = useState<SellerReview[]>([]);
   const [filteredReviews, setFilteredReviews] = useState<SellerReview[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,12 +34,6 @@ export default function ReviewsManagementPage() {
   const [selectedReview, setSelectedReview] = useState<SellerReview | null>(null);
   const [responseText, setResponseText] = useState('');
   const [showImageModal, setShowImageModal] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!isAuthenticated && !authLoading) {
-      router.push(ROUTES.LOGIN);
-    }
-  }, [isAuthenticated, authLoading, router]);
 
   useEffect(() => {
     async function loadReviews() {
@@ -80,10 +74,6 @@ export default function ReviewsManagementPage() {
 
   if (authLoading || isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando reseñas..." />;
-  }
-
-  if (!isAuthenticated || !user || !user.makerProfile) {
-    return null;
   }
 
   const pendingCount = reviews.filter((r) => r.status === 'pending').length;
