@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/contexts/ToastContext';
 import { ProductFormData } from '@/types/product';
 import {
   SellerBanner,
@@ -29,6 +30,7 @@ export default function ProductForm({
   submitLabel = 'Publicar Producto',
 }: ProductFormProps) {
   const { user } = useAuth();
+  const { showToast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
 
@@ -57,7 +59,7 @@ export default function ProductForm({
     e.preventDefault();
 
     if (!name || !category || !price || images.length === 0 || !description) {
-      alert('Por favor completa todos los campos obligatorios');
+      showToast('Por favor completa todos los campos obligatorios', 'error');
       return;
     }
 
@@ -85,7 +87,7 @@ export default function ProductForm({
       await onSubmit(formData);
     } catch (error) {
       console.error('Error submitting product:', error);
-      alert('Error al publicar el producto. Intenta de nuevo.');
+      showToast('Error al publicar el producto. Intenta de nuevo.', 'error');
     } finally {
       setIsSubmitting(false);
     }

@@ -258,7 +258,7 @@ export default function Header() {
                             Favoritos
                           </Link>
                           <Link
-                            href={ROUTES.MI_IMPACTO}
+                            href={ROUTES.MY_IMPACT}
                             onClick={() => setIsUserMenuOpen(false)}
                             className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                           >
@@ -521,7 +521,7 @@ export default function Header() {
                       Favoritos
                     </Link>
                     <Link
-                      href={ROUTES.MI_IMPACTO}
+                      href={ROUTES.MY_IMPACT}
                       className="flex items-center gap-3 text-gray-700 hover:text-primary-600 font-medium py-2"
                       onClick={() => setMobileMenuOpen(false)}
                     >

@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation'; // Add this import
+import { useRouter } from 'next/navigation';
 import { Sparkles } from 'lucide-react';
 import { useComparison } from '@/contexts/ComparisonContext';
+import { useToast } from '@/contexts/ToastContext';
 import { hasArtisanStory, getArtisanIdFromMaker } from '@/lib/utils/artisan';
 import { Product } from '@/types';
 import { formatCurrency, CATEGORY_ICONS, CATEGORY_COLORS, ROUTES } from '@/lib';
@@ -15,7 +16,8 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const router = useRouter(); // Add this
+  const router = useRouter();
+  const { showToast } = useToast();
   const { toggle, isInComparison, canAdd, isFull } = useComparison();
   const [mounted, setMounted] = useState(false);
   const hasStory = hasArtisanStory(product.maker);
@@ -45,7 +47,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     e.stopPropagation();
 
     if (isFull && !isComparing) {
-      alert('Ya tienes 4 productos en comparación. Quita uno para agregar otro.');
+      showToast('Ya tienes 4 productos en comparación. Quita uno para agregar otro.', 'info');
       return;
     }
 

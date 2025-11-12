@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useRequireAuth } from '@/hooks/auth';
+import { useToast } from '@/contexts/ToastContext';
 import { ROUTES } from '@/lib/constants/routes';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import ProductForm from '@/components/product/ProductForm';
@@ -11,6 +12,7 @@ import { Plus, Store, AlertCircle } from 'lucide-react';
 
 export default function CreateProductPage() {
   const router = useRouter();
+  const { showToast } = useToast();
   // Use requireSeller: false since we want to show the quick setup modal
   const { user, isLoading } = useRequireAuth();
   const [showQuickSetup, setShowQuickSetup] = useState(false);
@@ -31,7 +33,7 @@ export default function CreateProductPage() {
 
   const handleQuickSetup = () => {
     if (!shopName.trim() || !location.trim()) {
-      alert('Por favor completa el nombre de la tienda y ubicación');
+      showToast('Por favor completa el nombre de la tienda y ubicación', 'error');
       return;
     }
 
@@ -40,7 +42,7 @@ export default function CreateProductPage() {
 
     // For now, just close the modal and show the form
     setShowQuickSetup(false);
-    alert('¡Tienda activada! Ahora puedes crear tu producto.');
+    showToast('¡Tienda activada! Ahora puedes crear tu producto.', 'success');
   };
 
   const handleSubmit = async (data: ProductFormData) => {
@@ -51,7 +53,7 @@ export default function CreateProductPage() {
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    alert('¡Producto publicado exitosamente!');
+    showToast('¡Producto publicado exitosamente!', 'success');
     router.push(ROUTES.DASHBOARD);
   };
 

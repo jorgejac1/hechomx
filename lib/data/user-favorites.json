@@ -1,0 +1,83 @@
+{
+  "juan@ejemplo.com": [
+    {
+      "id": "1",
+      "addedAt": "2024-11-01T10:30:00Z",
+      "notes": "Para regalo de cumpleaños de mamá"
+    },
+    {
+      "id": "3",
+      "addedAt": "2024-10-28T14:20:00Z",
+      "notes": ""
+    },
+    {
+      "id": "7",
+      "addedAt": "2024-10-25T09:15:00Z",
+      "notes": "Me encanta el diseño"
+    },
+    {
+      "id": "12",
+      "addedAt": "2024-10-20T16:45:00Z",
+      "notes": ""
+    },
+    {
+      "id": "15",
+      "addedAt": "2024-10-15T11:00:00Z",
+      "notes": "Para decorar la sala"
+    }
+  ],
+  "maria@ejemplo.com": [
+    {
+      "id": "2",
+      "addedAt": "2024-11-05T08:30:00Z",
+      "notes": ""
+    },
+    {
+      "id": "5",
+      "addedAt": "2024-11-03T15:20:00Z",
+      "notes": "Quiero este para mi colección"
+    },
+    {
+      "id": "8",
+      "addedAt": "2024-10-30T12:10:00Z",
+      "notes": ""
+    }
+  ],
+  "sofia@example.com": [
+    {
+      "id": "1",
+      "addedAt": "2024-11-08T09:00:00Z",
+      "notes": "Perfecto para la cocina nueva"
+    },
+    {
+      "id": "4",
+      "addedAt": "2024-11-06T14:30:00Z",
+      "notes": ""
+    },
+    {
+      "id": "6",
+      "addedAt": "2024-11-04T10:15:00Z",
+      "notes": "Regalo para Ana"
+    },
+    {
+      "id": "9",
+      "addedAt": "2024-11-02T16:00:00Z",
+      "notes": ""
+    },
+    {
+      "id": "11",
+      "addedAt": "2024-10-28T13:45:00Z",
+      "notes": "Me encanta el color"
+    },
+    {
+      "id": "13",
+      "addedAt": "2024-10-25T11:20:00Z",
+      "notes": ""
+    },
+    {
+      "id": "16",
+      "addedAt": "2024-10-20T09:30:00Z",
+      "notes": "Para la recámara"
+    }
+  ]
+}

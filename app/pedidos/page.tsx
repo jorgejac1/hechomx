@@ -5,10 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRequireAuth } from '@/hooks/auth';
+import { useCart } from '@/contexts/CartContext';
+import { useToast } from '@/contexts/ToastContext';
 import { getBuyerOrders } from '@/lib/api/sellerApi';
 import type { BuyerOrder } from '@/lib/types/buyer';
+import type { Product } from '@/types';
 import { formatCurrency, formatRelativeTime, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
+import ReviewModal from '@/components/orders/ReviewModal';
 import {
   Package,
   Truck,
@@ -51,15 +55,24 @@ const ORDER_STATUS_CONFIG = {
   },
 };
 
+interface OrderReview {
+  itemId: string;
+  rating: number;
+  comment: string;
+}
+
 export default function OrdersPage() {
   const router = useRouter();
   const { user, isLoading: authLoading } = useRequireAuth();
+  const { addToCart } = useCart();
+  const { showToast } = useToast();
   const [orders, setOrders] = useState<BuyerOrder[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<BuyerOrder[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedOrder, setSelectedOrder] = useState<BuyerOrder | null>(null);
+  const [reviewingOrder, setReviewingOrder] = useState<BuyerOrder | null>(null);
 
   useEffect(() => {
     async function loadOrders() {
@@ -100,10 +113,52 @@ export default function OrdersPage() {
   }
 
   const handleReorder = (order: BuyerOrder) => {
-    // Add items to cart logic here
-    console.log('Reordering:', order);
-    // You would typically add all items to cart
+    let itemsAdded = 0;
+
+    order.items.forEach((item) => {
+      // Convert order item to full Product format
+      const product: Product = {
+        id: item.id,
+        name: item.name,
+        description: `Producto de ${item.artisan.shopName}`,
+        price: item.price,
+        currency: 'MXN',
+        category: 'Artesanía',
+        subcategory: '',
+        state: '',
+        maker: item.artisan.id,
+        images: [item.image],
+        inStock: true, // Changed from 'stock'
+        featured: false,
+        verified: false,
+        rating: 0,
+        reviewCount: 0, // Changed from 'reviewsCount'
+      };
+
+      addToCart(product, item.quantity);
+      itemsAdded += item.quantity;
+    });
+
+    showToast(
+      `${itemsAdded} ${itemsAdded === 1 ? 'producto agregado' : 'productos agregados'} al carrito`,
+      'success'
+    );
+
     router.push(ROUTES.CART);
+  };
+
+  const handleReviewSubmit = (orderId: string, reviews: OrderReview[]) => {
+    console.log('Reviews submitted for order:', orderId, reviews);
+
+    // Update order to mark as reviewed
+    setOrders((prev) =>
+      prev.map((order) =>
+        order.id === orderId ? { ...order, canReview: false, reviewed: true } : order
+      )
+    );
+
+    showToast('¡Gracias por tu reseña!', 'success');
+    setReviewingOrder(null);
   };
 
   return (
@@ -293,7 +348,10 @@ export default function OrdersPage() {
                       </button>
 
                       {order.canReview && (
-                        <button className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition font-medium text-sm">
+                        <button
+                          onClick={() => setReviewingOrder(order)}
+                          className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition font-medium text-sm"
+                        >
                           <Star className="w-4 h-4" />
                           Dejar Reseña
                         </button>
@@ -319,6 +377,15 @@ export default function OrdersPage() {
         {/* Order Detail Modal */}
         {selectedOrder && (
           <OrderDetailModal order={selectedOrder} onClose={() => setSelectedOrder(null)} />
+        )}
+
+        {/* Review Modal */}
+        {reviewingOrder && (
+          <ReviewModal
+            order={reviewingOrder}
+            onClose={() => setReviewingOrder(null)}
+            onSubmit={(reviews) => handleReviewSubmit(reviewingOrder.id, reviews)}
+          />
         )}
       </div>
     </div>

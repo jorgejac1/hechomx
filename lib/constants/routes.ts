@@ -1,7 +1,3 @@
-/**
- * Application routes
- */
-
 export const ROUTES = {
   HOME: '/',
   PRODUCTS: '/productos',
@@ -17,7 +13,7 @@ export const ROUTES = {
   REGISTER: '/registro',
   FORGOT_PASSWORD: '/recuperar-password',
   PROFILE: '/perfil',
-  MI_IMPACTO: '/mi-impacto',
+  MY_IMPACT: '/mi-impacto',
   DASHBOARD: '/dashboard',
   ORDERS: '/pedidos',
   WISHLIST: '/favoritos',
@@ -36,16 +32,9 @@ export const ROUTES = {
   MESSAGES: '/mensajes',
   REVIEWS_MANAGEMENT: '/resenas-gestion',
   ORDERS_MANAGEMENT: '/pedidos-gestion',
-} as const;
 
-export const API_ROUTES = {
-  PRODUCTS: '/api/products',
-  PRODUCT: (id: string) => `/api/products/${id}`,
-
-  // Auth API routes
-  LOGIN: '/api/auth/login',
-  REGISTER: '/api/auth/register',
-  LOGOUT: '/api/auth/logout',
-  PROFILE: '/api/auth/profile',
-  DASHBOARD: '/dashboard',
+  IMPACT: '/impacto',
+  HELP: '/ayuda',
+  SELL: '/vender',
+  GIFTS: '/regalos',
 } as const;

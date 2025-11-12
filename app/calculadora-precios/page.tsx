@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useRequireAuth } from '@/hooks/auth';
+import { useToast } from '@/contexts/ToastContext';
 import { getFairTradeRates, calculatePricing, savePricingCalculation } from '@/lib/api/sellerApi';
 import type {
   FairTradeRates,
@@ -13,7 +14,7 @@ import type {
 } from '@/lib/api/sellerApi';
 import { ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
-import { ArrowLeft, Calculator, Save, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Calculator, Save } from 'lucide-react';
 
 // Import components
 import ProductInfo from '@/components/pricing/ProductInfo';
@@ -26,6 +27,7 @@ import PricingSummary from '@/components/pricing/PricingSummary';
 export default function PricingCalculatorPage() {
   const router = useRouter();
   const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
+  const { showToast } = useToast();
 
   // Product Info
   const [productName, setProductName] = useState('');
@@ -61,7 +63,6 @@ export default function PricingCalculatorPage() {
 
   // UI State
   const [isSaving, setIsSaving] = useState(false);
-  const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   // Load fair trade rates
   useEffect(() => {
@@ -172,8 +173,8 @@ export default function PricingCalculatorPage() {
 
   // Save handler
   const handleSave = async () => {
-    if (!productName) {
-      alert('Por favor ingresa el nombre del producto');
+    if (!productName.trim()) {
+      showToast('Por favor ingresa el nombre del producto', 'error');
       return;
     }
 
@@ -203,8 +204,9 @@ export default function PricingCalculatorPage() {
     setIsSaving(false);
 
     if (success) {
-      setShowSuccessToast(true);
-      setTimeout(() => setShowSuccessToast(false), 3000);
+      showToast('Cálculo guardado exitosamente', 'success');
+    } else {
+      showToast('Error al guardar el cálculo', 'error');
     }
   };
 
@@ -244,14 +246,6 @@ export default function PricingCalculatorPage() {
             </button>
           </div>
         </div>
-
-        {/* Success Toast */}
-        {showSuccessToast && (
-          <div className="fixed top-4 right-4 z-50 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-fade-in">
-            <CheckCircle2 className="w-5 h-5" />
-            <span className="font-medium">Cálculo guardado exitosamente</span>
-          </div>
-        )}
 
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
