@@ -109,27 +109,27 @@ export const footerNavigation = {
     title: 'Acerca de',
     items: [
       { label: 'Nuestra Historia', href: ROUTES.ABOUT },
-      { label: 'Artesanos', href: '/artesanos' },
-      { label: 'Blog', href: '/blog' },
+      { label: 'Tiendas Artesanales', href: ROUTES.SHOPS },
+      { label: 'Blog', href: ROUTES.BLOG },
       { label: 'Contacto', href: ROUTES.CONTACT },
     ],
   },
   help: {
     title: 'Ayuda',
     items: [
-      { label: 'Preguntas Frecuentes', href: '/ayuda/faq' },
-      { label: 'Envíos', href: '/ayuda/envios' },
-      { label: 'Devoluciones', href: '/ayuda/devoluciones' },
-      { label: 'Métodos de Pago', href: '/ayuda/pagos' },
+      { label: 'Preguntas Frecuentes', href: ROUTES.FAQ },
+      { label: 'Envíos', href: ROUTES.SHIPPING_INFO },
+      { label: 'Devoluciones', href: ROUTES.RETURNS_POLICY },
+      { label: 'Métodos de Pago', href: ROUTES.PAYMENT_INFO },
     ],
   },
   legal: {
     title: 'Legal',
     items: [
-      { label: 'Términos y Condiciones', href: '/legal/terminos' },
-      { label: 'Política de Privacidad', href: '/legal/privacidad' },
-      { label: 'Política de Cookies', href: '/legal/cookies' },
-      { label: 'Aviso Legal', href: '/legal/aviso' },
+      { label: 'Términos y Condiciones', href: ROUTES.TERMS },
+      { label: 'Política de Privacidad', href: ROUTES.PRIVACY },
+      { label: 'Política de Cookies', href: ROUTES.COOKIES },
+      { label: 'Aviso Legal', href: ROUTES.LEGAL_NOTICE },
     ],
   },
 };
@@ -137,17 +137,17 @@ export const footerNavigation = {
 export const userNavigation: NavItem[] = [
   {
     label: 'Mi Cuenta',
-    href: '/cuenta',
+    href: ROUTES.ACCOUNT,
     icon: 'user',
   },
   {
     label: 'Mis Pedidos',
-    href: '/cuenta/pedidos',
+    href: ROUTES.ORDERS,
     icon: 'package',
   },
   {
     label: 'Lista de Deseos',
-    href: '/cuenta/lista-deseos',
+    href: ROUTES.WISHLIST,
     icon: 'heart',
   },
   {
@@ -186,7 +186,7 @@ export const mobileNavigation: NavItem[] = [
   },
   {
     label: 'Cuenta',
-    href: '/cuenta',
+    href: ROUTES.ACCOUNT,
     icon: 'user',
   },
 ];

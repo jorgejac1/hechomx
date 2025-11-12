@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { footerNavigation } from '@/config/navigation';
 import { siteConfig, SITE_NAME } from '@/config/site';
+import { ROUTES } from '@/lib/constants/routes';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -15,7 +16,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {footerNavigation.shop.items.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-blue-200 hover:text-white transition">
+                  <Link href={item.href} className="text-gray-300 hover:text-white transition">
                     {item.label}
                   </Link>
                 </li>
@@ -29,7 +30,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {footerNavigation.about.items.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-blue-200 hover:text-white transition">
+                  <Link href={item.href} className="text-gray-300 hover:text-white transition">
                     {item.label}
                   </Link>
                 </li>
@@ -43,7 +44,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {footerNavigation.help.items.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-blue-200 hover:text-white transition">
+                  <Link href={item.href} className="text-gray-300 hover:text-white transition">
                     {item.label}
                   </Link>
                 </li>
@@ -57,7 +58,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {footerNavigation.legal.items.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-blue-200 hover:text-white transition">
+                  <Link href={item.href} className="text-gray-300 hover:text-white transition">
                     {item.label}
                   </Link>
                 </li>
@@ -74,7 +75,7 @@ export default function Footer() {
                 href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-200 hover:text-white transition"
+                className="text-gray-300 hover:text-white transition"
                 aria-label="Instagram"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -87,7 +88,7 @@ export default function Footer() {
                 href={siteConfig.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-200 hover:text-white transition"
+                className="text-gray-300 hover:text-white transition"
                 aria-label="Facebook"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -100,7 +101,7 @@ export default function Footer() {
                 href={siteConfig.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-200 hover:text-white transition"
+                className="text-gray-300 hover:text-white transition"
                 aria-label="YouTube"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -113,7 +114,7 @@ export default function Footer() {
                 href={siteConfig.social.pinterest}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-200 hover:text-white transition"
+                className="text-gray-300 hover:text-white transition"
                 aria-label="Pinterest"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -123,8 +124,8 @@ export default function Footer() {
             </div>
 
             <Link
-              href="/app"
-              className="inline-block px-6 py-3 bg-indigo-800 rounded-full text-sm font-semibold hover:bg-indigo-900 transition"
+              href={ROUTES.APP_DOWNLOAD}
+              className="inline-block px-6 py-3 bg-primary-600 rounded-full text-sm font-semibold hover:bg-primary-700 transition"
             >
               Descargar la App
             </Link>
@@ -132,8 +133,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-indigo-600 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-blue-200">
+        <div className="border-t border-gray-700 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <span className="text-2xl">🇲🇽</span>
@@ -149,20 +150,20 @@ export default function Footer() {
               <span>
                 © {currentYear} {SITE_NAME}
               </span>
-              <Link href="/legal/terminos" className="hover:text-white transition">
+              <Link href={ROUTES.TERMS} className="hover:text-white transition">
                 Términos de Uso
               </Link>
-              <Link href="/legal/privacidad" className="hover:text-white transition">
+              <Link href={ROUTES.PRIVACY} className="hover:text-white transition">
                 Privacidad
               </Link>
-              <Link href="/legal/cookies" className="hover:text-white transition">
+              <Link href={ROUTES.COOKIES} className="hover:text-white transition">
                 Cookies
               </Link>
             </div>
           </div>
 
           {/* Contact Info */}
-          <div className="mt-6 text-center text-sm text-blue-200">
+          <div className="mt-6 text-center text-sm text-gray-400">
             <p>
               Contacto:{' '}
               <a
