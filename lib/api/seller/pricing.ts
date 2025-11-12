@@ -2,13 +2,17 @@ import type { PricingCalculation, FairTradeRates } from '@/lib/types/pricing-cal
 
 export async function getFairTradeRates(region: string): Promise<FairTradeRates | null> {
   try {
-    const response = await fetch('/api/pricing/fair-trade-rates');
-    const data: {
-      mexico: {
-        country: string;
-        regions: Record<string, Omit<FairTradeRates, 'country'>>;
-      };
-    } = await response.json();
+    const response = await fetch('/api/pricing/fair-trade-rates'); // Back to the correct URL!
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch rates');
+    }
+
+    const { success, data, error } = await response.json();
+
+    if (!success || !data) {
+      throw new Error(error || 'Invalid response data');
+    }
 
     const regionData = data.mexico.regions[region.toLowerCase()];
     if (!regionData) return null;

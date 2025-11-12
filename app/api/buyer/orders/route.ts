@@ -16,10 +16,10 @@ export async function GET(request: Request) {
     const userOrders = buyerOrdersData[email as keyof typeof buyerOrdersData];
 
     if (!userOrders) {
-      return NextResponse.json(
-        { success: false, error: 'No orders found for this user' },
-        { status: 404 }
-      );
+      return NextResponse.json({
+        success: true,
+        data: [],
+      });
     }
 
     return NextResponse.json({

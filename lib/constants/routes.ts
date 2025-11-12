@@ -1,61 +1,58 @@
 /**
- * Application routes configuration
- * Centralized route definitions to avoid hardcoded paths
- */
-
-/**
- * Application routes configuration
- * Centralized route definitions to avoid hardcoded paths
+ * Application routes
  */
 
 export const ROUTES = {
-  // Public routes
   HOME: '/',
+  PRODUCTS: '/productos',
+  PRODUCT_DETAIL: (id: string) => `/productos/${id}`,
+  CART: '/carrito',
+  COMPARISON: '/comparar',
+  CHECKOUT: '/checkout',
   ABOUT: '/nosotros',
   CONTACT: '/contacto',
 
-  // Products
-  PRODUCTS: '/productos',
-  PRODUCT_DETAIL: (id: string) => `/productos/${id}`,
+  // Auth routes
+  LOGIN: '/iniciar-sesion',
+  REGISTER: '/registro',
+  FORGOT_PASSWORD: '/recuperar-password',
+  PROFILE: '/perfil',
+  MI_IMPACTO: '/mi-impacto',
+  MY_IMPACT: '/mi-impacto', // Alias for MI_IMPACTO
+  DASHBOARD: '/dashboard',
+  ORDERS: '/pedidos',
+  WISHLIST: '/favoritos',
+  TASKS_CENTER: '/centro-tareas',
 
-  // Shops (formerly artesanos)
-  SHOPS: '/tiendas',
+  MY_STORY: '/mi-historia',
+
+  SHOP: '/tienda',
+  SHOPS: '/tiendas', // New shops listing page
   SHOP_DETAIL: (shopId: string) => `/tiendas/${shopId}`,
 
-  // Artisan Stories
+  PRODUCT_CREATE: '/productos/crear',
+  PRODUCT_MANAGE: '/productos/gestionar',
+
   ARTISAN: '/artesano',
   ARTISAN_STORY: (artisanId: string) => `/artesano/${artisanId}`,
 
-  // Cart & Checkout
-  CART: '/carrito',
-  CHECKOUT: '/checkout',
-  COMPARISON: '/comparar',
-
-  // User account
-  LOGIN: '/iniciar-sesion',
-  REGISTER: '/registro',
-  ACCOUNT: '/cuenta',
-  PROFILE: '/cuenta/perfil',
-  ORDERS: '/cuenta/pedidos',
-  ORDER_DETAIL: (orderId: string) => `/cuenta/pedidos/${orderId}`,
-  WISHLIST: '/favoritos',
-
-  // Seller routes
-  SELL: '/vender',
-  DASHBOARD: '/dashboard',
-  CREATE_PRODUCT: '/productos/crear',
-  EDIT_PRODUCT: (productId: string) => `/productos/${productId}/editar`,
-  SELLER_ORDERS: '/dashboard/pedidos',
   PRICING_CALCULATOR: '/calculadora-precios',
 
-  // Help & Support
+  MESSAGES: '/mensajes',
+  REVIEWS_MANAGEMENT: '/resenas-gestion',
+  ORDERS_MANAGEMENT: '/pedidos-gestion',
+
+  IMPACT: '/impacto',
   HELP: '/ayuda',
+  SELL: '/vender',
+
+  // Help & Support pages
   FAQ: '/ayuda/faq',
   SHIPPING_INFO: '/ayuda/envios',
   RETURNS_INFO: '/ayuda/devoluciones',
   PAYMENT_INFO: '/ayuda/pagos',
 
-  // Legal & Policies
+  // Legal & Policy pages
   TERMS: '/politicas/terminos',
   PRIVACY: '/politicas/privacidad',
   COOKIES: '/politicas/cookies',
@@ -70,9 +67,14 @@ export const ROUTES = {
   // Other
   SEARCH: '/buscar',
   APP_DOWNLOAD: '/app',
-} as const;
 
-export type RouteKey = keyof typeof ROUTES;
+  // Seller routes (aliases for existing routes)
+  ACCOUNT: '/perfil',
+  SELLER_ORDERS: '/pedidos-gestion',
+  CREATE_PRODUCT: '/productos/crear',
+  EDIT_PRODUCT: (productId: string) => `/productos/${productId}/editar`,
+  ORDER_DETAIL: (orderId: string) => `/pedidos/${orderId}`,
+} as const;
 
 export const API_ROUTES = {
   PRODUCTS: '/api/products',
