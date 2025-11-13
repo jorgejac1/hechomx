@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { useToast } from '@/contexts/ToastContext';
 import { getFairTradeRates, calculatePricing, savePricingCalculation } from '@/lib/api/sellerApi';
 import type {
@@ -12,8 +12,8 @@ import type {
   LaborTime,
   OverheadCost,
 } from '@/lib/api/sellerApi';
+import type { User } from '@/contexts/AuthContext';
 import { ROUTES } from '@/lib';
-import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import { ArrowLeft, Calculator, Save } from 'lucide-react';
 
 // Import components
@@ -25,8 +25,15 @@ import OverheadCostsList from '@/components/pricing/OverheadCostsList';
 import PricingSummary from '@/components/pricing/PricingSummary';
 
 export default function PricingCalculatorPage() {
+  return (
+    <AuthPageWrapper requireSeller loadingText="Cargando calculadora...">
+      {(user) => <PricingCalculatorContent user={user} />}
+    </AuthPageWrapper>
+  );
+}
+
+function PricingCalculatorContent({ user }: { user: User }) {
   const router = useRouter();
-  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const { showToast } = useToast();
 
   // Product Info
@@ -91,10 +98,6 @@ export default function PricingCalculatorPage() {
     const calculated = calculatePricing(matTotal, labTotal, ovTotal, profitMargin);
     setPricing(calculated);
   }, [materials, laborTasks, overheadCosts, profitMargin]);
-
-  if (authLoading) {
-    return <LoadingSpinner size="lg" fullScreen text="Cargando calculadora..." />;
-  }
 
   // Material handlers
   const addMaterial = () => {
@@ -200,7 +203,7 @@ export default function PricingCalculatorPage() {
     };
 
     setIsSaving(true);
-    const success = await savePricingCalculation(user!.email, calculation);
+    const success = await savePricingCalculation(user.email, calculation);
     setIsSaving(false);
 
     if (success) {

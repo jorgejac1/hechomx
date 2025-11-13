@@ -2,34 +2,36 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { useToast } from '@/contexts/ToastContext';
 import { ROUTES } from '@/lib/constants/routes';
-import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import ProductForm from '@/components/product/ProductForm';
+import type { User } from '@/contexts/AuthContext';
 import { ProductFormData } from '@/types/product';
 import { Plus, Store, AlertCircle } from 'lucide-react';
 
 export default function CreateProductPage() {
+  return (
+    <AuthPageWrapper loadingText="Cargando...">
+      {(user) => <CreateProductContent user={user} />}
+    </AuthPageWrapper>
+  );
+}
+
+function CreateProductContent({ user }: { user: User }) {
   const router = useRouter();
   const { showToast } = useToast();
-  // Use requireSeller: false since we want to show the quick setup modal
-  const { user, isLoading } = useRequireAuth();
   const [showQuickSetup, setShowQuickSetup] = useState(false);
   const [shopName, setShopName] = useState('');
   const [location, setLocation] = useState('');
   const [shopDescription, setShopDescription] = useState('');
 
-  // Check if user needs quick setup after auth is loaded
+  // Check if user needs quick setup after component mounts
   useEffect(() => {
-    if (!isLoading && user && !user.makerProfile) {
+    if (!user.makerProfile) {
       setShowQuickSetup(true);
     }
-  }, [isLoading, user]);
-
-  if (isLoading) {
-    return <LoadingSpinner size="lg" fullScreen text="Cargando..." />;
-  }
+  }, [user.makerProfile]);
 
   const handleQuickSetup = () => {
     if (!shopName.trim() || !location.trim()) {

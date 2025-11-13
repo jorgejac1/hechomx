@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { getSellerOrders } from '@/lib/api/sellerApi';
 import type { SellerOrder } from '@/lib/types';
+import type { User } from '@/contexts/AuthContext';
 import { formatCurrency, formatRelativeTime, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {
@@ -55,8 +56,15 @@ const ORDER_STATUS_CONFIG = {
 };
 
 export default function OrdersManagementPage() {
+  return (
+    <AuthPageWrapper requireSeller loadingText="Cargando pedidos...">
+      {(user) => <OrdersManagementContent user={user} />}
+    </AuthPageWrapper>
+  );
+}
+
+function OrdersManagementContent({ user }: { user: User }) {
   const router = useRouter();
-  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const [orders, setOrders] = useState<SellerOrder[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<SellerOrder[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -72,16 +80,14 @@ export default function OrdersManagementPage() {
 
   useEffect(() => {
     async function loadOrders() {
-      if (user) {
-        setIsLoading(true);
-        const data = await getSellerOrders(user.email);
-        setOrders(data);
-        setFilteredOrders(data);
-        setIsLoading(false);
-      }
+      setIsLoading(true);
+      const data = await getSellerOrders(user.email);
+      setOrders(data);
+      setFilteredOrders(data);
+      setIsLoading(false);
     }
     loadOrders();
-  }, [user]);
+  }, [user.email]);
 
   // Filter orders
   useEffect(() => {
@@ -103,7 +109,7 @@ export default function OrdersManagementPage() {
     setFilteredOrders(filtered);
   }, [filterStatus, searchQuery, orders]);
 
-  if (authLoading || isLoading) {
+  if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando pedidos..." />;
   }
 

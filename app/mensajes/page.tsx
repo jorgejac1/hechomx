@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { getSellerMessages } from '@/lib/api/sellerApi';
 import type { SellerMessage } from '@/lib/types';
+import type { User } from '@/contexts/AuthContext';
 import { formatRelativeTime, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {
@@ -21,8 +22,15 @@ import {
 } from 'lucide-react';
 
 export default function MessagesPage() {
+  return (
+    <AuthPageWrapper requireSeller loadingText="Cargando mensajes...">
+      {(user) => <MessagesContent user={user} />}
+    </AuthPageWrapper>
+  );
+}
+
+function MessagesContent({ user }: { user: User }) {
   const router = useRouter();
-  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const [messages, setMessages] = useState<SellerMessage[]>([]);
   const [filteredMessages, setFilteredMessages] = useState<SellerMessage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,16 +41,14 @@ export default function MessagesPage() {
 
   useEffect(() => {
     async function loadMessages() {
-      if (user) {
-        setIsLoading(true);
-        const data = await getSellerMessages(user.email);
-        setMessages(data);
-        setFilteredMessages(data);
-        setIsLoading(false);
-      }
+      setIsLoading(true);
+      const data = await getSellerMessages(user.email);
+      setMessages(data);
+      setFilteredMessages(data);
+      setIsLoading(false);
     }
     loadMessages();
-  }, [user]);
+  }, [user.email]);
 
   // Filter messages
   useEffect(() => {
@@ -64,7 +70,7 @@ export default function MessagesPage() {
     setFilteredMessages(filtered);
   }, [filterStatus, searchQuery, messages]);
 
-  if (authLoading || isLoading) {
+  if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando mensajes..." />;
   }
 
@@ -73,10 +79,8 @@ export default function MessagesPage() {
   const handleSendReply = () => {
     if (!replyText.trim() || !selectedMessage) return;
 
-    // Here you would send the reply to backend
     console.log('Sending reply:', replyText);
 
-    // Update local state
     const updatedMessages = messages.map((msg) =>
       msg.id === selectedMessage.id
         ? {

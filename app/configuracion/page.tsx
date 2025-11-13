@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { ROUTES } from '@/lib';
-import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {
   CreditCard,
   MapPin,
@@ -41,8 +40,15 @@ interface Address {
 }
 
 export default function SettingsPage() {
+  return (
+    <AuthPageWrapper loadingText="Cargando configuración...">
+      {() => <SettingsContent />}
+    </AuthPageWrapper>
+  );
+}
+
+function SettingsContent() {
   const router = useRouter();
-  const { isLoading } = useRequireAuth();
   const [activeTab, setActiveTab] = useState<'cards' | 'addresses' | 'security' | 'notifications'>(
     'cards'
   );
@@ -95,14 +101,9 @@ export default function SettingsPage() {
   ]);
 
   const handlePasswordUpdate = () => {
-    // Mock password update
     setSuccessMessage('Contraseña actualizada correctamente');
     setTimeout(() => setSuccessMessage(''), 3000);
   };
-
-  if (isLoading) {
-    return <LoadingSpinner size="lg" fullScreen text="Cargando configuración..." />;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-6 px-4">
@@ -292,7 +293,6 @@ export default function SettingsPage() {
                   ))}
                 </div>
 
-                {/* Address validation reminder */}
                 <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                   <div className="flex gap-3">
                     <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
@@ -313,7 +313,6 @@ export default function SettingsPage() {
             {/* Security Tab */}
             {activeTab === 'security' && (
               <div className="space-y-6">
-                {/* Password strength warning */}
                 <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                   <div className="flex gap-3">
                     <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
@@ -464,7 +463,6 @@ export default function SettingsPage() {
                   ))}
                 </div>
 
-                {/* Notification info */}
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="flex gap-3">
                     <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />

@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/contexts/ToastContext';
 import { getBuyerOrders } from '@/lib/api/sellerApi';
 import type { BuyerOrder } from '@/lib/types/buyer';
 import type { Product } from '@/types';
+import type { User } from '@/contexts/AuthContext';
 import { formatCurrency, formatRelativeTime, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import ReviewModal from '@/components/orders/ReviewModal';
@@ -62,8 +63,15 @@ interface OrderReview {
 }
 
 export default function OrdersPage() {
+  return (
+    <AuthPageWrapper loadingText="Cargando pedidos...">
+      {(user) => <OrdersContent user={user} />}
+    </AuthPageWrapper>
+  );
+}
+
+function OrdersContent({ user }: { user: User }) {
   const router = useRouter();
-  const { user, isLoading: authLoading } = useRequireAuth();
   const { addToCart } = useCart();
   const { showToast } = useToast();
   const [orders, setOrders] = useState<BuyerOrder[]>([]);
@@ -76,16 +84,14 @@ export default function OrdersPage() {
 
   useEffect(() => {
     async function loadOrders() {
-      if (user) {
-        setIsLoading(true);
-        const data = await getBuyerOrders(user.email);
-        setOrders(data);
-        setFilteredOrders(data);
-        setIsLoading(false);
-      }
+      setIsLoading(true);
+      const data = await getBuyerOrders(user.email);
+      setOrders(data);
+      setFilteredOrders(data);
+      setIsLoading(false);
     }
     loadOrders();
-  }, [user]);
+  }, [user.email]);
 
   // Filter orders
   useEffect(() => {
@@ -108,7 +114,7 @@ export default function OrdersPage() {
     setFilteredOrders(filtered);
   }, [filterStatus, searchQuery, orders]);
 
-  if (authLoading || isLoading) {
+  if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando pedidos..." />;
   }
 
@@ -128,11 +134,11 @@ export default function OrdersPage() {
         state: '',
         maker: item.artisan.id,
         images: [item.image],
-        inStock: true, // Changed from 'stock'
+        inStock: true,
         featured: false,
         verified: false,
         rating: 0,
-        reviewCount: 0, // Changed from 'reviewsCount'
+        reviewCount: 0,
       };
 
       addToCart(product, item.quantity);

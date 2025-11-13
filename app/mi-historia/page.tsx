@@ -3,10 +3,11 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import { useToast } from '@/contexts/ToastContext';
+import type { User } from '@/contexts/AuthContext';
 import {
   StoryFormSelector,
   BasicInfoSection,
@@ -24,8 +25,15 @@ import { SELLER_TYPE_CONFIG } from '@/lib/types/seller-types';
 import type { ArtisanStory } from '@/lib/types/artisan-story';
 
 export default function MiHistoriaPage() {
+  return (
+    <AuthPageWrapper requireSeller loadingText="Cargando tu historia...">
+      {(user) => <MiHistoriaContent user={user} />}
+    </AuthPageWrapper>
+  );
+}
+
+function MiHistoriaContent({ user }: { user: User }) {
   const router = useRouter();
-  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const { showToast } = useToast();
 
   // Seller Classification
@@ -93,8 +101,6 @@ export default function MiHistoriaPage() {
   // Load existing story data when component mounts
   useEffect(() => {
     async function loadExistingStory() {
-      if (!user) return;
-
       setIsLoadingStory(true);
 
       try {
@@ -105,7 +111,6 @@ export default function MiHistoriaPage() {
         if (savedStory) {
           const story: ArtisanStory = JSON.parse(savedStory);
           populateForm(story);
-          // Removed toast - silent load is better UX
           setIsLoadingStory(false);
           return;
         }
@@ -117,18 +122,17 @@ export default function MiHistoriaPage() {
 
         if (story) {
           populateForm(story);
-          // Removed toast - silent load is better UX
         }
       } catch (error) {
         console.error('Error loading story:', error);
-        showToast('No se pudo cargar la historia', 'error'); // Keep error toast
+        showToast('No se pudo cargar la historia', 'error');
       }
 
       setIsLoadingStory(false);
     }
 
     loadExistingStory();
-  }, [user, showToast]);
+  }, [user.email, showToast]);
 
   // Helper function to populate form with story data
   const populateForm = (story: ArtisanStory) => {
@@ -183,7 +187,7 @@ export default function MiHistoriaPage() {
   };
 
   // Show combined loading state
-  if (authLoading || isLoadingStory) {
+  if (isLoadingStory) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando tu historia..." />;
   }
 

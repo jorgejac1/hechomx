@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { getSellerReviews } from '@/lib/api/sellerApi';
 import type { SellerReview } from '@/lib/types';
+import type { User } from '@/contexts/AuthContext';
 import { formatRelativeTime, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {
@@ -23,8 +24,15 @@ import {
 } from 'lucide-react';
 
 export default function ReviewsManagementPage() {
+  return (
+    <AuthPageWrapper requireSeller loadingText="Cargando reseñas...">
+      {(user) => <ReviewsManagementContent user={user} />}
+    </AuthPageWrapper>
+  );
+}
+
+function ReviewsManagementContent({ user }: { user: User }) {
   const router = useRouter();
-  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const [reviews, setReviews] = useState<SellerReview[]>([]);
   const [filteredReviews, setFilteredReviews] = useState<SellerReview[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -37,16 +45,14 @@ export default function ReviewsManagementPage() {
 
   useEffect(() => {
     async function loadReviews() {
-      if (user) {
-        setIsLoading(true);
-        const data = await getSellerReviews(user.email);
-        setReviews(data);
-        setFilteredReviews(data);
-        setIsLoading(false);
-      }
+      setIsLoading(true);
+      const data = await getSellerReviews(user.email);
+      setReviews(data);
+      setFilteredReviews(data);
+      setIsLoading(false);
     }
     loadReviews();
-  }, [user]);
+  }, [user.email]);
 
   // Filter reviews
   useEffect(() => {
@@ -72,7 +78,7 @@ export default function ReviewsManagementPage() {
     setFilteredReviews(filtered);
   }, [filterStatus, filterRating, searchQuery, reviews]);
 
-  if (authLoading || isLoading) {
+  if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando reseñas..." />;
   }
 
@@ -369,13 +375,11 @@ export default function ReviewsManagementPage() {
         {/* Response Modal */}
         {selectedReview && selectedReview.status === 'pending' && (
           <>
-            {/* Backdrop */}
             <div
               className="fixed inset-0 bg-black/50 z-40"
               onClick={() => setSelectedReview(null)}
             />
 
-            {/* Modal */}
             <div className="fixed inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl bg-white rounded-xl shadow-2xl z-50 overflow-hidden flex flex-col max-h-[90vh]">
               {/* Header */}
               <div className="p-6 border-b border-gray-200">

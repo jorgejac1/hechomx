@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
+import type { User } from '@/contexts/AuthContext';
 import {
   Store,
   MapPin,
@@ -37,8 +38,15 @@ interface FinancialData {
 }
 
 export default function SellerProfilePage() {
+  return (
+    <AuthPageWrapper requireSeller loadingText="Cargando perfil de vendedor...">
+      {(user) => <SellerProfileContent user={user} />}
+    </AuthPageWrapper>
+  );
+}
+
+function SellerProfileContent({ user }: { user: User }) {
   const router = useRouter();
-  const { user, isLoading } = useRequireAuth({ requireSeller: true });
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [activeSection, setActiveSection] = useState<'business' | 'financial' | 'policies'>(
@@ -58,11 +66,7 @@ export default function SellerProfilePage() {
   // Edit form state
   const [editForm, setEditForm] = useState<FinancialData>(financialData);
 
-  if (isLoading) {
-    return <LoadingSpinner size="lg" fullScreen text="Cargando perfil de vendedor..." />;
-  }
-
-  const { makerProfile } = user!;
+  const { makerProfile } = user;
 
   const handleEditStart = () => {
     setEditForm(financialData);
@@ -110,10 +114,10 @@ export default function SellerProfilePage() {
         {/* Shop Header Card */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-6">
           <div className="flex items-center gap-4">
-            {user!.avatar ? (
+            {user.avatar ? (
               <Image
-                src={user!.avatar}
-                alt={user!.name}
+                src={user.avatar}
+                alt={user.name}
                 width={80}
                 height={80}
                 className="rounded-full border-4 border-primary-100"

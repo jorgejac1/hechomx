@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { getSellerTasks } from '@/lib/api/sellerApi';
 import type { SellerTask } from '@/lib/types';
+import type { User } from '@/contexts/AuthContext';
 import { formatRelativeTime, formatCurrency, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {
@@ -95,8 +96,15 @@ const PRIORITY_CONFIG = {
 };
 
 export default function TasksCenterPage() {
+  return (
+    <AuthPageWrapper requireSeller loadingText="Cargando tareas...">
+      {(user) => <TasksCenterContent user={user} />}
+    </AuthPageWrapper>
+  );
+}
+
+function TasksCenterContent({ user }: { user: User }) {
   const router = useRouter();
-  const { user, isLoading: authLoading } = useRequireAuth({ requireSeller: true });
   const [tasks, setTasks] = useState<SellerTask[]>([]);
   const [filteredTasks, setFilteredTasks] = useState<SellerTask[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -106,18 +114,16 @@ export default function TasksCenterPage() {
 
   useEffect(() => {
     async function loadTasks() {
-      if (user) {
-        setIsLoading(true);
-        const data = await getSellerTasks(user.email);
-        // Only show pending tasks
-        const pendingTasks = data.filter((task) => task.status === 'pending');
-        setTasks(pendingTasks);
-        setFilteredTasks(pendingTasks);
-        setIsLoading(false);
-      }
+      setIsLoading(true);
+      const data = await getSellerTasks(user.email);
+      // Only show pending tasks
+      const pendingTasks = data.filter((task) => task.status === 'pending');
+      setTasks(pendingTasks);
+      setFilteredTasks(pendingTasks);
+      setIsLoading(false);
     }
     loadTasks();
-  }, [user]);
+  }, [user.email]);
 
   // Filter tasks
   useEffect(() => {
@@ -146,7 +152,7 @@ export default function TasksCenterPage() {
     setFilteredTasks(filtered);
   }, [filterPriority, filterType, searchQuery, tasks]);
 
-  if (authLoading || isLoading) {
+  if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando tareas..." />;
   }
 

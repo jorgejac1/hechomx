@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useRequireAuth } from '@/hooks/auth';
+import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/contexts/ToastContext';
 import { getUserFavorites, type FavoriteProduct } from '@/lib/api/sellerApi';
 import { formatCurrency, formatRelativeTime, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import type { Product } from '@/types';
+import type { User } from '@/contexts/AuthContext';
 import {
   Heart,
   ShoppingCart,
@@ -30,8 +31,15 @@ type ViewMode = 'grid' | 'list';
 type SortOption = 'recent' | 'name' | 'price-low' | 'price-high';
 
 export default function FavoritesPage() {
+  return (
+    <AuthPageWrapper loadingText="Cargando favoritos...">
+      {(user) => <FavoritesContent user={user} />}
+    </AuthPageWrapper>
+  );
+}
+
+function FavoritesContent({ user }: { user: User }) {
   const router = useRouter();
-  const { user, isLoading: authLoading } = useRequireAuth();
   const { addToCart } = useCart();
   const { showToast } = useToast();
 
@@ -48,17 +56,15 @@ export default function FavoritesPage() {
 
   useEffect(() => {
     async function loadFavorites() {
-      if (user) {
-        setIsLoading(true);
-        const data = await getUserFavorites(user.email);
-        setFavorites(data);
-        setIsLoading(false);
-      }
+      setIsLoading(true);
+      const data = await getUserFavorites(user.email);
+      setFavorites(data);
+      setIsLoading(false);
     }
     loadFavorites();
-  }, [user]);
+  }, [user.email]);
 
-  if (authLoading || isLoading) {
+  if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando favoritos..." />;
   }
 
