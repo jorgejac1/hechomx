@@ -381,10 +381,10 @@ export default function CookiesPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="mailto:privacidad@hechoenmexicov.com"
+                  href="mailto:privacidad@@papalotemarket.com"
                   className="px-6 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition"
                 >
-                  privacidad@hechoenmexicov.com
+                  privacidad@@papalotemarket.com
                 </a>
               </div>
             </div>

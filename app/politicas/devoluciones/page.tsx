@@ -178,10 +178,10 @@ export default function ReturnsPage() {
                   <p className="text-gray-700 text-sm">
                     Envía un correo a{' '}
                     <a
-                      href="mailto:devoluciones@hechoenmexicov.com"
+                      href="mailto:devoluciones@@papalotemarket.com"
                       className="text-primary-600 hover:underline"
                     >
-                      devoluciones@hechoenmexicov.com
+                      devoluciones@@papalotemarket.com
                     </a>{' '}
                     con tu número de pedido, razón de la devolución y fotos del producto (si
                     aplica). Responderemos en 24 horas hábiles.
@@ -412,10 +412,10 @@ export default function ReturnsPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="mailto:devoluciones@hechoenmexicov.com"
+                  href="mailto:devoluciones@@papalotemarket.com"
                   className="px-6 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition"
                 >
-                  devoluciones@hechoenmexicov.com
+                  devoluciones@@papalotemarket.com
                 </a>
                 <a
                   href="tel:+525512345678"

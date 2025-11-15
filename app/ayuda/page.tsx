@@ -365,10 +365,10 @@ export default function HelpPage() {
                 <p className="text-sm text-gray-600">Respuesta en 24 horas</p>
               </div>
               <a
-                href="mailto:ayuda@hechoenmexico.mx"
+                href="mailto:ayuda@papalotemarket.mx"
                 className="text-primary-600 font-semibold hover:text-primary-700"
               >
-                ayuda@hechoenmexico.mx
+                ayuda@papalotemarket.mx
               </a>
             </div>
 

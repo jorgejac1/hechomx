@@ -245,10 +245,10 @@ export default function TermsPage() {
                 <li>
                   <strong>Email:</strong>{' '}
                   <a
-                    href="mailto:legal@hechoenmexicov.com"
+                    href="mailto:legal@@papalotemarket.com"
                     className="text-primary-600 hover:underline"
                   >
-                    legal@hechoenmexicov.com
+                    legal@@papalotemarket.com
                   </a>
                 </li>
                 <li>

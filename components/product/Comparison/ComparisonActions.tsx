@@ -110,7 +110,7 @@ export default function ComparisonActions({ products, tableRef }: ComparisonActi
       footer.style.fontSize = '12px';
       footer.innerHTML = `
         <p style="margin: 0;">Productos artesanales auténticos de México</p>
-        <p style="margin: 5px 0 0 0;">www.hechoenmexico.com</p>
+        <p style="margin: 5px 0 0 0;">www.papalotemarket.mx</p>
       `;
       wrapper.appendChild(footer);
 

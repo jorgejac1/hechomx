@@ -115,7 +115,7 @@ export default function SocialMediaSection({
           <li>• Comparte fotos del proceso detrás de tus productos</li>
           <li>• Publica regularmente para mantener a tus seguidores interesados</li>
           <li>• Responde a comentarios y mensajes rápidamente</li>
-          <li>• Usa hashtags relevantes como #HechoEnMéxico #Artesanía</li>
+          <li>• Usa hashtags relevantes como #PapaloteMarket #Artesanía</li>
         </ul>
       </div>
     </div>

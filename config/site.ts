@@ -12,18 +12,18 @@ export const siteConfig = {
 
   // Contact information
   contact: {
-    email: 'contacto@hechoenmex.com',
+    email: 'contacto@papalotemarket.com',
     phone: '+52 55 1234 5678',
     whatsapp: '+52 55 1234 5678',
   },
 
   // Social media links
   social: {
-    facebook: 'https://facebook.com/hechoenmex',
-    instagram: 'https://instagram.com/hechoenmex',
-    twitter: 'https://twitter.com/hechoenmex',
-    pinterest: 'https://pinterest.com/hechoenmex',
-    youtube: 'https://youtube.com/@hechoenmex',
+    facebook: 'https://facebook.com/papalotemarket',
+    instagram: 'https://instagram.com/papalotemarket',
+    twitter: 'https://twitter.com/papalotemarket',
+    pinterest: 'https://pinterest.com/papalotemarket',
+    youtube: 'https://youtube.com/@papalotemarket',
   },
 
   // Business information

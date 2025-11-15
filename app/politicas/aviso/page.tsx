@@ -81,10 +81,10 @@ export default function LegalNoticePage() {
                   <div>
                     <p className="font-semibold text-gray-900">Email:</p>
                     <a
-                      href="mailto:legal@hechoenmexicov.com"
+                      href="mailto:legal@@papalotemarket.com"
                       className="text-primary-600 hover:underline"
                     >
-                      legal@hechoenmexicov.com
+                      legal@@papalotemarket.com
                     </a>
                   </div>
                 </div>
@@ -222,10 +222,10 @@ export default function LegalNoticePage() {
                 Para ejercer tus derechos ARCO (Acceso, Rectificación, Cancelación y Oposición),
                 puedes contactarnos en{' '}
                 <a
-                  href="mailto:privacidad@hechoenmexicov.com"
+                  href="mailto:privacidad@@papalotemarket.com"
                   className="text-primary-600 hover:underline"
                 >
-                  privacidad@hechoenmexicov.com
+                  privacidad@@papalotemarket.com
                 </a>
               </p>
             </div>
@@ -258,10 +258,10 @@ export default function LegalNoticePage() {
                 <li className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-primary-600" />
                   <a
-                    href="mailto:legal@hechoenmexicov.com"
+                    href="mailto:legal@@papalotemarket.com"
                     className="text-primary-600 hover:underline"
                   >
-                    legal@hechoenmexicov.com
+                    legal@@papalotemarket.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2">

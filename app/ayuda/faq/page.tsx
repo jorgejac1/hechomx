@@ -96,7 +96,7 @@ const faqs = [
       },
       {
         q: '¿Cómo inicio una devolución?',
-        a: 'Envía un correo a devoluciones@hechoenmexicov.com con tu número de pedido y razón de la devolución. Te enviaremos las instrucciones y una guía de envío prepagada si aplica.',
+        a: 'Envía un correo a devoluciones@@papalotemarket.com con tu número de pedido y razón de la devolución. Te enviaremos las instrucciones y una guía de envío prepagada si aplica.',
       },
       {
         q: '¿Cuánto tarda el reembolso?',
@@ -126,7 +126,7 @@ const faqs = [
       },
       {
         q: '¿Cómo elimino mi cuenta?',
-        a: 'Puedes solicitar la eliminación de tu cuenta contactándonos a privacidad@hechoenmexicov.com. Procesaremos tu solicitud dentro de 30 días y eliminaremos toda tu información personal.',
+        a: 'Puedes solicitar la eliminación de tu cuenta contactándonos a privacidad@@papalotemarket.com. Procesaremos tu solicitud dentro de 30 días y eliminaremos toda tu información personal.',
       },
     ],
   },
@@ -223,7 +223,7 @@ export default function FAQPage() {
                 Contactar Soporte
               </Link>
               <a
-                href="mailto:ayuda@hechoenmexicov.com"
+                href="mailto:ayuda@@papalotemarket.com"
                 className="px-6 py-3 bg-primary-800 text-white rounded-lg font-semibold hover:bg-primary-900 transition"
               >
                 Enviar Email

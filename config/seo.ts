@@ -51,7 +51,7 @@ export const defaultMetadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: ['/images/twitter-image.jpg'],
-    creator: '@hechoenmex',
+    creator: '@papalotemarket',
   },
   robots: {
     index: true,

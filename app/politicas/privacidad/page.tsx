@@ -282,10 +282,10 @@ export default function PrivacyPage() {
                 <li>
                   <strong>Email:</strong>{' '}
                   <a
-                    href="mailto:privacidad@hechoenmexicov.com"
+                    href="mailto:privacidad@@papalotemarket.com"
                     className="text-primary-600 hover:underline"
                   >
-                    privacidad@hechoenmexicov.com
+                    privacidad@@papalotemarket.com
                   </a>
                 </li>
                 <li>
@@ -365,10 +365,10 @@ export default function PrivacyPage() {
                 Si eres padre o tutor y crees que tu hijo nos ha proporcionado información personal,
                 contáctanos en{' '}
                 <a
-                  href="mailto:privacidad@hechoenmexicov.com"
+                  href="mailto:privacidad@@papalotemarket.com"
                   className="text-primary-600 hover:underline"
                 >
-                  privacidad@hechoenmexicov.com
+                  privacidad@@papalotemarket.com
                 </a>
               </p>
             </div>
@@ -403,10 +403,10 @@ export default function PrivacyPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="mailto:privacidad@hechoenmexicov.com"
+                  href="mailto:privacidad@@papalotemarket.com"
                   className="px-6 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition"
                 >
-                  privacidad@hechoenmexicov.com
+                  privacidad@@papalotemarket.com
                 </a>
               </div>
               <p className="text-sm text-primary-100 mt-4">

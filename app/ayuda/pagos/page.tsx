@@ -212,8 +212,8 @@ export default function PaymentInfoPage() {
               <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
                 <p className="text-sm text-blue-900">
                   <strong>Importante:</strong> Envía tu comprobante de pago a{' '}
-                  <a href="mailto:pagos@hechoenmexicov.com" className="underline">
-                    pagos@hechoenmexicov.com
+                  <a href="mailto:pagos@@papalotemarket.com" className="underline">
+                    pagos@@papalotemarket.com
                   </a>{' '}
                   con tu número de pedido para confirmar tu compra.
                 </p>
@@ -325,10 +325,10 @@ export default function PaymentInfoPage() {
               <p className="mb-6 text-primary-100">Nuestro equipo está disponible para ayudarte</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="mailto:pagos@hechoenmexicov.com"
+                  href="mailto:pagos@@papalotemarket.com"
                   className="px-6 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition"
                 >
-                  pagos@hechoenmexicov.com
+                  pagos@@papalotemarket.com
                 </a>
                 <a
                   href="tel:+525512345678"
