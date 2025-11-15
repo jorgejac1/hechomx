@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: ShopPageProps): Promise<Metad
   }
 
   return {
-    title: `${shop.makerProfile.shopName} - Hecho en México`,
+    title: `${shop.makerProfile.shopName} - Papalote Market`,
     description: shop.makerProfile.description,
   };
 }

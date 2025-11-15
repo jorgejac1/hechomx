@@ -5,7 +5,7 @@ import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: 'Carrito de Compras - Hecho en México',
+  title: 'Carrito de Compras - Papalote Market',
   description: 'Revisa tu carrito de compras y procede al pago',
 };
 

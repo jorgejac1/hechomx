@@ -4,8 +4,8 @@ import { ArrowLeft, FileText, Building, Mail, Phone, MapPin, Shield } from 'luci
 import { ROUTES } from '@/lib';
 
 export const metadata: Metadata = {
-  title: 'Aviso Legal | Hecho en México',
-  description: 'Información legal sobre Hecho en México',
+  title: 'Aviso Legal | Papalote Market',
+  description: 'Información legal sobre Papalote Market',
 };
 
 export default function LegalNoticePage() {
@@ -48,7 +48,7 @@ export default function LegalNoticePage() {
                   <Building className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900">Razón Social:</p>
-                    <p className="text-gray-700">Hecho en México S.A. de C.V.</p>
+                    <p className="text-gray-700">Papalote Market S.A. de C.V.</p>
                   </div>
                 </div>
 
@@ -105,7 +105,7 @@ export default function LegalNoticePage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Objeto del Sitio Web</h2>
             <div className="prose prose-gray max-w-none text-gray-700">
               <p>
-                Hecho en México es una plataforma de comercio electrónico que conecta a artesanos
+                Papalote Market es una plataforma de comercio electrónico que conecta a artesanos
                 mexicanos con compradores interesados en productos artesanales auténticos y de alta
                 calidad.
               </p>
@@ -143,7 +143,7 @@ export default function LegalNoticePage() {
                 Todos los contenidos del sitio web, incluyendo pero no limitado a textos,
                 fotografías, gráficos, imágenes, iconos, tecnología, software, links y demás
                 contenidos audiovisuales o sonoros, así como su diseño gráfico y códigos fuente, son
-                propiedad intelectual de Hecho en México S.A. de C.V. o de sus proveedores de
+                propiedad intelectual de Papalote Market S.A. de C.V. o de sus proveedores de
                 contenido.
               </p>
               <p>
@@ -167,14 +167,14 @@ export default function LegalNoticePage() {
             <div className="prose prose-gray max-w-none text-gray-700">
               <h3 className="text-lg font-bold mt-4 mb-2">5.1 Contenido del Sitio</h3>
               <p>
-                Hecho en México no garantiza la licitud, fiabilidad, exactitud, exhaustividad y
+                Papalote Market no garantiza la licitud, fiabilidad, exactitud, exhaustividad y
                 actualidad de los contenidos del sitio web. El uso de la información publicada es
                 responsabilidad exclusiva del usuario.
               </p>
 
               <h3 className="text-lg font-bold mt-4 mb-2">5.2 Productos de Terceros</h3>
               <p>
-                Hecho en México actúa como intermediario entre compradores y artesanos. Los
+                Papalote Market actúa como intermediario entre compradores y artesanos. Los
                 productos son fabricados y vendidos directamente por artesanos independientes. No
                 somos responsables por defectos de fabricación, aunque trabajaremos contigo y el
                 artesano para resolver cualquier problema.
@@ -207,7 +207,7 @@ export default function LegalNoticePage() {
             <div className="prose prose-gray max-w-none text-gray-700">
               <p>
                 De conformidad con la Ley Federal de Protección de Datos Personales en Posesión de
-                los Particulares (LFPDPPP), Hecho en México S.A. de C.V. es responsable del
+                los Particulares (LFPDPPP), Papalote Market S.A. de C.V. es responsable del
                 tratamiento de tus datos personales.
               </p>
               <p>

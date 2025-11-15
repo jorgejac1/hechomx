@@ -14,7 +14,7 @@ import {
 import { ROUTES } from '@/lib';
 
 export const metadata: Metadata = {
-  title: 'Métodos de Pago | Hecho en México',
+  title: 'Métodos de Pago | Papalote Market',
   description: 'Conoce nuestros métodos de pago seguros y confiables',
 };
 
@@ -191,7 +191,7 @@ export default function PaymentInfoPage() {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Beneficiario:</span>
                     <span className="font-semibold text-gray-900">
-                      Hecho en México S.A. de C.V.
+                      Papalote Market S.A. de C.V.
                     </span>
                   </div>
                   <div className="flex justify-between">

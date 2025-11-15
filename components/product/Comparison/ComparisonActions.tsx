@@ -86,7 +86,7 @@ export default function ComparisonActions({ products, tableRef }: ComparisonActi
       header.style.borderBottom = '2px solid #0D9488';
       header.style.paddingBottom = '10px';
       header.innerHTML = `
-        <h1 style="margin: 0; color: #0D9488; font-size: 24px;">Hecho en México</h1>
+        <h1 style="margin: 0; color: #0D9488; font-size: 24px;">Papalote Market</h1>
         <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">
           Comparación de Productos - ${new Date().toLocaleDateString('es-MX', {
             year: 'numeric',
@@ -205,7 +205,7 @@ export default function ComparisonActions({ products, tableRef }: ComparisonActi
         isOpen={showShareModal}
         onClose={() => setShowShareModal(false)}
         url={generateShareableLink()}
-        title="Comparación de productos - Hecho en México"
+        title="Comparación de productos - Papalote Market"
         text={`Compara estos ${products.length} productos artesanales`}
       />
     </>

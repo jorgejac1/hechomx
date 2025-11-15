@@ -5,7 +5,7 @@ import { ArrowLeft, Calendar, User, Clock, ArrowRight } from 'lucide-react';
 import { ROUTES } from '@/lib';
 
 export const metadata: Metadata = {
-  title: 'Blog | Hecho en México',
+  title: 'Blog | Papalote Market',
   description:
     'Descubre historias de artesanos, técnicas tradicionales y la cultura artesanal mexicana',
 };
@@ -153,7 +153,7 @@ export default function BlogPage() {
             <ArrowLeft className="w-5 h-5" />
             Volver al inicio
           </Link>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog de Hecho en México</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog de Papalote Market</h1>
           <p className="text-xl text-primary-100 max-w-3xl">
             Historias, técnicas y cultura artesanal mexicana. Descubre el mundo detrás de cada pieza
             artesanal.

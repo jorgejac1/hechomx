@@ -14,7 +14,7 @@ export const defaultMetadata: Metadata = {
   keywords: [
     'artesanías mexicanas',
     'productos mexicanos',
-    'hecho en méxico',
+    'Papalote Market',
     'artesanos',
     'artesanías',
     'textiles mexicanos',
@@ -87,7 +87,7 @@ export function generateProductMetadata(product: {
   return {
     title: product.name,
     description: product.description,
-    keywords: [product.name, product.category, product.state, 'artesanía', 'hecho en méxico'],
+    keywords: [product.name, product.category, product.state, 'artesanía', 'Papalote Market'],
     openGraph: {
       type: 'website',
       title: product.name,

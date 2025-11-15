@@ -16,7 +16,7 @@ import { ROUTES } from '@/lib';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'Contacto | Hecho en México',
+  title: 'Contacto | Papalote Market',
   description: 'Contáctanos para cualquier duda o comentario sobre nuestros productos artesanales',
 };
 
@@ -308,7 +308,7 @@ export default function ContactPage() {
                   href={ROUTES.SELL}
                   className="block text-primary-600 hover:text-primary-700 text-sm font-medium"
                 >
-                  → Vender en Hecho en México
+                  → Vender en Papalote Market
                 </Link>
               </div>
             </div>
@@ -382,7 +382,7 @@ export default function ContactPage() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Ubicación de Hecho en México"
+              title="Ubicación de Papalote Market"
             />
           </div>
           <p className="text-center text-gray-600 text-sm mt-4">

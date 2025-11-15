@@ -252,7 +252,7 @@ export default function LoginPage() {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">¿Nuevo en Hecho en México?</span>
+                <span className="px-2 bg-white text-gray-500">¿Nuevo en Papalote Market?</span>
               </div>
             </div>
 

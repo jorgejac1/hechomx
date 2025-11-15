@@ -3,7 +3,7 @@
  */
 
 export const siteConfig = {
-  name: 'Hecho en México',
+  name: 'Papalote Market',
   description:
     'Descubre productos artesanales auténticos hechos en México. Conecta directamente con artesanos mexicanos y apoya el arte tradicional.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
@@ -28,7 +28,7 @@ export const siteConfig = {
 
   // Business information
   business: {
-    legalName: 'Hecho en México S.A. de C.V.',
+    legalName: 'Papalote Market S.A. de C.V.',
     rfc: 'HEM123456789',
     address: {
       street: 'Av. Reforma 123',

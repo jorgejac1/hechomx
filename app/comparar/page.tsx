@@ -5,7 +5,7 @@ import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: 'Comparar Productos - Hecho en México',
+  title: 'Comparar Productos - Papalote Market',
   description: 'Compara productos artesanales mexicanos lado a lado',
 };
 

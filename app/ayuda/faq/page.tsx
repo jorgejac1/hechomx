@@ -15,8 +15,8 @@ import {
 import { ROUTES } from '@/lib';
 
 export const metadata: Metadata = {
-  title: 'Preguntas Frecuentes | Hecho en México',
-  description: 'Encuentra respuestas a las preguntas más comunes sobre Hecho en México',
+  title: 'Preguntas Frecuentes | Papalote Market',
+  description: 'Encuentra respuestas a las preguntas más comunes sobre Papalote Market',
 };
 
 const faqs = [
@@ -135,7 +135,7 @@ const faqs = [
     icon: Package,
     questions: [
       {
-        q: '¿Cómo puedo vender en Hecho en México?',
+        q: '¿Cómo puedo vender en Papalote Market?',
         a: 'Regístrate como vendedor en nuestra plataforma, completa tu perfil de artesano y comienza a subir tus productos. Revisaremos tu solicitud en 24-48 horas.',
       },
       {

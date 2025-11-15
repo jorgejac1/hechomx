@@ -66,7 +66,14 @@ export default function Header() {
             {/* Logo */}
             <div className="flex items-center flex-shrink-0">
               <Link href={ROUTES.HOME} className="flex items-center gap-2">
-                <span className="text-2xl">🇲🇽</span>
+                <Image
+                  src="/logos/papalote-logo.png"
+                  alt="Papalote Market"
+                  width={40}
+                  height={40}
+                  className="w-8 h-8 sm:w-10 sm:h-10 transition-transform group-hover:scale-110 duration-200"
+                  priority
+                />
                 <span className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 hidden sm:block">
                   {SITE_NAME}
                 </span>

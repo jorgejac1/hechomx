@@ -8,7 +8,7 @@ export default function AboutSection() {
           {/* Header - Mobile Optimized */}
           <div className="text-center mb-6 sm:mb-8 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
-              ¿Qué es Hecho en México?
+              ¿Qué es Papalote Market?
             </h2>
             <Link
               href="/nosotros"
@@ -26,10 +26,10 @@ export default function AboutSection() {
                 Una comunidad que transforma
               </h3>
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                Hecho en México es un mercado digital donde artesanos y creadores mexicanos 
-                se conectan con personas que valoran lo auténtico. Somos una comunidad 
-                comprometida con preservar las tradiciones, apoyar la economía local y 
-                promover el talento mexicano en todo el mundo.{' '}
+                Papalote Market es un mercado digital donde artesanos y creadores mexicanos se
+                conectan con personas que valoran lo auténtico. Somos una comunidad comprometida con
+                preservar las tradiciones, apoyar la economía local y promover el talento mexicano
+                en todo el mundo.{' '}
                 <Link
                   href="/impacto"
                   className="text-primary-600 hover:text-primary-700 font-medium underline"
@@ -45,10 +45,10 @@ export default function AboutSection() {
                 Apoya a artesanos independientes
               </h3>
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                No hay bodega de Hecho en México - solo millones de artesanos vendiendo 
-                las creaciones que aman. Facilitamos todo el proceso, ayudándote a conectar 
-                directamente con maestros artesanos de los 32 estados para encontrar algo 
-                verdaderamente extraordinario.
+                No hay bodega de Papalote Market - solo millones de artesanos vendiendo las
+                creaciones que aman. Facilitamos todo el proceso, ayudándote a conectar directamente
+                con maestros artesanos de los 32 estados para encontrar algo verdaderamente
+                extraordinario.
               </p>
             </div>
 
@@ -58,9 +58,9 @@ export default function AboutSection() {
                 Compra con confianza
               </h3>
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                Tu seguridad es nuestra prioridad más alta. Cada producto está verificado 
-                como 100% hecho en México. Nuestro equipo dedicado está siempre listo para 
-                brindarte asistencia y garantizar una experiencia de compra excepcional.
+                Tu seguridad es nuestra prioridad más alta. Cada producto está verificado como 100%
+                Papalote Market. Nuestro equipo dedicado está siempre listo para brindarte
+                asistencia y garantizar una experiencia de compra excepcional.
               </p>
             </div>
           </div>
@@ -85,8 +85,8 @@ export default function AboutSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-900 mb-4 sm:mb-5 md:mb-6 max-w-4xl mx-auto px-4">
-              ¡Sí! Envíame ofertas exclusivas, ideas únicas de regalos y consejos 
-              personalizados para comprar y vender en Hecho en México.
+              ¡Sí! Envíame ofertas exclusivas, ideas únicas de regalos y consejos personalizados
+              para comprar y vender en Papalote Market.
             </p>
             <form className="max-w-3xl mx-auto flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-center">
               <input
@@ -110,8 +110,18 @@ export default function AboutSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 sm:gap-3 text-gray-700">
-              <svg className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
               <span className="text-xs sm:text-sm">
                 <Link href="/sustentabilidad" className="underline hover:text-primary-600">

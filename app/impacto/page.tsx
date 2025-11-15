@@ -118,7 +118,7 @@ export default function ImpactPage() {
               <span className="text-yellow-300">Preservando Tradiciones</span>
             </h1>
             <p className="text-xl text-primary-100 max-w-3xl mx-auto">
-              Cada compra en Hecho en México apoya directamente a artesanos mexicanos, preserva
+              Cada compra en Papalote Market apoya directamente a artesanos mexicanos, preserva
               técnicas ancestrales y contribuye a un futuro más sostenible.
             </p>
           </div>

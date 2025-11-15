@@ -1,4 +1,4 @@
-# Hecho en México - E-commerce Platform
+# Papalote Market - E-commerce Platform
 
 A modern e-commerce platform dedicated to promoting authentic Mexican-made products and supporting local artisans across all 32 states of Mexico.
 
@@ -29,21 +29,25 @@ A modern e-commerce platform dedicated to promoting authentic Mexican-made produ
 ### Installation
 
 1. Navigate to the project directory:
+
 ```bash
 cd hecho-en-mexico
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Run the development server:
+
 ```bash
 npm run dev
 ```
 
 4. Open your browser and visit:
+
 ```
 http://localhost:3000
 ```
@@ -86,7 +90,7 @@ hecho-en-mexico/
 
 ## Data Management
 
-Currently, the application uses local JSON files for data storage located in `public/data/products.json`. 
+Currently, the application uses local JSON files for data storage located in `public/data/products.json`.
 
 ### Adding New Products
 
@@ -112,6 +116,7 @@ Edit the `public/data/products.json` file and add new product objects with the f
 ### Future Database Migration
 
 The application is structured to easily migrate to a database. Key migration points:
+
 - Replace functions in `lib/products.ts` with database queries
 - Add database connection (PostgreSQL, MongoDB, etc.)
 - Implement proper API endpoints for CRUD operations
@@ -119,6 +124,7 @@ The application is structured to easily migrate to a database. Key migration poi
 ## Features Roadmap
 
 ### Phase 1 (Current - MVP)
+
 - ✅ Product listing and filtering
 - ✅ Product detail pages
 - ✅ Category filtering
@@ -126,6 +132,7 @@ The application is structured to easily migrate to a database. Key migration poi
 - ✅ Responsive design
 
 ### Phase 2 (Next Steps)
+
 - [ ] Shopping cart functionality
 - [ ] User authentication
 - [ ] Seller registration and dashboard
@@ -134,6 +141,7 @@ The application is structured to easily migrate to a database. Key migration poi
 - [ ] Payment integration (Mercado Pago, OXXO, etc.)
 
 ### Phase 3 (Future)
+
 - [ ] Reviews and ratings
 - [ ] Wishlist functionality
 - [ ] Advanced product recommendations
@@ -164,6 +172,7 @@ Categories are automatically generated from the products data. Add products with
 ## Contributing
 
 This is an MVP version. Future contributions should focus on:
+
 - Adding more sample products
 - Improving UI/UX
 - Adding new features from the roadmap

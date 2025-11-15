@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
   }
 
   return {
-    title: `${product.name} - Hecho en México`,
+    title: `${product.name} - Papalote Market`,
     description: product.description,
     openGraph: {
       title: product.name,

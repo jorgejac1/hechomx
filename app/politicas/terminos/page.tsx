@@ -4,7 +4,7 @@ import { ArrowLeft, FileText, CheckCircle, AlertCircle, Shield } from 'lucide-re
 import { ROUTES } from '@/lib';
 
 export const metadata: Metadata = {
-  title: 'Términos y Condiciones | Hecho en México',
+  title: 'Términos y Condiciones | Papalote Market',
   description: 'Lee nuestros términos y condiciones de uso de la plataforma',
 };
 
@@ -33,7 +33,7 @@ export default function TermsPage() {
             </div>
           </div>
           <p className="text-gray-700 leading-relaxed">
-            Al acceder y utilizar Hecho en México, aceptas estar sujeto a estos términos y
+            Al acceder y utilizar Papalote Market, aceptas estar sujeto a estos términos y
             condiciones. Por favor, léelos cuidadosamente antes de usar nuestra plataforma.
           </p>
         </div>
@@ -48,7 +48,7 @@ export default function TermsPage() {
             </h2>
             <div className="prose prose-gray max-w-none text-gray-700">
               <p>
-                Al acceder y utilizar Hecho en México (el "Sitio"), aceptas cumplir con estos
+                Al acceder y utilizar Papalote Market (el "Sitio"), aceptas cumplir con estos
                 Términos y Condiciones ("Términos"). Si no estás de acuerdo con alguna parte de
                 estos términos, no debes utilizar nuestro sitio.
               </p>
@@ -163,7 +163,7 @@ export default function TermsPage() {
             <div className="prose prose-gray max-w-none text-gray-700">
               <p>
                 Todo el contenido del Sitio, incluyendo textos, gráficos, logos, imágenes, videos y
-                software, es propiedad de Hecho en México o sus proveedores de contenido y está
+                software, es propiedad de Papalote Market o sus proveedores de contenido y está
                 protegido por las leyes de derechos de autor mexicanas e internacionales.
               </p>
               <p>
@@ -181,7 +181,7 @@ export default function TermsPage() {
             </h2>
             <div className="prose prose-gray max-w-none text-gray-700">
               <p>
-                Hecho en México actúa como plataforma intermediaria entre compradores y artesanos.
+                Papalote Market actúa como plataforma intermediaria entre compradores y artesanos.
                 No fabricamos los productos y no somos responsables por defectos de fabricación,
                 aunque trabajaremos contigo y el artesano para resolver cualquier problema.
               </p>
@@ -268,7 +268,7 @@ export default function TermsPage() {
               <div>
                 <h3 className="font-bold text-blue-900 mb-2">Nota Importante</h3>
                 <p className="text-sm text-blue-800">
-                  Estos términos constituyen el acuerdo completo entre tú y Hecho en México. Si
+                  Estos términos constituyen el acuerdo completo entre tú y Papalote Market. Si
                   alguna disposición es considerada inválida, las demás disposiciones permanecerán
                   en pleno vigor y efecto.
                 </p>

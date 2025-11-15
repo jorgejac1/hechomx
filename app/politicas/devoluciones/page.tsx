@@ -16,7 +16,7 @@ import {
 import { ROUTES } from '@/lib';
 
 export const metadata: Metadata = {
-  title: 'Política de Devoluciones | Hecho en México',
+  title: 'Política de Devoluciones | Papalote Market',
   description:
     'Conoce nuestra política de devoluciones y reembolsos para productos artesanales mexicanos',
 };
@@ -46,7 +46,7 @@ export default function ReturnsPage() {
             </div>
           </div>
           <p className="text-gray-700 leading-relaxed">
-            En Hecho en México valoramos tu satisfacción y confianza. Nuestra política de
+            En Papalote Market valoramos tu satisfacción y confianza. Nuestra política de
             devoluciones está diseñada para proteger tanto a compradores como a artesanos,
             garantizando un proceso justo y transparente para todos.
           </p>

@@ -14,7 +14,7 @@ import {
 import { ROUTES } from '@/lib';
 
 export const metadata: Metadata = {
-  title: 'Política de Privacidad | Hecho en México',
+  title: 'Política de Privacidad | Papalote Market',
   description: 'Conoce cómo protegemos y manejamos tu información personal',
 };
 
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
             </div>
           </div>
           <p className="text-gray-700 leading-relaxed">
-            En Hecho en México, respetamos tu privacidad y nos comprometemos a proteger tu
+            En Papalote Market, respetamos tu privacidad y nos comprometemos a proteger tu
             información personal. Esta política describe cómo recopilamos, usamos y protegemos tus
             datos.
           </p>
@@ -410,7 +410,7 @@ export default function PrivacyPage() {
                 </a>
               </div>
               <p className="text-sm text-primary-100 mt-4">
-                Responsable: Hecho en México S.A. de C.V.
+                Responsable: Papalote Market S.A. de C.V.
                 <br />
                 Domicilio: Av. Reforma 123, Ciudad de México, 06600
               </p>

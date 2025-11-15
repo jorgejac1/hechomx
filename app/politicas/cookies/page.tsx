@@ -12,7 +12,7 @@ import {
 import { ROUTES } from '@/lib';
 
 export const metadata: Metadata = {
-  title: 'Política de Cookies | Hecho en México',
+  title: 'Política de Cookies | Papalote Market',
   description: 'Conoce cómo utilizamos cookies en nuestro sitio web',
 };
 
@@ -41,7 +41,7 @@ export default function CookiesPage() {
             </div>
           </div>
           <p className="text-gray-700 leading-relaxed">
-            Esta política explica qué son las cookies, cómo las usamos en Hecho en México, y cómo
+            Esta política explica qué son las cookies, cómo las usamos en Papalote Market, y cómo
             puedes controlarlas para proteger tu privacidad.
           </p>
         </div>

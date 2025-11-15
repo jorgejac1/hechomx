@@ -40,7 +40,7 @@ interface FAQItem {
 
 const FAQS: FAQItem[] = [
   {
-    question: '¿Cuánto cuesta vender en Hecho en México?',
+    question: '¿Cuánto cuesta vender en Papalote Market?',
     answer:
       'Crear tu tienda es completamente gratis. Solo cobramos una comisión del 10% sobre cada venta realizada, sin costos ocultos ni tarifas mensuales.',
   },

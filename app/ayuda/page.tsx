@@ -191,7 +191,7 @@ export default function HelpPage() {
       category: 'selling',
       question: '¿Cómo puedo vender en la plataforma?',
       answer:
-        'Ve a la página "Vender en Hecho en México", completa el formulario de registro de artesanos y nuestro equipo revisará tu solicitud en 2-3 días hábiles.',
+        'Ve a la página "Vender en Papalote Market", completa el formulario de registro de artesanos y nuestro equipo revisará tu solicitud en 2-3 días hábiles.',
     },
     {
       category: 'selling',

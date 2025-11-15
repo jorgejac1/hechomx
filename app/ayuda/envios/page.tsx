@@ -14,7 +14,7 @@ import {
 import { ROUTES } from '@/lib';
 
 export const metadata: Metadata = {
-  title: 'Información de Envíos | Hecho en México',
+  title: 'Información de Envíos | Papalote Market',
   description: 'Conoce nuestros métodos de envío, tiempos de entrega y costos',
 };
 
