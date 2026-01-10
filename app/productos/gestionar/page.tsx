@@ -1,26 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import Image from 'next/image';
-import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
-import { ROUTES } from '@/lib/constants/routes';
-import { formatCurrency } from '@/lib';
-import type { User } from '@/contexts/AuthContext';
-import { Plus, Edit, Trash2, Eye, Package, AlertCircle, Search, Filter } from 'lucide-react';
-
-export default function ManageProductsPage() {
-  return (
-    <AuthPageWrapper requireSeller loadingText="Cargando...">
-      {(user) => <ManageProductsContent user={user} />}
-    </AuthPageWrapper>
-  );
-}
-
-function ManageProductsContent({ user }: { user: User }) {
-  const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState('');
+<span class="text-[10px] sm:text-xs text-green-700 font-medium whitespace-nowrap ml-1.5 sm:ml-2">Disponible</span>
 
   const products = user.makerProfile!.products || [];
   const filteredProducts = products.filter((p) =>
