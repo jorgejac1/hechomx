@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { Product } from '@/types';
+import { addToRecentlyViewed } from '@/lib/utils/recently-viewed';
 import ProductGallery from './ProductGallery';
 import ProductInfo from './ProductInfo';
 import ProductHighlights from './ProductHighlights';
@@ -18,9 +19,17 @@ interface ProductDetailClientProps {
   similarProducts: Product[];
 }
 
-export default function ProductDetailClient({ product, similarProducts }: ProductDetailClientProps) {
+export default function ProductDetailClient({
+  product,
+  similarProducts,
+}: ProductDetailClientProps) {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const { addToCart } = useCart();
+
+  // Track product view
+  useEffect(() => {
+    addToRecentlyViewed(product.id);
+  }, [product.id]);
 
   const handleAddToCart = () => {
     addToCart(product, selectedQuantity);
@@ -33,15 +42,14 @@ export default function ProductDetailClient({ product, similarProducts }: Produc
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
           {/* Bottom padding for mobile sticky bar */}
           <div className="space-y-6 sm:space-y-8 pb-24 sm:pb-8">
-            
             {/* 1. Main Product Section - Gallery + Info */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 bg-white rounded-xl shadow-md p-4 sm:p-6 lg:p-8">
               {/* Left: Gallery - Sticky on desktop */}
               <div className="lg:sticky lg:top-24 lg:self-start">
-                <ProductGallery 
-                  images={product.images} 
+                <ProductGallery
+                  images={product.images}
                   videos={product.videos}
-                  productName={product.name} 
+                  productName={product.name}
                 />
               </div>
 
@@ -57,7 +65,7 @@ export default function ProductDetailClient({ product, similarProducts }: Produc
 
             {/* 2. Description Section */}
             <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 lg:p-8">
-              <ProductDescription 
+              <ProductDescription
                 description={product.description}
                 category={product.category}
                 subcategory={product.subcategory}
@@ -74,7 +82,7 @@ export default function ProductDetailClient({ product, similarProducts }: Produc
             <ShippingReturns />
 
             {/* 5. Seller Profile */}
-            <SellerProfile 
+            <SellerProfile
               maker={product.maker}
               verified={product.verified ?? false}
               state={product.state}
@@ -92,19 +100,15 @@ export default function ProductDetailClient({ product, similarProducts }: Produc
             {/* 7. Similar Products */}
             {similarProducts.length > 0 && (
               <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 lg:p-8">
-                <SimilarProducts 
-                  products={similarProducts} 
-                  category={product.category} 
-                />
+                <SimilarProducts products={similarProducts} category={product.category} />
               </div>
             )}
-
           </div>
         </div>
       </div>
 
       {/* Sticky Cart Bar for Mobile - With safe area support */}
-      <StickyCartBar 
+      <StickyCartBar
         product={product}
         selectedQuantity={selectedQuantity}
         onAddToCart={handleAddToCart}

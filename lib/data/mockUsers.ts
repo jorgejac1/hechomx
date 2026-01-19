@@ -1,5 +1,8 @@
 import { User } from '@/contexts/AuthContext';
 import type { SellerProduct, Order, Review } from '@/lib/types';
+import type { SellerVerification } from '@/lib/types/verification';
+import { getAllProducts } from '@/lib/data/products';
+import type { Product } from '@/types/product';
 
 export type SellerType = 'individual' | 'artisan' | 'company';
 
@@ -19,6 +22,7 @@ export interface ExtendedMakerProfile {
   story: string;
   verified: boolean;
   verificationBadge?: 'verified' | 'top_seller' | 'artisan_certified' | 'eco_friendly';
+  verification?: SellerVerification;
 
   // Stats
   stats: {
@@ -78,7 +82,71 @@ export interface ExtendedMakerProfile {
   lastActive: string;
 }
 
-// Mock Data for Individual Seller
+// ============================================================================
+// HELPER FUNCTIONS TO DERIVE PRODUCTS FROM products.json
+// ============================================================================
+
+/**
+ * Convert a Product from products.json to SellerProduct format for dashboard
+ */
+function productToSellerProduct(product: Product, index: number): SellerProduct {
+  // Generate consistent mock stats based on product id for reproducibility
+  const seed = parseInt(product.id) || index;
+  const sold = 10 + ((seed * 7) % 90);
+  const views = 100 + ((seed * 37) % 900);
+  const favorites = 5 + ((seed * 3) % 45);
+
+  return {
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    stock: product.stock ?? (product.inStock ? 10 : 0),
+    sold,
+    image: product.images[0],
+    status: product.inStock ? 'active' : 'out_of_stock',
+    views,
+    favorites,
+  };
+}
+
+/**
+ * Get all products for a seller by their shop name (matches maker field in products.json)
+ */
+function getSellerProducts(shopName: string): SellerProduct[] {
+  const allProducts = getAllProducts();
+  return allProducts
+    .filter((p) => p.maker === shopName)
+    .map((p, i) => productToSellerProduct(p, i));
+}
+
+/**
+ * Calculate stats based on actual products
+ */
+function calculateSellerStats(
+  products: SellerProduct[],
+  baseStats: { rating: number; reviewsCount: number; responseTime: string; responseRate: number }
+) {
+  const totalSales = products.reduce((sum, p) => sum + p.sold, 0);
+  return {
+    productsCount: products.length,
+    rating: baseStats.rating,
+    reviewsCount: baseStats.reviewsCount,
+    salesCount: totalSales,
+    responseTime: baseStats.responseTime,
+    responseRate: baseStats.responseRate,
+  };
+}
+
+// ============================================================================
+// MOCK SELLER DATA
+// ============================================================================
+
+// Get products for each seller from products.json
+const sofiaProducts = getSellerProducts('Tejidos Sofía');
+const pedroProducts = getSellerProducts('Alebrijes Don Pedro');
+const artesaniasProducts = getSellerProducts('Artesanías de México');
+
+// Mock Data for Individual Seller - Tejidos Sofía
 export const mockIndividualSeller: User = {
   id: '3',
   name: 'Sofia Ramírez',
@@ -97,14 +165,12 @@ export const mockIndividualSeller: User = {
     verified: true,
     verificationBadge: 'verified',
 
-    stats: {
-      productsCount: 24,
+    stats: calculateSellerStats(sofiaProducts, {
       rating: 4.9,
       reviewsCount: 87,
-      salesCount: 156,
       responseTime: '< 2 horas',
       responseRate: 98,
-    },
+    }),
 
     businessHours: [
       { day: 'Lunes', open: '09:00', close: '18:00', closed: false },
@@ -134,7 +200,7 @@ export const mockIndividualSeller: User = {
       'Puedes cancelar tu pedido dentro de las primeras 24 horas sin costo alguno.',
 
     certifications: ['Vendedor Verificado'],
-    specialties: ['Tejido a crochet', 'Punto', 'Macramé'],
+    specialties: ['Tejido a crochet', 'Punto', 'Macramé', 'Bordados tradicionales'],
 
     socialMedia: {
       instagram: '@tejidossofia',
@@ -148,41 +214,7 @@ export const mockIndividualSeller: User = {
       expressShipping: false,
     },
 
-    products: [
-      {
-        id: 'p1',
-        name: 'Manta Tejida Artesanal',
-        price: 650,
-        stock: 5,
-        sold: 23,
-        image: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=400',
-        status: 'active',
-        views: 342,
-        favorites: 28,
-      },
-      {
-        id: 'p2',
-        name: 'Cojín Tejido Geometrico',
-        price: 350,
-        stock: 12,
-        sold: 45,
-        image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400',
-        status: 'active',
-        views: 589,
-        favorites: 52,
-      },
-      {
-        id: 'p3',
-        name: 'Canasta Macramé',
-        price: 280,
-        stock: 0,
-        sold: 18,
-        image: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400',
-        status: 'out_of_stock',
-        views: 234,
-        favorites: 19,
-      },
-    ],
+    products: sofiaProducts,
 
     reviews: [
       {
@@ -192,10 +224,10 @@ export const mockIndividualSeller: User = {
         buyerAvatar: 'https://i.pravatar.cc/150?img=5',
         rating: 5,
         comment:
-          '¡Hermosa manta! La calidad es excelente y el tejido está perfecto. Sofia fue muy atenta con mis preguntas. 100% recomendado.',
+          '¡Hermoso huipil! La calidad es excelente y el bordado está perfecto. Sofia fue muy atenta con mis preguntas. 100% recomendado.',
         date: '2024-10-28T15:30:00Z',
-        productId: 'p1',
-        productName: 'Manta Tejida Artesanal',
+        productId: '4',
+        productName: 'Huipil Bordado de Chiapas',
         helpful: 12,
         response: {
           text: '¡Muchas gracias Ana! Me alegra mucho que te haya gustado. Fue un placer trabajar en tu pedido 💕',
@@ -208,13 +240,13 @@ export const mockIndividualSeller: User = {
         buyerName: 'Carlos Méndez',
         rating: 5,
         comment:
-          'Compré varios cojines para mi sala y quedé encantado. El trabajo es impecable y Sofia es súper profesional.',
+          'Compré el rebozo de seda para mi esposa y quedó encantada. El trabajo es impecable y Sofia es súper profesional.',
         date: '2024-10-25T10:20:00Z',
-        productId: 'p2',
-        productName: 'Cojín Tejido Geometrico',
+        productId: '8',
+        productName: 'Rebozo de Seda',
         helpful: 8,
         response: {
-          text: '¡Gracias Carlos! Qué alegría saber que te encantaron. Espero verte pronto 😊',
+          text: '¡Gracias Carlos! Qué alegría saber que le encantó a tu esposa. Espero verte pronto 😊',
           date: '2024-10-25T14:00:00Z',
         },
       },
@@ -225,10 +257,10 @@ export const mockIndividualSeller: User = {
         buyerAvatar: 'https://i.pravatar.cc/150?img=10',
         rating: 4,
         comment:
-          'Bonita canasta, aunque tardó un poco más de lo esperado. Pero la calidad vale la pena.',
+          'Bonita blusa bordada, aunque tardó un poco más de lo esperado. Pero la calidad vale la pena.',
         date: '2024-10-20T09:15:00Z',
-        productId: 'p3',
-        productName: 'Canasta Macramé',
+        productId: '11',
+        productName: 'Blusa Bordada de Oaxaca',
         helpful: 3,
       },
     ],
@@ -238,14 +270,14 @@ export const mockIndividualSeller: User = {
         id: 'o1',
         createdAt: '2024-11-05T14:30:00Z',
         status: 'processing',
-        total: 1300,
+        total: 4400,
         items: [
           {
-            id: 'p1',
-            name: 'Manta Tejida Artesanal',
+            id: '4',
+            name: 'Huipil Bordado de Chiapas',
             quantity: 2,
-            price: 650,
-            images: ['https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=400'],
+            price: 2200,
+            images: ['https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=400'],
           },
         ],
         customer: {
@@ -257,14 +289,14 @@ export const mockIndividualSeller: User = {
         id: 'o2',
         createdAt: '2024-11-04T10:00:00Z',
         status: 'shipped',
-        total: 700,
+        total: 3500,
         items: [
           {
-            id: 'p2',
-            name: 'Cojín Tejido Geometrico',
-            quantity: 2,
-            price: 350,
-            images: ['https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400'],
+            id: '8',
+            name: 'Rebozo de Seda',
+            quantity: 1,
+            price: 3500,
+            images: ['https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=400'],
           },
         ],
         customer: {
@@ -280,7 +312,7 @@ export const mockIndividualSeller: User = {
   } as ExtendedMakerProfile,
 };
 
-// Mock Data for Artisan
+// Mock Data for Artisan - Alebrijes Don Pedro
 export const mockArtisan: User = {
   id: '4',
   name: 'Don Pedro Martínez',
@@ -299,14 +331,12 @@ export const mockArtisan: User = {
     verified: true,
     verificationBadge: 'artisan_certified',
 
-    stats: {
-      productsCount: 58,
+    stats: calculateSellerStats(pedroProducts, {
       rating: 5.0,
       reviewsCount: 234,
-      salesCount: 487,
       responseTime: '< 6 horas',
       responseRate: 95,
-    },
+    }),
 
     businessHours: [
       { day: 'Lunes', open: '08:00', close: '17:00', closed: false },
@@ -362,30 +392,7 @@ export const mockArtisan: User = {
       expressShipping: false,
     },
 
-    products: [
-      {
-        id: 'ap1',
-        name: 'Alebrije León Grande',
-        price: 2800,
-        stock: 3,
-        sold: 45,
-        image: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400',
-        status: 'active',
-        views: 1234,
-        favorites: 156,
-      },
-      {
-        id: 'ap2',
-        name: 'Alebrije Búho Mediano',
-        price: 1200,
-        stock: 8,
-        sold: 89,
-        image: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400',
-        status: 'active',
-        views: 2341,
-        favorites: 287,
-      },
-    ],
+    products: pedroProducts,
 
     reviews: [
       {
@@ -397,13 +404,25 @@ export const mockArtisan: User = {
         comment:
           '¡Artesanía absolutamente impresionante! El detalle de este alebrije es increíble. Don Pedro fue muy comunicativo durante todo el proceso. ¡Vale cada peso!',
         date: '2024-11-01T16:45:00Z',
-        productId: 'ap1',
-        productName: 'Alebrije León Grande',
+        productId: '2',
+        productName: 'Alebrije de Madera Tallada',
         helpful: 45,
         response: {
           text: '¡Muchas gracias Jennifer! Fue un placer crear esta pieza para ti. Espero que traiga alegría a tu hogar 🦁',
           date: '2024-11-02T08:00:00Z',
         },
+      },
+      {
+        id: 'ar2',
+        buyerId: 'ab2',
+        buyerName: 'Roberto García',
+        rating: 5,
+        comment:
+          'La máscara ceremonial es una obra de arte. Los colores y detalles son extraordinarios. Perfecta para mi colección.',
+        date: '2024-10-28T11:30:00Z',
+        productId: '7',
+        productName: 'Máscara Ceremonial de Madera',
+        helpful: 23,
       },
     ],
 
@@ -412,20 +431,40 @@ export const mockArtisan: User = {
         id: 'ao1',
         createdAt: '2024-11-06T09:15:00Z',
         status: 'processing',
-        total: 5600,
+        total: 5000,
         items: [
           {
-            id: 'ap1',
-            name: 'Alebrije León Grande',
+            id: '2',
+            name: 'Alebrije de Madera Tallada',
             quantity: 2,
-            price: 2800,
-            images: ['https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400'],
+            price: 2500,
+            images: ['https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=400'],
           },
         ],
         customer: {
           name: 'Hotel Boutique Oaxaca',
           email: 'compras@hotelboutique.com',
         },
+      },
+      {
+        id: 'ao2',
+        createdAt: '2024-11-03T16:20:00Z',
+        status: 'shipped',
+        total: 950,
+        items: [
+          {
+            id: '7',
+            name: 'Máscara Ceremonial de Madera',
+            quantity: 1,
+            price: 950,
+            images: ['https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=400'],
+          },
+        ],
+        customer: {
+          name: 'Museo de Arte Popular',
+          email: 'adquisiciones@museo.com',
+        },
+        tracking: 'MEX987654321',
       },
     ],
 
@@ -434,7 +473,7 @@ export const mockArtisan: User = {
   } as ExtendedMakerProfile,
 };
 
-// Mock Data for Company
+// Mock Data for Company - Artesanías de México
 export const mockCompany: User = {
   id: '5',
   name: 'Artesanías de México SA',
@@ -453,20 +492,18 @@ export const mockCompany: User = {
     verified: true,
     verificationBadge: 'top_seller',
 
-    stats: {
-      productsCount: 342,
+    stats: calculateSellerStats(artesaniasProducts, {
       rating: 4.8,
       reviewsCount: 1523,
-      salesCount: 3847,
       responseTime: '< 1 hora',
       responseRate: 99,
-    },
+    }),
 
     businessHours: [
       { day: 'Lunes', open: '09:00', close: '19:00', closed: false },
       { day: 'Martes', open: '09:00', close: '19:00', closed: false },
       { day: 'Miércoles', open: '09:00', close: '19:00', closed: false },
-      { day: 'Juernes', open: '09:00', close: '19:00', closed: false },
+      { day: 'Jueves', open: '09:00', close: '19:00', closed: false },
       { day: 'Viernes', open: '09:00', close: '19:00', closed: false },
       { day: 'Sábado', open: '10:00', close: '18:00', closed: false },
       { day: 'Domingo', open: '10:00', close: '15:00', closed: false },
@@ -511,19 +548,7 @@ export const mockCompany: User = {
       expressShipping: true,
     },
 
-    products: [
-      {
-        id: 'cp1',
-        name: 'Set Vajilla Talavera 24 piezas',
-        price: 4500,
-        stock: 45,
-        sold: 234,
-        image: 'https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=400',
-        status: 'active',
-        views: 8934,
-        favorites: 892,
-      },
-    ],
+    products: artesaniasProducts,
 
     reviews: [
       {
@@ -532,15 +557,40 @@ export const mockCompany: User = {
         buyerName: 'Restaurant Los Cabos',
         rating: 5,
         comment:
-          'Compramos 20 sets de vajilla para nuestro restaurante. Excelente calidad, llegó todo perfecto y el servicio al cliente fue excepcional. 100% profesionales.',
+          'Compramos varios jarrones de Talavera para nuestro restaurante. Excelente calidad, llegó todo perfecto y el servicio al cliente fue excepcional. 100% profesionales.',
         date: '2024-11-02T10:30:00Z',
-        productId: 'cp1',
-        productName: 'Set Vajilla Talavera 24 piezas',
+        productId: '3',
+        productName: 'Jarrón de Talavera',
         helpful: 67,
         response: {
           text: '¡Muchísimas gracias! Nos encanta ser parte de su restaurante. Quedamos a sus órdenes para futuras compras 🍽️',
           date: '2024-11-02T11:00:00Z',
         },
+      },
+      {
+        id: 'cr2',
+        buyerId: 'cb2',
+        buyerName: 'María Elena Torres',
+        buyerAvatar: 'https://i.pravatar.cc/150?img=25',
+        rating: 5,
+        comment:
+          'El collar de plata con turquesa es precioso. La calidad de la plata es excelente y la piedra tiene un color hermoso.',
+        date: '2024-10-30T14:15:00Z',
+        productId: '5',
+        productName: 'Collar de Plata con Turquesa',
+        helpful: 34,
+      },
+      {
+        id: 'cr3',
+        buyerId: 'cb3',
+        buyerName: 'Chef Antonio',
+        rating: 5,
+        comment:
+          'El molcajete es auténtico y de excelente calidad. Perfecto para preparar salsas tradicionales.',
+        date: '2024-10-25T09:00:00Z',
+        productId: '10',
+        productName: 'Molcajete de Piedra Volcánica',
+        helpful: 28,
       },
     ],
 
@@ -549,20 +599,59 @@ export const mockCompany: User = {
         id: 'co1',
         createdAt: '2024-11-07T08:30:00Z',
         status: 'pending',
-        total: 13500,
+        total: 5400,
         items: [
           {
-            id: 'cp1',
-            name: 'Set Vajilla Talavera 24 piezas',
+            id: '3',
+            name: 'Jarrón de Talavera',
             quantity: 3,
-            price: 4500,
-            images: ['https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=400'],
+            price: 1800,
+            images: ['https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=400'],
           },
         ],
         customer: {
           name: 'Hotel Boutique Centro',
           email: 'compras@hotelcentro.com',
         },
+      },
+      {
+        id: 'co2',
+        createdAt: '2024-11-06T11:45:00Z',
+        status: 'processing',
+        total: 3000,
+        items: [
+          {
+            id: '5',
+            name: 'Collar de Plata con Turquesa',
+            quantity: 2,
+            price: 1500,
+            images: ['https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400'],
+          },
+        ],
+        customer: {
+          name: 'Joyería Tradicional',
+          email: 'pedidos@joyeriatradicional.com',
+        },
+      },
+      {
+        id: 'co3',
+        createdAt: '2024-11-05T15:20:00Z',
+        status: 'shipped',
+        total: 2250,
+        items: [
+          {
+            id: '10',
+            name: 'Molcajete de Piedra Volcánica',
+            quantity: 3,
+            price: 750,
+            images: ['https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=400'],
+          },
+        ],
+        customer: {
+          name: 'Escuela de Cocina Mexicana',
+          email: 'compras@escuelacocina.com',
+        },
+        tracking: 'MEX456789123',
       },
     ],
 

@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
-import Header from '@/components/layout/Header';
+import Header from '@/components/layout/header';
 import Footer from '@/components/layout/Footer';
 import { defaultMetadata } from '@/config/seo';
 import ScrollToTop from '@/components/common/ScrollToTop';

@@ -1,0 +1,36 @@
+{
+  "sofia@ejemplo.com": {
+    "status": "verified",
+    "level": "verified_artisan",
+    "verifiedAt": "2024-05-20T00:00:00Z",
+    "expiresAt": "2025-05-20T00:00:00Z",
+    "requestId": "ver_001",
+    "commissionRate": 8,
+    "trustScore": 92
+  },
+  "pedro@ejemplo.com": {
+    "status": "verified",
+    "level": "master_artisan",
+    "verifiedAt": "2023-09-15T00:00:00Z",
+    "expiresAt": "2024-09-15T00:00:00Z",
+    "requestId": "ver_002",
+    "commissionRate": 5,
+    "trustScore": 98
+  },
+  "ventas@artesaniasdemexico.com": {
+    "status": "verified",
+    "level": "certified_workshop",
+    "verifiedAt": "2022-03-10T00:00:00Z",
+    "expiresAt": "2025-03-10T00:00:00Z",
+    "requestId": "ver_003",
+    "commissionRate": 7,
+    "trustScore": 95
+  },
+  "jorge@example.com": {
+    "status": "pending",
+    "level": null,
+    "requestId": "ver_004",
+    "commissionRate": 10,
+    "trustScore": 0
+  }
+}

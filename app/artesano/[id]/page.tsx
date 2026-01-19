@@ -20,6 +20,11 @@ import {
   Sparkles,
   ArrowLeft,
   Globe,
+  Clock,
+  Hammer,
+  Leaf,
+  Play,
+  ChevronRight,
 } from 'lucide-react';
 
 export default function ArtisanProfilePage() {
@@ -27,6 +32,7 @@ export default function ArtisanProfilePage() {
   const [story, setStory] = useState<ArtisanStory | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState<'story' | 'process' | 'recognition'>('story');
+  const [expandedStep, setExpandedStep] = useState<number | null>(null);
 
   useEffect(() => {
     async function loadStory() {
@@ -84,7 +90,7 @@ export default function ArtisanProfilePage() {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-        {/* Back Button - Fixed */}
+        {/* Back Button */}
         <Link
           href="/"
           className="absolute top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-white transition text-gray-900 font-medium"
@@ -141,7 +147,7 @@ export default function ArtisanProfilePage() {
                 </div>
               </div>
 
-              {/* Social Media - Fixed Icons */}
+              {/* Social Media */}
               {story.socialMedia && (
                 <div className="flex gap-3">
                   {story.socialMedia.instagram && (
@@ -240,7 +246,7 @@ export default function ArtisanProfilePage() {
                     : 'border-transparent text-gray-600 hover:text-gray-900'
                 }`}
               >
-                Proceso Creativo
+                Detrás del Arte
               </button>
               <button
                 onClick={() => setActiveSection('recognition')}
@@ -363,16 +369,199 @@ export default function ArtisanProfilePage() {
               </div>
             )}
 
-            {/* Process Tab */}
+            {/* Process Tab - ENHANCED "Behind the Craft" */}
             {activeSection === 'process' && (
-              <div className="space-y-8">
-                {/* Craft Technique */}
+              <div className="space-y-10">
+                {/* Time Investment Badge */}
+                {story.totalCraftTime && (
+                  <div className="flex items-center justify-center">
+                    <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary-50 to-primary-100 rounded-full border-2 border-primary-200">
+                      <Clock className="w-6 h-6 text-primary-600" />
+                      <div>
+                        <p className="text-xs text-primary-600 font-medium uppercase tracking-wide">
+                          Tiempo de Creación
+                        </p>
+                        <p className="text-lg font-bold text-primary-800">{story.totalCraftTime}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Process Video */}
+                {story.processVideo && (
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2 bg-primary-100 rounded-lg">
+                        <Play className="w-5 h-5 text-primary-600" />
+                      </div>
+                      <h2 className="text-2xl font-bold text-gray-900">Video del Proceso</h2>
+                    </div>
+                    <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+                      <iframe
+                        src={story.processVideo.replace('watch?v=', 'embed/')}
+                        title="Video del proceso creativo"
+                        className="w-full h-full"
+                        allowFullScreen
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Craft Technique Description */}
                 {story.craftTechnique && (
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-4">Técnica y Proceso</h2>
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-line mb-6">
+                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">
                       {story.craftTechnique}
                     </p>
+                  </div>
+                )}
+
+                {/* Materials Section */}
+                {story.materials && story.materials.length > 0 && (
+                  <div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-2 bg-green-100 rounded-lg">
+                        <Leaf className="w-5 h-5 text-green-600" />
+                      </div>
+                      <h2 className="text-2xl font-bold text-gray-900">Materiales</h2>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {story.materials.map((material, idx) => (
+                        <div
+                          key={idx}
+                          className="flex gap-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200 hover:shadow-md transition"
+                        >
+                          {material.image && (
+                            <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                              <Image
+                                src={material.image}
+                                alt={material.name}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-bold text-gray-900 mb-1">{material.name}</h3>
+                            <p className="text-sm text-green-700 font-medium mb-2 flex items-center gap-1">
+                              <MapPin className="w-3 h-3" />
+                              {material.source}
+                            </p>
+                            {material.description && (
+                              <p className="text-sm text-gray-600 line-clamp-2">
+                                {material.description}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Tools Section */}
+                {story.tools && story.tools.length > 0 && (
+                  <div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-2 bg-amber-100 rounded-lg">
+                        <Hammer className="w-5 h-5 text-amber-600" />
+                      </div>
+                      <h2 className="text-2xl font-bold text-gray-900">Herramientas</h2>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                      {story.tools.map((tool, idx) => (
+                        <div
+                          key={idx}
+                          className="p-4 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl border border-amber-200 hover:shadow-md transition"
+                        >
+                          {tool.image && (
+                            <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-3">
+                              <Image
+                                src={tool.image}
+                                alt={tool.name}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          )}
+                          <h3 className="font-bold text-gray-900 mb-1">{tool.name}</h3>
+                          <p className="text-sm text-gray-600 line-clamp-3">{tool.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Step-by-Step Process Timeline */}
+                {story.processSteps && story.processSteps.length > 0 && (
+                  <div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-2 bg-blue-100 rounded-lg">
+                        <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <h2 className="text-2xl font-bold text-gray-900">Paso a Paso</h2>
+                    </div>
+                    <div className="space-y-4">
+                      {story.processSteps.map((step, idx) => (
+                        <div
+                          key={idx}
+                          className={`border-2 rounded-xl overflow-hidden transition-all ${
+                            expandedStep === idx
+                              ? 'border-primary-300 shadow-lg'
+                              : 'border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <button
+                            onClick={() => setExpandedStep(expandedStep === idx ? null : idx)}
+                            className="w-full flex items-center gap-4 p-4 text-left hover:bg-gray-50 transition"
+                          >
+                            <div className="flex-shrink-0 w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
+                              {step.step}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-bold text-gray-900">{step.title}</h3>
+                              <div className="flex items-center gap-2 mt-1">
+                                <Clock className="w-4 h-4 text-gray-400" />
+                                <span className="text-sm text-gray-600">{step.duration}</span>
+                              </div>
+                            </div>
+                            <ChevronRight
+                              className={`w-5 h-5 text-gray-400 transition-transform ${
+                                expandedStep === idx ? 'rotate-90' : ''
+                              }`}
+                            />
+                          </button>
+                          {expandedStep === idx && (
+                            <div className="px-4 pb-4 border-t border-gray-100">
+                              <div className="pt-4 flex flex-col md:flex-row gap-4">
+                                {step.image && (
+                                  <div className="relative w-full md:w-64 aspect-video md:aspect-square rounded-lg overflow-hidden flex-shrink-0">
+                                    <Image
+                                      src={step.image}
+                                      alt={step.title}
+                                      fill
+                                      className="object-cover"
+                                    />
+                                  </div>
+                                )}
+                                <div className="flex-1">
+                                  <p className="text-gray-700 leading-relaxed">
+                                    {step.description}
+                                  </p>
+                                  <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-primary-50 rounded-full">
+                                    <Clock className="w-4 h-4 text-primary-600" />
+                                    <span className="text-sm font-medium text-primary-700">
+                                      Duración: {step.duration}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
 
@@ -396,10 +585,10 @@ export default function ArtisanProfilePage() {
                   </div>
                 )}
 
-                {/* Process Photos */}
-                {story.processPhotos && story.processPhotos.length > 0 && (
+                {/* Process Photos (legacy) */}
+                {story.processPhotos && story.processPhotos.length > 0 && !story.processSteps && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Proceso Creativo</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Galería del Proceso</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {story.processPhotos.map((photo, idx) => (
                         <div
@@ -496,7 +685,7 @@ export default function ArtisanProfilePage() {
           </div>
         </div>
 
-        {/* CTA Section - Fixed to use shop slug */}
+        {/* CTA Section */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl shadow-lg p-8 text-center text-white">
           <h2 className="text-2xl font-bold mb-2">Descubre Mis Creaciones</h2>
           <p className="text-primary-100 mb-6">

@@ -1,5 +1,8 @@
+// lib/types/seller-types.ts
+
 // Import Order types from order.ts (for internal use only)
 import type { Order } from './order';
+import type { SellerVerification } from './verification';
 
 // Re-export seller classification types and constants from seller.ts
 export type {
@@ -60,10 +63,95 @@ export interface MakerProfile {
   specialty?: string;
   memberSince: string;
   verified: boolean;
+  verification?: SellerVerification; // ADD VERIFICATION SUPPORT
   products: SellerProduct[];
   reviews: Review[];
   recentOrders: Order[];
   stats: MakerStats;
+}
+
+// ============================================================================
+// EXTENDED MAKER PROFILE WITH FULL VERIFICATION SUPPORT
+// ============================================================================
+
+export type ExtendedSellerType = 'individual' | 'artisan' | 'company';
+
+export interface BusinessHours {
+  day: string;
+  open: string;
+  close: string;
+  closed: boolean;
+}
+
+export interface ExtendedMakerProfile {
+  // Basic Info
+  shopName: string;
+  sellerType: ExtendedSellerType;
+  location: string;
+  description: string;
+  story: string;
+  verified: boolean;
+  verificationBadge?: 'verified' | 'top_seller' | 'artisan_certified' | 'eco_friendly';
+
+  // Verification System - NEW
+  verification?: SellerVerification;
+
+  // Stats
+  stats: {
+    productsCount: number;
+    rating: number;
+    reviewsCount: number;
+    salesCount: number;
+    responseTime: string;
+    responseRate: number;
+  };
+
+  // Business Details
+  businessHours?: BusinessHours[];
+  acceptsCustomOrders: boolean;
+  acceptsWholesale: boolean;
+  minWholesaleOrder?: number;
+
+  // Shipping & Payments
+  shippingOptions: {
+    national: boolean;
+    international: boolean;
+    freeShippingOver?: number;
+    averageProcessingTime: string;
+  };
+  paymentMethods: string[];
+
+  // Policies
+  returnPolicy: string;
+  cancellationPolicy: string;
+
+  // Certifications & Specialties
+  certifications: string[];
+  specialties: string[];
+
+  // Social & Contact
+  socialMedia?: {
+    facebook?: string;
+    instagram?: string;
+    whatsapp?: string;
+  };
+
+  // Store Features
+  features: {
+    customDesigns: boolean;
+    bulkOrders: boolean;
+    giftWrapping: boolean;
+    expressShipping: boolean;
+  };
+
+  // Products & Performance
+  products: SellerProduct[];
+  reviews: Review[];
+  recentOrders: Order[];
+
+  // Membership
+  memberSince: string;
+  lastActive: string;
 }
 
 // ============================================================================

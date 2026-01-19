@@ -8,6 +8,7 @@ import DealsSection from '@/components/home/DealsSection';
 import LocalShopsSection from '@/components/home/LocalShopsSection';
 import HeroSlider from '@/components/home/HeroSlider';
 import StatesSection from '@/components/home/StatesSection';
+import RecentlyViewedSection from '@/components/home/RecentlyViewedSection';
 
 export const dynamic = 'force-dynamic';
 
@@ -90,6 +91,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Recently Viewed - Shows only if user has history */}
+      <RecentlyViewedSection allProducts={allProducts} />
 
       {/* Deals Section */}
       <DealsSection />

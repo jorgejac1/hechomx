@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { User } from '@/contexts/AuthContext';
 import { MapPin, MessageCircle, Award, Sparkles, Instagram, Facebook } from 'lucide-react';
+import { VerificationBadgeWithTooltip } from '@/components/common/VerificationBadge';
 import Button from '@/components/common/Button';
 import Badge from '@/components/common/Badge';
 import ContactModal from '@/components/contact/ContactModal';
@@ -92,6 +93,12 @@ export default function ShopHeader({ shop }: ShopHeaderProps) {
                     {getBadgeText(profile.verificationBadge)}
                   </Badge>
                 )}
+
+                {/* Verification Badge - New System */}
+                {profile.verification?.level && (
+                  <VerificationBadgeWithTooltip level={profile.verification.level} size="lg" />
+                )}
+
                 {hasStory && (
                   <Badge variant="warning" size="md" icon={<Sparkles className="w-4 h-4" />}>
                     Tiene Historia

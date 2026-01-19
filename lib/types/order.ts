@@ -12,6 +12,8 @@ export interface OrderItem {
   quantity: number;
   price: number;
   images: string[];
+  maker: string;
+  state?: string;
 }
 
 export interface OrderCustomer {

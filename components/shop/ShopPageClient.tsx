@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Product } from '@/types';
 import { User } from '@/contexts/AuthContext';
 import ShopHeader from './ShopHeader';
@@ -9,6 +9,7 @@ import ShopAbout from './ShopAbout';
 import ShopProducts from './ShopProducts';
 import ShopReviews from './ShopReviews';
 import ShopPolicies from './ShopPolicies';
+import { getOrdersForSeller } from '@/lib/utils/orders';
 
 interface ShopPageClientProps {
   shop: User;
@@ -17,8 +18,23 @@ interface ShopPageClientProps {
 
 export default function ShopPageClient({ shop, products }: ShopPageClientProps) {
   const [activeTab, setActiveTab] = useState<'productos' | 'resenas' | 'info'>('productos');
+  const [salesCount, setSalesCount] = useState<number>(0);
 
   const profile = shop.makerProfile!;
+
+  // Calculate actual rating from reviews
+  const actualRating =
+    profile.reviews.length > 0
+      ? profile.reviews.reduce((sum, review) => sum + review.rating, 0) / profile.reviews.length
+      : 0;
+
+  // Load sales count from localStorage orders
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const sellerOrders = getOrdersForSeller(profile.shopName);
+      setSalesCount(sellerOrders.length);
+    }
+  }, [profile.shopName]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -28,7 +44,13 @@ export default function ShopPageClient({ shop, products }: ShopPageClientProps) 
       {/* Shop Stats */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <ShopStats stats={profile.stats} />
+          <ShopStats
+            stats={profile.stats}
+            actualProductCount={products.length}
+            actualRating={actualRating}
+            actualReviewCount={profile.reviews.length}
+            actualSalesCount={salesCount}
+          />
         </div>
       </div>
 

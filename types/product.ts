@@ -2,6 +2,28 @@
  * Product-related types
  */
 
+export type ProductStatus = 'draft' | 'published';
+
+export interface ProductDimensions {
+  length?: number | string;
+  width?: number | string;
+  height?: number | string;
+  diameter?: string;
+  capacity?: string;
+  opening?: string;
+  size?: string;
+  sizes?: string;
+  pendant?: string;
+  chain?: string;
+  thickness?: string;
+  stone?: string;
+  weight?: string;
+  quantity?: string;
+  waist?: string;
+  holán?: string;
+  unit?: 'cm' | 'in';
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -16,12 +38,25 @@ export interface Product {
   images: string[];
   videos?: string[];
   inStock: boolean;
+  stock?: number;
+  status?: ProductStatus;
   featured?: boolean;
   verified?: boolean;
   rating?: number;
   reviewCount?: number;
   createdAt?: string;
   updatedAt?: string;
+  // Extended fields from products.json
+  materials?: string[];
+  dimensions?: ProductDimensions;
+  careInstructions?: string[];
+  features?: string[];
+  tags?: string[];
+  makerProfile?: {
+    verification?: {
+      level: 'basic_seller' | 'verified_artisan' | 'master_artisan' | 'certified_workshop';
+    };
+  };
 }
 
 export interface Category {
@@ -79,6 +114,7 @@ export interface ProductFormData {
   description: string;
   images: string[];
   stock: number;
+  status: ProductStatus;
   materials?: string[];
   dimensions?: {
     length: number;
@@ -95,4 +131,15 @@ export interface ProductFormData {
   careInstructions?: string;
   story?: string;
   tags?: string[];
+}
+
+/**
+ * Draft product stored in localStorage
+ */
+export interface DraftProduct extends ProductFormData {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  sellerId: string;
+  sellerName: string;
 }

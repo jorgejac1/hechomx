@@ -1,5 +1,26 @@
 import { SellerType, CraftCategory, CraftStyle, IndigenousConnection } from './seller-types';
 
+export interface ProcessStep {
+  step: number;
+  title: string;
+  description: string;
+  duration: string; // "2-3 horas", "1 semana"
+  image?: string;
+}
+
+export interface Material {
+  name: string;
+  source: string;
+  description?: string;
+  image?: string;
+}
+
+export interface Tool {
+  name: string;
+  description: string;
+  image?: string;
+}
+
 export interface ArtisanStory {
   id: string;
   artisanId: string;
@@ -48,6 +69,14 @@ export interface ArtisanStory {
   processPhotos: string[];
   familyPhotos?: string[];
   teamPhotos?: string[];
+
+  // === BEHIND THE CRAFT (New Fields) ===
+  processVideo?: string; // Dedicated craft process video (separate from intro)
+  totalCraftTime?: string; // "2-3 meses para una pieza grande"
+
+  materials?: Material[]; // Raw materials with sourcing info
+  tools?: Tool[]; // Tools used in the craft
+  processSteps?: ProcessStep[]; // Step-by-step breakdown with durations
 
   // Recognition
   awards: Array<{

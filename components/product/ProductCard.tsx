@@ -8,6 +8,7 @@ import { Sparkles } from 'lucide-react';
 import { useComparison } from '@/contexts/ComparisonContext';
 import { useToast } from '@/contexts/ToastContext';
 import { hasArtisanStory, getArtisanIdFromMaker } from '@/lib/utils/artisan';
+import { VerificationIcon } from '@/components/common/VerificationBadge';
 import { Product } from '@/types';
 import { formatCurrency, CATEGORY_ICONS, CATEGORY_COLORS, ROUTES } from '@/lib';
 
@@ -231,6 +232,10 @@ export default function ProductCard({ product }: ProductCardProps) {
                   <p className="text-[10px] sm:text-xs text-gray-500 truncate flex-shrink">
                     {product.maker}
                   </p>
+
+                  {product.makerProfile?.verification?.level && (
+                    <VerificationIcon level={product.makerProfile.verification.level} size="sm" />
+                  )}
 
                   {/* Artisan Story Badge - Now using button instead of Link */}
                   {hasStory && artisanId && (

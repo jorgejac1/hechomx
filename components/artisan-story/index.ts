@@ -7,3 +7,4 @@ export { default as CompanyStorySection } from './CompanyStorySection';
 export { default as MediaSection } from './MediaSection';
 export { default as RecognitionSection } from './RecognitionSection';
 export { default as SocialMediaSection } from './SocialMediaSection';
+export { default as ProcessSection } from './ProcessSection';

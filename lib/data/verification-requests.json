@@ -1,0 +1,217 @@
+[
+  {
+    "id": "ver_004",
+    "sellerId": "user_jorge",
+    "sellerName": "Jorge Jacome",
+    "sellerEmail": "jorge@example.com",
+    "sellerAvatar": "https://i.pravatar.cc/150?img=33",
+    "sellerType": "individual",
+    "shopName": "Artesanías del Valle",
+    "requestedLevel": "verified_artisan",
+    "status": "submitted",
+    "priority": "high",
+    "daysWaiting": 3,
+    "documents": {
+      "governmentId": { "name": "INE_Jorge.pdf", "status": "completed" },
+      "proofOfAddress": { "name": "Comprobante_Domicilio.pdf", "status": "completed" },
+      "craftPhotos": [
+        { "name": "producto_1.jpg", "status": "completed" },
+        { "name": "producto_2.jpg", "status": "completed" },
+        { "name": "producto_3.jpg", "status": "completed" }
+      ],
+      "workshopPhotos": [{ "name": "taller_1.jpg", "status": "completed" }]
+    },
+    "questionnaire": {
+      "craftType": ["Textiles", "Bordados"],
+      "techniques": ["Bordado a mano", "Tejido en telar"],
+      "yearsOfExperience": 8,
+      "productionCapacity": "small",
+      "location": {
+        "state": "Oaxaca",
+        "city": "Oaxaca de Juárez",
+        "hasPhysicalWorkshop": true
+      },
+      "heritageInfo": "Técnicas transmitidas por mi abuela zapoteca",
+      "traditionalTechniques": true
+    },
+    "createdAt": "2026-01-15T10:00:00Z",
+    "submittedAt": "2026-01-15T14:30:00Z",
+    "updatedAt": "2026-01-15T14:30:00Z"
+  },
+  {
+    "id": "ver_005",
+    "sellerId": "user_carmen",
+    "sellerName": "Carmen Ruiz",
+    "sellerEmail": "carmen@ceramica.com",
+    "sellerAvatar": "https://i.pravatar.cc/150?img=23",
+    "sellerType": "individual",
+    "shopName": "Cerámica Tradicional Carmen",
+    "requestedLevel": "master_artisan",
+    "status": "under_review",
+    "priority": "normal",
+    "daysWaiting": 7,
+    "assignedTo": "admin@papalote.com",
+    "documents": {
+      "governmentId": { "name": "INE_Carmen.pdf", "status": "completed" },
+      "proofOfAddress": { "name": "Recibo_Luz.pdf", "status": "completed" },
+      "curp": { "name": "CURP_Carmen.pdf", "status": "completed" },
+      "craftPhotos": [
+        { "name": "ceramica_1.jpg", "status": "completed" },
+        { "name": "ceramica_2.jpg", "status": "completed" },
+        { "name": "ceramica_3.jpg", "status": "completed" },
+        { "name": "ceramica_4.jpg", "status": "completed" }
+      ],
+      "workshopPhotos": [
+        { "name": "taller_ceramica_1.jpg", "status": "completed" },
+        { "name": "taller_ceramica_2.jpg", "status": "completed" }
+      ],
+      "processVideo": { "name": "proceso_ceramica.mp4", "status": "completed" },
+      "certifications": [{ "name": "certificado_fonart.pdf", "status": "completed" }],
+      "awards": [{ "name": "premio_estatal_2023.pdf", "status": "completed" }]
+    },
+    "questionnaire": {
+      "craftType": ["Cerámica", "Barro Negro"],
+      "techniques": ["Modelado a mano", "Cocción tradicional", "Pulido con cuarzo"],
+      "yearsOfExperience": 25,
+      "productionCapacity": "medium",
+      "location": {
+        "state": "Oaxaca",
+        "city": "San Bartolo Coyotepec",
+        "hasPhysicalWorkshop": true
+      },
+      "heritageInfo": "Familia alfarera de 4 generaciones",
+      "culturalSignificance": "Preservamos la técnica ancestral del barro negro de San Bartolo",
+      "indigenousCommunity": "Zapoteca",
+      "traditionalTechniques": true,
+      "culturalOrganization": "Asociación de Artesanos del Barro Negro"
+    },
+    "createdAt": "2026-01-10T08:00:00Z",
+    "submittedAt": "2026-01-11T09:15:00Z",
+    "updatedAt": "2026-01-12T11:00:00Z"
+  },
+  {
+    "id": "ver_006",
+    "sellerId": "user_talleres",
+    "sellerName": "Talleres Artesanales del Sur SA de CV",
+    "sellerEmail": "contacto@talleressur.mx",
+    "sellerAvatar": "https://i.pravatar.cc/150?img=60",
+    "sellerType": "company",
+    "shopName": "Talleres Artesanales del Sur",
+    "requestedLevel": "certified_workshop",
+    "status": "info_requested",
+    "priority": "normal",
+    "daysWaiting": 12,
+    "assignedTo": "admin@papalote.com",
+    "requestedInfo": "Por favor proporcione el acta constitutiva actualizada y el RFC de la empresa.",
+    "documents": {
+      "governmentId": { "name": "INE_Representante.pdf", "status": "completed" },
+      "proofOfAddress": { "name": "Comprobante_Fiscal.pdf", "status": "completed" },
+      "rfc": { "name": "RFC_Empresa.pdf", "status": "completed" },
+      "businessRegistration": { "name": "Acta_Constitutiva.pdf", "status": "completed" },
+      "craftPhotos": [
+        { "name": "productos_taller_1.jpg", "status": "completed" },
+        { "name": "productos_taller_2.jpg", "status": "completed" }
+      ],
+      "workshopPhotos": [
+        { "name": "instalaciones_1.jpg", "status": "completed" },
+        { "name": "instalaciones_2.jpg", "status": "completed" },
+        { "name": "instalaciones_3.jpg", "status": "completed" }
+      ]
+    },
+    "questionnaire": {
+      "craftType": ["Textiles", "Cerámica", "Madera"],
+      "techniques": ["Múltiples técnicas tradicionales"],
+      "yearsOfExperience": 15,
+      "productionCapacity": "large",
+      "location": {
+        "state": "Chiapas",
+        "city": "San Cristóbal de las Casas",
+        "address": "Calle Real de Guadalupe 45",
+        "hasPhysicalWorkshop": true
+      },
+      "heritageInfo": "Trabajamos con más de 50 artesanos de comunidades indígenas",
+      "culturalSignificance": "Preservamos técnicas de las comunidades tzotziles y tzeltales"
+    },
+    "createdAt": "2026-01-05T14:00:00Z",
+    "submittedAt": "2026-01-06T10:00:00Z",
+    "updatedAt": "2026-01-08T16:30:00Z"
+  },
+  {
+    "id": "ver_007",
+    "sellerId": "user_miguel",
+    "sellerName": "Miguel Ángel Torres",
+    "sellerEmail": "miguel.alebrijes@gmail.com",
+    "sellerAvatar": "https://i.pravatar.cc/150?img=15",
+    "sellerType": "individual",
+    "shopName": "Alebrijes Miguel",
+    "requestedLevel": "verified_artisan",
+    "status": "submitted",
+    "priority": "urgent",
+    "flagged": true,
+    "flagReason": "Solicitud de verificación urgente - participación en feria internacional",
+    "daysWaiting": 1,
+    "documents": {
+      "governmentId": { "name": "INE_Miguel.pdf", "status": "completed" },
+      "proofOfAddress": { "name": "CFE_Recibo.pdf", "status": "completed" },
+      "craftPhotos": [
+        { "name": "alebrije_jaguar.jpg", "status": "completed" },
+        { "name": "alebrije_dragon.jpg", "status": "completed" },
+        { "name": "alebrije_colibri.jpg", "status": "completed" },
+        { "name": "alebrije_armadillo.jpg", "status": "completed" }
+      ],
+      "workshopPhotos": [{ "name": "taller_alebrijes.jpg", "status": "completed" }],
+      "processVideo": { "name": "tallado_alebrije.mp4", "status": "completed" }
+    },
+    "questionnaire": {
+      "craftType": ["Alebrijes", "Talla en madera"],
+      "techniques": ["Tallado en copal", "Pintura con pigmentos naturales"],
+      "yearsOfExperience": 12,
+      "productionCapacity": "small",
+      "location": {
+        "state": "Oaxaca",
+        "city": "San Martín Tilcajete",
+        "hasPhysicalWorkshop": true
+      },
+      "heritageInfo": "Aprendí de mi padre quien aprendió del Maestro Manuel Jiménez",
+      "traditionalTechniques": true,
+      "culturalOrganization": "Unión de Artesanos de Tilcajete"
+    },
+    "createdAt": "2026-01-17T09:00:00Z",
+    "submittedAt": "2026-01-17T11:30:00Z",
+    "updatedAt": "2026-01-17T11:30:00Z"
+  },
+  {
+    "id": "ver_008",
+    "sellerId": "user_lucia",
+    "sellerName": "Lucía Hernández",
+    "sellerEmail": "lucia.joyeria@outlook.com",
+    "sellerAvatar": "https://i.pravatar.cc/150?img=29",
+    "sellerType": "hobby",
+    "shopName": "Plata y Piedras Lucía",
+    "requestedLevel": "basic_seller",
+    "status": "submitted",
+    "priority": "low",
+    "daysWaiting": 5,
+    "documents": {
+      "governmentId": { "name": "INE_Lucia.pdf", "status": "completed" },
+      "craftPhotos": [
+        { "name": "collar_turquesa.jpg", "status": "completed" },
+        { "name": "aretes_plata.jpg", "status": "completed" }
+      ]
+    },
+    "questionnaire": {
+      "craftType": ["Joyería"],
+      "techniques": ["Engaste de piedras", "Pulido de plata"],
+      "yearsOfExperience": 2,
+      "productionCapacity": "small",
+      "location": {
+        "state": "Guerrero",
+        "city": "Taxco",
+        "hasPhysicalWorkshop": false
+      }
+    },
+    "createdAt": "2026-01-12T16:00:00Z",
+    "submittedAt": "2026-01-13T10:00:00Z",
+    "updatedAt": "2026-01-13T10:00:00Z"
+  }
+]

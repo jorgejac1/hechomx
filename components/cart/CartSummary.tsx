@@ -1,23 +1,75 @@
 'use client';
 
+import { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
-import { useToast } from '@/contexts/ToastContext';
 import { useRouter } from 'next/navigation';
 import { formatCurrency } from '@/lib';
+import { ROUTES } from '@/lib/constants/routes';
 import Button from '@/components/common/Button';
-import { ShoppingBag, Truck, Tag } from 'lucide-react';
+import { ShoppingBag, Truck, Tag, X, CheckCircle, Loader2 } from 'lucide-react';
+import { applyCoupon, AppliedCoupon, getCouponDisplayText } from '@/lib/utils/coupons';
 
 export default function CartSummary() {
   const { cartTotal, cartCount } = useCart();
-  const { info } = useToast();
   const router = useRouter();
 
-  const shippingCost = cartTotal >= 1000 ? 0 : 150;
+  // Coupon state
+  const [couponCode, setCouponCode] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
+  const [couponError, setCouponError] = useState('');
+  const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
+
+  // Calculate shipping
+  const baseShippingCost = cartTotal >= 1000 ? 0 : 150;
+
+  // Calculate discount
+  const couponDiscount = appliedCoupon?.discountAmount || 0;
+  const isFreeShippingCoupon = appliedCoupon?.type === 'free_shipping';
+  const shippingCost = isFreeShippingCoupon ? 0 : baseShippingCost;
+  const productDiscount =
+    appliedCoupon && appliedCoupon.type !== 'free_shipping' ? couponDiscount : 0;
+
   const subtotal = cartTotal;
-  const total = subtotal + shippingCost;
+  const total = subtotal + shippingCost - productDiscount;
+
+  const handleApplyCoupon = async () => {
+    if (!couponCode.trim()) {
+      setCouponError('Ingresa un código de cupón');
+      return;
+    }
+
+    setIsApplyingCoupon(true);
+    setCouponError('');
+
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    const result = applyCoupon(couponCode, subtotal, baseShippingCost);
+
+    if (result.success && result.appliedCoupon) {
+      setAppliedCoupon(result.appliedCoupon);
+      setCouponCode('');
+      setCouponError('');
+    } else {
+      setCouponError(result.error || 'Cupón no válido');
+    }
+
+    setIsApplyingCoupon(false);
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponError('');
+  };
 
   const handleCheckout = () => {
-    info(`Funcionalidad de pago próximamente. Total: ${formatCurrency(total)} MXN`, 5000);
+    // Store coupon in sessionStorage to use in checkout
+    if (appliedCoupon) {
+      sessionStorage.setItem('checkout-coupon', JSON.stringify(appliedCoupon));
+    } else {
+      sessionStorage.removeItem('checkout-coupon');
+    }
+    router.push(ROUTES.CHECKOUT);
   };
 
   return (
@@ -47,7 +99,34 @@ export default function CartSummary() {
           </span>
         </div>
 
-        {cartTotal < 1000 && (
+        {/* Applied Coupon Display */}
+        {appliedCoupon && (
+          <div className="flex justify-between items-center text-green-600 bg-green-50 p-2 rounded-lg">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4" />
+              <span className="text-sm font-medium">
+                {appliedCoupon.code}: {getCouponDisplayText(appliedCoupon)}
+              </span>
+            </div>
+            <button
+              onClick={handleRemoveCoupon}
+              className="p-1 hover:bg-green-100 rounded-full transition-colors"
+              aria-label="Eliminar cupón"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
+        {/* Discount Line */}
+        {productDiscount > 0 && (
+          <div className="flex justify-between text-green-600">
+            <span>Descuento</span>
+            <span className="font-semibold">-{formatCurrency(productDiscount)}</span>
+          </div>
+        )}
+
+        {cartTotal < 1000 && !isFreeShippingCoupon && (
           <div className="flex items-start gap-2 text-xs text-primary-700 bg-primary-50 p-3 rounded-lg">
             <Tag className="w-4 h-4 flex-shrink-0 mt-0.5" />
             <p>
@@ -62,6 +141,45 @@ export default function CartSummary() {
           <span className="text-primary-600">{formatCurrency(total)} MXN</span>
         </div>
       </div>
+
+      {/* Coupon Code Input */}
+      {!appliedCoupon && (
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700">
+            ¿Tienes un cupón de descuento?
+          </label>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={couponCode}
+              onChange={(e) => {
+                setCouponCode(e.target.value.toUpperCase());
+                setCouponError('');
+              }}
+              placeholder="Ej: PRIMERA10"
+              className={`flex-1 px-4 py-2 border rounded-lg text-sm uppercase focus:ring-2 focus:ring-primary-500 focus:border-primary-500 ${
+                couponError ? 'border-red-300' : 'border-gray-300'
+              }`}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleApplyCoupon();
+                }
+              }}
+            />
+            <button
+              type="button"
+              onClick={handleApplyCoupon}
+              disabled={isApplyingCoupon || !couponCode.trim()}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isApplyingCoupon ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Aplicar'}
+            </button>
+          </div>
+          {couponError && <p className="text-sm text-red-600">{couponError}</p>}
+          <p className="text-xs text-gray-500">Prueba: PRIMERA10, ENVIOGRATIS</p>
+        </div>
+      )}
 
       {/* Checkout Button */}
       <Button

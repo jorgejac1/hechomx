@@ -65,13 +65,16 @@ export function getShopBySlug(slug: string): User | null {
  * @param allProducts - All products to filter from
  */
 export function getProductsByShop(shopSlug: string, allProducts: Product[]): Product[] {
-  const normalizedSlug = getShopSlug(shopSlug);
+  const shop = getShopBySlug(shopSlug);
 
-  const shopMakers = Object.entries(MAKER_TO_SHOP_MAP)
-    .filter(([_, shop]) => shop === normalizedSlug)
-    .map(([maker]) => maker);
+  if (!shop || !shop.makerProfile) {
+    return [];
+  }
 
-  return allProducts.filter((product) => shopMakers.includes(product.maker));
+  const shopName = shop.makerProfile.shopName;
+
+  // Filter products where maker exactly matches shop name
+  return allProducts.filter((product) => product.maker === shopName);
 }
 
 /**

@@ -32,6 +32,7 @@ export const ROUTES = {
 
   PRODUCT_CREATE: '/productos/crear',
   PRODUCT_MANAGE: '/productos/gestionar',
+  PRODUCT_EDIT: (id: string) => `/productos/editar/${id}`,
 
   ARTISAN: '/artesano',
   ARTISAN_STORY: (artisanId: string) => `/artesano/${artisanId}`,
@@ -45,6 +46,10 @@ export const ROUTES = {
   IMPACT: '/impacto',
   HELP: '/ayuda',
   SELL: '/vender',
+
+  // Verification routes
+  VERIFICATION_REQUEST: '/verificacion/solicitar',
+  VERIFICATION_STATUS: '/verificacion/estado',
 
   // Help & Support pages
   FAQ: '/ayuda/faq',
@@ -74,6 +79,15 @@ export const ROUTES = {
   CREATE_PRODUCT: '/productos/crear',
   EDIT_PRODUCT: (productId: string) => `/productos/${productId}/editar`,
   ORDER_DETAIL: (orderId: string) => `/pedidos/${orderId}`,
+
+  // Admin routes
+  ADMIN: '/admin',
+  ADMIN_VERIFICACIONES: '/admin/verificaciones',
+  ADMIN_VERIFICACION_DETAIL: (id: string) => `/admin/verificaciones/${id}`,
+  ADMIN_USUARIOS: '/admin/usuarios',
+  ADMIN_PRODUCTOS: '/admin/productos',
+  ADMIN_REPORTES: '/admin/reportes',
+  ADMIN_CONFIGURACION: '/admin/configuracion',
 } as const;
 
 export const API_ROUTES = {
@@ -86,4 +100,7 @@ export const API_ROUTES = {
   LOGOUT: '/api/auth/logout',
   PROFILE: '/api/auth/profile',
   DASHBOARD: '/dashboard',
+
+  // Verification API routes
+  VERIFICATION: '/api/seller/verification',
 } as const;

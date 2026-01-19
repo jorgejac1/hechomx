@@ -19,9 +19,21 @@ export interface User {
   phone?: string;
   createdAt: string;
   makerProfile?: ExtendedMakerProfile;
+  isAdmin?: boolean;
 }
 
-// Mock users database (basic users + seller users)
+// Admin user
+const adminUser: User = {
+  id: 'admin-1',
+  name: 'Administrador',
+  email: 'admin@papalote.com',
+  avatar: 'https://i.pravatar.cc/150?img=68',
+  phone: '+52 555 000 0000',
+  createdAt: '2022-01-01T00:00:00Z',
+  isAdmin: true,
+};
+
+// Mock users database (basic users + seller users + admin)
 const MOCK_USERS: User[] = [
   {
     id: '1',
@@ -43,6 +55,8 @@ const MOCK_USERS: User[] = [
   mockIndividualSeller,
   mockArtisan,
   mockCompany,
+  // Add admin user
+  adminUser,
 ];
 
 // Mock passwords (in real app, these would be hashed on backend)
@@ -52,12 +66,14 @@ const MOCK_PASSWORDS: Record<string, string> = {
   'sofia@ejemplo.com': 'Password123',
   'pedro@ejemplo.com': 'Password123',
   'ventas@artesaniasdemexico.com': 'Password123',
+  'admin@papalote.com': 'Admin123',
 };
 
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isAdmin: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
@@ -158,6 +174,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         user,
         isAuthenticated: !!user,
         isLoading,
+        isAdmin: !!user?.isAdmin,
         login,
         register,
         logout,

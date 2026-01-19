@@ -9,11 +9,11 @@ import { validate } from '@/validators/utils';
 import { ROUTES } from '@/lib';
 import Button from '@/components/common/Button';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
-import { Eye, EyeOff, Mail, Lock, AlertCircle } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, AlertCircle, Shield } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { login, isAuthenticated, isAdmin, isLoading: authLoading } = useAuth();
   const [formData, setFormData] = useState<LoginInput>({
     email: '',
     password: '',
@@ -27,9 +27,14 @@ export default function LoginPage() {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated && !authLoading) {
-      router.replace(ROUTES.HOME);
+      // Redirect admin to admin dashboard, regular users to home
+      if (isAdmin) {
+        router.replace(ROUTES.ADMIN);
+      } else {
+        router.replace(ROUTES.HOME);
+      }
     }
-  }, [isAuthenticated, authLoading, router]);
+  }, [isAuthenticated, isAdmin, authLoading, router]);
 
   // Show loading while checking auth
   if (authLoading) {
@@ -74,8 +79,7 @@ export default function LoginPage() {
 
     try {
       await login(formData.email, formData.password);
-      // Success! Redirect will happen via useEffect
-      router.push(ROUTES.HOME);
+      // Redirect will happen via useEffect based on isAdmin
     } catch (error) {
       setLoginError(error instanceof Error ? error.message : 'Error al iniciar sesión');
     } finally {
@@ -106,6 +110,18 @@ export default function LoginPage() {
           <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-sm font-semibold text-blue-900 mb-2">🔐 Credenciales de prueba:</p>
             <div className="text-xs text-blue-800 space-y-2">
+              <div className="pb-2 border-b border-blue-300">
+                <p className="font-semibold flex items-center gap-1">
+                  <Shield className="w-3 h-3 text-purple-600" />
+                  Administrador:
+                </p>
+                <p>
+                  <strong>Email:</strong> admin@papalote.com
+                </p>
+                <p>
+                  <strong>Password:</strong> Admin123
+                </p>
+              </div>
               <div>
                 <p className="font-semibold">Usuario Regular:</p>
                 <p>
@@ -204,6 +220,7 @@ export default function LoginPage() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />

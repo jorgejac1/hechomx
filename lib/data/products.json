@@ -8,7 +8,7 @@
     "category": "Cocina",
     "subcategory": "platos",
     "state": "Oaxaca",
-    "maker": "Taller de Barro Negro",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
       "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=800",
@@ -16,9 +16,7 @@
       "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
       "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800"
     ],
-    "videos": [
-      "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"
-    ],
+    "videos": ["https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"],
     "inStock": true,
     "featured": true,
     "verified": true,
@@ -102,7 +100,7 @@
     "category": "Decoración del Hogar",
     "subcategory": "jarrones",
     "state": "Puebla",
-    "maker": "Cerámica Uriarte",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=800",
       "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800",
@@ -149,7 +147,7 @@
     "category": "Ropa",
     "subcategory": "huipiles",
     "state": "Chiapas",
-    "maker": "Bordados Tradicionales",
+    "maker": "Tejidos Sofía",
     "images": [
       "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
@@ -157,9 +155,7 @@
       "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=800",
       "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800"
     ],
-    "videos": [
-      "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"
-    ],
+    "videos": ["https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"],
     "inStock": true,
     "featured": true,
     "verified": true,
@@ -197,7 +193,7 @@
     "category": "Joyería",
     "subcategory": "collares",
     "state": "Guerrero",
-    "maker": "Platería Taxco",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
       "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800",
@@ -245,7 +241,7 @@
     "category": "Decoración del Hogar",
     "subcategory": "textiles",
     "state": "Yucatán",
-    "maker": "Hamacas Mérida",
+    "maker": "Tejidos Sofía",
     "images": [
       "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800",
       "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800",
@@ -290,7 +286,7 @@
     "category": "Arte",
     "subcategory": "mascaras",
     "state": "Guerrero",
-    "maker": "Arte Popular Mexicano",
+    "maker": "Alebrijes Don Pedro",
     "images": [
       "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800",
       "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800",
@@ -335,7 +331,7 @@
     "category": "Ropa",
     "subcategory": "rebozos",
     "state": "Michoacán",
-    "maker": "Telares de Santa Clara",
+    "maker": "Tejidos Sofía",
     "images": [
       "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=800",
       "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
@@ -348,11 +344,7 @@
     "verified": true,
     "rating": 4.8,
     "reviewCount": 92,
-    "materials": [
-      "Seda natural 100%",
-      "Flecos tejidos a mano (rapacejo)",
-      "Tintes naturales"
-    ],
+    "materials": ["Seda natural 100%", "Flecos tejidos a mano (rapacejo)", "Tintes naturales"],
     "dimensions": {
       "length": "2.5 metros",
       "width": "70 cm",
@@ -380,7 +372,7 @@
     "category": "Joyería",
     "subcategory": "aretes",
     "state": "Oaxaca",
-    "maker": "Plata Oaxaqueña",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800",
       "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
@@ -390,9 +382,7 @@
       "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800",
       "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800"
     ],
-    "videos": [
-      "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"
-    ],
+    "videos": ["https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"],
     "inStock": true,
     "featured": true,
     "verified": true,
@@ -430,7 +420,7 @@
     "category": "Cocina",
     "subcategory": "molcajetes",
     "state": "Puebla",
-    "maker": "Canteras Mexicanas",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1556910096-6f5e72db6803?w=800",
       "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
@@ -475,7 +465,7 @@
     "category": "Ropa",
     "subcategory": "blusas",
     "state": "Oaxaca",
-    "maker": "Textiles Oaxaqueños",
+    "maker": "Tejidos Sofía",
     "images": [
       "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
@@ -520,7 +510,7 @@
     "category": "Decoración del Hogar",
     "subcategory": "velas",
     "state": "Ciudad de México",
-    "maker": "Aromas Mexicanos",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=800",
       "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
@@ -564,7 +554,7 @@
     "category": "Joyería",
     "subcategory": "pulseras",
     "state": "Nayarit",
-    "maker": "Arte Huichol",
+    "maker": "Tejidos Sofía",
     "images": [
       "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800",
       "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800",
@@ -608,7 +598,7 @@
     "category": "Arte",
     "subcategory": "pinturas",
     "state": "Jalisco",
-    "maker": "Arte Contemporáneo MX",
+    "maker": "Alebrijes Don Pedro",
     "images": [
       "https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=800",
       "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800",
@@ -652,7 +642,7 @@
     "category": "Ropa",
     "subcategory": "vestidos",
     "state": "Oaxaca",
-    "maker": "Bordados Oaxaqueños",
+    "maker": "Tejidos Sofía",
     "images": [
       "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
       "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
@@ -664,11 +654,7 @@
     "verified": true,
     "rating": 4.7,
     "reviewCount": 178,
-    "materials": [
-      "Terciopelo de alta calidad",
-      "Satín para el holán",
-      "Flores bordadas a máquina"
-    ],
+    "materials": ["Terciopelo de alta calidad", "Satín para el holán", "Flores bordadas a máquina"],
     "dimensions": {
       "sizes": "CH, M, G, EG disponibles",
       "length": "Variable según talla",
@@ -696,7 +682,7 @@
     "category": "Joyería",
     "subcategory": "anillos",
     "state": "Querétaro",
-    "maker": "Platería del Centro",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800",
       "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
@@ -740,7 +726,7 @@
     "category": "Cocina",
     "subcategory": "tazas",
     "state": "Oaxaca",
-    "maker": "Taller de Barro Negro",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=800",
       "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
@@ -752,11 +738,7 @@
     "verified": true,
     "rating": 4.8,
     "reviewCount": 234,
-    "materials": [
-      "Barro negro natural",
-      "100% libre de plomo",
-      "Pulido con cuarzo"
-    ],
+    "materials": ["Barro negro natural", "100% libre de plomo", "Pulido con cuarzo"],
     "dimensions": {
       "height": "9 cm",
       "diameter": "8 cm",
@@ -784,7 +766,7 @@
     "category": "Decoración del Hogar",
     "subcategory": "textiles",
     "state": "Tlaxcala",
-    "maker": "Telares Tradicionales",
+    "maker": "Tejidos Sofía",
     "images": [
       "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800",
       "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
@@ -828,7 +810,7 @@
     "category": "Joyería",
     "subcategory": "collares",
     "state": "Ciudad de México",
-    "maker": "Joyería Artesanal MX",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800",
       "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",
@@ -872,7 +854,7 @@
     "category": "Decoración del Hogar",
     "subcategory": "talavera",
     "state": "Puebla",
-    "maker": "Talavera Uriarte",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800",
       "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=800",
@@ -880,9 +862,7 @@
       "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800",
       "https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800"
     ],
-    "videos": [
-      "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"
-    ],
+    "videos": ["https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4"],
     "inStock": true,
     "featured": true,
     "verified": true,
@@ -920,7 +900,7 @@
     "category": "Decoración del Hogar",
     "subcategory": "jarrones",
     "state": "Oaxaca",
-    "maker": "Alfarería San Bartolo",
+    "maker": "Alebrijes Don Pedro",
     "images": [
       "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800",
       "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
@@ -931,11 +911,7 @@
     "verified": true,
     "rating": 4.7,
     "reviewCount": 124,
-    "materials": [
-      "Barro negro natural",
-      "Pulido con piedra de cuarzo",
-      "100% hecho a mano"
-    ],
+    "materials": ["Barro negro natural", "Pulido con piedra de cuarzo", "100% hecho a mano"],
     "dimensions": {
       "height": "30 cm",
       "diameter": "18 cm",
@@ -963,7 +939,7 @@
     "category": "Arte",
     "subcategory": "esculturas",
     "state": "Michoacán",
-    "maker": "Artesanos de Pátzcuaro",
+    "maker": "Alebrijes Don Pedro",
     "images": [
       "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
       "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800",
@@ -974,11 +950,7 @@
     "verified": true,
     "rating": 4.5,
     "reviewCount": 56,
-    "materials": [
-      "Barro rojo natural",
-      "Pinturas acrílicas",
-      "Barniz protector"
-    ],
+    "materials": ["Barro rojo natural", "Pinturas acrílicas", "Barniz protector"],
     "dimensions": {
       "height": "35 cm",
       "width": "20 cm",
@@ -1006,7 +978,7 @@
     "category": "Cocina",
     "subcategory": "platos",
     "state": "Jalisco",
-    "maker": "Cerámica de Tonalá",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
       "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800",
@@ -1018,11 +990,7 @@
     "verified": true,
     "rating": 4.6,
     "reviewCount": 143,
-    "materials": [
-      "Barro de Tonalá",
-      "Esmalte vidriado libre de plomo",
-      "Pintado a mano"
-    ],
+    "materials": ["Barro de Tonalá", "Esmalte vidriado libre de plomo", "Pintado a mano"],
     "dimensions": {
       "diameter": "22 cm cada plato",
       "quantity": "6 platos",
@@ -1050,7 +1018,7 @@
     "category": "Ropa",
     "subcategory": "faldas",
     "state": "Yucatán",
-    "maker": "Artesanas Mayas",
+    "maker": "Tejidos Sofía",
     "images": [
       "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800",
       "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=800",
@@ -1094,7 +1062,7 @@
     "category": "Joyería",
     "subcategory": "broches",
     "state": "Oaxaca",
-    "maker": "Plata Filigrana",
+    "maker": "Artesanías de México",
     "images": [
       "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800",
       "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800",

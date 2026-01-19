@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { CheckCircle, MessageCircle, Store, BookOpen, Sparkles } from 'lucide-react';
 import Button from '@/components/common/Button';
 import ContactModal from '@/components/contact/ContactModal';
+import { VerificationBadgeWithTooltip } from '@/components/common/VerificationBadge';
+import type { ExtendedMakerProfile } from '@/lib/types/seller-types';
 import { getArtisanIdFromMaker, hasArtisanStory } from '@/lib/utils/artisan';
 import { getShopUrlFromMaker, hasShop } from '@/lib/utils/shop';
 import { ROUTES } from '@/lib';
@@ -12,9 +14,15 @@ interface SellerProfileProps {
   maker: string;
   verified: boolean;
   state: string;
+  makerProfile?: ExtendedMakerProfile;
 }
 
-export default function SellerProfile({ maker, verified, state }: SellerProfileProps) {
+export default function SellerProfile({
+  maker,
+  verified,
+  state,
+  makerProfile,
+}: SellerProfileProps) {
   const [showContactModal, setShowContactModal] = useState(false);
   const artisanId = getArtisanIdFromMaker(maker);
   const hasStory = hasArtisanStory(maker);
@@ -31,19 +39,37 @@ export default function SellerProfile({ maker, verified, state }: SellerProfileP
             {maker.charAt(0)}
           </div>
           <div className="flex-1">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
               <h3 className="text-xl font-bold text-gray-900">{maker}</h3>
-              {verified && <CheckCircle className="w-5 h-5 text-green-600" />}
+
+              {/* Verification Badge - New System */}
+              {makerProfile?.verification?.level && (
+                <VerificationBadgeWithTooltip level={makerProfile.verification.level} size="md" />
+              )}
+
+              {/* Legacy verified checkmark */}
+              {verified && !makerProfile?.verification?.level && (
+                <CheckCircle className="w-5 h-5 text-green-600" />
+              )}
+
               {hasStory && (
                 <div className="group relative">
                   <Sparkles className="w-5 h-5 text-amber-500" />
-                  <span className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  <span className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                     Tiene historia publicada
                   </span>
                 </div>
               )}
             </div>
             <p className="text-gray-600 text-sm">{state}, México</p>
+
+            {/* Trust Score and Commission */}
+            {makerProfile?.verification?.level && (
+              <div className="flex gap-3 mt-2 text-xs text-gray-600">
+                <span>Comisión: {makerProfile.verification.commissionRate}%</span>
+                <span>Trust Score: {makerProfile.verification.trustScore}/100</span>
+              </div>
+            )}
           </div>
         </div>
 

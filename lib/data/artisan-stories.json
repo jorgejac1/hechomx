@@ -31,6 +31,119 @@
     "culturalSignificance": "Los textiles zapotecas son más que productos decorativos; son portadores de nuestra cosmovisión, historia y resistencia cultural. Cada patrón cuenta una historia de nuestros ancestros, de las montañas sagradas que nos rodean, y de nuestra conexión con la madre tierra. Al preservar estas técnicas, mantenemos viva nuestra lengua zapoteca y nuestras tradiciones.",
 
     "videoIntro": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+
+    "processVideo": "https://www.youtube.com/embed/ScMzIvxBSi4",
+    "totalCraftTime": "2-3 meses para un tapete grande",
+
+    "materials": [
+      {
+        "name": "Lana de Borrego",
+        "source": "Rebaños locales de Teotitlán del Valle",
+        "description": "Lana virgen de borregos criollos, seleccionada por su suavidad y capacidad de absorber tintes naturales.",
+        "image": "https://images.unsplash.com/photo-1557318041-1ce374d55ebf?w=400"
+      },
+      {
+        "name": "Cochinilla (Grana)",
+        "source": "Cultivada en nopales de nuestra región",
+        "description": "Insecto del nopal que produce el color rojo más vibrante y duradero. Se necesitan 70,000 insectos para producir 1 kg de tinte.",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400"
+      },
+      {
+        "name": "Índigo (Añil)",
+        "source": "Plantaciones tradicionales de la Costa de Oaxaca",
+        "description": "Planta que produce tonos azules profundos. El proceso de fermentación tarda 2 semanas.",
+        "image": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400"
+      },
+      {
+        "name": "Muitle",
+        "source": "Recolectado en los cerros cercanos",
+        "description": "Planta silvestre que produce hermosos tonos púrpura y morado.",
+        "image": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400"
+      }
+    ],
+
+    "tools": [
+      {
+        "name": "Telar de Pedal",
+        "description": "Telar tradicional de madera con pedales, introducido en la época colonial. Permite crear piezas más grandes y uniformes.",
+        "image": "https://images.unsplash.com/photo-1558769132-cb1aea3c4a55?w=400"
+      },
+      {
+        "name": "Telar de Cintura",
+        "description": "Telar prehispánico atado a la cintura. Se usa para piezas más pequeñas y diseños más intrincados.",
+        "image": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=400"
+      },
+      {
+        "name": "Malacate",
+        "description": "Herramienta de madera para hilar la lana a mano. Cada vuelta determina el grosor del hilo.",
+        "image": "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?w=400"
+      },
+      {
+        "name": "Peine de Madera",
+        "description": "Se usa para compactar las hebras durante el tejido, asegurando una textura uniforme.",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400"
+      }
+    ],
+
+    "processSteps": [
+      {
+        "step": 1,
+        "title": "Selección y Lavado de Lana",
+        "description": "Selecciono la lana más fina de los borregos locales. Se lava varias veces para remover impurezas y lanolina.",
+        "duration": "1-2 días",
+        "image": "https://images.unsplash.com/photo-1557318041-1ce374d55ebf?w=600"
+      },
+      {
+        "step": 2,
+        "title": "Cardado e Hilado",
+        "description": "Con el malacate, transformo la lana en hilos del grosor deseado. Este proceso requiere paciencia y ritmo constante.",
+        "duration": "1 semana",
+        "image": "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?w=600"
+      },
+      {
+        "step": 3,
+        "title": "Preparación de Tintes",
+        "description": "Preparo los tintes naturales: machaco cochinilla, fermento índigo, y hiervo las plantas. Cada color tiene su proceso único.",
+        "duration": "3-5 días",
+        "image": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=600"
+      },
+      {
+        "step": 4,
+        "title": "Teñido de Hilos",
+        "description": "Sumerjo los hilos en los tintes calientes. El tiempo determina la intensidad del color. Algunos colores requieren múltiples inmersiones.",
+        "duration": "2-3 días",
+        "image": "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=600"
+      },
+      {
+        "step": 5,
+        "title": "Diseño del Patrón",
+        "description": "Planeo el diseño en papel cuadriculado, calculando cada hilo. Los patrones tradicionales tienen significados ancestrales.",
+        "duration": "1-2 días",
+        "image": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600"
+      },
+      {
+        "step": 6,
+        "title": "Montaje del Telar",
+        "description": "Preparo el telar con los hilos de urdimbre, tensándolos con precisión. La tensión correcta es crucial.",
+        "duration": "1 día",
+        "image": "https://images.unsplash.com/photo-1558769132-cb1aea3c4a55?w=600"
+      },
+      {
+        "step": 7,
+        "title": "Tejido",
+        "description": "Paso la lanzadera con el hilo de trama, creando el diseño hilo por hilo. Este es el proceso más largo y meditativo.",
+        "duration": "4-8 semanas",
+        "image": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600"
+      },
+      {
+        "step": 8,
+        "title": "Acabado Final",
+        "description": "Corto la pieza del telar, anudo los flecos, y doy los toques finales. Cada pieza se inspecciona minuciosamente.",
+        "duration": "1 día",
+        "image": "https://images.unsplash.com/photo-1556228852-80a5de4b2fe3?w=600"
+      }
+    ],
+
     "workshopPhotos": [
       "https://images.unsplash.com/photo-1558769132-cb1aea3c4a55?w=800",
       "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800",
@@ -138,6 +251,126 @@
     "culturalSignificance": "Los alebrijes representan el poder de la imaginación y la conexión entre el mundo real y el mundo de los sueños. En la cosmovisión zapoteca, cada animal tiene un significado espiritual, y al combinarlos en criaturas fantásticas, creamos nahuales protectores. Este arte mantiene viva nuestra tradición de tallado y nuestro respeto por la madera de copal, árbol sagrado usado en ceremonias ancestrales.",
 
     "videoIntro": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+
+    "processVideo": "https://www.youtube.com/embed/K4TOrB7at0Y",
+    "totalCraftTime": "2-4 semanas por alebrije mediano",
+
+    "materials": [
+      {
+        "name": "Madera de Copal",
+        "source": "Árboles de copal de los cerros de San Martín Tilcajete",
+        "description": "Madera sagrada, suave y ligera, perfecta para tallar. Solo usamos ramas caídas o árboles secos para proteger el bosque.",
+        "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400"
+      },
+      {
+        "name": "Pinturas Acrílicas",
+        "source": "Pigmentos de alta calidad",
+        "description": "Colores vibrantes que resisten el tiempo. Mezclamos nuestros propios tonos para lograr matices únicos.",
+        "image": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400"
+      },
+      {
+        "name": "Pinceles de Pelo Natural",
+        "source": "Fabricados localmente con pelo de cola de caballo",
+        "description": "Pinceles extra finos para los detalles más pequeños. Algunos tienen solo 3-5 pelos.",
+        "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400"
+      },
+      {
+        "name": "Base de Yeso Natural",
+        "source": "Preparación tradicional local",
+        "description": "Capa base que sella la madera y permite que los colores brillen intensamente.",
+        "image": "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=400"
+      }
+    ],
+
+    "tools": [
+      {
+        "name": "Machete",
+        "description": "Para el corte inicial de la madera y dar forma general a la pieza.",
+        "image": "https://images.unsplash.com/photo-1586864387789-628af9feed72?w=400"
+      },
+      {
+        "name": "Cuchillos de Tallado",
+        "description": "Cuchillos de diferentes tamaños para esculpir los detalles. Cada uno tiene su propósito específico.",
+        "image": "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=400"
+      },
+      {
+        "name": "Gubias",
+        "description": "Herramientas curvas para crear texturas y detalles profundos como escamas y plumas.",
+        "image": "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=400"
+      },
+      {
+        "name": "Lija Fina",
+        "description": "Para suavizar la superficie antes de aplicar la base y pintura.",
+        "image": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400"
+      }
+    ],
+
+    "processSteps": [
+      {
+        "step": 1,
+        "title": "Selección de la Madera",
+        "description": "Elijo trozos de copal con la forma natural adecuada. La madera me 'habla' y me dice qué criatura esconde dentro.",
+        "duration": "1 día",
+        "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600"
+      },
+      {
+        "step": 2,
+        "title": "Secado",
+        "description": "La madera verde debe secarse lentamente en un lugar fresco y sombreado para evitar grietas.",
+        "duration": "4-6 meses",
+        "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600"
+      },
+      {
+        "step": 3,
+        "title": "Tallado Grueso",
+        "description": "Con machete y cuchillos grandes, doy la forma básica de la criatura: cuerpo, cabeza, extremidades.",
+        "duration": "2-3 días",
+        "image": "https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=600"
+      },
+      {
+        "step": 4,
+        "title": "Tallado de Detalles",
+        "description": "Con cuchillos finos y gubias, creo los detalles: escamas, plumas, garras, expresiones faciales.",
+        "duration": "3-5 días",
+        "image": "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600"
+      },
+      {
+        "step": 5,
+        "title": "Lijado y Preparación",
+        "description": "Lijo toda la pieza hasta lograr una superficie perfectamente suave. Cualquier imperfección se notará en la pintura.",
+        "duration": "1 día",
+        "image": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600"
+      },
+      {
+        "step": 6,
+        "title": "Aplicación de Base",
+        "description": "Aplico varias capas de yeso natural, lijando entre cada capa. Esto sella la madera y prepara la superficie.",
+        "duration": "2 días",
+        "image": "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=600"
+      },
+      {
+        "step": 7,
+        "title": "Pintura Base",
+        "description": "Pinto los colores de fondo que definirán la paleta de la criatura. Estos colores establecen el 'carácter' del alebrije.",
+        "duration": "1-2 días",
+        "image": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600"
+      },
+      {
+        "step": 8,
+        "title": "Detalles y Puntillismo",
+        "description": "Con pinceles de 3-5 pelos, pinto miles de puntos, líneas y patrones. Este paso define la calidad final.",
+        "duration": "5-7 días",
+        "image": "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600"
+      },
+      {
+        "step": 9,
+        "title": "Sellado Final",
+        "description": "Aplico una capa de barniz mate para proteger la pintura sin alterar los colores.",
+        "duration": "1 día",
+        "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600"
+      }
+    ],
+
     "workshopPhotos": [
       "https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=800",
       "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800",
