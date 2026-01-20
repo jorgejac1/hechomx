@@ -20,7 +20,13 @@ describe('Date Utilities', () => {
       expect(result).toMatch(/2024/);
     });
 
-    it('should accept date string', () => {
+    it('should accept date string and convert to Date', () => {
+      const result = formatDate('2024-03-15T12:00:00');
+      expect(result).toMatch(/15/);
+      expect(result.toLowerCase()).toMatch(/marzo/i);
+    });
+
+    it('should accept Date object directly', () => {
       const result = formatDate(new Date(2024, 2, 15));
       expect(result).toMatch(/15/);
     });
@@ -41,7 +47,13 @@ describe('Date Utilities', () => {
       expect(result).toMatch(/2024/);
     });
 
-    it('should accept date string', () => {
+    it('should accept date string and convert to Date', () => {
+      const result = formatShortDate('2024-03-15T12:00:00');
+      expect(result).toMatch(/15/);
+      expect(result).toMatch(/03/);
+    });
+
+    it('should accept Date object directly', () => {
       const result = formatShortDate(new Date(2024, 2, 15));
       expect(result).toMatch(/15/);
     });
@@ -215,6 +227,14 @@ describe('Date Utilities', () => {
 
     it('should accept Date object created from components', () => {
       expect(isToday(new Date(2024, 2, 15, 10, 0, 0))).toBe(true);
+    });
+
+    it('should accept date string and convert to Date', () => {
+      expect(isToday('2024-03-15T10:00:00')).toBe(true);
+    });
+
+    it('should return false for string date that is not today', () => {
+      expect(isToday('2024-03-14T10:00:00')).toBe(false);
     });
   });
 });

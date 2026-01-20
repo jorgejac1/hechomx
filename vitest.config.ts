@@ -13,7 +13,16 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: ['node_modules/', '.next/', '**/*.d.ts', '**/*.config.*', '**/types/'],
+      exclude: [
+        'node_modules/',
+        '.next/',
+        '**/*.d.ts',
+        '**/*.config.*',
+        '**/types/',
+        '**/*.json',
+        'lib/index.ts', // Re-export file - coverage tracked in source files
+        'lib/data/mockUsers.ts', // Mock data generation - not business logic
+      ],
     },
   },
   resolve: {
