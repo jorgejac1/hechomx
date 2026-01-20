@@ -12,7 +12,11 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "validate": "npm run type-check && npm run lint && npm run build",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui",
+    "validate": "npm run type-check && npm run lint && npm run test -- --run && npm run build",
     "preview": "next build && next start",
     "clean": "rm -rf .next out node_modules/.cache",
     "prepare": "husky"
@@ -44,11 +48,15 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.39.0",
     "@next/eslint-plugin-next": "^16.0.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/html2pdf.js": "^0.10.0",
     "@types/node": "^25.0.9",
     "@types/react": "^19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
+    "@vitejs/plugin-react": "^5.1.2",
     "eslint": "^9.39.0",
     "eslint-config-next": "^16.0.1",
     "eslint-config-prettier": "^10.1.8",
@@ -57,9 +65,11 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^17.0.0",
     "husky": "^9.1.7",
+    "jsdom": "^27.4.0",
     "lint-staged": "^15.5.2",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.2"
+    "typescript-eslint": "^8.46.2",
+    "vitest": "^4.0.17"
   }
 }
