@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Plus, X } from 'lucide-react';
+import TextInput from '@/components/common/TextInput';
 
 interface TagsSectionProps {
   tags: string[];
@@ -25,23 +26,24 @@ export default function TagsSection({ tags, setTags }: TagsSectionProps) {
       <h3 className="text-lg font-bold text-gray-900 mb-4">Etiquetas</h3>
       <div className="space-y-4">
         <div className="flex gap-2">
-          <input
-            type="text"
-            value={tagInput}
-            onChange={(e) => setTagInput(e.target.value)}
-            placeholder="Ej: hecho a mano, único, tradicional"
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg"
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                handleAddTag();
-              }
-            }}
-          />
+          <div className="flex-1">
+            <TextInput
+              type="text"
+              value={tagInput}
+              onChange={(e) => setTagInput(e.target.value)}
+              placeholder="Ej: hecho a mano, único, tradicional"
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  handleAddTag();
+                }
+              }}
+            />
+          </div>
           <button
             type="button"
             onClick={handleAddTag}
-            className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
+            className="px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
           >
             <Plus className="w-5 h-5" />
           </button>

@@ -7,13 +7,13 @@ import {
   MapPin,
   Clock,
   MessageCircle,
-  Send,
   Facebook,
   Instagram,
   Youtube,
 } from 'lucide-react';
 import { ROUTES } from '@/lib';
 import { siteConfig } from '@/config/site';
+import ContactForm from '@/components/contact/ContactForm';
 
 export const metadata: Metadata = {
   title: 'Contacto | Papalote Market',
@@ -46,125 +46,7 @@ export default function ContactPage() {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-md p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Envíanos un Mensaje</h2>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      htmlFor="nombre"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Nombre *
-                    </label>
-                    <input
-                      type="text"
-                      id="nombre"
-                      name="nombre"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="Tu nombre completo"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="tu@email.com"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="telefono"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Teléfono
-                  </label>
-                  <input
-                    type="tel"
-                    id="telefono"
-                    name="telefono"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="+52 55 1234 5678"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="asunto"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Asunto *
-                  </label>
-                  <select
-                    id="asunto"
-                    name="asunto"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="">Selecciona un asunto</option>
-                    <option value="consulta-producto">Consulta sobre producto</option>
-                    <option value="estado-pedido">Estado de mi pedido</option>
-                    <option value="devolucion">Devolución o cambio</option>
-                    <option value="problema-tecnico">Problema técnico</option>
-                    <option value="quiero-vender">Quiero vender mis productos</option>
-                    <option value="colaboracion">Propuesta de colaboración</option>
-                    <option value="otro">Otro</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="mensaje"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Mensaje *
-                  </label>
-                  <textarea
-                    id="mensaje"
-                    name="mensaje"
-                    required
-                    rows={8}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
-                    placeholder="Cuéntanos cómo podemos ayudarte..."
-                  />
-                </div>
-
-                <div className="flex items-start gap-2">
-                  <input
-                    type="checkbox"
-                    id="acepto"
-                    name="acepto"
-                    required
-                    className="mt-1 w-4 h-4 text-primary-600 border-gray-300 rounded-sm focus:ring-primary-500"
-                  />
-                  <label htmlFor="acepto" className="text-sm text-gray-600">
-                    Acepto la{' '}
-                    <Link href={ROUTES.PRIVACY} className="text-primary-600 hover:underline">
-                      Política de Privacidad
-                    </Link>{' '}
-                    y autorizo el tratamiento de mis datos personales
-                  </label>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full px-6 py-4 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition flex items-center justify-center gap-2"
-                >
-                  <Send className="w-5 h-5" />
-                  Enviar Mensaje
-                </button>
-              </form>
+              <ContactForm />
             </div>
           </div>
 

@@ -1,3 +1,6 @@
+import TextInput from '@/components/common/TextInput';
+import Select from '@/components/common/Select';
+
 interface DimensionsWeightSectionProps {
   dimensions: {
     length: number;
@@ -32,64 +35,65 @@ export default function DimensionsWeightSection({
           <label className="block text-sm font-semibold text-gray-900 mb-2">Dimensiones</label>
           <div className="space-y-2">
             <div className="grid grid-cols-3 gap-2">
-              <input
+              <TextInput
                 type="number"
                 value={dimensions.length}
                 onChange={(e) => setDimensions({ ...dimensions, length: Number(e.target.value) })}
                 placeholder="Largo"
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
-                min="0"
+                size="sm"
+                min={0}
               />
-              <input
+              <TextInput
                 type="number"
                 value={dimensions.width}
                 onChange={(e) => setDimensions({ ...dimensions, width: Number(e.target.value) })}
                 placeholder="Ancho"
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
-                min="0"
+                size="sm"
+                min={0}
               />
-              <input
+              <TextInput
                 type="number"
                 value={dimensions.height}
                 onChange={(e) => setDimensions({ ...dimensions, height: Number(e.target.value) })}
                 placeholder="Alto"
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
-                min="0"
+                size="sm"
+                min={0}
               />
             </div>
-            <select
+            <Select
               value={dimensions.unit}
               onChange={(e) =>
                 setDimensions({ ...dimensions, unit: e.target.value as 'cm' | 'in' })
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
-            >
-              <option value="cm">Centímetros (cm)</option>
-              <option value="in">Pulgadas (in)</option>
-            </select>
+              size="sm"
+              options={[
+                { value: 'cm', label: 'Centímetros (cm)' },
+                { value: 'in', label: 'Pulgadas (in)' },
+              ]}
+            />
           </div>
         </div>
 
         <div>
           <label className="block text-sm font-semibold text-gray-900 mb-2">Peso</label>
           <div className="space-y-2">
-            <input
+            <TextInput
               type="number"
               value={weight.value}
               onChange={(e) => setWeight({ ...weight, value: Number(e.target.value) })}
               placeholder="0"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              min="0"
-              step="0.01"
+              min={0}
+              step={0.01}
             />
-            <select
+            <Select
               value={weight.unit}
               onChange={(e) => setWeight({ ...weight, unit: e.target.value as 'kg' | 'lb' })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
-            >
-              <option value="kg">Kilogramos (kg)</option>
-              <option value="lb">Libras (lb)</option>
-            </select>
+              size="sm"
+              options={[
+                { value: 'kg', label: 'Kilogramos (kg)' },
+                { value: 'lb', label: 'Libras (lb)' },
+              ]}
+            />
           </div>
         </div>
       </div>

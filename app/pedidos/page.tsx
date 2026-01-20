@@ -27,6 +27,7 @@ import {
   Filter,
   Search,
 } from 'lucide-react';
+import Modal from '@/components/common/Modal';
 
 const ORDER_STATUS_CONFIG = {
   processing: {
@@ -402,133 +403,113 @@ function OrdersContent({ user }: { user: User }) {
 function OrderDetailModal({ order, onClose }: { order: BuyerOrder; onClose: () => void }) {
   const statusConfig = ORDER_STATUS_CONFIG[order.status];
 
+  const footer = (
+    <button
+      onClick={onClose}
+      className="w-full px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
+    >
+      Cerrar
+    </button>
+  );
+
   return (
-    <>
-      {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/50 z-40" onClick={onClose} />
+    <Modal isOpen={true} onClose={onClose} title="Detalles del Pedido" size="lg" footer={footer}>
+      {/* Order ID and Status */}
+      <div className="flex items-center gap-2 mb-6">
+        <p className="text-lg font-semibold text-gray-900">#{order.id}</p>
+        <span
+          className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-semibold border ${statusConfig.color}`}
+        >
+          {statusConfig.label}
+        </span>
+      </div>
 
-      {/* Modal */}
-      <div className="fixed inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl bg-white rounded-xl shadow-2xl z-50 overflow-hidden flex flex-col max-h-[90vh]">
-        {/* Header */}
-        <div className="p-6 border-b border-gray-200">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-gray-900">Detalles del Pedido</h2>
-            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition">
-              <XCircle className="w-6 h-6 text-gray-600" />
-            </button>
-          </div>
-          <div className="flex items-center gap-2">
-            <p className="text-lg font-semibold text-gray-900">#{order.id}</p>
-            <span
-              className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-semibold border ${statusConfig.color}`}
-            >
-              {statusConfig.label}
-            </span>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6">
-          {/* Timeline */}
-          <div className="mb-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Estado del Pedido</h3>
-            <div className="space-y-4">
-              {order.timeline.map((event, index) => {
-                const isLast = index === order.timeline.length - 1;
-                return (
-                  <div key={index} className="flex gap-4">
-                    <div className="flex flex-col items-center">
-                      <div
-                        className={`w-3 h-3 rounded-full ${isLast ? 'bg-primary-600' : 'bg-green-600'}`}
-                      />
-                      {index < order.timeline.length - 1 && (
-                        <div className="w-0.5 h-12 bg-gray-300" />
-                      )}
-                    </div>
-                    <div className="flex-1 pb-4">
-                      <p className="font-semibold text-gray-900">{event.description}</p>
-                      <p className="text-sm text-gray-600">
-                        {new Date(event.date).toLocaleDateString('es-MX', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        })}
-                      </p>
-                      {event.carrier && (
-                        <p className="text-sm text-gray-600 mt-1">Paquetería: {event.carrier}</p>
-                      )}
-                      {event.reason && (
-                        <p className="text-sm text-red-600 mt-1">Motivo: {event.reason}</p>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Shipping Address */}
-          <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-            <div className="flex items-center gap-2 mb-3">
-              <MapPin className="w-5 h-5 text-gray-600" />
-              <h3 className="font-bold text-gray-900">Dirección de Envío</h3>
-            </div>
-            <div className="text-sm text-gray-700 space-y-1">
-              <p className="font-semibold">{order.shippingAddress.name}</p>
-              <p>{order.shippingAddress.street}</p>
-              <p>
-                {order.shippingAddress.city}, {order.shippingAddress.state}{' '}
-                {order.shippingAddress.zipCode}
-              </p>
-              <p>{order.shippingAddress.phone}</p>
-            </div>
-          </div>
-
-          {/* Items */}
-          <div>
-            <h3 className="font-bold text-gray-900 mb-3">Productos ({order.itemsCount})</h3>
-            <div className="space-y-3">
-              {order.items.map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    width={60}
-                    height={60}
-                    className="rounded-lg object-cover"
+      {/* Timeline */}
+      <div className="mb-6">
+        <h3 className="text-lg font-bold text-gray-900 mb-4">Estado del Pedido</h3>
+        <div className="space-y-4">
+          {order.timeline.map((event, index) => {
+            const isLast = index === order.timeline.length - 1;
+            return (
+              <div key={index} className="flex gap-4">
+                <div className="flex flex-col items-center">
+                  <div
+                    className={`w-3 h-3 rounded-full ${isLast ? 'bg-primary-600' : 'bg-green-600'}`}
                   />
-                  <div className="flex-1">
-                    <p className="font-semibold text-gray-900 text-sm">{item.name}</p>
-                    <p className="text-xs text-gray-600">{item.artisan.shopName}</p>
-                    <p className="text-xs text-gray-600">Cantidad: {item.quantity}</p>
-                  </div>
-                  <p className="font-bold text-primary-600">{formatCurrency(item.price)}</p>
+                  {index < order.timeline.length - 1 && <div className="w-0.5 h-12 bg-gray-300" />}
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Total */}
-          <div className="mt-6 pt-4 border-t border-gray-200">
-            <div className="flex justify-between items-center">
-              <p className="text-lg font-bold text-gray-900">Total</p>
-              <p className="text-2xl font-bold text-primary-600">{formatCurrency(order.total)}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="p-6 border-t border-gray-200 bg-gray-50">
-          <button
-            onClick={onClose}
-            className="w-full px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
-          >
-            Cerrar
-          </button>
+                <div className="flex-1 pb-4">
+                  <p className="font-semibold text-gray-900">{event.description}</p>
+                  <p className="text-sm text-gray-600">
+                    {new Date(event.date).toLocaleDateString('es-MX', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </p>
+                  {event.carrier && (
+                    <p className="text-sm text-gray-600 mt-1">Paquetería: {event.carrier}</p>
+                  )}
+                  {event.reason && (
+                    <p className="text-sm text-red-600 mt-1">Motivo: {event.reason}</p>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </>
+
+      {/* Shipping Address */}
+      <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+        <div className="flex items-center gap-2 mb-3">
+          <MapPin className="w-5 h-5 text-gray-600" />
+          <h3 className="font-bold text-gray-900">Dirección de Envío</h3>
+        </div>
+        <div className="text-sm text-gray-700 space-y-1">
+          <p className="font-semibold">{order.shippingAddress.name}</p>
+          <p>{order.shippingAddress.street}</p>
+          <p>
+            {order.shippingAddress.city}, {order.shippingAddress.state}{' '}
+            {order.shippingAddress.zipCode}
+          </p>
+          <p>{order.shippingAddress.phone}</p>
+        </div>
+      </div>
+
+      {/* Items */}
+      <div>
+        <h3 className="font-bold text-gray-900 mb-3">Productos ({order.itemsCount})</h3>
+        <div className="space-y-3">
+          {order.items.map((item, idx) => (
+            <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+              <Image
+                src={item.image}
+                alt={item.name}
+                width={60}
+                height={60}
+                className="rounded-lg object-cover"
+              />
+              <div className="flex-1">
+                <p className="font-semibold text-gray-900 text-sm">{item.name}</p>
+                <p className="text-xs text-gray-600">{item.artisan.shopName}</p>
+                <p className="text-xs text-gray-600">Cantidad: {item.quantity}</p>
+              </div>
+              <p className="font-bold text-primary-600">{formatCurrency(item.price)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Total */}
+      <div className="mt-6 pt-4 border-t border-gray-200">
+        <div className="flex justify-between items-center">
+          <p className="text-lg font-bold text-gray-900">Total</p>
+          <p className="text-2xl font-bold text-primary-600">{formatCurrency(order.total)}</p>
+        </div>
+      </div>
+    </Modal>
   );
 }

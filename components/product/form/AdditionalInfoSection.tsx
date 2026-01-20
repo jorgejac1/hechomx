@@ -1,3 +1,5 @@
+import Textarea from '@/components/common/Textarea';
+
 interface AdditionalInfoSectionProps {
   careInstructions: string;
   setCareInstructions: (value: string) => void;
@@ -15,31 +17,21 @@ export default function AdditionalInfoSection({
     <div className="bg-white rounded-xl shadow-md p-6">
       <h3 className="text-lg font-bold text-gray-900 mb-4">Información Adicional</h3>
       <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
-            Instrucciones de Cuidado
-          </label>
-          <textarea
-            value={careInstructions}
-            onChange={(e) => setCareInstructions(e.target.value)}
-            rows={3}
-            placeholder="Ej: Lavar a mano con agua tibia"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
-          />
-        </div>
+        <Textarea
+          label="Instrucciones de Cuidado"
+          value={careInstructions}
+          onChange={(e) => setCareInstructions(e.target.value)}
+          minRows={3}
+          placeholder="Ej: Lavar a mano con agua tibia"
+        />
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
-            Historia del Producto
-          </label>
-          <textarea
-            value={story}
-            onChange={(e) => setStory(e.target.value)}
-            rows={4}
-            placeholder="Comparte el significado cultural, proceso de creación, o historia detrás de este producto"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
-          />
-        </div>
+        <Textarea
+          label="Historia del Producto"
+          value={story}
+          onChange={(e) => setStory(e.target.value)}
+          minRows={4}
+          placeholder="Comparte el significado cultural, proceso de creación, o historia detrás de este producto"
+        />
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import { registerSchema, type RegisterInput } from '@/validators';
 import { validate } from '@/validators/utils';
 import { ROUTES } from '@/lib';
 import Button from '@/components/common/Button';
+import TextInput from '@/components/common/TextInput';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import { Eye, EyeOff, Mail, Lock, User as UserIcon, AlertCircle, CheckCircle2 } from 'lucide-react';
 
@@ -177,98 +178,56 @@ export default function RegisterPage() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Name */}
-            <div>
-              <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">
-                Tu nombre completo
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <UserIcon className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={`block w-full pl-10 pr-3 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base ${
-                    errors.name ? 'border-red-300' : 'border-gray-300'
-                  }`}
-                  placeholder="Ej: María González"
-                />
-              </div>
-              {errors.name && (
-                <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.name}
-                </p>
-              )}
-            </div>
+            <TextInput
+              id="name"
+              name="name"
+              type="text"
+              autoComplete="name"
+              value={formData.name}
+              onChange={handleChange}
+              label="Tu nombre completo"
+              placeholder="Ej: María González"
+              leftIcon={<UserIcon className="h-5 w-5" />}
+              error={errors.name}
+            />
 
             {/* Email */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-2">
-                Correo electrónico
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`block w-full pl-10 pr-3 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base ${
-                    errors.email ? 'border-red-300' : 'border-gray-300'
-                  }`}
-                  placeholder="tu@ejemplo.com"
-                />
-              </div>
-              {errors.email && (
-                <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.email}
-                </p>
-              )}
-            </div>
+            <TextInput
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              value={formData.email}
+              onChange={handleChange}
+              label="Correo electrónico"
+              placeholder="tu@ejemplo.com"
+              leftIcon={<Mail className="h-5 w-5" />}
+              error={errors.email}
+            />
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-semibold text-gray-900 mb-2">
-                Contraseña
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  autoComplete="new-password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={`block w-full pl-10 pr-10 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base ${
-                    errors.password ? 'border-red-300' : 'border-gray-300'
-                  }`}
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
-                  )}
-                </button>
-              </div>
+              <TextInput
+                id="password"
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="new-password"
+                value={formData.password}
+                onChange={handleChange}
+                label="Contraseña"
+                placeholder="••••••••"
+                leftIcon={<Lock className="h-5 w-5" />}
+                rightIcon={
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="p-1 hover:text-gray-600 transition-colors"
+                  >
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
+                }
+                error={errors.password}
+              />
 
               {/* Password strength indicator */}
               {formData.password && (
@@ -339,58 +298,34 @@ export default function RegisterPage() {
                   </p>
                 </div>
               </div>
-
-              {errors.password && (
-                <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.password}
-                </p>
-              )}
             </div>
 
             {/* Confirm Password */}
-            <div>
-              <label
-                htmlFor="confirmPassword"
-                className="block text-sm font-semibold text-gray-900 mb-2"
-              >
-                Confirmar contraseña
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  autoComplete="new-password"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  className={`block w-full pl-10 pr-10 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base ${
-                    errors.confirmPassword ? 'border-red-300' : 'border-gray-300'
-                  }`}
-                  placeholder="••••••••"
-                />
+            <TextInput
+              id="confirmPassword"
+              name="confirmPassword"
+              type={showConfirmPassword ? 'text' : 'password'}
+              autoComplete="new-password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              label="Confirmar contraseña"
+              placeholder="••••••••"
+              leftIcon={<Lock className="h-5 w-5" />}
+              rightIcon={
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="p-1 hover:text-gray-600 transition-colors"
                 >
                   {showConfirmPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <EyeOff className="h-5 w-5" />
                   ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <Eye className="h-5 w-5" />
                   )}
                 </button>
-              </div>
-              {errors.confirmPassword && (
-                <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
-                  <AlertCircle className="w-4 h-4" />
-                  {errors.confirmPassword}
-                </p>
-              )}
-            </div>
+              }
+              error={errors.confirmPassword}
+            />
 
             {/* Terms acceptance */}
             <div>

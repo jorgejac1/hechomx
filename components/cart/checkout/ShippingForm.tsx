@@ -4,7 +4,10 @@ import { useState, useEffect } from 'react';
 import { ShippingAddress, SavedAddress } from '@/lib/types/checkout';
 import { MEXICAN_STATES } from '@/lib/constants/states';
 import { getSavedAddresses, getDefaultAddress } from '@/lib/utils/orders';
-import { MapPin, User, Phone, Mail, Home, Building, ChevronDown } from 'lucide-react';
+import { MapPin, User, Phone, Mail, Home, Building } from 'lucide-react';
+import TextInput from '@/components/common/TextInput';
+import Select from '@/components/common/Select';
+import Textarea from '@/components/common/Textarea';
 
 interface ShippingFormProps {
   value: Partial<ShippingAddress>;
@@ -42,12 +45,6 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
     setSelectedAddressId(null); // Clear selected when manually editing
     onChange({ ...value, [field]: fieldValue });
   };
-
-  const inputClasses = (field: string) => `
-    w-full px-4 py-3 border rounded-lg transition-colors
-    focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-primary-500
-    ${errors[field] ? 'border-red-500 bg-red-50' : 'border-gray-300'}
-  `;
 
   return (
     <div className="space-y-6">
@@ -118,73 +115,51 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-              Nombre *
-            </label>
-            <input
-              type="text"
-              id="firstName"
-              value={value.firstName || ''}
-              onChange={(e) => handleInputChange('firstName', e.target.value)}
-              className={inputClasses('firstName')}
-              placeholder="Juan"
-            />
-            {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>}
-          </div>
+          <TextInput
+            id="firstName"
+            label="Nombre"
+            value={value.firstName || ''}
+            onChange={(e) => handleInputChange('firstName', e.target.value)}
+            placeholder="Juan"
+            error={errors.firstName}
+            required
+          />
 
-          <div>
-            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-              Apellidos *
-            </label>
-            <input
-              type="text"
-              id="lastName"
-              value={value.lastName || ''}
-              onChange={(e) => handleInputChange('lastName', e.target.value)}
-              className={inputClasses('lastName')}
-              placeholder="Pérez García"
-            />
-            {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>}
-          </div>
+          <TextInput
+            id="lastName"
+            label="Apellidos"
+            value={value.lastName || ''}
+            onChange={(e) => handleInputChange('lastName', e.target.value)}
+            placeholder="Pérez García"
+            error={errors.lastName}
+            required
+          />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Correo electrónico *
-            </label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="email"
-                id="email"
-                value={value.email || ''}
-                onChange={(e) => handleInputChange('email', e.target.value)}
-                className={`${inputClasses('email')} pl-10`}
-                placeholder="juan@ejemplo.com"
-              />
-            </div>
-            {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
-          </div>
+          <TextInput
+            type="email"
+            id="email"
+            label="Correo electrónico"
+            value={value.email || ''}
+            onChange={(e) => handleInputChange('email', e.target.value)}
+            placeholder="juan@ejemplo.com"
+            leftIcon={<Mail className="w-5 h-5" />}
+            error={errors.email}
+            required
+          />
 
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-              Teléfono *
-            </label>
-            <div className="relative">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="tel"
-                id="phone"
-                value={value.phone || ''}
-                onChange={(e) => handleInputChange('phone', e.target.value)}
-                className={`${inputClasses('phone')} pl-10`}
-                placeholder="55 1234 5678"
-              />
-            </div>
-            {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
-          </div>
+          <TextInput
+            type="tel"
+            id="phone"
+            label="Teléfono"
+            value={value.phone || ''}
+            onChange={(e) => handleInputChange('phone', e.target.value)}
+            placeholder="55 1234 5678"
+            leftIcon={<Phone className="w-5 h-5" />}
+            error={errors.phone}
+            required
+          />
         </div>
       </div>
 
@@ -197,143 +172,94 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="sm:col-span-2">
-            <label htmlFor="street" className="block text-sm font-medium text-gray-700 mb-1">
-              Calle *
-            </label>
-            <input
-              type="text"
+            <TextInput
               id="street"
+              label="Calle"
               value={value.street || ''}
               onChange={(e) => handleInputChange('street', e.target.value)}
-              className={inputClasses('street')}
               placeholder="Av. Reforma"
+              error={errors.street}
+              required
             />
-            {errors.street && <p className="mt-1 text-sm text-red-600">{errors.street}</p>}
           </div>
 
-          <div>
-            <label htmlFor="streetNumber" className="block text-sm font-medium text-gray-700 mb-1">
-              Número ext. *
-            </label>
-            <input
-              type="text"
-              id="streetNumber"
-              value={value.streetNumber || ''}
-              onChange={(e) => handleInputChange('streetNumber', e.target.value)}
-              className={inputClasses('streetNumber')}
-              placeholder="123"
-            />
-            {errors.streetNumber && (
-              <p className="mt-1 text-sm text-red-600">{errors.streetNumber}</p>
-            )}
-          </div>
+          <TextInput
+            id="streetNumber"
+            label="Número ext."
+            value={value.streetNumber || ''}
+            onChange={(e) => handleInputChange('streetNumber', e.target.value)}
+            placeholder="123"
+            error={errors.streetNumber}
+            required
+          />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="apartment" className="block text-sm font-medium text-gray-700 mb-1">
-              Número int. / Depto (opcional)
-            </label>
-            <div className="relative">
-              <Building className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input
-                type="text"
-                id="apartment"
-                value={value.apartment || ''}
-                onChange={(e) => handleInputChange('apartment', e.target.value)}
-                className={`${inputClasses('apartment')} pl-10`}
-                placeholder="4B"
-              />
-            </div>
-          </div>
+          <TextInput
+            id="apartment"
+            label="Número int. / Depto (opcional)"
+            value={value.apartment || ''}
+            onChange={(e) => handleInputChange('apartment', e.target.value)}
+            placeholder="4B"
+            leftIcon={<Building className="w-5 h-5" />}
+          />
 
-          <div>
-            <label htmlFor="neighborhood" className="block text-sm font-medium text-gray-700 mb-1">
-              Colonia *
-            </label>
-            <input
-              type="text"
-              id="neighborhood"
-              value={value.neighborhood || ''}
-              onChange={(e) => handleInputChange('neighborhood', e.target.value)}
-              className={inputClasses('neighborhood')}
-              placeholder="Juárez"
-            />
-            {errors.neighborhood && (
-              <p className="mt-1 text-sm text-red-600">{errors.neighborhood}</p>
-            )}
-          </div>
+          <TextInput
+            id="neighborhood"
+            label="Colonia"
+            value={value.neighborhood || ''}
+            onChange={(e) => handleInputChange('neighborhood', e.target.value)}
+            placeholder="Juárez"
+            error={errors.neighborhood}
+            required
+          />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
-              Ciudad *
-            </label>
-            <input
-              type="text"
-              id="city"
-              value={value.city || ''}
-              onChange={(e) => handleInputChange('city', e.target.value)}
-              className={inputClasses('city')}
-              placeholder="Ciudad de México"
-            />
-            {errors.city && <p className="mt-1 text-sm text-red-600">{errors.city}</p>}
-          </div>
+          <TextInput
+            id="city"
+            label="Ciudad"
+            value={value.city || ''}
+            onChange={(e) => handleInputChange('city', e.target.value)}
+            placeholder="Ciudad de México"
+            error={errors.city}
+            required
+          />
 
-          <div>
-            <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">
-              Estado *
-            </label>
-            <div className="relative">
-              <select
-                id="state"
-                value={value.state || ''}
-                onChange={(e) => handleInputChange('state', e.target.value)}
-                className={`${inputClasses('state')} appearance-none cursor-pointer`}
-              >
-                <option value="">Seleccionar...</option>
-                {MEXICAN_STATES.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
-            </div>
-            {errors.state && <p className="mt-1 text-sm text-red-600">{errors.state}</p>}
-          </div>
+          <Select
+            id="state"
+            label="Estado"
+            value={value.state || ''}
+            onChange={(e) => handleInputChange('state', e.target.value)}
+            options={MEXICAN_STATES.map((state) => ({
+              value: state,
+              label: state,
+            }))}
+            placeholder="Seleccionar..."
+            error={errors.state}
+            required
+          />
 
-          <div>
-            <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700 mb-1">
-              Código Postal *
-            </label>
-            <input
-              type="text"
-              id="postalCode"
-              value={value.postalCode || ''}
-              onChange={(e) => handleInputChange('postalCode', e.target.value.slice(0, 5))}
-              className={inputClasses('postalCode')}
-              placeholder="06600"
-              maxLength={5}
-            />
-            {errors.postalCode && <p className="mt-1 text-sm text-red-600">{errors.postalCode}</p>}
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="references" className="block text-sm font-medium text-gray-700 mb-1">
-            Referencias de entrega (opcional)
-          </label>
-          <textarea
-            id="references"
-            value={value.references || ''}
-            onChange={(e) => handleInputChange('references', e.target.value)}
-            className={`${inputClasses('references')} resize-none`}
-            rows={3}
-            placeholder="Ej: Casa color azul, portón negro, entre calles X y Y..."
+          <TextInput
+            id="postalCode"
+            label="Código Postal"
+            value={value.postalCode || ''}
+            onChange={(e) => handleInputChange('postalCode', e.target.value.slice(0, 5))}
+            placeholder="06600"
+            maxLength={5}
+            error={errors.postalCode}
+            required
           />
         </div>
+
+        <Textarea
+          id="references"
+          label="Referencias de entrega (opcional)"
+          value={value.references || ''}
+          onChange={(e) => handleInputChange('references', e.target.value)}
+          minRows={3}
+          placeholder="Ej: Casa color azul, portón negro, entre calles X y Y..."
+        />
       </div>
     </div>
   );

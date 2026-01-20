@@ -1,5 +1,8 @@
 import { Package } from 'lucide-react';
 import { CATEGORY_OPTIONS, getSubcategoriesByCategory } from '@/lib/constants/categories';
+import TextInput from '@/components/common/TextInput';
+import Select from '@/components/common/Select';
+import Textarea from '@/components/common/Textarea';
 
 interface BasicInfoSectionProps {
   name: string;
@@ -34,73 +37,54 @@ export default function BasicInfoSection({
 
       <div className="space-y-4">
         {/* Product Name */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
-            Nombre del Producto *
-          </label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Ej: Jarrón de Talavera Azul"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            required
-          />
-        </div>
+        <TextInput
+          label="Nombre del Producto"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Ej: Jarrón de Talavera Azul"
+          required
+        />
 
         {/* Category & Subcategory */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">Categoría *</label>
-            <select
-              value={category}
-              onChange={(e) => {
-                setCategory(e.target.value);
-                setSubcategory('');
-              }}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              required
-            >
-              <option value="">Seleccionar categoría</option>
-              {CATEGORY_OPTIONS.map((cat) => (
-                <option key={cat.name} value={cat.name}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <Select
+            label="Categoría"
+            value={category}
+            onChange={(e) => {
+              setCategory(e.target.value);
+              setSubcategory('');
+            }}
+            options={CATEGORY_OPTIONS.map((cat) => ({
+              value: cat.name,
+              label: cat.name,
+            }))}
+            placeholder="Seleccionar categoría"
+            required
+          />
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">Subcategoría</label>
-            <select
-              value={subcategory}
-              onChange={(e) => setSubcategory(e.target.value)}
-              disabled={!category}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-gray-100"
-            >
-              <option value="">Seleccionar subcategoría</option>
-              {subcategories.map((sub) => (
-                <option key={sub} value={sub}>
-                  {sub}
-                </option>
-              ))}
-            </select>
-          </div>
+          <Select
+            label="Subcategoría"
+            value={subcategory}
+            onChange={(e) => setSubcategory(e.target.value)}
+            disabled={!category}
+            options={subcategories.map((sub) => ({
+              value: sub,
+              label: sub,
+            }))}
+            placeholder="Seleccionar subcategoría"
+          />
         </div>
 
         {/* Description */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">Descripción *</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={5}
-            placeholder="Describe tu producto: materiales, proceso, tamaño, etc."
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
-            required
-          />
-          <p className="text-xs text-gray-500 mt-1">{description.length} caracteres</p>
-        </div>
+        <Textarea
+          label="Descripción"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          minRows={5}
+          placeholder="Describe tu producto: materiales, proceso, tamaño, etc."
+          showCharCount
+          required
+        />
       </div>
     </div>
   );
