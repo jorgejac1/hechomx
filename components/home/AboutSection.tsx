@@ -92,7 +92,7 @@ export default function AboutSection() {
               <input
                 type="email"
                 placeholder="Ingresa tu correo electrónico"
-                className="w-full sm:flex-1 px-4 sm:px-5 md:px-6 py-3 sm:py-3.5 md:py-4 rounded-full border-2 border-gray-300 focus:border-primary-500 focus:outline-none text-sm sm:text-base"
+                className="w-full sm:flex-1 px-4 sm:px-5 md:px-6 py-3 sm:py-3.5 md:py-4 rounded-full border-2 border-gray-300 focus:border-primary-500 focus:outline-hidden text-sm sm:text-base"
               />
               <button
                 type="submit"
@@ -111,7 +111,7 @@ export default function AboutSection() {
           <div className="text-center">
             <div className="inline-flex items-center gap-2 sm:gap-3 text-gray-700">
               <svg
-                className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 flex-shrink-0"
+                className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

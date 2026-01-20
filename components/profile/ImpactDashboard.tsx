@@ -82,7 +82,7 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
   return (
     <div className="space-y-6">
       {/* Hero Header */}
-      <div className="bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-xl shadow-lg p-8 text-white">
+      <div className="bg-linear-to-br from-primary-500 via-primary-600 to-primary-700 rounded-xl shadow-lg p-8 text-white">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-3 bg-white/20 rounded-full">
             <Heart className="w-8 h-8" />
@@ -96,19 +96,19 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+          <div className="bg-white/10 backdrop-blur-xs rounded-lg p-4">
             <p className="text-primary-100 text-sm mb-1">Total Invertido</p>
             <p className="text-2xl font-bold">{formatCurrency(data.totalSpent)}</p>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+          <div className="bg-white/10 backdrop-blur-xs rounded-lg p-4">
             <p className="text-primary-100 text-sm mb-1">Pedidos</p>
             <p className="text-2xl font-bold">{data.totalOrders}</p>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+          <div className="bg-white/10 backdrop-blur-xs rounded-lg p-4">
             <p className="text-primary-100 text-sm mb-1">Artesanos</p>
             <p className="text-2xl font-bold">{data.artisansSupported}</p>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+          <div className="bg-white/10 backdrop-blur-xs rounded-lg p-4">
             <p className="text-primary-100 text-sm mb-1">Estados</p>
             <p className="text-2xl font-bold">{data.statesRepresented}</p>
           </div>
@@ -126,7 +126,7 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
           sostenible
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 border-2 border-green-200">
+          <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-lg p-6 border-2 border-green-200">
             <div className="flex items-center gap-3 mb-3">
               <div className="p-3 bg-green-600 rounded-full">
                 <Leaf className="w-6 h-6 text-white" />
@@ -141,7 +141,7 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-6 border-2 border-blue-200">
+          <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-lg p-6 border-2 border-blue-200">
             <div className="flex items-center gap-3 mb-3">
               <div className="p-3 bg-blue-600 rounded-full">
                 <TreePine className="w-6 h-6 text-white" />
@@ -165,7 +165,7 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
           Impacto Cultural
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg border-2 border-yellow-200">
+          <div className="p-6 bg-linear-to-br from-yellow-50 to-orange-50 rounded-lg border-2 border-yellow-200">
             <div className="flex items-center gap-3 mb-3">
               <Award className="w-8 h-8 text-yellow-600" />
               <div>
@@ -180,7 +180,7 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
             </p>
           </div>
 
-          <div className="p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg border-2 border-purple-200">
+          <div className="p-6 bg-linear-to-br from-purple-50 to-pink-50 rounded-lg border-2 border-purple-200">
             <div className="flex items-center gap-3 mb-3">
               <Users className="w-8 h-8 text-purple-600" />
               <div>

@@ -62,7 +62,7 @@ export default function Header() {
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 justify-between items-center gap-3">
             {/* Logo */}
-            <Link href={ROUTES.HOME} className="flex items-center gap-2 flex-shrink-0">
+            <Link href={ROUTES.HOME} className="flex items-center gap-2 shrink-0">
               <Image
                 src="/logos/papalote-logo.png"
                 alt="Papalote Market"

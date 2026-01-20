@@ -45,7 +45,7 @@ export default function OverheadCostsList({
                 value={cost.category}
                 onChange={(e) => onUpdate(cost.id, 'category', e.target.value)}
                 placeholder="Renta, luz, herramientas..."
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded-sm focus:ring-2 focus:ring-primary-500"
               />
             </div>
             <div className="col-span-6 sm:col-span-3">
@@ -56,7 +56,7 @@ export default function OverheadCostsList({
                 onChange={(e) => onUpdate(cost.id, 'amount', parseFloat(e.target.value) || 0)}
                 min="0"
                 step="1"
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded-sm focus:ring-2 focus:ring-primary-500"
               />
             </div>
             <div className="col-span-6 sm:col-span-3">
@@ -64,7 +64,7 @@ export default function OverheadCostsList({
               <select
                 value={cost.frequency}
                 onChange={(e) => onUpdate(cost.id, 'frequency', e.target.value)}
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded-sm focus:ring-2 focus:ring-primary-500"
               >
                 <option value="one-time">Única vez</option>
                 <option value="monthly">Mensual</option>
@@ -75,7 +75,7 @@ export default function OverheadCostsList({
               <div className="col-span-12 sm:col-span-1 flex items-end justify-center">
                 <button
                   onClick={() => onRemove(cost.id)}
-                  className="p-1 text-red-600 hover:bg-red-50 rounded transition"
+                  className="p-1 text-red-600 hover:bg-red-50 rounded-sm transition"
                   title="Eliminar gasto"
                 >
                   <Trash2 className="w-4 h-4" />

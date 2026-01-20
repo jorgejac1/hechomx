@@ -16,9 +16,9 @@ export default function FairTradeRatesSelector({
   onRegionChange,
 }: FairTradeRatesSelectorProps) {
   return (
-    <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-6">
+    <div className="bg-linear-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-6">
       <div className="flex items-start gap-3">
-        <Heart className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
+        <Heart className="w-6 h-6 text-green-600 shrink-0 mt-1" />
         <div className="flex-1">
           <h3 className="text-lg font-bold text-gray-900 mb-2">Salario Justo</h3>
           <p className="text-sm text-gray-700 mb-4">

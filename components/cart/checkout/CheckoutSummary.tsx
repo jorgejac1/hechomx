@@ -111,7 +111,7 @@ export default function CheckoutSummary({
           <div className="space-y-3 pb-4 border-b">
             {cartItems.map((item) => (
               <div key={item.id} className="flex gap-3">
-                <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 bg-gray-100">
                   <Image src={item.images[0]} alt={item.name} fill className="object-cover" />
                   <div className="absolute -top-1 -right-1 w-5 h-5 bg-gray-800 text-white text-xs rounded-full flex items-center justify-center">
                     {item.quantity}
@@ -161,7 +161,7 @@ export default function CheckoutSummary({
                   type="checkbox"
                   checked={giftWrap}
                   onChange={(e) => onGiftWrapChange?.(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"
+                  className="mt-0.5 h-4 w-4 rounded-sm border-gray-300 text-pink-600 focus:ring-pink-500"
                 />
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
@@ -255,7 +255,7 @@ export default function CheckoutSummary({
 
           {amountToFreeShipping > 0 && !isFreeShippingCoupon && (
             <div className="flex items-start gap-2 text-xs text-primary-700 bg-primary-50 p-3 rounded-lg">
-              <Tag className="w-4 h-4 flex-shrink-0 mt-0.5" />
+              <Tag className="w-4 h-4 shrink-0 mt-0.5" />
               <p>
                 Agrega <strong>{formatCurrency(amountToFreeShipping)}</strong> más para obtener{' '}
                 <strong>envío gratis</strong>
@@ -272,7 +272,7 @@ export default function CheckoutSummary({
         {/* Estimated Delivery */}
         {estimatedDelivery && (
           <div className="flex items-start gap-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-            <Package className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+            <Package className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-medium text-green-800">Entrega estimada</p>
               <p className="text-xs text-green-700">{estimatedDelivery}</p>
@@ -283,7 +283,7 @@ export default function CheckoutSummary({
         {/* Gift Message Preview */}
         {giftMessage && (
           <div className="flex items-start gap-3 p-3 bg-pink-50 border border-pink-200 rounded-lg">
-            <Gift className="w-5 h-5 text-pink-600 flex-shrink-0 mt-0.5" />
+            <Gift className="w-5 h-5 text-pink-600 shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-medium text-pink-800">Mensaje de regalo</p>
               <p className="text-xs text-pink-700 italic">"{giftMessage}"</p>
@@ -294,7 +294,7 @@ export default function CheckoutSummary({
         {/* Shipping Address Preview */}
         {shippingAddress?.street && (
           <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-            <MapPin className="w-5 h-5 text-gray-500 flex-shrink-0 mt-0.5" />
+            <MapPin className="w-5 h-5 text-gray-500 shrink-0 mt-0.5" />
             <div className="text-sm">
               <p className="font-medium text-gray-900">
                 {shippingAddress.firstName} {shippingAddress.lastName}
@@ -320,7 +320,7 @@ export default function CheckoutSummary({
               type="checkbox"
               checked={acceptTerms}
               onChange={(e) => onAcceptTermsChange(e.target.checked)}
-              className="mt-0.5 h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+              className="mt-0.5 h-4 w-4 rounded-sm border-gray-300 text-primary-600 focus:ring-primary-500"
             />
             <span className="text-sm text-gray-600">
               Acepto los{' '}

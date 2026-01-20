@@ -78,7 +78,7 @@ export default function ArtisanProfilePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section with Cover Image */}
-      <div className="relative h-[400px] bg-gradient-to-br from-primary-600 to-primary-800">
+      <div className="relative h-[400px] bg-linear-to-br from-primary-600 to-primary-800">
         {story.coverImage && (
           <Image
             src={story.coverImage}
@@ -88,12 +88,12 @@ export default function ArtisanProfilePage() {
             priority
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
 
         {/* Back Button */}
         <Link
           href="/"
-          className="absolute top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-white transition text-gray-900 font-medium"
+          className="absolute top-4 left-4 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-xs rounded-lg hover:bg-white transition text-gray-900 font-medium"
         >
           <ArrowLeft className="w-4 h-4" />
           Volver
@@ -159,7 +159,7 @@ export default function ArtisanProfilePage() {
                       }
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition group"
+                      className="p-3 bg-white/20 backdrop-blur-xs rounded-lg hover:bg-white/30 transition group"
                       title="Instagram"
                     >
                       <Instagram className="w-5 h-5 text-white" />
@@ -174,7 +174,7 @@ export default function ArtisanProfilePage() {
                       }
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition group"
+                      className="p-3 bg-white/20 backdrop-blur-xs rounded-lg hover:bg-white/30 transition group"
                       title="Facebook"
                     >
                       <Facebook className="w-5 h-5 text-white" />
@@ -189,7 +189,7 @@ export default function ArtisanProfilePage() {
                       }
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition group"
+                      className="p-3 bg-white/20 backdrop-blur-xs rounded-lg hover:bg-white/30 transition group"
                       title="YouTube"
                     >
                       <Video className="w-5 h-5 text-white" />
@@ -331,9 +331,9 @@ export default function ArtisanProfilePage() {
 
                 {/* Cultural Significance */}
                 {story.culturalSignificance && (
-                  <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-amber-200">
+                  <div className="bg-linear-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-amber-200">
                     <div className="flex items-start gap-3 mb-4">
-                      <Globe className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
+                      <Globe className="w-6 h-6 text-amber-600 shrink-0 mt-1" />
                       <div>
                         <h2 className="text-2xl font-bold text-gray-900 mb-2">
                           Significado Cultural
@@ -356,7 +356,7 @@ export default function ArtisanProfilePage() {
                       {story.indigenousLanguageTerms.map((term, idx) => (
                         <div
                           key={idx}
-                          className="p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200"
+                          className="p-4 bg-linear-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200"
                         >
                           <p className="text-lg font-bold text-gray-900 mb-1">{term.term}</p>
                           <p className="text-sm text-gray-700 mb-2">{term.meaning}</p>
@@ -375,7 +375,7 @@ export default function ArtisanProfilePage() {
                 {/* Time Investment Badge */}
                 {story.totalCraftTime && (
                   <div className="flex items-center justify-center">
-                    <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary-50 to-primary-100 rounded-full border-2 border-primary-200">
+                    <div className="inline-flex items-center gap-3 px-6 py-3 bg-linear-to-r from-primary-50 to-primary-100 rounded-full border-2 border-primary-200">
                       <Clock className="w-6 h-6 text-primary-600" />
                       <div>
                         <p className="text-xs text-primary-600 font-medium uppercase tracking-wide">
@@ -430,10 +430,10 @@ export default function ArtisanProfilePage() {
                       {story.materials.map((material, idx) => (
                         <div
                           key={idx}
-                          className="flex gap-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200 hover:shadow-md transition"
+                          className="flex gap-4 p-4 bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200 hover:shadow-md transition"
                         >
                           {material.image && (
-                            <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                            <div className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden">
                               <Image
                                 src={material.image}
                                 alt={material.name}
@@ -473,7 +473,7 @@ export default function ArtisanProfilePage() {
                       {story.tools.map((tool, idx) => (
                         <div
                           key={idx}
-                          className="p-4 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl border border-amber-200 hover:shadow-md transition"
+                          className="p-4 bg-linear-to-br from-amber-50 to-orange-50 rounded-xl border border-amber-200 hover:shadow-md transition"
                         >
                           {tool.image && (
                             <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-3">
@@ -516,7 +516,7 @@ export default function ArtisanProfilePage() {
                             onClick={() => setExpandedStep(expandedStep === idx ? null : idx)}
                             className="w-full flex items-center gap-4 p-4 text-left hover:bg-gray-50 transition"
                           >
-                            <div className="flex-shrink-0 w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
+                            <div className="shrink-0 w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
                               {step.step}
                             </div>
                             <div className="flex-1 min-w-0">
@@ -536,7 +536,7 @@ export default function ArtisanProfilePage() {
                             <div className="px-4 pb-4 border-t border-gray-100">
                               <div className="pt-4 flex flex-col md:flex-row gap-4">
                                 {step.image && (
-                                  <div className="relative w-full md:w-64 aspect-video md:aspect-square rounded-lg overflow-hidden flex-shrink-0">
+                                  <div className="relative w-full md:w-64 aspect-video md:aspect-square rounded-lg overflow-hidden shrink-0">
                                     <Image
                                       src={step.image}
                                       alt={step.title}
@@ -577,7 +577,7 @@ export default function ArtisanProfilePage() {
                           key={idx}
                           className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
                         >
-                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                          <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
                           <span className="text-gray-900">{technique}</span>
                         </div>
                       ))}
@@ -622,9 +622,9 @@ export default function ArtisanProfilePage() {
                       {story.awards.map((award, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-4 p-4 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg border-2 border-yellow-200"
+                          className="flex items-start gap-4 p-4 bg-linear-to-r from-yellow-50 to-amber-50 rounded-lg border-2 border-yellow-200"
                         >
-                          <Award className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" />
+                          <Award className="w-6 h-6 text-yellow-600 shrink-0 mt-1" />
                           <div className="flex-1">
                             <p className="font-bold text-gray-900 text-lg">{award.title}</p>
                             <p className="text-gray-700">{award.organization}</p>
@@ -646,7 +646,7 @@ export default function ArtisanProfilePage() {
                           key={idx}
                           className="flex items-start gap-3 p-4 bg-green-50 rounded-lg border border-green-200"
                         >
-                          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
+                          <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-1" />
                           <div className="flex-1">
                             <p className="font-semibold text-gray-900">{cert.name}</p>
                             <p className="text-sm text-gray-700">{cert.issuer}</p>
@@ -673,7 +673,7 @@ export default function ArtisanProfilePage() {
                     <div className="space-y-3">
                       {story.communityProjects.map((project, idx) => (
                         <div key={idx} className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-                          <Heart className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
+                          <Heart className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
                           <p className="text-gray-900">{project}</p>
                         </div>
                       ))}
@@ -686,7 +686,7 @@ export default function ArtisanProfilePage() {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl shadow-lg p-8 text-center text-white">
+        <div className="bg-linear-to-r from-primary-600 to-primary-700 rounded-xl shadow-lg p-8 text-center text-white">
           <h2 className="text-2xl font-bold mb-2">Descubre Mis Creaciones</h2>
           <p className="text-primary-100 mb-6">
             Explora mi tienda y encuentra piezas únicas hechas a mano

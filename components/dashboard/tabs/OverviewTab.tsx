@@ -58,7 +58,7 @@ export default function OverviewTab({
             {trendingProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border-2 border-green-200"
+                className="bg-linear-to-br from-green-50 to-emerald-50 rounded-lg p-4 border-2 border-green-200"
               >
                 <div className="flex items-start justify-between mb-2">
                   <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-600 text-white text-xs font-semibold rounded-full">

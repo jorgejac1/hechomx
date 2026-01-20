@@ -12,7 +12,7 @@ interface ShopReviewsProps {
 export default function ShopReviews({ reviews }: ShopReviewsProps) {
   if (reviews.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-sm p-8 text-center">
+      <div className="bg-white rounded-xl shadow-xs p-8 text-center">
         <MessageSquare className="w-16 h-16 text-gray-400 mx-auto mb-4" />
         <h3 className="text-xl font-semibold text-gray-900 mb-2">Sin reseñas aún</h3>
         <p className="text-gray-600">Esta tienda aún no tiene reseñas de clientes.</p>
@@ -33,7 +33,7 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
   return (
     <div className="space-y-6">
       {/* Rating Summary */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white rounded-xl shadow-xs p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Average Rating */}
           <div className="text-center">
@@ -79,10 +79,10 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
       {/* Reviews List */}
       <div className="space-y-4">
         {reviews.map((review) => (
-          <div key={review.id} className="bg-white rounded-xl shadow-sm p-6">
+          <div key={review.id} className="bg-white rounded-xl shadow-xs p-6">
             {/* Reviewer Info */}
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+              <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 shrink-0">
                 {review.buyerAvatar ? (
                   <Image
                     src={review.buyerAvatar}

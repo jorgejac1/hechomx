@@ -238,11 +238,11 @@ export default function DealsSection() {
                 <Link
                   key={product.id}
                   href={`/productos/${product.id}`}
-                  className="flex-shrink-0 w-[70vw] max-w-[280px]"
+                  className="shrink-0 w-[70vw] max-w-[280px]"
                 >
                   <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow h-full flex flex-col">
                     {/* Image */}
-                    <div className="relative h-48 bg-gray-200 overflow-hidden flex-shrink-0">
+                    <div className="relative h-48 bg-gray-200 overflow-hidden shrink-0">
                       <Image
                         src={product.images[0]}
                         alt={product.name}
@@ -273,7 +273,7 @@ export default function DealsSection() {
                         <span className="text-xs text-gray-500 line-through">
                           ${product.originalPrice}
                         </span>
-                        <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded">
+                        <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-sm">
                           {product.discount}% off
                         </span>
                       </div>
@@ -304,11 +304,11 @@ export default function DealsSection() {
                 <Link
                   key={product.id}
                   href={`/productos/${product.id}`}
-                  className="flex-shrink-0 w-[calc(25%-18px)] min-w-[240px] group"
+                  className="shrink-0 w-[calc(25%-18px)] min-w-[240px] group"
                 >
                   <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow flex flex-col h-full">
                     {/* Image */}
-                    <div className="relative h-56 lg:h-64 bg-gray-200 overflow-hidden flex-shrink-0">
+                    <div className="relative h-56 lg:h-64 bg-gray-200 overflow-hidden shrink-0">
                       <Image
                         src={product.images[0]}
                         alt={product.name}
@@ -340,7 +340,7 @@ export default function DealsSection() {
                         <span className="text-sm text-gray-500 line-through">
                           ${product.originalPrice}
                         </span>
-                        <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-1 rounded">
+                        <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-1 rounded-sm">
                           {product.discount}% off
                         </span>
                       </div>

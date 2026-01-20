@@ -84,7 +84,7 @@ function CreateProductContent({ user }: { user: User }) {
 
               <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                 <div className="flex items-start gap-2">
-                  <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-blue-900">Configuración Rápida</p>
                     <p className="text-sm text-blue-800">

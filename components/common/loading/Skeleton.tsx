@@ -14,7 +14,7 @@ export default function Skeleton({
   animation = 'pulse',
 }: SkeletonProps) {
   const variantClasses = {
-    text: 'rounded',
+    text: 'rounded-sm',
     circular: 'rounded-full',
     rectangular: 'rounded-lg',
   };

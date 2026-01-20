@@ -35,7 +35,7 @@ export default function Button({
 }: ButtonProps) {
   // Base styles
   const baseStyles =
-    'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+    'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-hidden focus:ring-2 focus:ring-offset-2';
 
   // Variant styles
   const variantStyles = {
@@ -76,7 +76,7 @@ export default function Button({
 
   // Icon wrapper with proper sizing
   const IconWrapper = ({ children }: { children: ReactNode }) => (
-    <span className={`flex-shrink-0 ${iconSizeStyles[size]}`}>{children}</span>
+    <span className={`shrink-0 ${iconSizeStyles[size]}`}>{children}</span>
   );
 
   // Content with icon positioning

@@ -254,7 +254,7 @@ export default function ProcessSection({
                     <span className="text-sm font-medium text-green-700">Material {index + 1}</span>
                     <button
                       onClick={() => removeMaterial(index)}
-                      className="p-1 text-red-500 hover:bg-red-50 rounded"
+                      className="p-1 text-red-500 hover:bg-red-50 rounded-sm"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -366,7 +366,7 @@ export default function ProcessSection({
                     </span>
                     <button
                       onClick={() => removeTool(index)}
-                      className="p-1 text-red-500 hover:bg-red-50 rounded"
+                      className="p-1 text-red-500 hover:bg-red-50 rounded-sm"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -479,7 +479,7 @@ export default function ProcessSection({
                     </div>
                     <button
                       onClick={() => removeStep(index)}
-                      className="p-1 text-red-500 hover:bg-red-50 rounded"
+                      className="p-1 text-red-500 hover:bg-red-50 rounded-sm"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

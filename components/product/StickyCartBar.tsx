@@ -52,7 +52,7 @@ export default function StickyCartBar({
           size="sm"
           onClick={onAddToCart}
           icon={<ShoppingCart className="w-4 h-4" />}
-          className="flex-shrink-0"
+          className="shrink-0"
         >
           {selectedQuantity > 1 ? `Agregar (${selectedQuantity})` : 'Agregar'}
         </Button>

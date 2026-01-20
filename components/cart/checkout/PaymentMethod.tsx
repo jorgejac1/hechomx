@@ -103,7 +103,7 @@ export default function PaymentMethodSelector({
                 !method.available
                   ? 'opacity-50 cursor-not-allowed border-gray-200 bg-gray-50'
                   : value === method.id
-                    ? 'border-primary-500 bg-primary-50 shadow-sm'
+                    ? 'border-primary-500 bg-primary-50 shadow-xs'
                     : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
               }
             `}
@@ -112,7 +112,7 @@ export default function PaymentMethodSelector({
               {/* Radio indicator */}
               <div
                 className={`
-                  w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0
+                  w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0
                   ${value === method.id ? 'border-primary-500 bg-primary-500' : 'border-gray-300'}
                 `}
               >
@@ -122,7 +122,7 @@ export default function PaymentMethodSelector({
               {/* Icon */}
               <div
                 className={`
-                  w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0
+                  w-12 h-12 rounded-lg flex items-center justify-center shrink-0
                   ${
                     value === method.id
                       ? 'bg-primary-100 text-primary-600'
@@ -138,7 +138,7 @@ export default function PaymentMethodSelector({
                 <div className="flex items-center gap-2">
                   <p className="font-semibold text-gray-900">{method.name}</p>
                   {!method.available && (
-                    <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded">
+                    <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-sm">
                       Próximamente
                     </span>
                   )}
@@ -156,7 +156,7 @@ export default function PaymentMethodSelector({
 
       {error && (
         <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 p-3 rounded-lg">
-          <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
       )}
@@ -164,7 +164,7 @@ export default function PaymentMethodSelector({
       {/* Payment Security Notice */}
       <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
         <div className="flex items-start gap-3">
-          <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+          <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center shrink-0">
             <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
@@ -187,7 +187,7 @@ export default function PaymentMethodSelector({
       {value === 'oxxo' && (
         <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
           <div className="flex items-start gap-3">
-            <Store className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+            <Store className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
             <div>
               <p className="font-medium text-amber-800">Pago en OXXO</p>
               <p className="text-sm text-amber-700 mt-1">
@@ -203,7 +203,7 @@ export default function PaymentMethodSelector({
       {value === 'spei' && (
         <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
           <div className="flex items-start gap-3">
-            <Building2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+            <Building2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
             <div>
               <p className="font-medium text-blue-800">Transferencia SPEI</p>
               <p className="text-sm text-blue-700 mt-1">

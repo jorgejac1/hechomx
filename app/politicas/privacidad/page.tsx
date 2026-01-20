@@ -197,7 +197,7 @@ export default function PrivacyPage() {
                 de privacidad diferente.
               </p>
 
-              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded mt-4">
+              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded-sm mt-4">
                 <p className="text-sm text-green-900 font-medium">
                   <Shield className="w-4 h-4 inline mr-2" />
                   Nunca vendemos tu información personal a terceros para sus propósitos de
@@ -227,7 +227,7 @@ export default function PrivacyPage() {
                 <li>Capacitación continua del personal en seguridad</li>
               </ul>
 
-              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded mt-4">
+              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded-sm mt-4">
                 <p className="text-sm text-yellow-900">
                   <AlertCircle className="w-4 h-4 inline mr-2" />
                   Aunque implementamos medidas de seguridad robustas, ningún sistema es 100% seguro.
@@ -394,7 +394,7 @@ export default function PrivacyPage() {
           </section>
 
           {/* Contact Card */}
-          <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8">
+          <div className="bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8">
             <div className="text-center">
               <Mail className="w-12 h-12 mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-2">¿Preguntas sobre tu Privacidad?</h2>

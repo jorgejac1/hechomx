@@ -78,10 +78,10 @@ export default function StatesSection() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
 
                 {/* Count Badge */}
-                <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-md">
+                <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-xs px-3 py-1.5 rounded-full shadow-md">
                   <span className="text-xs font-bold text-gray-900">{state.count}</span>
                 </div>
 
@@ -110,7 +110,7 @@ export default function StatesSection() {
             {Object.entries(CRAFT_STATES).map(([craft, states]) => (
               <div
                 key={craft}
-                className="bg-white rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow"
+                className="bg-white rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-shadow"
               >
                 <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
                   <span className="text-primary-600">{craft}:</span>

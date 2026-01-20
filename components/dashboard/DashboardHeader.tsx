@@ -38,7 +38,7 @@ export default function DashboardHeader({ shopName, newOrderCount = 0 }: Dashboa
         href={`/tienda/${getShopSlug(shopName)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-lg hover:shadow-xl hover:from-primary-700 hover:to-primary-800 transition font-semibold mb-6"
+        className="flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-lg hover:shadow-xl hover:from-primary-700 hover:to-primary-800 transition font-semibold mb-6"
       >
         <Store className="w-5 h-5" />
         Ver Mi Tienda

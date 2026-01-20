@@ -12,36 +12,36 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
   return (
     <div className="space-y-6">
       {/* Story */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white rounded-xl shadow-xs p-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Nuestra Historia</h2>
         <p className="text-gray-700 leading-relaxed whitespace-pre-line">{profile.story}</p>
       </div>
 
       {/* Features */}
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white rounded-xl shadow-xs p-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Características</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {profile.features.customDesigns && (
             <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
               <span className="text-gray-900">Diseños personalizados</span>
             </div>
           )}
           {profile.features.bulkOrders && (
             <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
               <span className="text-gray-900">Pedidos al mayoreo</span>
             </div>
           )}
           {profile.features.giftWrapping && (
             <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
               <span className="text-gray-900">Envoltorio para regalo</span>
             </div>
           )}
           {profile.features.expressShipping && (
             <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
               <span className="text-gray-900">Envío express</span>
             </div>
           )}
@@ -52,7 +52,7 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Certifications */}
         {profile.certifications.length > 0 && (
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-white rounded-xl shadow-xs p-6">
             <div className="flex items-center gap-2 mb-4">
               <Award className="w-6 h-6 text-amber-600" />
               <h3 className="text-xl font-bold text-gray-900">Certificaciones</h3>
@@ -69,7 +69,7 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
 
         {/* Specialties */}
         {profile.specialties.length > 0 && (
-          <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="bg-white rounded-xl shadow-xs p-6">
             <div className="flex items-center gap-2 mb-4">
               <Package className="w-6 h-6 text-primary-600" />
               <h3 className="text-xl font-bold text-gray-900">Especialidades</h3>
@@ -88,7 +88,7 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
       {/* Shipping & Payment Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Shipping */}
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white rounded-xl shadow-xs p-6">
           <div className="flex items-center gap-2 mb-4">
             <Truck className="w-6 h-6 text-blue-600" />
             <h3 className="text-xl font-bold text-gray-900">Envíos</h3>
@@ -124,7 +124,7 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
         </div>
 
         {/* Payment Methods */}
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white rounded-xl shadow-xs p-6">
           <div className="flex items-center gap-2 mb-4">
             <CreditCard className="w-6 h-6 text-green-600" />
             <h3 className="text-xl font-bold text-gray-900">Formas de Pago</h3>
@@ -145,7 +145,7 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
 
       {/* Business Hours */}
       {profile.businessHours && (
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white rounded-xl shadow-xs p-6">
           <div className="flex items-center gap-2 mb-4">
             <Clock className="w-6 h-6 text-purple-600" />
             <h3 className="text-xl font-bold text-gray-900">Horario de Atención</h3>

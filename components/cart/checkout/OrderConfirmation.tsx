@@ -130,9 +130,9 @@ export default function OrderConfirmationClient() {
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-6">
             <div className="flex items-start gap-4">
               {order.paymentMethod === 'oxxo' ? (
-                <Store className="w-8 h-8 text-amber-600 flex-shrink-0" />
+                <Store className="w-8 h-8 text-amber-600 shrink-0" />
               ) : (
-                <Building2 className="w-8 h-8 text-amber-600 flex-shrink-0" />
+                <Building2 className="w-8 h-8 text-amber-600 shrink-0" />
               )}
               <div>
                 <h3 className="font-bold text-amber-800 mb-2">
@@ -204,7 +204,7 @@ export default function OrderConfirmationClient() {
             <div className="space-y-4">
               {order.items.map((item) => (
                 <div key={item.id} className="flex gap-4">
-                  <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                  <div className="relative w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-gray-100">
                     <Image src={item.images[0]} alt={item.name} fill className="object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -323,7 +323,7 @@ export default function OrderConfirmationClient() {
           <ol className="space-y-3 text-sm text-primary-800">
             {isPendingPayment && (
               <li className="flex items-start gap-3">
-                <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">
+                <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">
                   1
                 </span>
                 <span>
@@ -335,7 +335,7 @@ export default function OrderConfirmationClient() {
               </li>
             )}
             <li className="flex items-start gap-3">
-              <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">
+              <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">
                 {isPendingPayment ? '2' : '1'}
               </span>
               <span>
@@ -343,7 +343,7 @@ export default function OrderConfirmationClient() {
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">
+              <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">
                 {isPendingPayment ? '3' : '2'}
               </span>
               <span>
@@ -351,7 +351,7 @@ export default function OrderConfirmationClient() {
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xs">
+              <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">
                 {isPendingPayment ? '4' : '3'}
               </span>
               <span>

@@ -20,7 +20,7 @@ export default function ProductionOptionsSection({
             type="checkbox"
             checked={customizable}
             onChange={(e) => setCustomizable(e.target.checked)}
-            className="w-5 h-5 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+            className="w-5 h-5 text-primary-600 border-gray-300 rounded-sm focus:ring-primary-500"
           />
           <span className="text-gray-900">Este producto es personalizable</span>
         </label>

@@ -186,10 +186,10 @@ function SellerProfileContent({ user }: { user: User }) {
           {/* Mi Historia Artesanal Card */}
           <button
             onClick={() => router.push(ROUTES.MY_STORY)}
-            className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl shadow-lg p-6 text-left hover:shadow-xl hover:scale-[1.02] transition-all group"
+            className="bg-linear-to-br from-purple-600 to-pink-600 rounded-xl shadow-lg p-6 text-left hover:shadow-xl hover:scale-[1.02] transition-all group"
           >
             <div className="flex items-start justify-between mb-4">
-              <div className="p-3 bg-white/20 rounded-lg backdrop-blur-sm">
+              <div className="p-3 bg-white/20 rounded-lg backdrop-blur-xs">
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
               <svg
@@ -220,10 +220,10 @@ function SellerProfileContent({ user }: { user: User }) {
           {/* Pricing Calculator Card */}
           <button
             onClick={() => router.push(ROUTES.PRICING_CALCULATOR)}
-            className="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-xl shadow-lg p-6 text-left hover:shadow-xl hover:scale-[1.02] transition-all group"
+            className="bg-linear-to-br from-blue-600 to-cyan-600 rounded-xl shadow-lg p-6 text-left hover:shadow-xl hover:scale-[1.02] transition-all group"
           >
             <div className="flex items-start justify-between mb-4">
-              <div className="p-3 bg-white/20 rounded-lg backdrop-blur-sm">
+              <div className="p-3 bg-white/20 rounded-lg backdrop-blur-xs">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -414,7 +414,7 @@ function SellerProfileContent({ user }: { user: User }) {
             {activeSection === 'financial' && (
               <div className="space-y-6">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm text-blue-900 font-semibold">Información Segura</p>
                     <p className="text-sm text-blue-800">

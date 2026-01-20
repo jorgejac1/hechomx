@@ -208,7 +208,7 @@ export default function FAQPage() {
         </div>
 
         {/* Still Have Questions */}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8 mt-6">
+        <div className="bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8 mt-6">
           <div className="text-center">
             <MessageCircle className="w-12 h-12 mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-2">¿No encontraste lo que buscabas?</h2>

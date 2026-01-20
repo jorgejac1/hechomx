@@ -96,7 +96,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
 
         {/* Revenue Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 border-2 border-green-200">
+          <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-lg p-6 border-2 border-green-200">
             <div className="flex items-center gap-3 mb-2">
               <div className="p-2 bg-green-600 rounded-lg">
                 <DollarSign className="w-5 h-5 text-white" />
@@ -168,7 +168,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
                 <div key={index} className="flex-1 flex flex-col items-center gap-2">
                   <div className="relative w-full group flex items-end" style={{ height: '128px' }}>
                     <div
-                      className="w-full bg-gradient-to-t from-primary-600 to-primary-400 rounded-t-lg transition-all hover:from-primary-700 hover:to-primary-500 cursor-pointer"
+                      className="w-full bg-linear-to-t from-primary-600 to-primary-400 rounded-t-lg transition-all hover:from-primary-700 hover:to-primary-500 cursor-pointer"
                       style={{ height: `${heightPx}px` }}
                     />
                     {/* Tooltip */}
@@ -353,7 +353,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
             <Calendar className="w-5 h-5 text-purple-600" />
             Pronóstico
           </h3>
-          <div className="p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg border-2 border-purple-200">
+          <div className="p-6 bg-linear-to-br from-purple-50 to-pink-50 rounded-lg border-2 border-purple-200">
             <p className="text-sm text-gray-600 mb-2">Estimado para el próximo mes</p>
             <p className="text-4xl font-bold text-gray-900 mb-3">
               {formatCurrency(data.forecast.nextMonth)}

@@ -35,7 +35,7 @@ export default function SellerProfile({
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Conoce al Artesano</h2>
 
         <div className="flex items-start gap-4 mb-6">
-          <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+          <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center text-white text-2xl font-bold shrink-0">
             {maker.charAt(0)}
           </div>
           <div className="flex-1">
@@ -55,7 +55,7 @@ export default function SellerProfile({
               {hasStory && (
                 <div className="group relative">
                   <Sparkles className="w-5 h-5 text-amber-500" />
-                  <span className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                  <span className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 bg-gray-900 text-white text-xs rounded-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                     Tiene historia publicada
                   </span>
                 </div>
@@ -104,7 +104,7 @@ export default function SellerProfile({
               href={`${ROUTES.ARTISAN}/${artisanId}`}
               icon={<BookOpen className="w-5 h-5" />}
               fullWidth
-              className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700"
+              className="bg-linear-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700"
             >
               Ver Historia Completa
             </Button>
@@ -148,9 +148,9 @@ export default function SellerProfile({
 
         {/* Story Teaser */}
         {hasStory && (
-          <div className="mt-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-200">
+          <div className="mt-4 p-4 bg-linear-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-200">
             <div className="flex items-start gap-3">
-              <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+              <Sparkles className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-semibold text-amber-900 mb-1">
                   Este artesano tiene una historia que contar

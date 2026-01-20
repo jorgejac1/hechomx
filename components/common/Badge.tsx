@@ -81,7 +81,7 @@ export default function Badge({
     .replace(/\s+/g, " ");
 
   const IconWrapper = ({ children }: { children: ReactNode }) => (
-    <span className={`flex-shrink-0 ${iconSizeStyles[size]}`}>{children}</span>
+    <span className={`shrink-0 ${iconSizeStyles[size]}`}>{children}</span>
   );
 
   const content = (

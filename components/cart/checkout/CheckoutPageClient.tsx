@@ -120,7 +120,7 @@ export default function CheckoutPageClient() {
           <ul className="space-y-2">
             {outOfStockItems.map((item) => (
               <li key={item.id} className="flex items-center gap-3 text-left">
-                <div className="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0 relative">
+                <div className="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden shrink-0 relative">
                   <Image src={item.images[0]} alt={item.name} fill className="object-cover" />
                 </div>
                 <div>
@@ -387,7 +387,7 @@ export default function CheckoutPageClient() {
                         type="checkbox"
                         checked={saveAddressChecked}
                         onChange={(e) => setSaveAddressChecked(e.target.checked)}
-                        className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="h-4 w-4 rounded-sm border-gray-300 text-primary-600 focus:ring-primary-500"
                       />
                       <span className="text-sm text-gray-600">
                         Guardar esta dirección para futuras compras

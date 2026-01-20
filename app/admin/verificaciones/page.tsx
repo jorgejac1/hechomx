@@ -294,31 +294,31 @@ export default function AdminVerificacionesPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
-          <div className="bg-white rounded-xl shadow-sm p-4">
+          <div className="bg-white rounded-xl shadow-xs p-4">
             <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
             <p className="text-sm text-gray-600">Total</p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-blue-500">
+          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-blue-500">
             <p className="text-2xl font-bold text-blue-600">{stats.pending}</p>
             <p className="text-sm text-gray-600">Pendientes</p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-purple-500">
+          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-purple-500">
             <p className="text-2xl font-bold text-purple-600">{stats.underReview}</p>
             <p className="text-sm text-gray-600">En Revisión</p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-amber-500">
+          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-amber-500">
             <p className="text-2xl font-bold text-amber-600">{stats.infoRequested}</p>
             <p className="text-sm text-gray-600">Info Pedida</p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-green-500">
+          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-green-500">
             <p className="text-2xl font-bold text-green-600">{stats.approved}</p>
             <p className="text-sm text-gray-600">Aprobadas</p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-red-500">
+          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-red-500">
             <p className="text-2xl font-bold text-red-600">{stats.rejected}</p>
             <p className="text-sm text-gray-600">Rechazadas</p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 border-l-4 border-orange-500">
+          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-orange-500">
             <p className="text-2xl font-bold text-orange-600">{stats.urgent}</p>
             <p className="text-sm text-gray-600 flex items-center gap-1">
               <AlertCircle className="w-4 h-4 text-orange-500" />
@@ -328,7 +328,7 @@ export default function AdminVerificacionesPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
+        <div className="bg-white rounded-xl shadow-xs p-4 mb-6">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
@@ -364,7 +364,7 @@ export default function AdminVerificacionesPage() {
         {/* Requests List */}
         <div className="space-y-4">
           {filteredRequests.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+            <div className="bg-white rounded-xl shadow-xs p-12 text-center">
               <Shield className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">No hay solicitudes</h3>
               <p className="text-gray-600">
@@ -384,7 +384,7 @@ export default function AdminVerificacionesPage() {
               return (
                 <div
                   key={request.id}
-                  className={`bg-white rounded-xl shadow-sm overflow-hidden transition-all ${
+                  className={`bg-white rounded-xl shadow-xs overflow-hidden transition-all ${
                     request.flagged ? 'ring-2 ring-red-300' : ''
                   } ${isExpanded ? 'ring-2 ring-primary-300' : ''}`}
                 >

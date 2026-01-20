@@ -105,10 +105,10 @@ export default function ImpactPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
+      <div className="bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 py-16 sm:py-24">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-sm font-semibold mb-6 backdrop-blur-xs">
               <Heart className="w-4 h-4" />
               Nuestro Impacto Social y Ambiental
             </div>
@@ -128,7 +128,7 @@ export default function ImpactPage() {
             {impactStats.map((stat, index) => (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/20 transition"
+                className="bg-white/10 backdrop-blur-xs rounded-xl p-6 border border-white/20 hover:bg-white/20 transition"
               >
                 <div
                   className={`w-12 h-12 ${stat.bgColor} rounded-lg flex items-center justify-center mb-4`}
@@ -159,7 +159,7 @@ export default function ImpactPage() {
               className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition"
             >
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center shrink-0">
                   <item.icon className="w-6 h-6 text-primary-600" />
                 </div>
                 <div className="flex-1">
@@ -264,7 +264,7 @@ export default function ImpactPage() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
+      <div className="bg-linear-to-br from-primary-600 to-primary-800 text-white py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Sé Parte del Cambio</h2>
           <p className="text-xl text-primary-100 mb-8">

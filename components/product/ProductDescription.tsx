@@ -34,19 +34,19 @@ export default function ProductDescription({
           </h3>
           <ul className="space-y-3">
             <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 flex-shrink-0"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 shrink-0"></div>
               <span className="text-gray-700">Diseño único inspirado en arte prehispánico mexicano</span>
             </li>
             <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 flex-shrink-0"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 shrink-0"></div>
               <span className="text-gray-700">Acabado oxidado que resalta los detalles artesanales</span>
             </li>
             <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 flex-shrink-0"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 shrink-0"></div>
               <span className="text-gray-700">Piedras de turquesa natural engastadas a mano</span>
             </li>
             <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 flex-shrink-0"></div>
+              <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 shrink-0"></div>
               <span className="text-gray-700">Cierre seguro con sistema de presión</span>
             </li>
           </ul>
@@ -128,7 +128,7 @@ export default function ProductDescription({
       </div>
 
       {/* Perfect For */}
-      <div className="mt-6 p-5 bg-gradient-to-r from-teal-50 to-blue-50 rounded-lg border border-teal-100">
+      <div className="mt-6 p-5 bg-linear-to-r from-teal-50 to-blue-50 rounded-lg border border-teal-100">
         <h3 className="font-bold text-gray-900 mb-2 text-base">Perfecto para</h3>
         <p className="text-gray-700 text-sm">
           Ideal para uso diario o ocasiones especiales. Un regalo único que celebra la artesanía mexicana. 

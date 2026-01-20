@@ -223,7 +223,7 @@ export default function HelpPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
+      <div className="bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="text-center mb-8">
             <h1 className="text-4xl sm:text-5xl font-bold mb-4">¿Cómo podemos ayudarte?</h1>
@@ -241,7 +241,7 @@ export default function HelpPage() {
                 placeholder="Buscar en preguntas frecuentes..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-14 pr-4 py-4 rounded-xl text-gray-900 text-lg focus:ring-4 focus:ring-primary-300 outline-none"
+                className="w-full pl-14 pr-4 py-4 rounded-xl text-gray-900 text-lg focus:ring-4 focus:ring-primary-300 outline-hidden"
               />
             </div>
           </div>
@@ -321,9 +321,9 @@ export default function HelpPage() {
                 >
                   <h3 className="text-lg font-bold text-gray-900 pr-4">{faq.question}</h3>
                   {expandedFAQ === index ? (
-                    <ChevronUp className="w-6 h-6 text-gray-600 flex-shrink-0" />
+                    <ChevronUp className="w-6 h-6 text-gray-600 shrink-0" />
                   ) : (
-                    <ChevronDown className="w-6 h-6 text-gray-600 flex-shrink-0" />
+                    <ChevronDown className="w-6 h-6 text-gray-600 shrink-0" />
                   )}
                 </button>
                 {expandedFAQ === index && (

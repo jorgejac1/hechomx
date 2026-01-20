@@ -32,7 +32,7 @@ export default function ProductCardList({ product }: ProductCardListProps) {
       aria-label={`Producto: ${product.name}`}
     >
       {/* Image Section */}
-      <div className="relative w-full sm:w-52 h-48 sm:h-[212px] flex-shrink-0 bg-gray-100">
+      <div className="relative w-full sm:w-52 h-48 sm:h-[212px] shrink-0 bg-gray-100">
         <Link
           href={`/productos/${product.id}`}
           aria-label={`Ver detalles de ${product.name}`}
@@ -100,7 +100,7 @@ export default function ProductCardList({ product }: ProductCardListProps) {
               isComparing
                 ? 'bg-primary-600 text-white'
                 : 'bg-white border-2 border-gray-300 text-gray-600 hover:border-primary-500'
-            } focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2`}
+            } focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2`}
             aria-label={
               isComparing
                 ? `Quitar ${product.name} de la comparación`

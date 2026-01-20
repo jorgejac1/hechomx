@@ -204,7 +204,7 @@ function TasksCenterContent({ user }: { user: User }) {
                 <p className="text-sm text-gray-600 mb-1">Total Tareas</p>
                 <p className="text-2xl sm:text-3xl font-bold text-gray-900">{tasks.length}</p>
               </div>
-              <Zap className="w-10 h-10 text-primary-600 flex-shrink-0" />
+              <Zap className="w-10 h-10 text-primary-600 shrink-0" />
             </div>
           </div>
 
@@ -214,7 +214,7 @@ function TasksCenterContent({ user }: { user: User }) {
                 <p className="text-sm text-gray-600 mb-1">Críticas</p>
                 <p className="text-2xl sm:text-3xl font-bold text-red-600">{criticalCount}</p>
               </div>
-              <AlertCircle className="w-10 h-10 text-red-600 flex-shrink-0" />
+              <AlertCircle className="w-10 h-10 text-red-600 shrink-0" />
             </div>
           </div>
 
@@ -224,7 +224,7 @@ function TasksCenterContent({ user }: { user: User }) {
                 <p className="text-sm text-gray-600 mb-1">Alta Prioridad</p>
                 <p className="text-2xl sm:text-3xl font-bold text-orange-600">{highCount}</p>
               </div>
-              <AlertTriangle className="w-10 h-10 text-orange-600 flex-shrink-0" />
+              <AlertTriangle className="w-10 h-10 text-orange-600 shrink-0" />
             </div>
           </div>
 
@@ -234,7 +234,7 @@ function TasksCenterContent({ user }: { user: User }) {
                 <p className="text-sm text-gray-600 mb-1">Urgentes</p>
                 <p className="text-2xl sm:text-3xl font-bold text-yellow-600">{urgentCount}</p>
               </div>
-              <Clock className="w-10 h-10 text-yellow-600 flex-shrink-0" />
+              <Clock className="w-10 h-10 text-yellow-600 shrink-0" />
             </div>
           </div>
         </div>

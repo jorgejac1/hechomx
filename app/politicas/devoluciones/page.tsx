@@ -85,7 +85,7 @@ export default function ReturnsPage() {
                 producto para solicitar una devolución o cambio. Este plazo se aplica a todos los
                 productos excepto aquellos personalizados o hechos bajo pedido.
               </p>
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
+              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-sm">
                 <p className="text-sm text-blue-900 font-medium">
                   <AlertCircle className="w-4 h-4 inline mr-2" />
                   El plazo comienza a contar desde el día en que recibes tu pedido, no desde la
@@ -170,7 +170,7 @@ export default function ReturnsPage() {
             </div>
             <div className="space-y-4">
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
+                <div className="shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
                   1
                 </div>
                 <div>
@@ -190,7 +190,7 @@ export default function ReturnsPage() {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
+                <div className="shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
                   2
                 </div>
                 <div>
@@ -204,7 +204,7 @@ export default function ReturnsPage() {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
+                <div className="shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
                   3
                 </div>
                 <div>
@@ -218,7 +218,7 @@ export default function ReturnsPage() {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
+                <div className="shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
                   4
                 </div>
                 <div>
@@ -245,31 +245,31 @@ export default function ReturnsPage() {
               </p>
               <ul className="space-y-2 ml-4">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>
                     <strong>Tarjeta de crédito/débito:</strong> 5-10 días hábiles
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>
                     <strong>PayPal:</strong> 3-5 días hábiles
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>
                     <strong>OXXO Pay:</strong> Cupón de reembolso en 24 horas
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>
                     <strong>Transferencia bancaria:</strong> 3-5 días hábiles
                   </span>
                 </li>
               </ul>
-              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded mt-4">
+              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded-sm mt-4">
                 <p className="text-sm text-yellow-900">
                   <AlertCircle className="w-4 h-4 inline mr-2" />
                   Los costos de envío originales no son reembolsables, excepto en casos de productos
@@ -338,7 +338,7 @@ export default function ReturnsPage() {
                   <span>Incluye el costo de envío en el reembolso</span>
                 </li>
               </ul>
-              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded">
+              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded-sm">
                 <p className="text-sm text-green-900 font-medium">
                   <Shield className="w-4 h-4 inline mr-2" />
                   Todos nuestros artesanos están comprometidos con la calidad. Los productos
@@ -402,7 +402,7 @@ export default function ReturnsPage() {
           </section>
 
           {/* Contact Card */}
-          <section className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8">
+          <section className="bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8">
             <div className="text-center">
               <MessageCircle className="w-12 h-12 mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-2">¿Necesitas Ayuda?</h2>

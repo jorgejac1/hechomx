@@ -186,7 +186,7 @@ export default function LocalShopsSection() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
                 </div>
 
                 {/* Content Overlay */}
@@ -214,7 +214,7 @@ export default function LocalShopsSection() {
                   {/* Bottom - Shop Info */}
                   <div className="text-white">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 sm:border-3 border-white shadow-md flex-shrink-0">
+                      <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 sm:border-3 border-white shadow-md shrink-0">
                         <Image
                           src={shop.logo}
                           alt={`${shop.name} logo`}
@@ -226,7 +226,7 @@ export default function LocalShopsSection() {
                         <h3 className="text-sm sm:text-base font-bold mb-0.5 flex items-center gap-1.5">
                           <span className="truncate">{shop.name}</span>
                           {shop.verified && (
-                            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-400 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                             </svg>
                           )}
@@ -235,7 +235,7 @@ export default function LocalShopsSection() {
                       </div>
                     </div>
                     <p className="text-xs text-white/80 flex items-center gap-1">
-                      <svg className="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>

@@ -45,7 +45,7 @@ export default function LaborTasksList({
                 value={task.taskName}
                 onChange={(e) => onUpdate(task.id, 'taskName', e.target.value)}
                 placeholder="Tejido, teñido, etc."
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded-sm focus:ring-2 focus:ring-primary-500"
               />
             </div>
             <div className="col-span-4 sm:col-span-2">
@@ -56,7 +56,7 @@ export default function LaborTasksList({
                 onChange={(e) => onUpdate(task.id, 'hours', parseFloat(e.target.value) || 0)}
                 min="0"
                 step="0.5"
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded-sm focus:ring-2 focus:ring-primary-500"
               />
             </div>
             <div className="col-span-4 sm:col-span-2">
@@ -67,7 +67,7 @@ export default function LaborTasksList({
                 onChange={(e) => onUpdate(task.id, 'hourlyRate', parseFloat(e.target.value) || 0)}
                 min="0"
                 step="1"
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded-sm focus:ring-2 focus:ring-primary-500"
               />
             </div>
             <div className="col-span-4 sm:col-span-3 flex items-end gap-2">
@@ -80,7 +80,7 @@ export default function LaborTasksList({
               {laborTasks.length > 1 && (
                 <button
                   onClick={() => onRemove(task.id)}
-                  className="p-1 text-red-600 hover:bg-red-50 rounded transition"
+                  className="p-1 text-red-600 hover:bg-red-50 rounded-sm transition"
                   title="Eliminar tarea"
                 >
                   <Trash2 className="w-4 h-4" />

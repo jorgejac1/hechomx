@@ -288,7 +288,7 @@ export default function ProductInfo({
       <div className="bg-gray-50 rounded-lg p-4 space-y-2 text-sm text-gray-600">
         <div className="flex items-start gap-2">
           <svg
-            className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5"
+            className="w-5 h-5 text-teal-600 shrink-0 mt-0.5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -299,7 +299,7 @@ export default function ProductInfo({
         </div>
         <div className="flex items-start gap-2">
           <svg
-            className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5"
+            className="w-5 h-5 text-teal-600 shrink-0 mt-0.5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -310,7 +310,7 @@ export default function ProductInfo({
         </div>
         <div className="flex items-start gap-2">
           <svg
-            className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5"
+            className="w-5 h-5 text-teal-600 shrink-0 mt-0.5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

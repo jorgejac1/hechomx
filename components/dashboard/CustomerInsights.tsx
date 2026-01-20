@@ -89,7 +89,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
           {data.topCustomers.slice(0, 3).map((customer, index) => (
             <div
               key={customer.id}
-              className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg p-6 border-2 border-yellow-200"
+              className="bg-linear-to-br from-yellow-50 to-orange-50 rounded-lg p-6 border-2 border-yellow-200"
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="flex items-center justify-center w-10 h-10 bg-yellow-600 text-white rounded-full font-bold">
@@ -240,7 +240,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                     <div
-                      className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all"
+                      className="bg-linear-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all"
                       style={{ width: `${displayWidth}%` }}
                     />
                   </div>
@@ -264,7 +264,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
 
       {/* Upcoming Birthdays */}
       {data.upcomingBirthdays.length > 0 && (
-        <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl shadow-md p-6 border-2 border-pink-200">
+        <div className="bg-linear-to-br from-pink-50 to-rose-50 rounded-xl shadow-md p-6 border-2 border-pink-200">
           <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             🎂 Cumpleaños Próximos
           </h3>

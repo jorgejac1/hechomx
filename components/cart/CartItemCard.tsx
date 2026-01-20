@@ -40,7 +40,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
 
   return (
     <div
-      className={`bg-white rounded-xl shadow-sm border-2 border-gray-200 p-4 sm:p-6 transition-all ${
+      className={`bg-white rounded-xl shadow-xs border-2 border-gray-200 p-4 sm:p-6 transition-all ${
         isRemoving ? 'opacity-0 scale-95' : ''
       }`}
     >
@@ -48,7 +48,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
         {/* Product Image */}
         <Link
           href={`/productos/${item.id}`}
-          className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100"
+          className="relative w-24 h-24 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden bg-gray-100"
         >
           <Image
             src={item.images[0]}

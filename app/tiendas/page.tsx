@@ -86,7 +86,7 @@ export default function TiendasPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 sm:py-16">
+      <div className="bg-linear-to-r from-primary-600 to-primary-800 text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center">
             <div className="flex items-center justify-center gap-2 mb-4">
@@ -231,7 +231,7 @@ export default function TiendasPage() {
                   className="bg-white rounded-xl shadow-md hover:shadow-xl transition overflow-hidden group"
                 >
                   {/* Shop Header with Avatar */}
-                  <div className="relative h-32 bg-gradient-to-br from-primary-100 to-primary-200">
+                  <div className="relative h-32 bg-linear-to-br from-primary-100 to-primary-200">
                     <div className="absolute -bottom-12 left-6">
                       <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg overflow-hidden bg-white">
                         {shop.avatar ? (
@@ -266,7 +266,7 @@ export default function TiendasPage() {
                     </h3>
 
                     <div className="flex items-center gap-1 text-sm text-gray-600 mb-3">
-                      <MapPin className="w-4 h-4 flex-shrink-0" />
+                      <MapPin className="w-4 h-4 shrink-0" />
                       {profile.location}
                     </div>
 
@@ -303,13 +303,13 @@ export default function TiendasPage() {
                         {profile.specialties.slice(0, 2).map((specialty, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-primary-50 text-primary-700 text-xs font-medium rounded"
+                            className="px-2 py-1 bg-primary-50 text-primary-700 text-xs font-medium rounded-sm"
                           >
                             {specialty}
                           </span>
                         ))}
                         {profile.specialties.length > 2 && (
-                          <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded">
+                          <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-sm">
                             +{profile.specialties.length - 2}
                           </span>
                         )}
@@ -339,7 +339,7 @@ export default function TiendasPage() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 mt-12">
+      <div className="bg-linear-to-r from-primary-600 to-primary-800 text-white py-12 mt-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold mb-4">¿Eres artesano? Abre tu tienda</h2>
           <p className="text-lg text-primary-100 mb-6">

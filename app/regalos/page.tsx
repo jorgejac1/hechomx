@@ -168,13 +168,13 @@ export default function GiftsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white overflow-hidden">
+      <div className="relative bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20" />
         </div>
         <div className="max-w-7xl mx-auto px-4 py-16 sm:py-24 relative z-10">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-sm font-semibold mb-6 backdrop-blur-xs">
               <Gift className="w-4 h-4" />
               Regalos Artesanales Mexicanos
             </div>
@@ -278,11 +278,11 @@ export default function GiftsPage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div
-                    className={`absolute inset-0 bg-gradient-to-t ${occasion.color} opacity-60 group-hover:opacity-70 transition-opacity`}
+                    className={`absolute inset-0 bg-linear-to-t ${occasion.color} opacity-60 group-hover:opacity-70 transition-opacity`}
                   />
                 </div>
                 <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                  <div className="p-3 bg-white/20 backdrop-blur-sm rounded-lg w-fit mb-3">
+                  <div className="p-3 bg-white/20 backdrop-blur-xs rounded-lg w-fit mb-3">
                     <Icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">{occasion.name}</h3>
@@ -400,7 +400,7 @@ export default function GiftsPage() {
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
                 <h3 className="absolute bottom-4 left-4 text-2xl font-bold text-white">
                   {guide.title}
                 </h3>
@@ -421,7 +421,7 @@ export default function GiftsPage() {
       </div>
 
       {/* Why Gift Artisan */}
-      <div className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
+      <div className="bg-linear-to-br from-primary-600 to-primary-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
@@ -437,7 +437,7 @@ export default function GiftsPage() {
               const Icon = reason.icon;
               return (
                 <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-xs">
                     <Icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-xl font-bold mb-2">{reason.title}</h3>

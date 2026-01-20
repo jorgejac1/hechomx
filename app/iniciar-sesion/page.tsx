@@ -164,7 +164,7 @@ export default function LoginPage() {
           {/* Login error */}
           {loginError && (
             <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
-              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
               <p className="text-sm text-red-800">{loginError}</p>
             </div>
           )}
@@ -241,7 +241,7 @@ export default function LoginPage() {
                   type="checkbox"
                   checked={formData.rememberMe}
                   onChange={handleChange}
-                  className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded-sm"
                 />
                 <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-900">
                   Recordarme

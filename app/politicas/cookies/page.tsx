@@ -88,7 +88,7 @@ export default function CookiesPage() {
             {/* Esenciales */}
             <div className="mb-6 pb-6 border-b border-gray-200">
               <div className="flex items-start gap-3 mb-3">
-                <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
+                <CheckCircle className="w-6 h-6 text-green-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">
                     1. Cookies Estrictamente Necesarias
@@ -113,7 +113,7 @@ export default function CookiesPage() {
             {/* Funcionales */}
             <div className="mb-6 pb-6 border-b border-gray-200">
               <div className="flex items-start gap-3 mb-3">
-                <Settings className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                <Settings className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">2. Cookies Funcionales</h3>
                   <p className="text-gray-700 mb-3">
@@ -136,7 +136,7 @@ export default function CookiesPage() {
             {/* Analíticas */}
             <div className="mb-6 pb-6 border-b border-gray-200">
               <div className="flex items-start gap-3 mb-3">
-                <Shield className="w-6 h-6 text-purple-600 flex-shrink-0 mt-1" />
+                <Shield className="w-6 h-6 text-purple-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">
                     3. Cookies de Análisis y Rendimiento
@@ -166,7 +166,7 @@ export default function CookiesPage() {
             {/* Publicidad */}
             <div>
               <div className="flex items-start gap-3 mb-3">
-                <AlertCircle className="w-6 h-6 text-orange-600 flex-shrink-0 mt-1" />
+                <AlertCircle className="w-6 h-6 text-orange-600 shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">
                     4. Cookies de Publicidad y Marketing
@@ -372,7 +372,7 @@ export default function CookiesPage() {
           </section>
 
           {/* Contact Card */}
-          <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8">
+          <div className="bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8">
             <div className="text-center">
               <Cookie className="w-12 h-12 mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-2">¿Preguntas sobre Cookies?</h2>

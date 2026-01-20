@@ -116,7 +116,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
+      <div className="bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 py-16 sm:py-24">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
@@ -164,7 +164,7 @@ export default function AboutPage() {
       </div>
 
       {/* Why We're Different - NEW SECTION */}
-      <div className="bg-gradient-to-br from-primary-50 to-white py-16">
+      <div className="bg-linear-to-br from-primary-50 to-white py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -294,7 +294,7 @@ export default function AboutPage() {
       </div>
 
       {/* CTA */}
-      <div className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16">
+      <div className="bg-linear-to-br from-primary-600 to-primary-800 text-white py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Únete a Nuestra Misión</h2>
           <p className="text-xl text-primary-100 mb-8">

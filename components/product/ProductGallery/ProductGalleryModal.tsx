@@ -99,14 +99,14 @@ export function ProductGalleryModal({
       onClick={onClose}
     >
       {/* Top toolbar */}
-      <div className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between bg-gradient-to-b from-black/50 to-transparent z-20">
+      <div className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between bg-linear-to-b from-black/50 to-transparent z-20">
         <div className="flex items-center gap-2">
           <button
             onClick={(e) => {
               e.stopPropagation();
               setShowImageInfo(!showImageInfo);
             }}
-            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-hidden focus:ring-2 focus:ring-white"
             aria-label="Información de imagen"
             aria-pressed={showImageInfo}
           >
@@ -128,7 +128,7 @@ export function ProductGalleryModal({
               zoomControls.zoomOut();
             }}
             disabled={!zoomControls.canZoomOut}
-            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-white"
+            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-white"
             aria-label="Alejar zoom"
           >
             <ZoomOut className="w-5 h-5" aria-hidden="true" />
@@ -144,7 +144,7 @@ export function ProductGalleryModal({
               zoomControls.zoomIn();
             }}
             disabled={!zoomControls.canZoomIn}
-            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-white"
+            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-hidden focus:ring-2 focus:ring-white"
             aria-label="Acercar zoom"
           >
             <ZoomIn className="w-5 h-5" aria-hidden="true" />
@@ -156,7 +156,7 @@ export function ProductGalleryModal({
               e.stopPropagation();
               slideshow.toggle();
             }}
-            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-hidden focus:ring-2 focus:ring-white"
             aria-label={
               slideshow.isPlaying
                 ? "Pausar presentación"
@@ -177,7 +177,7 @@ export function ProductGalleryModal({
               e.stopPropagation();
               onShare();
             }}
-            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-hidden focus:ring-2 focus:ring-white"
             aria-label="Compartir imagen"
           >
             <Share2 className="w-5 h-5" aria-hidden="true" />
@@ -189,7 +189,7 @@ export function ProductGalleryModal({
               e.stopPropagation();
               onDownload();
             }}
-            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-hidden focus:ring-2 focus:ring-white"
             aria-label="Descargar imagen"
           >
             <Download className="w-5 h-5" aria-hidden="true" />
@@ -198,7 +198,7 @@ export function ProductGalleryModal({
           {/* Close button */}
           <button
             onClick={onClose}
-            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+            className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-hidden focus:ring-2 focus:ring-white"
             aria-label="Cerrar vista ampliada (Presiona Escape)"
           >
             <X className="w-6 h-6" aria-hidden="true" />
@@ -236,7 +236,7 @@ export function ProductGalleryModal({
               e.stopPropagation();
               onPrevious();
             }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-hidden focus:ring-2 focus:ring-white"
             aria-label={`Imagen anterior. Actual: ${selectedIndex + 1} de ${
               mediaItems.length
             }`}
@@ -248,7 +248,7 @@ export function ProductGalleryModal({
               e.stopPropagation();
               onNext();
             }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-hidden focus:ring-2 focus:ring-white"
             aria-label={`Siguiente imagen. Actual: ${selectedIndex + 1} de ${
               mediaItems.length
             }`}
@@ -260,7 +260,7 @@ export function ProductGalleryModal({
 
       {/* Bottom thumbnail strip */}
       {mediaItems.length > 1 && (
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent">
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/50 to-transparent">
           <div className="flex gap-2 overflow-x-auto scrollbar-hide justify-center">
             {mediaItems.map((item, index) => (
               <button
@@ -269,7 +269,7 @@ export function ProductGalleryModal({
                   e.stopPropagation();
                   onSelectImage(index);
                 }}
-                className={`relative flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                className={`relative shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
                   selectedIndex === index
                     ? "border-white ring-2 ring-white/50"
                     : "border-white/30 hover:border-white/60"

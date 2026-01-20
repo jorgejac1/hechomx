@@ -11,7 +11,7 @@ export default function ShippingReturns() {
       <div className="space-y-6">
         {/* Shipping */}
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+          <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
             <Truck className="w-6 h-6 text-blue-600" />
           </div>
           <div className="flex-1">
@@ -30,7 +30,7 @@ export default function ShippingReturns() {
 
         {/* Returns */}
         <div className="flex items-start gap-4 pt-6 border-t border-gray-200">
-          <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+          <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center shrink-0">
             <RotateCcw className="w-6 h-6 text-green-600" />
           </div>
           <div className="flex-1">
@@ -43,7 +43,7 @@ export default function ShippingReturns() {
               variant="ghost"
               size="sm"
               href="/politicas/devoluciones"
-              className="mt-3 !px-0 underline"
+              className="mt-3 px-0! underline"
             >
               Ver política completa de devoluciones →
             </Button>
@@ -52,7 +52,7 @@ export default function ShippingReturns() {
 
         {/* Secure Purchase */}
         <div className="flex items-start gap-4 pt-6 border-t border-gray-200">
-          <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+          <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
             <Shield className="w-6 h-6 text-purple-600" />
           </div>
           <div className="flex-1">

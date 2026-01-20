@@ -10,7 +10,7 @@ export default function EmptyCart() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-sm p-8 sm:p-12 text-center">
+        <div className="bg-white rounded-2xl shadow-xs p-8 sm:p-12 text-center">
           {/* Icon */}
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-6">
             <ShoppingCart className="w-10 h-10 text-gray-400" />

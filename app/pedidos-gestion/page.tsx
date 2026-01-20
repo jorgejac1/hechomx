@@ -332,7 +332,7 @@ function OrdersManagementContent({ user }: { user: User }) {
                             alt={item.name}
                             width={60}
                             height={60}
-                            className="rounded-lg object-cover flex-shrink-0"
+                            className="rounded-lg object-cover shrink-0"
                           />
                           <div className="flex-1 min-w-0">
                             <p className="font-semibold text-gray-900 text-sm truncate">

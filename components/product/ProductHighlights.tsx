@@ -18,7 +18,7 @@ export default function ProductHighlights() {
       <div className="space-y-3">
         {highlights.map((highlight, idx) => (
           <div key={idx} className="flex items-start gap-3">
-            <CheckCircle className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
+            <CheckCircle className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
             <span className="text-gray-700">{highlight}</span>
           </div>
         ))}

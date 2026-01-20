@@ -91,7 +91,7 @@ export default function ProductCarousel({
                 {products.map((product) => (
                   <div
                     key={product.id}
-                    className="flex-shrink-0 w-[55vw] sm:w-[45vw] max-w-[260px]"
+                    className="shrink-0 w-[55vw] sm:w-[45vw] max-w-[260px]"
                   >
                     <ProductCard product={product} />
                   </div>
@@ -110,7 +110,7 @@ export default function ProductCarousel({
                 {products.map((product) => (
                   <div
                     key={product.id}
-                    className="flex-shrink-0"
+                    className="shrink-0"
                     style={{ width: `calc(${100 / itemsToShow}% - ${(itemsToShow - 1) * 24 / itemsToShow}px)` }}
                   >
                     <ProductCard product={product} />

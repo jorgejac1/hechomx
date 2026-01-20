@@ -125,7 +125,7 @@ function SettingsContent() {
         {/* Success Message */}
         {successMessage && (
           <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
             <p className="text-sm text-green-800 font-medium">{successMessage}</p>
           </div>
         )}
@@ -205,7 +205,7 @@ function SettingsContent() {
                               {card.brand} •••• {card.last4}
                             </p>
                             {card.isDefault && (
-                              <span className="px-2 py-1 bg-primary-100 text-primary-700 text-xs font-semibold rounded">
+                              <span className="px-2 py-1 bg-primary-100 text-primary-700 text-xs font-semibold rounded-sm">
                                 Predeterminada
                               </span>
                             )}
@@ -229,7 +229,7 @@ function SettingsContent() {
 
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="flex gap-3">
-                    <Shield className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <Shield className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-sm text-blue-900 font-semibold">
                         Tus tarjetas están seguras
@@ -269,7 +269,7 @@ function SettingsContent() {
                           <div className="flex items-center gap-2 mb-1">
                             <p className="font-semibold text-gray-900">{address.name}</p>
                             {address.isDefault && (
-                              <span className="px-2 py-1 bg-primary-100 text-primary-700 text-xs font-semibold rounded">
+                              <span className="px-2 py-1 bg-primary-100 text-primary-700 text-xs font-semibold rounded-sm">
                                 Predeterminada
                               </span>
                             )}
@@ -295,7 +295,7 @@ function SettingsContent() {
 
                 <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                   <div className="flex gap-3">
-                    <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                    <AlertCircle className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-sm text-yellow-900 font-semibold">
                         Verifica tus direcciones
@@ -315,7 +315,7 @@ function SettingsContent() {
               <div className="space-y-6">
                 <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                   <div className="flex gap-3">
-                    <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                    <AlertCircle className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-sm text-yellow-900 font-semibold">
                         Usa una contraseña segura
@@ -457,7 +457,7 @@ function SettingsContent() {
                       </div>
                       <label className="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" defaultChecked className="sr-only peer" />
-                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-hidden peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
                       </label>
                     </div>
                   ))}
@@ -465,7 +465,7 @@ function SettingsContent() {
 
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="flex gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-sm text-blue-900 font-semibold">Mantente informado</p>
                       <p className="text-sm text-blue-800">

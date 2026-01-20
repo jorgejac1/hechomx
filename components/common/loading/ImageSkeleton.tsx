@@ -9,8 +9,8 @@ interface ImageSkeletonProps {
 const aspectRatioClasses = {
   square: 'aspect-square',
   video: 'aspect-video',
-  wide: 'aspect-[21/9]',
-  portrait: 'aspect-[3/4]',
+  wide: 'aspect-21/9',
+  portrait: 'aspect-3/4',
 };
 
 export default function ImageSkeleton({

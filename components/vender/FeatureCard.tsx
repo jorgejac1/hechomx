@@ -18,7 +18,7 @@ export default function FeatureCard({
   return (
     <div className="flex gap-4 p-6 bg-gray-50 rounded-xl">
       <div
-        className={`w-12 h-12 ${iconBg} rounded-lg flex items-center justify-center flex-shrink-0`}
+        className={`w-12 h-12 ${iconBg} rounded-lg flex items-center justify-center shrink-0`}
       >
         <Icon className={`w-6 h-6 ${iconColor}`} />
       </div>

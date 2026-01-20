@@ -48,7 +48,7 @@ function VerificationStatusContent({ user }: { user: User }) {
     return (
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+          <div className="bg-white rounded-lg shadow-xs p-8 text-center">
             <AlertCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               No tienes solicitudes de verificación
@@ -85,15 +85,15 @@ function VerificationStatusContent({ user }: { user: User }) {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-xs p-6 mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Estado de Verificación</h1>
           <p className="text-gray-600">Seguimiento de tu solicitud de verificación</p>
         </div>
 
         {/* Status Card */}
-        <div className={`rounded-lg shadow-sm p-6 mb-6 ${statusInfo.bgColor}`}>
+        <div className={`rounded-lg shadow-xs p-6 mb-6 ${statusInfo.bgColor}`}>
           <div className="flex items-start gap-4">
-            <StatusIcon className={`w-8 h-8 ${statusInfo.color} flex-shrink-0 mt-1`} />
+            <StatusIcon className={`w-8 h-8 ${statusInfo.color} shrink-0 mt-1`} />
             <div className="flex-1">
               <h2 className={`text-2xl font-bold mb-2 ${statusInfo.color}`}>{statusInfo.title}</h2>
               <p className="text-gray-700 mb-4">{statusInfo.description}</p>
@@ -162,7 +162,7 @@ function VerificationStatusContent({ user }: { user: User }) {
         </div>
 
         {/* Request Details */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-xs p-6 mb-6">
           <h3 className="text-lg font-bold text-gray-900 mb-4">Detalles de la Solicitud</h3>
 
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -209,7 +209,7 @@ function VerificationStatusContent({ user }: { user: User }) {
         </div>
 
         {/* Questionnaire Info */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-white rounded-lg shadow-xs p-6">
           <h3 className="text-lg font-bold text-gray-900 mb-4">Tu Información</h3>
 
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -303,7 +303,7 @@ function FavoritesContent({ user }: { user: User }) {
                         onClick={() => setViewMode('grid')}
                         className={`p-2 rounded transition ${
                           viewMode === 'grid'
-                            ? 'bg-white shadow-sm text-primary-600'
+                            ? 'bg-white shadow-xs text-primary-600'
                             : 'text-gray-600 hover:text-gray-900'
                         }`}
                       >
@@ -313,7 +313,7 @@ function FavoritesContent({ user }: { user: User }) {
                         onClick={() => setViewMode('list')}
                         className={`p-2 rounded transition ${
                           viewMode === 'list'
-                            ? 'bg-white shadow-sm text-primary-600'
+                            ? 'bg-white shadow-xs text-primary-600'
                             : 'text-gray-600 hover:text-gray-900'
                         }`}
                       >
@@ -520,7 +520,7 @@ function FavoritesContent({ user }: { user: User }) {
 
                           {/* Notes */}
                           {favorite.notes && (
-                            <div className="mb-3 p-2 bg-blue-50 rounded text-xs text-gray-700 italic">
+                            <div className="mb-3 p-2 bg-blue-50 rounded-sm text-xs text-gray-700 italic">
                               "{favorite.notes}"
                             </div>
                           )}
@@ -558,7 +558,7 @@ function FavoritesContent({ user }: { user: User }) {
                           {/* Image */}
                           <Link
                             href={ROUTES.PRODUCT_DETAIL(favorite.id)}
-                            className="relative flex-shrink-0"
+                            className="relative shrink-0"
                           >
                             <div className="relative h-48 sm:h-32 sm:w-32 rounded-lg overflow-hidden">
                               <Image
@@ -607,7 +607,7 @@ function FavoritesContent({ user }: { user: User }) {
                               </p>
 
                               {favorite.notes && (
-                                <div className="mt-2 p-2 bg-blue-50 rounded text-xs text-gray-700 italic">
+                                <div className="mt-2 p-2 bg-blue-50 rounded-sm text-xs text-gray-700 italic">
                                   "{favorite.notes}"
                                 </div>
                               )}

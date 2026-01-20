@@ -79,7 +79,7 @@ export default function ShippingInfoPage() {
                 rurales y áreas remotas. Nuestro objetivo es que la belleza del arte artesanal
                 mexicano llegue a todos los rincones del país.
               </p>
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
+              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-sm">
                 <p className="text-sm text-blue-900">
                   <AlertCircle className="w-4 h-4 inline mr-2" />
                   Actualmente solo realizamos envíos dentro de México. Próximamente estaremos
@@ -105,15 +105,15 @@ export default function ShippingInfoPage() {
                   <h3 className="font-bold text-gray-900 mb-2">Productos en Stock</h3>
                   <ul className="space-y-2 text-sm text-gray-700">
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                       <span>CDMX y Área Metropolitana: 2-3 días</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                       <span>Ciudades principales: 3-5 días</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                       <span>Zonas rurales: 5-7 días</span>
                     </li>
                   </ul>
@@ -123,22 +123,22 @@ export default function ShippingInfoPage() {
                   <h3 className="font-bold text-gray-900 mb-2">Productos Personalizados</h3>
                   <ul className="space-y-2 text-sm text-gray-700">
                     <li className="flex items-start gap-2">
-                      <Clock className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                      <Clock className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                       <span>Tiempo de producción: 5-15 días</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Clock className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                      <Clock className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                       <span>Más tiempo de envío estándar</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Clock className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                      <Clock className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                       <span>Depende de la complejidad del pedido</span>
                     </li>
                   </ul>
                 </div>
               </div>
 
-              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded">
+              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded-sm">
                 <p className="text-sm text-yellow-900">
                   <AlertCircle className="w-4 h-4 inline mr-2" />
                   Los tiempos son estimados y pueden variar durante temporadas altas (Día de
@@ -215,26 +215,26 @@ export default function ShippingInfoPage() {
               <p>Trabajamos con las siguientes paqueterías confiables:</p>
               <ul className="space-y-2 ml-4">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>
                     <strong>FedEx:</strong> Para envíos express y entregas urgentes
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>
                     <strong>Estafeta:</strong> Cobertura nacional con buenos tiempos de entrega
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>
                     <strong>DHL:</strong> Para paquetes grandes y productos delicados
                   </span>
                 </li>
               </ul>
 
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded mt-4">
+              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-sm mt-4">
                 <h3 className="font-bold text-blue-900 mb-2">Rastreo de tu Pedido</h3>
                 <p className="text-sm text-blue-800 mb-2">
                   Una vez que tu pedido sea enviado, recibirás:
@@ -261,24 +261,24 @@ export default function ShippingInfoPage() {
               </p>
               <ul className="space-y-2 ml-4">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>Materiales de embalaje profesionales y resistentes</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>Protección extra para productos frágiles (cerámica, vidrio)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>Cajas reforzadas para piezas delicadas</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
                   <span>Seguro incluido en todos los envíos</span>
                 </li>
               </ul>
 
-              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded">
+              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded-sm">
                 <p className="text-sm text-green-900 font-medium">
                   <Shield className="w-4 h-4 inline mr-2" />
                   Si tu producto llega dañado, lo reemplazamos o reembolsamos sin costo adicional.
@@ -288,7 +288,7 @@ export default function ShippingInfoPage() {
           </section>
 
           {/* Contact Card */}
-          <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8">
+          <div className="bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8">
             <div className="text-center">
               <Truck className="w-12 h-12 mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-2">¿Preguntas sobre tu envío?</h2>

@@ -48,11 +48,11 @@ export default function Toast({
       className={`flex items-center gap-3 px-4 py-3 rounded-lg border-2 shadow-lg min-w-[300px] max-w-md animate-slide-in ${styles[type]}`}
       role="alert"
     >
-      <div className="flex-shrink-0">{icons[type]}</div>
+      <div className="shrink-0">{icons[type]}</div>
       <p className="flex-1 text-sm font-medium">{message}</p>
       <button
         onClick={() => onClose(id)}
-        className="flex-shrink-0 hover:opacity-70 transition-opacity"
+        className="shrink-0 hover:opacity-70 transition-opacity"
         aria-label="Cerrar notificación"
       >
         <X className="w-4 h-4" />

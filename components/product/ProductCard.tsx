@@ -91,7 +91,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               }
               ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:scale-110'}
               sm:opacity-0 sm:group-hover:opacity-100 opacity-100
-              focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-1
+              focus:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-primary-600 focus:ring-offset-1
             `}
             aria-label={isComparing ? 'Quitar de comparación' : 'Agregar a comparación'}
             title={getButtonTitle()}
@@ -119,7 +119,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </button>
 
           {isFull && !isComparing && (
-            <div className="absolute top-12 right-2 z-10 bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-[10px] font-medium shadow-sm sm:opacity-0 sm:group-hover:opacity-100 opacity-100 whitespace-nowrap">
+            <div className="absolute top-12 right-2 z-10 bg-yellow-100 text-yellow-800 px-2 py-1 rounded-sm text-[10px] font-medium shadow-xs sm:opacity-0 sm:group-hover:opacity-100 opacity-100 whitespace-nowrap">
               Comparación llena
             </div>
           )}
@@ -129,7 +129,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <Link href={`${ROUTES.PRODUCTS}/${product.id}`}>
         <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
           {/* Image */}
-          <div className="relative h-40 sm:h-48 md:h-56 bg-gray-200 overflow-hidden flex-shrink-0">
+          <div className="relative h-40 sm:h-48 md:h-56 bg-gray-200 overflow-hidden shrink-0">
             <Image
               src={product.images[0]}
               alt={product.name}
@@ -139,17 +139,17 @@ export default function ProductCard({ product }: ProductCardProps) {
             />
 
             {/* Left Side - Badges Group (New + Featured + Verified) */}
-            <div className="absolute top-1.5 sm:top-2 left-1.5 sm:left-2 z-[1] flex items-center gap-1.5 sm:gap-2">
+            <div className="absolute top-1.5 sm:top-2 left-1.5 sm:left-2 z-1 flex items-center gap-1.5 sm:gap-2">
               {/* New Badge - First Priority */}
               {isNewProduct(product.createdAt) && (
-                <span className="bg-blue-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-sm">
+                <span className="bg-blue-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-xs">
                   Nuevo
                 </span>
               )}
 
               {/* Featured Badge */}
               {product.featured && (
-                <span className="bg-primary-600 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-sm">
+                <span className="bg-primary-600 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold shadow-xs">
                   Destacado
                 </span>
               )}
@@ -157,7 +157,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               {/* Verified Badge */}
               {product.verified && (
                 <div
-                  className="bg-green-500 text-white w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center shadow-sm flex-shrink-0"
+                  className="bg-green-500 text-white w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center shadow-xs shrink-0"
                   title="Producto verificado"
                 >
                   <svg
@@ -176,9 +176,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             </div>
 
             {/* Category Badge - Bottom Left */}
-            <div className="absolute bottom-1.5 sm:bottom-2 left-1.5 sm:left-2 z-[1]">
+            <div className="absolute bottom-1.5 sm:bottom-2 left-1.5 sm:left-2 z-1">
               <span
-                className={`inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium shadow-sm ${categoryColor}`}
+                className={`inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium shadow-xs ${categoryColor}`}
               >
                 <span className="text-xs sm:text-sm">{categoryIcon}</span>
                 <span className="hidden sm:inline">{product.category}</span>
@@ -188,7 +188,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
           {/* Content */}
           <div className="p-2.5 sm:p-3 flex-1 flex flex-col">
-            <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-1 sm:mb-1.5 line-clamp-2 group-hover:text-primary-600 transition-colors leading-tight min-h-[2rem] sm:min-h-[2.5rem]">
+            <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-1 sm:mb-1.5 line-clamp-2 group-hover:text-primary-600 transition-colors leading-tight min-h-8 sm:min-h-10">
               {product.name}
             </h3>
 
@@ -229,7 +229,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
                 {/* Maker Name + Artisan Story Badge */}
                 <div className="flex items-center gap-1.5">
-                  <p className="text-[10px] sm:text-xs text-gray-500 truncate flex-shrink">
+                  <p className="text-[10px] sm:text-xs text-gray-500 truncate shrink">
                     {product.maker}
                   </p>
 
@@ -241,7 +241,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                   {hasStory && artisanId && (
                     <button
                       onClick={handleArtisanStoryClick}
-                      className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 py-0.5 bg-gradient-to-r from-amber-100 to-orange-100 hover:from-amber-200 hover:to-orange-200 text-amber-700 rounded-full text-[9px] sm:text-[10px] font-semibold transition-all duration-200 hover:scale-105 flex-shrink-0 shadow-sm"
+                      className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 py-0.5 bg-linear-to-r from-amber-100 to-orange-100 hover:from-amber-200 hover:to-orange-200 text-amber-700 rounded-full text-[9px] sm:text-[10px] font-semibold transition-all duration-200 hover:scale-105 shrink-0 shadow-xs"
                       title="Ver historia del artesano"
                       type="button"
                     >

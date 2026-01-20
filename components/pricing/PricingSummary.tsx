@@ -36,7 +36,7 @@ export default function PricingSummary({
       {/* Fair Wage Indicator */}
       {isUsingFairWage ? (
         <div className="mb-6 p-3 bg-green-50 border-2 border-green-200 rounded-lg flex items-start gap-2">
-          <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+          <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
           <div>
             <p className="text-sm font-semibold text-green-900">Salario Justo</p>
             <p className="text-xs text-green-700">Estás usando tarifas de salario digno</p>
@@ -44,7 +44,7 @@ export default function PricingSummary({
         </div>
       ) : (
         <div className="mb-6 p-3 bg-yellow-50 border-2 border-yellow-200 rounded-lg flex items-start gap-2">
-          <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
           <div>
             <p className="text-sm font-semibold text-yellow-900">Revisa tu tarifa</p>
             <p className="text-xs text-yellow-700">Considera usar salario digno recomendado</p>
@@ -100,7 +100,7 @@ export default function PricingSummary({
           <p className="text-sm text-gray-600 mb-1">Precio Mayoreo</p>
           <p className="text-2xl font-bold text-primary-600">{formatCurrency(wholesalePrice)}</p>
         </div>
-        <div className="p-4 bg-gradient-to-br from-primary-600 to-primary-700 rounded-lg text-white">
+        <div className="p-4 bg-linear-to-br from-primary-600 to-primary-700 rounded-lg text-white">
           <p className="text-sm text-primary-100 mb-1">Precio Sugerido al Público</p>
           <p className="text-3xl font-bold">{formatCurrency(retailPrice)}</p>
           <p className="text-xs text-primary-100 mt-2">Incluye margen de distribución (2x)</p>

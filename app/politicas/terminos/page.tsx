@@ -264,7 +264,7 @@ export default function TermsPage() {
           {/* Notice Box */}
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
             <div className="flex items-start gap-4">
-              <AlertCircle className="w-6 h-6 text-blue-600 flex-shrink-0" />
+              <AlertCircle className="w-6 h-6 text-blue-600 shrink-0" />
               <div>
                 <h3 className="font-bold text-blue-900 mb-2">Nota Importante</h3>
                 <p className="text-sm text-blue-800">

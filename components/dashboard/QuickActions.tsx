@@ -90,11 +90,11 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
         {hasStory === false && (
           <button
             onClick={() => router.push(ROUTES.MY_STORY)}
-            className="w-full p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-2 border-purple-300 hover:from-purple-100 hover:to-pink-100 transition text-left"
+            className="w-full p-4 bg-linear-to-r from-purple-50 to-pink-50 rounded-lg border-2 border-purple-300 hover:from-purple-100 hover:to-pink-100 transition text-left"
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <Sparkles className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                <Sparkles className="w-5 h-5 text-purple-600 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">✨ Comparte Tu Historia Artesanal</p>
                   <p className="text-sm text-gray-600">
@@ -102,7 +102,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-purple-600 flex-shrink-0" />
+              <ArrowRight className="w-5 h-5 text-purple-600 shrink-0" />
             </div>
           </button>
         )}
@@ -110,11 +110,11 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
         {/* Pricing Calculator Promo */}
         <button
           onClick={() => router.push(ROUTES.PRICING_CALCULATOR)}
-          className="w-full p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-300 hover:from-blue-100 hover:to-cyan-100 transition text-left"
+          className="w-full p-4 bg-linear-to-r from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-300 hover:from-blue-100 hover:to-cyan-100 transition text-left"
         >
           <div className="flex items-start justify-between">
             <div className="flex gap-3">
-              <Calculator className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+              <Calculator className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
               <div>
                 <p className="font-semibold text-gray-900">💰 Calcula Precios Justos</p>
                 <p className="text-sm text-gray-600">
@@ -122,24 +122,24 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
                 </p>
               </div>
             </div>
-            <ArrowRight className="w-5 h-5 text-blue-600 flex-shrink-0" />
+            <ArrowRight className="w-5 h-5 text-blue-600 shrink-0" />
           </div>
         </button>
 
         {/* View My Shop - FIXED */}
         <button
           onClick={() => window.open(`/tienda/${getShopSlug(shopName)}`, '_blank')}
-          className="w-full p-4 bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg border-2 border-emerald-300 hover:from-emerald-100 hover:to-green-100 transition text-left"
+          className="w-full p-4 bg-linear-to-r from-emerald-50 to-green-50 rounded-lg border-2 border-emerald-300 hover:from-emerald-100 hover:to-green-100 transition text-left"
         >
           <div className="flex items-start justify-between">
             <div className="flex gap-3">
-              <Store className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+              <Store className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
               <div>
                 <p className="font-semibold text-gray-900">🏪 Vista de Cliente</p>
                 <p className="text-sm text-gray-600">Ve cómo los clientes ven tu tienda</p>
               </div>
             </div>
-            <ExternalLink className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+            <ExternalLink className="w-4 h-4 text-emerald-600 shrink-0" />
           </div>
         </button>
 
@@ -151,13 +151,13 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <Sparkles className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                <Sparkles className="w-5 h-5 text-purple-600 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">Editar Mi Historia</p>
                   <p className="text-sm text-gray-600">Actualiza tu historia artesanal y fotos</p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-purple-600 flex-shrink-0" />
+              <ArrowRight className="w-5 h-5 text-purple-600 shrink-0" />
             </div>
           </button>
         )}
@@ -170,7 +170,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <Package className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                <Package className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">
                     {data.pendingOrders.length} pedido{data.pendingOrders.length > 1 ? 's' : ''} por
@@ -182,7 +182,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-blue-600 flex-shrink-0" />
+              <ArrowRight className="w-5 h-5 text-blue-600 shrink-0" />
             </div>
           </button>
         )}
@@ -195,7 +195,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <AlertTriangle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
+                <AlertTriangle className="w-5 h-5 text-red-600 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">Productos sin stock</p>
                   <p className="text-sm text-gray-600">
@@ -203,7 +203,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-red-600 flex-shrink-0" />
+              <ArrowRight className="w-5 h-5 text-red-600 shrink-0" />
             </div>
           </button>
         )}
@@ -216,7 +216,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <MessageSquare className="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" />
+                <MessageSquare className="w-5 h-5 text-yellow-600 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">
                     {data.unansweredMessages} mensaje{data.unansweredMessages > 1 ? 's' : ''} sin
@@ -227,7 +227,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-yellow-600 flex-shrink-0" />
+              <ArrowRight className="w-5 h-5 text-yellow-600 shrink-0" />
             </div>
           </button>
         )}
@@ -240,7 +240,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <Star className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
+                <Star className="w-5 h-5 text-purple-600 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">
                     {data.pendingReviews.filter((r) => r.needsResponse).length} reseña
@@ -252,7 +252,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
                   </p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-purple-600 flex-shrink-0" />
+              <ArrowRight className="w-5 h-5 text-purple-600 shrink-0" />
             </div>
           </button>
         )}
@@ -265,13 +265,13 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
-                <TrendingUp className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <TrendingUp className="w-5 h-5 text-green-600 mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-gray-900">{urgentActions[0].title}</p>
                   <p className="text-sm text-gray-600">{urgentActions[0].description}</p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-green-600 flex-shrink-0" />
+              <ArrowRight className="w-5 h-5 text-green-600 shrink-0" />
             </div>
           </button>
         )}

@@ -74,7 +74,7 @@ function ManageProductsContent({ user }: { user: User }) {
               >
                 <div className="flex flex-col sm:flex-row gap-4">
                   {/* Product Image */}
-                  <div className="w-full sm:w-32 h-32 flex-shrink-0">
+                  <div className="w-full sm:w-32 h-32 shrink-0">
                     <Image
                       src={product.image}
                       alt={product.name}

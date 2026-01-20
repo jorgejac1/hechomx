@@ -45,7 +45,7 @@ export default function MaterialsList({
                 value={material.name}
                 onChange={(e) => onUpdate(material.id, 'name', e.target.value)}
                 placeholder="Lana, tinte, etc."
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded-sm focus:ring-2 focus:ring-primary-500"
               />
             </div>
             <div className="col-span-4 sm:col-span-2">
@@ -56,7 +56,7 @@ export default function MaterialsList({
                 onChange={(e) => onUpdate(material.id, 'quantity', parseFloat(e.target.value) || 0)}
                 min="0"
                 step="0.01"
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded-sm focus:ring-2 focus:ring-primary-500"
               />
             </div>
             <div className="col-span-4 sm:col-span-2">
@@ -64,7 +64,7 @@ export default function MaterialsList({
               <select
                 value={material.unit}
                 onChange={(e) => onUpdate(material.id, 'unit', e.target.value)}
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded-sm focus:ring-2 focus:ring-primary-500"
               >
                 <option value="kg">kg</option>
                 <option value="g">g</option>
@@ -84,7 +84,7 @@ export default function MaterialsList({
                 }
                 min="0"
                 step="0.01"
-                className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary-500"
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded-sm focus:ring-2 focus:ring-primary-500"
               />
             </div>
             <div className="col-span-12 sm:col-span-2 flex items-end gap-2">
@@ -97,7 +97,7 @@ export default function MaterialsList({
               {materials.length > 1 && (
                 <button
                   onClick={() => onRemove(material.id)}
-                  className="p-1 text-red-600 hover:bg-red-50 rounded transition"
+                  className="p-1 text-red-600 hover:bg-red-50 rounded-sm transition"
                   title="Eliminar material"
                 >
                   <Trash2 className="w-4 h-4" />

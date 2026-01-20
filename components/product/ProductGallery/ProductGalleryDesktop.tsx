@@ -79,7 +79,7 @@ export function ProductGalleryDesktop({
         <div className="flex gap-4 h-[450px] lg:h-[500px] xl:h-[550px]">
           {/* Thumbnails sidebar */}
           <nav
-            className="flex-shrink-0 w-20 lg:w-24 h-full"
+            className="shrink-0 w-20 lg:w-24 h-full"
             aria-label="Miniaturas de imágenes"
             role="tablist"
             aria-orientation="vertical"
@@ -92,7 +92,7 @@ export function ProductGalleryDesktop({
                   aria-selected={selectedIndex === index}
                   aria-controls={`image-${index}`}
                   onClick={() => onThumbnailClick(index)}
-                  className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 active:scale-95 ${
+                  className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all shrink-0 focus:outline-hidden focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 active:scale-95 ${
                     selectedIndex === index
                       ? "border-primary-600 ring-2 ring-primary-200"
                       : "border-gray-200 hover:border-gray-300"
@@ -148,7 +148,7 @@ export function ProductGalleryDesktop({
                   onMouseMove={handleMouseMove}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                  className="relative w-full h-full cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-inset rounded-xl"
+                  className="relative w-full h-full cursor-zoom-in focus:outline-hidden focus:ring-2 focus:ring-primary-600 focus:ring-inset rounded-xl"
                   onClick={onOpenModal}
                   tabIndex={0}
                   role="button"
@@ -219,14 +219,14 @@ export function ProductGalleryDesktop({
                 <>
                   <button
                     onClick={onPrevious}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/90 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary-600"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/90 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-primary-600"
                     aria-label={`Imagen anterior. Actual: ${selectedIndex + 1} de ${mediaItems.length}`}
                   >
                     <ChevronLeft className="w-5 h-5 text-gray-700" aria-hidden="true" />
                   </button>
                   <button
                     onClick={onNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/90 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary-600"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/90 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-primary-600"
                     aria-label={`Siguiente imagen. Actual: ${selectedIndex + 1} de ${mediaItems.length}`}
                   >
                     <ChevronRight className="w-5 h-5 text-gray-700" aria-hidden="true" />

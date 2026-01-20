@@ -146,7 +146,7 @@ export default function ContactPage() {
                     id="acepto"
                     name="acepto"
                     required
-                    className="mt-1 w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                    className="mt-1 w-4 h-4 text-primary-600 border-gray-300 rounded-sm focus:ring-primary-500"
                   />
                   <label htmlFor="acepto" className="text-sm text-gray-600">
                     Acepto la{' '}
@@ -175,7 +175,7 @@ export default function ContactPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-4">Información de Contacto</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-primary-600 flex-shrink-0 mt-1" />
+                  <Mail className="w-5 h-5 text-primary-600 shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">Email</p>
                     <a
@@ -188,7 +188,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-primary-600 flex-shrink-0 mt-1" />
+                  <Phone className="w-5 h-5 text-primary-600 shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">Teléfono</p>
                     <a
@@ -201,7 +201,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <MessageCircle className="w-5 h-5 text-primary-600 flex-shrink-0 mt-1" />
+                  <MessageCircle className="w-5 h-5 text-primary-600 shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">WhatsApp</p>
                     <a
@@ -216,7 +216,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-primary-600 flex-shrink-0 mt-1" />
+                  <MapPin className="w-5 h-5 text-primary-600 shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">Dirección</p>
                     <p className="text-gray-600 text-sm">
@@ -230,7 +230,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-primary-600 flex-shrink-0 mt-1" />
+                  <Clock className="w-5 h-5 text-primary-600 shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">Horario de Atención</p>
                     <p className="text-gray-600 text-sm">
@@ -246,7 +246,7 @@ export default function ContactPage() {
             </div>
 
             {/* Social Media */}
-            <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-6">
+            <div className="bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-6">
               <h3 className="text-xl font-bold mb-4">Síguenos</h3>
               <p className="text-primary-100 text-sm mb-4">
                 Mantente al día con nuestras novedades y descubre historias de artesanos

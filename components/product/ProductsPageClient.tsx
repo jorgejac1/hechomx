@@ -526,7 +526,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
             <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/productos" />
           </>
         ) : (
-          <div className="bg-white rounded-xl shadow-sm border-2 border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-xl shadow-xs border-2 border-gray-200 p-12 text-center">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-4">
               <Filter className="w-10 h-10 text-gray-400" />
             </div>

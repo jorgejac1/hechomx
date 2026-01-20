@@ -82,7 +82,7 @@ export default function FormActions({
       {/* Validation Warning */}
       {!hasImages && (
         <div className="flex items-start gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-lg mt-4">
-          <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+          <AlertCircle className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
           <div>
             <p className="font-semibold text-yellow-900">Imagen requerida</p>
             <p className="text-sm text-yellow-800">

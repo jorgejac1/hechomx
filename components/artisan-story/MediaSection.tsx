@@ -144,7 +144,7 @@ export default function MediaSection({
                 value={newPhotoUrl}
                 onChange={(e) => setNewPhotoUrl(e.target.value)}
                 placeholder="https://images.unsplash.com/..."
-                className="w-full px-3 py-2 border border-indigo-300 rounded mb-2"
+                className="w-full px-3 py-2 border border-indigo-300 rounded-sm mb-2"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
@@ -156,7 +156,7 @@ export default function MediaSection({
                 <button
                   type="button"
                   onClick={() => addPhoto('workshop')}
-                  className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                  className="px-3 py-1 text-sm bg-indigo-600 text-white rounded-sm hover:bg-indigo-700"
                 >
                   Agregar
                 </button>
@@ -166,7 +166,7 @@ export default function MediaSection({
                     setActivePhotoType(null);
                     setNewPhotoUrl('');
                   }}
-                  className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded"
+                  className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-sm"
                 >
                   Cancelar
                 </button>
@@ -229,7 +229,7 @@ export default function MediaSection({
               value={newPhotoUrl}
               onChange={(e) => setNewPhotoUrl(e.target.value)}
               placeholder="https://images.unsplash.com/..."
-              className="w-full px-3 py-2 border border-indigo-300 rounded mb-2"
+              className="w-full px-3 py-2 border border-indigo-300 rounded-sm mb-2"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
@@ -241,7 +241,7 @@ export default function MediaSection({
               <button
                 type="button"
                 onClick={() => addPhoto('process')}
-                className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                className="px-3 py-1 text-sm bg-indigo-600 text-white rounded-sm hover:bg-indigo-700"
               >
                 Agregar
               </button>
@@ -251,7 +251,7 @@ export default function MediaSection({
                   setActivePhotoType(null);
                   setNewPhotoUrl('');
                 }}
-                className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded"
+                className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-sm"
               >
                 Cancelar
               </button>
@@ -313,7 +313,7 @@ export default function MediaSection({
                 value={newPhotoUrl}
                 onChange={(e) => setNewPhotoUrl(e.target.value)}
                 placeholder="https://images.unsplash.com/..."
-                className="w-full px-3 py-2 border border-indigo-300 rounded mb-2"
+                className="w-full px-3 py-2 border border-indigo-300 rounded-sm mb-2"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
@@ -325,7 +325,7 @@ export default function MediaSection({
                 <button
                   type="button"
                   onClick={() => addPhoto('family')}
-                  className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                  className="px-3 py-1 text-sm bg-indigo-600 text-white rounded-sm hover:bg-indigo-700"
                 >
                   Agregar
                 </button>
@@ -335,7 +335,7 @@ export default function MediaSection({
                     setActivePhotoType(null);
                     setNewPhotoUrl('');
                   }}
-                  className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded"
+                  className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-sm"
                 >
                   Cancelar
                 </button>
@@ -391,7 +391,7 @@ export default function MediaSection({
                 value={newPhotoUrl}
                 onChange={(e) => setNewPhotoUrl(e.target.value)}
                 placeholder="https://images.unsplash.com/..."
-                className="w-full px-3 py-2 border border-indigo-300 rounded mb-2"
+                className="w-full px-3 py-2 border border-indigo-300 rounded-sm mb-2"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
@@ -403,7 +403,7 @@ export default function MediaSection({
                 <button
                   type="button"
                   onClick={() => addPhoto('team')}
-                  className="px-3 py-1 text-sm bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                  className="px-3 py-1 text-sm bg-indigo-600 text-white rounded-sm hover:bg-indigo-700"
                 >
                   Agregar
                 </button>
@@ -413,7 +413,7 @@ export default function MediaSection({
                     setActivePhotoType(null);
                     setNewPhotoUrl('');
                   }}
-                  className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded"
+                  className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-sm"
                 >
                   Cancelar
                 </button>

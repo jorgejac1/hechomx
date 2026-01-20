@@ -104,9 +104,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="h-96 bg-gray-200 rounded-xl" />
                 <div className="space-y-4">
-                  <div className="h-8 bg-gray-200 rounded w-3/4" />
-                  <div className="h-6 bg-gray-200 rounded w-1/2" />
-                  <div className="h-32 bg-gray-200 rounded" />
+                  <div className="h-8 bg-gray-200 rounded-sm w-3/4" />
+                  <div className="h-6 bg-gray-200 rounded-sm w-1/2" />
+                  <div className="h-32 bg-gray-200 rounded-sm" />
                 </div>
               </div>
             </div>

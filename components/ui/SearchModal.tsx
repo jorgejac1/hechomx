@@ -94,7 +94,7 @@ export default function SearchModal({ isOpen, onClose, products, categories }: S
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Buscar productos, artesanos..."
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-300 rounded-lg focus:border-primary-500 focus:outline-none"
+                className="w-full px-4 sm:px-6 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-300 rounded-lg focus:border-primary-500 focus:outline-hidden"
               />
               <svg
                 className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 text-gray-400"
@@ -176,7 +176,7 @@ export default function SearchModal({ isOpen, onClose, products, categories }: S
                           onClick={handleClose}
                           className="flex items-center gap-3 sm:gap-4 p-2 sm:p-3 rounded-lg hover:bg-gray-50 transition"
                         >
-                          <div className="relative w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 bg-gray-200 rounded-lg overflow-hidden">
+                          <div className="relative w-14 h-14 sm:w-16 sm:h-16 shrink-0 bg-gray-200 rounded-lg overflow-hidden">
                             <Image
                               src={product.images[0]}
                               alt={product.name}

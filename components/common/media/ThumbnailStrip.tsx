@@ -59,7 +59,7 @@ export default function ThumbnailStrip({
           key={index}
           onClick={() => handleSelect(index)}
           className={`
-            relative flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all
+            relative shrink-0 rounded-lg overflow-hidden border-2 transition-all
             ${sizeClasses[size]}
             ${
               currentIndex === index

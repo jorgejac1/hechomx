@@ -42,7 +42,7 @@ export default function Carousel<T>({
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {items.map((item, index) => (
-            <div key={index} className="w-full flex-shrink-0">
+            <div key={index} className="w-full shrink-0">
               {renderItem(item, index)}
             </div>
           ))}

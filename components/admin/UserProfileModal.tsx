@@ -132,7 +132,7 @@ export default function UserProfileModal({
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <span className="text-gray-600 ml-7">ID:</span>
-                    <code className="text-xs bg-gray-200 px-2 py-0.5 rounded">{user.id}</code>
+                    <code className="text-xs bg-gray-200 px-2 py-0.5 rounded-sm">{user.id}</code>
                   </div>
                 </div>
               </div>

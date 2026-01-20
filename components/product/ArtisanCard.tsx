@@ -21,8 +21,8 @@ export default function ArtisanCard({ artisanName, location, verified }: Artisan
 
         <div className="flex flex-col sm:flex-row items-start gap-6">
           {/* Avatar */}
-          <div className="flex-shrink-0">
-            <div className="w-20 h-20 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+          <div className="shrink-0">
+            <div className="w-20 h-20 bg-linear-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
               {artisanName.charAt(0)}
             </div>
           </div>

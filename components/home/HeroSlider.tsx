@@ -167,7 +167,7 @@ export default function HeroSlider() {
               priority={index === 0}
             />
             <div
-              className={`absolute inset-0 bg-gradient-to-r ${getGradientClasses(
+              className={`absolute inset-0 bg-linear-to-r ${getGradientClasses(
                 slide.theme
               )} opacity-50`}
             />
@@ -214,7 +214,7 @@ export default function HeroSlider() {
       {/* Navigation Arrows - Visible on mobile */}
       <button
         onClick={prevSlide}
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition z-10"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/30 hover:bg-white/50 backdrop-blur-xs rounded-full flex items-center justify-center text-white transition z-10"
         aria-label="Slide anterior"
       >
         <svg
@@ -233,7 +233,7 @@ export default function HeroSlider() {
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition z-10"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/30 hover:bg-white/50 backdrop-blur-xs rounded-full flex items-center justify-center text-white transition z-10"
         aria-label="Siguiente slide"
       >
         <svg
@@ -270,7 +270,7 @@ export default function HeroSlider() {
       {/* Auto-play indicator */}
       {isAutoPlaying && (
         <div className="absolute top-4 sm:top-5 md:top-6 right-4 sm:right-5 md:right-6 z-10">
-          <div className="flex items-center gap-1.5 sm:gap-2 bg-white/30 backdrop-blur-sm px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 md:py-2 rounded-full text-white text-xs sm:text-sm">
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-white/30 backdrop-blur-xs px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 md:py-2 rounded-full text-white text-xs sm:text-sm">
             <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse" />
             <span className="hidden sm:inline">Auto</span>
           </div>

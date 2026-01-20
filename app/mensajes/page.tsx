@@ -229,10 +229,10 @@ function MessagesContent({ user }: { user: User }) {
                           alt={message.from.name}
                           width={40}
                           height={40}
-                          className="rounded-full flex-shrink-0"
+                          className="rounded-full shrink-0"
                         />
                       ) : (
-                        <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
+                        <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center shrink-0">
                           <span className="text-gray-600 font-semibold text-sm">
                             {message.from.name.charAt(0)}
                           </span>
@@ -248,9 +248,9 @@ function MessagesContent({ user }: { user: User }) {
                             {message.from.name}
                           </p>
                           {message.status === 'unread' ? (
-                            <Mail className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                            <Mail className="w-4 h-4 text-blue-600 shrink-0" />
                           ) : (
-                            <MailOpen className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                            <MailOpen className="w-4 h-4 text-gray-400 shrink-0" />
                           )}
                         </div>
                         <p className="text-xs font-medium text-gray-900 truncate mb-1">

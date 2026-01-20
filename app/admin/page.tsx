@@ -53,7 +53,7 @@ function StatCard({ title, value, icon, trend, variant = 'default', href }: Stat
             </p>
           )}
         </div>
-        <div className="p-3 bg-white rounded-lg shadow-sm">{icon}</div>
+        <div className="p-3 bg-white rounded-lg shadow-xs">{icon}</div>
       </div>
     </div>
   );
@@ -86,7 +86,7 @@ function QuickAction({ title, description, icon, href, variant = 'default' }: Qu
       href={href}
       className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-colors ${variantStyles[variant]}`}
     >
-      <div className="p-3 bg-white rounded-lg shadow-sm">{icon}</div>
+      <div className="p-3 bg-white rounded-lg shadow-xs">{icon}</div>
       <div className="flex-1">
         <p className="font-semibold text-gray-900">{title}</p>
         <p className="text-sm text-gray-600">{description}</p>

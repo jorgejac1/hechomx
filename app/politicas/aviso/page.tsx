@@ -45,7 +45,7 @@ export default function LegalNoticePage() {
             <div className="prose prose-gray max-w-none">
               <div className="bg-gray-50 rounded-lg p-6 space-y-3">
                 <div className="flex items-start gap-3">
-                  <Building className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
+                  <Building className="w-5 h-5 text-gray-600 shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900">Razón Social:</p>
                     <p className="text-gray-700">Papalote Market S.A. de C.V.</p>
@@ -53,7 +53,7 @@ export default function LegalNoticePage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <FileText className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
+                  <FileText className="w-5 h-5 text-gray-600 shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900">RFC:</p>
                     <p className="text-gray-700">HEM123456789</p>
@@ -61,7 +61,7 @@ export default function LegalNoticePage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
+                  <MapPin className="w-5 h-5 text-gray-600 shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900">Domicilio Fiscal:</p>
                     <p className="text-gray-700">
@@ -77,7 +77,7 @@ export default function LegalNoticePage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
+                  <Mail className="w-5 h-5 text-gray-600 shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900">Email:</p>
                     <a
@@ -90,7 +90,7 @@ export default function LegalNoticePage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-gray-600 flex-shrink-0 mt-1" />
+                  <Phone className="w-5 h-5 text-gray-600 shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-gray-900">Teléfono:</p>
                     <p className="text-gray-700">+52 55 1234 5678</p>
@@ -269,7 +269,7 @@ export default function LegalNoticePage() {
                   <span>+52 55 1234 5678</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-primary-600 flex-shrink-0 mt-1" />
+                  <MapPin className="w-4 h-4 text-primary-600 shrink-0 mt-1" />
                   <span>
                     Av. Reforma 123, Col. Juárez
                     <br />

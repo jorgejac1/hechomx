@@ -210,7 +210,7 @@ export default function ArtisanStorySection({
               {indigenousLanguageTerms.map((term, idx) => (
                 <div
                   key={idx}
-                  className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200 space-y-3"
+                  className="p-4 bg-linear-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200 space-y-3"
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
@@ -218,14 +218,14 @@ export default function ArtisanStorySection({
                       value={term.term}
                       onChange={(e) => updateIndigenousTerm(idx, 'term', e.target.value)}
                       placeholder="Término (ej: Didxa')"
-                      className="px-3 py-2 text-sm border border-green-300 rounded focus:ring-2 focus:ring-green-500 bg-white"
+                      className="px-3 py-2 text-sm border border-green-300 rounded-sm focus:ring-2 focus:ring-green-500 bg-white"
                     />
                     <input
                       type="text"
                       value={term.language}
                       onChange={(e) => updateIndigenousTerm(idx, 'language', e.target.value)}
                       placeholder="Lengua (ej: Zapoteco)"
-                      className="px-3 py-2 text-sm border border-green-300 rounded focus:ring-2 focus:ring-green-500 bg-white"
+                      className="px-3 py-2 text-sm border border-green-300 rounded-sm focus:ring-2 focus:ring-green-500 bg-white"
                     />
                   </div>
                   <div className="flex items-center gap-2">
@@ -234,12 +234,12 @@ export default function ArtisanStorySection({
                       value={term.meaning}
                       onChange={(e) => updateIndigenousTerm(idx, 'meaning', e.target.value)}
                       placeholder="Significado (ej: Palabra o lengua)"
-                      className="flex-1 px-3 py-2 text-sm border border-green-300 rounded focus:ring-2 focus:ring-green-500 bg-white"
+                      className="flex-1 px-3 py-2 text-sm border border-green-300 rounded-sm focus:ring-2 focus:ring-green-500 bg-white"
                     />
                     <button
                       type="button"
                       onClick={() => removeIndigenousTerm(idx)}
-                      className="px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded transition"
+                      className="px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-sm transition"
                     >
                       Eliminar
                     </button>

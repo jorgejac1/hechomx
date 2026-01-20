@@ -105,7 +105,7 @@ export default function RecognitionSection({
             {awards.map((award, idx) => (
               <div
                 key={idx}
-                className="p-4 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg border border-yellow-200 space-y-3"
+                className="p-4 bg-linear-to-r from-yellow-50 to-amber-50 rounded-lg border border-yellow-200 space-y-3"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 space-y-3">
@@ -115,7 +115,7 @@ export default function RecognitionSection({
                         value={award.title}
                         onChange={(e) => updateAward(idx, 'title', e.target.value)}
                         placeholder="Nombre del premio"
-                        className="px-3 py-2 text-sm border border-yellow-300 rounded focus:ring-2 focus:ring-yellow-500 bg-white"
+                        className="px-3 py-2 text-sm border border-yellow-300 rounded-sm focus:ring-2 focus:ring-yellow-500 bg-white"
                       />
                       <input
                         type="number"
@@ -124,7 +124,7 @@ export default function RecognitionSection({
                         placeholder="Año"
                         min="1900"
                         max={new Date().getFullYear()}
-                        className="px-3 py-2 text-sm border border-yellow-300 rounded focus:ring-2 focus:ring-yellow-500 bg-white"
+                        className="px-3 py-2 text-sm border border-yellow-300 rounded-sm focus:ring-2 focus:ring-yellow-500 bg-white"
                       />
                     </div>
                     <input
@@ -132,13 +132,13 @@ export default function RecognitionSection({
                       value={award.organization}
                       onChange={(e) => updateAward(idx, 'organization', e.target.value)}
                       placeholder="Organización que lo otorgó"
-                      className="w-full px-3 py-2 text-sm border border-yellow-300 rounded focus:ring-2 focus:ring-yellow-500 bg-white"
+                      className="w-full px-3 py-2 text-sm border border-yellow-300 rounded-sm focus:ring-2 focus:ring-yellow-500 bg-white"
                     />
                   </div>
                   <button
                     type="button"
                     onClick={() => removeAward(idx)}
-                    className="p-2 text-red-600 hover:bg-red-50 rounded transition flex-shrink-0"
+                    className="p-2 text-red-600 hover:bg-red-50 rounded-sm transition shrink-0"
                     title="Eliminar premio"
                   >
                     <X className="w-4 h-4" />
@@ -174,7 +174,7 @@ export default function RecognitionSection({
             {certifications.map((cert, idx) => (
               <div
                 key={idx}
-                className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200 space-y-3"
+                className="p-4 bg-linear-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200 space-y-3"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 space-y-3">
@@ -184,27 +184,27 @@ export default function RecognitionSection({
                         value={cert.name}
                         onChange={(e) => updateCertification(idx, 'name', e.target.value)}
                         placeholder="Nombre de la certificación"
-                        className="px-3 py-2 text-sm border border-blue-300 rounded focus:ring-2 focus:ring-blue-500 bg-white"
+                        className="px-3 py-2 text-sm border border-blue-300 rounded-sm focus:ring-2 focus:ring-blue-500 bg-white"
                       />
                       <input
                         type="text"
                         value={cert.issuer}
                         onChange={(e) => updateCertification(idx, 'issuer', e.target.value)}
                         placeholder="Organismo emisor"
-                        className="px-3 py-2 text-sm border border-blue-300 rounded focus:ring-2 focus:ring-blue-500 bg-white"
+                        className="px-3 py-2 text-sm border border-blue-300 rounded-sm focus:ring-2 focus:ring-blue-500 bg-white"
                       />
                     </div>
                     <input
                       type="date"
                       value={cert.date}
                       onChange={(e) => updateCertification(idx, 'date', e.target.value)}
-                      className="w-full px-3 py-2 text-sm border border-blue-300 rounded focus:ring-2 focus:ring-blue-500 bg-white"
+                      className="w-full px-3 py-2 text-sm border border-blue-300 rounded-sm focus:ring-2 focus:ring-blue-500 bg-white"
                     />
                   </div>
                   <button
                     type="button"
                     onClick={() => removeCertification(idx)}
-                    className="p-2 text-red-600 hover:bg-red-50 rounded transition flex-shrink-0"
+                    className="p-2 text-red-600 hover:bg-red-50 rounded-sm transition shrink-0"
                     title="Eliminar certificación"
                   >
                     <X className="w-4 h-4" />

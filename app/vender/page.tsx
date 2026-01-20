@@ -255,7 +255,7 @@ export default function VenderPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 text-white overflow-hidden">
+      <section className="relative bg-linear-to-br from-primary-600 via-primary-700 to-primary-900 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -267,7 +267,7 @@ export default function VenderPage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-xs rounded-full mb-6">
               <Sparkles className="w-5 h-5" />
               <span className="font-semibold">Únete a nuestra comunidad de artesanos</span>
             </div>
@@ -293,7 +293,7 @@ export default function VenderPage() {
                   </Link>
                   <Link
                     href="#como-funciona"
-                    className="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-lg hover:bg-white/20 transition font-bold text-lg border-2 border-white"
+                    className="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-xs text-white rounded-lg hover:bg-white/20 transition font-bold text-lg border-2 border-white"
                   >
                     Ver Cómo Funciona
                   </Link>
@@ -391,7 +391,7 @@ export default function VenderPage() {
       </section>
 
       {/* Success Stories Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-pink-50 to-red-50">
+      <section className="py-16 sm:py-24 bg-linear-to-br from-pink-50 to-red-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-100 rounded-full mb-4">
@@ -444,7 +444,7 @@ export default function VenderPage() {
             <p className="text-xl text-gray-600">Sin sorpresas, sin costos ocultos</p>
           </div>
 
-          <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-8 sm:p-12 border-2 border-primary-200">
+          <div className="bg-linear-to-br from-primary-50 to-primary-100 rounded-2xl p-8 sm:p-12 border-2 border-primary-200">
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-full mb-4">
                 <CheckCircle2 className="w-5 h-5" />
@@ -464,7 +464,7 @@ export default function VenderPage() {
                 'Sin contratos ni compromisos',
               ].map((feature, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0" />
+                  <CheckCircle2 className="w-6 h-6 text-green-600 shrink-0" />
                   <span className="text-gray-700">{feature}</span>
                 </div>
               ))}
@@ -512,9 +512,9 @@ export default function VenderPage() {
                 >
                   <span className="font-bold text-gray-900 pr-4">{faq.question}</span>
                   {openFAQ === index ? (
-                    <ChevronUp className="w-5 h-5 text-primary-600 flex-shrink-0" />
+                    <ChevronUp className="w-5 h-5 text-primary-600 shrink-0" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                    <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
                   )}
                 </button>
                 {openFAQ === index && (
@@ -540,7 +540,7 @@ export default function VenderPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 sm:py-24 bg-gradient-to-r from-primary-600 to-primary-800 text-white">
+      <section className="py-16 sm:py-24 bg-linear-to-r from-primary-600 to-primary-800 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Comienza tu viaje hoy</h2>
           <p className="text-xl text-primary-100 mb-8">

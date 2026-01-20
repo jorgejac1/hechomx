@@ -32,7 +32,7 @@ export default function SubcategoriesGrid({
   };
 
   return (
-    <div className="mb-8 bg-white rounded-xl shadow-sm p-6">
+    <div className="mb-8 bg-white rounded-xl shadow-xs p-6">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">
         {currentSubcategory ? 'Refina tu búsqueda' : 'Explora por tipo'}
       </h2>
@@ -40,7 +40,7 @@ export default function SubcategoriesGrid({
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
         {subcategories.map((sub) => (
           <Link key={sub.slug} href={buildUrl(sub.slug)} className="group">
-            <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-100 mb-2 shadow-sm group-hover:shadow-lg transition-all border-2 border-transparent group-hover:border-primary-500">
+            <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-100 mb-2 shadow-xs group-hover:shadow-lg transition-all border-2 border-transparent group-hover:border-primary-500">
               <Image
                 src={sub.image}
                 alt={sub.name}
@@ -49,7 +49,7 @@ export default function SubcategoriesGrid({
               />
 
               {/* Hover overlay con flecha */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Ícono de flecha en hover */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

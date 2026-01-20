@@ -109,7 +109,7 @@ export default function DonutChart({
             return (
               <div key={index} className="flex items-center gap-2">
                 <span
-                  className="w-3 h-3 rounded-full flex-shrink-0"
+                  className="w-3 h-3 rounded-full shrink-0"
                   style={{ backgroundColor: color }}
                 />
                 <span className="text-sm text-gray-600">

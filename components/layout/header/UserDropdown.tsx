@@ -160,7 +160,7 @@ export default function UserDropdown({ user, isAdmin, onLogout }: UserDropdownPr
             </div>
             <p className="text-xs text-gray-600 truncate">{user.email}</p>
             {isAdmin && (
-              <span className="inline-block mt-1 px-2 py-0.5 bg-purple-100 text-purple-700 text-xs font-medium rounded">
+              <span className="inline-block mt-1 px-2 py-0.5 bg-purple-100 text-purple-700 text-xs font-medium rounded-sm">
                 Administrador
               </span>
             )}

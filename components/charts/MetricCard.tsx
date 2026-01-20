@@ -67,7 +67,7 @@ export default function MetricCard({
             </p>
           )}
         </div>
-        {icon && <div className="p-3 bg-white rounded-lg shadow-sm">{icon}</div>}
+        {icon && <div className="p-3 bg-white rounded-lg shadow-xs">{icon}</div>}
       </div>
     </div>
   );

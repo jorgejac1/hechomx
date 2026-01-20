@@ -43,7 +43,7 @@ export default function ComparisonMobileView({ products }: ComparisonMobileViewP
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+    <div className="bg-white rounded-xl shadow-xs overflow-hidden">
       {/* Navigation */}
       {products.length > 2 && (
         <div className="flex items-center justify-between p-4 bg-gray-50 border-b">
@@ -149,7 +149,7 @@ function ProductColumn({
       </div>
 
       {/* Product Info */}
-      <h3 className="font-bold text-sm mb-2 line-clamp-2 min-h-[2.5rem]">{product.name}</h3>
+      <h3 className="font-bold text-sm mb-2 line-clamp-2 min-h-10">{product.name}</h3>
 
       {/* Price */}
       <div className="mb-3">
@@ -177,17 +177,17 @@ function ProductColumn({
       {/* Details - Mobile optimized */}
       <div className="space-y-1.5 mb-3 text-xs">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-gray-600 flex-shrink-0">Estado:</span>
+          <span className="text-gray-600 shrink-0">Estado:</span>
           <span className="font-medium text-right truncate">{product.state}</span>
         </div>
         <div className="flex items-center justify-between gap-2">
-          <span className="text-gray-600 flex-shrink-0">Categoría:</span>
+          <span className="text-gray-600 shrink-0">Categoría:</span>
           <span className="font-medium text-right truncate">{product.category}</span>
         </div>
         <div className="flex items-center justify-between gap-1.5">
-          <span className="text-gray-600 flex-shrink-0">Disp:</span>
+          <span className="text-gray-600 shrink-0">Disp:</span>
           <span
-            className={`font-semibold text-right flex-shrink-0 ${product.inStock ? 'text-green-600' : 'text-red-600'}`}
+            className={`font-semibold text-right shrink-0 ${product.inStock ? 'text-green-600' : 'text-red-600'}`}
           >
             {product.inStock ? 'Disponible' : 'Agotado'}
           </span>
@@ -213,7 +213,7 @@ function ProductColumn({
               : 'bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed'
           }`}
         >
-          <ShoppingCart className="w-3.5 h-3.5 flex-shrink-0" />
+          <ShoppingCart className="w-3.5 h-3.5 shrink-0" />
           <span className="whitespace-nowrap">
             {product.inStock ? (isInCart ? 'Agregar más' : 'Agregar') : 'Agotado'}
           </span>

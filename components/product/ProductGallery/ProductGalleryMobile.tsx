@@ -74,7 +74,7 @@ export function ProductGalleryMobile({
         <div className="relative w-full aspect-square">
           {currentItem.type === "image" ? (
             <div
-              className="relative w-full h-full focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 rounded-lg group cursor-pointer"
+              className="relative w-full h-full focus:outline-hidden focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 rounded-lg group cursor-pointer"
               onClick={onOpenModal}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
@@ -123,14 +123,14 @@ export function ProductGalleryMobile({
             <>
               <button
                 onClick={onPrevious}
-                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all z-10 focus:outline-none focus:ring-2 focus:ring-primary-600 active:scale-95"
+                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all z-10 focus:outline-hidden focus:ring-2 focus:ring-primary-600 active:scale-95"
                 aria-label={`Imagen anterior. Actual: ${selectedIndex + 1} de ${mediaItems.length}`}
               >
                 <ChevronLeft className="w-5 h-5 text-gray-700" aria-hidden="true" />
               </button>
               <button
                 onClick={onNext}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all z-10 focus:outline-none focus:ring-2 focus:ring-primary-600 active:scale-95"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all z-10 focus:outline-hidden focus:ring-2 focus:ring-primary-600 active:scale-95"
                 aria-label={`Siguiente imagen. Actual: ${selectedIndex + 1} de ${mediaItems.length}`}
               >
                 <ChevronRight className="w-5 h-5 text-gray-700" aria-hidden="true" />
@@ -165,7 +165,7 @@ export function ProductGalleryMobile({
               aria-selected={selectedIndex === index}
               aria-controls={`image-${index}`}
               onClick={() => handleThumbnailClick(index)}
-              className={`relative flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all snap-center focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 active:scale-95 ${
+              className={`relative shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all snap-center focus:outline-hidden focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 active:scale-95 ${
                 selectedIndex === index
                   ? "border-primary-600 ring-2 ring-primary-200"
                   : "border-gray-200 hover:border-gray-300"

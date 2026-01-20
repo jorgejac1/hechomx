@@ -73,7 +73,7 @@ export default function ImagesSection({ images, setImages }: ImagesSectionProps)
                   className="w-full h-32 object-cover rounded-lg border-2 border-gray-200"
                 />
                 {index === 0 && (
-                  <span className="absolute top-2 left-2 px-2 py-1 bg-primary-600 text-white text-xs font-semibold rounded">
+                  <span className="absolute top-2 left-2 px-2 py-1 bg-primary-600 text-white text-xs font-semibold rounded-sm">
                     Principal
                   </span>
                 )}

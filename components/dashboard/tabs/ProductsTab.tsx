@@ -236,7 +236,7 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
                   </p>
 
                   <div className="grid grid-cols-2 gap-2 text-sm mb-3">
-                    <div className="bg-gray-50 p-2 rounded">
+                    <div className="bg-gray-50 p-2 rounded-sm">
                       <p className="text-gray-600">Stock</p>
                       <p
                         className={`font-semibold ${
@@ -250,7 +250,7 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
                         {product.stock}
                       </p>
                     </div>
-                    <div className="bg-gray-50 p-2 rounded">
+                    <div className="bg-gray-50 p-2 rounded-sm">
                       <p className="text-gray-600">Vendidos</p>
                       <p className="font-semibold text-gray-900">{product.sold}</p>
                     </div>
@@ -279,7 +279,7 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
           <div className="bg-gray-900 text-white rounded-xl shadow-2xl px-4 py-3 flex items-center gap-3">
             {/* Selection Count */}
             <div className="flex items-center gap-2 pr-3 border-r border-gray-700">
-              <span className="bg-primary-600 text-white text-sm font-bold px-2 py-0.5 rounded">
+              <span className="bg-primary-600 text-white text-sm font-bold px-2 py-0.5 rounded-sm">
                 {selectedIds.size}
               </span>
               <span className="text-sm text-gray-300 hidden sm:inline">

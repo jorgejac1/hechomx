@@ -153,7 +153,7 @@ function ProfileContent({ user }: { user: User }) {
         {/* Success Message */}
         {successMessage && (
           <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
             <p className="text-sm text-green-800 font-medium">{successMessage}</p>
           </div>
         )}
@@ -161,7 +161,7 @@ function ProfileContent({ user }: { user: User }) {
         {/* Error Message */}
         {errors._form && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
-            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+            <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
             <p className="text-sm text-red-800">{errors._form}</p>
           </div>
         )}
@@ -445,7 +445,7 @@ function ProfileContent({ user }: { user: User }) {
               {user.makerProfile ? (
                 <div className="space-y-4">
                   <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center shrink-0">
                       <span className="text-2xl font-bold text-primary-700">
                         {user.makerProfile.shopName.charAt(0)}
                       </span>

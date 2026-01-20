@@ -107,7 +107,7 @@ export const VERIFICATION_LEVELS: Record<string, VerificationLevelInfo> = {
       level: 'master_artisan',
       icon: '👑',
       color: 'text-primary-700',
-      bgColor: 'bg-gradient-to-r from-accent-200 to-primary-200',
+      bgColor: 'bg-linear-to-r from-accent-200 to-primary-200',
       description: 'Master craftsperson with exceptional heritage',
       descriptionEs: 'Maestro artesano con herencia excepcional',
       earnedAt: new Date(),

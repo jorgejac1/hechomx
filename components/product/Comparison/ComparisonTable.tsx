@@ -64,7 +64,7 @@ export default function ComparisonTable({ products, showOnlyDifferences }: Compa
   );
 
   return (
-    <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+    <div className="bg-white rounded-xl shadow-xs overflow-hidden">
       {/* Sticky Header */}
       <div
         style={gridStyle}
@@ -317,7 +317,7 @@ export default function ComparisonTable({ products, showOnlyDifferences }: Compa
                   success(`${product.name} agregado al carrito`);
                 }}
               >
-                <ShoppingCart className="w-4 h-4 flex-shrink-0" />
+                <ShoppingCart className="w-4 h-4 shrink-0" />
                 <span className="truncate">
                   {product.inStock
                     ? isInCart(product.id)

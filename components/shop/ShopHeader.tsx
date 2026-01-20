@@ -53,11 +53,11 @@ export default function ShopHeader({ shop }: ShopHeaderProps) {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white">
+      <div className="bg-linear-to-r from-primary-600 to-primary-700 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row gap-6 items-start">
             {/* Avatar */}
-            <div className="relative flex-shrink-0">
+            <div className="relative shrink-0">
               <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-white shadow-xl bg-white">
                 {shop.avatar ? (
                   <Image

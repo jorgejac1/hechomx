@@ -93,7 +93,7 @@ export default function WorkshopStorySection({
 
       {/* Team tip */}
       <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-start gap-3">
-        <Target className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+        <Target className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
         <div>
           <p className="text-sm text-blue-900 font-semibold">Consejo: Destaquen lo colaborativo</p>
           <p className="text-sm text-blue-800">

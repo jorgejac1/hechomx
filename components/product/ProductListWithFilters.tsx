@@ -49,7 +49,7 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
         </div>
 
         {/* Search and Filter Bar */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+        <div className="bg-white rounded-xl shadow-xs border border-gray-200 p-4 mb-6">
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
@@ -171,7 +171,7 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
+          <div className="bg-white rounded-xl shadow-xs border border-gray-200 p-12 text-center">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-4">
               <Filter className="w-10 h-10 text-gray-400" />
             </div>

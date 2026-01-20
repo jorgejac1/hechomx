@@ -100,7 +100,7 @@ function VerificationApplicationContent({ user }: { user: User }) {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-xs p-6 mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Solicitud de Verificación</h1>
           <p className="text-gray-600">
             Completa tu solicitud para ser verificado como artesano auténtico
@@ -108,7 +108,7 @@ function VerificationApplicationContent({ user }: { user: User }) {
         </div>
 
         {/* Progress */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-xs p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             {[1, 2, 3, 4].map((s) => (
               <div key={s} className="flex items-center">
@@ -134,7 +134,7 @@ function VerificationApplicationContent({ user }: { user: User }) {
         </div>
 
         {/* Step Content */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
+        <div className="bg-white rounded-lg shadow-xs p-6">
           {step === 1 && (
             <div className="space-y-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
@@ -181,7 +181,7 @@ function VerificationApplicationContent({ user }: { user: User }) {
                           <ul className="text-sm text-gray-600 space-y-1">
                             {level.benefitsEs.slice(0, 3).map((benefit, i) => (
                               <li key={i} className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-primary-600 mt-0.5 flex-shrink-0" />
+                                <CheckCircle className="w-4 h-4 text-primary-600 mt-0.5 shrink-0" />
                                 <span>{benefit}</span>
                               </li>
                             ))}
@@ -319,7 +319,7 @@ function VerificationApplicationContent({ user }: { user: User }) {
                     onChange={(e) =>
                       setFormData({ ...formData, hasPhysicalWorkshop: e.target.checked })
                     }
-                    className="w-4 h-4 text-primary-600 rounded focus:ring-primary-500"
+                    className="w-4 h-4 text-primary-600 rounded-sm focus:ring-primary-500"
                   />
                   <span className="text-sm text-gray-700">Tengo un taller físico</span>
                 </label>
@@ -376,7 +376,7 @@ function VerificationApplicationContent({ user }: { user: User }) {
 
               <div className="bg-secondary-50 border border-secondary-200 rounded-lg p-4 mb-6">
                 <div className="flex gap-3">
-                  <AlertCircle className="w-5 h-5 text-secondary-600 flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="w-5 h-5 text-secondary-600 shrink-0 mt-0.5" />
                   <div className="text-sm text-secondary-800">
                     <p className="font-semibold mb-1">Documentos Requeridos:</p>
                     <ul className="space-y-1">

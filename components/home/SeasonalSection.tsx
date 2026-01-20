@@ -120,7 +120,7 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
                 </div>
                 <Link
                   href={`/productos?q=${currentTheme.keywords[0]}`}
-                  className="block bg-white text-center text-gray-900 px-4 sm:px-5 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm shadow-sm"
+                  className="block bg-white text-center text-gray-900 px-4 sm:px-5 py-2 rounded-full font-bold hover:bg-gray-100 transition text-sm shadow-xs"
                 >
                   Inspírate
                 </Link>
@@ -155,7 +155,7 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
                           sizes="(max-width: 768px) 100vw, 50vw"
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent" />
                       </div>
 
                       {/* Price Badge */}
@@ -164,7 +164,7 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
                       </div>
 
                       {/* Product Name */}
-                      <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 text-white sm:transform sm:translate-y-full sm:group-hover:translate-y-0 sm:transition-transform sm:duration-300 bg-gradient-to-t from-black/60 to-transparent sm:bg-transparent">
+                      <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 text-white sm:transform sm:translate-y-full sm:group-hover:translate-y-0 sm:transition-transform sm:duration-300 bg-linear-to-t from-black/60 to-transparent sm:bg-transparent">
                         <p className="font-semibold text-xs sm:text-sm line-clamp-2">
                           {product.name}
                         </p>

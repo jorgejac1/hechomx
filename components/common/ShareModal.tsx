@@ -145,7 +145,7 @@ export default function ShareModal({ isOpen, onClose, url, title, text = '' }: S
                   type="text"
                   value={url}
                   readOnly
-                  className="flex-1 px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="flex-1 px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-600 focus:outline-hidden focus:ring-2 focus:ring-primary-500"
                   onClick={(e) => e.currentTarget.select()}
                 />
                 <button

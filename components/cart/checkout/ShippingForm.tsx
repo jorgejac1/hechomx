@@ -45,7 +45,7 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
 
   const inputClasses = (field: string) => `
     w-full px-4 py-3 border rounded-lg transition-colors
-    focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+    focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-primary-500
     ${errors[field] ? 'border-red-500 bg-red-50' : 'border-gray-300'}
   `;
 
@@ -75,7 +75,7 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
                     <p className="font-medium text-gray-900">
                       {address.firstName} {address.lastName}
                       {address.label && (
-                        <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
+                        <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-sm">
                           {address.label}
                         </span>
                       )}
@@ -89,7 +89,7 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
                     </p>
                   </div>
                   {address.isDefault && (
-                    <span className="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">
+                    <span className="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded-sm">
                       Predeterminada
                     </span>
                   )}

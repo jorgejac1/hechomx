@@ -47,7 +47,7 @@ export default function PaymentInfoPage() {
         {/* Security Notice */}
         <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
           <div className="flex items-start gap-4">
-            <Shield className="w-8 h-8 text-green-600 flex-shrink-0" />
+            <Shield className="w-8 h-8 text-green-600 shrink-0" />
             <div>
               <h3 className="font-bold text-green-900 mb-2">Tus Pagos son 100% Seguros</h3>
               <p className="text-sm text-green-800">
@@ -90,7 +90,7 @@ export default function PaymentInfoPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
+              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-sm">
                 <h4 className="font-bold text-blue-900 mb-2">Pagos a meses sin intereses</h4>
                 <p className="text-sm text-blue-800">
                   Compras mayores a $1,000 MXN pueden pagarse a 3, 6, 9 o 12 meses sin intereses con
@@ -100,15 +100,15 @@ export default function PaymentInfoPage() {
 
               <ul className="space-y-2 text-gray-700 text-sm ml-4">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                   <span>Procesamiento instantáneo</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                   <span>Sin cargos adicionales</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                   <span>Protección contra fraude</span>
                 </li>
               </ul>
@@ -129,15 +129,15 @@ export default function PaymentInfoPage() {
 
               <ul className="space-y-2 text-gray-700 text-sm ml-4">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                   <span>Sin necesidad de ingresar datos bancarios</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                   <span>Protección al comprador de PayPal</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                   <span>Confirmación inmediata del pago</span>
                 </li>
               </ul>
@@ -156,7 +156,7 @@ export default function PaymentInfoPage() {
                 cualquier tienda OXXO.
               </p>
 
-              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded">
+              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded-sm">
                 <h4 className="font-bold text-yellow-900 mb-2">Cómo pagar en OXXO:</h4>
                 <ol className="text-sm text-yellow-800 space-y-1 ml-4 list-decimal">
                   <li>Selecciona OXXO Pay al finalizar tu compra</li>
@@ -209,7 +209,7 @@ export default function PaymentInfoPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
+              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-sm">
                 <p className="text-sm text-blue-900">
                   <strong>Importante:</strong> Envía tu comprobante de pago a{' '}
                   <a href="mailto:pagos@@papalotemarket.com" className="underline">
@@ -237,19 +237,19 @@ export default function PaymentInfoPage() {
                 <h4 className="font-bold text-gray-900 mb-3">Requisitos para facturar:</h4>
                 <ul className="space-y-2 text-sm ml-4">
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                     <span>RFC</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                     <span>Razón Social</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                     <span>Código Postal</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                     <span>Uso de CFDI</span>
                   </li>
                 </ul>
@@ -308,7 +308,7 @@ export default function PaymentInfoPage() {
                 </div>
               </div>
 
-              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded">
+              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded-sm">
                 <p className="text-sm text-green-900">
                   <strong>Garantía:</strong> Si detectas algún cargo no autorizado, contáctanos
                   inmediatamente. Investigaremos y resolveremos el problema en 48 horas.
@@ -318,7 +318,7 @@ export default function PaymentInfoPage() {
           </section>
 
           {/* Contact Card */}
-          <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8">
+          <div className="bg-linear-to-r from-primary-600 to-primary-700 text-white rounded-xl shadow-md p-8">
             <div className="text-center">
               <CreditCard className="w-12 h-12 mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-2">¿Problemas con tu pago?</h2>

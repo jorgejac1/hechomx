@@ -59,7 +59,7 @@ export default function RankedList({
           {/* Rank Badge */}
           {showRank && (
             <span
-              className={`w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold flex-shrink-0 ${rankColorStyles[rankColor]}`}
+              className={`w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold shrink-0 ${rankColorStyles[rankColor]}`}
             >
               {index + 1}
             </span>
@@ -72,7 +72,7 @@ export default function RankedList({
               alt=""
               width={40}
               height={40}
-              className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+              className="w-10 h-10 rounded-full object-cover shrink-0"
             />
           )}
 
@@ -83,7 +83,7 @@ export default function RankedList({
           </div>
 
           {/* Value & Trend */}
-          <div className="text-right flex-shrink-0">
+          <div className="text-right shrink-0">
             <p className="font-semibold text-gray-900">{item.value}</p>
             {showTrend && item.trend !== undefined && (
               <p

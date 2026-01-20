@@ -38,7 +38,7 @@ export default function ScrollToTop() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
       }
-      className="fixed bottom-20 right-4 sm:bottom-8 sm:right-8 z-40 !p-2.5 sm:!p-3 rounded-full shadow-lg hover:scale-110"
+      className="fixed bottom-20 right-4 sm:bottom-8 sm:right-8 z-40 p-2.5! sm:p-3! rounded-full shadow-lg hover:scale-110"
       ariaLabel="Volver arriba"
     />
   );

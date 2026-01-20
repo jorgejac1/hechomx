@@ -144,7 +144,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white py-16 px-4">
+      <div className="bg-linear-to-r from-primary-600 to-primary-700 text-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <Link
             href={ROUTES.HOME}
@@ -291,7 +291,7 @@ export default function BlogPage() {
         </section>
 
         {/* Newsletter Subscription */}
-        <section className="mt-12 bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl shadow-lg p-8 text-white">
+        <section className="mt-12 bg-linear-to-r from-primary-600 to-primary-700 rounded-xl shadow-lg p-8 text-white">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">Suscríbete a Nuestro Newsletter</h2>
             <p className="text-primary-100 mb-6">
@@ -302,7 +302,7 @@ export default function BlogPage() {
               <input
                 type="email"
                 placeholder="Tu correo electrónico"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-300"
+                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-hidden focus:ring-2 focus:ring-primary-300"
               />
               <button
                 type="submit"

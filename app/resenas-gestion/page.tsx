@@ -258,10 +258,10 @@ function ReviewsManagementContent({ user }: { user: User }) {
                         alt={review.buyer.name}
                         width={48}
                         height={48}
-                        className="rounded-full flex-shrink-0"
+                        className="rounded-full shrink-0"
                       />
                     ) : (
-                      <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center shrink-0">
                         <span className="text-gray-600 font-semibold">
                           {review.buyer.name.charAt(0)}
                         </span>
@@ -271,7 +271,7 @@ function ReviewsManagementContent({ user }: { user: User }) {
                       <div className="flex items-center gap-2 mb-1">
                         <p className="font-semibold text-gray-900 truncate">{review.buyer.name}</p>
                         {review.buyer.verified && (
-                          <ShieldCheck className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                          <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
                         )}
                       </div>
                       <div className="flex items-center gap-2 mb-1">
@@ -282,9 +282,9 @@ function ReviewsManagementContent({ user }: { user: User }) {
                       </div>
                     </div>
                     {review.status === 'responded' ? (
-                      <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                      <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
                     ) : (
-                      <Clock className="w-5 h-5 text-yellow-600 flex-shrink-0" />
+                      <Clock className="w-5 h-5 text-yellow-600 shrink-0" />
                     )}
                   </div>
 
@@ -295,7 +295,7 @@ function ReviewsManagementContent({ user }: { user: User }) {
                       alt={review.product.name}
                       width={48}
                       height={48}
-                      className="rounded-lg object-cover flex-shrink-0"
+                      className="rounded-lg object-cover shrink-0"
                     />
                     <p className="text-sm font-semibold text-gray-900 flex-1 truncate">
                       {review.product.name}
@@ -317,7 +317,7 @@ function ReviewsManagementContent({ user }: { user: User }) {
                             e.stopPropagation();
                             setShowImageModal(img);
                           }}
-                          className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden hover:opacity-80 transition"
+                          className="relative w-20 h-20 shrink-0 rounded-lg overflow-hidden hover:opacity-80 transition"
                         >
                           <Image
                             src={img}

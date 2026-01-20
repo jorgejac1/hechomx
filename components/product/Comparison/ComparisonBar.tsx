@@ -45,7 +45,7 @@ export default function ComparisonBar() {
               {comparisonProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="relative group flex-shrink-0"
+                  className="relative group shrink-0"
                 >
                   <div className="w-20 h-20 rounded-lg overflow-hidden border-2 border-gray-200 bg-white">
                     <Image
@@ -60,7 +60,7 @@ export default function ComparisonBar() {
                   {/* Remove button */}
                   <button
                     onClick={() => removeFromComparison(product.id)}
-                    className="absolute top-0 right-0 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 transition-all shadow-md"
+                    className="absolute top-0 right-0 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 hover:scale-110 focus:outline-hidden focus:ring-2 focus:ring-red-500 focus:ring-offset-1 transition-all shadow-md"
                     aria-label={`Eliminar ${product.name} de la comparación`}
                   >
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
@@ -69,7 +69,7 @@ export default function ComparisonBar() {
                   </button>
                   
                   {/* Product name on hover */}
-                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-gray-900 text-white text-xs rounded-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
                     {product.name}
                   </div>
                 </div>

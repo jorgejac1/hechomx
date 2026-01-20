@@ -128,7 +128,7 @@ export default function CartSummary() {
 
         {cartTotal < 1000 && !isFreeShippingCoupon && (
           <div className="flex items-start gap-2 text-xs text-primary-700 bg-primary-50 p-3 rounded-lg">
-            <Tag className="w-4 h-4 flex-shrink-0 mt-0.5" />
+            <Tag className="w-4 h-4 shrink-0 mt-0.5" />
             <p>
               Agrega <strong>{formatCurrency(1000 - cartTotal)}</strong> más para obtener{' '}
               <strong>envío gratis</strong>
