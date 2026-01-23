@@ -80,11 +80,12 @@ function MobileMenuItem({
   external,
 }: MobileMenuItemProps) {
   const variantClasses = {
-    default: 'text-gray-700 hover:text-primary-600',
-    primary: 'bg-primary-50 text-primary-700 hover:bg-primary-100 px-4 rounded-lg',
-    purple: 'text-purple-700 hover:text-purple-800',
-    blue: 'text-blue-600 hover:text-blue-700',
-    red: 'text-red-600 hover:text-red-700',
+    default: 'text-gray-700 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400',
+    primary:
+      'bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-primary-900/50 px-4 rounded-lg',
+    purple: 'text-purple-700 dark:text-purple-300 hover:text-purple-800 dark:hover:text-purple-200',
+    blue: 'text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300',
+    red: 'text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300',
   };
 
   const linkProps = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
@@ -124,8 +125,8 @@ function MobileMenuButton({
   variant?: 'default' | 'red' | 'primary';
 }) {
   const variantClasses = {
-    default: 'text-gray-700 hover:text-primary-600',
-    red: 'text-red-600 hover:text-red-700',
+    default: 'text-gray-700 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-400',
+    red: 'text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300',
     primary: 'bg-primary-600 text-white hover:bg-primary-700 px-4 rounded-lg',
   };
 
@@ -154,7 +155,10 @@ function MobileMenuSection({
   title: string;
   variant?: 'default' | 'purple';
 }) {
-  const colorClass = variant === 'purple' ? 'text-purple-600' : 'text-gray-500';
+  const colorClass =
+    variant === 'purple'
+      ? 'text-purple-600 dark:text-purple-400'
+      : 'text-gray-500 dark:text-gray-400';
   return (
     <p className={`text-xs font-semibold uppercase tracking-wider px-1 py-2 ${colorClass}`}>
       {title}
@@ -167,7 +171,7 @@ function MobileMenuSection({
  * @returns The rendered divider element with separator role
  */
 function MobileMenuDivider() {
-  return <div className="border-t border-gray-200 my-2" role="separator" />;
+  return <div className="border-t border-gray-200 dark:border-gray-700 my-2" role="separator" />;
 }
 
 /**
@@ -182,8 +186,8 @@ function UserHeader({ user, isAdmin }: { user: UserType; isAdmin: boolean }) {
     <div
       className={`flex items-center gap-3 py-3 ${
         isAdmin
-          ? 'border-b border-purple-200 bg-purple-50 -mx-6 px-6 mb-2'
-          : 'pt-2 pb-4 border-b border-gray-200'
+          ? 'border-b border-purple-200 dark:border-purple-800 bg-purple-50 dark:bg-purple-900/30 -mx-6 px-6 mb-2'
+          : 'pt-2 pb-4 border-b border-gray-200 dark:border-gray-700'
       }`}
     >
       {user.avatar && (
@@ -197,13 +201,15 @@ function UserHeader({ user, isAdmin }: { user: UserType; isAdmin: boolean }) {
       )}
       <div>
         <div className="flex items-center gap-2">
-          {isAdmin && <Shield className="w-4 h-4 text-purple-600" aria-hidden="true" />}
-          <p className="text-sm font-semibold text-gray-900">{user.name}</p>
+          {isAdmin && (
+            <Shield className="w-4 h-4 text-purple-600 dark:text-purple-400" aria-hidden="true" />
+          )}
+          <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{user.name}</p>
         </div>
         {isAdmin ? (
-          <p className="text-xs text-purple-600 font-medium">Administrador</p>
+          <p className="text-xs text-purple-600 dark:text-purple-400 font-medium">Administrador</p>
         ) : (
-          <p className="text-xs text-gray-600">{user.email}</p>
+          <p className="text-xs text-gray-600 dark:text-gray-400">{user.email}</p>
         )}
       </div>
     </div>
