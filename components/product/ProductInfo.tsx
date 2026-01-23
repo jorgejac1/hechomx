@@ -210,16 +210,9 @@ export default function ProductInfo({
             >
               <Minus className="w-5 h-5 text-gray-600" />
             </button>
-            <input
-              type="number"
-              min="1"
-              value={selectedQuantity}
-              onChange={(e) => {
-                const value = parseInt(e.target.value);
-                if (value > 0) onQuantityChange(value);
-              }}
-              className="w-20 text-center py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 font-semibold"
-            />
+            <span className="inline-flex items-center justify-center w-20 py-2 border-2 border-gray-300 rounded-lg bg-white text-gray-900 font-semibold text-lg">
+              {selectedQuantity}
+            </span>
             <button
               onClick={increaseQuantity}
               className="p-2 border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
@@ -267,7 +260,7 @@ export default function ProductInfo({
             icon={<Heart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />}
             fullWidth
           >
-            <span className="hidden sm:inline">Favoritos</span>
+            Favoritos
           </Button>
 
           <Button
@@ -277,7 +270,7 @@ export default function ProductInfo({
             icon={<Share2 className="w-5 h-5" />}
             fullWidth
           >
-            <span className="hidden sm:inline">Compartir</span>
+            Compartir
           </Button>
         </div>
       </div>
