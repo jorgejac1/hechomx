@@ -139,11 +139,17 @@ export default function Table<T>({
   const [sortKey, setSortKey] = useState<string | null>(defaultSortKey || null);
   const [sortDirection, setSortDirection] = useState<SortDirection>(defaultSortDirection);
 
-  // Size styles
+  // Size styles - responsive padding for mobile
   const sizeStyles: Record<TableSize, { cell: string; header: string }> = {
-    sm: { cell: 'py-2 px-3 text-sm', header: 'py-2 px-3 text-xs' },
-    md: { cell: 'py-3 px-4 text-sm', header: 'py-3 px-4 text-sm' },
-    lg: { cell: 'py-4 px-6 text-base', header: 'py-4 px-6 text-base' },
+    sm: { cell: 'py-2 px-2 sm:px-3 text-xs sm:text-sm', header: 'py-2 px-2 sm:px-3 text-xs' },
+    md: {
+      cell: 'py-2.5 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm',
+      header: 'py-2.5 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm',
+    },
+    lg: {
+      cell: 'py-3 sm:py-4 px-4 sm:px-6 text-sm sm:text-base',
+      header: 'py-3 sm:py-4 px-4 sm:px-6 text-sm sm:text-base',
+    },
   };
 
   // Get row key
@@ -293,8 +299,8 @@ export default function Table<T>({
 
   return (
     <TableContext.Provider value={contextValue}>
-      <div className={`overflow-x-auto ${className}`}>
-        <table className="w-full" role="grid">
+      <div className={`overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0 ${className}`}>
+        <table className="w-full min-w-[500px] sm:min-w-0" role="grid">
           {caption && <caption className="sr-only">{caption}</caption>}
           <thead className={stickyHeader ? 'sticky top-0 z-10' : ''}>
             <tr

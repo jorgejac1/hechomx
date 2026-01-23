@@ -80,11 +80,11 @@ export default function Button({
       'bg-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 focus:ring-gray-500 border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 disabled:text-gray-400 disabled:border-gray-200 dark:disabled:border-gray-700 disabled:cursor-not-allowed',
   };
 
-  // Responsive size styles (for mobile optimization)
+  // Responsive size styles with minimum touch target height (44px for WCAG compliance)
   const responsiveSizeStyles = {
-    sm: 'px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm gap-1 sm:gap-1.5',
-    md: 'px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base gap-1.5 sm:gap-2',
-    lg: 'px-4 sm:px-6 py-2 sm:py-3 text-base sm:text-lg gap-2 sm:gap-2.5',
+    sm: 'px-2.5 sm:px-3 py-1.5 sm:py-1.5 text-xs sm:text-sm gap-1 sm:gap-1.5 min-h-[36px] sm:min-h-[36px]',
+    md: 'px-3 sm:px-4 py-2 sm:py-2 text-sm sm:text-base gap-1.5 sm:gap-2 min-h-[44px]',
+    lg: 'px-4 sm:px-6 py-2.5 sm:py-3 text-base sm:text-lg gap-2 sm:gap-2.5 min-h-[48px] sm:min-h-[52px]',
   };
 
   // Icon size based on button size

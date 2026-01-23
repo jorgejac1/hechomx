@@ -13,6 +13,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import ComparisonBar from '@/components/product/Comparison/ComparisonBar';
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import { MaintenanceProvider } from '@/components/providers/MaintenanceProvider';
+import FeedbackWidget from '@/components/common/FeedbackWidget';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <Suspense fallback={null}>
                       <ComparisonBar />
                     </Suspense>
+                    <FeedbackWidget />
                   </ComparisonProvider>
                 </CartProvider>
               </MaintenanceProvider>

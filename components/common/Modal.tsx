@@ -61,13 +61,13 @@ export default function Modal({
   const modalRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
 
-  // Size styles
+  // Size styles - responsive with mobile-friendly defaults
   const sizeStyles = {
-    sm: 'max-w-sm',
-    md: 'max-w-md',
-    lg: 'max-w-lg',
-    xl: 'max-w-xl',
-    full: 'max-w-4xl',
+    sm: 'max-w-[calc(100%-2rem)] sm:max-w-sm',
+    md: 'max-w-[calc(100%-2rem)] sm:max-w-md',
+    lg: 'max-w-[calc(100%-2rem)] sm:max-w-lg',
+    xl: 'max-w-[calc(100%-2rem)] sm:max-w-xl',
+    full: 'max-w-[calc(100%-2rem)] sm:max-w-4xl',
   };
 
   // Handle escape key
@@ -186,15 +186,21 @@ export default function Modal({
         >
           {/* Header */}
           {(title || showCloseButton) && (
-            <div className="flex items-start justify-between p-6 pb-0">
-              <div>
+            <div className="flex items-start justify-between p-4 sm:p-6 pb-0">
+              <div className="flex-1 min-w-0 pr-2">
                 {title && (
-                  <h2 id="modal-title" className="text-lg font-bold text-gray-900">
+                  <h2
+                    id="modal-title"
+                    className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100"
+                  >
                     {title}
                   </h2>
                 )}
                 {description && (
-                  <p id="modal-description" className="mt-1 text-sm text-gray-600">
+                  <p
+                    id="modal-description"
+                    className="mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400"
+                  >
                     {description}
                   </p>
                 )}
@@ -204,7 +210,7 @@ export default function Modal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="ml-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="shrink-0 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                   aria-label="Cerrar"
                 >
                   <X className="w-5 h-5" />
@@ -214,12 +220,12 @@ export default function Modal({
           )}
 
           {/* Content */}
-          <div className="p-6">{children}</div>
+          <div className="p-4 sm:p-6">{children}</div>
 
           {/* Footer */}
           {footer && (
-            <div className="px-6 pb-6 pt-0">
-              <div className="flex justify-end gap-3">{footer}</div>
+            <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+              <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3">{footer}</div>
             </div>
           )}
         </div>
