@@ -463,7 +463,7 @@ export default function ReviewsSection({
                     onChange={(e) => setNewReviewComment(e.target.value)}
                     rows={5}
                     placeholder="Cuéntanos qué te pareció el producto. ¿Qué te gustó? ¿Algo que mejorar?"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none bg-white text-gray-900 placeholder:text-gray-400"
                     disabled={isSubmittingReview}
                   />
                   <p className="text-xs text-gray-500 mt-2">
