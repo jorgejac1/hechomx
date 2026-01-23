@@ -17,7 +17,9 @@ import {
   Eye,
   ShoppingCart,
   Loader2,
+  X,
 } from 'lucide-react';
+import DatePicker from '@/components/common/DatePicker';
 import { useAuth } from '@/contexts/AuthContext';
 import { ROUTES } from '@/lib/constants/routes';
 import {
@@ -33,7 +35,7 @@ import {
 } from '@/components/charts';
 import type { TableColumn } from '@/components/charts';
 
-type TimeRange = '7d' | '30d' | '90d' | '12m';
+type TimeRange = '7d' | '30d' | '90d' | '12m' | 'custom';
 
 interface ProductRow {
   rank: number;
@@ -49,6 +51,11 @@ export default function AdminReportesPage() {
   const { isAdmin, isLoading: authLoading } = useAuth();
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<TimeRange>('30d');
+  const [customDateRange, setCustomDateRange] = useState<{ start: Date | null; end: Date | null }>({
+    start: null,
+    end: null,
+  });
+  const [showCustomPicker, setShowCustomPicker] = useState(false);
 
   // Auth check
   useEffect(() => {
@@ -227,7 +234,10 @@ export default function AdminReportesPage() {
                 {(['7d', '30d', '90d', '12m'] as TimeRange[]).map((range) => (
                   <button
                     key={range}
-                    onClick={() => setTimeRange(range)}
+                    onClick={() => {
+                      setTimeRange(range);
+                      setShowCustomPicker(false);
+                    }}
                     className={`px-3 py-1.5 text-sm font-medium rounded-md transition ${
                       timeRange === range
                         ? 'bg-purple-600 text-white'
@@ -240,6 +250,19 @@ export default function AdminReportesPage() {
                     {range === '12m' && '12 meses'}
                   </button>
                 ))}
+                <button
+                  onClick={() => {
+                    setTimeRange('custom');
+                    setShowCustomPicker(true);
+                  }}
+                  className={`px-3 py-1.5 text-sm font-medium rounded-md transition ${
+                    timeRange === 'custom'
+                      ? 'bg-purple-600 text-white'
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  Personalizado
+                </button>
               </div>
 
               {/* Export Button */}
@@ -249,6 +272,50 @@ export default function AdminReportesPage() {
               </button>
             </div>
           </div>
+
+          {/* Custom Date Range Picker */}
+          {showCustomPicker && (
+            <div className="mt-4 p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold text-gray-900">Seleccionar rango de fechas</h3>
+                <button
+                  onClick={() => setShowCustomPicker(false)}
+                  className="p-1 hover:bg-gray-100 rounded-full transition"
+                >
+                  <X className="w-4 h-4 text-gray-500" />
+                </button>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <DatePicker
+                  label="Fecha inicio"
+                  value={customDateRange.start}
+                  onChange={(date) => setCustomDateRange((prev) => ({ ...prev, start: date }))}
+                  placeholder="Seleccionar fecha"
+                  maxDate={customDateRange.end || new Date()}
+                />
+                <DatePicker
+                  label="Fecha fin"
+                  value={customDateRange.end}
+                  onChange={(date) => setCustomDateRange((prev) => ({ ...prev, end: date }))}
+                  placeholder="Seleccionar fecha"
+                  minDate={customDateRange.start || undefined}
+                  maxDate={new Date()}
+                />
+              </div>
+              {customDateRange.start && customDateRange.end && (
+                <p className="mt-3 text-sm text-gray-600">
+                  Mostrando datos del{' '}
+                  <span className="font-medium">
+                    {customDateRange.start.toLocaleDateString('es-MX')}
+                  </span>{' '}
+                  al{' '}
+                  <span className="font-medium">
+                    {customDateRange.end.toLocaleDateString('es-MX')}
+                  </span>
+                </p>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Key Metrics */}

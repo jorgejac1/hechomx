@@ -110,8 +110,8 @@ export default function PricingSummary({
       {/* Info Note */}
       <div className="mt-6 p-3 bg-gray-50 rounded-lg">
         <p className="text-xs text-gray-600">
-          💡 <strong>Tip:</strong> El precio sugerido al público incluye un margen para
-          distribuidores. Ajusta según tu canal de venta.
+          <strong>Tip:</strong> El precio sugerido al público incluye un margen para distribuidores.
+          Ajusta según tu canal de venta.
         </p>
       </div>
     </div>

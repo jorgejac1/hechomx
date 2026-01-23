@@ -1,12 +1,20 @@
-import Badge from "@/components/common/Badge";
-import { Sparkles, Shield, Package } from "lucide-react";
+/**
+ * @fileoverview Product gallery trust badges component
+ * Displays trust indicators below the product gallery including
+ * handmade certification, verified artisan, and national shipping badges.
+ * @module components/product/ProductGallery/ProductGalleryBadges
+ */
 
+import Badge from '@/components/common/Badge';
+import { Sparkles, Shield, Package } from 'lucide-react';
+
+/**
+ * Renders trust badges for product gallery
+ * @returns Row of badge components with icons
+ */
 export function ProductGalleryBadges() {
   return (
-    <div
-      className="flex flex-wrap items-center justify-center gap-2 text-xs"
-      role="list"
-    >
+    <div className="flex flex-wrap items-center justify-center gap-2 text-xs" role="list">
       <Badge
         variant="primary"
         size="sm"

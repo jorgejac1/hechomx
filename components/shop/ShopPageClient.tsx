@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Client-side shop page component that renders the complete shop view
+ * Displays shop header, statistics, navigation tabs, and content sections including
+ * products, reviews, and shop information. Manages tab navigation state and calculates
+ * shop metrics from actual data.
+ * @module components/shop/ShopPageClient
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -11,8 +19,14 @@ import ShopReviews from './ShopReviews';
 import ShopPolicies from './ShopPolicies';
 import { getOrdersForSeller } from '@/lib/utils/orders';
 
+/**
+ * Props for the ShopPageClient component
+ * @interface ShopPageClientProps
+ */
 interface ShopPageClientProps {
+  /** The shop owner's user data including maker profile */
   shop: User;
+  /** Array of products belonging to this shop */
   products: Product[];
 }
 

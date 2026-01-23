@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Mock user data for admin dashboard and testing.
+ * Provides sample buyer, seller, and admin user records
+ * for development, demos, and admin user management views.
+ * @module lib/data/users
+ */
+
 export interface MockUser {
   id: string;
   name: string;

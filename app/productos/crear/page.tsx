@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { useToast } from '@/contexts/ToastContext';
 import { ROUTES } from '@/lib/constants/routes';
@@ -9,6 +10,7 @@ import ProductForm from '@/components/product/ProductForm';
 import type { User } from '@/contexts/AuthContext';
 import { ProductFormData } from '@/types/product';
 import { Plus, Store, AlertCircle } from 'lucide-react';
+import Alert from '@/components/common/Alert';
 
 export default function CreateProductPage() {
   return (
@@ -82,17 +84,15 @@ function CreateProductContent({ user }: { user: User }) {
                 <h2 className="text-2xl font-bold text-gray-900">Activa Tu Tienda</h2>
               </div>
 
-              <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="flex items-start gap-2">
-                  <AlertCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-blue-900">Configuración Rápida</p>
-                    <p className="text-sm text-blue-800">
-                      Necesitas activar tu tienda antes de crear productos. Solo tomará un momento.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <Alert
+                variant="info"
+                layout="bordered"
+                icon={AlertCircle}
+                title="Configuración Rápida"
+                className="mb-6"
+              >
+                Necesitas activar tu tienda antes de crear productos. Solo tomará un momento.
+              </Alert>
 
               <div className="space-y-4 mb-6">
                 <div>
@@ -136,12 +136,12 @@ function CreateProductContent({ user }: { user: User }) {
               </div>
 
               <div className="flex gap-3">
-                <button
-                  onClick={() => router.push(ROUTES.HOME)}
-                  className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-semibold"
+                <Link
+                  href={ROUTES.HOME}
+                  className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-semibold text-center"
                 >
                   Cancelar
-                </button>
+                </Link>
                 <button
                   onClick={handleQuickSetup}
                   className="flex-1 px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-semibold"

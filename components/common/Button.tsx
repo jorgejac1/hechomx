@@ -1,21 +1,52 @@
+/**
+ * @fileoverview Button component with multiple variants, sizes, and icon support.
+ * Supports both button and link rendering with full accessibility features.
+ * @module components/common/Button
+ */
+
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
+/**
+ * Available button visual variants
+ * @typedef {'primary' | 'secondary' | 'ghost' | 'outline'} ButtonVariant
+ */
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline';
+
+/**
+ * Available button sizes
+ * @typedef {'sm' | 'md' | 'lg'} ButtonSize
+ */
 type ButtonSize = 'sm' | 'md' | 'lg';
 
+/**
+ * Props for the Button component
+ * @interface ButtonProps
+ */
 interface ButtonProps {
+  /** Button content/label */
   children?: ReactNode;
+  /** Visual style variant - affects colors and borders */
   variant?: ButtonVariant;
+  /** Size of the button - affects padding and font size */
   size?: ButtonSize;
+  /** If provided, renders as a Next.js Link instead of button */
   href?: string;
+  /** Click handler function */
   onClick?: () => void;
+  /** HTML button type attribute */
   type?: 'button' | 'submit' | 'reset';
+  /** Whether the button is disabled */
   disabled?: boolean;
+  /** Whether the button should take full width of container */
   fullWidth?: boolean;
+  /** Optional icon element to display */
   icon?: ReactNode;
+  /** Position of the icon relative to children */
   iconPosition?: 'left' | 'right';
+  /** Additional CSS classes */
   className?: string;
+  /** Accessibility label for screen readers */
   ariaLabel?: string;
 }
 
@@ -37,16 +68,16 @@ export default function Button({
   const baseStyles =
     'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-hidden focus:ring-2 focus:ring-offset-2';
 
-  // Variant styles
+  // Variant styles with dark mode support
   const variantStyles = {
     primary:
-      'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 disabled:bg-gray-300 disabled:cursor-not-allowed',
+      'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed',
     secondary:
-      'bg-white text-primary-600 hover:bg-primary-50 focus:ring-primary-500 border-2 border-primary-600 disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed',
+      'bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-gray-700 focus:ring-primary-500 border-2 border-primary-600 dark:border-primary-500 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:text-gray-400 disabled:border-gray-300 dark:disabled:border-gray-600 disabled:cursor-not-allowed',
     ghost:
-      'bg-transparent text-primary-600 hover:bg-primary-50 focus:ring-primary-500 disabled:text-gray-400 disabled:cursor-not-allowed',
+      'bg-transparent text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-gray-800 focus:ring-primary-500 disabled:text-gray-400 disabled:cursor-not-allowed',
     outline:
-      'bg-transparent text-gray-700 hover:bg-gray-50 focus:ring-gray-500 border-2 border-gray-300 hover:border-gray-400 disabled:text-gray-400 disabled:border-gray-200 disabled:cursor-not-allowed',
+      'bg-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 focus:ring-gray-500 border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 disabled:text-gray-400 disabled:border-gray-200 dark:disabled:border-gray-700 disabled:cursor-not-allowed',
   };
 
   // Responsive size styles (for mobile optimization)

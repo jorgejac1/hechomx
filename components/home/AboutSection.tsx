@@ -1,5 +1,17 @@
+/**
+ * @fileoverview About Section Component for the Home Page
+ * Provides information about the Papalote Market platform including its mission,
+ * community values, artisan support, and trust guarantees. Also includes a newsletter
+ * subscription form and sustainability commitment note.
+ * @module components/home/AboutSection
+ */
+
 import Link from 'next/link';
 
+/**
+ * Renders the About section with platform information, newsletter signup, and sustainability note.
+ * @returns {JSX.Element} The AboutSection component
+ */
 export default function AboutSection() {
   return (
     <>

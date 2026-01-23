@@ -1,19 +1,42 @@
+/**
+ * @fileoverview Alerts section component for the seller dashboard.
+ * Displays important notifications including new orders, out-of-stock products,
+ * and low stock warnings. Alerts are color-coded by severity and can link
+ * to relevant management pages.
+ * @module components/dashboard/AlertsSection
+ */
+
 'use client';
 
 import { AlertCircle, Package, ShoppingBag, ArrowRight } from 'lucide-react';
 import { CompleteOrder } from '@/lib/types/checkout';
 import { formatCurrency } from '@/lib/utils/currency';
 
+/**
+ * @interface ProductAlert
+ * Represents a product with stock-related alert information.
+ */
 interface ProductAlert {
+  /** Name of the product */
   name: string;
+  /** Current stock quantity */
   stock: number;
 }
 
+/**
+ * @interface AlertsSectionProps
+ * Props for the AlertsSection component.
+ */
 interface AlertsSectionProps {
+  /** Products with low stock levels */
   lowStockProducts: ProductAlert[];
+  /** Products that are completely out of stock */
   outOfStockProducts: ProductAlert[];
+  /** Array of new orders requiring attention */
   newOrders?: CompleteOrder[];
+  /** Seller name for filtering order items */
   sellerName?: string;
+  /** Callback to navigate to orders view */
   onViewOrders?: () => void;
 }
 

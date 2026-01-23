@@ -8,10 +8,31 @@ import {
   Clock,
   DollarSign,
   Shield,
-  AlertCircle,
   CheckCircle,
+  AlertCircle,
 } from 'lucide-react';
 import { ROUTES } from '@/lib';
+import Alert from '@/components/common/Alert';
+import Table, { TableColumn } from '@/components/common/Table';
+
+interface ShippingZone {
+  id: number;
+  zone: string;
+  cost: string;
+}
+
+const shippingZones: ShippingZone[] = [
+  { id: 1, zone: 'CDMX y Área Metropolitana', cost: '$80 MXN' },
+  { id: 2, zone: 'Zona Centro (Puebla, Querétaro, etc.)', cost: '$100 MXN' },
+  { id: 3, zone: 'Norte (Monterrey, Chihuahua, etc.)', cost: '$120 MXN' },
+  { id: 4, zone: 'Sur (Chiapas, Yucatán, etc.)', cost: '$120 MXN' },
+  { id: 5, zone: 'Zonas remotas', cost: '$150 MXN' },
+];
+
+const shippingColumns: TableColumn<ShippingZone>[] = [
+  { key: 'zone', header: 'Zona', cell: 'zone' },
+  { key: 'cost', header: 'Costo (pedidos <$500)', cell: 'cost' },
+];
 
 export const metadata: Metadata = {
   title: 'Información de Envíos | Papalote Market',
@@ -79,13 +100,10 @@ export default function ShippingInfoPage() {
                 rurales y áreas remotas. Nuestro objetivo es que la belleza del arte artesanal
                 mexicano llegue a todos los rincones del país.
               </p>
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-sm">
-                <p className="text-sm text-blue-900">
-                  <AlertCircle className="w-4 h-4 inline mr-2" />
-                  Actualmente solo realizamos envíos dentro de México. Próximamente estaremos
-                  enviando a todo el mundo.
-                </p>
-              </div>
+              <Alert variant="info" layout="sidebar" icon={AlertCircle}>
+                Actualmente solo realizamos envíos dentro de México. Próximamente estaremos enviando
+                a todo el mundo.
+              </Alert>
             </div>
           </section>
 
@@ -138,13 +156,10 @@ export default function ShippingInfoPage() {
                 </div>
               </div>
 
-              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded-sm">
-                <p className="text-sm text-yellow-900">
-                  <AlertCircle className="w-4 h-4 inline mr-2" />
-                  Los tiempos son estimados y pueden variar durante temporadas altas (Día de
-                  Muertos, Navidad, etc.)
-                </p>
-              </div>
+              <Alert variant="warning" layout="sidebar" icon={AlertCircle}>
+                Los tiempos son estimados y pueden variar durante temporadas altas (Día de Muertos,
+                Navidad, etc.)
+              </Alert>
             </div>
           </section>
 
@@ -155,49 +170,27 @@ export default function ShippingInfoPage() {
               <h2 className="text-2xl font-bold text-gray-900">Costos de Envío</h2>
             </div>
             <div className="space-y-4">
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
-                <h3 className="font-bold text-green-900 mb-2 flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5" />
-                  ¡Envío Gratuito!
-                </h3>
-                <p className="text-sm text-green-800">
-                  En pedidos superiores a <strong>$500 MXN</strong> el envío es completamente gratis
-                  a cualquier parte de México.
-                </p>
-              </div>
+              <Alert
+                variant="success"
+                layout="bordered"
+                icon={CheckCircle}
+                title="¡Envío Gratuito!"
+                className="mb-4"
+              >
+                En pedidos superiores a <strong>$500 MXN</strong> el envío es completamente gratis a
+                cualquier parte de México.
+              </Alert>
 
-              <table className="w-full border border-gray-200 rounded-lg overflow-hidden">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="text-left p-4 font-semibold text-gray-900">Zona</th>
-                    <th className="text-left p-4 font-semibold text-gray-900">
-                      Costo (pedidos &lt;$500)
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  <tr>
-                    <td className="p-4 text-gray-700">CDMX y Área Metropolitana</td>
-                    <td className="p-4 text-gray-700">$80 MXN</td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 text-gray-700">Zona Centro (Puebla, Querétaro, etc.)</td>
-                    <td className="p-4 text-gray-700">$100 MXN</td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 text-gray-700">Norte (Monterrey, Chihuahua, etc.)</td>
-                    <td className="p-4 text-gray-700">$120 MXN</td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 text-gray-700">Sur (Chiapas, Yucatán, etc.)</td>
-                    <td className="p-4 text-gray-700">$120 MXN</td>
-                  </tr>
-                  <tr>
-                    <td className="p-4 text-gray-700">Zonas remotas</td>
-                    <td className="p-4 text-gray-700">$150 MXN</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <Table
+                  columns={shippingColumns}
+                  data={shippingZones}
+                  keyAccessor="id"
+                  variant="striped"
+                  hoverable={false}
+                  size="md"
+                />
+              </div>
 
               <p className="text-sm text-gray-600">
                 * Los costos pueden variar según el peso y dimensiones del paquete
@@ -234,17 +227,14 @@ export default function ShippingInfoPage() {
                 </li>
               </ul>
 
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-sm mt-4">
-                <h3 className="font-bold text-blue-900 mb-2">Rastreo de tu Pedido</h3>
-                <p className="text-sm text-blue-800 mb-2">
-                  Una vez que tu pedido sea enviado, recibirás:
-                </p>
-                <ul className="text-sm text-blue-800 space-y-1 ml-4">
+              <Alert variant="info" layout="sidebar" title="Rastreo de tu Pedido" className="mt-4">
+                <p className="mb-2">Una vez que tu pedido sea enviado, recibirás:</p>
+                <ul className="space-y-1 ml-4">
                   <li>• Email con número de rastreo</li>
                   <li>• Link directo para rastrear tu paquete</li>
                   <li>• Actualizaciones del estado en tu cuenta</li>
                 </ul>
-              </div>
+              </Alert>
             </div>
           </section>
 
@@ -278,12 +268,11 @@ export default function ShippingInfoPage() {
                 </li>
               </ul>
 
-              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded-sm">
-                <p className="text-sm text-green-900 font-medium">
-                  <Shield className="w-4 h-4 inline mr-2" />
+              <Alert variant="success" layout="sidebar" icon={Shield}>
+                <span className="font-medium">
                   Si tu producto llega dañado, lo reemplazamos o reembolsamos sin costo adicional.
-                </p>
-              </div>
+                </span>
+              </Alert>
             </div>
           </section>
 

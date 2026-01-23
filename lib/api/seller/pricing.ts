@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Pricing calculator API client functions.
+ * Provides functions for fetching fair trade wage rates by region,
+ * saving pricing calculations, and calculating wholesale/retail prices.
+ * @module lib/api/seller/pricing
+ */
+
 import type { PricingCalculation, FairTradeRates } from '@/lib/types/pricing-calculator';
 
 export async function getFairTradeRates(region: string): Promise<FairTradeRates | null> {
@@ -22,7 +29,7 @@ export async function getFairTradeRates(region: string): Promise<FairTradeRates 
       ...regionData,
     };
   } catch (error) {
-    console.error('Error loading fair trade rates:', error);
+    console.error('[seller/pricing] Error loading fair trade rates:', error);
     return null;
   }
 }
@@ -36,7 +43,7 @@ export async function savePricingCalculation(
     await new Promise((resolve) => setTimeout(resolve, 500));
     return true;
   } catch (error) {
-    console.error('Error saving pricing calculation:', error);
+    console.error('[seller/pricing] Error saving pricing calculation:', error);
     return false;
   }
 }

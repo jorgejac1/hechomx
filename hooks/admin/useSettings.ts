@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Platform settings management hook for admin panel
+ * Provides CRUD operations for settings with validation, persistence, and email testing
+ * @module hooks/admin/useSettings
+ */
+
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';

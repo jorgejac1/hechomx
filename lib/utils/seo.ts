@@ -1,5 +1,8 @@
 /**
- * SEO metadata generation utilities
+ * @fileoverview SEO metadata generation utilities for product pages.
+ * Provides functions for building dynamic page titles and descriptions
+ * based on filter state, generating Next.js Metadata objects, and structured data.
+ * @module lib/utils/seo
  */
 
 import type { Metadata } from 'next';

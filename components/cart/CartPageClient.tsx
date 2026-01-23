@@ -1,16 +1,23 @@
-"use client";
+/**
+ * @fileoverview Main cart page client component for the shopping cart view.
+ * Displays cart items, order summary, and recommended products based on cart contents.
+ * Handles hydration state, empty cart display, and provides navigation to checkout.
+ * @module components/cart/CartPageClient
+ */
 
-import { useState, useEffect } from "react";
-import { useCart } from "@/contexts/CartContext";
-import { useRouter } from "next/navigation";
-import CartItemCard from "./CartItemCard";
-import CartSummary from "./CartSummary";
-import EmptyCart from "./EmptyCart";
-import { useToast } from "@/contexts/ToastContext";
-import RecommendedProducts from "./RecommendedProducts";
-import LoadingSpinner from "@/components/common/feedback/LoadingSpinner";
-import { ArrowLeft, ShoppingBag } from "lucide-react";
-import { Product } from "@/types";
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useCart } from '@/contexts/CartContext';
+import { useRouter } from 'next/navigation';
+import CartItemCard from './CartItemCard';
+import CartSummary from './CartSummary';
+import EmptyCart from './EmptyCart';
+import { useToast } from '@/contexts/ToastContext';
+import RecommendedProducts from './RecommendedProducts';
+import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
+import { ArrowLeft, ShoppingBag } from 'lucide-react';
+import { Product } from '@/types';
 
 export default function CartPageClient() {
   const { info } = useToast();
@@ -27,20 +34,18 @@ export default function CartPageClient() {
   // Fetch recommended products
   useEffect(() => {
     if (cartItems.length > 0) {
-      fetch("/api/products")
+      fetch('/api/products')
         .then((res) => res.json())
         .then((data: { data: Product[] }) => {
           // Get products from same categories as cart items
-          const cartCategories = [
-            ...new Set(cartItems.map((item) => item.category)),
-          ];
+          const cartCategories = [...new Set(cartItems.map((item) => item.category))];
           const recommended = data.data
             .filter((p) => cartCategories.includes(p.category))
             .filter((p) => !cartItems.some((item) => item.id === p.id))
             .slice(0, 4);
           setRecommendedProducts(recommended);
         })
-        .catch((err) => console.error("Error fetching products:", err));
+        .catch((err) => console.error('[CartPageClient] Error fetching products:', err));
     }
   }, [cartItems]);
 
@@ -77,20 +82,15 @@ export default function CartPageClient() {
                 Carrito de Compras
               </h1>
               <p className="text-sm sm:text-base text-gray-600">
-                {cartCount} {cartCount === 1 ? "producto" : "productos"} en tu
-                carrito
+                {cartCount} {cartCount === 1 ? 'producto' : 'productos'} en tu carrito
               </p>
             </div>
 
             <button
               onClick={() => {
-                if (
-                  window.confirm(
-                    "¿Estás seguro de que quieres vaciar el carrito?"
-                  )
-                ) {
+                if (window.confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
                   clearCart();
-                  info("Carrito vaciado");
+                  info('Carrito vaciado');
                 }
               }}
               className="text-sm text-red-600 hover:text-red-700 font-medium hover:underline"
@@ -109,12 +109,9 @@ export default function CartPageClient() {
               <div className="flex items-start gap-3">
                 <ShoppingBag className="w-5 h-5 text-primary-600 shrink-0 mt-0.5" />
                 <div className="text-sm text-primary-900">
-                  <p className="font-semibold mb-1">
-                    Compra segura y protegida
-                  </p>
+                  <p className="font-semibold mb-1">Compra segura y protegida</p>
                   <p className="text-primary-700">
-                    Todos tus productos están protegidos. Envío seguro a toda la
-                    República Mexicana.
+                    Todos tus productos están protegidos. Envío seguro a toda la República Mexicana.
                   </p>
                 </div>
               </div>
@@ -163,12 +160,8 @@ export default function CartPageClient() {
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-1">
-                Productos Auténticos
-              </h3>
-              <p className="text-sm text-gray-600">
-                100% hechos a mano por artesanos mexicanos
-              </p>
+              <h3 className="font-semibold text-gray-900 mb-1">Productos Auténticos</h3>
+              <p className="text-sm text-gray-600">100% hechos a mano por artesanos mexicanos</p>
             </div>
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 rounded-full mb-3">
@@ -187,9 +180,7 @@ export default function CartPageClient() {
                 </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-1">Pago Seguro</h3>
-              <p className="text-sm text-gray-600">
-                Transacciones protegidas y encriptadas
-              </p>
+              <p className="text-sm text-gray-600">Transacciones protegidas y encriptadas</p>
             </div>
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 rounded-full mb-3">
@@ -207,12 +198,8 @@ export default function CartPageClient() {
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-1">
-                Envío Nacional
-              </h3>
-              <p className="text-sm text-gray-600">
-                A toda la República Mexicana
-              </p>
+              <h3 className="font-semibold text-gray-900 mb-1">Envío Nacional</h3>
+              <p className="text-sm text-gray-600">A toda la República Mexicana</p>
             </div>
           </div>
         </div>

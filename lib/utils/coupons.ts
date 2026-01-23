@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Coupon validation and discount calculation utilities.
+ * Provides functions for validating coupon codes, calculating discounts
+ * (percentage, fixed, free shipping), and applying coupons to orders.
+ * @module lib/utils/coupons
+ */
+
 export interface Coupon {
   code: string;
   type: 'percentage' | 'free_shipping' | 'fixed';
@@ -43,6 +50,13 @@ const AVAILABLE_COUPONS: Coupon[] = [
     value: 50,
     description: '$50 MXN de descuento',
     minPurchase: 400,
+  },
+  {
+    code: 'EXPIRED2023',
+    type: 'percentage',
+    value: 15,
+    description: 'Cupón expirado',
+    expiresAt: '2023-01-01',
   },
 ];
 

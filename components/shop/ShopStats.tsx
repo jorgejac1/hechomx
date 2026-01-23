@@ -1,13 +1,30 @@
+/**
+ * @fileoverview Shop statistics display component
+ * Renders a grid of shop performance metrics including product count, rating,
+ * sales count, response time, and response rate. Supports both mock and actual
+ * data values with fallback behavior.
+ * @module components/shop/ShopStats
+ */
+
 'use client';
 
 import { Package, Star, ShoppingBag, Clock, TrendingUp } from 'lucide-react';
-import { ExtendedMakerProfile } from '@/lib/data/mockUsers';
+import type { ExtendedMakerProfile } from '@/lib/data/mockUsers';
 
+/**
+ * Props for the ShopStats component
+ * @interface ShopStatsProps
+ */
 interface ShopStatsProps {
+  /** Mock statistics from the maker profile */
   stats: ExtendedMakerProfile['stats'];
+  /** Actual product count (overrides mock if provided) */
   actualProductCount?: number;
+  /** Actual rating calculated from reviews (overrides mock if provided) */
   actualRating?: number;
+  /** Actual number of reviews (for display purposes) */
   actualReviewCount?: number;
+  /** Actual sales count from orders (overrides mock if provided) */
   actualSalesCount?: number;
 }
 

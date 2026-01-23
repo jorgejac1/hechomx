@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "analyze": "next experimental-analyze",
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -35,9 +36,11 @@
   "license": "ISC",
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.18",
+    "@tanstack/react-virtual": "^3.13.18",
     "html2pdf.js": "^0.14.0",
     "lucide-react": "^0.562.0",
     "next": "^16.0.10",
+    "next-themes": "^0.4.6",
     "postcss": "^8.5.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -47,6 +50,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.39.0",
+    "@next/bundle-analyzer": "^16.1.4",
     "@next/eslint-plugin-next": "^16.0.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",

@@ -1,9 +1,24 @@
+/**
+ * @fileoverview Comparison table row component
+ * Renders a single row in the comparison table with label and values.
+ * Highlights rows with different values across products.
+ * @module components/product/Comparison/ComparisonRow
+ */
+
 import { ReactNode } from 'react';
 
+/**
+ * Props for the ComparisonRow component
+ * @interface ComparisonRowProps
+ */
 interface ComparisonRowProps {
+  /** Row label text */
   label: string;
+  /** Array of values for each product column */
   values: (string | number | ReactNode)[];
+  /** Whether to hide rows with identical values */
   showOnlyDifferences: boolean;
+  /** Whether this row has different values across products */
   hasDifference: boolean;
 }
 

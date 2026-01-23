@@ -1,11 +1,22 @@
+/**
+ * @fileoverview Quick filter presets component for product browsing
+ * Displays predefined filter buttons that allow users to quickly apply
+ * common filter combinations. Syncs filter state with URL parameters.
+ * @module components/product/QuickFilters
+ */
+
 'use client';
 
 import { Suspense } from 'react';
 import { useUrlState } from '@/hooks/common/useUrlState';
 import { FILTER_PRESETS, matchesPreset } from '@/lib/constants/filterPresets';
 
+/**
+ * Inner component that renders the filter preset buttons
+ * @returns Filter preset buttons with active state management
+ */
 function FilterPresetsContent() {
-  const { searchParams, setUrlParams, clearUrlParams } = useUrlState('/productos');
+  const { searchParams, replaceUrlParams, clearUrlParams } = useUrlState('/productos');
 
   const handlePresetClick = (presetId: string) => {
     const preset = FILTER_PRESETS.find((p) => p.id === presetId);
@@ -16,7 +27,9 @@ function FilterPresetsContent() {
     if (isActive) {
       clearUrlParams();
     } else {
-      setUrlParams(preset.params);
+      // Replace all params with only the preset params
+      // This prevents params from accumulating when switching presets
+      replaceUrlParams(preset.params);
     }
   };
 

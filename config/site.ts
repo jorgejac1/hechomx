@@ -1,5 +1,8 @@
 /**
- * Site-wide configuration
+ * @fileoverview Site-wide configuration for the Papalote Market e-commerce platform.
+ * Contains core settings including site identity, contact information, social media links,
+ * business details, feature flags, pagination settings, image optimization, and shipping configuration.
+ * @module config/site
  */
 
 export const siteConfig = {

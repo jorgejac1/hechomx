@@ -1,18 +1,40 @@
+/**
+ * @fileoverview Product gallery image component
+ * Renders individual gallery images with loading states, error handling,
+ * and accessibility support. Respects reduced motion preferences.
+ * @module components/product/ProductGallery/ProductGalleryImage
+ */
+
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import { usePrefersReducedMotion } from '@/hooks/common/usePrefersReducedMotion';
 
+/**
+ * Props for the ProductGalleryImage component
+ * @interface ProductGalleryImageProps
+ */
 interface ProductGalleryImageProps {
+  /** Image URL */
   url: string;
+  /** Alt text for accessibility */
   alt: string;
+  /** Image index in the gallery */
   index: number;
+  /** Whether the image has finished loading */
   isLoaded: boolean;
+  /** Whether there was an error loading the image */
   hasError: boolean;
+  /** Callback when image loads successfully */
   onLoad: () => void;
+  /** Callback when image fails to load */
   onError: () => void;
+  /** Whether to prioritize loading this image */
   priority?: boolean;
+  /** Responsive sizes attribute for the image */
   sizes: string;
+  /** Additional CSS classes */
   className?: string;
+  /** Inline styles for zoom/transform effects */
   style?: React.CSSProperties;
 }
 

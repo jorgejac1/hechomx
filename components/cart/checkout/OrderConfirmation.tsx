@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Order confirmation page displayed after successful checkout.
+ * Shows order details, order number, payment status, shipping information,
+ * and next steps timeline. Handles pending payment instructions for OXXO and SPEI.
+ * @module components/cart/checkout/OrderConfirmation
+ */
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -23,7 +30,11 @@ import {
   Store,
   Building2,
   AlertCircle,
+  Wallet,
+  Wrench,
+  Gift,
 } from 'lucide-react';
+import Timeline from '@/components/common/Timeline';
 
 export default function OrderConfirmationClient() {
   const searchParams = useSearchParams();
@@ -314,51 +325,52 @@ export default function OrderConfirmationClient() {
           </div>
         </div>
 
-        {/* What's Next */}
+        {/* What's Next Timeline */}
         <div className="bg-primary-50 rounded-xl p-6 mb-8">
           <h3 className="font-bold text-primary-900 mb-4 flex items-center gap-2">
             <Clock className="w-5 h-5" />
             ¿Qué sigue?
           </h3>
-          <ol className="space-y-3 text-sm text-primary-800">
-            {isPendingPayment && (
-              <li className="flex items-start gap-3">
-                <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">
-                  1
-                </span>
-                <span>
-                  <strong>Completa tu pago</strong> -{' '}
-                  {order.paymentMethod === 'oxxo'
-                    ? 'Presenta el código en cualquier OXXO'
-                    : 'Realiza la transferencia SPEI'}
-                </span>
-              </li>
-            )}
-            <li className="flex items-start gap-3">
-              <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">
-                {isPendingPayment ? '2' : '1'}
-              </span>
-              <span>
-                <strong>Preparación</strong> - Los artesanos prepararán tu pedido con cuidado
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">
-                {isPendingPayment ? '3' : '2'}
-              </span>
-              <span>
-                <strong>Envío</strong> - Recibirás un correo con el número de rastreo
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="w-6 h-6 bg-primary-200 text-primary-800 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">
-                {isPendingPayment ? '4' : '3'}
-              </span>
-              <span>
-                <strong>Entrega</strong> - ¡Disfruta de tu artesanía mexicana auténtica!
-              </span>
-            </li>
-          </ol>
+          <Timeline
+            items={[
+              ...(isPendingPayment
+                ? [
+                    {
+                      id: 'payment',
+                      title: 'Completa tu pago',
+                      description:
+                        order.paymentMethod === 'oxxo'
+                          ? 'Presenta el código en cualquier OXXO'
+                          : 'Realiza la transferencia SPEI',
+                      status: 'current' as const,
+                      icon: Wallet,
+                    },
+                  ]
+                : []),
+              {
+                id: 'preparation',
+                title: 'Preparación',
+                description: 'Los artesanos prepararán tu pedido con cuidado',
+                status: isPendingPayment ? ('pending' as const) : ('current' as const),
+                icon: Wrench,
+              },
+              {
+                id: 'shipping',
+                title: 'Envío',
+                description: 'Recibirás un correo con el número de rastreo',
+                status: 'pending' as const,
+                icon: Truck,
+              },
+              {
+                id: 'delivery',
+                title: 'Entrega',
+                description: '¡Disfruta de tu artesanía mexicana auténtica!',
+                status: 'pending' as const,
+                icon: Gift,
+              },
+            ]}
+            size="sm"
+          />
         </div>
 
         {/* Action Buttons */}

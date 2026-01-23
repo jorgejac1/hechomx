@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Seller analytics and insights API client functions.
+ * Provides async functions for fetching seller analytics data,
+ * pending actions dashboard data, and customer insights.
+ * @module lib/api/seller/analytics
+ */
+
 import type {
   AnalyticsData,
   PendingActionsData,
@@ -13,13 +20,13 @@ export async function getSellerAnalytics(email: string): Promise<AnalyticsData |
     const result = await response.json();
 
     if (!result.success) {
-      console.error('Error fetching analytics:', result.error);
+      console.error('[seller/analytics] Error fetching analytics:', result.error);
       return null;
     }
 
     return result.data;
   } catch (error) {
-    console.error('Error fetching analytics:', error);
+    console.error('[seller/analytics] Error fetching analytics:', error);
     return null;
   }
 }
@@ -31,13 +38,13 @@ export async function getPendingActions(email: string): Promise<PendingActionsDa
     const result = await response.json();
 
     if (!result.success) {
-      console.error('Error fetching pending actions:', result.error);
+      console.error('[seller/analytics] Error fetching pending actions:', result.error);
       return null;
     }
 
     return result.data;
   } catch (error) {
-    console.error('Error fetching pending actions:', error);
+    console.error('[seller/analytics] Error fetching pending actions:', error);
     return null;
   }
 }
@@ -51,13 +58,13 @@ export async function getCustomerInsights(email: string): Promise<CustomerInsigh
     const result = await response.json();
 
     if (!result.success) {
-      console.error('Error fetching customer insights:', result.error);
+      console.error('[seller/analytics] Error fetching customer insights:', result.error);
       return null;
     }
 
     return result.data;
   } catch (error) {
-    console.error('Error fetching customer insights:', error);
+    console.error('[seller/analytics] Error fetching customer insights:', error);
     return null;
   }
 }

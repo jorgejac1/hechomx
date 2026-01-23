@@ -1,5 +1,8 @@
 /**
- * Mexican states
+ * @fileoverview Mexican states constants and craft region mappings.
+ * Provides a complete list of all 32 Mexican states as a const array
+ * and maps states known for specific traditional crafts.
+ * @module lib/constants/states
  */
 
 export const MEXICAN_STATES = [

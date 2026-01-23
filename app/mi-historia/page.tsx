@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { ROUTES } from '@/lib';
@@ -41,7 +40,6 @@ export default function MiHistoriaPage() {
 }
 
 function MiHistoriaContent({ user }: { user: User }) {
-  const router = useRouter();
   const [activeSection, setActiveSection] = useState<ActiveSection>('classification');
 
   const story = useArtisanStory(user);
@@ -66,12 +64,12 @@ function MiHistoriaContent({ user }: { user: User }) {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <button
-            onClick={() => router.push(ROUTES.DASHBOARD)}
+          <Link
+            href={ROUTES.DASHBOARD}
             className="text-primary-600 hover:text-primary-700 mb-4 flex items-center gap-2"
           >
             ← Volver al Dashboard
-          </button>
+          </Link>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{config.storyTitle}</h1>
           <p className="text-gray-600 mt-1">{config.storySubtitle}</p>
         </div>
@@ -227,8 +225,8 @@ function MiHistoriaContent({ user }: { user: User }) {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             {story.sellerType === 'hobby_maker'
-              ? '💡 Tómate tu tiempo. Una buena historia puede aumentar tus ventas hasta un 40%'
-              : '💡 Una historia completa y auténtica puede aumentar tus ventas hasta un 80%'}
+              ? 'Tómate tu tiempo. Una buena historia puede aumentar tus ventas hasta un 40%'
+              : 'Una historia completa y auténtica puede aumentar tus ventas hasta un 80%'}
           </p>
         </div>
       </div>

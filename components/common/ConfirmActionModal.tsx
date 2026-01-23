@@ -1,16 +1,36 @@
+/**
+ * @fileoverview ConfirmActionModal component for confirming user actions.
+ * Displays a modal dialog with customizable title, message, and action buttons.
+ * Supports danger, success, and warning variants with appropriate icons and colors.
+ * @module components/common/ConfirmActionModal
+ */
+
 'use client';
 
 import { Loader2, AlertTriangle, Ban, UserCheck } from 'lucide-react';
 
+/**
+ * Props for the ConfirmActionModal component
+ * @interface ConfirmActionModalProps
+ */
 interface ConfirmActionModalProps {
+  /** Whether the modal is currently visible */
   isOpen: boolean;
+  /** Callback fired when the modal should close (cancel or backdrop click) */
   onClose: () => void;
+  /** Callback fired when the confirm action is executed */
   onConfirm: () => void;
+  /** Modal title text */
   title: string;
+  /** Descriptive message explaining the action */
   message: string;
+  /** Text for the confirm button */
   confirmLabel: string;
+  /** Visual variant determining icon and button colors */
   confirmVariant: 'danger' | 'success' | 'warning';
+  /** Whether an async operation is in progress */
   isLoading?: boolean;
+  /** Optional username to display in the modal */
   userName?: string;
 }
 

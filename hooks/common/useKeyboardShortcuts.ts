@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Keyboard shortcut handler hook
+ * Registers keyboard event listeners for specified key combinations with optional target element binding
+ * @module hooks/common/useKeyboardShortcuts
+ */
+
 import { useEffect, RefObject } from 'react';
 
 /**

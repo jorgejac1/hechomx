@@ -231,7 +231,7 @@ export default function RecognitionSection({
           placeholder="Talleres gratuitos para jóvenes artesanos&#10;Preservación de técnicas tradicionales&#10;Proyecto de reforestación comunitaria&#10;Capacitación a mujeres artesanas"
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
         />
-        <p className="text-xs text-gray-500 mt-1">💡 Escribe cada proyecto en una línea nueva</p>
+        <p className="text-xs text-gray-500 mt-1">Escribe cada proyecto en una línea nueva</p>
       </div>
     </div>
   );

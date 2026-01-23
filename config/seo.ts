@@ -1,5 +1,8 @@
 /**
- * SEO configuration and metadata
+ * @fileoverview SEO configuration and metadata for the Papalote Market application.
+ * Defines default metadata, Open Graph settings, Twitter cards, and provides
+ * utility functions for generating product-specific metadata and JSON-LD structured data.
+ * @module config/seo
  */
 
 import { Metadata } from 'next';

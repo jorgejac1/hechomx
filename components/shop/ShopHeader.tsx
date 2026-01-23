@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Shop header component displaying the main shop banner
+ * Renders the shop's avatar, name, verification badges, description, location,
+ * social media links, and contact button. Includes a modal for contacting the seller.
+ * @module components/shop/ShopHeader
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -11,7 +18,12 @@ import ContactModal from '@/components/contact/ContactModal';
 import { hasArtisanStory, getArtisanIdFromMaker } from '@/lib/utils/artisan';
 import { ROUTES } from '@/lib';
 
+/**
+ * Props for the ShopHeader component
+ * @interface ShopHeaderProps
+ */
 interface ShopHeaderProps {
+  /** The shop owner's user data including maker profile */
   shop: User;
 }
 
@@ -21,6 +33,11 @@ export default function ShopHeader({ shop }: ShopHeaderProps) {
   const hasStory = hasArtisanStory(profile.shopName);
   const artisanId = getArtisanIdFromMaker(profile.shopName);
 
+  /**
+   * Gets the Badge variant based on the badge type
+   * @param badge - The badge identifier string
+   * @returns The variant string for the Badge component
+   */
   const getBadgeVariant = (badge: string) => {
     switch (badge) {
       case 'verified':
@@ -36,6 +53,11 @@ export default function ShopHeader({ shop }: ShopHeaderProps) {
     }
   };
 
+  /**
+   * Gets the display text for a badge type
+   * @param badge - The badge identifier string
+   * @returns The localized display text for the badge
+   */
   const getBadgeText = (badge: string) => {
     switch (badge) {
       case 'verified':

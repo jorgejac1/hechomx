@@ -9,6 +9,29 @@ import QuickFilters from '@/components/product/QuickFilters';
 import ProductsPageClient from '@/components/product/ProductsPageClient';
 import ErrorBoundary from '@/components/common/feedback/ErrorBoundary';
 import { generateProductsMetadata } from '@/lib/utils/seo';
+import ImageSkeleton from '@/components/common/loading/ImageSkeleton';
+import Skeleton from '@/components/common/loading/Skeleton';
+
+// Products grid loading skeleton
+function ProductsGridSkeleton() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {[...Array(8)].map((_, i) => (
+        <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden">
+          <ImageSkeleton aspectRatio="square" rounded={false} />
+          <div className="p-4">
+            <Skeleton height={20} className="mb-2" />
+            <Skeleton width="60%" height={16} className="mb-3" />
+            <div className="flex justify-between items-center">
+              <Skeleton width={80} height={24} />
+              <Skeleton width={60} height={16} />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export const dynamic = 'force-dynamic';
 
@@ -163,7 +186,7 @@ export default async function ProductsPage({
 
           <QuickFilters />
 
-          <Suspense fallback={<div className="animate-pulse h-96 bg-gray-200 rounded-xl" />}>
+          <Suspense fallback={<ProductsGridSkeleton />}>
             <ProductsPageClient products={products} />
           </Suspense>
         </div>

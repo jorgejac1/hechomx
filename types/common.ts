@@ -1,5 +1,7 @@
 /**
- * Common/shared types
+ * @fileoverview Common and shared TypeScript type definitions
+ * Defines reusable interfaces for UI components including navigation, toasts, modals, and common UI states
+ * @module types/common
  */
 
 export interface BreadcrumbItem {

@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { Send, Loader2, Mail, User } from 'lucide-react';
+import { Send, Mail, User } from 'lucide-react';
 import { useToast } from '@/contexts/ToastContext';
 import { useAuth } from '@/contexts/AuthContext';
 import Modal from '@/components/common/Modal';
 import TextInput from '@/components/common/TextInput';
 import Textarea from '@/components/common/Textarea';
+import Alert from '@/components/common/Alert';
+import LoadingButton from '@/components/common/LoadingButton';
+import Button from '@/components/common/Button';
 
 interface ContactModalProps {
   sellerName: string;
@@ -32,8 +35,8 @@ export default function ContactModal({ sellerName, onClose }: ContactModalProps)
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: React.FormEvent) => {
+    e?.preventDefault();
 
     // Validation
     if (!formData.name.trim()) {
@@ -68,7 +71,7 @@ export default function ContactModal({ sellerName, onClose }: ContactModalProps)
       showToast('Mensaje enviado exitosamente. El artesano te responderá pronto.', 'success');
       onClose();
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error('[ContactModal] Error sending message:', error);
       showToast('Error al enviar el mensaje. Intenta de nuevo.', 'error');
     } finally {
       setIsSubmitting(false);
@@ -77,32 +80,19 @@ export default function ContactModal({ sellerName, onClose }: ContactModalProps)
 
   const footer = (
     <>
-      <button
-        type="button"
-        onClick={onClose}
-        disabled={isSubmitting}
-        className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-      >
+      <Button variant="outline" onClick={onClose} disabled={isSubmitting} fullWidth>
         Cancelar
-      </button>
-      <button
-        type="submit"
-        onClick={handleSubmit}
-        disabled={isSubmitting}
-        className="flex-1 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+      </Button>
+      <LoadingButton
+        type="button"
+        onClick={() => handleSubmit()}
+        isLoading={isSubmitting}
+        loadingText="Enviando..."
+        icon={<Send className="w-5 h-5" />}
+        fullWidth
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="w-5 h-5 animate-spin" />
-            Enviando...
-          </>
-        ) : (
-          <>
-            <Send className="w-5 h-5" />
-            Enviar Mensaje
-          </>
-        )}
-      </button>
+        Enviar Mensaje
+      </LoadingButton>
     </>
   );
 
@@ -168,13 +158,10 @@ export default function ContactModal({ sellerName, onClose }: ContactModalProps)
         />
 
         {/* Info Box */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <p className="text-sm text-blue-900">
-            <strong>Tip:</strong> Sé específico sobre lo que necesitas. Si es un pedido
-            personalizado, incluye detalles como colores, tamaños, cantidades y fecha esperada de
-            entrega.
-          </p>
-        </div>
+        <Alert variant="info" hideIcon>
+          <strong>Tip:</strong> Sé específico sobre lo que necesitas. Si es un pedido personalizado,
+          incluye detalles como colores, tamaños, cantidades y fecha esperada de entrega.
+        </Alert>
       </form>
     </Modal>
   );

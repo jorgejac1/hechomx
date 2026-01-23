@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
+import DataList from '@/components/common/DataList';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/contexts/ToastContext';
 import { getBuyerOrders } from '@/lib/api/sellerApi';
@@ -28,6 +29,8 @@ import {
   Search,
 } from 'lucide-react';
 import Modal from '@/components/common/Modal';
+import Alert from '@/components/common/Alert';
+import Timeline, { type TimelineItem } from '@/components/common/Timeline';
 
 const ORDER_STATUS_CONFIG = {
   processing: {
@@ -216,19 +219,156 @@ function OrdersContent({ user }: { user: User }) {
         </div>
 
         {/* Orders List */}
-        {filteredOrders.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-md p-12 text-center">
-            <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              {searchQuery || filterStatus !== 'all'
-                ? 'No se encontraron pedidos'
-                : 'No tienes pedidos aún'}
-            </h3>
-            <p className="text-gray-600 mb-6">
-              {searchQuery || filterStatus !== 'all'
-                ? 'Intenta con otros filtros o términos de búsqueda'
-                : 'Explora productos artesanales y realiza tu primera compra'}
-            </p>
+        <DataList<BuyerOrder>
+          data={filteredOrders}
+          keyAccessor="id"
+          layout="list"
+          divided={false}
+          hoverable={false}
+          loading={isLoading}
+          loadingItems={3}
+          emptyMessage={
+            searchQuery || filterStatus !== 'all'
+              ? 'No se encontraron pedidos'
+              : 'No tienes pedidos aún'
+          }
+          emptyIcon={<Package className="w-16 h-16 text-gray-400" />}
+          className="space-y-4"
+          itemClassName="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+          renderItem={(order) => {
+            const statusConfig = ORDER_STATUS_CONFIG[order.status];
+            const StatusIcon = statusConfig.icon;
+
+            return (
+              <>
+                {/* Order Header */}
+                <div className="p-4 sm:p-6 border-b border-gray-200">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-bold text-gray-900">Pedido #{order.id}</p>
+                        <span
+                          className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold border ${statusConfig.color}`}
+                        >
+                          <StatusIcon className="w-3 h-3" />
+                          {statusConfig.label}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600">
+                        {formatRelativeTime(order.date)} • {order.itemsCount}{' '}
+                        {order.itemsCount === 1 ? 'producto' : 'productos'}
+                      </p>
+                    </div>
+                    <div className="text-left sm:text-right">
+                      <p className="text-2xl font-bold text-primary-600">
+                        {formatCurrency(order.total)}
+                      </p>
+                      {order.tracking && (
+                        <p className="text-xs text-gray-600 mt-1">Rastreo: {order.tracking}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Order Items */}
+                <div className="p-4 sm:p-6">
+                  <div className="space-y-3">
+                    {order.items.map((item, idx) => (
+                      <div key={idx} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          width={80}
+                          height={80}
+                          className="rounded-lg object-cover"
+                        />
+                        <div className="flex-1">
+                          <p className="font-semibold text-gray-900 mb-1">{item.name}</p>
+                          <p className="text-sm text-gray-600 mb-1">{item.artisan.shopName}</p>
+                          <div className="flex items-center gap-3 text-sm">
+                            <span className="text-gray-600">
+                              Cantidad: <strong>{item.quantity}</strong>
+                            </span>
+                            <span className="text-gray-400">•</span>
+                            <span className="font-bold text-primary-600">
+                              {formatCurrency(item.price)}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Delivery Info */}
+                  {order.status === 'shipped' && order.estimatedDelivery && (
+                    <Alert
+                      variant="info"
+                      layout="bordered"
+                      icon={Truck}
+                      title="En camino a tu dirección"
+                      className="mt-4"
+                    >
+                      Entrega estimada:{' '}
+                      {new Date(order.estimatedDelivery).toLocaleDateString('es-MX', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </Alert>
+                  )}
+
+                  {order.status === 'delivered' && order.actualDelivery && (
+                    <Alert
+                      variant="success"
+                      layout="bordered"
+                      icon={CheckCircle2}
+                      title="Entregado exitosamente"
+                      className="mt-4"
+                    >
+                      {formatRelativeTime(order.actualDelivery)}
+                    </Alert>
+                  )}
+
+                  {/* Actions */}
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <button
+                      onClick={() => setSelectedOrder(order)}
+                      className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium text-sm"
+                    >
+                      Ver Detalles
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+
+                    {order.canReview && (
+                      <button
+                        onClick={() => setReviewingOrder(order)}
+                        className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition font-medium text-sm"
+                      >
+                        <Star className="w-4 h-4" />
+                        Dejar Reseña
+                      </button>
+                    )}
+
+                    {order.canReorder && (
+                      <button
+                        onClick={() => handleReorder(order)}
+                        className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium text-sm"
+                      >
+                        <RotateCcw className="w-4 h-4" />
+                        Volver a Pedir
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </>
+            );
+          }}
+        />
+
+        {/* Empty state CTA */}
+        {filteredOrders.length === 0 && !searchQuery && filterStatus === 'all' && (
+          <div className="text-center mt-6">
             <Link
               href={ROUTES.PRODUCTS}
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
@@ -236,148 +376,6 @@ function OrdersContent({ user }: { user: User }) {
               <Package className="w-5 h-5" />
               Explorar Productos
             </Link>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {filteredOrders.map((order) => {
-              const statusConfig = ORDER_STATUS_CONFIG[order.status];
-              const StatusIcon = statusConfig.icon;
-
-              return (
-                <div
-                  key={order.id}
-                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
-                >
-                  {/* Order Header */}
-                  <div className="p-4 sm:p-6 border-b border-gray-200">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <p className="font-bold text-gray-900">Pedido #{order.id}</p>
-                          <span
-                            className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold border ${statusConfig.color}`}
-                          >
-                            <StatusIcon className="w-3 h-3" />
-                            {statusConfig.label}
-                          </span>
-                        </div>
-                        <p className="text-sm text-gray-600">
-                          {formatRelativeTime(order.date)} • {order.itemsCount}{' '}
-                          {order.itemsCount === 1 ? 'producto' : 'productos'}
-                        </p>
-                      </div>
-                      <div className="text-left sm:text-right">
-                        <p className="text-2xl font-bold text-primary-600">
-                          {formatCurrency(order.total)}
-                        </p>
-                        {order.tracking && (
-                          <p className="text-xs text-gray-600 mt-1">Rastreo: {order.tracking}</p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Order Items */}
-                  <div className="p-4 sm:p-6">
-                    <div className="space-y-3">
-                      {order.items.map((item, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg"
-                        >
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            width={80}
-                            height={80}
-                            className="rounded-lg object-cover"
-                          />
-                          <div className="flex-1">
-                            <p className="font-semibold text-gray-900 mb-1">{item.name}</p>
-                            <p className="text-sm text-gray-600 mb-1">{item.artisan.shopName}</p>
-                            <div className="flex items-center gap-3 text-sm">
-                              <span className="text-gray-600">
-                                Cantidad: <strong>{item.quantity}</strong>
-                              </span>
-                              <span className="text-gray-400">•</span>
-                              <span className="font-bold text-primary-600">
-                                {formatCurrency(item.price)}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Delivery Info */}
-                    {order.status === 'shipped' && order.estimatedDelivery && (
-                      <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Truck className="w-5 h-5 text-blue-600" />
-                          <p className="text-sm font-semibold text-blue-900">
-                            En camino a tu dirección
-                          </p>
-                        </div>
-                        <p className="text-sm text-blue-800">
-                          Entrega estimada:{' '}
-                          {new Date(order.estimatedDelivery).toLocaleDateString('es-MX', {
-                            weekday: 'long',
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                          })}
-                        </p>
-                      </div>
-                    )}
-
-                    {order.status === 'delivered' && order.actualDelivery && (
-                      <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
-                        <div className="flex items-center gap-2 mb-1">
-                          <CheckCircle2 className="w-5 h-5 text-green-600" />
-                          <p className="text-sm font-semibold text-green-900">
-                            Entregado exitosamente
-                          </p>
-                        </div>
-                        <p className="text-sm text-green-800">
-                          {formatRelativeTime(order.actualDelivery)}
-                        </p>
-                      </div>
-                    )}
-
-                    {/* Actions */}
-                    <div className="mt-4 flex flex-wrap gap-3">
-                      <button
-                        onClick={() => setSelectedOrder(order)}
-                        className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium text-sm"
-                      >
-                        Ver Detalles
-                        <ChevronRight className="w-4 h-4" />
-                      </button>
-
-                      {order.canReview && (
-                        <button
-                          onClick={() => setReviewingOrder(order)}
-                          className="flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition font-medium text-sm"
-                        >
-                          <Star className="w-4 h-4" />
-                          Dejar Reseña
-                        </button>
-                      )}
-
-                      {order.canReorder && (
-                        <button
-                          onClick={() => handleReorder(order)}
-                          className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium text-sm"
-                        >
-                          <RotateCcw className="w-4 h-4" />
-                          Volver a Pedir
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
           </div>
         )}
 
@@ -427,39 +425,45 @@ function OrderDetailModal({ order, onClose }: { order: BuyerOrder; onClose: () =
       {/* Timeline */}
       <div className="mb-6">
         <h3 className="text-lg font-bold text-gray-900 mb-4">Estado del Pedido</h3>
-        <div className="space-y-4">
-          {order.timeline.map((event, index) => {
+        <Timeline
+          items={order.timeline.map((event, index): TimelineItem => {
             const isLast = index === order.timeline.length - 1;
-            return (
-              <div key={index} className="flex gap-4">
-                <div className="flex flex-col items-center">
-                  <div
-                    className={`w-3 h-3 rounded-full ${isLast ? 'bg-primary-600' : 'bg-green-600'}`}
-                  />
-                  {index < order.timeline.length - 1 && <div className="w-0.5 h-12 bg-gray-300" />}
-                </div>
-                <div className="flex-1 pb-4">
-                  <p className="font-semibold text-gray-900">{event.description}</p>
-                  <p className="text-sm text-gray-600">
-                    {new Date(event.date).toLocaleDateString('es-MX', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </p>
+            const statusIcon =
+              event.status === 'cancelled'
+                ? XCircle
+                : event.status === 'delivered'
+                  ? CheckCircle2
+                  : event.status === 'shipped'
+                    ? Truck
+                    : event.status === 'confirmed'
+                      ? Package
+                      : Clock;
+            return {
+              id: `${order.id}-${index}`,
+              title: event.description,
+              timestamp: new Date(event.date).toLocaleDateString('es-MX', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              }),
+              status: isLast ? 'current' : 'completed',
+              icon: statusIcon,
+              content: (
+                <>
                   {event.carrier && (
                     <p className="text-sm text-gray-600 mt-1">Paquetería: {event.carrier}</p>
                   )}
                   {event.reason && (
                     <p className="text-sm text-red-600 mt-1">Motivo: {event.reason}</p>
                   )}
-                </div>
-              </div>
-            );
+                </>
+              ),
+            };
           })}
-        </div>
+          size="sm"
+        />
       </div>
 
       {/* Shipping Address */}

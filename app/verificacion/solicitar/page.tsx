@@ -12,7 +12,10 @@ import {
 import type { VerificationLevel, SellerType } from '@/lib/types/verification';
 import type { User } from '@/contexts/AuthContext';
 import { useToast } from '@/contexts/ToastContext';
-import { CheckCircle, Upload, AlertCircle } from 'lucide-react';
+import { CheckCircle, AlertCircle, Award, ClipboardList, FileText, Eye } from 'lucide-react';
+import RadioGroup from '@/components/common/RadioGroup';
+import Stepper, { type Step } from '@/components/common/Stepper';
+import FileUpload, { type UploadedFile } from '@/components/common/FileUpload';
 
 export default function VerificationApplicationPage() {
   return (
@@ -39,6 +42,18 @@ function VerificationApplicationContent({ user }: { user: User }) {
     heritageInfo: '',
     culturalSignificance: '',
   });
+
+  // File upload states
+  const [idFiles, setIdFiles] = useState<UploadedFile[]>([]);
+  const [workshopPhotos, setWorkshopPhotos] = useState<UploadedFile[]>([]);
+  const [videoFiles, setVideoFiles] = useState<UploadedFile[]>([]);
+
+  const handleFileRemove = (
+    fileId: string,
+    setter: React.Dispatch<React.SetStateAction<UploadedFile[]>>
+  ) => {
+    setter((prev) => prev.filter((f) => f.id !== fileId));
+  };
 
   const handleSubmit = async () => {
     if (formData.craftType.length === 0) {
@@ -96,6 +111,19 @@ function VerificationApplicationContent({ user }: { user: User }) {
 
   const levelInfo = VERIFICATION_LEVELS[formData.requestedLevel];
 
+  const verificationSteps: Step[] = [
+    { id: 'level', label: 'Nivel', description: 'Elige tu nivel', icon: Award },
+    { id: 'info', label: 'Información', description: 'Datos del artesano', icon: ClipboardList },
+    { id: 'docs', label: 'Documentos', description: 'Sube archivos', icon: FileText },
+    { id: 'review', label: 'Revisar', description: 'Confirmar envío', icon: Eye },
+  ];
+
+  const handleStepClick = (stepIndex: number) => {
+    if (stepIndex < step - 1) {
+      setStep(stepIndex + 1);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -109,28 +137,14 @@ function VerificationApplicationContent({ user }: { user: User }) {
 
         {/* Progress */}
         <div className="bg-white rounded-lg shadow-xs p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            {[1, 2, 3, 4].map((s) => (
-              <div key={s} className="flex items-center">
-                <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
-                    step >= s ? 'bg-primary-600 text-white' : 'bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  {step > s ? <CheckCircle className="w-6 h-6" /> : s}
-                </div>
-                {s < 4 && (
-                  <div className={`w-20 h-1 mx-2 ${step > s ? 'bg-primary-600' : 'bg-gray-200'}`} />
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-between text-xs text-gray-600">
-            <span>Nivel</span>
-            <span>Información</span>
-            <span>Documentos</span>
-            <span>Revisar</span>
-          </div>
+          <Stepper
+            steps={verificationSteps}
+            currentStep={step - 1}
+            onStepClick={handleStepClick}
+            clickable={true}
+            size="md"
+            showNumbers={false}
+          />
         </div>
 
         {/* Step Content */}
@@ -141,57 +155,43 @@ function VerificationApplicationContent({ user }: { user: User }) {
                 Elige tu Nivel de Verificación
               </h2>
 
-              <div className="space-y-4">
-                {Object.values(VERIFICATION_LEVELS).map((level) => (
-                  <label
-                    key={level.level}
-                    className={`block p-6 border-2 rounded-lg cursor-pointer transition-all ${
-                      formData.requestedLevel === level.level
-                        ? 'border-primary-600 bg-primary-50'
-                        : 'border-gray-200 hover:border-primary-300'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="level"
-                      value={level.level}
-                      checked={formData.requestedLevel === level.level}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          requestedLevel: e.target.value as VerificationLevel,
-                        })
-                      }
-                      className="sr-only"
-                    />
-                    <div className="flex items-start gap-4">
-                      <span className="text-4xl">{level.badge.icon}</span>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-lg font-bold text-gray-900">{level.nameEs}</h3>
-                          <span className="text-sm text-gray-600">
-                            Comisión: {level.commissionRate}%
-                          </span>
-                        </div>
-                        <p className="text-sm text-gray-600 mb-3">
-                          Tiempo estimado: {level.estimatedTime}
-                        </p>
-                        <div className="space-y-2">
-                          <p className="text-sm font-semibold text-gray-700">Beneficios:</p>
-                          <ul className="text-sm text-gray-600 space-y-1">
-                            {level.benefitsEs.slice(0, 3).map((benefit, i) => (
-                              <li key={i} className="flex items-start gap-2">
-                                <CheckCircle className="w-4 h-4 text-primary-600 mt-0.5 shrink-0" />
-                                <span>{benefit}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+              <RadioGroup
+                value={formData.requestedLevel}
+                onChange={(value) =>
+                  setFormData({ ...formData, requestedLevel: value as VerificationLevel })
+                }
+                variant="cards"
+                options={Object.values(VERIFICATION_LEVELS).map((level) => ({
+                  value: level.level,
+                  label: (
+                    <div className="flex items-center justify-between w-full">
+                      <span className="text-lg font-bold">{level.nameEs}</span>
+                      <span className="text-sm text-gray-600">
+                        Comisión: {level.commissionRate}%
+                      </span>
+                    </div>
+                  ),
+                  description: (
+                    <div>
+                      <p className="text-sm text-gray-600 mb-3">
+                        Tiempo estimado: {level.estimatedTime}
+                      </p>
+                      <div className="space-y-2">
+                        <p className="text-sm font-semibold text-gray-700">Beneficios:</p>
+                        <ul className="text-sm text-gray-600 space-y-1">
+                          {level.benefitsEs.slice(0, 3).map((benefit, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <CheckCircle className="w-4 h-4 text-primary-600 mt-0.5 shrink-0" />
+                              <span>{benefit}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
-                  </label>
-                ))}
-              </div>
+                  ),
+                  icon: <span className="text-3xl">{level.badge.icon}</span>,
+                }))}
+              />
 
               <button
                 onClick={() => setStep(2)}
@@ -388,30 +388,40 @@ function VerificationApplicationContent({ user }: { user: User }) {
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary-400 transition-colors cursor-pointer">
-                  <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-gray-700 mb-1">
-                    Identificación Oficial (INE/Pasaporte)
-                  </p>
-                  <p className="text-xs text-gray-500">Arrastra o haz clic para subir</p>
-                </div>
+              <div className="space-y-6">
+                <FileUpload
+                  label="Identificación Oficial (INE/Pasaporte)"
+                  accept=".jpg,.jpeg,.png,.pdf"
+                  maxFiles={2}
+                  maxSize={10 * 1024 * 1024}
+                  files={idFiles}
+                  onFilesChange={setIdFiles}
+                  onFileRemove={(id) => handleFileRemove(id, setIdFiles)}
+                  helperText="Formatos: JPG, PNG o PDF. Máximo 10MB"
+                />
 
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary-400 transition-colors cursor-pointer">
-                  <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-gray-700 mb-1">
-                    Fotos de tu Taller/Espacio de Trabajo (5+ fotos)
-                  </p>
-                  <p className="text-xs text-gray-500">Arrastra o haz clic para subir</p>
-                </div>
+                <FileUpload
+                  label="Fotos de tu Taller/Espacio de Trabajo (5+ fotos)"
+                  accept=".jpg,.jpeg,.png"
+                  multiple
+                  maxFiles={10}
+                  maxSize={5 * 1024 * 1024}
+                  files={workshopPhotos}
+                  onFilesChange={setWorkshopPhotos}
+                  onFileRemove={(id) => handleFileRemove(id, setWorkshopPhotos)}
+                  helperText="Sube al menos 5 fotos. Formatos: JPG, PNG. Máximo 5MB cada una"
+                />
 
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary-400 transition-colors cursor-pointer">
-                  <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-sm font-medium text-gray-700 mb-1">
-                    Video del Proceso Artesanal (1-3 min)
-                  </p>
-                  <p className="text-xs text-gray-500">Máximo 100MB - MP4, MOV</p>
-                </div>
+                <FileUpload
+                  label="Video del Proceso Artesanal (1-3 min)"
+                  accept=".mp4,.mov,.webm"
+                  maxFiles={1}
+                  maxSize={100 * 1024 * 1024}
+                  files={videoFiles}
+                  onFilesChange={setVideoFiles}
+                  onFileRemove={(id) => handleFileRemove(id, setVideoFiles)}
+                  helperText="Formatos: MP4, MOV, WebM. Máximo 100MB"
+                />
               </div>
 
               <div className="flex gap-4">

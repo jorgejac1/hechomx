@@ -1,9 +1,23 @@
+/**
+ * @fileoverview Additional information form section component
+ * Provides text areas for care instructions and product story/cultural background.
+ * @module components/product/form/AdditionalInfoSection
+ */
+
 import Textarea from '@/components/common/Textarea';
 
+/**
+ * Props for the AdditionalInfoSection component
+ * @interface AdditionalInfoSectionProps
+ */
 interface AdditionalInfoSectionProps {
+  /** Care instructions text */
   careInstructions: string;
+  /** Callback to update care instructions */
   setCareInstructions: (value: string) => void;
+  /** Product story/background text */
   story: string;
+  /** Callback to update story */
   setStory: (value: string) => void;
 }
 

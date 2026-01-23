@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Centralized re-export module for seller and buyer API functions.
+ * Aggregates and exports all API client functions, types, and utilities
+ * from seller and buyer sub-modules for convenient importing.
+ * @module lib/api/sellerApi
+ */
+
 // Re-export all types
 export type * from '@/lib/types/seller';
 export type * from '@/lib/types/buyer';

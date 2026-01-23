@@ -1,17 +1,29 @@
+/**
+ * @fileoverview Comparison action buttons component
+ * Provides print, share, and PDF export functionality for the product comparison page.
+ * @module components/product/Comparison/ComparisonActions
+ */
+
 'use client';
 
-import { useState, RefObject } from 'react';
+import { useState } from 'react';
 import { useToast } from '@/contexts/ToastContext';
 import ShareModal from '@/components/common/ShareModal';
 import { Product } from '@/types';
 import { Printer, Share2, Download } from 'lucide-react';
 
+/**
+ * Props for the ComparisonActions component
+ * @interface ComparisonActionsProps
+ */
 interface ComparisonActionsProps {
+  /** Products being compared */
   products: Product[];
-  tableRef: RefObject<HTMLDivElement | null>;
+  /** @deprecated No longer used - PDF is generated from product data directly */
+  tableRef?: React.RefObject<HTMLDivElement | null>;
 }
 
-export default function ComparisonActions({ products, tableRef }: ComparisonActionsProps) {
+export default function ComparisonActions({ products }: ComparisonActionsProps) {
   const [showShareModal, setShowShareModal] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const { info, success, error } = useToast();
@@ -36,9 +48,74 @@ export default function ComparisonActions({ products, tableRef }: ComparisonActi
     setShowShareModal(true);
   };
 
+  /**
+   * Generates a clean HTML table for PDF export with inline styles only
+   * This avoids issues with html2canvas not supporting lab() colors from Tailwind CSS v4
+   */
+  const generatePDFContent = (): string => {
+    const date = new Date().toLocaleDateString('es-MX', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+
+    const productRows = products
+      .map(
+        (p) => `
+        <td style="padding: 16px; text-align: center; border: 1px solid #E5E7EB; vertical-align: top;">
+          <img src="${p.images[0]}" alt="${p.name}" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 8px;" crossorigin="anonymous" />
+          <div style="font-weight: 600; color: #111827; font-size: 14px; margin-bottom: 4px;">${p.name}</div>
+          <div style="font-size: 18px; font-weight: 700; color: #0D9488;">$${p.price.toLocaleString('es-MX')}</div>
+        </td>
+      `
+      )
+      .join('');
+
+    const compareRow = (label: string, getValue: (p: Product) => string) => `
+      <tr>
+        <td style="padding: 12px 16px; font-weight: 600; color: #374151; background-color: #F9FAFB; border: 1px solid #E5E7EB; white-space: nowrap;">${label}</td>
+        ${products.map((p) => `<td style="padding: 12px 16px; color: #4B5563; border: 1px solid #E5E7EB; text-align: center;">${getValue(p)}</td>`).join('')}
+      </tr>
+    `;
+
+    return `
+      <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #ffffff;">
+        <!-- Header -->
+        <div style="margin-bottom: 24px; border-bottom: 3px solid #0D9488; padding-bottom: 16px;">
+          <h1 style="margin: 0; color: #0D9488; font-size: 28px; font-weight: 700;">Papalote Market</h1>
+          <p style="margin: 8px 0 0 0; color: #6B7280; font-size: 14px;">Comparación de Productos - ${date}</p>
+        </div>
+
+        <!-- Comparison Table -->
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead>
+            <tr>
+              <th style="padding: 16px; background-color: #0D9488; color: white; font-weight: 600; border: 1px solid #0D9488; text-align: left;">Producto</th>
+              ${productRows}
+            </tr>
+          </thead>
+          <tbody>
+            ${compareRow('Categoría', (p) => p.category)}
+            ${compareRow('Artesano', (p) => p.maker)}
+            ${compareRow('Origen', (p) => p.state)}
+            ${compareRow('Calificación', (p) => `${p.rating ?? 0} / 5 (${p.reviewCount ?? 0} reseñas)`)}
+            ${compareRow('Disponibilidad', (p) => (p.inStock ? (p.stock ? `${p.stock} disponibles` : 'Disponible') : 'Agotado'))}
+            ${compareRow('Verificado', (p) => (p.verified ? 'Sí' : 'No'))}
+          </tbody>
+        </table>
+
+        <!-- Footer -->
+        <div style="margin-top: 24px; border-top: 1px solid #E5E7EB; padding-top: 16px; text-align: center;">
+          <p style="margin: 0; color: #6B7280; font-size: 12px;">Productos artesanales auténticos de México</p>
+          <p style="margin: 4px 0 0 0; color: #9CA3AF; font-size: 11px;">www.papalotemarket.mx</p>
+        </div>
+      </div>
+    `;
+  };
+
   const handleExportPDF = async () => {
-    if (!tableRef.current) {
-      error('No se pudo generar el PDF. Intenta de nuevo.');
+    if (products.length === 0) {
+      error('No hay productos para exportar.');
       return;
     }
 
@@ -49,76 +126,13 @@ export default function ComparisonActions({ products, tableRef }: ComparisonActi
       // Dynamically import html2pdf only on client side
       const html2pdf = (await import('html2pdf.js')).default;
 
-      // Clone the element to avoid modifying the original
-      const element = tableRef.current.cloneNode(true) as HTMLElement;
+      // Create an isolated container with only inline styles (no Tailwind)
+      const container = document.createElement('div');
+      container.innerHTML = generatePDFContent();
 
-      // Remove interactive elements from the clone
-      const buttons = element.querySelectorAll('button');
-      buttons.forEach((btn) => btn.remove());
-
-      const links = element.querySelectorAll('a');
-      links.forEach((link) => {
-        // Remove links but keep text
-        const text = link.textContent;
-        const span = document.createElement('span');
-        span.textContent = text;
-        span.className = link.className;
-        link.replaceWith(span);
-      });
-
-      // Remove "Ver detalles" rows
-      const verDetallesRows = element.querySelectorAll(
-        'td:has(a[href*="/producto/"]), .product-actions'
-      );
-      verDetallesRows.forEach((row) => {
-        const parent = row.closest('tr');
-        if (parent) parent.remove();
-      });
-
-      // Create a wrapper with header and footer
-      const wrapper = document.createElement('div');
-      wrapper.style.padding = '20px';
-      wrapper.style.fontFamily = 'Arial, sans-serif';
-
-      // Add header
-      const header = document.createElement('div');
-      header.style.marginBottom = '20px';
-      header.style.borderBottom = '2px solid #0D9488';
-      header.style.paddingBottom = '10px';
-      header.innerHTML = `
-        <h1 style="margin: 0; color: #0D9488; font-size: 24px;">Papalote Market</h1>
-        <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">
-          Comparación de Productos - ${new Date().toLocaleDateString('es-MX', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </p>
-      `;
-
-      // Add the comparison table
-      wrapper.appendChild(header);
-      wrapper.appendChild(element);
-
-      // Add footer
-      const footer = document.createElement('div');
-      footer.style.marginTop = '20px';
-      footer.style.borderTop = '1px solid #E5E7EB';
-      footer.style.paddingTop = '10px';
-      footer.style.textAlign = 'center';
-      footer.style.color = '#666';
-      footer.style.fontSize = '12px';
-      footer.innerHTML = `
-        <p style="margin: 0;">Productos artesanales auténticos de México</p>
-        <p style="margin: 5px 0 0 0;">www.papalotemarket.mx</p>
-      `;
-      wrapper.appendChild(footer);
-
-      // Configure PDF options - use explicit variable for margin
-      const margin: [number, number, number, number] = [10, 10, 10, 10];
-
+      // Configure PDF options
       const opt = {
-        margin,
+        margin: [10, 10, 10, 10] as [number, number, number, number],
         filename: `comparacion-productos-${new Date().toISOString().split('T')[0]}.pdf`,
         image: {
           type: 'jpeg' as const,
@@ -129,6 +143,8 @@ export default function ComparisonActions({ products, tableRef }: ComparisonActi
           useCORS: true,
           logging: false,
           backgroundColor: '#ffffff',
+          // Ignore stylesheets to avoid lab() color parsing
+          ignoreElements: (el: Element) => el.tagName === 'STYLE' || el.tagName === 'LINK',
         },
         jsPDF: {
           unit: 'mm' as const,
@@ -137,8 +153,8 @@ export default function ComparisonActions({ products, tableRef }: ComparisonActi
         },
       };
 
-      // Generate PDF from the wrapper
-      await html2pdf().set(opt).from(wrapper).save();
+      // Generate PDF
+      await html2pdf().set(opt).from(container).save();
 
       success('PDF descargado exitosamente');
 
@@ -150,7 +166,7 @@ export default function ComparisonActions({ products, tableRef }: ComparisonActi
         });
       }
     } catch (err) {
-      console.error('Error generating PDF:', err);
+      console.error('[ComparisonActions] Error generating PDF:', err);
       error('Error al generar el PDF. Intenta de nuevo.');
 
       // Track analytics

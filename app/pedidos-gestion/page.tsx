@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { getSellerOrders } from '@/lib/api/sellerApi';
@@ -26,6 +26,8 @@ import {
   Printer,
   Download,
 } from 'lucide-react';
+import Alert from '@/components/common/Alert';
+import Timeline, { type TimelineItem } from '@/components/common/Timeline';
 
 const ORDER_STATUS_CONFIG = {
   processing: {
@@ -64,7 +66,6 @@ export default function OrdersManagementPage() {
 }
 
 function OrdersManagementContent({ user }: { user: User }) {
-  const router = useRouter();
   const [orders, setOrders] = useState<SellerOrder[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<SellerOrder[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -150,13 +151,13 @@ function OrdersManagementContent({ user }: { user: User }) {
       <div className="max-w-7xl mx-auto p-4 sm:p-6">
         {/* Header */}
         <div className="mb-6">
-          <button
-            onClick={() => router.push(ROUTES.DASHBOARD)}
+          <Link
+            href={ROUTES.DASHBOARD}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition"
           >
             <ArrowLeft className="w-5 h-5" />
             Volver al Dashboard
-          </button>
+          </Link>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Gestión de Pedidos</h1>
@@ -311,11 +312,9 @@ function OrdersManagementContent({ user }: { user: User }) {
 
                     {/* Notes */}
                     {order.notes && (
-                      <div className="mt-3 p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
-                        <p className="text-sm text-gray-900">
-                          <strong>Nota:</strong> {order.notes}
-                        </p>
-                      </div>
+                      <Alert variant="warning" layout="sidebar" className="mt-3">
+                        <strong>Nota:</strong> {order.notes}
+                      </Alert>
                     )}
                   </div>
 
@@ -485,35 +484,35 @@ function OrderDetailModal({ order, onClose }: { order: SellerOrder; onClose: () 
           {/* Timeline */}
           <div className="mb-6">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Historial del Pedido</h3>
-            <div className="space-y-4">
-              {order.timeline.map((event, index) => {
+            <Timeline
+              items={order.timeline.map((event, index): TimelineItem => {
                 const isLast = index === order.timeline.length - 1;
-                return (
-                  <div key={index} className="flex gap-4">
-                    <div className="flex flex-col items-center">
-                      <div
-                        className={`w-3 h-3 rounded-full ${isLast ? 'bg-primary-600' : 'bg-green-600'}`}
-                      />
-                      {index < order.timeline.length - 1 && (
-                        <div className="w-0.5 h-12 bg-gray-300" />
-                      )}
-                    </div>
-                    <div className="flex-1 pb-4">
-                      <p className="font-semibold text-gray-900">{event.description}</p>
-                      <p className="text-sm text-gray-600">
-                        {new Date(event.date).toLocaleDateString('es-MX', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        })}
-                      </p>
-                    </div>
-                  </div>
-                );
+                const statusIcon =
+                  event.status === 'cancelled'
+                    ? XCircle
+                    : event.status === 'delivered'
+                      ? CheckCircle2
+                      : event.status === 'shipped'
+                        ? Truck
+                        : event.status === 'confirmed'
+                          ? Package
+                          : Clock;
+                return {
+                  id: `${order.id}-${index}`,
+                  title: event.description,
+                  timestamp: new Date(event.date).toLocaleDateString('es-MX', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  }),
+                  status: isLast ? 'current' : 'completed',
+                  icon: statusIcon,
+                };
               })}
-            </div>
+              size="sm"
+            />
           </div>
 
           {/* Items */}

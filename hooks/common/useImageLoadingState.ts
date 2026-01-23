@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Multi-image loading state tracker hook
+ * Tracks loading and error states for multiple images with progress calculation
+ * @module hooks/common/useImageLoadingState
+ */
+
 import { useState, useCallback, useMemo } from 'react';
 
 /**

@@ -1,5 +1,8 @@
 /**
- * Analytics tracking utilities
+ * @fileoverview Analytics tracking utilities for Google Analytics integration.
+ * Provides functions for tracking filter usage, search queries, sort changes,
+ * pagination clicks, and filter resets via gtag events.
+ * @module lib/utils/analytics
  */
 
 export const trackFilterUsage = (filterType: string, filterValue: string | boolean | number) => {

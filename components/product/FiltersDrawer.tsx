@@ -1,28 +1,84 @@
+/**
+ * @fileoverview Product filters drawer component
+ * Full-screen slide-out drawer with comprehensive filtering options including
+ * categories, states, price range, rating, and other product attributes.
+ * @module components/product/FiltersDrawer
+ */
+
 'use client';
 
-import { X, ChevronDown, ChevronUp } from 'lucide-react';
+import {
+  X,
+  ChevronDown,
+  ChevronUp,
+  MapPin,
+  Shirt,
+  Container,
+  Gem,
+  TreeDeciduous,
+  Briefcase,
+  FileText,
+  Hammer,
+  Sparkles,
+  Package,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import { formatCurrency, CATEGORY_ICONS } from '@/lib';
+import RangeSlider from '@/components/common/RangeSlider';
 
+const CATEGORY_ICON_COMPONENTS: Record<string, LucideIcon> = {
+  Shirt,
+  Container,
+  Gem,
+  TreeDeciduous,
+  Briefcase,
+  FileText,
+  Hammer,
+  Sparkles,
+};
+
+/**
+ * Product filter state structure
+ * @interface ProductFilters
+ */
 interface ProductFilters {
+  /** Selected category filters */
   categories: string[];
+  /** Selected state filters */
   states: string[];
+  /** Price range bounds */
   priceRange: {
     min: number;
     max: number;
   };
+  /** Minimum rating filter */
   minRating: number;
+  /** In stock filter (null = any) */
   inStock: boolean | null;
+  /** Verified seller filter (null = any) */
   verified: boolean | null;
+  /** Featured product filter (null = any) */
   featured: boolean | null;
 }
 
+/**
+ * Available filter options
+ * @interface FilterOptions
+ */
 interface FilterOptions {
+  /** Available categories to filter by */
   categories: string[];
+  /** Available states to filter by */
   states: string[];
 }
 
+/**
+ * Props for the FiltersDrawer component
+ * @interface FiltersDrawerProps
+ */
 interface FiltersDrawerProps {
+  /** Whether the drawer is open */
   isOpen: boolean;
   onClose: () => void;
   filters: ProductFilters;
@@ -130,7 +186,8 @@ export default function FiltersDrawer({
 
                 {/* Category Options (First 3 or All) */}
                 {visibleCategories.map((category: string) => {
-                  const icon = CATEGORY_ICONS[category] || '🎨';
+                  const iconName = CATEGORY_ICONS[category] || 'Package';
+                  const IconComponent = CATEGORY_ICON_COMPONENTS[iconName] || Package;
                   return (
                     <button
                       key={category}
@@ -141,7 +198,7 @@ export default function FiltersDrawer({
                           : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
-                      <span className="text-lg">{icon}</span>
+                      <IconComponent className="w-5 h-5" />
                       <span>{category}</span>
                     </button>
                   );
@@ -198,7 +255,7 @@ export default function FiltersDrawer({
                         : 'text-gray-700 hover:bg-gray-50'
                     }`}
                   >
-                    <span>📍</span>
+                    <MapPin className="w-5 h-5" />
                     <span>{state}</span>
                   </button>
                 ))}
@@ -224,44 +281,27 @@ export default function FiltersDrawer({
 
             {/* Price Range Section */}
             <div className="px-6 py-6 border-b border-gray-100">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Precio</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Precio</h3>
               <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="flex-1">
-                    <label className="block text-sm text-gray-600 mb-2 font-medium">Mínimo</label>
-                    <input
-                      type="number"
-                      value={filters.priceRange.min}
-                      onChange={(e) =>
-                        onUpdatePriceRange({
-                          ...filters.priceRange,
-                          min: Number(e.target.value),
-                        })
-                      }
-                      min={priceRange.min}
-                      max={priceRange.max}
-                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                    />
-                  </div>
-                  <span className="text-gray-400 mt-8">-</span>
-                  <div className="flex-1">
-                    <label className="block text-sm text-gray-600 mb-2 font-medium">Máximo</label>
-                    <input
-                      type="number"
-                      value={filters.priceRange.max}
-                      onChange={(e) =>
-                        onUpdatePriceRange({
-                          ...filters.priceRange,
-                          max: Number(e.target.value),
-                        })
-                      }
-                      min={priceRange.min}
-                      max={priceRange.max}
-                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                    />
-                  </div>
-                </div>
-                <div className="text-sm text-gray-600 text-center bg-gray-50 py-2 rounded-lg">
+                <RangeSlider
+                  min={priceRange.min}
+                  max={priceRange.max}
+                  value={[filters.priceRange.min, filters.priceRange.max]}
+                  onChange={(value) => {
+                    if (Array.isArray(value)) {
+                      onUpdatePriceRange({ min: value[0], max: value[1] });
+                    }
+                  }}
+                  range
+                  step={100}
+                  formatValue={(v) => formatCurrency(v)}
+                  showTooltip
+                  alwaysShowTooltip
+                  size="lg"
+                  color="primary"
+                  ariaLabel="Rango de precio"
+                />
+                <div className="text-sm text-gray-600 dark:text-gray-400 text-center bg-gray-50 dark:bg-gray-800 py-2 rounded-lg">
                   {formatCurrency(filters.priceRange.min)} -{' '}
                   {formatCurrency(filters.priceRange.max)} MXN
                 </div>

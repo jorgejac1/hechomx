@@ -1,5 +1,8 @@
 /**
- * Filter constants and configurations
+ * @fileoverview Product filter constants and configurations.
+ * Defines URL parameter names for filtering, sort options,
+ * pagination settings, and filter parameter types for product listings.
+ * @module lib/constants/filters
  */
 
 export const FILTER_PARAM_NAMES = {

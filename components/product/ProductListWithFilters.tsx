@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Product listing page with integrated filtering functionality
+ * Full-featured product browsing component with search, sort, and filter capabilities.
+ * Includes a filter drawer for detailed filtering options and active filter display.
+ * @module components/product/ProductListWithFilters
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -8,11 +15,19 @@ import FiltersDrawer from './FiltersDrawer';
 import ProductCard from './ProductCard';
 import Button from '@/components/common/Button';
 
+/**
+ * Props for the ProductListWithFilters component
+ * @interface ProductListWithFiltersProps
+ */
 interface ProductListWithFiltersProps {
+  /** Array of all products to filter and display */
   products: Product[];
 }
 
-// Define sort options type
+/**
+ * Sort option values for product ordering
+ * @typedef {'relevance' | 'price-asc' | 'price-desc' | 'rating-desc' | 'newest' | 'popular'} SortOption
+ */
 type SortOption = 'relevance' | 'price-asc' | 'price-desc' | 'rating-desc' | 'newest' | 'popular';
 
 export default function ProductListWithFilters({ products }: ProductListWithFiltersProps) {
@@ -118,7 +133,7 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
                 ))}
                 {filters.minRating > 0 && (
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-medium">
-                    {filters.minRating}+ ⭐
+                    {filters.minRating}+ estrellas
                   </span>
                 )}
                 {filters.inStock === true && (

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { updateProfileSchema, type UpdateProfileInput } from '@/validators';
@@ -29,6 +29,8 @@ import {
   TrendingUp,
   Store,
 } from 'lucide-react';
+import Alert from '@/components/common/Alert';
+import Divider from '@/components/common/Divider';
 
 interface MakerProfileData {
   shopName: string;
@@ -45,7 +47,6 @@ export default function ProfilePage() {
 }
 
 function ProfileContent({ user }: { user: User }) {
-  const router = useRouter();
   const { logout, updateProfile } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -101,7 +102,7 @@ function ProfileContent({ user }: { user: User }) {
     try {
       await updateProfile(formData);
       setIsEditing(false);
-      setSuccessMessage('¡Perfil actualizado correctamente! ✓');
+      setSuccessMessage('¡Perfil actualizado correctamente!');
 
       setTimeout(() => setSuccessMessage(''), 3000);
     } catch (error) {
@@ -129,7 +130,7 @@ function ProfileContent({ user }: { user: User }) {
       },
     });
     setShowSellerSetup(false);
-    setSuccessMessage('¡Tienda activada correctamente! ✓');
+    setSuccessMessage('¡Tienda activada correctamente!');
     setTimeout(() => setSuccessMessage(''), 3000);
   };
 
@@ -152,18 +153,16 @@ function ProfileContent({ user }: { user: User }) {
 
         {/* Success Message */}
         {successMessage && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
-            <p className="text-sm text-green-800 font-medium">{successMessage}</p>
-          </div>
+          <Alert variant="success" layout="bordered" icon={CheckCircle2} className="mb-6">
+            <span className="font-medium">{successMessage}</span>
+          </Alert>
         )}
 
         {/* Error Message */}
         {errors._form && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
-            <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-            <p className="text-sm text-red-800">{errors._form}</p>
-          </div>
+          <Alert variant="error" layout="bordered" icon={AlertCircle} className="mb-6">
+            {errors._form}
+          </Alert>
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -209,55 +208,54 @@ function ProfileContent({ user }: { user: User }) {
               <div className="mt-6 space-y-2">
                 {user.makerProfile && (
                   <>
-                    <button
-                      onClick={() => router.push(ROUTES.DASHBOARD)}
+                    <Link
+                      href={ROUTES.DASHBOARD}
                       className="w-full flex items-center gap-3 p-3 rounded-lg bg-primary-50 hover:bg-primary-100 transition text-left text-primary-700 font-medium border-2 border-primary-200"
                     >
                       <TrendingUp className="w-5 h-5 text-primary-600" />
                       Dashboard de Ventas
-                    </button>
-                    <button
-                      onClick={() => router.push('/perfil/vendedor')}
+                    </Link>
+                    <Link
+                      href="/perfil/vendedor"
                       className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition text-left text-gray-700 font-medium"
                     >
                       <Store className="w-5 h-5 text-gray-600" />
                       Perfil de Vendedor
-                    </button>
+                    </Link>
                   </>
                 )}
-                <button
-                  onClick={() => router.push(ROUTES.ORDERS)}
+                <Link
+                  href={ROUTES.ORDERS}
                   className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition text-left text-gray-700 font-medium"
                 >
                   <Package className="w-5 h-5 text-gray-600" />
                   Mis Pedidos
-                </button>
-                <button
-                  onClick={() => router.push(ROUTES.WISHLIST)}
+                </Link>
+                <Link
+                  href={ROUTES.WISHLIST}
                   className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition text-left text-gray-700 font-medium"
                 >
                   <Heart className="w-5 h-5 text-gray-600" />
                   Favoritos
-                </button>
-                <button
-                  onClick={() => router.push('/configuracion')}
+                </Link>
+                <Link
+                  href="/configuracion"
                   className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition text-left text-gray-700 font-medium"
                 >
                   <Settings className="w-5 h-5 text-gray-600" />
                   Configuración
-                </button>
+                </Link>
               </div>
 
               {/* Logout Button */}
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <button
-                  onClick={handleLogout}
-                  className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition font-medium border-2 border-red-200"
-                >
-                  <LogOut className="w-5 h-5" />
-                  Cerrar Sesión
-                </button>
-              </div>
+              <Divider spacing="md" />
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition font-medium border-2 border-red-200"
+              >
+                <LogOut className="w-5 h-5" />
+                Cerrar Sesión
+              </button>
             </div>
           </div>
 
@@ -526,9 +524,8 @@ function ProfileContent({ user }: { user: User }) {
             </div>
 
             {/* Help Card */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-              <h3 className="text-lg font-bold text-blue-900 mb-3">💡 Ayuda</h3>
-              <div className="space-y-2 text-sm text-blue-800">
+            <Alert variant="info" layout="bordered" title="Ayuda">
+              <div className="space-y-2">
                 <p>
                   <strong>¿Necesitas cambiar algo?</strong> Haz clic en "Editar" para modificar tu
                   información.
@@ -541,7 +538,7 @@ function ProfileContent({ user }: { user: User }) {
                   <strong>¿Tienes problemas?</strong> Contáctanos y te ayudaremos.
                 </p>
               </div>
-            </div>
+            </Alert>
           </div>
         </div>
       </div>

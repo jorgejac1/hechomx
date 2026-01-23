@@ -1,5 +1,7 @@
 /**
- * Validation utility functions
+ * @fileoverview Validation utility functions
+ * Provides helper functions for Zod schema validation, error formatting, and result handling
+ * @module validators/utils
  */
 
 import { ZodError, ZodSchema, ZodIssue } from 'zod';

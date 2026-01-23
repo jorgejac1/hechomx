@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Client-side product detail page component
+ * Renders the complete product detail view including gallery, info, description,
+ * highlights, shipping details, seller profile, reviews, and similar products.
+ * Handles cart interactions and tracks recently viewed products.
+ * @module components/product/ProductDetailClient
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -14,8 +22,14 @@ import ShippingReturns from './ShippingReturns';
 import StickyCartBar from './StickyCartBar';
 import ProductDescription from './ProductDescription';
 
+/**
+ * Props for the ProductDetailClient component
+ * @interface ProductDetailClientProps
+ */
 interface ProductDetailClientProps {
+  /** The main product to display */
   product: Product;
+  /** Array of similar products to show in recommendations section */
   similarProducts: Product[];
 }
 

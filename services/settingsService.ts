@@ -1,6 +1,9 @@
-// Settings Service
-// Currently uses localStorage, swap to API calls when backend is ready
-// All methods return Promises to match async API behavior
+/**
+ * @fileoverview Platform settings service for managing admin configuration.
+ * Currently uses localStorage for persistence, designed to be swapped with API calls.
+ * All methods return Promises to match async API behavior for seamless migration.
+ * @module services/settingsService
+ */
 
 import { PlatformSettings, defaultSettings } from '@/lib/types/settings';
 
@@ -24,7 +27,7 @@ export async function getSettings(): Promise<PlatformSettings> {
       return JSON.parse(stored);
     }
   } catch (error) {
-    console.error('Error loading settings:', error);
+    console.error('[settingsService] Error loading settings:', error);
   }
 
   return defaultSettings;
@@ -58,7 +61,7 @@ export async function saveSettings(
 
     return { success: true, message: 'Configuración guardada exitosamente' };
   } catch (error) {
-    console.error('Error saving settings:', error);
+    console.error('[settingsService] Error saving settings:', error);
     return { success: false, message: 'Error al guardar la configuración' };
   }
 }
@@ -87,7 +90,7 @@ export async function saveSectionSettings<K extends keyof PlatformSettings>(
 
     return { success: true, message: 'Sección actualizada exitosamente' };
   } catch (error) {
-    console.error('Error saving section:', error);
+    console.error('[settingsService] Error saving section:', error);
     return { success: false, message: 'Error al actualizar la sección' };
   }
 }
@@ -103,7 +106,7 @@ export async function resetSettings(): Promise<{ success: boolean; message: stri
     localStorage.removeItem(STORAGE_KEY);
     return { success: true, message: 'Configuración restablecida a valores por defecto' };
   } catch (error) {
-    console.error('Error resetting settings:', error);
+    console.error('[settingsService] Error resetting settings:', error);
     return { success: false, message: 'Error al restablecer la configuración' };
   }
 }

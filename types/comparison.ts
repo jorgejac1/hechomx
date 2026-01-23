@@ -1,5 +1,7 @@
 /**
- * Product comparison types
+ * @fileoverview Product comparison type definitions
+ * Defines interfaces for comparing products including comparison attributes, rows, and settings
+ * @module types/comparison
  */
 
 import { Product } from './product';

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Product filtering and sorting hook
+ * Manages filter state, applies filters to product lists, and provides filter toggle/reset actions
+ * @module hooks/product/useProductFilters
+ */
+
 import { useState, useCallback, useMemo } from 'react';
 import { Product } from '@/types';
 import { ProductFilters, SortOption, PriceRange } from '@/types/filters';

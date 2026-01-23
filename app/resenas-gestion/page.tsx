@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { getSellerReviews } from '@/lib/api/sellerApi';
@@ -32,7 +32,6 @@ export default function ReviewsManagementPage() {
 }
 
 function ReviewsManagementContent({ user }: { user: User }) {
-  const router = useRouter();
   const [reviews, setReviews] = useState<SellerReview[]>([]);
   const [filteredReviews, setFilteredReviews] = useState<SellerReview[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -144,13 +143,13 @@ function ReviewsManagementContent({ user }: { user: User }) {
       <div className="max-w-7xl mx-auto p-4 sm:p-6">
         {/* Header */}
         <div className="mb-6">
-          <button
-            onClick={() => router.push(ROUTES.DASHBOARD)}
+          <Link
+            href={ROUTES.DASHBOARD}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition"
           >
             <ArrowLeft className="w-5 h-5" />
             Volver al Dashboard
-          </button>
+          </Link>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Gestión de Reseñas</h1>
@@ -218,11 +217,11 @@ function ReviewsManagementContent({ user }: { user: User }) {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               >
                 <option value="all">Todas las estrellas</option>
-                <option value="5">⭐⭐⭐⭐⭐ (5)</option>
-                <option value="4">⭐⭐⭐⭐ (4)</option>
-                <option value="3">⭐⭐⭐ (3)</option>
-                <option value="2">⭐⭐ (2)</option>
-                <option value="1">⭐ (1)</option>
+                <option value="5">5 estrellas</option>
+                <option value="4">4 estrellas</option>
+                <option value="3">3 estrellas</option>
+                <option value="2">2 estrellas</option>
+                <option value="1">1 estrella</option>
               </select>
             </div>
           </div>
@@ -430,8 +429,8 @@ function ReviewsManagementContent({ user }: { user: User }) {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
                   />
                   <p className="text-xs text-gray-600 mt-2">
-                    💡 Consejo: Agradece al cliente, aborda sus comentarios y ofrece ayuda adicional
-                    si es necesario.
+                    Consejo: Agradece al cliente, aborda sus comentarios y ofrece ayuda adicional si
+                    es necesario.
                   </p>
                 </div>
               </div>

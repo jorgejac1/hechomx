@@ -1,5 +1,8 @@
 /**
- * Filter URL and parameter utilities
+ * @fileoverview Filter URL and parameter utility functions.
+ * Provides functions for building product URLs with filter parameters,
+ * mapping filter types to URL parameters, and managing filter state.
+ * @module lib/utils/filters
  */
 
 import { FILTER_PARAM_NAMES } from '@/lib/constants/filters';

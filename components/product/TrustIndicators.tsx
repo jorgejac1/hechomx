@@ -1,7 +1,18 @@
+/**
+ * @fileoverview Trust indicators component for product pages
+ * Displays confidence-building badges for secure purchase, returns policy,
+ * and seller response time to encourage buyer trust.
+ * @module components/product/TrustIndicators
+ */
+
 'use client';
 
 import { Shield, RotateCcw, Clock } from 'lucide-react';
 
+/**
+ * Renders a grid of trust indicator badges
+ * @returns Three-column grid with security, returns, and response badges
+ */
 export default function TrustIndicators() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-gray-200">

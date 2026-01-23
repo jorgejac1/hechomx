@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Products page client component
+ * Main client-side component for the products listing page with full filtering,
+ * sorting, pagination, and view toggle functionality. Syncs state with URL params.
+ * @module components/product/ProductsPageClient
+ */
+
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -5,12 +12,13 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useProductFilters } from '@/hooks/product/useProductFilters';
 import FiltersDrawer from '@/components/product/FiltersDrawer';
 import ProductsGrid from '@/components/product/ProductsGrid';
-import Button from '@/components/common/Button';
 import Pagination from '@/components/common/Pagination';
-import CardSkeleton from '@/components/common/loading/CardSkeleton';
+import ViewToggle from '@/components/product/ViewToggle';
+import FilterBadge from '@/components/product/FilterBadge';
 import { Product } from '@/types';
 import type { SortOption } from '@/types/filters';
-import { Filter, Grid3x3, List } from 'lucide-react';
+import { Filter, Search } from 'lucide-react';
+import EmptyState from '@/components/common/EmptyState';
 import { formatCurrency, pluralize, ROUTES } from '@/lib';
 import { FILTER_PARAM_NAMES, ITEMS_PER_PAGE, SORT_OPTIONS } from '@/lib/constants/filters';
 import {
@@ -27,7 +35,12 @@ import {
   trackSearchQuery,
 } from '@/lib/utils/analytics';
 
+/**
+ * Props for the ProductsPageClient component
+ * @interface ProductsPageClientProps
+ */
 interface ProductsPageClientProps {
+  /** All products to filter and display */
   products: Product[];
 }
 
@@ -36,7 +49,6 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
   const searchParams = useSearchParams();
   const [view, setView] = useState<'grid' | 'list'>('grid');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Read current page from URL
   const currentPageFromUrl = parseInt(searchParams.get(FILTER_PARAM_NAMES.PAGE) || '1', 10);
@@ -68,6 +80,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
     updatePriceRange,
     updateMinRating,
     updateSortBy,
+    updateFilter,
     toggleInStock,
     toggleVerified,
     toggleFeatured,
@@ -81,7 +94,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
     }
   }, [currentQuery, filteredProducts.length]);
 
-  // Sync filter state with URL params
+  // Sync filter state with URL params (only when URL params change)
   useEffect(() => {
     // Handle category filters
     if (currentCategory && !filters.categories.includes(currentCategory)) {
@@ -111,54 +124,29 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
       updatePriceRange(priceRange);
     }
 
-    // Track transition state for boolean filters
-    const needsTransition =
-      currentFeatured !== filters.featured ||
-      currentVerified !== filters.verified ||
-      currentInStock !== filters.inStock;
-
-    if (needsTransition) {
-      setIsTransitioning(true);
-    }
-
-    // Toggle boolean filters until they match URL state
-    if (currentFeatured !== filters.featured) {
-      toggleFeatured();
-    }
-
-    if (currentVerified !== filters.verified) {
-      toggleVerified();
-    }
-
-    if (currentInStock !== filters.inStock) {
-      toggleInStock();
-    }
-
-    // Clear transition when all filters match
-    if (
-      currentFeatured === filters.featured &&
-      currentVerified === filters.verified &&
-      currentInStock === filters.inStock
-    ) {
-      setIsTransitioning(false);
-    }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    currentCategory,
-    currentState,
-    currentSort,
-    currentPrice,
-    currentFeatured,
-    currentVerified,
-    currentInStock,
-    filters.featured,
-    filters.verified,
-    filters.inStock,
-  ]);
+  }, [currentCategory, currentState, currentSort, currentPrice]);
 
-  // Calculate active filter count
-  const getTotalActiveFilters = () => {
+  // Separate effect for boolean filters from URL - only runs on URL param changes
+  useEffect(() => {
+    // Only sync from URL if there's a URL param set
+    // This prevents overriding local drawer selections
+    if (searchParams.has(FILTER_PARAM_NAMES.FEATURED) && currentFeatured !== filters.featured) {
+      updateFilter('featured', currentFeatured);
+    }
+
+    if (searchParams.has(FILTER_PARAM_NAMES.VERIFIED) && currentVerified !== filters.verified) {
+      updateFilter('verified', currentVerified);
+    }
+
+    if (searchParams.has(FILTER_PARAM_NAMES.IN_STOCK) && currentInStock !== filters.inStock) {
+      updateFilter('inStock', currentInStock);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentFeatured, currentVerified, currentInStock]);
+
+  // Calculate active filter count - memoized to avoid recalculation on each render
+  const totalActiveFilters = useMemo(() => {
     let count = 0;
 
     count += filters.categories.length;
@@ -172,7 +160,17 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
     if (currentQuery) count++;
 
     return count;
-  };
+  }, [
+    filters.categories.length,
+    filters.states.length,
+    filters.priceRange.max,
+    priceRange.max,
+    filters.minRating,
+    filters.inStock,
+    filters.verified,
+    filters.featured,
+    currentQuery,
+  ]);
 
   // Paginate filtered products
   const { paginatedProducts: displayProducts, totalPages } = useMemo(() => {
@@ -242,9 +240,9 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
             >
               <Filter className="w-5 h-5" />
               Filtros
-              {getTotalActiveFilters() > 0 && (
+              {totalActiveFilters > 0 && (
                 <span className="ml-1 px-2 py-0.5 text-xs font-semibold bg-primary-600 text-white rounded-full">
-                  {getTotalActiveFilters()}
+                  {totalActiveFilters}
                 </span>
               )}
             </button>
@@ -257,26 +255,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
 
           <div className="flex items-center gap-3">
             {/* View Toggle */}
-            <div className="flex items-center bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
-              <button
-                onClick={() => setView('grid')}
-                className={`p-2 transition-colors ${
-                  view === 'grid' ? 'bg-primary-600 text-white' : 'text-gray-600 hover:bg-gray-50'
-                }`}
-                aria-label="Vista de cuadrícula"
-              >
-                <Grid3x3 className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setView('list')}
-                className={`p-2 transition-colors ${
-                  view === 'list' ? 'bg-primary-600 text-white' : 'text-gray-600 hover:bg-gray-50'
-                }`}
-                aria-label="Vista de lista"
-              >
-                <List className="w-5 h-5" />
-              </button>
-            </div>
+            <ViewToggle view={view} onViewChange={setView} />
 
             {/* Sort Dropdown */}
             <div className="relative">
@@ -328,176 +307,85 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
         </div>
 
         {/* Active Filters Display */}
-        {(filters.categories.length > 0 ||
-          filters.states.length > 0 ||
-          filters.minRating > 0 ||
-          filters.inStock === true ||
-          filters.verified === true ||
-          filters.featured === true ||
-          filters.priceRange.max < priceRange.max ||
-          currentQuery) && (
+        {totalActiveFilters > 0 && (
           <div className="mt-4 p-4 bg-white rounded-xl border-2 border-gray-200">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-sm font-semibold text-gray-700">Filtros activos:</span>
 
               {/* Category Badges */}
               {filters.categories.map((category) => (
-                <span
+                <FilterBadge
                   key={category}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 text-primary-700 rounded-lg text-sm font-medium"
-                >
-                  {category}
-                  <button
-                    onClick={() =>
-                      handleFilterChange(() => toggleCategory(category), 'category', category)
-                    }
-                    className="hover:text-primary-900"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </span>
+                  label={category}
+                  variant="primary"
+                  onRemove={() =>
+                    handleFilterChange(() => toggleCategory(category), 'category', category)
+                  }
+                />
               ))}
 
               {/* State Badges */}
               {filters.states.map((state) => (
-                <span
+                <FilterBadge
                   key={state}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium"
-                >
-                  {state}
-                  <button
-                    onClick={() => handleFilterChange(() => toggleState(state), 'state', state)}
-                    className="hover:text-blue-900"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </span>
+                  label={state}
+                  variant="blue"
+                  onRemove={() => handleFilterChange(() => toggleState(state), 'state', state)}
+                />
               ))}
 
               {/* Price Badge */}
               {filters.priceRange.max < priceRange.max && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-700 rounded-lg text-sm font-medium">
-                  Menos de {formatCurrency(filters.priceRange.max)}
-                  <button
-                    onClick={() => handleRemoveFilter('price')}
-                    className="hover:text-green-900"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </span>
+                <FilterBadge
+                  label={`Menos de ${formatCurrency(filters.priceRange.max)}`}
+                  variant="green"
+                  onRemove={() => handleRemoveFilter('price')}
+                />
               )}
 
               {/* Rating Badge */}
               {filters.minRating > 0 && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-100 text-yellow-700 rounded-lg text-sm font-medium">
-                  {filters.minRating}+ ⭐
-                  <button
-                    onClick={() => handleFilterChange(() => updateMinRating(0), 'rating', 0)}
-                    className="hover:text-yellow-900"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </span>
+                <FilterBadge
+                  label={`${filters.minRating}+ estrellas`}
+                  variant="yellow"
+                  onRemove={() => handleFilterChange(() => updateMinRating(0), 'rating', 0)}
+                />
               )}
 
               {/* In Stock Badge */}
               {filters.inStock === true && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-700 rounded-lg text-sm font-medium">
-                  En stock
-                  <button
-                    onClick={() => handleRemoveFilter('inStock')}
-                    className="hover:text-green-900"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </span>
+                <FilterBadge
+                  label="En stock"
+                  variant="green"
+                  onRemove={() => handleRemoveFilter('inStock')}
+                />
               )}
 
               {/* Verified Badge */}
               {filters.verified === true && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-lg text-sm font-medium">
-                  Verificados
-                  <button
-                    onClick={() => handleRemoveFilter('verified')}
-                    className="hover:text-purple-900"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </span>
+                <FilterBadge
+                  label="Verificados"
+                  variant="purple"
+                  onRemove={() => handleRemoveFilter('verified')}
+                />
               )}
 
               {/* Featured Badge */}
               {filters.featured === true && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-100 text-orange-700 rounded-lg text-sm font-medium">
-                  Destacados
-                  <button
-                    onClick={() => handleRemoveFilter('featured')}
-                    className="hover:text-orange-900"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </span>
+                <FilterBadge
+                  label="Destacados"
+                  variant="orange"
+                  onRemove={() => handleRemoveFilter('featured')}
+                />
               )}
 
               {/* Search Query Badge */}
               {currentQuery && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-100 text-primary-700 rounded-lg text-sm font-medium">
-                  "{currentQuery}"
-                  <button
-                    onClick={() => router.push(ROUTES.PRODUCTS, { scroll: false })}
-                    className="hover:text-primary-900"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                </span>
+                <FilterBadge
+                  label={`"${currentQuery}"`}
+                  variant="primary"
+                  onRemove={() => router.push(ROUTES.PRODUCTS, { scroll: false })}
+                />
               )}
 
               {/* Clear All Button */}
@@ -514,32 +402,23 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
 
       {/* Products Grid */}
       <div>
-        {isTransitioning ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <CardSkeleton key={i} />
-            ))}
-          </div>
-        ) : displayProducts.length > 0 ? (
+        {displayProducts.length > 0 ? (
           <>
             <ProductsGrid products={displayProducts} view={view} />
             <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/productos" />
           </>
         ) : (
-          <div className="bg-white rounded-xl shadow-xs border-2 border-gray-200 p-12 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-4">
-              <Filter className="w-10 h-10 text-gray-400" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              No se encontraron productos
-            </h3>
-            <p className="text-gray-600 mb-6 max-w-md mx-auto">
-              No hay productos que coincidan con tus criterios de búsqueda. Intenta ajustar los
-              filtros o realizar una búsqueda diferente.
-            </p>
-            <Button variant="primary" size="lg" onClick={handleResetFilters}>
-              Limpiar todos los filtros
-            </Button>
+          <div className="bg-white rounded-xl shadow-xs border-2 border-gray-200">
+            <EmptyState
+              icon={<Search className="w-12 h-12" />}
+              title="No se encontraron productos"
+              description="No hay productos que coincidan con tus criterios de búsqueda. Intenta ajustar los filtros o realizar una búsqueda diferente."
+              size="lg"
+              action={{
+                label: 'Limpiar todos los filtros',
+                onClick: handleResetFilters,
+              }}
+            />
           </div>
         )}
       </div>
@@ -563,7 +442,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
         onToggleVerified={() => handleFilterChange(toggleVerified, 'verified', !filters.verified)}
         onToggleFeatured={() => handleFilterChange(toggleFeatured, 'featured', !filters.featured)}
         onResetFilters={handleResetFilters}
-        activeFilterCount={getTotalActiveFilters()}
+        activeFilterCount={totalActiveFilters}
       />
     </>
   );

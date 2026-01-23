@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Recently viewed products tracking utilities.
+ * Manages localStorage-based storage of recently viewed products
+ * with automatic limit enforcement and retrieval functions.
+ * @module lib/utils/recently-viewed
+ */
+
 const STORAGE_KEY = 'papalote-recently-viewed';
 const MAX_ITEMS = 10;
 
@@ -18,7 +25,7 @@ export function getRecentlyViewedIds(): RecentlyViewedItem[] {
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored ? JSON.parse(stored) : [];
   } catch (error) {
-    console.error('Error loading recently viewed:', error);
+    console.error('[recently-viewed] Error loading recently viewed:', error);
     return [];
   }
 }
@@ -45,7 +52,7 @@ export function addToRecentlyViewed(productId: string): void {
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   } catch (error) {
-    console.error('Error saving recently viewed:', error);
+    console.error('[recently-viewed] Error saving recently viewed:', error);
   }
 }
 

@@ -1,12 +1,29 @@
+/**
+ * @fileoverview States Section Component
+ * Showcases Mexican states and their traditional crafts. Features a grid of highlighted
+ * states with craft specialties, images, and product counts. Also includes a comprehensive
+ * list of crafts organized by state with navigation links.
+ * @module components/home/StatesSection
+ */
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { CRAFT_STATES, ROUTES } from '@/lib';
+
+/**
+ * @typedef {Object} FeaturedState
+ * @property {string} name - State name
+ * @property {string} craft - Primary craft specialty
+ * @property {string} icon - Emoji icon representing the craft
+ * @property {string} description - Brief description of the craft tradition
+ * @property {string} image - URL of the state/craft image
+ * @property {string} count - Number of artisans/products (e.g., "500+")
+ */
 
 const FEATURED_STATES = [
   {
     name: 'Oaxaca',
     craft: 'Cerámica',
-    icon: '🏺',
     description: 'Barro negro y alebrijes únicos',
     image: 'https://images.unsplash.com/photo-1582845512747-e42001c95638?w=800',
     count: '500+',
@@ -14,7 +31,6 @@ const FEATURED_STATES = [
   {
     name: 'Chiapas',
     craft: 'Textiles',
-    icon: '🧵',
     description: 'Bordados tradicionales mayas',
     image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=800',
     count: '350+',
@@ -22,7 +38,6 @@ const FEATURED_STATES = [
   {
     name: 'Michoacán',
     craft: 'Madera',
-    icon: '🪵',
     description: 'Tallado en madera y muebles',
     image: 'https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=800',
     count: '420+',
@@ -30,13 +45,16 @@ const FEATURED_STATES = [
   {
     name: 'Puebla',
     craft: 'Cerámica',
-    icon: '🎨',
     description: 'Talavera tradicional poblana',
     image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800',
     count: '380+',
   },
 ] as const;
 
+/**
+ * Renders the States exploration section with featured state cards and craft listings.
+ * @returns {JSX.Element} The StatesSection component
+ */
 export default function StatesSection() {
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-white">
@@ -87,10 +105,7 @@ export default function StatesSection() {
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">{state.icon}</span>
-                    <h3 className="text-xl font-bold text-white">{state.name}</h3>
-                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">{state.name}</h3>
                   <p className="text-sm text-white/90 font-medium mb-1">{state.craft}</p>
                   <p className="text-xs text-white/80">{state.description}</p>
                 </div>
@@ -102,7 +117,6 @@ export default function StatesSection() {
         {/* Craft Specialties - Clean white cards */}
         <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
           <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="text-2xl">🇲🇽</span>
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Cubrimos todo México</h3>
           </div>
 

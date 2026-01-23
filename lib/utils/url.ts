@@ -1,5 +1,8 @@
 /**
- * URL manipulation utilities
+ * @fileoverview URL manipulation and query parameter utilities.
+ * Provides functions for building URLs with parameters, parsing query strings,
+ * updating browser history, detecting external URLs, and domain extraction.
+ * @module lib/utils/url
  */
 
 /**

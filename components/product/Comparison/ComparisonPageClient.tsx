@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Product comparison page client component
+ * Main page component for comparing products with responsive desktop/mobile views,
+ * difference filtering, and shareable URLs. Handles hydration and analytics.
+ * @module components/product/Comparison/ComparisonPageClient
+ */
+
 'use client';
 
 import { Suspense, useState, useRef, useEffect } from 'react';
@@ -9,10 +16,14 @@ import ComparisonMobileView from './ComparisonMobileView';
 import ComparisonProsCons from './ComparisonProscons';
 import ComparisonActions from './ComparisonActions';
 import Button from '@/components/common/Button';
-import EmptyState from '@/components/common/feedback/EmptyState';
+import EmptyState from '@/components/common/EmptyState';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Search, Check } from 'lucide-react';
 
+/**
+ * Inner content component for the comparison page
+ * @returns Comparison page content with table or mobile view
+ */
 function ComparisonPageContent() {
   const { comparisonProducts, clearComparison } = useComparison();
   const [showOnlyDifferences, setShowOnlyDifferences] = useState(false);
@@ -75,14 +86,13 @@ function ComparisonPageContent() {
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="max-w-7xl mx-auto px-4">
           <EmptyState
-            icon="search"
+            icon={<Search className="w-12 h-12" />}
             title="No hay productos para comparar"
             description="Agrega productos desde el catálogo para comenzar a compararlos."
-            action={
-              <Button variant="primary" href="/productos">
-                Ver productos
-              </Button>
-            }
+            action={{
+              label: 'Ver productos',
+              href: '/productos',
+            }}
           />
         </div>
       </div>
@@ -116,13 +126,13 @@ function ComparisonPageContent() {
             <div className="flex flex-wrap items-center gap-2">
               <button
                 onClick={() => setShowOnlyDifferences(!showOnlyDifferences)}
-                className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-lg border-2 transition-all ${
+                className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-lg border-2 transition-all flex items-center gap-1 ${
                   showOnlyDifferences
                     ? 'bg-primary-50 border-primary-600 text-primary-700'
                     : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
                 }`}
               >
-                {showOnlyDifferences ? '✓ ' : ''}
+                {showOnlyDifferences && <Check className="w-4 h-4" />}
                 <span className="hidden sm:inline">Mostrar solo diferencias</span>
                 <span className="sm:hidden">Solo diferencias</span>
               </button>

@@ -1,9 +1,22 @@
+/**
+ * @fileoverview Seller badge component for verified artisans
+ * Displays a highlighted badge for star artisans with their name
+ * and a note about their responsiveness and shipping reliability.
+ * @module components/product/SellerBadge
+ */
+
 'use client';
 
 import { Award } from 'lucide-react';
 
+/**
+ * Props for the SellerBadge component
+ * @interface SellerBadgeProps
+ */
 interface SellerBadgeProps {
+  /** Whether the seller is verified */
   verified: boolean;
+  /** Name of the artisan/maker */
   makerName: string;
 }
 

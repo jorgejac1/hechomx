@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Seasonal Products Section Component
+ * Displays products filtered by seasonal themes (e.g., holidays, special occasions).
+ * Automatically detects current and upcoming seasonal events and filters products
+ * based on categories and keywords. Features a dynamic grid layout with theme selection.
+ * @module components/home/SeasonalSection
+ */
+
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
@@ -6,11 +14,21 @@ import Image from 'next/image';
 import { Product } from '@/types';
 import { SeasonalTheme, getCurrentSeasonalTheme, seasonalThemes, formatCurrency } from '@/lib';
 
+/**
+ * @interface SeasonalSectionProps
+ * Props for the SeasonalSection component
+ */
 interface SeasonalSectionProps {
+  /** Array of products to filter by seasonal theme */
   products: Product[];
 }
 
-// Helper functions
+/**
+ * Adds days to a date string in MM-DD format
+ * @param {string} dateStr - Date string in MM-DD format
+ * @param {number} days - Number of days to add
+ * @returns {string} New date string in MM-DD format
+ */
 const addDays = (dateStr: string, days: number): string => {
   const [month, day] = dateStr.split('-').map(Number);
   const date = new Date(2024, month - 1, day + days);
@@ -19,6 +37,11 @@ const addDays = (dateStr: string, days: number): string => {
   return `${newMonth}-${newDay}`;
 };
 
+/**
+ * Checks if a seasonal theme is upcoming within the next 30 days
+ * @param {SeasonalTheme} theme - The seasonal theme to check
+ * @returns {boolean} True if the theme starts within 30 days
+ */
 const isUpcoming = (theme: SeasonalTheme): boolean => {
   const today = new Date();
   const month = String(today.getMonth() + 1).padStart(2, '0');
@@ -29,6 +52,11 @@ const isUpcoming = (theme: SeasonalTheme): boolean => {
   return themeStart >= currentDate && themeStart <= addDays(currentDate, 30);
 };
 
+/**
+ * Renders a seasonal products section with theme filtering and dynamic grid layout.
+ * @param {SeasonalSectionProps} props - Component props
+ * @returns {JSX.Element | null} The SeasonalSection component or null if no active themes
+ */
 export default function SeasonalSection({ products }: SeasonalSectionProps) {
   const [selectedTheme, setSelectedTheme] = useState<string>('');
   const [activeThemes, setActiveThemes] = useState<SeasonalTheme[]>([]);

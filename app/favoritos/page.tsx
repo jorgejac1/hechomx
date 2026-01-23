@@ -1,31 +1,31 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/contexts/ToastContext';
 import { getUserFavorites, type FavoriteProduct } from '@/lib/api/sellerApi';
-import { formatCurrency, formatRelativeTime, ROUTES } from '@/lib';
+import { formatCurrency, ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import type { Product } from '@/types';
 import type { User } from '@/contexts/AuthContext';
 import {
   Heart,
   ShoppingCart,
-  Trash2,
   Grid3x3,
   List,
   Share2,
   Filter,
   SortAsc,
   Package,
-  Star,
-  AlertCircle,
+  Search,
   X,
+  AlertCircle,
 } from 'lucide-react';
+import EmptyState from '@/components/common/EmptyState';
+import FavoriteCard from '@/components/product/FavoriteCard';
+import FavoriteListItem from '@/components/product/FavoriteListItem';
 
 type ViewMode = 'grid' | 'list';
 type SortOption = 'recent' | 'name' | 'price-low' | 'price-high';
@@ -64,37 +64,43 @@ function FavoritesContent({ user }: { user: User }) {
     loadFavorites();
   }, [user.email]);
 
+  const handleRemoveFavorite = useCallback(
+    (productId: string) => {
+      setFavorites((prev) => prev.filter((item) => item.id !== productId));
+      showToast('Producto eliminado de favoritos', 'success');
+    },
+    [showToast]
+  );
+
+  const handleAddToCart = useCallback(
+    (favorite: FavoriteProduct) => {
+      const product: Product = {
+        id: favorite.id,
+        name: favorite.name,
+        description: favorite.description,
+        price: favorite.price,
+        currency: favorite.currency,
+        category: favorite.category,
+        subcategory: favorite.subcategory,
+        state: favorite.state,
+        maker: favorite.maker,
+        images: favorite.images,
+        inStock: favorite.inStock,
+        featured: favorite.featured,
+        verified: favorite.verified,
+        rating: favorite.rating,
+        reviewCount: favorite.reviewCount,
+      };
+
+      addToCart(product, 1);
+      showToast('Producto agregado al carrito', 'success');
+    },
+    [addToCart, showToast]
+  );
+
   if (isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando favoritos..." />;
   }
-
-  const handleRemoveFavorite = (productId: string) => {
-    setFavorites((prev) => prev.filter((item) => item.id !== productId));
-    showToast('Producto eliminado de favoritos', 'success');
-  };
-
-  const handleAddToCart = (favorite: FavoriteProduct) => {
-    const product: Product = {
-      id: favorite.id,
-      name: favorite.name,
-      description: favorite.description,
-      price: favorite.price,
-      currency: favorite.currency,
-      category: favorite.category,
-      subcategory: favorite.subcategory,
-      state: favorite.state,
-      maker: favorite.maker,
-      images: favorite.images,
-      inStock: favorite.inStock,
-      featured: favorite.featured,
-      verified: favorite.verified,
-      rating: favorite.rating,
-      reviewCount: favorite.reviewCount,
-    };
-
-    addToCart(product, 1);
-    showToast('Producto agregado al carrito', 'success');
-  };
 
   const handleAddAllToCart = () => {
     let itemsAdded = 0;
@@ -248,22 +254,18 @@ function FavoritesContent({ user }: { user: User }) {
         </div>
 
         {favorites.length === 0 ? (
-          // Empty State
-          <div className="bg-white rounded-xl shadow-md p-12 text-center">
-            <Heart className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Tu lista de favoritos está vacía
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Explora productos artesanales y guarda tus favoritos para verlos más tarde
-            </p>
-            <Link
-              href={ROUTES.PRODUCTS}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
-            >
-              <Package className="w-5 h-5" />
-              Explorar Productos
-            </Link>
+          <div className="bg-white rounded-xl shadow-md">
+            <EmptyState
+              title="Tu lista de favoritos está vacía"
+              description="Explora productos artesanales y guarda tus favoritos para verlos más tarde"
+              icon={<Heart className="w-12 h-12" />}
+              size="lg"
+              action={{
+                label: 'Explorar Productos',
+                href: ROUTES.PRODUCTS,
+                icon: <Package className="w-5 h-5" />,
+              }}
+            />
           </div>
         ) : (
           <>
@@ -433,21 +435,17 @@ function FavoritesContent({ user }: { user: User }) {
 
             {/* No Results Message */}
             {sortedFavorites.length === 0 && hasActiveFilters && (
-              <div className="bg-white rounded-xl shadow-md p-12 text-center">
-                <AlertCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  No se encontraron productos
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Intenta ajustar los filtros para ver más resultados
-                </p>
-                <button
-                  onClick={clearFilters}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
-                >
-                  <X className="w-5 h-5" />
-                  Limpiar Filtros
-                </button>
+              <div className="bg-white rounded-xl shadow-md">
+                <EmptyState
+                  title="No se encontraron productos"
+                  description="Intenta ajustar los filtros para ver más resultados"
+                  icon={<Search className="w-12 h-12" />}
+                  action={{
+                    label: 'Limpiar Filtros',
+                    onClick: clearFilters,
+                    icon: <X className="w-5 h-5" />,
+                  }}
+                />
               </div>
             )}
 
@@ -457,188 +455,24 @@ function FavoritesContent({ user }: { user: User }) {
                 {viewMode === 'grid' ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {sortedFavorites.map((favorite) => (
-                      <div
+                      <FavoriteCard
                         key={favorite.id}
-                        className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition group"
-                      >
-                        {/* Image */}
-                        <Link href={ROUTES.PRODUCT_DETAIL(favorite.id)} className="relative block">
-                          <div className="relative h-64">
-                            <Image
-                              src={favorite.images[0]}
-                              alt={favorite.name}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            {!favorite.inStock && (
-                              <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                <span className="px-4 py-2 bg-red-600 text-white rounded-full text-sm font-bold">
-                                  Agotado
-                                </span>
-                              </div>
-                            )}
-                            {favorite.featured && (
-                              <div className="absolute top-2 left-2">
-                                <span className="px-2 py-1 bg-yellow-500 text-white rounded-full text-xs font-bold">
-                                  Destacado
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                        </Link>
-
-                        {/* Content */}
-                        <div className="p-4">
-                          <Link href={ROUTES.PRODUCT_DETAIL(favorite.id)}>
-                            <h3 className="font-bold text-gray-900 mb-1 hover:text-primary-600 transition line-clamp-2">
-                              {favorite.name}
-                            </h3>
-                          </Link>
-
-                          {/* Rating */}
-                          {favorite.rating && (
-                            <div className="flex items-center gap-1 mb-2">
-                              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                              <span className="text-sm font-semibold text-gray-900">
-                                {favorite.rating.toFixed(1)}
-                              </span>
-                              <span className="text-sm text-gray-600">
-                                ({favorite.reviewCount || 0})
-                              </span>
-                            </div>
-                          )}
-
-                          {/* Price */}
-                          <p className="text-2xl font-bold text-primary-600 mb-3">
-                            {formatCurrency(favorite.price)}
-                          </p>
-
-                          {/* Added Date */}
-                          <p className="text-xs text-gray-500 mb-3">
-                            Agregado {formatRelativeTime(favorite.addedAt)}
-                          </p>
-
-                          {/* Notes */}
-                          {favorite.notes && (
-                            <div className="mb-3 p-2 bg-blue-50 rounded-sm text-xs text-gray-700 italic">
-                              "{favorite.notes}"
-                            </div>
-                          )}
-
-                          {/* Actions */}
-                          <div className="flex gap-2">
-                            <button
-                              onClick={() => handleAddToCart(favorite)}
-                              disabled={!favorite.inStock}
-                              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                              <ShoppingCart className="w-4 h-4" />
-                              Agregar
-                            </button>
-                            <button
-                              onClick={() => handleRemoveFavorite(favorite.id)}
-                              className="px-3 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+                        favorite={favorite}
+                        onAddToCart={handleAddToCart}
+                        onRemove={handleRemoveFavorite}
+                      />
                     ))}
                   </div>
                 ) : (
                   // List View
                   <div className="space-y-4">
                     {sortedFavorites.map((favorite) => (
-                      <div
+                      <FavoriteListItem
                         key={favorite.id}
-                        className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
-                      >
-                        <div className="flex flex-col sm:flex-row gap-4 p-4">
-                          {/* Image */}
-                          <Link
-                            href={ROUTES.PRODUCT_DETAIL(favorite.id)}
-                            className="relative shrink-0"
-                          >
-                            <div className="relative h-48 sm:h-32 sm:w-32 rounded-lg overflow-hidden">
-                              <Image
-                                src={favorite.images[0]}
-                                alt={favorite.name}
-                                fill
-                                className="object-cover hover:scale-105 transition-transform duration-300"
-                              />
-                              {!favorite.inStock && (
-                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                  <span className="px-3 py-1 bg-red-600 text-white rounded-full text-xs font-bold">
-                                    Agotado
-                                  </span>
-                                </div>
-                              )}
-                            </div>
-                          </Link>
-
-                          {/* Content */}
-                          <div className="flex-1 flex flex-col justify-between">
-                            <div>
-                              <Link href={ROUTES.PRODUCT_DETAIL(favorite.id)}>
-                                <h3 className="font-bold text-lg text-gray-900 mb-1 hover:text-primary-600 transition">
-                                  {favorite.name}
-                                </h3>
-                              </Link>
-
-                              <p className="text-sm text-gray-600 mb-2 line-clamp-2">
-                                {favorite.description}
-                              </p>
-
-                              {favorite.rating && (
-                                <div className="flex items-center gap-1 mb-2">
-                                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                                  <span className="text-sm font-semibold text-gray-900">
-                                    {favorite.rating.toFixed(1)}
-                                  </span>
-                                  <span className="text-sm text-gray-600">
-                                    ({favorite.reviewCount || 0} reseñas)
-                                  </span>
-                                </div>
-                              )}
-
-                              <p className="text-xs text-gray-500">
-                                Agregado {formatRelativeTime(favorite.addedAt)}
-                              </p>
-
-                              {favorite.notes && (
-                                <div className="mt-2 p-2 bg-blue-50 rounded-sm text-xs text-gray-700 italic">
-                                  "{favorite.notes}"
-                                </div>
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Price & Actions */}
-                          <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-3">
-                            <p className="text-2xl font-bold text-primary-600">
-                              {formatCurrency(favorite.price)}
-                            </p>
-
-                            <div className="flex sm:flex-col gap-2">
-                              <button
-                                onClick={() => handleAddToCart(favorite)}
-                                disabled={!favorite.inStock}
-                                className="flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-                              >
-                                <ShoppingCart className="w-4 h-4" />
-                                <span className="hidden sm:inline">Agregar al Carrito</span>
-                              </button>
-                              <button
-                                onClick={() => handleRemoveFavorite(favorite.id)}
-                                className="px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                        favorite={favorite}
+                        onAddToCart={handleAddToCart}
+                        onRemove={handleRemoveFavorite}
+                      />
                     ))}
                   </div>
                 )}

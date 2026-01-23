@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Mobile navigation menu component for the site header
+ * Provides a responsive mobile menu with different layouts for admin and regular users.
+ * Features include navigation links, user profile display, seller tools, and logout functionality.
+ * Supports both authenticated and unauthenticated states with appropriate menu options.
+ * @module components/layout/header/MobileMenu
+ */
+
 'use client';
 
 import Link from 'next/link';
@@ -19,26 +27,50 @@ import {
   ShoppingBag,
 } from 'lucide-react';
 import { ROUTES } from '@/lib/constants/routes';
-import { getShopSlug } from '@/lib/utils/shop';
+import { getShopSlug } from '@/lib/utils/shop-utils';
 import type { User as UserType } from '@/contexts/AuthContext';
 
+/**
+ * Props for the MobileMenu component
+ * @interface MobileMenuProps
+ */
 interface MobileMenuProps {
+  /** Current authenticated user object, or null if not authenticated */
   user: UserType | null;
+  /** Whether the user is currently authenticated */
   isAuthenticated: boolean;
+  /** Whether the user has admin privileges */
   isAdmin: boolean;
+  /** Callback function to close the mobile menu */
   onClose: () => void;
+  /** Callback function to handle user logout */
   onLogout: () => void;
 }
 
+/**
+ * Props for individual mobile menu item links
+ * @interface MobileMenuItemProps
+ */
 interface MobileMenuItemProps {
+  /** URL destination for the menu item */
   href: string;
+  /** Icon element to display alongside the label */
   icon: React.ReactNode;
+  /** Text label for the menu item */
   label: string;
+  /** Optional click handler for additional actions */
   onClick?: () => void;
+  /** Visual style variant for the menu item */
   variant?: 'default' | 'primary' | 'purple' | 'blue' | 'red';
+  /** Whether the link opens in a new tab */
   external?: boolean;
 }
 
+/**
+ * Renders a single navigation item in the mobile menu
+ * @param {MobileMenuItemProps} props - The component props
+ * @returns The rendered menu item link
+ */
 function MobileMenuItem({
   href,
   icon,
@@ -71,6 +103,15 @@ function MobileMenuItem({
   );
 }
 
+/**
+ * Renders a button element in the mobile menu (e.g., logout button)
+ * @param props - The component props
+ * @param props.icon - Icon element to display
+ * @param props.label - Button text label
+ * @param props.onClick - Click handler function
+ * @param props.variant - Visual style variant
+ * @returns The rendered menu button
+ */
 function MobileMenuButton({
   icon,
   label,
@@ -99,6 +140,13 @@ function MobileMenuButton({
   );
 }
 
+/**
+ * Renders a section header in the mobile menu
+ * @param props - The component props
+ * @param props.title - Section title text
+ * @param props.variant - Color variant for the section header
+ * @returns The rendered section header
+ */
 function MobileMenuSection({
   title,
   variant = 'default',
@@ -114,17 +162,28 @@ function MobileMenuSection({
   );
 }
 
+/**
+ * Renders a horizontal divider line in the mobile menu
+ * @returns The rendered divider element with separator role
+ */
 function MobileMenuDivider() {
   return <div className="border-t border-gray-200 my-2" role="separator" />;
 }
 
+/**
+ * Renders the user information header section in the mobile menu
+ * @param props - The component props
+ * @param props.user - The authenticated user object
+ * @param props.isAdmin - Whether the user has admin privileges
+ * @returns The rendered user header with avatar and info
+ */
 function UserHeader({ user, isAdmin }: { user: UserType; isAdmin: boolean }) {
   return (
     <div
       className={`flex items-center gap-3 py-3 ${
         isAdmin
-          ? 'border-b border-purple-200 bg-purple-50 -mx-4 px-4 mb-2'
-          : 'pt-2 pb-4 border-t border-gray-200'
+          ? 'border-b border-purple-200 bg-purple-50 -mx-6 px-6 mb-2'
+          : 'pt-2 pb-4 border-b border-gray-200'
       }`}
     >
       {user.avatar && (
@@ -151,6 +210,13 @@ function UserHeader({ user, isAdmin }: { user: UserType; isAdmin: boolean }) {
   );
 }
 
+/**
+ * Main mobile menu component with responsive navigation
+ * Renders different menu layouts for admin users vs regular users.
+ * Handles authenticated and unauthenticated states appropriately.
+ * @param {MobileMenuProps} props - The component props
+ * @returns The rendered mobile menu navigation
+ */
 export default function MobileMenu({
   user,
   isAuthenticated,
@@ -166,7 +232,7 @@ export default function MobileMenu({
   // Admin Mobile Menu
   if (isAdmin && user) {
     return (
-      <nav className="md:hidden pb-4 pt-2 border-t" aria-label="Menú móvil de administrador">
+      <nav aria-label="Menú móvil de administrador">
         <div className="flex flex-col space-y-3">
           <UserHeader user={user} isAdmin={true} />
 
@@ -223,7 +289,7 @@ export default function MobileMenu({
 
   // Regular User Mobile Menu
   return (
-    <nav className="md:hidden pb-4 pt-2 border-t" aria-label="Menú móvil">
+    <nav aria-label="Menú móvil">
       <div className="flex flex-col space-y-3">
         {/* Public Links */}
         <MobileMenuItem

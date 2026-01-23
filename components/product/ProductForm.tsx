@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Product creation and editing form component
+ * Comprehensive form for creating or editing artisan products with support for
+ * basic info, pricing, images, materials, dimensions, production options, and more.
+ * Supports draft saving and publishing workflows.
+ * @module components/product/ProductForm
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -20,10 +28,18 @@ import {
   FormActions,
 } from './form';
 
+/**
+ * Props for the ProductForm component
+ * @interface ProductFormProps
+ */
 interface ProductFormProps {
+  /** Initial form data for editing existing products */
   initialData?: Partial<ProductFormData> & { id?: string };
+  /** Callback function to handle form submission */
   onSubmit: (data: ProductFormData) => Promise<void>;
+  /** Custom label for the submit button */
   submitLabel?: string;
+  /** Whether the form is in edit mode vs create mode */
   isEditing?: boolean;
 }
 
@@ -129,7 +145,7 @@ export default function ProductForm({
         router.push('/productos/gestionar');
       }, 1000);
     } catch (error) {
-      console.error('Error saving draft:', error);
+      console.error('[ProductForm] Error saving draft:', error);
       showToast('Error al guardar el borrador', 'error');
     } finally {
       setIsSavingDraft(false);
@@ -154,7 +170,7 @@ export default function ProductForm({
       await onSubmit(formData);
       setCurrentStatus('published');
     } catch (error) {
-      console.error('Error submitting product:', error);
+      console.error('[ProductForm] Error submitting product:', error);
       showToast('Error al publicar el producto. Intenta de nuevo.', 'error');
     } finally {
       setIsSubmitting(false);

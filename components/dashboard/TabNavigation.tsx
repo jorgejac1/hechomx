@@ -1,13 +1,34 @@
+/**
+ * @fileoverview Tab navigation component for the seller dashboard.
+ * Provides navigation between different dashboard sections including
+ * overview, analytics, customers, orders, products, and reviews.
+ * Supports count badges and new order notifications.
+ * @module components/dashboard/TabNavigation
+ */
+
 import { BarChart3, Users } from 'lucide-react';
 
+/**
+ * Available tab identifiers for dashboard navigation.
+ */
 type TabType = 'overview' | 'analytics' | 'customers' | 'orders' | 'products' | 'reviews';
 
+/**
+ * @interface TabNavigationProps
+ * Props for the TabNavigation component.
+ */
 interface TabNavigationProps {
+  /** Currently active tab identifier */
   activeTab: TabType;
+  /** Callback function to change the active tab */
   setActiveTab: (tab: TabType) => void;
+  /** Total number of orders to display in tab */
   orderCount: number;
+  /** Total number of products to display in tab */
   productCount: number;
+  /** Total number of reviews to display in tab */
   reviewCount: number;
+  /** Number of new orders for notification badge */
   newOrderCount?: number;
 }
 

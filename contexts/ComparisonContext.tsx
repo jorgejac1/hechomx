@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Product comparison context for managing side-by-side product comparisons.
+ * Allows users to add up to 4 products for comparison with localStorage persistence.
+ * Provides toast notifications when comparison limit is reached.
+ * @module contexts/ComparisonContext
+ */
+
 'use client';
 
 import { createContext, useContext, ReactNode } from 'react';
@@ -8,6 +15,10 @@ import {
 } from '@/hooks/product/useProductComparison';
 import { useToast } from '@/contexts/ToastContext';
 
+/**
+ * Comparison context value type extending the useProductComparison hook
+ * @typedef ComparisonContextType
+ */
 type ComparisonContextType = UseProductComparisonReturn & {
   comparisonProducts: Product[];
   addToComparison: (product: Product) => void;

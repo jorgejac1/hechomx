@@ -1,11 +1,24 @@
+/**
+ * @fileoverview Similar products recommendation section component
+ * Displays a grid of related products with a link to view more in the same category.
+ * Used on product detail pages to encourage product discovery.
+ * @module components/product/SimilarProducts
+ */
+
 'use client';
 
 import Link from 'next/link';
 import { Product } from '@/types';
 import ProductCard from './ProductCard';
 
+/**
+ * Props for the SimilarProducts component
+ * @interface SimilarProductsProps
+ */
 interface SimilarProductsProps {
+  /** Array of similar products to display */
   products: Product[];
+  /** Category slug used for the "View more" link */
   category: string;
 }
 
@@ -15,9 +28,7 @@ export default function SimilarProducts({ products, category }: SimilarProductsP
   return (
     <div className="bg-white rounded-xl shadow-md p-6 lg:p-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">
-          Productos Similares
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-900">Productos Similares</h2>
         <Link
           href={`/productos?category=${category}`}
           className="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center gap-1"

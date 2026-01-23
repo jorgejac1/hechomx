@@ -24,6 +24,7 @@ import ToggleSwitch from '@/components/common/ToggleSwitch';
 import ConfirmActionModal from '@/components/common/ConfirmActionModal';
 import { useSettings } from '@/hooks/admin/useSettings';
 import { useToast } from '@/contexts/ToastContext';
+import { useMaintenance } from '@/components/providers/MaintenanceProvider';
 
 type SettingsSection =
   | 'general'
@@ -42,6 +43,7 @@ export default function AdminConfiguracionPage() {
   const [testingEmail, setTestingEmail] = useState(false);
 
   const toast = useToast();
+  const { toggleMaintenance } = useMaintenance();
   const {
     settings,
     isLoading,
@@ -106,14 +108,28 @@ export default function AdminConfiguracionPage() {
     if (enabled) {
       setShowMaintenanceConfirm(true);
     } else {
-      updateSection('general', { maintenanceMode: false });
+      // Disable maintenance mode via API and local state
+      toggleMaintenance(false)
+        .then(() => {
+          updateSection('general', { maintenanceMode: false });
+          toast.success('Modo mantenimiento desactivado');
+        })
+        .catch(() => {
+          toast.error('Error al desactivar modo mantenimiento');
+        });
     }
   };
 
-  const confirmMaintenanceMode = () => {
-    updateSection('general', { maintenanceMode: true });
-    setShowMaintenanceConfirm(false);
-    toast.warning('Modo mantenimiento activado');
+  const confirmMaintenanceMode = async () => {
+    try {
+      await toggleMaintenance(true);
+      updateSection('general', { maintenanceMode: true });
+      setShowMaintenanceConfirm(false);
+      toast.warning('Modo mantenimiento activado. Los usuarios serán redirigidos.');
+    } catch {
+      toast.error('Error al activar modo mantenimiento');
+      setShowMaintenanceConfirm(false);
+    }
   };
 
   const sections = [

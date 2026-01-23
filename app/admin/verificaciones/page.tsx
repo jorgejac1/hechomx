@@ -31,6 +31,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/contexts/ToastContext';
 import { ROUTES } from '@/lib/constants/routes';
 import verificationRequestsData from '@/lib/data/verification-requests.json';
+import Alert from '@/components/common/Alert';
 
 type VerificationStatus = 'submitted' | 'under_review' | 'info_requested' | 'approved' | 'rejected';
 type VerificationLevel =
@@ -463,22 +464,21 @@ export default function AdminVerificacionesPage() {
 
                     {/* Flag Reason */}
                     {request.flagged && request.flagReason && (
-                      <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
-                        <p className="text-sm text-red-700">
-                          <Flag className="w-4 h-4 inline mr-1" />
-                          {request.flagReason}
-                        </p>
-                      </div>
+                      <Alert variant="error" layout="bordered" icon={Flag} className="mt-3">
+                        {request.flagReason}
+                      </Alert>
                     )}
 
                     {/* Requested Info Note */}
                     {request.status === 'info_requested' && request.requestedInfo && (
-                      <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                        <p className="text-sm text-amber-700">
-                          <MessageSquare className="w-4 h-4 inline mr-1" />
-                          {request.requestedInfo}
-                        </p>
-                      </div>
+                      <Alert
+                        variant="warning"
+                        layout="bordered"
+                        icon={MessageSquare}
+                        className="mt-3"
+                      >
+                        {request.requestedInfo}
+                      </Alert>
                     )}
                   </div>
 
@@ -598,7 +598,10 @@ export default function AdminVerificacionesPage() {
                                   {request.questionnaire.location.state}
                                 </p>
                                 {request.questionnaire.location.hasPhysicalWorkshop && (
-                                  <p className="text-xs text-green-600">✓ Tiene taller físico</p>
+                                  <p className="text-xs text-green-600 flex items-center gap-1">
+                                    <CheckCircle2 className="w-3 h-3" />
+                                    Tiene taller físico
+                                  </p>
                                 )}
                               </div>
                             </div>
@@ -727,9 +730,15 @@ export default function AdminVerificacionesPage() {
                           }`}
                         >
                           {request.status === 'approved' ? (
-                            <p className="font-medium">✅ Esta solicitud fue aprobada</p>
+                            <p className="font-medium flex items-center justify-center gap-2">
+                              <CheckCircle2 className="w-5 h-5" />
+                              Esta solicitud fue aprobada
+                            </p>
                           ) : (
-                            <p className="font-medium">❌ Esta solicitud fue rechazada</p>
+                            <p className="font-medium flex items-center justify-center gap-2">
+                              <XCircle className="w-5 h-5" />
+                              Esta solicitud fue rechazada
+                            </p>
                           )}
                         </div>
                       )}

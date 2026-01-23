@@ -2,11 +2,13 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Star, Loader2 } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { useToast } from '@/contexts/ToastContext';
 import type { BuyerOrder } from '@/lib/types/buyer';
 import Modal from '@/components/common/Modal';
 import Textarea from '@/components/common/Textarea';
+import LoadingButton from '@/components/common/LoadingButton';
+import Button from '@/components/common/Button';
 
 interface ReviewModalProps {
   order: BuyerOrder;
@@ -90,27 +92,17 @@ export default function ReviewModal({ order, onClose, onSubmit }: ReviewModalPro
 
   const footer = (
     <>
-      <button
-        onClick={onClose}
-        disabled={isSubmitting}
-        className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-      >
+      <Button variant="outline" onClick={onClose} disabled={isSubmitting} fullWidth>
         Cancelar
-      </button>
-      <button
+      </Button>
+      <LoadingButton
         onClick={handleSubmit}
-        disabled={isSubmitting}
-        className="flex-1 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        isLoading={isSubmitting}
+        loadingText="Enviando..."
+        fullWidth
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="w-5 h-5 animate-spin" />
-            Enviando...
-          </>
-        ) : (
-          'Publicar Reseñas'
-        )}
-      </button>
+        Publicar Reseñas
+      </LoadingButton>
     </>
   );
 

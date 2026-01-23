@@ -1,5 +1,8 @@
 /**
- * Product categories and metadata
+ * @fileoverview Product category constants and metadata.
+ * Defines main product categories (textiles, ceramics, jewelry, etc.),
+ * category icons, colors, subcategories, and helper functions for category data.
+ * @module lib/constants/categories
  */
 
 export const CATEGORIES = {
@@ -14,14 +17,14 @@ export const CATEGORIES = {
 } as const;
 
 export const CATEGORY_ICONS: Record<string, string> = {
-  [CATEGORIES.TEXTILES]: '🧵',
-  [CATEGORIES.CERAMICA]: '🏺',
-  [CATEGORIES.JOYERIA]: '💍',
-  [CATEGORIES.MADERA]: '🪵',
-  [CATEGORIES.CUERO]: '👜',
-  [CATEGORIES.PAPEL]: '📄',
-  [CATEGORIES.METAL]: '⚒️',
-  [CATEGORIES.VIDRIO]: '🔮',
+  [CATEGORIES.TEXTILES]: 'Shirt',
+  [CATEGORIES.CERAMICA]: 'Container',
+  [CATEGORIES.JOYERIA]: 'Gem',
+  [CATEGORIES.MADERA]: 'TreeDeciduous',
+  [CATEGORIES.CUERO]: 'Briefcase',
+  [CATEGORIES.PAPEL]: 'FileText',
+  [CATEGORIES.METAL]: 'Hammer',
+  [CATEGORIES.VIDRIO]: 'Sparkles',
 };
 
 export const CATEGORY_COLORS: Record<string, string> = {

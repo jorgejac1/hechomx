@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Type definitions for seller verification system.
+ * Includes verification levels (basic, verified artisan, master artisan, certified workshop),
+ * verification statuses, document uploads, verification requests, badges, and form data.
+ * @module lib/types/verification
+ */
+
 export type VerificationLevel =
   | 'basic_seller'
   | 'verified_artisan'

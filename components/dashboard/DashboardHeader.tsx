@@ -1,9 +1,22 @@
+/**
+ * @fileoverview Header component for the seller dashboard.
+ * Displays the dashboard title, shop name, new order notifications,
+ * and provides a link to view the public shop page.
+ * @module components/dashboard/DashboardHeader
+ */
+
 import Link from 'next/link';
-import { getShopSlug } from '@/lib/utils/shop';
+import { getShopSlug } from '@/lib/utils/shop-utils';
 import { Store, ExternalLink, Bell } from 'lucide-react';
 
+/**
+ * @interface DashboardHeaderProps
+ * Props for the DashboardHeader component.
+ */
 interface DashboardHeaderProps {
+  /** Name of the seller's shop */
   shopName: string;
+  /** Number of new orders for notification display */
   newOrderCount?: number;
 }
 

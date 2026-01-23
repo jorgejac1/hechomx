@@ -11,6 +11,8 @@ import { CartProvider } from '@/contexts/CartContext';
 import { ToastProvider } from '@/contexts/ToastContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 import ComparisonBar from '@/components/product/Comparison/ComparisonBar';
+import ThemeProvider from '@/components/providers/ThemeProvider';
+import { MaintenanceProvider } from '@/components/providers/MaintenanceProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,23 +22,29 @@ export const dynamic = 'force-dynamic';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <body className={inter.className}>
-        <ToastProvider>
-          <AuthProvider>
-            <CartProvider>
-              <ComparisonProvider>
-                <Header />
-                <main className="min-h-screen">{children}</main>
-                <Footer />
-                <ScrollToTop />
-                <Suspense fallback={null}>
-                  <ComparisonBar />
-                </Suspense>
-              </ComparisonProvider>
-            </CartProvider>
-          </AuthProvider>
-        </ToastProvider>
+        <ThemeProvider>
+          <ToastProvider>
+            <AuthProvider>
+              <MaintenanceProvider>
+                <CartProvider>
+                  <ComparisonProvider>
+                    <Header />
+                    <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+                      {children}
+                    </main>
+                    <Footer />
+                    <ScrollToTop />
+                    <Suspense fallback={null}>
+                      <ComparisonBar />
+                    </Suspense>
+                  </ComparisonProvider>
+                </CartProvider>
+              </MaintenanceProvider>
+            </AuthProvider>
+          </ToastProvider>
+        </ThemeProvider>
 
         {/* Google Analytics */}
         <Script

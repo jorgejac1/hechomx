@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Seasonal theme configuration and detection utilities.
+ * Defines seasonal themes for Mexican holidays (Dia de Muertos, Navidad, etc.)
+ * and provides functions to detect current and upcoming seasonal promotions.
+ * @module lib/utils/season
+ */
+
 export interface SeasonalTheme {
   id: string;
   name: string;
@@ -22,7 +29,7 @@ export const seasonalThemes: SeasonalTheme[] = [
     bgColor: 'bg-orange-50',
     categories: ['Decoración del Hogar', 'Arte', 'Ropa'],
     keywords: ['halloween', 'calabaza', 'disfraz', 'decoración'],
-    icon: '🎃'
+    icon: '🎃',
   },
   {
     id: 'dia-muertos',
@@ -34,7 +41,7 @@ export const seasonalThemes: SeasonalTheme[] = [
     bgColor: 'bg-purple-50',
     categories: ['Decoración del Hogar', 'Arte'],
     keywords: ['calavera', 'ofrenda', 'tradicional', 'altar', 'muertos'],
-    icon: '💀'
+    icon: '💀',
   },
   {
     id: 'navidad',
@@ -46,74 +53,74 @@ export const seasonalThemes: SeasonalTheme[] = [
     bgColor: 'bg-red-50',
     categories: ['Decoración del Hogar', 'Ropa', 'Joyería'],
     keywords: ['navidad', 'regalo', 'decoración', 'christmas'],
-    icon: '🎄'
+    icon: '🎄',
   },
   {
-    id: "año-nuevo",
-    name: "Año Nuevo",
-    description: "Empieza el año con productos únicos hechos en México",
-    startDate: "12-26",
-    endDate: "01-15",
-    color: "text-yellow-700",
-    bgColor: "bg-yellow-50",
-    categories: ["Joyería", "Ropa", "Decoración del Hogar"],
-    keywords: ["nuevo", "celebración"],
-    icon: "🎉",
+    id: 'año-nuevo',
+    name: 'Año Nuevo',
+    description: 'Empieza el año con productos únicos hechos en México',
+    startDate: '12-26',
+    endDate: '01-15',
+    color: 'text-yellow-700',
+    bgColor: 'bg-yellow-50',
+    categories: ['Joyería', 'Ropa', 'Decoración del Hogar'],
+    keywords: ['nuevo', 'celebración'],
+    icon: '🎉',
   },
   {
-    id: "amor-amistad",
-    name: "Amor y Amistad",
-    description: "Regalos especiales para demostrar tu cariño",
-    startDate: "02-01",
-    endDate: "02-14",
-    color: "text-pink-700",
-    bgColor: "bg-pink-50",
-    categories: ["Joyería", "Ropa", "Arte"],
-    keywords: ["amor", "regalo", "romántico"],
-    icon: "💝",
+    id: 'amor-amistad',
+    name: 'Amor y Amistad',
+    description: 'Regalos especiales para demostrar tu cariño',
+    startDate: '02-01',
+    endDate: '02-14',
+    color: 'text-pink-700',
+    bgColor: 'bg-pink-50',
+    categories: ['Joyería', 'Ropa', 'Arte'],
+    keywords: ['amor', 'regalo', 'romántico'],
+    icon: '💝',
   },
   {
-    id: "primavera",
-    name: "Primavera",
-    description: "Renueva tu hogar con artesanías coloridas y frescas",
-    startDate: "03-21",
-    endDate: "06-20",
-    color: "text-green-700",
-    bgColor: "bg-green-50",
-    categories: ["Decoración del Hogar", "Arte", "Textiles"],
-    keywords: ["floral", "colorido", "fresco"],
-    icon: "🌸",
+    id: 'primavera',
+    name: 'Primavera',
+    description: 'Renueva tu hogar con artesanías coloridas y frescas',
+    startDate: '03-21',
+    endDate: '06-20',
+    color: 'text-green-700',
+    bgColor: 'bg-green-50',
+    categories: ['Decoración del Hogar', 'Arte', 'Textiles'],
+    keywords: ['floral', 'colorido', 'fresco'],
+    icon: '🌸',
   },
   {
-    id: "verano",
-    name: "Verano Mexicano",
-    description: "Productos perfectos para la temporada de calor",
-    startDate: "06-21",
-    endDate: "09-22",
-    color: "text-orange-700",
-    bgColor: "bg-orange-50",
-    categories: ["Ropa", "Calzado", "Textiles"],
-    keywords: ["verano", "playa", "ligero"],
-    icon: "☀️",
+    id: 'verano',
+    name: 'Verano Mexicano',
+    description: 'Productos perfectos para la temporada de calor',
+    startDate: '06-21',
+    endDate: '09-22',
+    color: 'text-orange-700',
+    bgColor: 'bg-orange-50',
+    categories: ['Ropa', 'Calzado', 'Textiles'],
+    keywords: ['verano', 'playa', 'ligero'],
+    icon: '☀️',
   },
   {
-    id: "otoño",
-    name: "Otoño",
-    description: "Artesanías cálidas para la temporada de cosecha",
-    startDate: "09-23",
-    endDate: "11-14",
-    color: "text-amber-700",
-    bgColor: "bg-amber-50",
-    categories: ["Decoración del Hogar", "Textiles", "Ropa"],
-    keywords: ["otoño", "cálido", "acogedor"],
-    icon: "🍂",
+    id: 'otoño',
+    name: 'Otoño',
+    description: 'Artesanías cálidas para la temporada de cosecha',
+    startDate: '09-23',
+    endDate: '11-14',
+    color: 'text-amber-700',
+    bgColor: 'bg-amber-50',
+    categories: ['Decoración del Hogar', 'Textiles', 'Ropa'],
+    keywords: ['otoño', 'cálido', 'acogedor'],
+    icon: '🍂',
   },
 ];
 
 export function getCurrentSeasonalTheme(): SeasonalTheme | null {
   const today = new Date();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
   const currentDate = `${month}-${day}`;
 
   for (const theme of seasonalThemes) {
@@ -137,8 +144,8 @@ export function getCurrentSeasonalTheme(): SeasonalTheme | null {
 
 export function getUpcomingSeasonalTheme(): SeasonalTheme | null {
   const today = new Date();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
   const currentDate = `${month}-${day}`;
 
   // Find the next upcoming theme

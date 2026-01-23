@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Checkout validation schemas
+ * Provides Zod schemas for validating shipping addresses, payment methods, checkout forms, and gift options for Mexican e-commerce
+ * @module validators/checkout
+ */
+
 import { z } from 'zod';
 import { MEXICAN_STATES } from '@/lib/constants/states';
 

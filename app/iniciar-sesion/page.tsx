@@ -10,6 +10,7 @@ import { ROUTES } from '@/lib';
 import Button from '@/components/common/Button';
 import TextInput from '@/components/common/TextInput';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
+import Alert from '@/components/common/Alert';
 import { Eye, EyeOff, Mail, Lock, AlertCircle, Shield } from 'lucide-react';
 
 export default function LoginPage() {
@@ -108,9 +109,9 @@ export default function LoginPage() {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-lg sm:rounded-xl sm:px-10">
           {/* Demo credentials info */}
-          <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-sm font-semibold text-blue-900 mb-2">🔐 Credenciales de prueba:</p>
-            <div className="text-xs text-blue-800 space-y-2">
+          <Alert variant="info" layout="bordered" className="mb-6">
+            <p className="text-sm font-semibold mb-2">🔐 Credenciales de prueba:</p>
+            <div className="text-xs space-y-2">
               <div className="pb-2 border-b border-blue-300">
                 <p className="font-semibold flex items-center gap-1">
                   <Shield className="w-3 h-3 text-purple-600" />
@@ -160,14 +161,13 @@ export default function LoginPage() {
                 </p>
               </div>
             </div>
-          </div>
+          </Alert>
 
           {/* Login error */}
           {loginError && (
-            <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
-              <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-              <p className="text-sm text-red-800">{loginError}</p>
-            </div>
+            <Alert variant="error" layout="bordered" icon={AlertCircle} className="mb-4">
+              {loginError}
+            </Alert>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">

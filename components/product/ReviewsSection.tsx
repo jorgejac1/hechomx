@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Product reviews section component
+ * Full-featured reviews section with rating summary, distribution, filtering,
+ * individual review display with photos, and review submission modal.
+ * @module components/product/ReviewsSection
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -9,21 +16,43 @@ import ReviewPhotos from './ReviewPhotos';
 import RatingBreakdown from './RatingBreakdown';
 import Badge from '@/components/common/Badge';
 import Button from '@/components/common/Button';
+import StarRating from '@/components/common/StarRating';
+import Avatar from '@/components/common/Avatar';
+import Radio from '@/components/common/Radio';
 
+/**
+ * Props for the ReviewsSection component
+ * @interface ReviewsSectionProps
+ */
 interface ReviewsSectionProps {
+  /** Product ID for fetching/submitting reviews */
   productId: number;
+  /** Overall product rating */
   rating: number;
+  /** Total number of reviews */
   reviewCount: number;
 }
 
+/**
+ * Individual review data structure
+ * @interface Review
+ */
 interface Review {
+  /** Unique review ID */
   id: number;
+  /** Review author name */
   author: string;
+  /** Review rating (1-5) */
   rating: number;
+  /** Review date string */
   date: string;
+  /** Review text content */
   comment: string;
+  /** Whether reviewer has verified purchase */
   verified: boolean;
+  /** Number of helpful votes */
   helpful: number;
+  /** Array of review photo URLs */
   photos: string[];
 }
 
@@ -255,27 +284,23 @@ export default function ReviewsSection({
             <span className="font-semibold">{reviewsWithPhotos} reseñas con fotos</span>
           </div>
 
-          <div className="flex gap-2">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                filter === 'all'
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              Todas
-            </button>
-            <button
-              onClick={() => setFilter('photos')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                filter === 'photos'
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              Con fotos
-            </button>
+          <div className="flex gap-4">
+            <Radio
+              name="review-filter"
+              value="all"
+              checked={filter === 'all'}
+              onChange={() => setFilter('all')}
+              label="Todas"
+              size="md"
+            />
+            <Radio
+              name="review-filter"
+              value="photos"
+              checked={filter === 'photos'}
+              onChange={() => setFilter('photos')}
+              label="Con fotos"
+              size="md"
+            />
           </div>
         </div>
 
@@ -300,9 +325,7 @@ export default function ReviewsSection({
               {/* Review Header */}
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-700 font-semibold">
-                    {review.author.charAt(0)}
-                  </div>
+                  <Avatar name={review.author} size="md" />
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="font-semibold text-gray-900">{review.author}</span>
@@ -313,16 +336,12 @@ export default function ReviewsSection({
                       )}
                     </div>
                     <div className="flex items-center gap-2 mt-1">
-                      <div className="flex items-center">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-4 h-4 ${
-                              i < review.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                            }`}
-                          />
-                        ))}
-                      </div>
+                      <StarRating
+                        rating={review.rating}
+                        size="sm"
+                        showValue={false}
+                        productId={`review-${review.id}`}
+                      />
                       <span className="text-sm text-gray-500">
                         {formatDate(review.date, {
                           year: 'numeric',

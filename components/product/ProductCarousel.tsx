@@ -1,13 +1,28 @@
+/**
+ * @fileoverview Product carousel component with responsive design
+ * Displays products in a horizontally scrollable carousel on desktop
+ * and a touch-scrollable list on mobile devices.
+ * @module components/product/ProductCarousel
+ */
+
 'use client';
 
 import { useState } from 'react';
 import { Product } from '@/types';
 import ProductCard from './ProductCard';
 
+/**
+ * Props for the ProductCarousel component
+ * @interface ProductCarouselProps
+ */
 interface ProductCarouselProps {
+  /** Array of products to display in the carousel */
   products: Product[];
+  /** Optional section title displayed above the carousel */
   title?: string;
+  /** Optional link to view all products in this collection */
   viewAllLink?: string;
+  /** Number of items visible at once on desktop (defaults to 4) */
   itemsToShow?: number;
 }
 
@@ -15,18 +30,18 @@ export default function ProductCarousel({
   products,
   title,
   viewAllLink,
-  itemsToShow = 4
+  itemsToShow = 4,
 }: ProductCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const maxIndex = Math.max(0, products.length - itemsToShow);
 
   const handlePrev = () => {
-    setCurrentIndex(prev => Math.max(0, prev - 1));
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex(prev => Math.min(maxIndex, prev + 1));
+    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
   };
 
   if (products.length === 0) {
@@ -40,15 +55,25 @@ export default function ProductCarousel({
         {title && (
           <div className="flex items-center justify-between mb-4 sm:mb-6">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">{title}</h2>
-            
+
             {viewAllLink && (
               <a
                 href={viewAllLink}
                 className="text-primary-600 hover:text-primary-700 font-semibold flex items-center gap-1 text-sm sm:text-base"
               >
                 Ver todos
-                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <svg
+                  className="w-4 h-4 sm:w-5 sm:h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </a>
             )}
@@ -66,8 +91,18 @@ export default function ProductCarousel({
                 className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg items-center justify-center hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition"
                 aria-label="Anterior"
               >
-                <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                <svg
+                  className="w-6 h-6 text-gray-700"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
                 </svg>
               </button>
               <button
@@ -76,8 +111,18 @@ export default function ProductCarousel({
                 className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg items-center justify-center hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition"
                 aria-label="Siguiente"
               >
-                <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <svg
+                  className="w-6 h-6 text-gray-700"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </button>
             </>
@@ -89,10 +134,7 @@ export default function ProductCarousel({
             <div className="md:hidden overflow-x-auto scrollbar-hide -mx-4 px-4">
               <div className="flex gap-3 pb-2">
                 {products.map((product) => (
-                  <div
-                    key={product.id}
-                    className="shrink-0 w-[55vw] sm:w-[45vw] max-w-[260px]"
-                  >
+                  <div key={product.id} className="shrink-0 w-[55vw] sm:w-[45vw] max-w-[260px]">
                     <ProductCard product={product} />
                   </div>
                 ))}
@@ -104,14 +146,16 @@ export default function ProductCarousel({
               <div
                 className="flex gap-4 lg:gap-6 transition-transform duration-300 ease-in-out items-stretch"
                 style={{
-                  transform: `translateX(-${currentIndex * (100 / itemsToShow + 1.5)}%)`
+                  transform: `translateX(-${currentIndex * (100 / itemsToShow + 1.5)}%)`,
                 }}
               >
                 {products.map((product) => (
                   <div
                     key={product.id}
                     className="shrink-0"
-                    style={{ width: `calc(${100 / itemsToShow}% - ${(itemsToShow - 1) * 24 / itemsToShow}px)` }}
+                    style={{
+                      width: `calc(${100 / itemsToShow}% - ${((itemsToShow - 1) * 24) / itemsToShow}px)`,
+                    }}
                   >
                     <ProductCard product={product} />
                   </div>

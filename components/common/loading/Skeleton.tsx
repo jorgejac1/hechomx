@@ -1,5 +1,4 @@
-interface SkeletonProps {
-  className?: string;
+interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'text' | 'circular' | 'rectangular';
   width?: string | number;
   height?: string | number;
@@ -12,6 +11,7 @@ export default function Skeleton({
   width,
   height,
   animation = 'pulse',
+  ...props
 }: SkeletonProps) {
   const variantClasses = {
     text: 'rounded-sm',
@@ -41,6 +41,7 @@ export default function Skeleton({
       style={style}
       aria-busy="true"
       aria-live="polite"
+      {...props}
     />
   );
 }

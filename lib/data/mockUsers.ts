@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Mock seller user data for development and demos.
+ * Contains complete mock profiles for individual sellers, artisans, and companies
+ * with products, reviews, orders, stats, and business configurations.
+ * @module lib/data/mockUsers
+ */
+
 import { User } from '@/contexts/AuthContext';
 import type { SellerProduct, Order, Review } from '@/lib/types';
 import type { SellerVerification } from '@/lib/types/verification';

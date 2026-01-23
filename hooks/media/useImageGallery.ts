@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Complete image gallery composition hook
+ * Combines zoom, slideshow, preloading, and loading state hooks for full gallery functionality
+ * @module hooks/media/useImageGallery
+ */
+
 import { useState, useCallback } from 'react';
 import { useImageLoadingState } from '../common/useImageLoadingState';
 import { useImagePreloader } from '../common/useImagePreloader';

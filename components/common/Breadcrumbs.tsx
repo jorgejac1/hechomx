@@ -1,11 +1,28 @@
+/**
+ * @fileoverview Breadcrumbs component for displaying hierarchical navigation path.
+ * Renders a list of links with chevron separators, with the last item as plain text.
+ * @module components/common/Breadcrumbs
+ */
+
 import Link from 'next/link';
 
+/**
+ * Single breadcrumb item configuration
+ * @interface BreadcrumbItem
+ */
 interface BreadcrumbItem {
+  /** Display text for the breadcrumb */
   label: string;
+  /** URL to navigate to (omit for non-clickable items) */
   href?: string;
 }
 
+/**
+ * Props for the Breadcrumbs component
+ * @interface BreadcrumbsProps
+ */
 interface BreadcrumbsProps {
+  /** Array of breadcrumb items from root to current page */
   items: BreadcrumbItem[];
 }
 

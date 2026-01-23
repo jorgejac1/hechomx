@@ -1,39 +1,63 @@
+/**
+ * @fileoverview View toggle component for product listings
+ * Provides a radio button group to switch between grid and list views.
+ * Uses accessible radio controls with visual styling.
+ * @module components/product/ViewToggle
+ */
+
 'use client';
 
+import { LayoutGrid, List } from 'lucide-react';
+import Radio from '@/components/common/Radio';
+
+/**
+ * Props for the ViewToggle component
+ * @interface ViewToggleProps
+ */
 interface ViewToggleProps {
+  /** Currently selected view mode */
   view: 'grid' | 'list';
+  /** Callback when view mode changes */
   onViewChange: (view: 'grid' | 'list') => void;
 }
 
 export default function ViewToggle({ view, onViewChange }: ViewToggleProps) {
   return (
-    <div className="flex gap-1 border-2 border-gray-300 rounded-lg p-1">
-      <button
-        onClick={() => onViewChange('grid')}
-        className={`p-2 rounded transition ${
-          view === 'grid' 
-            ? 'bg-primary-600 text-white' 
-            : 'text-gray-600 hover:bg-gray-100'
+    <fieldset className="flex gap-3" role="radiogroup" aria-label="Seleccionar vista">
+      <label
+        className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
+          view === 'grid'
+            ? 'bg-primary-100 text-primary-700 ring-2 ring-primary-500'
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
         }`}
-        aria-label="Vista en cuadrícula"
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-        </svg>
-      </button>
-      <button
-        onClick={() => onViewChange('list')}
-        className={`p-2 rounded transition ${
-          view === 'list' 
-            ? 'bg-primary-600 text-white' 
-            : 'text-gray-600 hover:bg-gray-100'
+        <Radio
+          name="view-toggle"
+          value="grid"
+          checked={view === 'grid'}
+          onChange={() => onViewChange('grid')}
+          className="sr-only"
+        />
+        <LayoutGrid className="w-5 h-5" />
+        <span className="text-sm font-medium hidden sm:inline">Cuadrícula</span>
+      </label>
+      <label
+        className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
+          view === 'list'
+            ? 'bg-primary-100 text-primary-700 ring-2 ring-primary-500'
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
         }`}
-        aria-label="Vista en lista"
       >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </div>
+        <Radio
+          name="view-toggle"
+          value="list"
+          checked={view === 'list'}
+          onChange={() => onViewChange('list')}
+          className="sr-only"
+        />
+        <List className="w-5 h-5" />
+        <span className="text-sm font-medium hidden sm:inline">Lista</span>
+      </label>
+    </fieldset>
   );
 }

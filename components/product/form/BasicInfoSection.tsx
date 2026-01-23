@@ -1,17 +1,36 @@
+/**
+ * @fileoverview Basic information form section component
+ * Provides inputs for product name, category, subcategory, and description.
+ * Uses autocomplete for category selection with dynamic subcategory filtering.
+ * @module components/product/form/BasicInfoSection
+ */
+
 import { Package } from 'lucide-react';
 import { CATEGORY_OPTIONS, getSubcategoriesByCategory } from '@/lib/constants/categories';
 import TextInput from '@/components/common/TextInput';
-import Select from '@/components/common/Select';
+import Autocomplete from '@/components/common/Autocomplete';
 import Textarea from '@/components/common/Textarea';
 
+/**
+ * Props for the BasicInfoSection component
+ * @interface BasicInfoSectionProps
+ */
 interface BasicInfoSectionProps {
+  /** Product name */
   name: string;
+  /** Callback to update product name */
   setName: (value: string) => void;
+  /** Selected category */
   category: string;
+  /** Callback to update category */
   setCategory: (value: string) => void;
+  /** Selected subcategory */
   subcategory: string;
+  /** Callback to update subcategory */
   setSubcategory: (value: string) => void;
+  /** Product description */
   description: string;
+  /** Callback to update description */
   setDescription: (value: string) => void;
 }
 
@@ -47,31 +66,31 @@ export default function BasicInfoSection({
 
         {/* Category & Subcategory */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Select
+          <Autocomplete
             label="Categoría"
-            value={category}
-            onChange={(e) => {
-              setCategory(e.target.value);
+            value={category || null}
+            onChange={(val) => {
+              setCategory((val as string) || '');
               setSubcategory('');
             }}
             options={CATEGORY_OPTIONS.map((cat) => ({
               value: cat.name,
               label: cat.name,
             }))}
-            placeholder="Seleccionar categoría"
+            placeholder="Buscar categoría..."
             required
           />
 
-          <Select
+          <Autocomplete
             label="Subcategoría"
-            value={subcategory}
-            onChange={(e) => setSubcategory(e.target.value)}
+            value={subcategory || null}
+            onChange={(val) => setSubcategory((val as string) || '')}
             disabled={!category}
             options={subcategories.map((sub) => ({
               value: sub,
               label: sub,
             }))}
-            placeholder="Seleccionar subcategoría"
+            placeholder="Buscar subcategoría..."
           />
         </div>
 

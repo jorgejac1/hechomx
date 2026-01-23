@@ -1,23 +1,44 @@
+/**
+ * @fileoverview Dimensions and weight form section component
+ * Provides inputs for product physical dimensions (length, width, height)
+ * and weight with unit selection options.
+ * @module components/product/form/DimensionsWeightSection
+ */
+
 import TextInput from '@/components/common/TextInput';
 import Select from '@/components/common/Select';
 
+/**
+ * Props for the DimensionsWeightSection component
+ * @interface DimensionsWeightSectionProps
+ */
 interface DimensionsWeightSectionProps {
+  /** Product dimensions object */
   dimensions: {
+    /** Length value */
     length: number;
+    /** Width value */
     width: number;
+    /** Height value */
     height: number;
+    /** Measurement unit */
     unit: 'cm' | 'in';
   };
+  /** Callback to update dimensions */
   setDimensions: (dimensions: {
     length: number;
     width: number;
     height: number;
     unit: 'cm' | 'in';
   }) => void;
+  /** Product weight object */
   weight: {
+    /** Weight value */
     value: number;
+    /** Weight unit */
     unit: 'kg' | 'lb';
   };
+  /** Callback to update weight */
   setWeight: (weight: { value: number; unit: 'kg' | 'lb' }) => void;
 }
 

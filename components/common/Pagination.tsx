@@ -1,12 +1,26 @@
+/**
+ * @fileoverview Pagination component for navigating through paginated content.
+ * Supports URL-based navigation with preserved query parameters, responsive design
+ * with mobile-optimized view, and smart page number display with ellipsis.
+ * @module components/common/Pagination
+ */
+
 'use client';
 
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
+/**
+ * Props for the Pagination component
+ * @interface PaginationProps
+ */
 interface PaginationProps {
+  /** Currently active page number (1-indexed) */
   currentPage: number;
+  /** Total number of pages available */
   totalPages: number;
+  /** Base URL for pagination links (query params will be appended) */
   baseUrl: string;
 }
 

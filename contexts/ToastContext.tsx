@@ -1,15 +1,34 @@
+/**
+ * @fileoverview Toast notification context for displaying temporary messages.
+ * Provides methods for showing success, error, info, and warning notifications.
+ * Toasts auto-dismiss after a configurable duration.
+ * @module contexts/ToastContext
+ */
+
 'use client';
 
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 import Toast, { ToastType } from '@/components/common/feedback/Toast';
 
+/**
+ * Internal toast data structure
+ * @interface ToastData
+ */
 interface ToastData {
+  /** Unique identifier for the toast */
   id: string;
+  /** Message content to display */
   message: string;
+  /** Visual type of the toast */
   type: ToastType;
+  /** Auto-dismiss duration in milliseconds */
   duration?: number;
 }
 
+/**
+ * Toast context value type
+ * @interface ToastContextType
+ */
 interface ToastContextType {
   showToast: (message: string, type?: ToastType, duration?: number) => void;
   success: (message: string, duration?: number) => void;
@@ -27,13 +46,10 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   }, []);
 
-  const showToast = useCallback(
-    (message: string, type: ToastType = 'info', duration = 3000) => {
-      const id = Math.random().toString(36).substring(2, 9);
-      setToasts((prev) => [...prev, { id, message, type, duration }]);
-    },
-    []
-  );
+  const showToast = useCallback((message: string, type: ToastType = 'info', duration = 3000) => {
+    const id = Math.random().toString(36).substring(2, 9);
+    setToasts((prev) => [...prev, { id, message, type, duration }]);
+  }, []);
 
   const success = useCallback(
     (message: string, duration?: number) => showToast(message, 'success', duration),
@@ -58,7 +74,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={{ showToast, success, error, info, warning }}>
       {children}
-      
+
       {/* Toast Container */}
       <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none">
         <div className="flex flex-col gap-2 pointer-events-auto">

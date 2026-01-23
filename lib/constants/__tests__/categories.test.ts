@@ -28,14 +28,14 @@ describe('Categories Constants', () => {
 
   describe('CATEGORY_ICONS', () => {
     it('should have icon for each category', () => {
-      expect(CATEGORY_ICONS[CATEGORIES.TEXTILES]).toBe('🧵');
-      expect(CATEGORY_ICONS[CATEGORIES.CERAMICA]).toBe('🏺');
-      expect(CATEGORY_ICONS[CATEGORIES.JOYERIA]).toBe('💍');
-      expect(CATEGORY_ICONS[CATEGORIES.MADERA]).toBe('🪵');
-      expect(CATEGORY_ICONS[CATEGORIES.CUERO]).toBe('👜');
-      expect(CATEGORY_ICONS[CATEGORIES.PAPEL]).toBe('📄');
-      expect(CATEGORY_ICONS[CATEGORIES.METAL]).toBe('⚒️');
-      expect(CATEGORY_ICONS[CATEGORIES.VIDRIO]).toBe('🔮');
+      expect(CATEGORY_ICONS[CATEGORIES.TEXTILES]).toBe('Shirt');
+      expect(CATEGORY_ICONS[CATEGORIES.CERAMICA]).toBe('Container');
+      expect(CATEGORY_ICONS[CATEGORIES.JOYERIA]).toBe('Gem');
+      expect(CATEGORY_ICONS[CATEGORIES.MADERA]).toBe('TreeDeciduous');
+      expect(CATEGORY_ICONS[CATEGORIES.CUERO]).toBe('Briefcase');
+      expect(CATEGORY_ICONS[CATEGORIES.PAPEL]).toBe('FileText');
+      expect(CATEGORY_ICONS[CATEGORIES.METAL]).toBe('Hammer');
+      expect(CATEGORY_ICONS[CATEGORIES.VIDRIO]).toBe('Sparkles');
     });
   });
 

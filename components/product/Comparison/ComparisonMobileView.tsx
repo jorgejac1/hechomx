@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Mobile-optimized product comparison view
+ * Displays products in a swipeable card format for touch devices.
+ * Shows two products at a time with navigation controls.
+ * @module components/product/Comparison/ComparisonMobileView
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -10,8 +17,14 @@ import { formatCurrency } from '@/lib';
 import Button from '@/components/common/Button';
 import { ChevronLeft, ChevronRight, X, Star, ShoppingCart } from 'lucide-react';
 
+/**
+ * Props for the ComparisonMobileView component
+ * @interface ComparisonMobileViewProps
+ */
 interface ComparisonMobileViewProps {
+  /** Products to compare */
   products: Product[];
+  /** Whether to highlight only differences (not fully implemented in mobile) */
   showOnlyDifferences: boolean;
 }
 

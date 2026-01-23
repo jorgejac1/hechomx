@@ -1,21 +1,47 @@
+/**
+ * @fileoverview Modal dialog component with accessibility features.
+ * Includes focus trapping, escape key handling, backdrop click, and body scroll lock.
+ * Supports multiple sizes and optional header/footer sections.
+ * @module components/common/Modal
+ */
+
 'use client';
 
 import { ReactNode, useEffect, useCallback, useRef } from 'react';
 import { X } from 'lucide-react';
 
+/**
+ * Available modal width sizes
+ * @typedef {'sm' | 'md' | 'lg' | 'xl' | 'full'} ModalSize
+ */
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
+/**
+ * Props for the Modal component
+ * @interface ModalProps
+ */
 interface ModalProps {
+  /** Whether the modal is currently visible */
   isOpen: boolean;
+  /** Callback fired when the modal should close */
   onClose: () => void;
+  /** Main content of the modal */
   children: ReactNode;
+  /** Optional title displayed in the header */
   title?: string;
+  /** Optional description displayed below the title */
   description?: string;
+  /** Maximum width of the modal dialog */
   size?: ModalSize;
+  /** Whether to show the close button in the header */
   showCloseButton?: boolean;
+  /** Whether clicking the backdrop should close the modal */
   closeOnBackdrop?: boolean;
+  /** Whether pressing Escape should close the modal */
   closeOnEscape?: boolean;
+  /** Additional CSS classes for the modal panel */
   className?: string;
+  /** Optional footer content (typically action buttons) */
   footer?: ReactNode;
 }
 
@@ -130,7 +156,7 @@ export default function Modal({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/50 transition-opacity animate-in fade-in duration-200"
+        className="fixed inset-0 bg-black/50 animate-fade-in"
         onClick={handleBackdropClick}
         aria-hidden="true"
       />
@@ -150,8 +176,8 @@ export default function Modal({
           tabIndex={-1}
           onKeyDown={handleTabKey}
           className={`
-            relative bg-white rounded-2xl shadow-xl w-full
-            animate-in zoom-in-95 fade-in duration-200
+            relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl dark:shadow-gray-900/50 w-full
+            animate-scale-in
             ${sizeStyles[size]}
             ${className}
           `

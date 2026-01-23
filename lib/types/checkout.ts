@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Type definitions for the checkout process.
+ * Includes interfaces for shipping addresses, payment methods, gift options,
+ * coupons, checkout form data, complete orders, and order summaries.
+ * @module lib/types/checkout
+ */
+
 import { MexicanState } from '@/lib/constants/states';
 import { OrderItem, OrderStatus } from './order';
 
@@ -80,6 +87,8 @@ export interface CheckoutFormData {
 export interface CompleteOrder {
   id: string;
   orderNumber: string;
+  userId?: string;
+  userEmail?: string;
   status: OrderStatus;
   items: OrderItem[];
   subtotal: number;

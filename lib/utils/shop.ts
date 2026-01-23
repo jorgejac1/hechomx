@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Shop utility functions for seller storefronts.
+ * Provides functions for shop slug generation, shop lookup by slug,
+ * product filtering by shop, and maker-to-shop mappings.
+ * @module lib/utils/shop
+ */
+
 import { Product } from '@/types';
 import { User } from '@/contexts/AuthContext';
 import { MOCK_SELLER_USERS } from '@/lib/data/mockUsers';

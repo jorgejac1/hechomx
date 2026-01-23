@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, FileText, CheckCircle, AlertCircle, Shield } from 'lucide-react';
 import { ROUTES } from '@/lib';
+import Alert from '@/components/common/Alert';
 
 export const metadata: Metadata = {
   title: 'Términos y Condiciones | Papalote Market',
@@ -262,19 +263,11 @@ export default function TermsPage() {
           </section>
 
           {/* Notice Box */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-            <div className="flex items-start gap-4">
-              <AlertCircle className="w-6 h-6 text-blue-600 shrink-0" />
-              <div>
-                <h3 className="font-bold text-blue-900 mb-2">Nota Importante</h3>
-                <p className="text-sm text-blue-800">
-                  Estos términos constituyen el acuerdo completo entre tú y Papalote Market. Si
-                  alguna disposición es considerada inválida, las demás disposiciones permanecerán
-                  en pleno vigor y efecto.
-                </p>
-              </div>
-            </div>
-          </div>
+          <Alert variant="info" layout="bordered" icon={AlertCircle} title="Nota Importante">
+            Estos términos constituyen el acuerdo completo entre tú y Papalote Market. Si alguna
+            disposición es considerada inválida, las demás disposiciones permanecerán en pleno vigor
+            y efecto.
+          </Alert>
 
           {/* Related Links */}
           <div className="bg-white rounded-xl shadow-md p-6">

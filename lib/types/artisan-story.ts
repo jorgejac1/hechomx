@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Type definitions for artisan story pages.
+ * Includes interfaces for artisan stories with personal narratives, craft processes,
+ * materials, tools, awards, certifications, social media, and location information.
+ * @module lib/types/artisan-story
+ */
+
 import { SellerType, CraftCategory, CraftStyle, IndigenousConnection } from './seller-types';
 
 export interface ProcessStep {

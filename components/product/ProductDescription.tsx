@@ -1,20 +1,34 @@
-// components/product/ProductDescription.tsx - FIXED
+/**
+ * @fileoverview Product description section component
+ * Displays detailed product information including description, key features,
+ * specifications, materials, care instructions, and usage suggestions.
+ * @module components/product/ProductDescription
+ */
+
 'use client';
 
 import { Package, Ruler, Sparkles, Heart } from 'lucide-react';
 
+/**
+ * Props for the ProductDescription component
+ * @interface ProductDescriptionProps
+ */
 interface ProductDescriptionProps {
+  /** Main product description text */
   description: string;
+  /** Product category name */
   category: string;
-  subcategory?: string; // Make it optional
+  /** Product subcategory name (optional) */
+  subcategory?: string;
+  /** State/region where the product originates from */
   state: string;
 }
 
-export default function ProductDescription({ 
-  description, 
-  category, 
-  subcategory, 
-  state 
+export default function ProductDescription({
+  description,
+  category,
+  subcategory,
+  state,
 }: ProductDescriptionProps) {
   return (
     <div className="bg-white rounded-xl shadow-md p-6 lg:p-8">
@@ -22,10 +36,8 @@ export default function ProductDescription({
 
       {/* Main Description */}
       <div className="mb-8">
-        <p className="text-gray-700 text-lg leading-relaxed mb-6">
-          {description}
-        </p>
-        
+        <p className="text-gray-700 text-lg leading-relaxed mb-6">{description}</p>
+
         {/* Key Features */}
         <div className="bg-teal-50 rounded-lg p-6 border border-teal-100">
           <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -35,11 +47,15 @@ export default function ProductDescription({
           <ul className="space-y-3">
             <li className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 shrink-0"></div>
-              <span className="text-gray-700">Diseño único inspirado en arte prehispánico mexicano</span>
+              <span className="text-gray-700">
+                Diseño único inspirado en arte prehispánico mexicano
+              </span>
             </li>
             <li className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 shrink-0"></div>
-              <span className="text-gray-700">Acabado oxidado que resalta los detalles artesanales</span>
+              <span className="text-gray-700">
+                Acabado oxidado que resalta los detalles artesanales
+              </span>
             </li>
             <li className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-teal-600 mt-2 shrink-0"></div>
@@ -131,8 +147,8 @@ export default function ProductDescription({
       <div className="mt-6 p-5 bg-linear-to-r from-teal-50 to-blue-50 rounded-lg border border-teal-100">
         <h3 className="font-bold text-gray-900 mb-2 text-base">Perfecto para</h3>
         <p className="text-gray-700 text-sm">
-          Ideal para uso diario o ocasiones especiales. Un regalo único que celebra la artesanía mexicana. 
-          Complementa tanto outfits casuales como elegantes.
+          Ideal para uso diario o ocasiones especiales. Un regalo único que celebra la artesanía
+          mexicana. Complementa tanto outfits casuales como elegantes.
         </p>
       </div>
     </div>

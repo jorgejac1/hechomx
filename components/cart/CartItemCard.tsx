@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Individual cart item card component for displaying product details in the cart.
+ * Shows product image, name, origin info, quantity controls, and pricing.
+ * Supports quantity adjustment, item removal with animation, and links to product detail page.
+ * @module components/cart/CartItemCard
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -8,8 +15,15 @@ import { useToast } from '@/contexts/ToastContext';
 import { Product } from '@/types';
 import { formatCurrency } from '@/lib';
 import { Minus, Plus, Trash2, MapPin } from 'lucide-react';
+import Card from '@/components/common/Card';
+import ImageSkeleton from '@/components/common/loading/ImageSkeleton';
 
+/**
+ * Props for the CartItemCard component
+ * @interface CartItemCardProps
+ */
 interface CartItemCardProps {
+  /** The product item with quantity information */
   item: Product & { quantity: number };
 }
 
@@ -17,6 +31,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
   const { updateQuantity, removeFromCart } = useCart();
   const { info } = useToast();
   const [isRemoving, setIsRemoving] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleRemove = () => {
     setIsRemoving(true);
@@ -39,10 +54,10 @@ export default function CartItemCard({ item }: CartItemCardProps) {
   const itemTotal = item.price * item.quantity;
 
   return (
-    <div
-      className={`bg-white rounded-xl shadow-xs border-2 border-gray-200 p-4 sm:p-6 transition-all ${
-        isRemoving ? 'opacity-0 scale-95' : ''
-      }`}
+    <Card
+      variant="outlined"
+      padding="md"
+      className={`transition-all ${isRemoving ? 'opacity-0 scale-95' : ''}`}
     >
       <div className="flex gap-4 sm:gap-6">
         {/* Product Image */}
@@ -50,12 +65,16 @@ export default function CartItemCard({ item }: CartItemCardProps) {
           href={`/productos/${item.id}`}
           className="relative w-24 h-24 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden bg-gray-100"
         >
+          {!imageLoaded && <ImageSkeleton aspectRatio="square" rounded={false} />}
           <Image
             src={item.images[0]}
             alt={item.name}
             fill
-            className="object-cover hover:scale-110 transition-transform duration-300"
+            className={`object-cover hover:scale-110 transition-transform duration-300 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
             sizes="(max-width: 640px) 96px, 128px"
+            onLoad={() => setImageLoaded(true)}
           />
         </Link>
 
@@ -132,6 +151,6 @@ export default function CartItemCard({ item }: CartItemCardProps) {
           </button>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

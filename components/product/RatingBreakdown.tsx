@@ -1,9 +1,22 @@
+/**
+ * @fileoverview Rating breakdown component displaying overall and category ratings
+ * Shows star ratings with visual representation for overall rating and
+ * individual category scores (quality, shipping, customer service).
+ * @module components/product/RatingBreakdown
+ */
+
 'use client';
 
 import { Star } from 'lucide-react';
 
+/**
+ * Props for the RatingBreakdown component
+ * @interface RatingBreakdownProps
+ */
 interface RatingBreakdownProps {
+  /** Overall rating value (1-5) */
   rating: number;
+  /** Total number of reviews */
   reviewCount?: number;
 }
 

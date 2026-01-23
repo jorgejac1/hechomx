@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Overview tab component for the seller dashboard.
+ * Provides a summary view including quick actions widget, trending products,
+ * recent orders, and featured products. Serves as the default landing
+ * view for the dashboard with key metrics at a glance.
+ * @module components/dashboard/tabs/OverviewTab
+ */
+
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import {
   TrendingUp,
@@ -13,7 +24,12 @@ import {
 import { formatCurrency, formatRelativeTime } from '@/lib';
 import { SellerProduct, Order } from '@/lib/types';
 import QuickActions from '../QuickActions';
+import ImageSkeleton from '@/components/common/loading/ImageSkeleton';
 
+/**
+ * Configuration mapping for order status display in the overview.
+ * Each status has a localized label, color classes, and icon component.
+ */
 const ORDER_STATUS_CONFIG = {
   pending: { label: 'Pendiente', color: 'bg-yellow-100 text-yellow-800', icon: Clock },
   confirmed: { label: 'Confirmado', color: 'bg-blue-100 text-blue-800', icon: CheckCheck },
@@ -23,10 +39,58 @@ const ORDER_STATUS_CONFIG = {
   cancelled: { label: 'Cancelado', color: 'bg-red-100 text-red-800', icon: XCircle },
 } as const;
 
+/**
+ * Helper component that displays a product image with a skeleton loader.
+ * Shows a skeleton placeholder while the image is loading, then fades in the image.
+ * @param props - Component props
+ * @param props.src - Image source URL
+ * @param props.alt - Alternative text for the image
+ * @param props.className - CSS classes for styling
+ * @param props.width - Image width in pixels
+ * @param props.height - Image height in pixels
+ * @returns Product image with skeleton loading state
+ */
+function ProductImageWithSkeleton({
+  src,
+  alt,
+  className,
+  width,
+  height,
+}: {
+  src: string;
+  alt: string;
+  className: string;
+  width: number;
+  height: number;
+}) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className={`relative ${className}`}>
+      {!loaded && <ImageSkeleton aspectRatio="video" />}
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={`${className} ${loaded ? 'opacity-100' : 'opacity-0'} transition-opacity`}
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
+  );
+}
+
+/**
+ * @interface OverviewTabProps
+ * Props for the OverviewTab component.
+ */
 interface OverviewTabProps {
+  /** Email of the seller for loading quick actions */
   userEmail: string;
+  /** Name of the shop for display and links */
   shopName: string;
+  /** Array of seller products for trending and featured sections */
   products: SellerProduct[];
+  /** Array of recent orders to display */
   recentOrders: Order[];
 }
 
@@ -66,7 +130,7 @@ export default function OverviewTab({
                     Trending
                   </span>
                 </div>
-                <Image
+                <ProductImageWithSkeleton
                   src={product.image}
                   alt={product.name}
                   width={200}
@@ -108,12 +172,12 @@ export default function OverviewTab({
 
               return (
                 <div key={order.id} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                  <Image
+                  <ProductImageWithSkeleton
                     src={firstImage}
                     alt={order.items[0]?.name || 'Product'}
                     width={60}
                     height={60}
-                    className="rounded-lg object-cover"
+                    className="w-[60px] h-[60px] rounded-lg object-cover"
                   />
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-gray-900 truncate">{order.customer.name}</p>
@@ -147,7 +211,7 @@ export default function OverviewTab({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {products.slice(0, 3).map((product) => (
             <div key={product.id} className="bg-gray-50 rounded-lg p-4">
-              <Image
+              <ProductImageWithSkeleton
                 src={product.image}
                 alt={product.name}
                 width={200}

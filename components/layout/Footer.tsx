@@ -1,13 +1,26 @@
+/**
+ * @fileoverview Site footer component with navigation, social links, and legal information
+ * Provides a comprehensive footer including shop navigation, about links, help resources,
+ * legal pages, social media links, app download button, and contact information.
+ * Displays copyright, locale, and currency information in the bottom bar.
+ * @module components/layout/Footer
+ */
+
 import Link from 'next/link';
 import { footerNavigation } from '@/config/navigation';
 import { siteConfig, SITE_NAME } from '@/config/site';
 import { ROUTES } from '@/lib/constants/routes';
 
+/**
+ * Footer component displaying site-wide navigation and information
+ * Renders navigation sections, social media links, legal links, and contact details.
+ * @returns {JSX.Element} The rendered footer with all navigation and information sections
+ */
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 dark:bg-gray-950 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           {/* Shop Section */}

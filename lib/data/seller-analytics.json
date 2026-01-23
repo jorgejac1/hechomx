@@ -9,15 +9,34 @@
       "lastMonth": 15600,
       "thisYear": 125000
     },
-    "salesTrend": [
-      { "date": "2024-11-01", "sales": 2, "revenue": 1300 },
-      { "date": "2024-11-02", "sales": 3, "revenue": 1950 },
-      { "date": "2024-11-03", "sales": 1, "revenue": 650 },
-      { "date": "2024-11-04", "sales": 4, "revenue": 2600 },
-      { "date": "2024-11-05", "sales": 2, "revenue": 1300 },
-      { "date": "2024-11-06", "sales": 5, "revenue": 3250 },
-      { "date": "2024-11-07", "sales": 3, "revenue": 1950 }
-    ],
+    "salesTrend": {
+      "week": [
+        { "date": "2024-11-01", "sales": 2, "revenue": 1300 },
+        { "date": "2024-11-02", "sales": 3, "revenue": 1950 },
+        { "date": "2024-11-03", "sales": 1, "revenue": 650 },
+        { "date": "2024-11-04", "sales": 4, "revenue": 2600 },
+        { "date": "2024-11-05", "sales": 2, "revenue": 1300 },
+        { "date": "2024-11-06", "sales": 5, "revenue": 3250 },
+        { "date": "2024-11-07", "sales": 3, "revenue": 1950 }
+      ],
+      "month": [
+        { "date": "2024-10-08", "sales": 8, "revenue": 5200 },
+        { "date": "2024-10-15", "sales": 12, "revenue": 7800 },
+        { "date": "2024-10-22", "sales": 10, "revenue": 6500 },
+        { "date": "2024-10-29", "sales": 15, "revenue": 9750 },
+        { "date": "2024-11-05", "sales": 18, "revenue": 11700 }
+      ]
+    },
+    "stats": {
+      "week": {
+        "averageOrderValue": 825,
+        "conversionRate": 3.8
+      },
+      "month": {
+        "averageOrderValue": 890,
+        "conversionRate": 4.2
+      }
+    },
     "topProducts": [
       {
         "id": "p2",
@@ -88,15 +107,34 @@
       "lastMonth": 87500,
       "thisYear": 680000
     },
-    "salesTrend": [
-      { "date": "2024-11-01", "sales": 4, "revenue": 11200 },
-      { "date": "2024-11-02", "sales": 3, "revenue": 8400 },
-      { "date": "2024-11-03", "sales": 2, "revenue": 5600 },
-      { "date": "2024-11-04", "sales": 5, "revenue": 14000 },
-      { "date": "2024-11-05", "sales": 3, "revenue": 8400 },
-      { "date": "2024-11-06", "sales": 6, "revenue": 16800 },
-      { "date": "2024-11-07", "sales": 4, "revenue": 11200 }
-    ],
+    "salesTrend": {
+      "week": [
+        { "date": "2024-11-01", "sales": 4, "revenue": 11200 },
+        { "date": "2024-11-02", "sales": 3, "revenue": 8400 },
+        { "date": "2024-11-03", "sales": 2, "revenue": 5600 },
+        { "date": "2024-11-04", "sales": 5, "revenue": 14000 },
+        { "date": "2024-11-05", "sales": 3, "revenue": 8400 },
+        { "date": "2024-11-06", "sales": 6, "revenue": 16800 },
+        { "date": "2024-11-07", "sales": 4, "revenue": 11200 }
+      ],
+      "month": [
+        { "date": "2024-10-08", "sales": 18, "revenue": 50400 },
+        { "date": "2024-10-15", "sales": 22, "revenue": 61600 },
+        { "date": "2024-10-22", "sales": 20, "revenue": 56000 },
+        { "date": "2024-10-29", "sales": 25, "revenue": 70000 },
+        { "date": "2024-11-05", "sales": 27, "revenue": 75600 }
+      ]
+    },
+    "stats": {
+      "week": {
+        "averageOrderValue": 2450,
+        "conversionRate": 8.2
+      },
+      "month": {
+        "averageOrderValue": 2680,
+        "conversionRate": 8.8
+      }
+    },
     "topProducts": [
       {
         "id": "ap2",
@@ -167,15 +205,34 @@
       "lastMonth": 210000,
       "thisYear": 1850000
     },
-    "salesTrend": [
-      { "date": "2024-11-01", "sales": 12, "revenue": 24500 },
-      { "date": "2024-11-02", "sales": 15, "revenue": 32000 },
-      { "date": "2024-11-03", "sales": 8, "revenue": 18500 },
-      { "date": "2024-11-04", "sales": 18, "revenue": 38000 },
-      { "date": "2024-11-05", "sales": 10, "revenue": 21000 },
-      { "date": "2024-11-06", "sales": 22, "revenue": 45000 },
-      { "date": "2024-11-07", "sales": 14, "revenue": 28000 }
-    ],
+    "salesTrend": {
+      "week": [
+        { "date": "2024-11-01", "sales": 12, "revenue": 24500 },
+        { "date": "2024-11-02", "sales": 15, "revenue": 32000 },
+        { "date": "2024-11-03", "sales": 8, "revenue": 18500 },
+        { "date": "2024-11-04", "sales": 18, "revenue": 38000 },
+        { "date": "2024-11-05", "sales": 10, "revenue": 21000 },
+        { "date": "2024-11-06", "sales": 22, "revenue": 45000 },
+        { "date": "2024-11-07", "sales": 14, "revenue": 28000 }
+      ],
+      "month": [
+        { "date": "2024-10-08", "sales": 65, "revenue": 137800 },
+        { "date": "2024-10-15", "sales": 78, "revenue": 165200 },
+        { "date": "2024-10-22", "sales": 72, "revenue": 152600 },
+        { "date": "2024-10-29", "sales": 85, "revenue": 180000 },
+        { "date": "2024-11-05", "sales": 99, "revenue": 207000 }
+      ]
+    },
+    "stats": {
+      "week": {
+        "averageOrderValue": 3200,
+        "conversionRate": 9.5
+      },
+      "month": {
+        "averageOrderValue": 3450,
+        "conversionRate": 10.2
+      }
+    },
     "topProducts": [
       {
         "id": "comp1",

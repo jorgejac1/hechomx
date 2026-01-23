@@ -1,17 +1,23 @@
+/**
+ * @fileoverview Value debouncing hook
+ * Delays value updates until a specified time has passed without changes, useful for search inputs and filters
+ * @module hooks/common/useDebounce
+ */
+
 import { useState, useEffect } from 'react';
 
 /**
  * Debounces a value
  * Useful for search inputs, filters, etc.
- * 
+ *
  * @param value - Value to debounce
  * @param delay - Delay in milliseconds (default: 500)
  * @returns Debounced value
- * 
+ *
  * @example
  * const [search, setSearch] = useState('');
  * const debouncedSearch = useDebounce(search, 300);
- * 
+ *
  * useEffect(() => {
  *   // API call with debounced value
  *   fetchResults(debouncedSearch);

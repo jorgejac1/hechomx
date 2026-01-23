@@ -1,8 +1,16 @@
+/**
+ * @fileoverview User dropdown menu component for authenticated users
+ * Provides a dropdown menu displaying user information and navigation options.
+ * Shows different menu items based on user role (admin vs regular user).
+ * Includes profile links, order history, favorites, seller tools, and logout.
+ * Features keyboard navigation support (Escape to close) and click-outside detection.
+ * @module components/layout/header/UserDropdown
+ */
+
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import {
   User,
   LogOut,
@@ -19,24 +27,47 @@ import {
   FileCheck,
 } from 'lucide-react';
 import { ROUTES } from '@/lib/constants/routes';
-import { getShopSlug } from '@/lib/utils/shop';
+import { getShopSlug } from '@/lib/utils/shop-utils';
+import Avatar from '@/components/common/Avatar';
 import type { User as UserType } from '@/contexts/AuthContext';
 
+/**
+ * Props for the UserDropdown component
+ * @interface UserDropdownProps
+ */
 interface UserDropdownProps {
+  /** The authenticated user object */
   user: UserType;
+  /** Whether the user has admin privileges */
   isAdmin: boolean;
+  /** Callback function to handle user logout */
   onLogout: () => void;
 }
 
+/**
+ * Props for dropdown menu item links
+ * @interface MenuItemProps
+ */
 interface MenuItemProps {
+  /** URL destination for the menu item */
   href: string;
+  /** Icon element to display alongside the label */
   icon: React.ReactNode;
+  /** Text label for the menu item */
   label: string;
+  /** Optional click handler for additional actions */
   onClick?: () => void;
+  /** Visual style variant for the menu item */
   variant?: 'default' | 'primary' | 'purple';
+  /** Whether the link opens in a new tab */
   external?: boolean;
 }
 
+/**
+ * Renders a single menu item link in the dropdown
+ * @param {MenuItemProps} props - The component props
+ * @returns The rendered menu item link
+ */
 function MenuItem({ href, icon, label, onClick, variant = 'default', external }: MenuItemProps) {
   const variantClasses = {
     default: 'text-gray-700 hover:bg-gray-50',
@@ -60,6 +91,13 @@ function MenuItem({ href, icon, label, onClick, variant = 'default', external }:
   );
 }
 
+/**
+ * Renders a section header in the dropdown menu
+ * @param props - The component props
+ * @param props.title - Section title text
+ * @param props.variant - Color variant for the section header
+ * @returns The rendered section header
+ */
 function MenuSection({
   title,
   variant = 'default',
@@ -75,10 +113,21 @@ function MenuSection({
   );
 }
 
+/**
+ * Renders a horizontal divider line in the dropdown menu
+ * @returns The rendered divider element with separator role
+ */
 function MenuDivider() {
   return <div className="border-t border-gray-200 my-2" role="separator" />;
 }
 
+/**
+ * User dropdown menu component with role-based navigation
+ * Displays user information and provides navigation links based on user role.
+ * Includes keyboard support (Escape to close) and click-outside detection.
+ * @param {UserDropdownProps} props - The component props
+ * @returns The rendered dropdown menu with user info and navigation
+ */
 export default function UserDropdown({ user, isAdmin, onLogout }: UserDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -132,17 +181,7 @@ export default function UserDropdown({ user, isAdmin, onLogout }: UserDropdownPr
         aria-haspopup="true"
         aria-label={`Menú de usuario: ${user.name}`}
       >
-        {user.avatar ? (
-          <Image
-            src={user.avatar}
-            alt=""
-            width={32}
-            height={32}
-            className={`rounded-full ${isAdmin ? 'ring-2 ring-purple-500' : ''}`}
-          />
-        ) : (
-          <User className="w-6 h-6" aria-hidden="true" />
-        )}
+        <Avatar src={user.avatar} name={user.name} size="sm" ring={isAdmin ? 'primary' : 'none'} />
         <ChevronDown className="w-4 h-4" aria-hidden="true" />
       </button>
 

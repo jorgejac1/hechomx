@@ -95,7 +95,7 @@ export default function CompanyStorySection({
           placeholder="Uso de materiales reciclados&#10;Energía solar en producción&#10;Empaques biodegradables&#10;Programa de reciclaje&#10;Reducción de huella de carbono"
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
         />
-        <p className="text-xs text-gray-500 mt-1">💡 Escribe cada práctica en una línea nueva</p>
+        <p className="text-xs text-gray-500 mt-1">Escribe cada práctica en una línea nueva</p>
       </div>
 
       {/* Sustainability tip */}

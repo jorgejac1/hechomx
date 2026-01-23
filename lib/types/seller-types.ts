@@ -1,4 +1,9 @@
-// lib/types/seller-types.ts
+/**
+ * @fileoverview Comprehensive type definitions for seller dashboard functionality.
+ * Includes types for seller profiles, products, reviews, orders, analytics,
+ * pending actions, customer insights, messages, and tasks.
+ * @module lib/types/seller-types
+ */
 
 // Import Order types from order.ts (for internal use only)
 import type { Order } from './order';
@@ -158,6 +163,19 @@ export interface ExtendedMakerProfile {
 // SELLER ANALYTICS TYPES
 // ============================================================================
 
+/** Single data point for sales trend */
+export interface SalesTrendDataPoint {
+  date: string;
+  sales: number;
+  revenue: number;
+}
+
+/** Time-period specific stats */
+export interface PeriodStats {
+  averageOrderValue: number;
+  conversionRate: number;
+}
+
 export interface AnalyticsData {
   revenue: {
     today: number;
@@ -168,11 +186,16 @@ export interface AnalyticsData {
     lastMonth: number;
     thisYear: number;
   };
-  salesTrend: Array<{
-    date: string;
-    sales: number;
-    revenue: number;
-  }>;
+  /** Sales trend data by time period */
+  salesTrend: {
+    week: SalesTrendDataPoint[];
+    month: SalesTrendDataPoint[];
+  };
+  /** Time-period specific stats for ticket promedio and conversion */
+  stats: {
+    week: PeriodStats;
+    month: PeriodStats;
+  };
   topProducts: Array<{
     id: string;
     name: string;
@@ -204,7 +227,9 @@ export interface AnalyticsData {
       percentage: number;
     }>;
   };
+  /** Legacy - kept for backwards compatibility, use stats.week.conversionRate */
   conversionRate: number;
+  /** Legacy - kept for backwards compatibility, use stats.week.averageOrderValue */
   averageOrderValue: number;
   forecast: {
     nextMonth: number;

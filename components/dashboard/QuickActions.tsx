@@ -1,10 +1,18 @@
+/**
+ * @fileoverview Quick actions widget for the seller dashboard.
+ * Displays actionable items including pending orders, low stock alerts,
+ * unanswered messages, pending reviews, and promotional features like
+ * artisan story creation and pricing calculator access.
+ * @module components/dashboard/QuickActions
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { getPendingActions } from '@/lib/api/sellerApi';
 import type { PendingActionsData } from '@/lib/types';
-import { getShopSlug } from '@/lib/utils/shop';
+import { getShopSlug } from '@/lib/utils/shop-utils';
 import { getArtisanStoryByEmail } from '@/lib';
 import { formatCurrency, ROUTES } from '@/lib';
 import {
@@ -21,13 +29,18 @@ import {
   ExternalLink,
 } from 'lucide-react';
 
+/**
+ * @interface QuickActionsProps
+ * Props for the QuickActions component.
+ */
 interface QuickActionsProps {
+  /** Email of the seller for loading pending actions */
   userEmail: string;
-  shopName: string; // Added prop
+  /** Name of the shop for generating shop links */
+  shopName: string;
 }
 
 export default function QuickActions({ userEmail, shopName }: QuickActionsProps) {
-  const router = useRouter();
   const [data, setData] = useState<PendingActionsData | null>(null);
   const [hasStory, setHasStory] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -88,15 +101,15 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
       <div className="space-y-3">
         {/* Mi Historia Artesanal - Show if they don't have a story yet */}
         {hasStory === false && (
-          <button
-            onClick={() => router.push(ROUTES.MY_STORY)}
-            className="w-full p-4 bg-linear-to-r from-purple-50 to-pink-50 rounded-lg border-2 border-purple-300 hover:from-purple-100 hover:to-pink-100 transition text-left"
+          <Link
+            href={ROUTES.MY_STORY}
+            className="block w-full p-4 bg-linear-to-r from-purple-50 to-pink-50 rounded-lg border-2 border-purple-300 hover:from-purple-100 hover:to-pink-100 transition text-left"
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
                 <Sparkles className="w-5 h-5 text-purple-600 mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-semibold text-gray-900">✨ Comparte Tu Historia Artesanal</p>
+                  <p className="font-semibold text-gray-900">Comparte Tu Historia Artesanal</p>
                   <p className="text-sm text-gray-600">
                     Conecta emocionalmente con tus clientes mostrando tu herencia y proceso
                   </p>
@@ -104,19 +117,19 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
               </div>
               <ArrowRight className="w-5 h-5 text-purple-600 shrink-0" />
             </div>
-          </button>
+          </Link>
         )}
 
         {/* Pricing Calculator Promo */}
-        <button
-          onClick={() => router.push(ROUTES.PRICING_CALCULATOR)}
-          className="w-full p-4 bg-linear-to-r from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-300 hover:from-blue-100 hover:to-cyan-100 transition text-left"
+        <Link
+          href={ROUTES.PRICING_CALCULATOR}
+          className="block w-full p-4 bg-linear-to-r from-blue-50 to-cyan-50 rounded-lg border-2 border-blue-300 hover:from-blue-100 hover:to-cyan-100 transition text-left"
         >
           <div className="flex items-start justify-between">
             <div className="flex gap-3">
               <Calculator className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
               <div>
-                <p className="font-semibold text-gray-900">💰 Calcula Precios Justos</p>
+                <p className="font-semibold text-gray-900">Calcula Precios Justos</p>
                 <p className="text-sm text-gray-600">
                   Herramienta para calcular precios con salario digno
                 </p>
@@ -124,30 +137,31 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
             </div>
             <ArrowRight className="w-5 h-5 text-blue-600 shrink-0" />
           </div>
-        </button>
+        </Link>
 
-        {/* View My Shop - FIXED */}
-        <button
-          onClick={() => window.open(`/tienda/${getShopSlug(shopName)}`, '_blank')}
-          className="w-full p-4 bg-linear-to-r from-emerald-50 to-green-50 rounded-lg border-2 border-emerald-300 hover:from-emerald-100 hover:to-green-100 transition text-left"
+        {/* View My Shop */}
+        <Link
+          href={`/tienda/${getShopSlug(shopName)}`}
+          target="_blank"
+          className="block w-full p-4 bg-linear-to-r from-emerald-50 to-green-50 rounded-lg border-2 border-emerald-300 hover:from-emerald-100 hover:to-green-100 transition text-left"
         >
           <div className="flex items-start justify-between">
             <div className="flex gap-3">
               <Store className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
               <div>
-                <p className="font-semibold text-gray-900">🏪 Vista de Cliente</p>
+                <p className="font-semibold text-gray-900">Vista de Cliente</p>
                 <p className="text-sm text-gray-600">Ve cómo los clientes ven tu tienda</p>
               </div>
             </div>
             <ExternalLink className="w-4 h-4 text-emerald-600 shrink-0" />
           </div>
-        </button>
+        </Link>
 
         {/* Edit Story - Show if they already have a story */}
         {hasStory === true && (
-          <button
-            onClick={() => router.push(ROUTES.MY_STORY)}
-            className="w-full p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500 hover:bg-purple-100 transition text-left"
+          <Link
+            href={ROUTES.MY_STORY}
+            className="block w-full p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500 hover:bg-purple-100 transition text-left"
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
@@ -159,14 +173,14 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
               </div>
               <ArrowRight className="w-5 h-5 text-purple-600 shrink-0" />
             </div>
-          </button>
+          </Link>
         )}
 
         {/* Pending Orders */}
         {data.pendingOrders.length > 0 && (
-          <button
-            onClick={() => router.push(ROUTES.ORDERS_MANAGEMENT)}
-            className="w-full p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500 hover:bg-blue-100 transition text-left"
+          <Link
+            href={ROUTES.ORDERS_MANAGEMENT}
+            className="block w-full p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500 hover:bg-blue-100 transition text-left"
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
@@ -184,14 +198,14 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
               </div>
               <ArrowRight className="w-5 h-5 text-blue-600 shrink-0" />
             </div>
-          </button>
+          </Link>
         )}
 
         {/* Low Stock */}
         {data.lowStockProducts.filter((p) => p.urgency === 'critical').length > 0 && (
-          <button
-            onClick={() => router.push(`${ROUTES.DASHBOARD}?tab=products`)}
-            className="w-full p-4 bg-red-50 rounded-lg border-l-4 border-red-500 hover:bg-red-100 transition text-left"
+          <Link
+            href={`${ROUTES.DASHBOARD}?tab=products`}
+            className="block w-full p-4 bg-red-50 rounded-lg border-l-4 border-red-500 hover:bg-red-100 transition text-left"
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
@@ -205,14 +219,14 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
               </div>
               <ArrowRight className="w-5 h-5 text-red-600 shrink-0" />
             </div>
-          </button>
+          </Link>
         )}
 
         {/* Unanswered Messages */}
         {data.unansweredMessages > 0 && (
-          <button
-            onClick={() => router.push(ROUTES.MESSAGES)}
-            className="w-full p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500 hover:bg-yellow-100 transition text-left"
+          <Link
+            href={ROUTES.MESSAGES}
+            className="block w-full p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500 hover:bg-yellow-100 transition text-left"
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
@@ -229,14 +243,14 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
               </div>
               <ArrowRight className="w-5 h-5 text-yellow-600 shrink-0" />
             </div>
-          </button>
+          </Link>
         )}
 
         {/* Pending Reviews */}
         {data.pendingReviews.filter((r) => r.needsResponse).length > 0 && (
-          <button
-            onClick={() => router.push(ROUTES.REVIEWS_MANAGEMENT)}
-            className="w-full p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500 hover:bg-purple-100 transition text-left"
+          <Link
+            href={ROUTES.REVIEWS_MANAGEMENT}
+            className="block w-full p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500 hover:bg-purple-100 transition text-left"
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
@@ -254,14 +268,14 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
               </div>
               <ArrowRight className="w-5 h-5 text-purple-600 shrink-0" />
             </div>
-          </button>
+          </Link>
         )}
 
         {/* Recommended Actions */}
         {urgentActions.length > 0 && (
-          <button
-            onClick={() => router.push(ROUTES.ORDERS_MANAGEMENT)}
-            className="w-full p-4 bg-green-50 rounded-lg border-l-4 border-green-500 hover:bg-green-100 transition text-left"
+          <Link
+            href={ROUTES.ORDERS_MANAGEMENT}
+            className="block w-full p-4 bg-green-50 rounded-lg border-l-4 border-green-500 hover:bg-green-100 transition text-left"
           >
             <div className="flex items-start justify-between">
               <div className="flex gap-3">
@@ -273,7 +287,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
               </div>
               <ArrowRight className="w-5 h-5 text-green-600 shrink-0" />
             </div>
-          </button>
+          </Link>
         )}
 
         {/* All Clear */}
@@ -288,13 +302,13 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
         )}
 
         {/* View All Tasks Button */}
-        <button
-          onClick={() => router.push(ROUTES.TASKS_CENTER)}
-          className="w-full p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition text-center"
+        <Link
+          href={ROUTES.TASKS_CENTER}
+          className="block w-full p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition text-center"
         >
           <p className="font-semibold text-gray-700">Ver Todas las Tareas</p>
           <p className="text-sm text-gray-600 mt-1">Centro completo de gestión</p>
-        </button>
+        </Link>
       </div>
     </div>
   );

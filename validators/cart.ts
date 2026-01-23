@@ -1,5 +1,7 @@
 /**
- * Cart and checkout validation schemas
+ * @fileoverview Cart and checkout validation schemas
+ * Provides Zod schemas for validating cart operations, shipping addresses, payment methods, and checkout data
+ * @module validators/cart
  */
 
 import { z } from 'zod';

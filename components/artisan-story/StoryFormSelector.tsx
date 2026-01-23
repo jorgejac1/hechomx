@@ -1,8 +1,16 @@
 'use client';
 
-import { Globe } from 'lucide-react';
+import { Globe, Sprout, Leaf, BookOpen, Star, Home, Palette, Users, Building2 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { SellerType, CraftCategory, IndigenousConnection } from '@/lib/types/seller-types';
 import { SELLER_TYPE_CONFIG, CRAFT_CATEGORIES } from '@/lib/types/seller-types';
+
+const SELLER_ICON_MAP: Record<string, LucideIcon> = {
+  Home,
+  Palette,
+  Users,
+  Building2,
+};
 
 interface StoryFormSelectorProps {
   sellerType: SellerType;
@@ -38,22 +46,25 @@ export default function StoryFormSelector({
           ¿Qué tipo de vendedor eres? *
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {Object.entries(SELLER_TYPE_CONFIG).map(([key, config]) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => onSellerTypeChange(key as SellerType)}
-              className={`p-4 border-2 rounded-lg text-left transition ${
-                sellerType === key
-                  ? 'border-primary-600 bg-primary-50'
-                  : 'border-gray-200 hover:border-primary-300'
-              }`}
-            >
-              <div className="text-2xl mb-2">{config.emoji}</div>
-              <p className="font-semibold text-gray-900 mb-1 text-sm">{config.title}</p>
-              <p className="text-xs text-gray-600">{config.subtitle}</p>
-            </button>
-          ))}
+          {Object.entries(SELLER_TYPE_CONFIG).map(([key, config]) => {
+            const Icon = SELLER_ICON_MAP[config.icon];
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => onSellerTypeChange(key as SellerType)}
+                className={`p-4 border-2 rounded-lg text-left transition ${
+                  sellerType === key
+                    ? 'border-primary-600 bg-primary-50'
+                    : 'border-gray-200 hover:border-primary-300'
+                }`}
+              >
+                <div className="mb-2">{Icon && <Icon className="w-8 h-8 text-primary-600" />}</div>
+                <p className="font-semibold text-gray-900 mb-1 text-sm">{config.title}</p>
+                <p className="text-xs text-gray-600">{config.subtitle}</p>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -71,7 +82,7 @@ export default function StoryFormSelector({
             <option value="">Selecciona una categoría</option>
             {Object.entries(CRAFT_CATEGORIES).map(([key, value]) => (
               <option key={key} value={key}>
-                {value.icon} {value.label} - {value.examples}
+                {value.label} - {value.examples}
               </option>
             ))}
           </select>
@@ -85,46 +96,51 @@ export default function StoryFormSelector({
             Herencia Indígena (Opcional)
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {[
-              {
-                value: 'native',
-                emoji: '🌿',
-                label: 'Artesano Nativo',
-                desc: 'Hablo lengua indígena',
-              },
-              {
-                value: 'descendant',
-                emoji: '🌱',
-                label: 'Descendiente',
-                desc: 'Descendiente indígena',
-              },
-              {
-                value: 'learned',
-                emoji: '📚',
-                label: 'Técnicas Aprendidas',
-                desc: 'Aprendí técnicas tradicionales',
-              },
-              { value: 'none', emoji: '⭐', label: 'Otra Conexión', desc: 'No aplica' },
-            ].map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() => onConnectionChange(option.value as IndigenousConnection)}
-                className={`p-3 border-2 rounded-lg text-left transition ${
-                  indigenousConnection === option.value
-                    ? 'border-green-600 bg-green-50'
-                    : 'border-gray-200 hover:border-green-300'
-                }`}
-              >
-                <div className="flex items-start gap-2">
-                  <span className="text-lg">{option.emoji}</span>
-                  <div>
-                    <p className="text-sm font-semibold text-gray-900">{option.label}</p>
-                    <p className="text-xs text-gray-600">{option.desc}</p>
+            {(
+              [
+                {
+                  value: 'native',
+                  icon: Leaf,
+                  label: 'Artesano Nativo',
+                  desc: 'Hablo lengua indígena',
+                },
+                {
+                  value: 'descendant',
+                  icon: Sprout,
+                  label: 'Descendiente',
+                  desc: 'Descendiente indígena',
+                },
+                {
+                  value: 'learned',
+                  icon: BookOpen,
+                  label: 'Técnicas Aprendidas',
+                  desc: 'Aprendí técnicas tradicionales',
+                },
+                { value: 'none', icon: Star, label: 'Otra Conexión', desc: 'No aplica' },
+              ] as { value: string; icon: LucideIcon; label: string; desc: string }[]
+            ).map((option) => {
+              const Icon = option.icon;
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => onConnectionChange(option.value as IndigenousConnection)}
+                  className={`p-3 border-2 rounded-lg text-left transition ${
+                    indigenousConnection === option.value
+                      ? 'border-green-600 bg-green-50'
+                      : 'border-gray-200 hover:border-green-300'
+                  }`}
+                >
+                  <div className="flex items-start gap-2">
+                    <Icon className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-sm font-semibold text-gray-900">{option.label}</p>
+                      <p className="text-xs text-gray-600">{option.desc}</p>
+                    </div>
                   </div>
-                </div>
-              </button>
-            ))}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}

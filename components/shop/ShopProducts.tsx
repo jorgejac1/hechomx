@@ -1,16 +1,34 @@
+/**
+ * @fileoverview Shop products grid component with sorting functionality
+ * Displays a sortable grid of products belonging to a shop. Supports sorting
+ * by newest, price (ascending/descending), and popularity. Shows an empty state
+ * when no products are available.
+ * @module components/shop/ShopProducts
+ */
+
 'use client';
 
 import { useState } from 'react';
 import { Product } from '@/types';
 import ProductCard from '@/components/product/ProductCard';
-import EmptyState from '@/components/common/feedback/EmptyState';
+import EmptyState from '@/components/common/EmptyState';
 import { Package } from 'lucide-react';
 
+/**
+ * Props for the ShopProducts component
+ * @interface ShopProductsProps
+ */
 interface ShopProductsProps {
+  /** Array of products to display in the grid */
   products: Product[];
+  /** Shop name used for display in empty state */
   shopName: string;
 }
 
+/**
+ * Available sorting options for the products grid
+ * @typedef {'newest' | 'price-asc' | 'price-desc' | 'popular'} SortOption
+ */
 type SortOption = 'newest' | 'price-asc' | 'price-desc' | 'popular';
 
 export default function ShopProducts({ products, shopName }: ShopProductsProps) {
@@ -34,7 +52,7 @@ export default function ShopProducts({ products, shopName }: ShopProductsProps) 
   if (products.length === 0) {
     return (
       <EmptyState
-        icon={<Package className="w-full h-full" />}
+        icon={<Package className="w-12 h-12" />}
         title="Sin productos disponibles"
         description={`${shopName} aún no tiene productos publicados.`}
       />

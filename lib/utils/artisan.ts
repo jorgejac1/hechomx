@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Utilities for mapping products to artisan story pages.
+ * Provides functions to link product makers to artisan profiles,
+ * fetch artisan stories, and generate artisan page URLs.
+ * @module lib/utils/artisan
+ */
+
 import type { ArtisanStory } from '@/lib/types/artisan-story';
 
 /**
@@ -60,7 +67,7 @@ export async function getArtisanStoryById(artisanId: string): Promise<ArtisanSto
     const data: Record<string, ArtisanStory> = await response.json();
     return data[artisanId] || null;
   } catch (error) {
-    console.error('Error loading artisan story:', error);
+    console.error('[artisan] Error loading artisan story:', error);
     return null;
   }
 }

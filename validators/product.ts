@@ -1,5 +1,7 @@
 /**
- * Product validation schemas
+ * @fileoverview Product validation schemas
+ * Provides Zod schemas for validating products, product queries, reviews, and URL parameters
+ * @module validators/product
  */
 
 import { z } from 'zod';

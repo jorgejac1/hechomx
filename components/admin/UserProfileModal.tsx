@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { type MockUser } from '@/lib/data/users';
 import Modal from '@/components/common/Modal';
+import Alert from '@/components/common/Alert';
 
 interface UserProfileModalProps {
   user: MockUser;
@@ -225,33 +226,28 @@ export default function UserProfileModal({
 
       {/* Status Messages */}
       {user.status === 'suspended' && (
-        <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
-          <div className="flex items-start gap-3">
-            <Ban className="w-5 h-5 text-red-500 mt-0.5" />
-            <div>
-              <h4 className="font-semibold text-red-800">Cuenta Suspendida</h4>
-              <p className="text-sm text-red-600 mt-1">
-                Esta cuenta fue suspendida por violación de los términos de servicio. El usuario no
-                puede acceder a la plataforma.
-              </p>
-            </div>
-          </div>
-        </div>
+        <Alert
+          variant="error"
+          layout="bordered"
+          icon={Ban}
+          title="Cuenta Suspendida"
+          className="mb-6"
+        >
+          Esta cuenta fue suspendida por violación de los términos de servicio. El usuario no puede
+          acceder a la plataforma.
+        </Alert>
       )}
 
       {user.status === 'pending' && user.role === 'seller' && (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-          <div className="flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5" />
-            <div>
-              <h4 className="font-semibold text-amber-800">Verificación Pendiente</h4>
-              <p className="text-sm text-amber-600 mt-1">
-                Este vendedor está esperando la verificación de sus documentos. Revisar en el panel
-                de verificaciones.
-              </p>
-            </div>
-          </div>
-        </div>
+        <Alert
+          variant="warning"
+          layout="bordered"
+          icon={AlertTriangle}
+          title="Verificación Pendiente"
+        >
+          Este vendedor está esperando la verificación de sus documentos. Revisar en el panel de
+          verificaciones.
+        </Alert>
       )}
     </Modal>
   );

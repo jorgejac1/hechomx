@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Products management tab for the seller dashboard.
+ * Provides a grid view of all products with bulk selection capabilities,
+ * allowing sellers to mark products as out-of-stock, available, duplicate,
+ * or delete them. Includes product statistics like views and favorites.
+ * @module components/dashboard/tabs/ProductsTab
+ */
+
 'use client';
 
 import { useState, useMemo } from 'react';
@@ -21,7 +29,12 @@ import { ROUTES } from '@/lib';
 import { SellerProduct } from '@/lib/types';
 import { useToast } from '@/contexts/ToastContext';
 
+/**
+ * @interface ProductsTabProps
+ * Props for the ProductsTab component.
+ */
 interface ProductsTabProps {
+  /** Array of seller products to display and manage */
   products: SellerProduct[];
 }
 

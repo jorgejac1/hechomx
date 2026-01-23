@@ -1,5 +1,9 @@
-// Platform settings type definitions
-// Easy to extend and matches typical backend schema
+/**
+ * @fileoverview Platform settings type definitions for the marketplace.
+ * Defines interfaces for general, payment, notification, security, email,
+ * and appearance settings with default values and validation schemas.
+ * @module lib/types/settings
+ */
 
 export interface GeneralSettings {
   siteName: string;

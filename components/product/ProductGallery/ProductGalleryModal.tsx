@@ -1,7 +1,14 @@
-"use client";
+/**
+ * @fileoverview Product gallery fullscreen modal component
+ * Full-featured lightbox with zoom controls, slideshow, keyboard navigation,
+ * share/download actions, and thumbnail strip for image browsing.
+ * @module components/product/ProductGallery/ProductGalleryModal
+ */
 
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import {
   X,
   ChevronLeft,
@@ -13,28 +20,49 @@ import {
   Info,
   Download,
   Share2,
-} from "lucide-react";
-import { useFocusTrap } from "@/hooks/common/useFocusTrap";
-import { useKeyboardShortcuts } from "@/hooks/common/useKeyboardShortcuts";
-import { useSlideshow } from "@/hooks/media/useSlideshow";
-import { useZoomControls } from "@/hooks/media/useZoomControls";
-import { usePrefersReducedMotion } from "@/hooks/common/usePrefersReducedMotion";
+} from 'lucide-react';
+import { useFocusTrap } from '@/hooks/common/useFocusTrap';
+import { useKeyboardShortcuts } from '@/hooks/common/useKeyboardShortcuts';
+import { useSlideshow } from '@/hooks/media/useSlideshow';
+import { useZoomControls } from '@/hooks/media/useZoomControls';
+import { usePrefersReducedMotion } from '@/hooks/common/usePrefersReducedMotion';
+import ThumbnailStrip from '@/components/common/media/ThumbnailStrip';
 
+/**
+ * Media item type for modal content
+ * @interface MediaItem
+ */
 interface MediaItem {
-  type: "image" | "video";
+  /** Type of media */
+  type: 'image' | 'video';
+  /** Media URL */
   url: string;
+  /** Index in media array */
   index: number;
 }
 
+/**
+ * Props for the ProductGalleryModal component
+ * @interface ProductGalleryModalProps
+ */
 interface ProductGalleryModalProps {
+  /** Array of media items */
   mediaItems: MediaItem[];
+  /** Currently selected index */
   selectedIndex: number;
+  /** Product name for accessibility */
   productName: string;
+  /** Close modal callback */
   onClose: () => void;
+  /** Navigate to next image */
   onNext: () => void;
+  /** Navigate to previous image */
   onPrevious: () => void;
+  /** Select specific image by index */
   onSelectImage: (index: number) => void;
+  /** Share image callback */
   onShare: () => void;
+  /** Download image callback */
   onDownload: () => void;
 }
 
@@ -71,10 +99,10 @@ export function ProductGalleryModal({
     Escape: onClose,
     ArrowLeft: onPrevious,
     ArrowRight: onNext,
-    " ": slideshow.toggle,
-    "+": zoomControls.zoomIn,
-    "=": zoomControls.zoomIn,
-    "-": zoomControls.zoomOut,
+    ' ': slideshow.toggle,
+    '+': zoomControls.zoomIn,
+    '=': zoomControls.zoomIn,
+    '-': zoomControls.zoomOut,
   });
 
   // Save previous focus and restore on close
@@ -121,7 +149,7 @@ export function ProductGalleryModal({
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Zoom controls - to use zoom instead of zoomLevel */}
+          {/* Zoom controls */}
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -150,18 +178,14 @@ export function ProductGalleryModal({
             <ZoomIn className="w-5 h-5" aria-hidden="true" />
           </button>
 
-          {/* Slideshow toggle to use slideshow.isPlaying */}
+          {/* Slideshow toggle */}
           <button
             onClick={(e) => {
               e.stopPropagation();
               slideshow.toggle();
             }}
             className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-hidden focus:ring-2 focus:ring-white"
-            aria-label={
-              slideshow.isPlaying
-                ? "Pausar presentación"
-                : "Iniciar presentación"
-            }
+            aria-label={slideshow.isPlaying ? 'Pausar presentación' : 'Iniciar presentación'}
             aria-pressed={slideshow.isPlaying}
           >
             {slideshow.isPlaying ? (
@@ -213,7 +237,7 @@ export function ProductGalleryModal({
           onClick={(e) => e.stopPropagation()}
           style={{
             transform: `scale(${zoomControls.zoom})`,
-            transition: prefersReducedMotion ? "none" : "transform 0.3s ease",
+            transition: prefersReducedMotion ? 'none' : 'transform 0.3s ease',
           }}
         >
           <Image
@@ -237,9 +261,7 @@ export function ProductGalleryModal({
               onPrevious();
             }}
             className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-hidden focus:ring-2 focus:ring-white"
-            aria-label={`Imagen anterior. Actual: ${selectedIndex + 1} de ${
-              mediaItems.length
-            }`}
+            aria-label={`Imagen anterior. Actual: ${selectedIndex + 1} de ${mediaItems.length}`}
           >
             <ChevronLeft className="w-6 h-6" aria-hidden="true" />
           </button>
@@ -249,9 +271,7 @@ export function ProductGalleryModal({
               onNext();
             }}
             className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors focus:outline-hidden focus:ring-2 focus:ring-white"
-            aria-label={`Siguiente imagen. Actual: ${selectedIndex + 1} de ${
-              mediaItems.length
-            }`}
+            aria-label={`Siguiente imagen. Actual: ${selectedIndex + 1} de ${mediaItems.length}`}
           >
             <ChevronRight className="w-6 h-6" aria-hidden="true" />
           </button>
@@ -260,31 +280,18 @@ export function ProductGalleryModal({
 
       {/* Bottom thumbnail strip */}
       {mediaItems.length > 1 && (
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/50 to-transparent">
-          <div className="flex gap-2 overflow-x-auto scrollbar-hide justify-center">
-            {mediaItems.map((item, index) => (
-              <button
-                key={index}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onSelectImage(index);
-                }}
-                className={`relative shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
-                  selectedIndex === index
-                    ? "border-white ring-2 ring-white/50"
-                    : "border-white/30 hover:border-white/60"
-                }`}
-                aria-label={`Ir a imagen ${index + 1}`}
-              >
-                <Image
-                  src={item.url}
-                  alt=""
-                  fill
-                  sizes="64px"
-                  className="object-cover"
-                />
-              </button>
-            ))}
+        <div
+          className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/50 to-transparent"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex justify-center">
+            <ThumbnailStrip
+              items={mediaItems.map((item) => ({ type: item.type, url: item.url }))}
+              currentIndex={selectedIndex}
+              onSelect={onSelectImage}
+              orientation="horizontal"
+              size="md"
+            />
           </div>
         </div>
       )}

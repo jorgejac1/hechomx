@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Payment method selector component for the checkout flow.
+ * Displays available payment options including card, Mercado Pago, OXXO, SPEI, and PayPal.
+ * Shows processing times, security notices, and method-specific information panels.
+ * @module components/cart/checkout/PaymentMethod
+ */
+
 'use client';
 
 import { PaymentMethod, PaymentMethodInfo } from '@/lib/types/checkout';
@@ -7,14 +14,21 @@ import {
   Store,
   Building2,
   CircleDollarSign,
-  Check,
   Clock,
   AlertCircle,
 } from 'lucide-react';
+import RadioGroup from '@/components/common/RadioGroup';
 
+/**
+ * Props for the PaymentMethodSelector component
+ * @interface PaymentMethodSelectorProps
+ */
 interface PaymentMethodSelectorProps {
+  /** Currently selected payment method */
   value: PaymentMethod | null;
+  /** Callback when payment method selection changes */
   onChange: (method: PaymentMethod) => void;
+  /** Validation error message */
   error?: string;
 }
 
@@ -83,6 +97,31 @@ export default function PaymentMethodSelector({
   onChange,
   error,
 }: PaymentMethodSelectorProps) {
+  const options = PAYMENT_METHODS.map((method) => ({
+    value: method.id,
+    label: (
+      <div className="flex items-center gap-2">
+        <span>{method.name}</span>
+        {!method.available && (
+          <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-sm">
+            Próximamente
+          </span>
+        )}
+      </div>
+    ),
+    description: (
+      <div>
+        <p>{method.description}</p>
+        <div className="flex items-center gap-1 mt-1 text-xs text-gray-400">
+          <Clock className="w-3 h-3" />
+          <span>{method.processingTime}</span>
+        </div>
+      </div>
+    ),
+    icon: <PaymentIcon type={method.icon} className="w-6 h-6" />,
+    disabled: !method.available,
+  }));
+
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
@@ -90,69 +129,13 @@ export default function PaymentMethodSelector({
         Método de pago
       </h3>
 
-      <div className="space-y-3">
-        {PAYMENT_METHODS.map((method) => (
-          <button
-            key={method.id}
-            type="button"
-            onClick={() => method.available && onChange(method.id)}
-            disabled={!method.available}
-            className={`
-              w-full p-4 rounded-xl border-2 text-left transition-all
-              ${
-                !method.available
-                  ? 'opacity-50 cursor-not-allowed border-gray-200 bg-gray-50'
-                  : value === method.id
-                    ? 'border-primary-500 bg-primary-50 shadow-xs'
-                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-              }
-            `}
-          >
-            <div className="flex items-center gap-4">
-              {/* Radio indicator */}
-              <div
-                className={`
-                  w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0
-                  ${value === method.id ? 'border-primary-500 bg-primary-500' : 'border-gray-300'}
-                `}
-              >
-                {value === method.id && <Check className="w-3 h-3 text-white" />}
-              </div>
-
-              {/* Icon */}
-              <div
-                className={`
-                  w-12 h-12 rounded-lg flex items-center justify-center shrink-0
-                  ${
-                    value === method.id
-                      ? 'bg-primary-100 text-primary-600'
-                      : 'bg-gray-100 text-gray-500'
-                  }
-                `}
-              >
-                <PaymentIcon type={method.icon} className="w-6 h-6" />
-              </div>
-
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <p className="font-semibold text-gray-900">{method.name}</p>
-                  {!method.available && (
-                    <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-sm">
-                      Próximamente
-                    </span>
-                  )}
-                </div>
-                <p className="text-sm text-gray-500">{method.description}</p>
-                <div className="flex items-center gap-1 mt-1 text-xs text-gray-400">
-                  <Clock className="w-3 h-3" />
-                  <span>{method.processingTime}</span>
-                </div>
-              </div>
-            </div>
-          </button>
-        ))}
-      </div>
+      <RadioGroup
+        value={value || ''}
+        onChange={(val) => onChange(val as PaymentMethod)}
+        options={options}
+        variant="cards"
+        error={error}
+      />
 
       {error && (
         <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 p-3 rounded-lg">

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Type definitions for the artisan pricing calculator tool.
+ * Includes interfaces for material costs, labor time, overhead costs,
+ * pricing calculations, and fair trade wage rates by region.
+ * @module lib/types/pricing-calculator
+ */
+
 export interface MaterialCost {
   id: string;
   name: string;

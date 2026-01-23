@@ -1,30 +1,38 @@
-import { Product } from "@/types";
-import { CheckCircle, XCircle } from "lucide-react";
+/**
+ * @fileoverview Product pros and cons comparison component
+ * Analyzes and displays advantages and disadvantages for each compared product
+ * based on price, rating, availability, and other attributes.
+ * @module components/product/Comparison/ComparisonProscons
+ */
 
+import { Product } from '@/types';
+import { CheckCircle, XCircle } from 'lucide-react';
+
+/**
+ * Props for the ComparisonProsCons component
+ * @interface ComparisonProsConsProps
+ */
 interface ComparisonProsConsProps {
+  /** Products to analyze */
   products: Product[];
 }
 
-export default function ComparisonProsCons({
-  products,
-}: ComparisonProsConsProps) {
-  const avgPrice =
-    products.reduce((sum, p) => sum + p.price, 0) / products.length;
+export default function ComparisonProsCons({ products }: ComparisonProsConsProps) {
+  const avgPrice = products.reduce((sum, p) => sum + p.price, 0) / products.length;
   const minPrice = Math.min(...products.map((p) => p.price));
   const maxRating = Math.max(...products.map((p) => p.rating || 0));
 
   const getPros = (product: Product) => {
     const pros: string[] = [];
 
-    if ((product.rating || 0) >= 4.5) pros.push("Excelente calificación");
-    if ((product.rating || 0) === maxRating && maxRating > 0)
-      pros.push("Mejor valorado");
-    if (product.price === minPrice) pros.push("Precio más bajo");
-    if (product.price < avgPrice * 0.9) pros.push("Buen precio");
-    if (product.inStock) pros.push("Disponible inmediatamente");
-    if (product.verified) pros.push("Producto verificado");
-    if (product.featured) pros.push("Producto destacado");
-    if ((product.reviewCount || 0) > 100) pros.push("Muy reseñado");
+    if ((product.rating || 0) >= 4.5) pros.push('Excelente calificación');
+    if ((product.rating || 0) === maxRating && maxRating > 0) pros.push('Mejor valorado');
+    if (product.price === minPrice) pros.push('Precio más bajo');
+    if (product.price < avgPrice * 0.9) pros.push('Buen precio');
+    if (product.inStock) pros.push('Disponible inmediatamente');
+    if (product.verified) pros.push('Producto verificado');
+    if (product.featured) pros.push('Producto destacado');
+    if ((product.reviewCount || 0) > 100) pros.push('Muy reseñado');
 
     return pros;
   };
@@ -32,12 +40,11 @@ export default function ComparisonProsCons({
   const getCons = (product: Product) => {
     const cons: string[] = [];
 
-    if (!product.inStock) cons.push("No disponible actualmente");
-    if (product.price > avgPrice * 1.1)
-      cons.push("Precio más alto que el promedio");
-    if ((product.rating || 0) < 4.0) cons.push("Calificación moderada");
-    if ((product.reviewCount || 0) < 50) cons.push("Pocas reseñas");
-    if (!product.verified) cons.push("Sin verificar");
+    if (!product.inStock) cons.push('No disponible actualmente');
+    if (product.price > avgPrice * 1.1) cons.push('Precio más alto que el promedio');
+    if ((product.rating || 0) < 4.0) cons.push('Calificación moderada');
+    if ((product.reviewCount || 0) < 50) cons.push('Pocas reseñas');
+    if (!product.verified) cons.push('Sin verificar');
 
     return cons;
   };
@@ -53,10 +60,7 @@ export default function ComparisonProsCons({
           const cons = getCons(product);
 
           return (
-            <div
-              key={product.id}
-              className="bg-gray-50 rounded-lg p-4 border-2 border-gray-200"
-            >
+            <div key={product.id} className="bg-gray-50 rounded-lg p-4 border-2 border-gray-200">
               <h3 className="font-bold text-sm sm:text-base text-gray-900 mb-3 sm:mb-4 line-clamp-2">
                 {product.name}
               </h3>
@@ -71,15 +75,13 @@ export default function ComparisonProsCons({
                   <ul className="text-xs sm:text-sm space-y-1 text-gray-700">
                     {pros.map((pro, index) => (
                       <li key={index} className="flex items-start gap-2">
-                        <span className="text-green-600 mt-0.5">✓</span>
+                        <CheckCircle className="w-3 h-3 text-green-600 mt-0.5 shrink-0" />
                         <span>{pro}</span>
                       </li>
                     ))}
                   </ul>
                 ) : (
-                  <p className="text-xs text-gray-500 italic">
-                    Sin ventajas destacadas
-                  </p>
+                  <p className="text-xs text-gray-500 italic">Sin ventajas destacadas</p>
                 )}
               </div>
 
@@ -93,15 +95,13 @@ export default function ComparisonProsCons({
                   <ul className="text-xs sm:text-sm space-y-1 text-gray-700">
                     {cons.map((con, index) => (
                       <li key={index} className="flex items-start gap-2">
-                        <span className="text-red-600 mt-0.5">✗</span>
+                        <XCircle className="w-3 h-3 text-red-600 mt-0.5 shrink-0" />
                         <span>{con}</span>
                       </li>
                     ))}
                   </ul>
                 ) : (
-                  <p className="text-xs text-gray-500 italic">
-                    Sin desventajas significativas
-                  </p>
+                  <p className="text-xs text-gray-500 italic">Sin desventajas significativas</p>
                 )}
               </div>
             </div>

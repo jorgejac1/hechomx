@@ -14,6 +14,7 @@ import {
   CreditCard,
 } from 'lucide-react';
 import { ROUTES } from '@/lib';
+import Alert from '@/components/common/Alert';
 
 export const metadata: Metadata = {
   title: 'Política de Devoluciones | Papalote Market',
@@ -85,13 +86,12 @@ export default function ReturnsPage() {
                 producto para solicitar una devolución o cambio. Este plazo se aplica a todos los
                 productos excepto aquellos personalizados o hechos bajo pedido.
               </p>
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-sm">
-                <p className="text-sm text-blue-900 font-medium">
-                  <AlertCircle className="w-4 h-4 inline mr-2" />
+              <Alert variant="info" layout="sidebar" icon={AlertCircle}>
+                <span className="font-medium">
                   El plazo comienza a contar desde el día en que recibes tu pedido, no desde la
                   fecha de compra.
-                </p>
-              </div>
+                </span>
+              </Alert>
             </div>
           </section>
 
@@ -269,13 +269,10 @@ export default function ReturnsPage() {
                   </span>
                 </li>
               </ul>
-              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded-sm mt-4">
-                <p className="text-sm text-yellow-900">
-                  <AlertCircle className="w-4 h-4 inline mr-2" />
-                  Los costos de envío originales no son reembolsables, excepto en casos de productos
-                  defectuosos o errores en el pedido.
-                </p>
-              </div>
+              <Alert variant="warning" layout="sidebar" icon={AlertCircle} className="mt-4">
+                Los costos de envío originales no son reembolsables, excepto en casos de productos
+                defectuosos o errores en el pedido.
+              </Alert>
             </div>
           </section>
 
@@ -338,14 +335,13 @@ export default function ReturnsPage() {
                   <span>Incluye el costo de envío en el reembolso</span>
                 </li>
               </ul>
-              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded-sm">
-                <p className="text-sm text-green-900 font-medium">
-                  <Shield className="w-4 h-4 inline mr-2" />
+              <Alert variant="success" layout="sidebar" icon={Shield}>
+                <span className="font-medium">
                   Todos nuestros artesanos están comprometidos con la calidad. Los productos
                   defectuosos son raros, pero cuando ocurren, resolveremos el problema
                   inmediatamente.
-                </p>
-              </div>
+                </span>
+              </Alert>
             </div>
           </section>
 

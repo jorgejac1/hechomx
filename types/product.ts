@@ -1,5 +1,7 @@
 /**
- * Product-related types
+ * @fileoverview Product-related TypeScript type definitions
+ * Defines interfaces for products, categories, states, makers, reviews, and product form data
+ * @module types/product
  */
 
 export type ProductStatus = 'draft' | 'published';

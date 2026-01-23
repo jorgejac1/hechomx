@@ -14,14 +14,14 @@ import {
   MessageCircle,
   User,
   Store,
-  ChevronDown,
-  ChevronUp,
   Mail,
   Phone,
   Clock,
 } from 'lucide-react';
+import Accordion from '@/components/common/Accordion';
 
 interface FAQ {
+  id: string;
   question: string;
   answer: string;
   category: string;
@@ -30,7 +30,6 @@ interface FAQ {
 export default function HelpPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
 
   const categories = [
     { id: 'all', name: 'Todas', icon: HelpCircle },
@@ -80,126 +79,147 @@ export default function HelpPage() {
 
   const faqs: FAQ[] = [
     {
+      id: 'buying-1',
       category: 'buying',
       question: '¿Cómo realizo una compra?',
       answer:
         'Para realizar una compra, navega por nuestros productos, agrega los que te gusten al carrito, revisa tu pedido y procede al pago. Puedes pagar con tarjeta, transferencia, OXXO o PayPal.',
     },
     {
+      id: 'buying-2',
       category: 'buying',
       question: '¿Los productos son auténticos?',
       answer:
         'Sí, todos nuestros productos son 100% auténticos y hechos a mano por artesanos verificados. Verificamos cada artesano y cada pieza antes de listarla en la plataforma.',
     },
     {
+      id: 'buying-3',
       category: 'buying',
       question: '¿Puedo personalizar un producto?',
       answer:
         'Muchos artesanos ofrecen opciones de personalización. Busca el icono "Personalizable" en la página del producto o contacta directamente al artesano a través de nuestro sistema de mensajería.',
     },
     {
+      id: 'orders-1',
       category: 'orders',
       question: '¿Cómo rastree mi pedido?',
       answer:
         'Una vez que tu pedido sea enviado, recibirás un número de rastreo por correo electrónico. También puedes ver el estado de todos tus pedidos en la sección "Mis Pedidos" de tu cuenta.',
     },
     {
+      id: 'orders-2',
       category: 'orders',
       question: '¿Cuánto tarda en llegar mi pedido?',
       answer:
         'El tiempo de entrega varía según la ubicación y el tipo de producto. Generalmente, los pedidos nacionales tardan de 5 a 10 días hábiles. Los productos personalizados pueden tomar más tiempo.',
     },
     {
+      id: 'orders-3',
       category: 'orders',
       question: '¿Puedo cancelar mi pedido?',
       answer:
         'Puedes cancelar tu pedido dentro de las primeras 2 horas después de realizarlo sin costo. Después de este tiempo, contacta al artesano para discutir opciones de cancelación.',
     },
     {
+      id: 'payment-1',
       category: 'payment',
       question: '¿Qué métodos de pago aceptan?',
       answer:
         'Aceptamos tarjetas de crédito y débito (Visa, Mastercard, American Express), transferencias bancarias, pagos en OXXO y PayPal. Todos los pagos son procesados de forma segura.',
     },
     {
+      id: 'payment-2',
       category: 'payment',
       question: '¿Es seguro pagar en la plataforma?',
       answer:
         'Completamente seguro. Utilizamos encriptación SSL de 256 bits y cumplimos con los estándares de seguridad PCI DSS. Nunca almacenamos tu información financiera completa.',
     },
     {
+      id: 'payment-3',
       category: 'payment',
       question: '¿Puedo obtener una factura?',
       answer:
         'Sí, puedes solicitar tu factura fiscal dentro de los primeros 5 días después de tu compra. Ve a "Mis Pedidos", selecciona el pedido y haz clic en "Solicitar Factura".',
     },
     {
+      id: 'shipping-1',
       category: 'shipping',
       question: '¿Cuánto cuesta el envío?',
       answer:
         'El costo de envío varía según el tamaño, peso y destino del producto. Muchos artesanos ofrecen envío gratis en compras mayores a cierta cantidad. Verás el costo exacto antes de confirmar tu compra.',
     },
     {
+      id: 'shipping-2',
       category: 'shipping',
       question: '¿Envían a todo México?',
       answer:
         'Sí, enviamos a todo México. También tenemos artesanos que envían internacionalmente. Verifica la disponibilidad en la página de cada producto.',
     },
     {
+      id: 'shipping-3',
       category: 'shipping',
       question: '¿Qué pasa si no estoy en casa cuando llegue mi paquete?',
       answer:
         'La paquetería dejará un aviso y hará hasta 3 intentos de entrega. También puedes recoger tu paquete en la sucursal más cercana presentando tu identificación y el número de rastreo.',
     },
     {
+      id: 'returns-1',
       category: 'returns',
       question: '¿Puedo devolver un producto?',
       answer:
         'Sí, aceptamos devoluciones dentro de los 15 días posteriores a la entrega si el producto llega dañado o no corresponde a la descripción. Los productos personalizados no son reembolsables.',
     },
     {
+      id: 'returns-2',
       category: 'returns',
       question: '¿Cómo inicio una devolución?',
       answer:
         'Ve a "Mis Pedidos", selecciona el pedido, haz clic en "Solicitar Devolución" y sigue las instrucciones. El artesano revisará tu solicitud y coordinará la devolución contigo.',
     },
     {
+      id: 'returns-3',
       category: 'returns',
       question: '¿Cuándo recibiré mi reembolso?',
       answer:
         'Una vez que el artesano confirme la recepción del producto devuelto, procesaremos tu reembolso en 5-10 días hábiles al mismo método de pago que utilizaste.',
     },
     {
+      id: 'account-1',
       category: 'account',
       question: '¿Cómo creo una cuenta?',
       answer:
         'Haz clic en "Registro" en la parte superior de la página, completa tu información y verifica tu correo electrónico. ¡Listo! Ya puedes empezar a comprar.',
     },
     {
+      id: 'account-2',
       category: 'account',
       question: '¿Olvidé mi contraseña, qué hago?',
       answer:
         'En la página de inicio de sesión, haz clic en "¿Olvidaste tu contraseña?" e ingresa tu correo electrónico. Te enviaremos un enlace para crear una nueva contraseña.',
     },
     {
+      id: 'account-3',
       category: 'account',
       question: '¿Cómo actualizo mi información de perfil?',
       answer:
         'Inicia sesión, ve a "Mi Perfil" y haz clic en "Editar Perfil". Puedes actualizar tu nombre, dirección, teléfono y preferencias.',
     },
     {
+      id: 'selling-1',
       category: 'selling',
       question: '¿Cómo puedo vender en la plataforma?',
       answer:
         'Ve a la página "Vender en Papalote Market", completa el formulario de registro de artesanos y nuestro equipo revisará tu solicitud en 2-3 días hábiles.',
     },
     {
+      id: 'selling-2',
       category: 'selling',
       question: '¿Cuánto cuesta vender en la plataforma?',
       answer:
         'No cobramos ninguna cuota mensual. Solo cobramos una comisión del 12% en cada venta realizada. Esta comisión cubre los costos de la plataforma, procesamiento de pagos y soporte.',
     },
     {
+      id: 'selling-3',
       category: 'selling',
       question: '¿Cómo recibo mis pagos?',
       answer:
@@ -215,10 +235,6 @@ export default function HelpPage() {
       faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
-
-  const toggleFAQ = (index: number) => {
-    setExpandedFAQ(expandedFAQ === index ? null : index);
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -309,31 +325,17 @@ export default function HelpPage() {
             </p>
           </div>
         ) : (
-          <div className="space-y-4">
-            {filteredFAQs.map((faq, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+          <Accordion variant="separated">
+            {filteredFAQs.map((faq) => (
+              <Accordion.Item
+                key={faq.id}
+                itemId={faq.id}
+                title={<span className="text-lg font-bold text-gray-900">{faq.question}</span>}
               >
-                <button
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full flex items-center justify-between p-6 text-left"
-                >
-                  <h3 className="text-lg font-bold text-gray-900 pr-4">{faq.question}</h3>
-                  {expandedFAQ === index ? (
-                    <ChevronUp className="w-6 h-6 text-gray-600 shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-6 h-6 text-gray-600 shrink-0" />
-                  )}
-                </button>
-                {expandedFAQ === index && (
-                  <div className="px-6 pb-6">
-                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-                  </div>
-                )}
-              </div>
+                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+              </Accordion.Item>
             ))}
-          </div>
+          </Accordion>
         )}
       </div>
 

@@ -1,5 +1,7 @@
 /**
- * User and authentication validation schemas
+ * @fileoverview User and authentication validation schemas
+ * Provides Zod schemas for validating login, registration, password reset, profile updates, and password changes
+ * @module validators/user
  */
 
 import { z } from 'zod';

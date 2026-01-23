@@ -1,33 +1,43 @@
-"use client";
+/**
+ * @fileoverview Main product gallery component
+ * Responsive image/video gallery with mobile and desktop layouts,
+ * fullscreen modal, zoom functionality, and analytics tracking.
+ * @module components/product/ProductGallery/ProductGallery
+ */
 
-import { useState } from "react";
-import { ProductGalleryMobile } from "./ProductGalleryMobile";
-import { ProductGalleryDesktop } from "./ProductGalleryDesktop";
-import { ProductGalleryModal } from "./ProductGalleryModal";
-import { ProductGalleryBadges } from "./ProductGalleryBadges";
-import { useImageGallery } from "@/hooks/media/useImageGallery";
-import { useProductGalleryAnalytics } from "@/hooks/product/useProductGalleryAnalytics";
-import { useMediaQuery } from "@/hooks/common/useMediaQuery";
+'use client';
 
+import { useState } from 'react';
+import { ProductGalleryMobile } from './ProductGalleryMobile';
+import { ProductGalleryDesktop } from './ProductGalleryDesktop';
+import { ProductGalleryModal } from './ProductGalleryModal';
+import { ProductGalleryBadges } from './ProductGalleryBadges';
+import { useImageGallery } from '@/hooks/media/useImageGallery';
+import { useProductGalleryAnalytics } from '@/hooks/product/useProductGalleryAnalytics';
+import { useMediaQuery } from '@/hooks/common/useMediaQuery';
+
+/**
+ * Props for the ProductGallery component
+ * @interface ProductGalleryProps
+ */
 interface ProductGalleryProps {
+  /** Array of product image URLs */
   images: string[];
+  /** Array of product video URLs (optional) */
   videos?: string[];
+  /** Product name for alt text and accessibility */
   productName: string;
 }
 
-export default function ProductGallery({
-  images,
-  videos = [],
-  productName,
-}: ProductGalleryProps) {
+export default function ProductGallery({ images, videos = [], productName }: ProductGalleryProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   // Combine images and videos into media items
   const mediaItems = [
-    ...images.map((url, index) => ({ type: "image" as const, url, index })),
+    ...images.map((url, index) => ({ type: 'image' as const, url, index })),
     ...videos.map((url, index) => ({
-      type: "video" as const,
+      type: 'video' as const,
       url,
       index: images.length + index,
     })),
@@ -79,7 +89,7 @@ export default function ProductGallery({
 
   // Wrap analytics functions to match expected signatures
   const handleShare = () => {
-    trackImageShare("native");
+    trackImageShare('native');
   };
 
   const handleDownload = () => {
@@ -89,14 +99,9 @@ export default function ProductGallery({
   return (
     <div className="space-y-4">
       {/* Screen reader announcement */}
-      <div
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
-        className="sr-only"
-      >
-        {currentItem.type === "image" ? "Imagen" : "Video"} {selectedIndex + 1}{" "}
-        de {mediaItems.length}: {productName}
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
+        {currentItem.type === 'image' ? 'Imagen' : 'Video'} {selectedIndex + 1} de{' '}
+        {mediaItems.length}: {productName}
       </div>
 
       {/* Mobile Layout */}
@@ -138,9 +143,9 @@ export default function ProductGallery({
       <ProductGalleryBadges />
 
       {/* Fullscreen Modal */}
-      {isModalOpen && currentItem.type === "image" && (
+      {isModalOpen && currentItem.type === 'image' && (
         <ProductGalleryModal
-          mediaItems={mediaItems.filter((item) => item.type === "image")}
+          mediaItems={mediaItems.filter((item) => item.type === 'image')}
           selectedIndex={selectedIndex}
           productName={productName}
           onClose={closeModal}

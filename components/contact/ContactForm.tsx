@@ -7,6 +7,8 @@ import { ROUTES } from '@/lib';
 import TextInput from '@/components/common/TextInput';
 import Select from '@/components/common/Select';
 import Textarea from '@/components/common/Textarea';
+import Checkbox from '@/components/common/Checkbox';
+import Button from '@/components/common/Button';
 
 const SUBJECT_OPTIONS = [
   { value: 'consulta-producto', label: 'Consulta sobre producto' },
@@ -94,32 +96,27 @@ export default function ContactForm() {
         required
       />
 
-      <div className="flex items-start gap-2">
-        <input
-          type="checkbox"
-          id="acepto"
-          name="acepto"
-          checked={formData.acepto}
-          onChange={(e) => setFormData({ ...formData, acepto: e.target.checked })}
-          required
-          className="mt-1 w-4 h-4 text-primary-600 border-gray-300 rounded-sm focus:ring-primary-500"
-        />
-        <label htmlFor="acepto" className="text-sm text-gray-600">
-          Acepto la{' '}
-          <Link href={ROUTES.PRIVACY} className="text-primary-600 hover:underline">
-            Política de Privacidad
-          </Link>{' '}
-          y autorizo el tratamiento de mis datos personales
-        </label>
-      </div>
+      <Checkbox
+        id="acepto"
+        name="acepto"
+        checked={formData.acepto}
+        onChange={(e) => setFormData({ ...formData, acepto: e.target.checked })}
+        required
+        size="sm"
+        label={
+          <>
+            Acepto la{' '}
+            <Link href={ROUTES.PRIVACY} className="text-primary-600 hover:underline">
+              Política de Privacidad
+            </Link>{' '}
+            y autorizo el tratamiento de mis datos personales
+          </>
+        }
+      />
 
-      <button
-        type="submit"
-        className="w-full px-6 py-4 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition flex items-center justify-center gap-2"
-      >
-        <Send className="w-5 h-5" />
+      <Button type="submit" fullWidth size="lg" icon={<Send className="w-5 h-5" />}>
         Enviar Mensaje
-      </button>
+      </Button>
     </form>
   );
 }

@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Recently Viewed Products Section Component
+ * Displays a grid of products the user has recently viewed, stored in localStorage.
+ * Features include viewing history management, clear history functionality, and
+ * responsive grid layout with product cards.
+ * @module components/home/RecentlyViewedSection
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -7,10 +15,21 @@ import ProductCard from '@/components/product/ProductCard';
 import { Product } from '@/types';
 import { getRecentlyViewedIds, clearRecentlyViewed } from '@/lib/utils/recently-viewed';
 
+/**
+ * @interface RecentlyViewedSectionProps
+ * Props for the RecentlyViewedSection component
+ */
 interface RecentlyViewedSectionProps {
+  /** Complete list of products to filter recently viewed items from */
   allProducts: Product[];
 }
 
+/**
+ * Renders a section displaying recently viewed products from localStorage.
+ * Returns null if no recently viewed products exist or while loading.
+ * @param {RecentlyViewedSectionProps} props - Component props
+ * @returns {JSX.Element | null} The RecentlyViewedSection component or null
+ */
 export default function RecentlyViewedSection({ allProducts }: RecentlyViewedSectionProps) {
   const [recentProducts, setRecentProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);

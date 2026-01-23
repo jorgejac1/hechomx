@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Sticky cart bar component for mobile devices
+ * Displays a fixed bottom bar on mobile showing product name, price,
+ * and add to cart button. Appears after scrolling past a threshold.
+ * @module components/product/StickyCartBar
+ */
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -6,9 +13,16 @@ import { Product } from '@/types';
 import { formatCurrency } from '@/lib';
 import Button from '@/components/common/Button';
 
+/**
+ * Props for the StickyCartBar component
+ * @interface StickyCartBarProps
+ */
 interface StickyCartBarProps {
+  /** Product to display and add to cart */
   product: Product;
+  /** Currently selected quantity */
   selectedQuantity: number;
+  /** Callback function when add to cart is clicked */
   onAddToCart: () => void;
 }
 

@@ -1,14 +1,30 @@
+/**
+ * @fileoverview ShareModal component for sharing content to social platforms.
+ * Provides buttons for WhatsApp, Facebook, Twitter/X, and email sharing.
+ * Includes a copy-to-clipboard feature with visual feedback and Google Analytics tracking.
+ * @module components/common/ShareModal
+ */
+
 'use client';
 
 import { useState } from 'react';
 import { X, Copy, Check, Mail } from 'lucide-react';
 import { useToast } from '@/contexts/ToastContext';
 
+/**
+ * Props for the ShareModal component
+ * @interface ShareModalProps
+ */
 interface ShareModalProps {
+  /** Whether the modal is currently visible */
   isOpen: boolean;
+  /** Callback fired when the modal should close */
   onClose: () => void;
+  /** The URL to share */
   url: string;
+  /** Title text for the share (used in social posts) */
   title: string;
+  /** Optional additional text for the share body (used in email) */
   text?: string;
 }
 
@@ -25,7 +41,7 @@ export default function ShareModal({ isOpen, onClose, url, title, text = '' }: S
       success('Enlace copiado al portapapeles');
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Error copying to clipboard:', err);
+      console.error('[ShareModal] Error copying to clipboard:', err);
     }
   };
 

@@ -1,7 +1,14 @@
+/**
+ * @fileoverview Customer insights component for the seller dashboard.
+ * Displays detailed customer analytics including top customers, repeat buyers,
+ * purchase patterns, seasonal trends, product combinations frequently bought
+ * together, and upcoming customer birthdays for personalized marketing.
+ * @module components/dashboard/CustomerInsights
+ */
+
 'use client';
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useState, useEffect, useCallback } from 'react';
 import { getCustomerInsights } from '@/lib/api/sellerApi';
 import type { CustomerInsightsData } from '@/lib/types';
 import { formatCurrency, formatRelativeTime } from '@/lib';
@@ -16,12 +23,25 @@ import {
   Package,
   Loader2,
   Sparkles,
+  Cake,
 } from 'lucide-react';
+import Avatar from '@/components/common/Avatar';
+import Progress from '@/components/common/Progress';
+import ErrorState from '@/components/common/feedback/ErrorState';
 
+/**
+ * @interface CustomerInsightsProps
+ * Props for the CustomerInsights component.
+ */
 interface CustomerInsightsProps {
+  /** Email of the seller to load customer insights for */
   userEmail: string;
 }
 
+/**
+ * Configuration for customer lifetime value tier display.
+ * Maps tier levels to labels, colors, and icons.
+ */
 const LIFETIME_VALUE_CONFIG = {
   vip: {
     label: 'VIP',
@@ -48,16 +68,24 @@ const LIFETIME_VALUE_CONFIG = {
 export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
   const [data, setData] = useState<CustomerInsightsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  useEffect(() => {
-    async function loadData() {
-      setIsLoading(true);
+  const loadData = useCallback(async () => {
+    setIsLoading(true);
+    setError(false);
+    try {
       const result = await getCustomerInsights(userEmail);
       setData(result);
+    } catch {
+      setError(true);
+    } finally {
       setIsLoading(false);
     }
-    loadData();
   }, [userEmail]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   if (isLoading) {
     return (
@@ -65,6 +93,19 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
         <div className="flex items-center justify-center py-12">
           <Loader2 className="w-8 h-8 text-primary-600 animate-spin" />
         </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-white rounded-xl shadow-md p-6">
+        <ErrorState
+          type="error"
+          title="Error al cargar datos"
+          message="No pudimos cargar la información de clientes. Por favor, intenta de nuevo."
+          onRetry={loadData}
+        />
       </div>
     );
   }
@@ -124,19 +165,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
                 key={customer.id}
                 className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
               >
-                {customer.avatar ? (
-                  <Image
-                    src={customer.avatar}
-                    alt={customer.name}
-                    width={56}
-                    height={56}
-                    className="rounded-full"
-                  />
-                ) : (
-                  <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center">
-                    <Users className="w-7 h-7 text-primary-600" />
-                  </div>
-                )}
+                <Avatar src={customer.avatar} name={customer.name} alt={customer.name} size="xl" />
 
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
@@ -216,7 +245,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
           </div>
           <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
             <p className="text-xs text-yellow-900">
-              <strong>💡 Sugerencia:</strong> Considera crear paquetes o promociones con estos
+              <strong>Sugerencia:</strong> Considera crear paquetes o promociones con estos
               productos
             </p>
           </div>
@@ -238,12 +267,14 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
                     <span className="text-sm font-semibold text-gray-900">{trend.season}</span>
                     <span className="text-sm font-bold text-green-600">+{trend.increase}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                    <div
-                      className="bg-linear-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all"
-                      style={{ width: `${displayWidth}%` }}
-                    />
-                  </div>
+                  <Progress
+                    value={displayWidth}
+                    max={100}
+                    size="lg"
+                    variant="primary"
+                    animated
+                    barClassName="bg-gradient-to-r from-purple-500 to-pink-500"
+                  />
                 </div>
               );
             })}
@@ -266,7 +297,8 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
       {data.upcomingBirthdays.length > 0 && (
         <div className="bg-linear-to-br from-pink-50 to-rose-50 rounded-xl shadow-md p-6 border-2 border-pink-200">
           <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            🎂 Cumpleaños Próximos
+            <Cake className="w-5 h-5 text-pink-600" />
+            Cumpleaños Próximos
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {data.upcomingBirthdays.map((birthday) => (
@@ -285,7 +317,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
             ))}
           </div>
           <p className="text-xs text-gray-600 mt-4">
-            💡 Envía un mensaje personalizado o un descuento especial
+            Envía un mensaje personalizado o un descuento especial
           </p>
         </div>
       )}

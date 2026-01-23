@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Order and address management utilities.
+ * Provides functions for order creation, storage, status updates, shipping calculations,
+ * saved addresses management, and seller order notifications using localStorage.
+ * @module lib/utils/orders
+ */
+
 import { CompleteOrder, SavedAddress } from '@/lib/types/checkout';
 
 const ORDERS_KEY = 'papalote-orders';
@@ -69,7 +76,7 @@ export function saveOrder(order: CompleteOrder): void {
     orders.unshift(order); // Add to beginning (newest first)
     localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
   } catch (error) {
-    console.error('Error saving order:', error);
+    console.error('[orders] Error saving order:', error);
     throw new Error('No se pudo guardar el pedido');
   }
 }
@@ -82,7 +89,7 @@ export function getOrders(): CompleteOrder[] {
     const stored = localStorage.getItem(ORDERS_KEY);
     return stored ? JSON.parse(stored) : [];
   } catch (error) {
-    console.error('Error loading orders:', error);
+    console.error('[orders] Error loading orders:', error);
     return [];
   }
 }
@@ -127,7 +134,7 @@ export function updateOrderStatus(
     localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
     return orders[index];
   } catch (error) {
-    console.error('Error updating order:', error);
+    console.error('[orders] Error updating order:', error);
     return null;
   }
 }
@@ -156,7 +163,7 @@ export function saveAddress(address: SavedAddress): void {
 
     localStorage.setItem(ADDRESSES_KEY, JSON.stringify(addresses));
   } catch (error) {
-    console.error('Error saving address:', error);
+    console.error('[orders] Error saving address:', error);
     throw new Error('No se pudo guardar la dirección');
   }
 }
@@ -169,7 +176,7 @@ export function getSavedAddresses(): SavedAddress[] {
     const stored = localStorage.getItem(ADDRESSES_KEY);
     return stored ? JSON.parse(stored) : [];
   } catch (error) {
-    console.error('Error loading addresses:', error);
+    console.error('[orders] Error loading addresses:', error);
     return [];
   }
 }
@@ -190,7 +197,7 @@ export function deleteAddress(addressId: string): void {
     const addresses = getSavedAddresses().filter((addr) => addr.id !== addressId);
     localStorage.setItem(ADDRESSES_KEY, JSON.stringify(addresses));
   } catch (error) {
-    console.error('Error deleting address:', error);
+    console.error('[orders] Error deleting address:', error);
     throw new Error('No se pudo eliminar la dirección');
   }
 }
@@ -257,7 +264,7 @@ export function getSeenOrderIds(sellerName: string): string[] {
     const seenMap: Record<string, string[]> = stored ? JSON.parse(stored) : {};
     return seenMap[sellerName.toLowerCase()] || [];
   } catch (error) {
-    console.error('Error loading seen orders:', error);
+    console.error('[orders] Error loading seen orders:', error);
     return [];
   }
 }
@@ -286,7 +293,7 @@ export function markOrdersAsSeen(sellerName: string, orderIds: string[]): void {
 
     localStorage.setItem(SEEN_ORDERS_KEY, JSON.stringify(seenMap));
   } catch (error) {
-    console.error('Error marking orders as seen:', error);
+    console.error('[orders] Error marking orders as seen:', error);
   }
 }
 

@@ -1,5 +1,8 @@
 /**
- * Pre-configured filter combinations
+ * @fileoverview Pre-configured filter combinations for product listings.
+ * Defines filter presets (popular, budget, premium, featured, new arrivals)
+ * with utility functions to match and apply preset configurations.
+ * @module lib/constants/filterPresets
  */
 
 import { FILTER_PARAM_NAMES } from './filters';
@@ -74,10 +77,16 @@ export const getFilterPreset = (id: string): FilterPreset | undefined => {
 };
 
 /**
- * Checks if current params match a preset
+ * Checks if current params exactly match a preset (no extra params beyond the preset)
  */
 export const matchesPreset = (currentParams: URLSearchParams, preset: FilterPreset): boolean => {
   const presetKeys = Object.keys(preset.params);
+  const currentKeys = Array.from(currentParams.keys());
+
+  // Must have exactly the same number of params
+  if (currentKeys.length !== presetKeys.length) {
+    return false;
+  }
 
   // Check if all preset params match current params
   return presetKeys.every((key) => {

@@ -1,11 +1,28 @@
+/**
+ * @fileoverview Statistics grid component for the seller dashboard.
+ * Displays key performance metrics including total sales, product count,
+ * average rating, and response rate in a responsive grid layout.
+ * @module components/dashboard/StatsGrid
+ */
+
 import { DollarSign, ShoppingBag, Star, MessageSquare } from 'lucide-react';
 
+/**
+ * @interface StatsGridProps
+ * Props for the StatsGrid component.
+ */
 interface StatsGridProps {
+  /** Statistics object containing seller performance metrics */
   stats: {
+    /** Total number of sales */
     salesCount: number;
+    /** Total number of products listed */
     productsCount: number;
+    /** Average rating from customer reviews */
     rating: number;
+    /** Total number of reviews received */
     reviewsCount: number;
+    /** Percentage of customer messages responded to */
     responseRate: number;
   };
 }

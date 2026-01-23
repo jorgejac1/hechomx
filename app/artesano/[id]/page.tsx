@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { ArtisanStory } from '@/lib/types/artisan-story';
-import { getShopSlug } from '@/lib/utils/shop';
+import { getShopSlug } from '@/lib/utils/shop-utils';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import {
   MapPin,

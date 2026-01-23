@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Seller classification types and configuration constants.
+ * Defines seller types (hobby maker, artisan, workshop, company), craft styles,
+ * indigenous connections, craft categories, and their display configurations.
+ * @module lib/types/seller
+ */
+
 export type SellerType =
   | 'hobby_maker' // Makes things at home
   | 'artisan_individual' // Professional artisan
@@ -37,7 +44,7 @@ export interface SellerClassification {
 
 export const SELLER_TYPE_CONFIG = {
   hobby_maker: {
-    emoji: '🏠',
+    icon: 'Home',
     title: 'Hago cosas en casa',
     subtitle: 'Vendo mis creaciones como hobby o negocio secundario',
     examples: 'Bufandas tejidas, velas, jabones, manualidades',
@@ -45,7 +52,7 @@ export const SELLER_TYPE_CONFIG = {
     storySubtitle: 'Comparte un poco sobre ti y lo que haces',
   },
   artisan_individual: {
-    emoji: '🎨',
+    icon: 'Palette',
     title: 'Soy artesano profesional',
     subtitle: 'Dedicado a mi oficio, es mi profesión principal',
     examples: 'Joyería, textiles tradicionales, cerámica, tallado',
@@ -53,7 +60,7 @@ export const SELLER_TYPE_CONFIG = {
     storySubtitle: 'Comparte tu historia, herencia y proceso creativo',
   },
   workshop: {
-    emoji: '👥',
+    icon: 'Users',
     title: 'Tengo un taller',
     subtitle: 'Trabajo con un equipo pequeño (2-10 personas)',
     examples: 'Taller familiar, cooperativa, equipo de producción',
@@ -61,7 +68,7 @@ export const SELLER_TYPE_CONFIG = {
     storySubtitle: 'Comparte la historia de tu taller y equipo',
   },
   company: {
-    emoji: '🏢',
+    icon: 'Building2',
     title: 'Soy una empresa',
     subtitle: 'Negocio establecido con equipo grande',
     examples: 'Fábrica, marca establecida, producción a escala',
@@ -73,62 +80,62 @@ export const SELLER_TYPE_CONFIG = {
 export const CRAFT_CATEGORIES = {
   textiles: {
     label: 'Textiles y Ropa',
-    icon: '🧵',
+    icon: 'Shirt',
     examples: 'Tejidos, bordados, rebozos, huipiles, bufandas',
   },
   jewelry: {
     label: 'Joyería',
-    icon: '💍',
+    icon: 'Gem',
     examples: 'Plata, cobre, filigrana, piedras, bisutería',
   },
   pottery: {
     label: 'Cerámica y Alfarería',
-    icon: '🏺',
+    icon: 'Container',
     examples: 'Talavera, barro negro, cerámica vidriada',
   },
   woodwork: {
     label: 'Madera',
-    icon: '🪵',
+    icon: 'TreeDeciduous',
     examples: 'Alebrijes, muebles, máscaras, tallados',
   },
   metalwork: {
     label: 'Metalistería',
-    icon: '⚒️',
+    icon: 'Hammer',
     examples: 'Hojalata, herrería, latón',
   },
   leather: {
     label: 'Piel y Cuero',
-    icon: '👜',
+    icon: 'Briefcase',
     examples: 'Bolsas, cinturones, huaraches, talabartería',
   },
   paper: {
     label: 'Papel Artesanal',
-    icon: '📄',
+    icon: 'FileText',
     examples: 'Papel amate, papel picado, cartón',
   },
   candles: {
     label: 'Velas y Jabones',
-    icon: '🕯️',
+    icon: 'Flame',
     examples: 'Velas aromáticas, jabones artesanales',
   },
   food: {
     label: 'Alimentos Artesanales',
-    icon: '🌮',
+    icon: 'UtensilsCrossed',
     examples: 'Chocolates, moles, mezcal, conservas',
   },
   crafts: {
     label: 'Manualidades',
-    icon: '✂️',
+    icon: 'Scissors',
     examples: 'Macramé, crochet, costura, bordado',
   },
   mixed: {
     label: 'Varios',
-    icon: '🎨',
+    icon: 'Palette',
     examples: 'Múltiples categorías',
   },
   other: {
     label: 'Otros',
-    icon: '✨',
+    icon: 'Sparkles',
     examples: 'Otras artesanías mexicanas',
   },
 } as const;

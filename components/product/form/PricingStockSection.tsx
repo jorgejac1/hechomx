@@ -1,12 +1,27 @@
-import { useRouter } from 'next/navigation';
+/**
+ * @fileoverview Pricing and stock form section component
+ * Provides inputs for product price and available stock quantity.
+ * Includes a link to the pricing calculator tool.
+ * @module components/product/form/PricingStockSection
+ */
+
+import Link from 'next/link';
 import { DollarSign } from 'lucide-react';
 import { ROUTES } from '@/lib/constants/routes';
 import TextInput from '@/components/common/TextInput';
 
+/**
+ * Props for the PricingStockSection component
+ * @interface PricingStockSectionProps
+ */
 interface PricingStockSectionProps {
+  /** Product price in MXN */
   price: number;
+  /** Callback to update price */
   setPrice: (value: number) => void;
+  /** Available stock quantity */
   stock: number;
+  /** Callback to update stock */
   setStock: (value: number) => void;
 }
 
@@ -16,8 +31,6 @@ export default function PricingStockSection({
   stock,
   setStock,
 }: PricingStockSectionProps) {
-  const router = useRouter();
-
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
@@ -34,13 +47,9 @@ export default function PricingStockSection({
         />
         <p className="text-xs text-gray-500 mt-1">
           Usa la{' '}
-          <button
-            type="button"
-            onClick={() => router.push(ROUTES.PRICING_CALCULATOR)}
-            className="text-primary-600 hover:underline"
-          >
+          <Link href={ROUTES.PRICING_CALCULATOR} className="text-primary-600 hover:underline">
             calculadora de precios
-          </button>{' '}
+          </Link>{' '}
           para precios justos
         </p>
       </div>

@@ -1,5 +1,8 @@
 /**
- * Application routes
+ * @fileoverview Application route constants and URL path definitions.
+ * Defines all client-side routes (products, checkout, auth, seller, admin)
+ * and API endpoint routes used throughout the application.
+ * @module lib/constants/routes
  */
 
 export const ROUTES = {

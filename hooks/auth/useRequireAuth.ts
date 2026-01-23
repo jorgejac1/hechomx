@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Authentication requirement hook for protected routes
+ * Redirects unauthenticated users to login and optionally requires seller profile
+ * @module hooks/auth/useRequireAuth
+ */
+
 'use client';
 
 import { useEffect } from 'react';

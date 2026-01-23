@@ -1,7 +1,20 @@
+/**
+ * @fileoverview Advanced fields toggle button component
+ * Provides a button to expand/collapse advanced product form fields.
+ * Used in the product form to show optional detailed information sections.
+ * @module components/product/form/AdvancedFieldsToggle
+ */
+
 import { Sparkles } from 'lucide-react';
 
+/**
+ * Props for the AdvancedFieldsToggle component
+ * @interface AdvancedFieldsToggleProps
+ */
 interface AdvancedFieldsToggleProps {
+  /** Whether advanced fields are currently visible */
   showAdvanced: boolean;
+  /** Callback to toggle advanced fields visibility */
   setShowAdvanced: (show: boolean) => void;
 }
 

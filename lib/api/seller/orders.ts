@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Seller orders API client functions.
+ * Provides async functions for fetching seller orders
+ * and updating order status (marking as shipped).
+ * @module lib/api/seller/orders
+ */
+
 import type { SellerOrder } from '@/lib/types/seller-types';
 
 export async function getSellerOrders(userEmail: string): Promise<SellerOrder[]> {
@@ -6,7 +13,7 @@ export async function getSellerOrders(userEmail: string): Promise<SellerOrder[]>
     const data = await response.json();
     return data[userEmail] || [];
   } catch (error) {
-    console.error('Error loading seller orders:', error);
+    console.error('[seller/orders] Error loading seller orders:', error);
     return [];
   }
 }

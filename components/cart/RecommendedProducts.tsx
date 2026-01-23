@@ -1,9 +1,20 @@
-"use client";
+/**
+ * @fileoverview Recommended products section for displaying related items in the cart page.
+ * Shows a grid of product cards for items that may interest the user based on their cart contents.
+ * @module components/cart/RecommendedProducts
+ */
 
-import { Product } from "@/types";
-import ProductCard from "@/components/product/ProductCard";
+'use client';
 
+import { Product } from '@/types';
+import ProductCard from '@/components/product/ProductCard';
+
+/**
+ * Props for the RecommendedProducts component
+ * @interface RecommendedProductsProps
+ */
 interface RecommendedProductsProps {
+  /** Array of recommended products to display */
   products: Product[];
 }
 

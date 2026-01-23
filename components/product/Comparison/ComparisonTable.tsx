@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Desktop product comparison table component
+ * Full-featured comparison table with sticky header, difference highlighting,
+ * and cart integration. Displays product attributes in a grid layout.
+ * @module components/product/Comparison/ComparisonTable
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -8,10 +15,16 @@ import { Product } from '@/types';
 import { useToast } from '@/contexts/ToastContext';
 import { formatCurrency } from '@/lib';
 import Button from '@/components/common/Button';
-import { X, Star, ShoppingCart } from 'lucide-react';
+import { X, Star, ShoppingCart, Trophy } from 'lucide-react';
 
+/**
+ * Props for the ComparisonTable component
+ * @interface ComparisonTableProps
+ */
 interface ComparisonTableProps {
+  /** Products to compare */
   products: Product[];
+  /** Whether to hide rows with identical values */
   showOnlyDifferences: boolean;
 }
 
@@ -77,8 +90,9 @@ export default function ComparisonTable({ products, showOnlyDifferences }: Compa
           <div key={product.id} className="text-center relative">
             {/* Winner Badge */}
             {product.id === bestProduct.id && products.length > 2 && (
-              <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10 whitespace-nowrap">
-                🏆 Recomendado
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10 whitespace-nowrap flex items-center gap-1">
+                <Trophy className="w-3 h-3" />
+                Recomendado
               </div>
             )}
 

@@ -12,10 +12,33 @@ import ProductsTab from '@/components/dashboard/tabs/ProductsTab';
 import ReviewsTab from '@/components/dashboard/tabs/ReviewsTab';
 import AnalyticsDashboard from '@/components/dashboard/AnalyticsDashboard';
 import CustomerInsights from '@/components/dashboard/CustomerInsights';
+import LazyLoad from '@/components/common/LazyLoad';
+import Skeleton from '@/components/common/loading/Skeleton';
 import { CompleteOrder } from '@/lib/types/checkout';
 import { getNewOrdersForSeller, markAllOrdersAsSeen } from '@/lib/utils/orders';
 import { SellerProduct, Review, MakerStats } from '@/lib/types/seller-types';
 import { Order } from '@/lib/types/order';
+
+// Loading skeleton for heavy dashboard sections
+function DashboardSectionSkeleton() {
+  return (
+    <div className="space-y-4">
+      <Skeleton width={200} height={24} className="mb-4" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="bg-white rounded-xl border border-gray-200 p-4">
+            <Skeleton width={80} height={32} className="mb-2" />
+            <Skeleton width={120} height={16} />
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        <Skeleton height={300} className="rounded-xl" />
+        <Skeleton height={300} className="rounded-xl" />
+      </div>
+    </div>
+  );
+}
 
 interface DashboardContentProps {
   user: {
@@ -100,8 +123,16 @@ function DashboardContent({ user }: DashboardContentProps) {
                 recentOrders={makerProfile.recentOrders}
               />
             )}
-            {activeTab === 'analytics' && <AnalyticsDashboard userEmail={user.email} />}
-            {activeTab === 'customers' && <CustomerInsights userEmail={user.email} />}
+            {activeTab === 'analytics' && (
+              <LazyLoad fallback={<DashboardSectionSkeleton />}>
+                <AnalyticsDashboard userEmail={user.email} />
+              </LazyLoad>
+            )}
+            {activeTab === 'customers' && (
+              <LazyLoad fallback={<DashboardSectionSkeleton />}>
+                <CustomerInsights userEmail={user.email} />
+              </LazyLoad>
+            )}
             {activeTab === 'orders' && <OrdersTab orders={makerProfile.recentOrders} />}
             {activeTab === 'products' && <ProductsTab products={makerProfile.products} />}
             {activeTab === 'reviews' && <ReviewsTab reviews={makerProfile.reviews} />}

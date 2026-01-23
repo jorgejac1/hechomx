@@ -67,10 +67,10 @@ describe('Coupon Utilities', () => {
     });
 
     it('should reject expired coupon', () => {
-      // Note: There are no expired coupons in the mock data, but the code path exists
-      // This test verifies the validation logic works correctly
-      const result = validateCoupon('NONEXISTENT', 1000);
+      // EXPIRED2023 has expiresAt: '2023-01-01' which is in the past
+      const result = validateCoupon('EXPIRED2023', 1000);
       expect(result.valid).toBe(false);
+      expect(result.error).toBe('Este cupón ha expirado');
     });
   });
 

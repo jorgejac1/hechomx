@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Product data access layer and query functions.
+ * Provides functions for retrieving products from JSON data source,
+ * filtering by category/state, searching, and getting featured products.
+ * @module lib/data/products
+ */
+
 import { Product } from '@/types';
 import productsData from './products.json';
 

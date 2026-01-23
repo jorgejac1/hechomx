@@ -1,21 +1,35 @@
+/**
+ * @fileoverview Product card list view component
+ * Horizontal product card layout for list view display.
+ * Shows image, details, rating, price, and comparison toggle. Memoized for performance.
+ * @module components/product/ProductCardList
+ */
+
 'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { Product } from '@/types';
 import { useComparison } from '@/contexts/ComparisonContext';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { formatCurrency } from '@/lib';
 import Badge from '@/components/common/Badge';
 import Button from '@/components/common/Button';
+import ImageSkeleton from '@/components/common/loading/ImageSkeleton';
 
+/**
+ * Props for the ProductCardList component
+ * @interface ProductCardListProps
+ */
 interface ProductCardListProps {
+  /** Product data to display */
   product: Product;
 }
 
-export default function ProductCardList({ product }: ProductCardListProps) {
+const ProductCardList = memo(function ProductCardList({ product }: ProductCardListProps) {
   const { addToComparison, removeFromComparison, isInComparison } = useComparison();
   const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const isComparing = isInComparison(product.id);
 
   const handleComparisonToggle = () => {
@@ -38,14 +52,19 @@ export default function ProductCardList({ product }: ProductCardListProps) {
           aria-label={`Ver detalles de ${product.name}`}
           className="block w-full h-full"
         >
+          {!imageLoaded && !imageError && <ImageSkeleton aspectRatio="square" rounded={false} />}
           {!imageError ? (
             <Image
               src={product.images[0]}
               alt={`Imagen de ${product.name}`}
               fill
               sizes="(max-width: 640px) 100vw, 208px"
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              className={`object-cover group-hover:scale-105 transition-transform duration-300 ${
+                imageLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              onLoad={() => setImageLoaded(true)}
               onError={() => setImageError(true)}
+              loading="lazy"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gray-200">
@@ -263,4 +282,6 @@ export default function ProductCardList({ product }: ProductCardListProps) {
       </div>
     </article>
   );
-}
+});
+
+export default ProductCardList;

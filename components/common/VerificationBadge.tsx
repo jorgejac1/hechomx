@@ -1,12 +1,27 @@
+/**
+ * @fileoverview VerificationBadge components for displaying seller verification status.
+ * Includes VerificationBadge, VerificationIcon, and VerificationBadgeWithTooltip variants.
+ * Displays colored badges with icons based on verification levels from the constants.
+ * @module components/common/VerificationBadge
+ */
+
 'use client';
 
 import type { VerificationLevel } from '@/lib/types/verification';
 import { VERIFICATION_LEVELS } from '@/lib/constants/verification';
 
+/**
+ * Props for the VerificationBadge component
+ * @interface VerificationBadgeProps
+ */
 interface VerificationBadgeProps {
+  /** The verification level determining badge appearance */
   level: VerificationLevel;
+  /** Size variant affecting dimensions and font size */
   size?: 'sm' | 'md' | 'lg';
+  /** Whether to show the text label alongside the icon */
   showLabel?: boolean;
+  /** Additional CSS classes */
   className?: string;
 }
 

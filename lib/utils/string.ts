@@ -1,5 +1,8 @@
 /**
- * String manipulation utilities
+ * @fileoverview String manipulation utility functions.
+ * Provides functions for text capitalization, slugification, truncation,
+ * HTML stripping, initials generation, phone formatting, and pluralization.
+ * @module lib/utils/string
  */
 
 /**

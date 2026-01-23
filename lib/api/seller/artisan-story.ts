@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Artisan story API client functions.
+ * Provides async functions for fetching artisan stories
+ * by email, ID, or retrieving all stories for display.
+ * @module lib/api/seller/artisan-story
+ */
+
 import { ArtisanStory } from '@/lib/types/artisan-story';
 
 export async function getArtisanStoryByEmail(email: string): Promise<ArtisanStory | null> {
@@ -10,7 +17,7 @@ export async function getArtisanStoryByEmail(email: string): Promise<ArtisanStor
 
     return data[artisanId] || null;
   } catch (error) {
-    console.error('Error loading artisan story:', error);
+    console.error('[seller/artisan-story] Error loading artisan story:', error);
     return null;
   }
 }
@@ -21,7 +28,7 @@ export async function getArtisanStoryById(artisanId: string): Promise<ArtisanSto
     const data = await response.json();
     return data[artisanId] || null;
   } catch (error) {
-    console.error('Error loading artisan story:', error);
+    console.error('[seller/artisan-story] Error loading artisan story:', error);
     return null;
   }
 }
@@ -32,7 +39,7 @@ export async function getAllArtisanStories(): Promise<Record<string, ArtisanStor
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error loading artisan stories:', error);
+    console.error('[seller/artisan-story] Error loading artisan stories:', error);
     return {};
   }
 }

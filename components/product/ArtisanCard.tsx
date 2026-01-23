@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Artisan profile card component
+ * Displays artisan information including name, location, verification status,
+ * statistics, and action buttons for viewing their store or contacting them.
+ * @module components/product/ArtisanCard
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -5,9 +12,16 @@ import { MapPin, CheckCircle, MessageCircle, Store } from 'lucide-react';
 import Button from '@/components/common/Button';
 import ContactModal from '@/components/contact/ContactModal';
 
+/**
+ * Props for the ArtisanCard component
+ * @interface ArtisanCardProps
+ */
 interface ArtisanCardProps {
+  /** Name of the artisan */
   artisanName: string;
+  /** Location/state where the artisan is based */
   location: string;
+  /** Whether the artisan has been verified */
   verified: boolean;
 }
 

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Product subcategory data and navigation structure.
+ * Defines hierarchical subcategories for main product categories
+ * with images, counts, and nested sub-subcategories for filtering.
+ * @module lib/data/subcategories
+ */
+
 export interface Subcategory {
   name: string;
   slug: string;

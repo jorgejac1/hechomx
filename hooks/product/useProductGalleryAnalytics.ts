@@ -1,4 +1,10 @@
 /**
+ * @fileoverview Product gallery analytics tracking hook
+ * Tracks user interactions with product images including views, zooms, downloads, and shares via Google Analytics
+ * @module hooks/product/useProductGalleryAnalytics
+ */
+
+/**
  * Product-specific analytics tracking for gallery
  *
  * @param productId - Product ID

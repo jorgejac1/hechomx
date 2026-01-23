@@ -1,5 +1,7 @@
 /**
- * Search validation schemas
+ * @fileoverview Search validation schemas
+ * Provides Zod schemas for validating search queries and filter inputs with price range refinement
+ * @module validators/search
  */
 
 import { z } from 'zod';

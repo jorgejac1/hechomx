@@ -1,7 +1,18 @@
+/**
+ * @fileoverview Delivery estimate and trust indicators component
+ * Displays trust badges for secure purchase, returns policy, and response time.
+ * Provides buyers with confidence indicators about the purchase experience.
+ * @module components/product/DeliveryEstimate
+ */
+
 'use client';
 
 import { Shield, RotateCcw, Clock } from 'lucide-react';
 
+/**
+ * Renders trust indicator badges for delivery and purchase security
+ * @returns Grid of trust badges with icons and descriptions
+ */
 export default function TrustIndicators() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-gray-200">

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Seller reviews API client functions.
+ * Provides async functions for fetching seller reviews
+ * and submitting responses to customer reviews.
+ * @module lib/api/seller/reviews
+ */
+
 import type { SellerReview } from '@/lib/types/seller-types';
 
 export async function getSellerReviews(userEmail: string): Promise<SellerReview[]> {
@@ -6,7 +13,7 @@ export async function getSellerReviews(userEmail: string): Promise<SellerReview[
     const data = await response.json();
     return data[userEmail] || [];
   } catch (error) {
-    console.error('Error loading seller reviews:', error);
+    console.error('[seller/reviews] Error loading seller reviews:', error);
     return [];
   }
 }

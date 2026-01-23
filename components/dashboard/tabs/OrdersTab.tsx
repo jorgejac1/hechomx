@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Orders management tab component for the seller dashboard.
+ * Displays all orders with their status, allows status updates, and handles
+ * tracking number input for shipped orders. Supports order workflow from
+ * pending through delivered or cancelled states.
+ * @module components/dashboard/tabs/OrdersTab
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -17,8 +25,16 @@ import { formatCurrency, formatRelativeTime } from '@/lib';
 import { Order } from '@/lib/types';
 import { useToast } from '@/contexts/ToastContext';
 
+/**
+ * @typedef {'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled'} OrderStatus
+ * Represents the possible states of an order in the fulfillment workflow.
+ */
 type OrderStatus = 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
 
+/**
+ * Configuration mapping for order status display properties.
+ * Each status has a label, color class, and associated icon.
+ */
 const ORDER_STATUS_CONFIG: Record<
   OrderStatus,
   { label: string; color: string; icon: React.ComponentType<{ className?: string }> }
@@ -31,7 +47,10 @@ const ORDER_STATUS_CONFIG: Record<
   cancelled: { label: 'Cancelado', color: 'bg-red-100 text-red-800', icon: XCircle },
 };
 
-// Define valid next statuses for each status
+/**
+ * Defines the valid state transitions for each order status.
+ * Controls which status changes are allowed from the current state.
+ */
 const NEXT_STATUS_OPTIONS: Record<OrderStatus, OrderStatus[]> = {
   pending: ['confirmed', 'cancelled'],
   confirmed: ['processing', 'cancelled'],
@@ -41,7 +60,12 @@ const NEXT_STATUS_OPTIONS: Record<OrderStatus, OrderStatus[]> = {
   cancelled: [],
 };
 
+/**
+ * @interface OrdersTabProps
+ * Props for the OrdersTab component.
+ */
 interface OrdersTabProps {
+  /** Array of orders to display and manage */
   orders: Order[];
 }
 
@@ -139,8 +163,9 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                   <p className="text-sm font-semibold text-gray-900">{order.customer.name}</p>
                   <p className="text-sm text-gray-600">{order.customer.email}</p>
                   {order.tracking && (
-                    <p className="text-xs text-purple-600 font-medium mt-1">
-                      📦 Rastreo: {order.tracking}
+                    <p className="text-xs text-purple-600 font-medium mt-1 flex items-center gap-1">
+                      <Package className="w-3 h-3" />
+                      Rastreo: {order.tracking}
                     </p>
                   )}
                 </div>
@@ -266,16 +291,16 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                   {/* Quick Actions Info */}
                   <div className="mt-3 text-xs text-gray-500">
                     {order.status === 'pending' && (
-                      <p>💡 Confirma el pedido para comenzar a prepararlo</p>
+                      <p>Confirma el pedido para comenzar a prepararlo</p>
                     )}
                     {order.status === 'confirmed' && (
-                      <p>💡 Marca como procesando cuando empieces a preparar el envío</p>
+                      <p>Marca como procesando cuando empieces a preparar el envío</p>
                     )}
                     {order.status === 'processing' && (
-                      <p>💡 Agrega el número de rastreo al marcar como enviado</p>
+                      <p>Agrega el número de rastreo al marcar como enviado</p>
                     )}
                     {order.status === 'shipped' && (
-                      <p>💡 Marca como entregado cuando el cliente reciba el pedido</p>
+                      <p>Marca como entregado cuando el cliente reciba el pedido</p>
                     )}
                   </div>
                 </div>
@@ -292,8 +317,18 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                         : 'bg-gray-50 text-gray-700'
                   }`}
                 >
-                  {order.status === 'delivered' && '✅ Pedido completado'}
-                  {order.status === 'cancelled' && '❌ Pedido cancelado'}
+                  {order.status === 'delivered' && (
+                    <span className="flex items-center justify-center gap-2">
+                      <CheckCircle2 className="w-4 h-4" />
+                      Pedido completado
+                    </span>
+                  )}
+                  {order.status === 'cancelled' && (
+                    <span className="flex items-center justify-center gap-2">
+                      <XCircle className="w-4 h-4" />
+                      Pedido cancelado
+                    </span>
+                  )}
                 </div>
               )}
             </div>

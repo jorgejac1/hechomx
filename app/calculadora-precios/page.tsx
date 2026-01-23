@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { useToast } from '@/contexts/ToastContext';
 import { getFairTradeRates, calculatePricing, savePricingCalculation } from '@/lib/api/sellerApi';
@@ -33,7 +33,6 @@ export default function PricingCalculatorPage() {
 }
 
 function PricingCalculatorContent({ user }: { user: User }) {
-  const router = useRouter();
   const { showToast } = useToast();
 
   // Product Info
@@ -222,13 +221,13 @@ function PricingCalculatorContent({ user }: { user: User }) {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <button
-            onClick={() => router.push(ROUTES.DASHBOARD)}
+          <Link
+            href={ROUTES.DASHBOARD}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition"
           >
             <ArrowLeft className="w-5 h-5" />
             Volver al Dashboard
-          </button>
+          </Link>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">

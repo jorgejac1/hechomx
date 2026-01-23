@@ -1,5 +1,7 @@
 /**
- * Contact and communication validation schemas
+ * @fileoverview Contact and communication validation schemas
+ * Provides Zod schemas for validating contact forms, newsletter subscriptions, problem reports, and maker contact
+ * @module validators/contact
  */
 
 import { z } from 'zod';

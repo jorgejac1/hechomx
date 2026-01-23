@@ -10,7 +10,18 @@ import { ROUTES } from '@/lib';
 import Button from '@/components/common/Button';
 import TextInput from '@/components/common/TextInput';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
-import { Eye, EyeOff, Mail, Lock, User as UserIcon, AlertCircle, CheckCircle2 } from 'lucide-react';
+import Alert from '@/components/common/Alert';
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  User as UserIcon,
+  AlertCircle,
+  CheckCircle2,
+  ShoppingBag,
+  Palette,
+} from 'lucide-react';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -145,7 +156,7 @@ export default function RegisterPage() {
                 }`}
               >
                 <div className="text-center">
-                  <span className="text-2xl mb-2 block">🛍️</span>
+                  <ShoppingBag className="w-8 h-8 mx-auto mb-2 text-primary-600" />
                   <p className="font-semibold text-sm">Comprar</p>
                   <p className="text-xs text-gray-600 mt-1">Productos artesanales</p>
                 </div>
@@ -160,7 +171,7 @@ export default function RegisterPage() {
                 }`}
               >
                 <div className="text-center">
-                  <span className="text-2xl mb-2 block">🎨</span>
+                  <Palette className="w-8 h-8 mx-auto mb-2 text-primary-600" />
                   <p className="font-semibold text-sm">Vender</p>
                   <p className="text-xs text-gray-600 mt-1">Mis productos</p>
                 </div>
@@ -170,10 +181,9 @@ export default function RegisterPage() {
 
           {/* Register error */}
           {registerError && (
-            <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
-              <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-              <p className="text-sm text-red-800">{registerError}</p>
-            </div>
+            <Alert variant="error" layout="bordered" icon={AlertCircle} className="mb-4">
+              {registerError}
+            </Alert>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -371,12 +381,10 @@ export default function RegisterPage() {
 
           {/* Info box for sellers */}
           {userType === 'seller' && (
-            <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-900">
-                <span className="font-semibold">💡 Para vendedores:</span> Después de crear tu
-                cuenta, podrás publicar tus productos y empezar a vender.
-              </p>
-            </div>
+            <Alert variant="info" layout="bordered" className="mt-6">
+              <span className="font-semibold">Para vendedores:</span> Después de crear tu cuenta,
+              podrás publicar tus productos y empezar a vender.
+            </Alert>
           )}
         </div>
       </div>

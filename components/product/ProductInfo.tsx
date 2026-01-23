@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Product information panel component
+ * Displays comprehensive product details including name, price, rating, quantity selector,
+ * add to cart/buy actions, and trust indicators. Main info section on product detail page.
+ * @module components/product/ProductInfo
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -21,10 +28,18 @@ import TrustIndicators from './TrustIndicators';
 import SellerBadge from './SellerBadge';
 import Badge from '@/components/common/Badge';
 import Button from '@/components/common/Button';
+import StarRating from '@/components/common/StarRating';
 
+/**
+ * Props for the ProductInfo component
+ * @interface ProductInfoProps
+ */
 interface ProductInfoProps {
+  /** Product data to display */
   product: Product;
+  /** Currently selected quantity */
   selectedQuantity: number;
+  /** Callback when quantity changes */
   onQuantityChange: (quantity: number) => void;
 }
 
@@ -117,24 +132,7 @@ export default function ProductInfo({
       {/* Rating */}
       {product.rating && product.reviewCount && (
         <div className="flex items-center gap-3 pb-4 border-b border-gray-200">
-          <div className="flex items-center gap-1">
-            <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <svg
-                  key={i}
-                  className={`w-5 h-5 ${
-                    i < Math.floor(product.rating!)
-                      ? 'text-yellow-400 fill-current'
-                      : 'text-gray-300'
-                  }`}
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                </svg>
-              ))}
-            </div>
-            <span className="font-bold text-lg text-gray-900">{product.rating.toFixed(1)}</span>
-          </div>
+          <StarRating rating={product.rating} size="lg" showValue productId={product.id} />
           <a href="#reviews" className="text-teal-600 hover:text-teal-700 underline font-medium">
             ({product.reviewCount.toLocaleString('es-MX')}{' '}
             {product.reviewCount === 1 ? 'reseña' : 'reseñas'})

@@ -1,12 +1,28 @@
+/**
+ * @fileoverview Shopping cart context for managing cart state across the application.
+ * Handles adding, removing, and updating cart items with localStorage persistence.
+ * Includes Google Analytics tracking for add_to_cart events.
+ * @module contexts/CartContext
+ */
+
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Product } from '@/types';
 
+/**
+ * Cart item extending Product with quantity
+ * @interface CartItem
+ */
 interface CartItem extends Product {
+  /** Number of this product in the cart */
   quantity: number;
 }
 
+/**
+ * Cart context value type
+ * @interface CartContextType
+ */
 interface CartContextType {
   cartItems: CartItem[];
   cartCount: number;
@@ -31,7 +47,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       try {
         setCartItems(JSON.parse(savedCart));
       } catch (err) {
-        console.error('Error loading cart:', err);
+        console.error('[CartContext] Failed to load cart from storage - data corrupted:', err);
+        localStorage.removeItem('shopping-cart');
+        // Cart will start empty - silent fail on initial load is acceptable
       }
     }
     setIsHydrated(true);
@@ -40,7 +58,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Save cart to localStorage whenever it changes
   useEffect(() => {
     if (isHydrated) {
-      localStorage.setItem('shopping-cart', JSON.stringify(cartItems));
+      try {
+        localStorage.setItem('shopping-cart', JSON.stringify(cartItems));
+      } catch (err) {
+        console.error('[CartContext] Failed to save cart to storage:', err);
+        // Storage might be full - continue without persistence
+      }
     }
   }, [cartItems, isHydrated]);
 

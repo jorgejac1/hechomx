@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Daily Deals Section Component
+ * Displays a carousel of discounted products with a countdown timer for deal expiration.
+ * Features responsive design with horizontal scroll on mobile and carousel navigation on desktop.
+ * @module components/home/DealsSection
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -5,9 +12,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Product } from '@/types';
 
+/**
+ * @interface DealProduct
+ * @extends Product
+ * Extended product interface for deal items with additional pricing information
+ */
 interface DealProduct extends Product {
+  /** Original price before discount */
   originalPrice: number;
+  /** Discount percentage */
   discount: number;
+  /** Optional promotional tag (e.g., "Mayor venta en 60+ dias") */
   dealTag?: string;
 }
 
@@ -109,8 +124,14 @@ const DEAL_PRODUCTS: DealProduct[] = [
   },
 ];
 
+/** Number of items visible in the carousel at once */
 const ITEMS_TO_SHOW = 4;
 
+/**
+ * Renders a deals carousel section with countdown timer and navigation.
+ * Features horizontal scroll on mobile and animated carousel on desktop.
+ * @returns {JSX.Element} The DealsSection component
+ */
 export default function DealsSection() {
   const [timeLeft, setTimeLeft] = useState({
     hours: 1,

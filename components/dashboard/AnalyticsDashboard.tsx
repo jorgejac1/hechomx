@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Analytics dashboard component displaying comprehensive sales data.
+ * Features revenue overview, sales trends, top products, traffic sources,
+ * peak selling times, customer demographics, and sales forecasts.
+ * Supports weekly and monthly time range filtering.
+ * @module components/dashboard/AnalyticsDashboard
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -18,7 +26,12 @@ import {
   BarChart3,
 } from 'lucide-react';
 
+/**
+ * @interface AnalyticsDashboardProps
+ * Props for the AnalyticsDashboard component.
+ */
 interface AnalyticsDashboardProps {
+  /** Email of the seller to load analytics for */
   userEmail: string;
 }
 
@@ -55,11 +68,27 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
     );
   }
 
-  // Fix: Ensure we're working with numbers and handle potential division by zero
-  const thisWeek = Number(data.revenue.thisWeek) || 0;
-  const lastWeek = Number(data.revenue.lastWeek) || 1; // Avoid division by zero
-  const revenueChange = lastWeek > 0 ? ((thisWeek - lastWeek) / lastWeek) * 100 : 0;
+  // Get data based on selected time range
+  const currentRevenue = timeRange === 'week' ? data.revenue.thisWeek : data.revenue.thisMonth;
+  const previousRevenue = timeRange === 'week' ? data.revenue.lastWeek : data.revenue.lastMonth;
+  const revenueChange =
+    previousRevenue > 0 ? ((currentRevenue - previousRevenue) / previousRevenue) * 100 : 0;
   const isPositiveChange = revenueChange >= 0;
+
+  // Get period-specific stats (with fallback to legacy fields)
+  const periodStats = data.stats?.[timeRange] || {
+    averageOrderValue: data.averageOrderValue,
+    conversionRate: data.conversionRate,
+  };
+
+  // Get sales trend data for the selected period (with fallback)
+  const salesTrendData =
+    data.salesTrend?.[timeRange] ||
+    (Array.isArray(data.salesTrend) ? data.salesTrend : data.salesTrend?.week) ||
+    [];
+
+  const comparisonText = timeRange === 'week' ? 'vs. semana anterior' : 'vs. mes anterior';
+  const trendTitle = timeRange === 'week' ? 'Últimos 7 días' : 'Últimas 5 semanas';
 
   return (
     <div className="space-y-6">
@@ -122,7 +151,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
                 {isPositiveChange ? '+' : ''}
                 {revenueChange.toFixed(1)}%
               </span>
-              <span className="text-sm text-gray-600">vs. semana anterior</span>
+              <span className="text-sm text-gray-600">{comparisonText}</span>
             </div>
           </div>
 
@@ -134,7 +163,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
               <p className="text-sm font-semibold text-gray-700">Ticket Promedio</p>
             </div>
             <p className="text-3xl font-bold text-gray-900 mb-2">
-              {formatCurrency(data.averageOrderValue)}
+              {formatCurrency(periodStats.averageOrderValue)}
             </p>
             <p className="text-sm text-gray-600">Por pedido</p>
           </div>
@@ -146,7 +175,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
               </div>
               <p className="text-sm font-semibold text-gray-700">Conversión</p>
             </div>
-            <p className="text-3xl font-bold text-gray-900 mb-2">{data.conversionRate}%</p>
+            <p className="text-3xl font-bold text-gray-900 mb-2">{periodStats.conversionRate}%</p>
             <p className="text-sm text-gray-600">De visitantes a compradores</p>
           </div>
         </div>
@@ -155,14 +184,23 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
         <div>
           <h4 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
             <BarChart3 className="w-4 h-4" />
-            Tendencia de Ventas (Últimos 7 días)
+            Tendencia de Ventas ({trendTitle})
           </h4>
           <div className="flex items-end justify-between gap-2" style={{ height: '128px' }}>
-            {data.salesTrend.map((day, index) => {
-              const maxRevenue = Math.max(...data.salesTrend.map((d) => Number(d.revenue)));
+            {salesTrendData.map((day, index) => {
+              const maxRevenue = Math.max(...salesTrendData.map((d) => Number(d.revenue)));
               const heightPercentage =
                 maxRevenue > 0 ? (Number(day.revenue) / maxRevenue) * 100 : 0;
               const heightPx = Math.max((heightPercentage / 100) * 128, 12); // Convert to pixels with min 12px
+
+              // Format label based on time range
+              const dateLabel =
+                timeRange === 'week'
+                  ? new Date(day.date).toLocaleDateString('es-MX', { weekday: 'short' })
+                  : new Date(day.date).toLocaleDateString('es-MX', {
+                      day: 'numeric',
+                      month: 'short',
+                    });
 
               return (
                 <div key={index} className="flex-1 flex flex-col items-center gap-2">
@@ -178,9 +216,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
                       <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900" />
                     </div>
                   </div>
-                  <p className="text-xs text-gray-600 font-medium">
-                    {new Date(day.date).toLocaleDateString('es-MX', { weekday: 'short' })}
-                  </p>
+                  <p className="text-xs text-gray-600 font-medium">{dateLabel}</p>
                 </div>
               );
             })}

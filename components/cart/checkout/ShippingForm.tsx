@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Shipping address form component for collecting delivery information.
+ * Supports saved address selection, contact information input, and complete Mexican address fields.
+ * Includes state autocomplete and delivery references textarea.
+ * @module components/cart/checkout/ShippingForm
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -6,12 +13,19 @@ import { MEXICAN_STATES } from '@/lib/constants/states';
 import { getSavedAddresses, getDefaultAddress } from '@/lib/utils/orders';
 import { MapPin, User, Phone, Mail, Home, Building } from 'lucide-react';
 import TextInput from '@/components/common/TextInput';
-import Select from '@/components/common/Select';
+import Autocomplete from '@/components/common/Autocomplete';
 import Textarea from '@/components/common/Textarea';
 
+/**
+ * Props for the ShippingForm component
+ * @interface ShippingFormProps
+ */
 interface ShippingFormProps {
+  /** Current shipping address values */
   value: Partial<ShippingAddress>;
+  /** Callback when address values change */
   onChange: (address: Partial<ShippingAddress>) => void;
+  /** Validation errors keyed by field name */
   errors: Record<string, string>;
 }
 
@@ -226,18 +240,18 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
             required
           />
 
-          <Select
-            id="state"
+          <Autocomplete
             label="Estado"
-            value={value.state || ''}
-            onChange={(e) => handleInputChange('state', e.target.value)}
+            value={value.state || null}
+            onChange={(val) => handleInputChange('state', (val as string) || '')}
             options={MEXICAN_STATES.map((state) => ({
               value: state,
               label: state,
             }))}
-            placeholder="Seleccionar..."
+            placeholder="Buscar estado..."
             error={errors.state}
             required
+            clearable
           />
 
           <TextInput

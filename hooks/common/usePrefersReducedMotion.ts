@@ -1,11 +1,17 @@
+/**
+ * @fileoverview Reduced motion preference detection hook
+ * Detects OS-level accessibility settings for users who prefer reduced motion
+ * @module hooks/common/usePrefersReducedMotion
+ */
+
 import { useState, useEffect } from 'react';
 
 /**
  * Detects if user prefers reduced motion
  * Respects OS-level accessibility settings
- * 
+ *
  * @returns boolean - true if user prefers reduced motion
- * 
+ *
  * @example
  * const prefersReducedMotion = usePrefersReducedMotion();
  * const duration = prefersReducedMotion ? 0 : 300;

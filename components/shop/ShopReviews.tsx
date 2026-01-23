@@ -1,11 +1,26 @@
+/**
+ * @fileoverview Shop reviews display component
+ * Renders a comprehensive reviews section including an average rating summary,
+ * rating distribution chart (5-star breakdown), and individual review cards
+ * with buyer info, ratings, comments, helpful buttons, and seller responses.
+ * Shows an empty state when no reviews are available.
+ * @module components/shop/ShopReviews
+ */
+
 'use client';
 
-import Image from 'next/image';
 import type { Review } from '@/lib/types';
-import { Star, ThumbsUp, MessageSquare } from 'lucide-react';
+import { ThumbsUp, MessageSquare } from 'lucide-react';
 import { formatRelativeTime } from '@/lib';
+import StarRating from '@/components/common/StarRating';
+import Avatar from '@/components/common/Avatar';
 
+/**
+ * Props for the ShopReviews component
+ * @interface ShopReviewsProps
+ */
 interface ShopReviewsProps {
+  /** Array of review objects to display */
   reviews: Review[];
 }
 
@@ -38,15 +53,13 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
           {/* Average Rating */}
           <div className="text-center">
             <p className="text-6xl font-bold text-gray-900 mb-2">{averageRating.toFixed(1)}</p>
-            <div className="flex items-center justify-center gap-1 mb-2">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-6 h-6 ${
-                    i < Math.round(averageRating) ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                  }`}
-                />
-              ))}
+            <div className="flex items-center justify-center mb-2">
+              <StarRating
+                rating={averageRating}
+                size="lg"
+                showValue={false}
+                productId="shop-average"
+              />
             </div>
             <p className="text-gray-600">
               Basado en {reviews.length} {reviews.length === 1 ? 'reseña' : 'reseñas'}
@@ -61,7 +74,7 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
 
               return (
                 <div key={rating} className="flex items-center gap-3">
-                  <span className="text-sm font-medium text-gray-700 w-12">{rating} ⭐</span>
+                  <span className="text-sm font-medium text-gray-700 w-12">{rating} est.</span>
                   <div className="flex-1 h-4 bg-gray-200 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-yellow-400 transition-all"
@@ -82,21 +95,12 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
           <div key={review.id} className="bg-white rounded-xl shadow-xs p-6">
             {/* Reviewer Info */}
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 shrink-0">
-                {review.buyerAvatar ? (
-                  <Image
-                    src={review.buyerAvatar}
-                    alt={review.buyerName}
-                    width={48}
-                    height={48}
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-600 font-bold">
-                    {review.buyerName.charAt(0)}
-                  </div>
-                )}
-              </div>
+              <Avatar
+                src={review.buyerAvatar}
+                name={review.buyerName}
+                alt={review.buyerName}
+                size="lg"
+              />
 
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-1">
@@ -105,16 +109,12 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
                 </div>
 
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${
-                          i < review.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
+                  <StarRating
+                    rating={review.rating}
+                    size="sm"
+                    showValue={false}
+                    productId={review.id}
+                  />
                   {review.productName && (
                     <span className="text-sm text-gray-500">· {review.productName}</span>
                   )}

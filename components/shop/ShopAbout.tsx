@@ -1,10 +1,34 @@
+/**
+ * @fileoverview Shop about section component displaying detailed maker information
+ * Renders the shop's story, features (custom designs, bulk orders, etc.),
+ * certifications, specialties, shipping options, payment methods, and business hours.
+ * @module components/shop/ShopAbout
+ */
+
 'use client';
 
-import { ExtendedMakerProfile } from '@/lib/data/mockUsers';
-import { Award, Package, Truck, CreditCard, Clock, CheckCircle } from 'lucide-react';
+import type { ExtendedMakerProfile } from '@/lib/data/mockUsers';
+import {
+  Award,
+  Package,
+  Truck,
+  CreditCard,
+  Clock,
+  CheckCircle,
+  X,
+  Banknote,
+  Building2,
+  Store,
+  CircleDollarSign,
+} from 'lucide-react';
 import Badge from '@/components/common/Badge';
 
+/**
+ * Props for the ShopAbout component
+ * @interface ShopAboutProps
+ */
 interface ShopAboutProps {
+  /** Extended maker profile containing all shop information */
   profile: ExtendedMakerProfile;
 }
 
@@ -96,14 +120,34 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-600">Nacional:</span>
-              <span className="font-medium text-gray-900">
-                {profile.shippingOptions.national ? '✓ Disponible' : '✗ No disponible'}
+              <span
+                className={`font-medium flex items-center gap-1 ${profile.shippingOptions.national ? 'text-green-600' : 'text-gray-500'}`}
+              >
+                {profile.shippingOptions.national ? (
+                  <>
+                    <CheckCircle className="w-4 h-4" /> Disponible
+                  </>
+                ) : (
+                  <>
+                    <X className="w-4 h-4" /> No disponible
+                  </>
+                )}
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Internacional:</span>
-              <span className="font-medium text-gray-900">
-                {profile.shippingOptions.international ? '✓ Disponible' : '✗ No disponible'}
+              <span
+                className={`font-medium flex items-center gap-1 ${profile.shippingOptions.international ? 'text-green-600' : 'text-gray-500'}`}
+              >
+                {profile.shippingOptions.international ? (
+                  <>
+                    <CheckCircle className="w-4 h-4" /> Disponible
+                  </>
+                ) : (
+                  <>
+                    <X className="w-4 h-4" /> No disponible
+                  </>
+                )}
               </span>
             </div>
             {profile.shippingOptions.freeShippingOver && (
@@ -131,12 +175,32 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
           </div>
           <div className="flex flex-wrap gap-2">
             {profile.paymentMethods.map((method, index) => (
-              <Badge key={index} variant="neutral" size="md">
-                {method === 'card' && '💳 Tarjeta'}
-                {method === 'cash' && '💵 Efectivo'}
-                {method === 'transfer' && '🏦 Transferencia'}
-                {method === 'oxxo' && '🏪 OXXO'}
-                {method === 'paypal' && '🔷 PayPal'}
+              <Badge key={index} variant="neutral" size="md" className="flex items-center gap-1.5">
+                {method === 'card' && (
+                  <>
+                    <CreditCard className="w-4 h-4" /> Tarjeta
+                  </>
+                )}
+                {method === 'cash' && (
+                  <>
+                    <Banknote className="w-4 h-4" /> Efectivo
+                  </>
+                )}
+                {method === 'transfer' && (
+                  <>
+                    <Building2 className="w-4 h-4" /> Transferencia
+                  </>
+                )}
+                {method === 'oxxo' && (
+                  <>
+                    <Store className="w-4 h-4" /> OXXO
+                  </>
+                )}
+                {method === 'paypal' && (
+                  <>
+                    <CircleDollarSign className="w-4 h-4" /> PayPal
+                  </>
+                )}
               </Badge>
             ))}
           </div>

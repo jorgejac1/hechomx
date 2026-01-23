@@ -151,7 +151,7 @@ export default function SellerSetupForm({ onClose, onSave }: SellerSetupFormProp
           {/* Help text */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <p className="text-sm text-blue-900">
-              <strong>💡 Consejo:</strong> Una buena descripción ayuda a los clientes a conocer tu
+              <strong>Consejo:</strong> Una buena descripción ayuda a los clientes a conocer tu
               historia y técnicas artesanales.
             </p>
           </div>

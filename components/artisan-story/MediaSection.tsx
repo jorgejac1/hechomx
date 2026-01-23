@@ -112,7 +112,7 @@ export default function MediaSection({
             />
           </div>
           <p className="text-xs text-gray-500 mt-1">
-            💡 Un video corto (1-2 minutos) puede aumentar la confianza hasta 80%
+            Un video corto (1-2 minutos) puede aumentar la confianza hasta 80%
           </p>
         </div>
       )}
@@ -452,7 +452,7 @@ export default function MediaSection({
 
       {/* Photo Tips */}
       <div className="p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
-        <p className="text-sm text-indigo-900 font-semibold mb-2">💡 Consejos para buenas fotos:</p>
+        <p className="text-sm text-indigo-900 font-semibold mb-2">Consejos para buenas fotos:</p>
         <ul className="text-sm text-indigo-800 space-y-1">
           <li>• Usa buena iluminación natural</li>
           <li>• Muestra tu espacio de trabajo y herramientas</li>

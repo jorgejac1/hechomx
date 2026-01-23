@@ -1,5 +1,7 @@
 /**
- * Custom hook for managing URL state
+ * @fileoverview URL query parameter state management hook
+ * Provides methods to get, set, remove, and clear URL search parameters with Next.js router integration
+ * @module hooks/common/useUrlState
  */
 
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -74,11 +76,34 @@ export const useUrlState = (baseUrl: string = '/productos') => {
     [router, baseUrl]
   );
 
+  /**
+   * Replaces all URL parameters with new ones (clears existing params first)
+   */
+  const replaceUrlParams = useCallback(
+    (
+      params: Record<string, string | number | boolean>,
+      options: { scroll?: boolean } = { scroll: false }
+    ) => {
+      const urlParams = new URLSearchParams();
+
+      Object.entries(params).forEach(([key, value]) => {
+        urlParams.set(key, String(value));
+      });
+
+      const queryString = urlParams.toString();
+      const newUrl = queryString ? `${baseUrl}?${queryString}` : baseUrl;
+
+      router.push(newUrl, options);
+    },
+    [router, baseUrl]
+  );
+
   return {
     searchParams: searchParams || new URLSearchParams(),
     setUrlParams,
     getUrlParam,
     removeUrlParams,
     clearUrlParams,
+    replaceUrlParams,
   };
 };

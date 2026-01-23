@@ -1,5 +1,8 @@
 /**
- * Date formatting and manipulation utilities
+ * @fileoverview Date formatting and manipulation utilities for Mexican locale.
+ * Provides functions for formatting dates, relative time (hace X dias),
+ * delivery date calculations, and date comparison utilities.
+ * @module lib/utils/date
  */
 
 /**

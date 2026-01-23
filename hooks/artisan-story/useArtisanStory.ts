@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Artisan story form management hook
+ * Manages artisan profile form state, validation, and persistence for seller storytelling features
+ * @module hooks/artisan-story/useArtisanStory
+ */
+
 import { useState, useEffect, useCallback } from 'react';
 import { useToast } from '@/contexts/ToastContext';
 import type { User } from '@/contexts/AuthContext';

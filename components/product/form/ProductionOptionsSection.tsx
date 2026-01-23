@@ -1,7 +1,21 @@
+/**
+ * @fileoverview Production options form section component
+ * Allows sellers to configure customization availability and production time estimates.
+ * @module components/product/form/ProductionOptionsSection
+ */
+
+/**
+ * Props for the ProductionOptionsSection component
+ * @interface ProductionOptionsSectionProps
+ */
 interface ProductionOptionsSectionProps {
+  /** Whether the product can be customized */
   customizable: boolean;
+  /** Callback to update customizable state */
   setCustomizable: (value: boolean) => void;
+  /** Production time in days */
   productionTime: number;
+  /** Callback to update production time */
   setProductionTime: (value: number) => void;
 }
 

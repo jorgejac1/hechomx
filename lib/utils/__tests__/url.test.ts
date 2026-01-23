@@ -211,6 +211,13 @@ describe('URL Utilities', () => {
     it('should return false for invalid URL', () => {
       expect(isExternalUrl('not-a-url')).toBe(false);
     });
+
+    it('should return false when URL constructor throws', () => {
+      // Mock window without location to cause an error
+      vi.stubGlobal('window', {});
+      // This will throw because window.location.origin is undefined
+      expect(isExternalUrl('https://example.com')).toBe(false);
+    });
   });
 
   describe('extractDomain', () => {

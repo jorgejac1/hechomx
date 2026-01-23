@@ -1,6 +1,18 @@
+/**
+ * @fileoverview Seller banner component for product forms
+ * Displays the seller's shop name at the top of the product form
+ * to indicate which store the product will be published to.
+ * @module components/product/form/SellerBanner
+ */
+
 import { Store } from 'lucide-react';
 
+/**
+ * Props for the SellerBanner component
+ * @interface SellerBannerProps
+ */
 interface SellerBannerProps {
+  /** Name of the seller's shop */
   shopName: string;
 }
 

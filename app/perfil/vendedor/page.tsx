@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { ROUTES } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
@@ -27,6 +27,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { formatCurrency } from '@/lib';
+import Alert from '@/components/common/Alert';
 
 interface FinancialData {
   accountType: string;
@@ -46,7 +47,6 @@ export default function SellerProfilePage() {
 }
 
 function SellerProfileContent({ user }: { user: User }) {
-  const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [activeSection, setActiveSection] = useState<'business' | 'financial' | 'policies'>(
@@ -101,12 +101,12 @@ function SellerProfileContent({ user }: { user: User }) {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <button
-            onClick={() => router.push(ROUTES.PROFILE)}
+          <Link
+            href={ROUTES.PROFILE}
             className="text-primary-600 hover:text-primary-700 mb-4 flex items-center gap-2"
           >
             ← Volver al Perfil
-          </button>
+          </Link>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Perfil de Vendedor</h1>
           <p className="text-gray-600 mt-1">Administra tu negocio y cuenta financiera</p>
         </div>
@@ -184,8 +184,8 @@ function SellerProfileContent({ user }: { user: User }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Mi Historia Artesanal Card */}
-          <button
-            onClick={() => router.push(ROUTES.MY_STORY)}
+          <Link
+            href={ROUTES.MY_STORY}
             className="bg-linear-to-br from-purple-600 to-pink-600 rounded-xl shadow-lg p-6 text-left hover:shadow-xl hover:scale-[1.02] transition-all group"
           >
             <div className="flex items-start justify-between mb-4">
@@ -215,11 +215,11 @@ function SellerProfileContent({ user }: { user: User }) {
               <BookOpen className="w-4 h-4" />
               <span>Historias, fotos, técnicas tradicionales</span>
             </div>
-          </button>
+          </Link>
 
           {/* Pricing Calculator Card */}
-          <button
-            onClick={() => router.push(ROUTES.PRICING_CALCULATOR)}
+          <Link
+            href={ROUTES.PRICING_CALCULATOR}
             className="bg-linear-to-br from-blue-600 to-cyan-600 rounded-xl shadow-lg p-6 text-left hover:shadow-xl hover:scale-[1.02] transition-all group"
           >
             <div className="flex items-start justify-between mb-4">
@@ -261,7 +261,7 @@ function SellerProfileContent({ user }: { user: User }) {
               <DollarSign className="w-4 h-4" />
               <span>Materiales, mano de obra, márgenes</span>
             </div>
-          </button>
+          </Link>
         </div>
 
         {/* Tabs */}
@@ -413,16 +413,15 @@ function SellerProfileContent({ user }: { user: User }) {
             {/* Financial Information */}
             {activeSection === 'financial' && (
               <div className="space-y-6">
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm text-blue-900 font-semibold">Información Segura</p>
-                    <p className="text-sm text-blue-800">
-                      Tus datos financieros están encriptados y protegidos. Nunca compartiremos esta
-                      información.
-                    </p>
-                  </div>
-                </div>
+                <Alert
+                  variant="info"
+                  layout="bordered"
+                  icon={AlertCircle}
+                  title="Información Segura"
+                >
+                  Tus datos financieros están encriptados y protegidos. Nunca compartiremos esta
+                  información.
+                </Alert>
 
                 {/* Bank Account */}
                 <div>
@@ -616,12 +615,10 @@ function SellerProfileContent({ user }: { user: User }) {
                       )}
                     </div>
                     {makerProfile!.shippingOptions.freeShippingOver && (
-                      <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                        <p className="text-green-900">
-                          <strong>Envío gratis</strong> en compras mayores a{' '}
-                          {formatCurrency(makerProfile!.shippingOptions.freeShippingOver)}
-                        </p>
-                      </div>
+                      <Alert variant="success" layout="bordered">
+                        <strong>Envío gratis</strong> en compras mayores a{' '}
+                        {formatCurrency(makerProfile!.shippingOptions.freeShippingOver)}
+                      </Alert>
                     )}
                   </div>
                 </div>

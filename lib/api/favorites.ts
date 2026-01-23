@@ -1,3 +1,10 @@
+/**
+ * @fileoverview User favorites API client functions.
+ * Provides async functions for fetching user's favorite/wishlisted
+ * products with metadata like notes and added date.
+ * @module lib/api/favorites
+ */
+
 import type { Product } from '@/types';
 
 export interface FavoriteProduct extends Product {
@@ -11,13 +18,13 @@ export async function getUserFavorites(userEmail: string): Promise<FavoriteProdu
     const result = await response.json();
 
     if (!result.success) {
-      console.error('Failed to fetch favorites:', result.error);
+      console.error('[favorites] Failed to fetch favorites:', result.error);
       return [];
     }
 
     return result.data;
   } catch (error) {
-    console.error('Error loading favorites:', error);
+    console.error('[favorites] Error loading favorites:', error);
     return [];
   }
 }

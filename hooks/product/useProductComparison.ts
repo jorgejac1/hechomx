@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Product comparison management hook
+ * Handles adding, removing, and persisting products for comparison with localStorage support and analytics
+ * @module hooks/product/useProductComparison
+ */
+
 import { useState, useCallback, useEffect } from 'react';
 import { Product } from '@/types';
 import { siteConfig } from '@/config';
@@ -61,7 +67,16 @@ export function useProductComparison(
         return Array.isArray(parsed) ? parsed : [];
       }
     } catch (error) {
-      console.error('Failed to load comparison from storage:', error);
+      console.error(
+        '[useProductComparison] Failed to load comparison from storage - data corrupted:',
+        error
+      );
+      // Clean up corrupted data
+      try {
+        localStorage.removeItem(storageKey);
+      } catch {
+        // Ignore cleanup errors
+      }
     }
     return [];
   });
@@ -73,7 +88,12 @@ export function useProductComparison(
     try {
       localStorage.setItem(storageKey, JSON.stringify(products));
     } catch (error) {
-      console.error('Failed to save comparison to storage:', error);
+      const isQuotaError =
+        error instanceof DOMException && (error.code === 22 || error.name === 'QuotaExceededError');
+      console.error(
+        `[useProductComparison] Failed to save comparison${isQuotaError ? ' - storage quota exceeded' : ''}:`,
+        error
+      );
     }
   }, [products, persistToStorage, storageKey]);
 

@@ -1,10 +1,17 @@
+/**
+ * @fileoverview Product gallery components barrel export
+ * Re-exports the main ProductGallery component and sub-components
+ * for custom gallery layouts and individual component usage.
+ * @module components/product/ProductGallery
+ */
+
 // Main component export
-export { default } from "./ProductGallery";
+export { default } from './ProductGallery';
 
 // Sub-component exports (if needed for custom layouts)
-export { ProductGalleryMobile } from "./ProductGalleryMobile";
-export { ProductGalleryDesktop } from "./ProductGalleryDesktop";
-export { ProductGalleryModal } from "./ProductGalleryModal";
-export { ProductGalleryImage } from "./ProductGalleryImage";
-export { ProductGalleryActions } from "./ProductGalleryActions";
-export { ProductGalleryBadges } from "./ProductGalleryBadges";
+export { ProductGalleryMobile } from './ProductGalleryMobile';
+export { ProductGalleryDesktop } from './ProductGalleryDesktop';
+export { ProductGalleryModal } from './ProductGalleryModal';
+export { ProductGalleryImage } from './ProductGalleryImage';
+export { ProductGalleryActions } from './ProductGalleryActions';
+export { ProductGalleryBadges } from './ProductGalleryBadges';

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview localStorage state persistence hook
+ * Provides useState-like API with automatic localStorage synchronization and SSR support
+ * @module hooks/common/useLocalStorage
+ */
+
 import { useState } from 'react';
 
 /**
@@ -25,7 +31,13 @@ export function useLocalStorage<T>(
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      console.error(`Error reading localStorage key "${key}":`, error);
+      console.error(`[useLocalStorage] Failed to read key "${key}" - data corrupted:`, error);
+      // Attempt to clean up corrupted data
+      try {
+        window.localStorage.removeItem(key);
+      } catch {
+        // Ignore cleanup errors
+      }
       return initialValue;
     }
   });
@@ -42,7 +54,14 @@ export function useLocalStorage<T>(
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (error) {
-      console.error(`Error setting localStorage key "${key}":`, error);
+      // Check for quota exceeded error
+      const isQuotaError =
+        error instanceof DOMException && (error.code === 22 || error.name === 'QuotaExceededError');
+      console.error(
+        `[useLocalStorage] Failed to save key "${key}"${isQuotaError ? ' - storage quota exceeded' : ''}:`,
+        error
+      );
+      // State is still updated even if persistence fails
     }
   };
 

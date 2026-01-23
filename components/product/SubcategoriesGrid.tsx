@@ -1,11 +1,26 @@
+/**
+ * @fileoverview Subcategories navigation grid component
+ * Displays a visual grid of subcategory options with images and labels.
+ * Supports nested subcategory navigation with URL parameter building.
+ * @module components/product/SubcategoriesGrid
+ */
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Subcategory } from '@/lib';
 
+/**
+ * Props for the SubcategoriesGrid component
+ * @interface SubcategoriesGridProps
+ */
 interface SubcategoriesGridProps {
+  /** Current category slug */
   category: string;
+  /** Array of subcategories to display */
   subcategories: Subcategory[];
+  /** Currently selected subcategory (for nested navigation) */
   currentSubcategory?: string;
+  /** Base URL for building subcategory links (defaults to /productos) */
   baseUrl?: string;
 }
 

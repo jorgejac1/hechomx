@@ -110,7 +110,7 @@ export default function SocialMediaSection({
 
       {/* Social Media Tips */}
       <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-        <p className="text-sm text-blue-900 font-semibold mb-2">💡 Consejos para redes sociales:</p>
+        <p className="text-sm text-blue-900 font-semibold mb-2">Consejos para redes sociales:</p>
         <ul className="text-sm text-blue-800 space-y-1">
           <li>• Comparte fotos del proceso detrás de tus productos</li>
           <li>• Publica regularmente para mantener a tus seguidores interesados</li>

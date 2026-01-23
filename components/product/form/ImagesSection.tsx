@@ -1,9 +1,22 @@
+/**
+ * @fileoverview Product images upload section component
+ * Allows users to add product images via URL input with preview grid.
+ * Supports up to 10 images with the first image marked as primary.
+ * @module components/product/form/ImagesSection
+ */
+
 import { useState } from 'react';
 import Image from 'next/image';
 import { Upload, X, Plus, Info, Image as ImageIcon } from 'lucide-react';
 
+/**
+ * Props for the ImagesSection component
+ * @interface ImagesSectionProps
+ */
 interface ImagesSectionProps {
+  /** Array of image URLs */
   images: string[];
+  /** Callback to update the images array */
   setImages: (images: string[]) => void;
 }
 

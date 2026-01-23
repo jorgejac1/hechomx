@@ -1,13 +1,19 @@
+/**
+ * @fileoverview Slideshow autoplay functionality hook
+ * Manages automatic slide advancement with play, pause, and toggle controls
+ * @module hooks/media/useSlideshow
+ */
+
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 /**
  * Slideshow/autoplay functionality
- * 
+ *
  * @param itemCount - Total number of items
  * @param interval - Time between slides in ms
  * @param onIndexChange - Callback when index changes
  * @returns Slideshow controls
- * 
+ *
  * @example
  * const { isPlaying, toggle, currentIndex } = useSlideshow(
  *   images.length,

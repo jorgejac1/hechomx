@@ -1,6 +1,13 @@
+/**
+ * @fileoverview Checkout summary sidebar component for the checkout process.
+ * Displays order summary with items, costs breakdown, gift options, coupon display,
+ * shipping address preview, terms acceptance, and submit button.
+ * Supports collapsible sections for items list and gift options.
+ * @module components/cart/checkout/CheckoutSummary
+ */
+
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/contexts/CartContext';
@@ -8,35 +15,40 @@ import { formatCurrency } from '@/lib';
 import { calculateShippingCost, calculateEstimatedDelivery } from '@/lib/utils/orders';
 import { ShippingAddress } from '@/lib/types/checkout';
 import { AppliedCoupon, getCouponDisplayText } from '@/lib/utils/coupons';
-import {
-  ShoppingBag,
-  Truck,
-  Tag,
-  MapPin,
-  ChevronDown,
-  ChevronUp,
-  Package,
-  Gift,
-  X,
-  CheckCircle,
-} from 'lucide-react';
+import { ShoppingBag, Truck, Tag, MapPin, Package, Gift, X, CheckCircle } from 'lucide-react';
+import Accordion from '@/components/common/Accordion';
 
+/** Cost for gift wrapping in MXN */
 const GIFT_WRAP_COST = 50;
 
+/**
+ * Props for the CheckoutSummary component
+ * @interface CheckoutSummaryProps
+ */
 interface CheckoutSummaryProps {
+  /** Partial shipping address for delivery estimation and display */
   shippingAddress?: Partial<ShippingAddress>;
+  /** Whether the order is currently being processed */
   isProcessing?: boolean;
+  /** Callback function when submit button is clicked */
   onSubmit?: () => void;
+  /** Whether terms and conditions are accepted */
   acceptTerms: boolean;
+  /** Callback when terms acceptance changes */
   onAcceptTermsChange: (accepted: boolean) => void;
+  /** Error message for terms validation */
   termsError?: string;
-  // Gift options
+  /** Whether gift wrap is enabled */
   giftWrap?: boolean;
+  /** Callback when gift wrap option changes */
   onGiftWrapChange?: (enabled: boolean) => void;
+  /** Gift message text */
   giftMessage?: string;
+  /** Callback when gift message changes */
   onGiftMessageChange?: (message: string) => void;
-  // Coupon
+  /** Currently applied coupon, if any */
   appliedCoupon?: AppliedCoupon | null;
+  /** Callback to remove applied coupon */
   onRemoveCoupon?: () => void;
 }
 
@@ -55,8 +67,6 @@ export default function CheckoutSummary({
   onRemoveCoupon,
 }: CheckoutSummaryProps) {
   const { cartItems, cartTotal, cartCount } = useCart();
-  const [showItems, setShowItems] = useState(false);
-  const [showGiftOptions, setShowGiftOptions] = useState(giftWrap || !!giftMessage);
 
   // Calculate costs
   const baseShippingCost = calculateShippingCost(
@@ -96,65 +106,54 @@ export default function CheckoutSummary({
       </div>
 
       <div className="p-6 space-y-4">
-        {/* Toggle Items */}
-        <button
-          type="button"
-          onClick={() => setShowItems(!showItems)}
-          className="w-full flex items-center justify-between py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+        {/* Collapsible Sections */}
+        <Accordion
+          allowMultiple
+          defaultExpanded={giftWrap || !!giftMessage ? ['gift-options'] : []}
         >
-          <span>Ver productos</span>
-          {showItems ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-        </button>
-
-        {/* Items List */}
-        {showItems && (
-          <div className="space-y-3 pb-4 border-b">
-            {cartItems.map((item) => (
-              <div key={item.id} className="flex gap-3">
-                <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 bg-gray-100">
-                  <Image src={item.images[0]} alt={item.name} fill className="object-cover" />
-                  <div className="absolute -top-1 -right-1 w-5 h-5 bg-gray-800 text-white text-xs rounded-full flex items-center justify-center">
-                    {item.quantity}
+          {/* Items List */}
+          <Accordion.Item
+            itemId="items"
+            title={<span className="text-sm text-gray-600">Ver productos</span>}
+          >
+            <div className="space-y-3 pb-4">
+              {cartItems.map((item) => (
+                <div key={item.id} className="flex gap-3">
+                  <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 bg-gray-100">
+                    <Image src={item.images[0]} alt={item.name} fill className="object-cover" />
+                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-gray-800 text-white text-xs rounded-full flex items-center justify-center">
+                      {item.quantity}
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-gray-900 text-sm truncate">{item.name}</p>
+                    <p className="text-xs text-gray-500">{item.maker}</p>
+                    <p className="text-sm text-primary-600 font-semibold">
+                      {formatCurrency(item.price * item.quantity)}
+                    </p>
                   </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-medium text-gray-900 text-sm truncate">{item.name}</p>
-                  <p className="text-xs text-gray-500">{item.maker}</p>
-                  <p className="text-sm text-primary-600 font-semibold">
-                    {formatCurrency(item.price * item.quantity)}
-                  </p>
-                </div>
-              </div>
-            ))}
-            <Link
-              href="/carrito"
-              className="block text-sm text-primary-600 hover:text-primary-700 font-medium"
-            >
-              Editar carrito
-            </Link>
-          </div>
-        )}
+              ))}
+              <Link
+                href="/carrito"
+                className="block text-sm text-primary-600 hover:text-primary-700 font-medium"
+              >
+                Editar carrito
+              </Link>
+            </div>
+          </Accordion.Item>
 
-        {/* Gift Options */}
-        <div className="border-b pb-4">
-          <button
-            type="button"
-            onClick={() => setShowGiftOptions(!showGiftOptions)}
-            className="w-full flex items-center justify-between py-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+          {/* Gift Options */}
+          <Accordion.Item
+            itemId="gift-options"
+            title={
+              <span className="flex items-center gap-2 text-sm text-gray-600">
+                <Gift className="w-4 h-4" />
+                Opciones de regalo
+              </span>
+            }
           >
-            <span className="flex items-center gap-2">
-              <Gift className="w-4 h-4" />
-              Opciones de regalo
-            </span>
-            {showGiftOptions ? (
-              <ChevronUp className="w-4 h-4" />
-            ) : (
-              <ChevronDown className="w-4 h-4" />
-            )}
-          </button>
-
-          {showGiftOptions && (
-            <div className="mt-3 space-y-4">
+            <div className="space-y-4">
               {/* Gift Wrap Checkbox */}
               <label className="flex items-start gap-3 cursor-pointer p-3 bg-pink-50 border border-pink-200 rounded-lg hover:bg-pink-100 transition-colors">
                 <input
@@ -192,8 +191,8 @@ export default function CheckoutSummary({
                 <p className="text-xs text-gray-500 text-right mt-1">{giftMessage.length}/200</p>
               </div>
             </div>
-          )}
-        </div>
+          </Accordion.Item>
+        </Accordion>
 
         {/* Costs Breakdown */}
         <div className="space-y-3 text-sm">

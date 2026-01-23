@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Buyer orders API client functions.
+ * Provides async functions for fetching buyer orders, combining
+ * localStorage orders with API data, and generating order timelines.
+ * @module lib/api/buyer/orders
+ */
+
 import type { BuyerOrder } from '@/lib/types/buyer';
 import type { CompleteOrder } from '@/lib/types/checkout';
 import { getOrders } from '@/lib/utils/orders';
@@ -114,7 +121,7 @@ function getLocalStorageOrders(): BuyerOrder[] {
     const localOrders = getOrders();
     return localOrders.map(convertToBuyerOrder);
   } catch (error) {
-    console.error('Error loading localStorage orders:', error);
+    console.error('[buyer/orders] Error loading localStorage orders:', error);
     return [];
   }
 }
@@ -132,7 +139,7 @@ export async function getBuyerOrders(userEmail: string): Promise<BuyerOrder[]> {
     const result = await response.json();
 
     if (!result.success) {
-      console.error('Failed to fetch buyer orders:', result.error);
+      console.error('[buyer/orders] Failed to fetch buyer orders:', result.error);
       return localOrders;
     }
 
@@ -144,7 +151,7 @@ export async function getBuyerOrders(userEmail: string): Promise<BuyerOrder[]> {
 
     return [...localOrders, ...filteredMockOrders];
   } catch (error) {
-    console.error('Error loading buyer orders:', error);
+    console.error('[buyer/orders] Error loading buyer orders:', error);
     return localOrders;
   }
 }

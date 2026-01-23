@@ -63,7 +63,7 @@ export default function GiftsPage() {
       name: 'Graduación',
       icon: GraduationCap,
       description: 'Celebra este logro importante',
-      image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800',
+      image: 'https://images.unsplash.com/photo-1627556704290-2b1f5853ff78?w=800',
       color: 'from-green-500 to-emerald-500',
     },
     {
@@ -263,12 +263,10 @@ export default function GiftsPage() {
           {occasions.map((occasion) => {
             const Icon = occasion.icon;
             return (
-              <button
+              <Link
                 key={occasion.id}
-                onClick={() => setOccasionFilter(occasion.id)}
-                className={`group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1 ${
-                  occasionFilter === occasion.id ? 'ring-4 ring-primary-600' : ''
-                }`}
+                href={`${ROUTES.PRODUCTS}?ocasion=${occasion.id}`}
+                className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1"
               >
                 <div className="relative h-64">
                   <Image
@@ -288,7 +286,7 @@ export default function GiftsPage() {
                   <h3 className="text-2xl font-bold text-white mb-2">{occasion.name}</h3>
                   <p className="text-white/90">{occasion.description}</p>
                 </div>
-              </button>
+              </Link>
             );
           })}
         </div>

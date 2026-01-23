@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { getSellerTasks } from '@/lib/api/sellerApi';
 import type { SellerTask } from '@/lib/types';
@@ -24,6 +24,7 @@ import {
   ChevronRight,
   Calendar,
   Zap,
+  User as UserIcon,
 } from 'lucide-react';
 
 const TASK_TYPE_CONFIG = {
@@ -104,7 +105,6 @@ export default function TasksCenterPage() {
 }
 
 function TasksCenterContent({ user }: { user: User }) {
-  const router = useRouter();
   const [tasks, setTasks] = useState<SellerTask[]>([]);
   const [filteredTasks, setFilteredTasks] = useState<SellerTask[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -179,13 +179,13 @@ function TasksCenterContent({ user }: { user: User }) {
       <div className="max-w-7xl mx-auto p-4 sm:p-6">
         {/* Header */}
         <div className="mb-6">
-          <button
-            onClick={() => router.push(ROUTES.DASHBOARD)}
+          <Link
+            href={ROUTES.DASHBOARD}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition"
           >
             <ArrowLeft className="w-5 h-5" />
             Volver al Dashboard
-          </button>
+          </Link>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Centro de Tareas</h1>
@@ -383,10 +383,16 @@ function TasksCenterContent({ user }: { user: User }) {
                             {task.relatedData && (
                               <div className="flex flex-wrap gap-3 text-xs text-gray-600 mb-2">
                                 {task.relatedData.customerName && (
-                                  <span>👤 {task.relatedData.customerName}</span>
+                                  <span className="flex items-center gap-1">
+                                    <UserIcon className="w-3 h-3" />
+                                    {task.relatedData.customerName}
+                                  </span>
                                 )}
                                 {task.relatedData.orderNumber && (
-                                  <span>📦 {task.relatedData.orderNumber}</span>
+                                  <span className="flex items-center gap-1">
+                                    <Package className="w-3 h-3" />
+                                    {task.relatedData.orderNumber}
+                                  </span>
                                 )}
                                 {task.relatedData.amount && (
                                   <span className="font-semibold text-primary-600">
@@ -394,10 +400,16 @@ function TasksCenterContent({ user }: { user: User }) {
                                   </span>
                                 )}
                                 {task.relatedData.rating && (
-                                  <span>⭐ {task.relatedData.rating} estrellas</span>
+                                  <span className="flex items-center gap-1">
+                                    <Star className="w-3 h-3" />
+                                    {task.relatedData.rating} estrellas
+                                  </span>
                                 )}
                                 {task.relatedData.productName && (
-                                  <span>📦 {task.relatedData.productName}</span>
+                                  <span className="flex items-center gap-1">
+                                    <Package className="w-3 h-3" />
+                                    {task.relatedData.productName}
+                                  </span>
                                 )}
                                 {task.relatedData.currentStock !== undefined && (
                                   <span>
@@ -427,13 +439,13 @@ function TasksCenterContent({ user }: { user: User }) {
 
                       {/* Actions */}
                       <div className="flex sm:flex-col gap-2">
-                        <button
-                          onClick={() => router.push(task.actionUrl)}
+                        <Link
+                          href={task.actionUrl}
                           className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium text-sm whitespace-nowrap"
                         >
                           Ir a Tarea
                           <ChevronRight className="w-4 h-4" />
-                        </button>
+                        </Link>
                         <button
                           onClick={() => handleCompleteTask(task.id)}
                           className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition font-medium text-sm whitespace-nowrap"

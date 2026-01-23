@@ -1,9 +1,21 @@
+/**
+ * @fileoverview Shop policies display component
+ * Renders the shop's return and cancellation policies in a two-column grid layout.
+ * Provides customers with important policy information before making purchases.
+ * @module components/shop/ShopPolicies
+ */
+
 'use client';
 
-import { ExtendedMakerProfile } from '@/lib/data/mockUsers';
+import type { ExtendedMakerProfile } from '@/lib/data/mockUsers';
 import { RefreshCw, XCircle } from 'lucide-react';
 
+/**
+ * Props for the ShopPolicies component
+ * @interface ShopPoliciesProps
+ */
 interface ShopPoliciesProps {
+  /** Extended maker profile containing policy information */
   profile: ExtendedMakerProfile;
 }
 

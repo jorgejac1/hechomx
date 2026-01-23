@@ -1,22 +1,58 @@
+/**
+ * @fileoverview Product card component for grid displays
+ * Feature-rich product card with image, badges, rating, price, comparison toggle,
+ * and artisan story links. Memoized for performance in product grids.
+ * @module components/product/ProductCard
+ */
+
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Sparkles } from 'lucide-react';
+import {
+  Sparkles,
+  Shirt,
+  Container,
+  Gem,
+  TreeDeciduous,
+  Briefcase,
+  FileText,
+  Hammer,
+  Package,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { useComparison } from '@/contexts/ComparisonContext';
 import { useToast } from '@/contexts/ToastContext';
 import { hasArtisanStory, getArtisanIdFromMaker } from '@/lib/utils/artisan';
 import { VerificationIcon } from '@/components/common/VerificationBadge';
+import StarRating from '@/components/common/StarRating';
+import Tooltip from '@/components/common/Tooltip';
 import { Product } from '@/types';
 import { formatCurrency, CATEGORY_ICONS, CATEGORY_COLORS, ROUTES } from '@/lib';
 
+const CATEGORY_ICON_COMPONENTS: Record<string, LucideIcon> = {
+  Shirt,
+  Container,
+  Gem,
+  TreeDeciduous,
+  Briefcase,
+  FileText,
+  Hammer,
+  Sparkles,
+};
+
+/**
+ * Props for the ProductCard component
+ * @interface ProductCardProps
+ */
 interface ProductCardProps {
+  /** Product data to display */
   product: Product;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
   const router = useRouter();
   const { showToast } = useToast();
   const { toggle, isInComparison, canAdd, isFull } = useComparison();
@@ -31,9 +67,21 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const isComparing = mounted ? isInComparison(product.id) : false;
 
-  // Generate random rating if not provided (for demo purposes)
-  const rating = product.rating || Math.random() * (5 - 4) + 4;
-  const reviewCount = product.reviewCount || Math.floor(Math.random() * 500) + 50;
+  // Use product rating if available, otherwise generate a stable fallback based on product ID
+  // This ensures consistent values across re-renders
+  const rating = useMemo(() => {
+    if (product.rating) return product.rating;
+    // Generate a deterministic rating based on product ID hash
+    const hash = product.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return 4 + (hash % 10) / 10; // Range: 4.0 - 4.9
+  }, [product.id, product.rating]);
+
+  const reviewCount = useMemo(() => {
+    if (product.reviewCount) return product.reviewCount;
+    // Generate a deterministic review count based on product ID hash
+    const hash = product.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return 50 + (hash % 450); // Range: 50 - 499
+  }, [product.id, product.reviewCount]);
 
   // Check if product is new (added within last 7 days)
   const isNewProduct = (createdAt?: string): boolean => {
@@ -72,7 +120,8 @@ export default function ProductCard({ product }: ProductCardProps) {
     return 'Agregar a comparación';
   };
 
-  const categoryIcon = CATEGORY_ICONS[product.category] || '🎨';
+  const categoryIconName = CATEGORY_ICONS[product.category] || 'Package';
+  const CategoryIcon = CATEGORY_ICON_COMPONENTS[categoryIconName] || Package;
   const categoryColor = CATEGORY_COLORS[product.category] || 'bg-gray-100 text-gray-700';
 
   return (
@@ -136,6 +185,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               fill
               sizes="(max-width: 640px) 60vw, (max-width: 1024px) 45vw, 25vw"
               className="object-cover group-hover:scale-110 transition-transform duration-300"
+              loading="lazy"
             />
 
             {/* Left Side - Badges Group (New + Featured + Verified) */}
@@ -156,22 +206,25 @@ export default function ProductCard({ product }: ProductCardProps) {
 
               {/* Verified Badge */}
               {product.verified && (
-                <div
-                  className="bg-green-500 text-white w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center shadow-xs shrink-0"
-                  title="Producto verificado"
+                <Tooltip
+                  content="Producto verificado por nuestro equipo"
+                  placement="bottom"
+                  size="sm"
                 >
-                  <svg
-                    className="w-3 h-3 sm:w-3.5 sm:h-3.5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
+                  <div className="bg-green-500 text-white w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center shadow-xs shrink-0">
+                    <svg
+                      className="w-3 h-3 sm:w-3.5 sm:h-3.5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </Tooltip>
               )}
             </div>
 
@@ -180,7 +233,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               <span
                 className={`inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium shadow-xs ${categoryColor}`}
               >
-                <span className="text-xs sm:text-sm">{categoryIcon}</span>
+                <CategoryIcon className="w-3 h-3 sm:w-4 sm:h-4" />
                 <span className="hidden sm:inline">{product.category}</span>
               </span>
             </div>
@@ -197,23 +250,19 @@ export default function ProductCard({ product }: ProductCardProps) {
               <span
                 className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium ${categoryColor}`}
               >
-                <span>{categoryIcon}</span>
+                <CategoryIcon className="w-3 h-3" />
                 <span>{product.category}</span>
               </span>
             </div>
 
             {/* Rating & Location */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5 sm:gap-0 mb-1.5 sm:mb-2 text-[10px] sm:text-xs">
-              <div className="flex items-center gap-1">
-                <span className="font-bold text-gray-900">{rating.toFixed(1)}</span>
-                <svg
-                  className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-yellow-400 fill-current"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                </svg>
-                <span className="text-gray-500">({reviewCount})</span>
-              </div>
+              <StarRating
+                rating={rating}
+                reviewCount={reviewCount}
+                size="sm"
+                productId={product.id}
+              />
               <span className="text-gray-500 truncate sm:ml-2">{product.state}</span>
             </div>
 
@@ -267,4 +316,6 @@ export default function ProductCard({ product }: ProductCardProps) {
       </Link>
     </div>
   );
-}
+});
+
+export default ProductCard;

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Product management utilities for sellers.
+ * Provides functions for draft product storage, publishing, unpublishing,
+ * product ID generation, and seller product counts using localStorage.
+ * @module lib/utils/products
+ */
+
 import { DraftProduct, ProductFormData } from '@/types/product';
 
 const DRAFT_PRODUCTS_KEY = 'papalote-draft-products';
@@ -46,7 +53,7 @@ export function saveDraftProduct(
     localStorage.setItem(DRAFT_PRODUCTS_KEY, JSON.stringify(drafts));
     return draftProduct;
   } catch (error) {
-    console.error('Error saving draft product:', error);
+    console.error('[products] Error saving draft product:', error);
     throw new Error('No se pudo guardar el borrador');
   }
 }
@@ -60,7 +67,7 @@ export function getDraftProducts(sellerId: string): DraftProduct[] {
     const allDrafts: DraftProduct[] = stored ? JSON.parse(stored) : [];
     return allDrafts.filter((draft) => draft.sellerId === sellerId);
   } catch (error) {
-    console.error('Error loading draft products:', error);
+    console.error('[products] Error loading draft products:', error);
     return [];
   }
 }
@@ -74,7 +81,7 @@ export function getDraftProductById(productId: string): DraftProduct | null {
     const allDrafts: DraftProduct[] = stored ? JSON.parse(stored) : [];
     return allDrafts.find((draft) => draft.id === productId) || null;
   } catch (error) {
-    console.error('Error loading draft product:', error);
+    console.error('[products] Error loading draft product:', error);
     return null;
   }
 }
@@ -89,7 +96,7 @@ export function deleteDraftProduct(productId: string): void {
     const filtered = allDrafts.filter((draft) => draft.id !== productId);
     localStorage.setItem(DRAFT_PRODUCTS_KEY, JSON.stringify(filtered));
   } catch (error) {
-    console.error('Error deleting draft product:', error);
+    console.error('[products] Error deleting draft product:', error);
     throw new Error('No se pudo eliminar el borrador');
   }
 }
@@ -117,7 +124,7 @@ export function publishDraftProduct(productId: string): DraftProduct | null {
 
     return publishedProduct;
   } catch (error) {
-    console.error('Error publishing draft:', error);
+    console.error('[products] Error publishing draft:', error);
     return null;
   }
 }
@@ -138,7 +145,7 @@ export function savePublishedProduct(product: DraftProduct): void {
 
     localStorage.setItem(SELLER_PRODUCTS_KEY, JSON.stringify(products));
   } catch (error) {
-    console.error('Error saving published product:', error);
+    console.error('[products] Error saving published product:', error);
     throw new Error('No se pudo guardar el producto');
   }
 }
@@ -154,7 +161,7 @@ export function getPublishedProducts(sellerId: string): DraftProduct[] {
       (product) => product.sellerId === sellerId && product.status === 'published'
     );
   } catch (error) {
-    console.error('Error loading published products:', error);
+    console.error('[products] Error loading published products:', error);
     return [];
   }
 }
@@ -195,7 +202,7 @@ export function unpublishProduct(productId: string, sellerId: string): DraftProd
 
     return draftProduct;
   } catch (error) {
-    console.error('Error unpublishing product:', error);
+    console.error('[products] Error unpublishing product:', error);
     return null;
   }
 }

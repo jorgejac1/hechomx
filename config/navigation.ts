@@ -1,5 +1,8 @@
 /**
- * Navigation configuration
+ * @fileoverview Navigation configuration for the Papalote Market application.
+ * Defines the structure for main navigation, footer links, user account menu,
+ * and mobile navigation with support for nested items and category filtering.
+ * @module config/navigation
  */
 
 import { ROUTES } from '@/lib/constants/routes';

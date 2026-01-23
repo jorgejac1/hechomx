@@ -1,16 +1,26 @@
+/**
+ * @fileoverview Authentication context for managing user sessions and authentication state.
+ * Provides login, logout, registration, and profile update functionality.
+ * Uses localStorage for session persistence in development (mock implementation).
+ * @module contexts/AuthContext
+ */
+
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/lib/constants/routes';
+import type { ExtendedMakerProfile } from '@/lib/data/mockUsers';
 import {
-  ExtendedMakerProfile,
-  mockIndividualSeller,
-  mockArtisan,
-  mockCompany,
-} from '@/lib/data/mockUsers';
+  mockIndividualSellerAuth,
+  mockArtisanAuth,
+  mockCompanyAuth,
+} from '@/lib/data/mockUsersAuth';
 
-// User type with extended maker profile
+/**
+ * User type with extended maker profile for sellers
+ * @interface User
+ */
 export interface User {
   id: string;
   name: string;
@@ -51,10 +61,10 @@ const MOCK_USERS: User[] = [
     phone: '+52 555 987 6543',
     createdAt: '2024-02-20T14:20:00Z',
   },
-  // Add seller users
-  mockIndividualSeller,
-  mockArtisan,
-  mockCompany,
+  // Add seller users (lightweight auth versions without products)
+  mockIndividualSellerAuth,
+  mockArtisanAuth,
+  mockCompanyAuth,
   // Add admin user
   adminUser,
 ];
@@ -69,14 +79,26 @@ const MOCK_PASSWORDS: Record<string, string> = {
   'admin@papalote.com': 'Admin123',
 };
 
+/**
+ * Authentication context value type
+ * @interface AuthContextType
+ */
 interface AuthContextType {
+  /** Currently authenticated user or null */
   user: User | null;
+  /** Whether a user is currently logged in */
   isAuthenticated: boolean;
+  /** Whether auth state is being loaded from storage */
   isLoading: boolean;
+  /** Whether the current user has admin privileges */
   isAdmin: boolean;
+  /** Authenticate user with email and password */
   login: (email: string, password: string) => Promise<void>;
+  /** Register a new user account */
   register: (name: string, email: string, password: string) => Promise<void>;
+  /** Log out the current user */
   logout: () => void;
+  /** Update the current user's profile data */
   updateProfile: (data: Partial<User>) => Promise<void>;
 }
 
@@ -94,8 +116,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         setUser(JSON.parse(storedUser));
       } catch (error) {
-        console.error('Error loading user:', error);
+        console.error('[AuthContext] Failed to load user session - data corrupted:', error);
         localStorage.removeItem('auth_user');
+        // User will need to log in again - silent fail is acceptable here
+        // as showing a toast on page load would be disruptive
       }
     }
     setIsLoading(false);

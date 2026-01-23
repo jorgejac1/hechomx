@@ -1,4 +1,9 @@
-// lib/constants/verification.ts
+/**
+ * @fileoverview Seller verification system configuration constants.
+ * Defines verification levels with requirements, benefits, and commission rates,
+ * craft types, traditional techniques, production capacity options, and status messages.
+ * @module lib/constants/verification
+ */
 
 import type { VerificationLevelInfo } from '@/lib/types/verification';
 

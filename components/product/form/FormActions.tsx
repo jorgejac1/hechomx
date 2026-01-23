@@ -1,13 +1,31 @@
+/**
+ * @fileoverview Form action buttons component
+ * Renders cancel, save draft, and publish buttons for the product form.
+ * Includes validation warnings and status indicators.
+ * @module components/product/form/FormActions
+ */
+
 import { useRouter } from 'next/navigation';
 import { AlertCircle, Save, Send } from 'lucide-react';
 
+/**
+ * Props for the FormActions component
+ * @interface FormActionsProps
+ */
 interface FormActionsProps {
+  /** Whether the form is currently being submitted */
   isSubmitting: boolean;
+  /** Whether a draft is being saved */
   isSavingDraft?: boolean;
+  /** Whether at least one image has been added */
   hasImages: boolean;
+  /** Label text for the submit/publish button */
   submitLabel: string;
+  /** Callback function for saving as draft */
   onSaveDraft?: () => void;
+  /** Whether to show the save draft button */
   showDraftButton?: boolean;
+  /** Current publication status of the product */
   currentStatus?: 'draft' | 'published';
 }
 

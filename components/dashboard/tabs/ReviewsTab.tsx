@@ -1,9 +1,22 @@
-import Image from 'next/image';
-import { Star } from 'lucide-react';
+/**
+ * @fileoverview Reviews tab component for the seller dashboard.
+ * Displays customer reviews with ratings, comments, and seller responses.
+ * Shows review helpfulness counts and supports threaded responses.
+ * @module components/dashboard/tabs/ReviewsTab
+ */
+
 import { formatRelativeTime } from '@/lib';
 import { Review } from '@/lib/types';
+import Card from '@/components/common/Card';
+import Avatar from '@/components/common/Avatar';
+import StarRating from '@/components/common/StarRating';
 
+/**
+ * @interface ReviewsTabProps
+ * Props for the ReviewsTab component.
+ */
 interface ReviewsTabProps {
+  /** Array of customer reviews to display */
   reviews: Review[];
 }
 
@@ -15,30 +28,23 @@ export default function ReviewsTab({ reviews }: ReviewsTabProps) {
         <p className="text-gray-600 text-center py-8">No hay reseñas aún</p>
       ) : (
         reviews.map((review) => (
-          <div key={review.id} className="border border-gray-200 rounded-lg p-6">
+          <Card key={review.id} variant="outlined" padding="md">
             <div className="flex items-start gap-4">
-              {review.buyerAvatar && (
-                <Image
-                  src={review.buyerAvatar}
-                  alt={review.buyerName}
-                  width={48}
-                  height={48}
-                  className="rounded-full"
-                />
-              )}
+              <Avatar
+                src={review.buyerAvatar}
+                name={review.buyerName}
+                alt={review.buyerName}
+                size="lg"
+              />
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <p className="font-bold text-gray-900">{review.buyerName}</p>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${
-                          i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
+                  <StarRating
+                    rating={review.rating}
+                    size="sm"
+                    showValue={false}
+                    productId={`review-${review.id}`}
+                  />
                 </div>
                 <p className="text-sm text-gray-600 mb-2">{review.productName}</p>
                 <p className="text-gray-900 mb-2">{review.comment}</p>
@@ -59,7 +65,7 @@ export default function ReviewsTab({ reviews }: ReviewsTabProps) {
                 </div>
               </div>
             </div>
-          </div>
+          </Card>
         ))
       )}
     </div>

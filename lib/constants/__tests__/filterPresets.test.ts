@@ -132,14 +132,15 @@ describe('Filter Presets Constants', () => {
       expect(matchesPreset(params, popular)).toBe(false);
     });
 
-    it('should return true even with extra params', () => {
+    it('should return false when extra params are present', () => {
       const params = new URLSearchParams();
       params.set(FILTER_PARAM_NAMES.SORT, 'popular');
       params.set(FILTER_PARAM_NAMES.VERIFIED, 'si');
       params.set(FILTER_PARAM_NAMES.CATEGORY, 'Joyería'); // Extra param
 
       const popular = FILTER_PRESETS.find((p) => p.id === 'popular')!;
-      expect(matchesPreset(params, popular)).toBe(true);
+      // Should return false because extra params mean the user has customized the filters
+      expect(matchesPreset(params, popular)).toBe(false);
     });
 
     it('should return false when values do not match', () => {

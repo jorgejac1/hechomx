@@ -1,4 +1,9 @@
-// Global type definitions for Google Analytics gtag
+/**
+ * @fileoverview Google Analytics gtag type declarations
+ * Provides TypeScript type definitions for the global gtag function and event parameters
+ * @module types/analytics/gtag
+ */
+
 declare global {
   interface Window {
     gtag?: (

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Type definitions for buyer-related functionality.
+ * Includes interfaces for buyer impact data (environmental metrics, supported artisans),
+ * buyer orders, order timelines, and shipping address information.
+ * @module lib/types/buyer
+ */
+
 // ============================================================================
 // BUYER IMPACT TYPES
 // ============================================================================

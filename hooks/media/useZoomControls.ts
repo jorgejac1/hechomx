@@ -1,16 +1,22 @@
+/**
+ * @fileoverview Image zoom level management hook
+ * Provides zoom in, zoom out, and reset controls with configurable min/max/step values
+ * @module hooks/media/useZoomControls
+ */
+
 import { useState, useCallback } from 'react';
 
 /**
  * Zoom in/out state management
- * 
+ *
  * @param min - Minimum zoom level
  * @param max - Maximum zoom level
  * @param step - Zoom increment
  * @param initial - Initial zoom level
  * @returns Zoom controls
- * 
+ *
  * @example
- * const { zoom, zoomIn, zoomOut, canZoomIn, canZoomOut } = 
+ * const { zoom, zoomIn, zoomOut, canZoomIn, canZoomOut } =
  *   useZoomControls(1, 3, 0.5);
  */
 export interface UseZoomControlsReturn {

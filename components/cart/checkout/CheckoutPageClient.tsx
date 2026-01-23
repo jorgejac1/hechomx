@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Main checkout page client component managing the multi-step checkout flow.
+ * Handles shipping address collection, payment method selection, order review, and order placement.
+ * Supports coupon application, gift options, out-of-stock item handling, and address saving.
+ * @module components/cart/checkout/CheckoutPageClient
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -6,6 +13,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/contexts/ToastContext';
+import { useAuth } from '@/contexts/AuthContext';
+import AuthRequiredModal from '@/components/modals/AuthRequiredModal';
 import { ShippingAddress, PaymentMethod, CompleteOrder } from '@/lib/types/checkout';
 import { shippingAddressSchema } from '@/validators/checkout';
 import { AppliedCoupon, applyCoupon } from '@/lib/utils/coupons';
@@ -22,12 +31,32 @@ import {
 import ShippingForm from './ShippingForm';
 import PaymentMethodSelector from './PaymentMethod';
 import CheckoutSummary from './CheckoutSummary';
+import Stepper, { type Step } from '@/components/common/Stepper';
 import { ROUTES } from '@/lib/constants/routes';
-import { ArrowLeft, ShieldCheck, Truck, RefreshCcw, ChevronRight, AlertCircle } from 'lucide-react';
+import {
+  ArrowLeft,
+  ShieldCheck,
+  Truck,
+  RefreshCcw,
+  ChevronRight,
+  AlertCircle,
+  MapPin,
+  CreditCard,
+  CheckCircle,
+} from 'lucide-react';
 
+/**
+ * Checkout step identifiers
+ * @typedef {'shipping' | 'payment' | 'review'} CheckoutStep
+ */
 type CheckoutStep = 'shipping' | 'payment' | 'review';
 
+/**
+ * Form validation errors object
+ * @interface FormErrors
+ */
 interface FormErrors {
+  /** Error messages keyed by field name */
   [key: string]: string;
 }
 
@@ -37,6 +66,7 @@ export default function CheckoutPageClient() {
   const router = useRouter();
   const { cartItems, cartTotal, cartCount, clearCart, removeFromCart } = useCart();
   const { success, error: toastError } = useToast();
+  const { user, isAuthenticated } = useAuth();
 
   const [currentStep, setCurrentStep] = useState<CheckoutStep>('shipping');
   const [shippingAddress, setShippingAddress] = useState<Partial<ShippingAddress>>({});
@@ -45,6 +75,7 @@ export default function CheckoutPageClient() {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Gift options state
   const [giftWrap, setGiftWrap] = useState(false);
@@ -66,7 +97,7 @@ export default function CheckoutPageClient() {
           setAppliedCoupon(result.appliedCoupon);
         }
       } catch (e) {
-        console.error('Error loading coupon:', e);
+        console.error('[CheckoutPageClient] Error loading coupon:', e);
       }
     }
   }, [cartTotal, shippingAddress.state]);
@@ -205,6 +236,16 @@ export default function CheckoutPageClient() {
   const handlePlaceOrder = async () => {
     if (!validateTerms()) return;
 
+    // Check if user is authenticated
+    if (!isAuthenticated) {
+      setShowAuthModal(true);
+      return;
+    }
+
+    await processOrder();
+  };
+
+  const processOrder = async () => {
     setIsProcessing(true);
 
     try {
@@ -233,6 +274,8 @@ export default function CheckoutPageClient() {
       const order: CompleteOrder = {
         id: generateOrderId(),
         orderNumber: generateOrderNumber(),
+        userId: user?.id,
+        userEmail: user?.email,
         status: paymentMethod === 'oxxo' || paymentMethod === 'spei' ? 'pending' : 'confirmed',
         items: cartItems.map((item) => ({
           id: item.id,
@@ -289,22 +332,43 @@ export default function CheckoutPageClient() {
       success('¡Pedido realizado con éxito!');
       router.push(`/pedido-confirmado?orderId=${order.id}`);
     } catch (err) {
-      console.error('Error placing order:', err);
+      console.error('[CheckoutPageClient] Error placing order:', err);
       toastError('Hubo un error al procesar tu pedido. Inténtalo de nuevo.');
       setIsProcessing(false);
     }
   };
 
-  const steps = [
-    { id: 'shipping', label: 'Envío', number: 1 },
-    { id: 'payment', label: 'Pago', number: 2 },
-    { id: 'review', label: 'Confirmar', number: 3 },
+  const checkoutSteps: Step[] = [
+    { id: 'shipping', label: 'Envío', icon: MapPin },
+    { id: 'payment', label: 'Pago', icon: CreditCard },
+    { id: 'review', label: 'Confirmar', icon: CheckCircle },
   ];
 
-  const currentStepIndex = steps.findIndex((s) => s.id === currentStep);
+  const currentStepIndex = checkoutSteps.findIndex((s) => s.id === currentStep);
+
+  const handleStepClick = (stepIndex: number) => {
+    if (stepIndex < currentStepIndex) {
+      setCurrentStep(checkoutSteps[stepIndex].id as CheckoutStep);
+    }
+  };
+
+  const handleAuthSuccess = () => {
+    setShowAuthModal(false);
+    // After successful login, proceed with order
+    processOrder();
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Auth Required Modal */}
+      <AuthRequiredModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onLoginSuccess={handleAuthSuccess}
+        title="Inicia sesión para completar tu compra"
+        description="Necesitas una cuenta para realizar pedidos y dar seguimiento a tus compras"
+      />
+
       {/* Header */}
       <div className="bg-white border-b sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -327,38 +391,15 @@ export default function CheckoutPageClient() {
               </span>
             </button>
             {/* Progress Steps */}
-            <div className="flex items-center gap-2 sm:gap-4">
-              {steps.map((step, index) => (
-                <div key={step.id} className="flex items-center">
-                  <button
-                    onClick={() => {
-                      if (index < currentStepIndex) {
-                        setCurrentStep(step.id as CheckoutStep);
-                      }
-                    }}
-                    disabled={index > currentStepIndex}
-                    className={`
-                      flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-colors
-                      ${
-                        index === currentStepIndex
-                          ? 'bg-primary-600 text-white'
-                          : index < currentStepIndex
-                            ? 'bg-green-100 text-green-700 hover:bg-green-200 cursor-pointer'
-                            : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      }
-                    `}
-                  >
-                    <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-xs">
-                      {index < currentStepIndex ? '✓' : step.number}
-                    </span>
-                    <span className="hidden sm:inline">{step.label}</span>
-                  </button>
-                  {index < steps.length - 1 && (
-                    <ChevronRight className="w-4 h-4 text-gray-300 mx-1 hidden sm:block" />
-                  )}
-                </div>
-              ))}
-            </div>
+            <Stepper
+              steps={checkoutSteps}
+              currentStep={currentStepIndex}
+              onStepClick={handleStepClick}
+              clickable={true}
+              size="sm"
+              showNumbers={false}
+              className="flex-1 max-w-md"
+            />
             <div className="w-24" /> {/* Spacer for centering */}
           </div>
         </div>

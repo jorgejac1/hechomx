@@ -12,7 +12,6 @@ import {
   Store,
   Ban,
   CheckCircle,
-  Loader2,
   ChevronDown,
   Eye,
 } from 'lucide-react';
@@ -22,6 +21,7 @@ import UserProfileModal from '@/components/admin/UserProfileModal';
 import ConfirmActionModal from '@/components/common/ConfirmActionModal';
 import UserExpandedDetails from '@/components/admin/UserExpandedDetails';
 import { mockUsers, type MockUser } from '@/lib/data/users';
+import Skeleton from '@/components/common/loading/Skeleton';
 
 type UserRole = 'all' | 'buyer' | 'seller' | 'admin';
 type UserStatus = 'all' | 'active' | 'suspended' | 'pending';
@@ -153,10 +153,45 @@ export default function AdminUsuariosPage() {
 
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="w-12 h-12 text-purple-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">Cargando usuarios...</p>
+      <div className="min-h-screen bg-gray-50 py-8 px-4">
+        <div className="max-w-7xl mx-auto">
+          {/* Header Skeleton */}
+          <div className="mb-8">
+            <Skeleton width={120} height={20} className="mb-4" />
+            <div className="flex items-center gap-3 mb-2">
+              <Skeleton variant="circular" width={32} height={32} />
+              <Skeleton width={280} height={36} />
+            </div>
+            <Skeleton width={300} height={20} />
+          </div>
+
+          {/* Stats Skeleton */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="bg-white rounded-xl border border-gray-200 p-4">
+                <Skeleton width={60} height={32} className="mb-2" />
+                <Skeleton width={100} height={16} />
+              </div>
+            ))}
+          </div>
+
+          {/* Table Skeleton */}
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div className="p-4 border-b border-gray-200">
+              <Skeleton width="100%" height={40} />
+            </div>
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="p-4 border-b border-gray-200 flex items-center gap-4">
+                <Skeleton variant="circular" width={40} height={40} />
+                <div className="flex-1">
+                  <Skeleton width={180} height={20} className="mb-2" />
+                  <Skeleton width={220} height={16} />
+                </div>
+                <Skeleton width={80} height={24} />
+                <Skeleton width={80} height={24} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );

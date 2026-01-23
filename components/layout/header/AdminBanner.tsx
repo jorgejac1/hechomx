@@ -1,6 +1,18 @@
+/**
+ * @fileoverview Admin banner component displayed at the top of the header
+ * Shows a purple notification banner indicating the user is in administrator mode.
+ * Includes accessibility features with role and aria-live attributes.
+ * @module components/layout/header/AdminBanner
+ */
+
 import { Shield } from 'lucide-react';
 
+/**
+ * Props for the AdminBanner component
+ * @interface AdminBannerProps
+ */
 interface AdminBannerProps {
+  /** Custom message to display in the banner. Defaults to 'Modo Administrador' */
   message?: string;
 }
 

@@ -1,5 +1,8 @@
 /**
- * Currency formatting utilities
+ * @fileoverview Currency formatting utilities for Mexican Peso (MXN).
+ * Provides functions for formatting currency values, parsing currency strings,
+ * compact notation, and discount calculations with Mexican locale support.
+ * @module lib/utils/currency
  */
 
 /**

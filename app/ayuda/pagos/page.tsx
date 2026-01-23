@@ -12,6 +12,7 @@ import {
   Receipt,
 } from 'lucide-react';
 import { ROUTES } from '@/lib';
+import Alert from '@/components/common/Alert';
 
 export const metadata: Metadata = {
   title: 'Métodos de Pago | Papalote Market',
@@ -45,18 +46,16 @@ export default function PaymentInfoPage() {
         </div>
 
         {/* Security Notice */}
-        <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
-          <div className="flex items-start gap-4">
-            <Shield className="w-8 h-8 text-green-600 shrink-0" />
-            <div>
-              <h3 className="font-bold text-green-900 mb-2">Tus Pagos son 100% Seguros</h3>
-              <p className="text-sm text-green-800">
-                Utilizamos encriptación SSL de nivel bancario y trabajamos con procesadores de pago
-                certificados PCI-DSS. Nunca almacenamos información completa de tarjetas de crédito.
-              </p>
-            </div>
-          </div>
-        </div>
+        <Alert
+          variant="success"
+          layout="bordered"
+          icon={Shield}
+          title="Tus Pagos son 100% Seguros"
+          className="mb-6"
+        >
+          Utilizamos encriptación SSL de nivel bancario y trabajamos con procesadores de pago
+          certificados PCI-DSS. Nunca almacenamos información completa de tarjetas de crédito.
+        </Alert>
 
         {/* Payment Methods */}
         <div className="space-y-6">
@@ -73,30 +72,35 @@ export default function PaymentInfoPage() {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="border border-gray-200 rounded-lg p-4 text-center">
-                  <div className="text-3xl mb-2">💳</div>
+                  <div className="flex justify-center mb-2">
+                    <CreditCard className="w-8 h-8 text-blue-600" />
+                  </div>
                   <p className="font-semibold text-gray-900">Visa</p>
                 </div>
                 <div className="border border-gray-200 rounded-lg p-4 text-center">
-                  <div className="text-3xl mb-2">💳</div>
+                  <div className="flex justify-center mb-2">
+                    <CreditCard className="w-8 h-8 text-orange-600" />
+                  </div>
                   <p className="font-semibold text-gray-900">Mastercard</p>
                 </div>
                 <div className="border border-gray-200 rounded-lg p-4 text-center">
-                  <div className="text-3xl mb-2">💳</div>
+                  <div className="flex justify-center mb-2">
+                    <CreditCard className="w-8 h-8 text-blue-800" />
+                  </div>
                   <p className="font-semibold text-gray-900">American Express</p>
                 </div>
                 <div className="border border-gray-200 rounded-lg p-4 text-center">
-                  <div className="text-3xl mb-2">💳</div>
+                  <div className="flex justify-center mb-2">
+                    <CreditCard className="w-8 h-8 text-green-600" />
+                  </div>
                   <p className="font-semibold text-gray-900">Carnet</p>
                 </div>
               </div>
 
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-sm">
-                <h4 className="font-bold text-blue-900 mb-2">Pagos a meses sin intereses</h4>
-                <p className="text-sm text-blue-800">
-                  Compras mayores a $1,000 MXN pueden pagarse a 3, 6, 9 o 12 meses sin intereses con
-                  tarjetas participantes.
-                </p>
-              </div>
+              <Alert variant="info" layout="sidebar" title="Pagos a meses sin intereses">
+                Compras mayores a $1,000 MXN pueden pagarse a 3, 6, 9 o 12 meses sin intereses con
+                tarjetas participantes.
+              </Alert>
 
               <ul className="space-y-2 text-gray-700 text-sm ml-4">
                 <li className="flex items-start gap-2">
@@ -156,16 +160,15 @@ export default function PaymentInfoPage() {
                 cualquier tienda OXXO.
               </p>
 
-              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded-sm">
-                <h4 className="font-bold text-yellow-900 mb-2">Cómo pagar en OXXO:</h4>
-                <ol className="text-sm text-yellow-800 space-y-1 ml-4 list-decimal">
+              <Alert variant="warning" layout="sidebar" title="Cómo pagar en OXXO:">
+                <ol className="space-y-1 ml-4 list-decimal">
                   <li>Selecciona OXXO Pay al finalizar tu compra</li>
                   <li>Recibe tu código de pago por email</li>
                   <li>Acude a cualquier tienda OXXO</li>
                   <li>Proporciona el código en caja</li>
                   <li>Paga en efectivo (máximo $10,000 MXN)</li>
                 </ol>
-              </div>
+              </Alert>
 
               <p className="text-sm text-gray-600">
                 <AlertCircle className="w-4 h-4 inline mr-2" />
@@ -209,15 +212,13 @@ export default function PaymentInfoPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-sm">
-                <p className="text-sm text-blue-900">
-                  <strong>Importante:</strong> Envía tu comprobante de pago a{' '}
-                  <a href="mailto:pagos@@papalotemarket.com" className="underline">
-                    pagos@@papalotemarket.com
-                  </a>{' '}
-                  con tu número de pedido para confirmar tu compra.
-                </p>
-              </div>
+              <Alert variant="info" layout="sidebar">
+                <strong>Importante:</strong> Envía tu comprobante de pago a{' '}
+                <a href="mailto:pagos@@papalotemarket.com" className="underline">
+                  pagos@@papalotemarket.com
+                </a>{' '}
+                con tu número de pedido para confirmar tu compra.
+              </Alert>
             </div>
           </section>
 
@@ -308,12 +309,10 @@ export default function PaymentInfoPage() {
                 </div>
               </div>
 
-              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded-sm">
-                <p className="text-sm text-green-900">
-                  <strong>Garantía:</strong> Si detectas algún cargo no autorizado, contáctanos
-                  inmediatamente. Investigaremos y resolveremos el problema en 48 horas.
-                </p>
-              </div>
+              <Alert variant="success" layout="sidebar">
+                <strong>Garantía:</strong> Si detectas algún cargo no autorizado, contáctanos
+                inmediatamente. Investigaremos y resolveremos el problema en 48 horas.
+              </Alert>
             </div>
           </section>
 

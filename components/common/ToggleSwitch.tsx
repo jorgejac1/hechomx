@@ -1,19 +1,30 @@
+/**
+ * @fileoverview ToggleSwitch component for binary on/off settings.
+ * Displays a switch control with label and optional description text.
+ * Supports multiple sizes and accessible switch role.
+ * @module components/common/ToggleSwitch
+ */
+
 'use client';
 
+/**
+ * Props for the ToggleSwitch component
+ * @interface ToggleSwitchProps
+ */
 export interface ToggleSwitchProps {
-  /** Whether the toggle is enabled */
+  /** Current enabled/disabled state of the toggle */
   enabled: boolean;
-  /** Callback when toggled */
+  /** Callback fired when the toggle state changes */
   onChange: (enabled: boolean) => void;
-  /** Label text */
+  /** Primary label text displayed next to the toggle */
   label: string;
-  /** Optional description */
+  /** Optional secondary description text below the label */
   description?: string;
-  /** Disable the toggle */
+  /** Whether the toggle is disabled and non-interactive */
   disabled?: boolean;
-  /** Size variant */
+  /** Size variant affecting switch dimensions */
   size?: 'sm' | 'md' | 'lg';
-  /** Additional CSS classes */
+  /** Additional CSS classes for the container */
   className?: string;
 }
 

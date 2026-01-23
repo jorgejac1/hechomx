@@ -12,6 +12,7 @@ import {
   Mail,
 } from 'lucide-react';
 import { ROUTES } from '@/lib';
+import Alert from '@/components/common/Alert';
 
 export const metadata: Metadata = {
   title: 'Política de Privacidad | Papalote Market',
@@ -197,13 +198,12 @@ export default function PrivacyPage() {
                 de privacidad diferente.
               </p>
 
-              <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded-sm mt-4">
-                <p className="text-sm text-green-900 font-medium">
-                  <Shield className="w-4 h-4 inline mr-2" />
+              <Alert variant="success" layout="sidebar" icon={Shield} className="mt-4">
+                <span className="font-medium">
                   Nunca vendemos tu información personal a terceros para sus propósitos de
                   marketing.
-                </p>
-              </div>
+                </span>
+              </Alert>
             </div>
           </section>
 
@@ -227,13 +227,10 @@ export default function PrivacyPage() {
                 <li>Capacitación continua del personal en seguridad</li>
               </ul>
 
-              <div className="bg-yellow-50 border-l-4 border-yellow-600 p-4 rounded-sm mt-4">
-                <p className="text-sm text-yellow-900">
-                  <AlertCircle className="w-4 h-4 inline mr-2" />
-                  Aunque implementamos medidas de seguridad robustas, ningún sistema es 100% seguro.
-                  Si detectas actividad sospechosa en tu cuenta, contáctanos inmediatamente.
-                </p>
-              </div>
+              <Alert variant="warning" layout="sidebar" icon={AlertCircle} className="mt-4">
+                Aunque implementamos medidas de seguridad robustas, ningún sistema es 100% seguro.
+                Si detectas actividad sospechosa en tu cuenta, contáctanos inmediatamente.
+              </Alert>
             </div>
           </section>
 

@@ -1,31 +1,62 @@
-"use client";
+/**
+ * @fileoverview Mobile product gallery component
+ * Touch-optimized gallery with swipeable thumbnails, navigation arrows,
+ * and fullscreen modal support for mobile devices.
+ * @module components/product/ProductGallery/ProductGalleryMobile
+ */
 
-import { useRef } from "react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Play } from "lucide-react";
-import { ProductGalleryImage } from "./ProductGalleryImage";
-import { ProductGalleryActions } from "./ProductGalleryActions";
-import { usePrefersReducedMotion } from "@/hooks/common/usePrefersReducedMotion";
+'use client';
 
+import { useRef } from 'react';
+import Image from 'next/image';
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { ProductGalleryImage } from './ProductGalleryImage';
+import { ProductGalleryActions } from './ProductGalleryActions';
+import { usePrefersReducedMotion } from '@/hooks/common/usePrefersReducedMotion';
+
+/**
+ * Media item type for gallery content
+ * @interface MediaItem
+ */
 interface MediaItem {
-  type: "image" | "video";
+  /** Type of media (image or video) */
+  type: 'image' | 'video';
+  /** Media URL */
   url: string;
+  /** Index in the media array */
   index: number;
 }
 
+/**
+ * Props for the ProductGalleryMobile component
+ * @interface ProductGalleryMobileProps
+ */
 interface ProductGalleryMobileProps {
+  /** Array of media items to display */
   mediaItems: MediaItem[];
+  /** Currently selected media index */
   selectedIndex: number;
+  /** Product name for accessibility */
   productName: string;
+  /** Set of loaded image indices */
   loadedImages: Set<number>;
+  /** Set of errored image indices */
   imageErrors: Set<number>;
+  /** Navigate to next item */
   onNext: () => void;
+  /** Navigate to previous item */
   onPrevious: () => void;
+  /** Handle thumbnail selection */
   onThumbnailClick: (index: number) => void;
+  /** Handle image load event */
   onImageLoad: (index: number) => void;
+  /** Handle image error event */
   onImageError: (index: number) => void;
+  /** Open fullscreen modal */
   onOpenModal: () => void;
+  /** Share current image */
   onShare: () => void;
+  /** Download current image */
   onDownload: () => void;
 }
 
@@ -55,9 +86,9 @@ export function ProductGalleryMobile({
       const thumbnail = thumbnailsRef.current.children[index] as HTMLElement;
       if (thumbnail) {
         thumbnail.scrollIntoView({
-          behavior: prefersReducedMotion ? "auto" : "smooth",
-          block: "nearest",
-          inline: "center",
+          behavior: prefersReducedMotion ? 'auto' : 'smooth',
+          block: 'nearest',
+          inline: 'center',
         });
       }
     }
@@ -72,12 +103,12 @@ export function ProductGalleryMobile({
         className="relative w-full bg-gray-50 rounded-lg overflow-hidden mb-3"
       >
         <div className="relative w-full aspect-square">
-          {currentItem.type === "image" ? (
+          {currentItem.type === 'image' ? (
             <div
               className="relative w-full h-full focus:outline-hidden focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 rounded-lg group cursor-pointer"
               onClick={onOpenModal}
               onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
+                if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
                   onOpenModal();
                 }
@@ -167,12 +198,12 @@ export function ProductGalleryMobile({
               onClick={() => handleThumbnailClick(index)}
               className={`relative shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all snap-center focus:outline-hidden focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 active:scale-95 ${
                 selectedIndex === index
-                  ? "border-primary-600 ring-2 ring-primary-200"
-                  : "border-gray-200 hover:border-gray-300"
+                  ? 'border-primary-600 ring-2 ring-primary-200'
+                  : 'border-gray-200 hover:border-gray-300'
               }`}
-              aria-label={`${item.type === "video" ? "Video" : "Imagen"} ${index + 1} de ${mediaItems.length}`}
+              aria-label={`${item.type === 'video' ? 'Video' : 'Imagen'} ${index + 1} de ${mediaItems.length}`}
             >
-              {item.type === "image" ? (
+              {item.type === 'image' ? (
                 <>
                   {!loadedImages.has(index) && (
                     <div className="absolute inset-0 bg-gray-200 animate-pulse" />

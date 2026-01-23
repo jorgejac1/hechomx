@@ -1,8 +1,16 @@
+/**
+ * @fileoverview Cart summary component displaying order totals, shipping costs, and coupon functionality.
+ * Shows subtotal, shipping calculation (free shipping over $1000 MXN), discount application,
+ * and provides checkout navigation. Supports coupon code input and validation.
+ * @module components/cart/CartSummary
+ */
+
 'use client';
 
 import { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { formatCurrency } from '@/lib';
 import { ROUTES } from '@/lib/constants/routes';
 import Button from '@/components/common/Button';
@@ -192,9 +200,11 @@ export default function CartSummary() {
         Proceder al pago
       </Button>
 
-      <Button variant="outline" size="md" onClick={() => router.push('/productos')} fullWidth>
-        Seguir comprando
-      </Button>
+      <Link href="/productos" className="block">
+        <Button variant="outline" size="md" fullWidth>
+          Seguir comprando
+        </Button>
+      </Link>
 
       {/* Security Info */}
       <div className="pt-4 border-t border-gray-200 space-y-2 text-xs text-gray-600">

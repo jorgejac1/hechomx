@@ -1,14 +1,20 @@
+/**
+ * @fileoverview Generic carousel state management hook
+ * Provides navigation controls, loop support, and optional autoplay for carousel components
+ * @module hooks/media/useCarousel
+ */
+
 import { useState, useCallback, useEffect, useRef } from 'react';
 
 /**
  * Generic carousel state management
- * 
+ *
  * @param itemCount - Total number of items
  * @param options - Configuration options
  * @returns Carousel controls
- * 
+ *
  * @example
- * const { currentIndex, next, previous, goTo, isFirst, isLast } = 
+ * const { currentIndex, next, previous, goTo, isFirst, isLast } =
  *   useCarousel(products.length, { loop: true, autoPlay: false });
  */
 export interface UseCarouselOptions {
@@ -31,12 +37,7 @@ export function useCarousel(
   itemCount: number,
   options: UseCarouselOptions = {}
 ): UseCarouselReturn {
-  const {
-    loop = false,
-    autoPlay = false,
-    autoPlayInterval = 3000,
-    initialIndex = 0,
-  } = options;
+  const { loop = false, autoPlay = false, autoPlayInterval = 3000, initialIndex = 0 } = options;
 
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);

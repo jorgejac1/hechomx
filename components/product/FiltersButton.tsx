@@ -1,10 +1,23 @@
+/**
+ * @fileoverview Filter button component for triggering product filter actions
+ * Displays a button with filter icon and active filter count badge.
+ * Wrapped in Suspense for client-side hydration support.
+ * @module components/product/FiltersButton
+ */
+
 'use client';
 
 import { Suspense } from 'react';
 import { Filter } from 'lucide-react';
 
+/**
+ * Props for the FiltersButton component
+ * @interface FiltersButtonProps
+ */
 interface FiltersButtonProps {
+  /** Callback function triggered when the button is clicked */
   onClick: () => void;
+  /** Number of currently active filters to display as a badge */
   activeCount?: number;
 }
 

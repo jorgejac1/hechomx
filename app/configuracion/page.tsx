@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import { ROUTES } from '@/lib';
 import {
@@ -18,6 +18,8 @@ import {
   CheckCircle2,
   AlertCircle,
 } from 'lucide-react';
+import Alert from '@/components/common/Alert';
+import Tabs, { TabItem } from '@/components/common/Tabs';
 
 interface SavedCard {
   id: string;
@@ -47,11 +49,14 @@ export default function SettingsPage() {
   );
 }
 
+const settingsTabs: TabItem[] = [
+  { id: 'cards', label: 'Tarjetas', icon: CreditCard },
+  { id: 'addresses', label: 'Direcciones', icon: MapPin },
+  { id: 'security', label: 'Seguridad', icon: Lock },
+  { id: 'notifications', label: 'Notificaciones', icon: Bell },
+];
+
 function SettingsContent() {
-  const router = useRouter();
-  const [activeTab, setActiveTab] = useState<'cards' | 'addresses' | 'security' | 'notifications'>(
-    'cards'
-  );
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -110,12 +115,12 @@ function SettingsContent() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <button
-            onClick={() => router.push(ROUTES.PROFILE)}
+          <Link
+            href={ROUTES.PROFILE}
             className="text-primary-600 hover:text-primary-700 mb-4 flex items-center gap-2"
           >
             ← Volver al Perfil
-          </button>
+          </Link>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Configuración</h1>
           <p className="text-gray-600 mt-1">
             Administra tus métodos de pago, direcciones y seguridad
@@ -124,62 +129,18 @@ function SettingsContent() {
 
         {/* Success Message */}
         {successMessage && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
-            <p className="text-sm text-green-800 font-medium">{successMessage}</p>
-          </div>
+          <Alert variant="success" layout="bordered" icon={CheckCircle2} className="mb-6">
+            <span className="font-medium">{successMessage}</span>
+          </Alert>
         )}
 
         {/* Tabs */}
-        <div className="bg-white rounded-xl shadow-md">
-          <div className="border-b border-gray-200">
-            <nav className="flex overflow-x-auto">
-              <button
-                onClick={() => setActiveTab('cards')}
-                className={`px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
-                  activeTab === 'cards'
-                    ? 'border-primary-600 text-primary-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                Tarjetas
-              </button>
-              <button
-                onClick={() => setActiveTab('addresses')}
-                className={`px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
-                  activeTab === 'addresses'
-                    ? 'border-primary-600 text-primary-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                Direcciones
-              </button>
-              <button
-                onClick={() => setActiveTab('security')}
-                className={`px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
-                  activeTab === 'security'
-                    ? 'border-primary-600 text-primary-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                Seguridad
-              </button>
-              <button
-                onClick={() => setActiveTab('notifications')}
-                className={`px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
-                  activeTab === 'notifications'
-                    ? 'border-primary-600 text-primary-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                Notificaciones
-              </button>
-            </nav>
-          </div>
+        <Tabs defaultTab="cards" className="bg-white rounded-xl shadow-md">
+          <Tabs.List tabs={settingsTabs} />
 
-          <div className="p-6">
+          <Tabs.Panels className="p-6">
             {/* Cards Tab */}
-            {activeTab === 'cards' && (
+            <Tabs.Panel tabId="cards">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-gray-900">Tarjetas Guardadas</h3>
@@ -227,25 +188,19 @@ function SettingsContent() {
                   ))}
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <div className="flex gap-3">
-                    <Shield className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm text-blue-900 font-semibold">
-                        Tus tarjetas están seguras
-                      </p>
-                      <p className="text-sm text-blue-800">
-                        Usamos encriptación de nivel bancario para proteger tu información
-                        financiera.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <Alert
+                  variant="info"
+                  layout="bordered"
+                  icon={Shield}
+                  title="Tus tarjetas están seguras"
+                >
+                  Usamos encriptación de nivel bancario para proteger tu información financiera.
+                </Alert>
               </div>
-            )}
+            </Tabs.Panel>
 
             {/* Addresses Tab */}
-            {activeTab === 'addresses' && (
+            <Tabs.Panel tabId="addresses">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-gray-900">Direcciones de Envío</h3>
@@ -293,40 +248,29 @@ function SettingsContent() {
                   ))}
                 </div>
 
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                  <div className="flex gap-3">
-                    <AlertCircle className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm text-yellow-900 font-semibold">
-                        Verifica tus direcciones
-                      </p>
-                      <p className="text-sm text-yellow-800">
-                        Asegúrate de que tus direcciones estén actualizadas para evitar problemas
-                        con tus envíos.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <Alert
+                  variant="warning"
+                  layout="bordered"
+                  icon={AlertCircle}
+                  title="Verifica tus direcciones"
+                >
+                  Asegúrate de que tus direcciones estén actualizadas para evitar problemas con tus
+                  envíos.
+                </Alert>
               </div>
-            )}
+            </Tabs.Panel>
 
             {/* Security Tab */}
-            {activeTab === 'security' && (
+            <Tabs.Panel tabId="security">
               <div className="space-y-6">
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                  <div className="flex gap-3">
-                    <AlertCircle className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm text-yellow-900 font-semibold">
-                        Usa una contraseña segura
-                      </p>
-                      <p className="text-sm text-yellow-800">
-                        Combina letras mayúsculas, minúsculas, números y símbolos. Mínimo 8
-                        caracteres.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <Alert
+                  variant="warning"
+                  layout="bordered"
+                  icon={AlertCircle}
+                  title="Usa una contraseña segura"
+                >
+                  Combina letras mayúsculas, minúsculas, números y símbolos. Mínimo 8 caracteres.
+                </Alert>
 
                 <div>
                   <div className="flex items-center gap-2 mb-4">
@@ -430,10 +374,10 @@ function SettingsContent() {
                   </div>
                 </div>
               </div>
-            )}
+            </Tabs.Panel>
 
             {/* Notifications Tab */}
-            {activeTab === 'notifications' && (
+            <Tabs.Panel tabId="notifications">
               <div className="space-y-6">
                 <div className="flex items-center gap-2 mb-4">
                   <Bell className="w-5 h-5 text-gray-600" />
@@ -463,22 +407,18 @@ function SettingsContent() {
                   ))}
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <div className="flex gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-sm text-blue-900 font-semibold">Mantente informado</p>
-                      <p className="text-sm text-blue-800">
-                        Las notificaciones te ayudan a estar al tanto de tus pedidos y ofertas
-                        exclusivas.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <Alert
+                  variant="info"
+                  layout="bordered"
+                  icon={CheckCircle2}
+                  title="Mantente informado"
+                >
+                  Las notificaciones te ayudan a estar al tanto de tus pedidos y ofertas exclusivas.
+                </Alert>
               </div>
-            )}
-          </div>
-        </div>
+            </Tabs.Panel>
+          </Tabs.Panels>
+        </Tabs>
       </div>
     </div>
   );

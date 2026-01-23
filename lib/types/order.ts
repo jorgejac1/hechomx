@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Core order type definitions shared across the application.
+ * Defines order status types, order items, customer information,
+ * and the main Order interface used by both buyers and sellers.
+ * @module lib/types/order
+ */
+
 export type OrderStatus =
   | 'pending'
   | 'confirmed'

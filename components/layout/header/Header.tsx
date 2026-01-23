@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Main site header component with responsive navigation
+ * Provides the primary navigation header including logo, search functionality,
+ * desktop/mobile navigation menus, shopping cart, user authentication controls,
+ * and theme toggle. Adapts display based on user role (admin vs regular user)
+ * and authentication state. Includes accessibility features and responsive design.
+ * @module components/layout/header/Header
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -15,6 +24,8 @@ import {
   User,
 } from 'lucide-react';
 import SearchModal from '@/components/ui/SearchModal';
+import Drawer from '@/components/common/Drawer';
+import ThemeToggle from '@/components/common/ThemeToggle';
 import AdminBanner from './AdminBanner';
 import UserDropdown from './UserDropdown';
 import MobileMenu from './MobileMenu';
@@ -24,6 +35,11 @@ import { Product } from '@/types';
 import { ROUTES } from '@/lib/constants/routes';
 import { SITE_NAME } from '@/config/site';
 
+/**
+ * Main header component for the site
+ * Manages mobile menu state, search modal, and fetches product data for search functionality.
+ * @returns {JSX.Element} The rendered header with navigation, search, and user controls
+ */
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
@@ -43,7 +59,7 @@ export default function Header() {
         setProducts(productsArray);
         setCategories([...new Set(productsArray.map((p) => p.category))]);
       } catch (error) {
-        console.error('Error loading products:', error);
+        console.error('[Header] Error loading products:', error);
       }
     };
     fetchData();
@@ -56,7 +72,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-white shadow-md sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-900 shadow-md dark:shadow-gray-800/50 sticky top-0 z-50 transition-colors">
         {isAdmin && <AdminBanner />}
 
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -71,7 +87,7 @@ export default function Header() {
                 className="w-8 h-8 sm:w-10 sm:h-10"
                 priority
               />
-              <span className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 hidden sm:block">
+              <span className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white hidden sm:block">
                 {SITE_NAME}
               </span>
             </Link>
@@ -80,11 +96,13 @@ export default function Header() {
             <div className="hidden lg:flex flex-1 max-w-xl xl:max-w-2xl mx-4">
               <button
                 onClick={() => setSearchModalOpen(true)}
-                className="w-full flex items-center gap-3 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition text-left"
+                className="w-full flex items-center gap-3 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition text-left"
                 aria-label="Abrir búsqueda"
               >
-                <Search className="w-5 h-5 text-gray-400" aria-hidden="true" />
-                <span className="text-gray-500 truncate">Buscar productos...</span>
+                <Search className="w-5 h-5 text-gray-400 dark:text-gray-500" aria-hidden="true" />
+                <span className="text-gray-500 dark:text-gray-400 truncate">
+                  Buscar productos...
+                </span>
               </button>
             </div>
 
@@ -93,7 +111,7 @@ export default function Header() {
               {/* Search - Medium screens */}
               <button
                 onClick={() => setSearchModalOpen(true)}
-                className="lg:hidden text-gray-700 hover:text-primary-600"
+                className="lg:hidden text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
                 aria-label="Buscar"
               >
                 <Search className="h-6 w-6" />
@@ -103,7 +121,7 @@ export default function Header() {
               {isAdmin && (
                 <Link
                   href={ROUTES.ADMIN_VERIFICACIONES}
-                  className="flex items-center gap-2 text-purple-600 hover:text-purple-700 transition"
+                  className="flex items-center gap-2 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition"
                 >
                   <FileCheck className="w-5 h-5 lg:w-6 lg:h-6" />
                   <span className="font-medium hidden lg:block">Verificaciones</span>
@@ -114,7 +132,7 @@ export default function Header() {
               {!isAdmin && (
                 <Link
                   href="/regalos"
-                  className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition"
+                  className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition"
                 >
                   <Gift className="w-5 h-5 lg:w-6 lg:h-6" />
                   <span className="font-medium hidden lg:block">Regalos</span>
@@ -124,7 +142,7 @@ export default function Header() {
               {/* Productos */}
               <Link
                 href={ROUTES.PRODUCTS}
-                className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition"
+                className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition"
               >
                 <ShoppingBag className="w-5 h-5 lg:w-6 lg:h-6" />
                 <span className="font-medium hidden lg:block">Productos</span>
@@ -134,7 +152,7 @@ export default function Header() {
               {!isAdmin && (
                 <Link
                   href={ROUTES.CART}
-                  className="relative flex items-center text-gray-700 hover:text-primary-600 transition"
+                  className="relative flex items-center text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition"
                   aria-label={`Carrito${cartCount > 0 ? `, ${cartCount} productos` : ''}`}
                 >
                   <ShoppingCart className="w-5 h-5 lg:w-6 lg:h-6" />
@@ -152,12 +170,15 @@ export default function Header() {
               ) : (
                 <Link
                   href={ROUTES.LOGIN}
-                  className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition"
+                  className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition"
                 >
                   <User className="w-5 h-5 lg:w-6 lg:h-6" />
                   <span className="font-medium hidden lg:block">Iniciar Sesión</span>
                 </Link>
               )}
+
+              {/* Theme Toggle */}
+              <ThemeToggle size="md" />
 
               {/* CTA Button */}
               {isAdmin ? (
@@ -195,7 +216,7 @@ export default function Header() {
             <div className="md:hidden flex items-center gap-3 sm:gap-4">
               <button
                 onClick={() => setSearchModalOpen(true)}
-                className="text-gray-700 hover:text-primary-600"
+                className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
                 aria-label="Buscar"
               >
                 <Search className="h-6 w-6" />
@@ -204,7 +225,7 @@ export default function Header() {
               {!isAdmin && (
                 <Link
                   href={ROUTES.CART}
-                  className="relative text-gray-700 hover:text-primary-600"
+                  className="relative text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
                   aria-label={`Carrito${cartCount > 0 ? `, ${cartCount} productos` : ''}`}
                 >
                   <ShoppingCart className="h-6 w-6" />
@@ -216,9 +237,12 @@ export default function Header() {
                 </Link>
               )}
 
+              {/* Mobile Theme Toggle */}
+              <ThemeToggle size="sm" />
+
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`hover:text-primary-600 ${isAdmin ? 'text-purple-600' : 'text-gray-700'}`}
+                className={`hover:text-primary-600 dark:hover:text-primary-400 ${isAdmin ? 'text-purple-600 dark:text-purple-400' : 'text-gray-700 dark:text-gray-300'}`}
                 aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
                 aria-expanded={mobileMenuOpen}
               >
@@ -226,18 +250,24 @@ export default function Header() {
               </button>
             </div>
           </div>
-
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <MobileMenu
-              user={user}
-              isAuthenticated={isAuthenticated}
-              isAdmin={isAdmin}
-              onClose={() => setMobileMenuOpen(false)}
-              onLogout={handleLogout}
-            />
-          )}
         </nav>
+
+        {/* Mobile Menu Drawer */}
+        <Drawer
+          isOpen={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
+          title={isAdmin ? 'Panel Admin' : 'Menú'}
+          position="right"
+          size="md"
+        >
+          <MobileMenu
+            user={user}
+            isAuthenticated={isAuthenticated}
+            isAdmin={isAdmin}
+            onClose={() => setMobileMenuOpen(false)}
+            onLogout={handleLogout}
+          />
+        </Drawer>
       </header>
 
       {/* Search Modal */}

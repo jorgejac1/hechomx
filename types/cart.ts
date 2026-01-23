@@ -1,5 +1,7 @@
 /**
- * Shopping cart types
+ * @fileoverview Shopping cart and order type definitions
+ * Defines interfaces for cart items, cart summary, shipping addresses, payment methods, and orders
+ * @module types/cart
  */
 
 import { Product } from './product';

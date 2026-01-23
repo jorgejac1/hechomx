@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { getBuyerImpact } from '@/lib/api/buyer/impact';
+import { ROUTES } from '@/lib/constants/routes';
 import type { BuyerImpactData } from '@/lib/types/buyer';
 import { formatCurrency, formatRelativeTime } from '@/lib';
 import {
@@ -66,9 +68,12 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
           <p className="text-gray-600 mb-6">
             Realiza tu primera compra para ver tu impacto en la comunidad artesanal
           </p>
-          <button className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium">
+          <Link
+            href={ROUTES.PRODUCTS}
+            className="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
+          >
             Explorar Productos
-          </button>
+          </Link>
         </div>
       </div>
     );

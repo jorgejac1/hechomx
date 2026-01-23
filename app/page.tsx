@@ -22,13 +22,13 @@ export default function Home() {
       <HeroSlider />
 
       {/* Features */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-gray-50">
+      <section className="py-8 sm:py-12 lg:py-16 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="text-center">
-              <div className="bg-primary-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <div className="bg-primary-100 dark:bg-primary-900/30 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <svg
-                  className="w-8 h-8 text-primary-600"
+                  className="w-8 h-8 text-primary-600 dark:text-primary-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -41,16 +41,18 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">100% Auténtico</h3>
-              <p className="text-gray-600">
+              <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-gray-900 dark:text-gray-100">
+                100% Auténtico
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
                 Todos los productos son verificados y hechos en México
               </p>
             </div>
 
             <div className="text-center">
-              <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-primary-100 dark:bg-primary-900/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
-                  className="w-8 h-8 text-primary-600"
+                  className="w-8 h-8 text-primary-600 dark:text-primary-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -63,16 +65,18 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Apoya Artesanos</h3>
-              <p className="text-sm sm:text-base text-gray-600 px-2">
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">
+                Apoya Artesanos
+              </h3>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 px-2">
                 Todos los productos son verificados y hechos en México
               </p>
             </div>
 
             <div className="text-center">
-              <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-primary-100 dark:bg-primary-900/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
-                  className="w-8 h-8 text-primary-600"
+                  className="w-8 h-8 text-primary-600 dark:text-primary-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -85,8 +89,12 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">De Todo México</h3>
-              <p className="text-gray-600">Productos de los 32 estados de la República Mexicana</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">
+                De Todo México
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Productos de los 32 estados de la República Mexicana
+              </p>
             </div>
           </div>
         </div>

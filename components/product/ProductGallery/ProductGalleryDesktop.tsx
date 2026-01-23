@@ -1,30 +1,61 @@
-"use client";
+/**
+ * @fileoverview Desktop product gallery component
+ * Feature-rich gallery with hover zoom, thumbnail sidebar, keyboard navigation,
+ * and fullscreen modal support for desktop browsers.
+ * @module components/product/ProductGallery/ProductGalleryDesktop
+ */
 
-import { useState, useRef, type MouseEvent } from "react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Play, ZoomIn } from "lucide-react";
-import { ProductGalleryImage } from "./ProductGalleryImage";
-import { ProductGalleryActions } from "./ProductGalleryActions";
+'use client';
 
+import { useState, useRef, type MouseEvent } from 'react';
+import { ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
+import { ProductGalleryImage } from './ProductGalleryImage';
+import { ProductGalleryActions } from './ProductGalleryActions';
+import ThumbnailStrip from '@/components/common/media/ThumbnailStrip';
+
+/**
+ * Media item type for gallery content
+ * @interface MediaItem
+ */
 interface MediaItem {
-  type: "image" | "video";
+  /** Type of media (image or video) */
+  type: 'image' | 'video';
+  /** Media URL */
   url: string;
+  /** Index in the media array */
   index: number;
 }
 
+/**
+ * Props for the ProductGalleryDesktop component
+ * @interface ProductGalleryDesktopProps
+ */
 interface ProductGalleryDesktopProps {
+  /** Array of media items to display */
   mediaItems: MediaItem[];
+  /** Currently selected media index */
   selectedIndex: number;
+  /** Product name for accessibility */
   productName: string;
+  /** Set of loaded image indices */
   loadedImages: Set<number>;
+  /** Set of errored image indices */
   imageErrors: Set<number>;
+  /** Navigate to next item */
   onNext: () => void;
+  /** Navigate to previous item */
   onPrevious: () => void;
+  /** Handle thumbnail selection */
   onThumbnailClick: (index: number) => void;
+  /** Handle image load event */
   onImageLoad: (index: number) => void;
+  /** Handle image error event */
   onImageError: (index: number) => void;
+  /** Open fullscreen modal */
   onOpenModal: () => void;
+  /** Share current image */
   onShare: () => void;
+  /** Download current image */
   onDownload: () => void;
 }
 
@@ -59,7 +90,7 @@ export function ProductGalleryDesktop({
   };
 
   const handleMouseEnter = () => {
-    if (currentItem.type === "image") {
+    if (currentItem.type === 'image') {
       setIsHovering(true);
     }
   };
@@ -78,61 +109,15 @@ export function ProductGalleryDesktop({
       >
         <div className="flex gap-4 h-[450px] lg:h-[500px] xl:h-[550px]">
           {/* Thumbnails sidebar */}
-          <nav
-            className="shrink-0 w-20 lg:w-24 h-full"
-            aria-label="Miniaturas de imágenes"
-            role="tablist"
-            aria-orientation="vertical"
-          >
-            <div className="flex flex-col gap-3 overflow-y-auto custom-scrollbar h-full w-full">
-              {mediaItems.map((item, index) => (
-                <button
-                  key={index}
-                  role="tab"
-                  aria-selected={selectedIndex === index}
-                  aria-controls={`image-${index}`}
-                  onClick={() => onThumbnailClick(index)}
-                  className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all shrink-0 focus:outline-hidden focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 active:scale-95 ${
-                    selectedIndex === index
-                      ? "border-primary-600 ring-2 ring-primary-200"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
-                  aria-label={`${item.type === "video" ? "Video" : "Imagen"} ${index + 1} de ${mediaItems.length}`}
-                >
-                  {item.type === "image" ? (
-                    <>
-                      {!loadedImages.has(index) && (
-                        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-                      )}
-                      <Image
-                        src={item.url}
-                        alt=""
-                        fill
-                        sizes="96px"
-                        className="object-cover"
-                        loading="lazy"
-                        onLoad={() => onImageLoad(index)}
-                        onError={() => onImageError(index)}
-                      />
-                    </>
-                  ) : (
-                    <div className="relative w-full h-full bg-gray-900">
-                      <video
-                        src={item.url}
-                        className="w-full h-full object-cover"
-                        muted
-                        aria-hidden="true"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                        <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
-                          <Play className="w-4 h-4 text-gray-900 ml-0.5" aria-hidden="true" />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
+          <nav className="shrink-0 w-20 lg:w-24 h-full" aria-label="Miniaturas de imágenes">
+            <ThumbnailStrip
+              items={mediaItems.map((item) => ({ type: item.type, url: item.url }))}
+              currentIndex={selectedIndex}
+              onSelect={onThumbnailClick}
+              orientation="vertical"
+              size="lg"
+              className="h-full"
+            />
           </nav>
 
           {/* Main image area */}
@@ -142,7 +127,7 @@ export function ProductGalleryDesktop({
               role="tabpanel"
               className="relative w-full h-full bg-gray-100 rounded-xl overflow-hidden group"
             >
-              {currentItem.type === "image" ? (
+              {currentItem.type === 'image' ? (
                 <div
                   ref={imageRef}
                   onMouseMove={handleMouseMove}
@@ -154,7 +139,7 @@ export function ProductGalleryDesktop({
                   role="button"
                   aria-label={`Ampliar imagen ${selectedIndex + 1} de ${mediaItems.length}. Presiona Enter para ver en pantalla completa`}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
+                    if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
                       onOpenModal();
                     }
@@ -171,7 +156,7 @@ export function ProductGalleryDesktop({
                     priority={selectedIndex === 0}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
                     className={`transition-all duration-300 ${
-                      isHovering ? "scale-150" : "scale-100"
+                      isHovering ? 'scale-150' : 'scale-100'
                     }`}
                     style={
                       isHovering

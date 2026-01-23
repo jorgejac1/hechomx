@@ -1,19 +1,35 @@
+/**
+ * @fileoverview Seller/artisan profile section component
+ * Displays artisan information, verification status, statistics, and action buttons.
+ * Shows trust score, commission rate, and links to artisan story/shop.
+ * @module components/product/SellerProfile
+ */
+
 'use client';
 
 import { useState } from 'react';
-import { CheckCircle, MessageCircle, Store, BookOpen, Sparkles } from 'lucide-react';
+import { CheckCircle, MessageCircle, Store, BookOpen, Sparkles, HelpCircle } from 'lucide-react';
 import Button from '@/components/common/Button';
 import ContactModal from '@/components/contact/ContactModal';
+import Popover from '@/components/common/Popover';
 import { VerificationBadgeWithTooltip } from '@/components/common/VerificationBadge';
 import type { ExtendedMakerProfile } from '@/lib/types/seller-types';
 import { getArtisanIdFromMaker, hasArtisanStory } from '@/lib/utils/artisan';
-import { getShopUrlFromMaker, hasShop } from '@/lib/utils/shop';
+import { getShopUrlFromMaker, hasShop } from '@/lib/utils/shop-utils';
 import { ROUTES } from '@/lib';
 
+/**
+ * Props for the SellerProfile component
+ * @interface SellerProfileProps
+ */
 interface SellerProfileProps {
+  /** Artisan/maker name */
   maker: string;
+  /** Whether the seller is verified */
   verified: boolean;
+  /** Seller's state/location */
   state: string;
+  /** Extended maker profile with verification details */
   makerProfile?: ExtendedMakerProfile;
 }
 
@@ -67,7 +83,30 @@ export default function SellerProfile({
             {makerProfile?.verification?.level && (
               <div className="flex gap-3 mt-2 text-xs text-gray-600">
                 <span>Comisión: {makerProfile.verification.commissionRate}%</span>
-                <span>Trust Score: {makerProfile.verification.trustScore}/100</span>
+                <Popover
+                  trigger="hover"
+                  placement="bottom-start"
+                  width={280}
+                  header="¿Qué es el Trust Score?"
+                  content={
+                    <div className="space-y-2 text-sm">
+                      <p className="text-gray-700">
+                        El Trust Score indica la confiabilidad del artesano basado en:
+                      </p>
+                      <ul className="text-gray-600 space-y-1 list-disc list-inside">
+                        <li>Historial de ventas completadas</li>
+                        <li>Calificaciones de clientes</li>
+                        <li>Tiempo de respuesta</li>
+                        <li>Verificación de identidad</li>
+                      </ul>
+                    </div>
+                  }
+                >
+                  <span className="inline-flex items-center gap-1 cursor-help hover:text-gray-900 transition-colors">
+                    Trust Score: {makerProfile.verification.trustScore}/100
+                    <HelpCircle className="w-3 h-3" />
+                  </span>
+                </Popover>
               </div>
             )}
           </div>

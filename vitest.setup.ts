@@ -65,6 +65,9 @@ Object.defineProperty(window, 'ResizeObserver', {
   value: MockResizeObserver,
 });
 
+// Mock scrollIntoView (not available in JSDOM)
+Element.prototype.scrollIntoView = vi.fn();
+
 // Reset localStorage before each test
 beforeEach(() => {
   localStorage.clear();
