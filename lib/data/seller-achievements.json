@@ -1,0 +1,485 @@
+{
+  "vendedor@ejemplo.com": {
+    "userId": "vendedor@ejemplo.com",
+    "userType": "seller",
+    "achievements": [
+      {
+        "id": "s-first-sale",
+        "status": "unlocked",
+        "currentValue": 156,
+        "progress": 100,
+        "unlockedAt": "2023-06-15T00:00:00Z"
+      },
+      {
+        "id": "s-first-review",
+        "status": "unlocked",
+        "currentValue": 45,
+        "progress": 100,
+        "unlockedAt": "2023-06-20T00:00:00Z"
+      },
+      {
+        "id": "s-profile-complete",
+        "status": "unlocked",
+        "currentValue": 100,
+        "progress": 100,
+        "unlockedAt": "2023-06-10T00:00:00Z"
+      },
+      {
+        "id": "s-sales-10",
+        "status": "unlocked",
+        "currentValue": 156,
+        "progress": 100,
+        "unlockedAt": "2023-07-15T00:00:00Z"
+      },
+      {
+        "id": "s-sales-50",
+        "status": "unlocked",
+        "currentValue": 156,
+        "progress": 100,
+        "unlockedAt": "2023-10-20T00:00:00Z"
+      },
+      {
+        "id": "s-sales-100",
+        "status": "unlocked",
+        "currentValue": 156,
+        "progress": 100,
+        "unlockedAt": "2024-02-15T00:00:00Z"
+      },
+      {
+        "id": "s-sales-500",
+        "status": "in_progress",
+        "currentValue": 156,
+        "progress": 31
+      },
+      {
+        "id": "s-revenue-5k",
+        "status": "unlocked",
+        "currentValue": 85600,
+        "progress": 100,
+        "unlockedAt": "2023-07-25T00:00:00Z"
+      },
+      {
+        "id": "s-revenue-25k",
+        "status": "unlocked",
+        "currentValue": 85600,
+        "progress": 100,
+        "unlockedAt": "2023-11-10T00:00:00Z"
+      },
+      {
+        "id": "s-revenue-100k",
+        "status": "in_progress",
+        "currentValue": 85600,
+        "progress": 86
+      },
+      {
+        "id": "s-revenue-500k",
+        "status": "locked",
+        "currentValue": 85600,
+        "progress": 17
+      },
+      {
+        "id": "s-rating-4.5",
+        "status": "unlocked",
+        "currentValue": 4.8,
+        "progress": 100,
+        "unlockedAt": "2023-08-01T00:00:00Z"
+      },
+      {
+        "id": "s-rating-perfect",
+        "status": "locked",
+        "currentValue": 4.8,
+        "progress": 96
+      },
+      {
+        "id": "s-reviews-25",
+        "status": "unlocked",
+        "currentValue": 45,
+        "progress": 100,
+        "unlockedAt": "2023-12-15T00:00:00Z"
+      },
+      {
+        "id": "s-reviews-100",
+        "status": "in_progress",
+        "currentValue": 45,
+        "progress": 45
+      },
+      {
+        "id": "s-response-90",
+        "status": "unlocked",
+        "currentValue": 95,
+        "progress": 100,
+        "unlockedAt": "2023-07-10T00:00:00Z"
+      },
+      {
+        "id": "s-response-100",
+        "status": "in_progress",
+        "currentValue": 95,
+        "progress": 95
+      },
+      {
+        "id": "s-repeat-customers",
+        "status": "unlocked",
+        "currentValue": 18,
+        "progress": 100,
+        "unlockedAt": "2024-03-20T00:00:00Z"
+      },
+      {
+        "id": "s-products-10",
+        "status": "unlocked",
+        "currentValue": 24,
+        "progress": 100,
+        "unlockedAt": "2023-06-25T00:00:00Z"
+      },
+      {
+        "id": "s-products-50",
+        "status": "in_progress",
+        "currentValue": 24,
+        "progress": 48
+      },
+      {
+        "id": "s-bestseller",
+        "status": "unlocked",
+        "currentValue": 2,
+        "progress": 100,
+        "unlockedAt": "2024-01-15T00:00:00Z"
+      },
+      {
+        "id": "s-verified",
+        "status": "unlocked",
+        "currentValue": 1,
+        "progress": 100,
+        "unlockedAt": "2023-08-15T00:00:00Z"
+      },
+      {
+        "id": "s-master",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "s-story",
+        "status": "unlocked",
+        "currentValue": 1,
+        "progress": 100,
+        "unlockedAt": "2023-06-12T00:00:00Z"
+      },
+      {
+        "id": "s-month-growth",
+        "status": "unlocked",
+        "currentValue": 35,
+        "progress": 100,
+        "unlockedAt": "2024-11-30T00:00:00Z"
+      },
+      {
+        "id": "s-year-active",
+        "status": "unlocked",
+        "currentValue": 540,
+        "progress": 100,
+        "unlockedAt": "2024-06-15T00:00:00Z"
+      },
+      {
+        "id": "s-consecutive-30",
+        "status": "in_progress",
+        "currentValue": 12,
+        "progress": 40
+      },
+      {
+        "id": "s-sales-1000",
+        "status": "locked",
+        "currentValue": 156,
+        "progress": 16
+      },
+      {
+        "id": "s-fast-responder",
+        "status": "unlocked",
+        "currentValue": 45,
+        "progress": 100,
+        "unlockedAt": "2023-09-15T00:00:00Z"
+      },
+      {
+        "id": "s-same-day-ship-10",
+        "status": "unlocked",
+        "currentValue": 87,
+        "progress": 100,
+        "unlockedAt": "2023-08-20T00:00:00Z"
+      },
+      {
+        "id": "s-same-day-ship-50",
+        "status": "unlocked",
+        "currentValue": 87,
+        "progress": 100,
+        "unlockedAt": "2024-01-25T00:00:00Z"
+      },
+      {
+        "id": "s-speed-demon",
+        "status": "in_progress",
+        "currentValue": 87,
+        "progress": 87
+      },
+      {
+        "id": "s-zero-returns",
+        "status": "in_progress",
+        "currentValue": 42,
+        "progress": 84
+      },
+      {
+        "id": "s-video-1",
+        "status": "unlocked",
+        "currentValue": 3,
+        "progress": 100,
+        "unlockedAt": "2023-11-10T00:00:00Z"
+      },
+      {
+        "id": "s-video-5",
+        "status": "in_progress",
+        "currentValue": 3,
+        "progress": 60
+      },
+      {
+        "id": "s-video-20",
+        "status": "locked",
+        "currentValue": 3,
+        "progress": 15
+      }
+    ],
+    "totalUnlocked": 23,
+    "totalAvailable": 36
+  },
+  "artesano@ejemplo.com": {
+    "userId": "artesano@ejemplo.com",
+    "userType": "seller",
+    "achievements": [
+      {
+        "id": "s-first-sale",
+        "status": "unlocked",
+        "currentValue": 23,
+        "progress": 100,
+        "unlockedAt": "2024-03-10T00:00:00Z"
+      },
+      {
+        "id": "s-first-review",
+        "status": "unlocked",
+        "currentValue": 8,
+        "progress": 100,
+        "unlockedAt": "2024-03-18T00:00:00Z"
+      },
+      {
+        "id": "s-profile-complete",
+        "status": "in_progress",
+        "currentValue": 80,
+        "progress": 80
+      },
+      {
+        "id": "s-sales-10",
+        "status": "unlocked",
+        "currentValue": 23,
+        "progress": 100,
+        "unlockedAt": "2024-05-20T00:00:00Z"
+      },
+      {
+        "id": "s-sales-50",
+        "status": "in_progress",
+        "currentValue": 23,
+        "progress": 46
+      },
+      {
+        "id": "s-sales-100",
+        "status": "locked",
+        "currentValue": 23,
+        "progress": 23
+      },
+      {
+        "id": "s-sales-500",
+        "status": "locked",
+        "currentValue": 23,
+        "progress": 5
+      },
+      {
+        "id": "s-revenue-5k",
+        "status": "unlocked",
+        "currentValue": 12450,
+        "progress": 100,
+        "unlockedAt": "2024-06-10T00:00:00Z"
+      },
+      {
+        "id": "s-revenue-25k",
+        "status": "in_progress",
+        "currentValue": 12450,
+        "progress": 50
+      },
+      {
+        "id": "s-revenue-100k",
+        "status": "locked",
+        "currentValue": 12450,
+        "progress": 12
+      },
+      {
+        "id": "s-revenue-500k",
+        "status": "locked",
+        "currentValue": 12450,
+        "progress": 2
+      },
+      {
+        "id": "s-rating-4.5",
+        "status": "unlocked",
+        "currentValue": 4.9,
+        "progress": 100,
+        "unlockedAt": "2024-04-15T00:00:00Z"
+      },
+      {
+        "id": "s-rating-perfect",
+        "status": "in_progress",
+        "currentValue": 4.9,
+        "progress": 98
+      },
+      {
+        "id": "s-reviews-25",
+        "status": "in_progress",
+        "currentValue": 8,
+        "progress": 32
+      },
+      {
+        "id": "s-reviews-100",
+        "status": "locked",
+        "currentValue": 8,
+        "progress": 8
+      },
+      {
+        "id": "s-response-90",
+        "status": "unlocked",
+        "currentValue": 100,
+        "progress": 100,
+        "unlockedAt": "2024-03-25T00:00:00Z"
+      },
+      {
+        "id": "s-response-100",
+        "status": "unlocked",
+        "currentValue": 100,
+        "progress": 100,
+        "unlockedAt": "2024-03-25T00:00:00Z"
+      },
+      {
+        "id": "s-repeat-customers",
+        "status": "in_progress",
+        "currentValue": 4,
+        "progress": 40
+      },
+      {
+        "id": "s-products-10",
+        "status": "in_progress",
+        "currentValue": 7,
+        "progress": 70
+      },
+      {
+        "id": "s-products-50",
+        "status": "locked",
+        "currentValue": 7,
+        "progress": 14
+      },
+      {
+        "id": "s-bestseller",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "s-verified",
+        "status": "unlocked",
+        "currentValue": 1,
+        "progress": 100,
+        "unlockedAt": "2024-04-01T00:00:00Z"
+      },
+      {
+        "id": "s-master",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "s-story",
+        "status": "unlocked",
+        "currentValue": 1,
+        "progress": 100,
+        "unlockedAt": "2024-03-12T00:00:00Z"
+      },
+      {
+        "id": "s-month-growth",
+        "status": "locked",
+        "currentValue": 8,
+        "progress": 40
+      },
+      {
+        "id": "s-year-active",
+        "status": "in_progress",
+        "currentValue": 290,
+        "progress": 79
+      },
+      {
+        "id": "s-consecutive-30",
+        "status": "locked",
+        "currentValue": 5,
+        "progress": 17
+      },
+      {
+        "id": "s-sales-1000",
+        "status": "locked",
+        "currentValue": 23,
+        "progress": 2
+      },
+      {
+        "id": "s-fast-responder",
+        "status": "unlocked",
+        "currentValue": 15,
+        "progress": 100,
+        "unlockedAt": "2024-04-20T00:00:00Z"
+      },
+      {
+        "id": "s-same-day-ship-10",
+        "status": "unlocked",
+        "currentValue": 18,
+        "progress": 100,
+        "unlockedAt": "2024-06-15T00:00:00Z"
+      },
+      {
+        "id": "s-same-day-ship-50",
+        "status": "in_progress",
+        "currentValue": 18,
+        "progress": 36
+      },
+      {
+        "id": "s-speed-demon",
+        "status": "in_progress",
+        "currentValue": 78,
+        "progress": 78
+      },
+      {
+        "id": "s-zero-returns",
+        "status": "unlocked",
+        "currentValue": 50,
+        "progress": 100,
+        "unlockedAt": "2024-08-01T00:00:00Z"
+      },
+      {
+        "id": "s-video-1",
+        "status": "unlocked",
+        "currentValue": 2,
+        "progress": 100,
+        "unlockedAt": "2024-05-20T00:00:00Z"
+      },
+      {
+        "id": "s-video-5",
+        "status": "in_progress",
+        "currentValue": 2,
+        "progress": 40
+      },
+      {
+        "id": "s-video-20",
+        "status": "locked",
+        "currentValue": 2,
+        "progress": 10
+      }
+    ],
+    "totalUnlocked": 15,
+    "totalAvailable": 36
+  }
+}

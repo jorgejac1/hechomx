@@ -8,7 +8,8 @@ import { useToast } from '@/contexts/ToastContext';
 import { ROUTES } from '@/lib/constants/routes';
 import ProductForm from '@/components/product/ProductForm';
 import type { User } from '@/contexts/AuthContext';
-import { ProductFormData } from '@/types/product';
+import type { ProductFormData, DraftProduct } from '@/types/product';
+import { savePublishedProduct, generateProductId } from '@/lib/utils/products';
 import { Plus, Store, AlertCircle } from 'lucide-react';
 import Alert from '@/components/common/Alert';
 
@@ -50,15 +51,33 @@ function CreateProductContent({ user }: { user: User }) {
   };
 
   const handleSubmit = async (data: ProductFormData) => {
-    console.log('Product data:', data);
+    try {
+      // Create the product object with all required fields
+      const productId = generateProductId();
+      const now = new Date().toISOString();
+      const sellerName = user.makerProfile?.shopName || shopName || user.name || 'Vendedor';
 
-    // TODO: Save product to backend/database
+      const product: DraftProduct = {
+        ...data,
+        id: productId,
+        createdAt: now,
+        updatedAt: now,
+        sellerId: user.email,
+        sellerName,
+        status: 'published',
+      };
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Save to localStorage
+      savePublishedProduct(product);
 
-    showToast('¡Producto publicado exitosamente!', 'success');
-    router.push(ROUTES.DASHBOARD);
+      console.log('[CreateProduct] Product saved:', product);
+
+      showToast('¡Producto publicado exitosamente!', 'success');
+      router.push(ROUTES.DASHBOARD);
+    } catch (error) {
+      console.error('[CreateProduct] Error saving product:', error);
+      showToast('Error al publicar el producto. Intenta de nuevo.', 'error');
+    }
   };
 
   return (

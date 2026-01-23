@@ -22,6 +22,7 @@ export const ROUTES = {
   PROFILE: '/perfil',
   MI_IMPACTO: '/mi-impacto',
   MY_IMPACT: '/mi-impacto', // Alias for MI_IMPACTO
+  ACHIEVEMENTS: '/mi-impacto/logros',
   DASHBOARD: '/dashboard',
   ORDERS: '/pedidos',
   WISHLIST: '/favoritos',

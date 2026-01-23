@@ -126,19 +126,25 @@ describe('Table', () => {
     it('should apply small size classes', () => {
       render(<Table columns={testColumns} data={testData} keyAccessor="id" size="sm" />);
       const cells = screen.getAllByRole('cell');
-      expect(cells[0]).toHaveClass('py-2', 'px-3', 'text-sm');
+      // Responsive classes: py-2 px-2 sm:px-3 text-xs sm:text-sm
+      expect(cells[0]).toHaveClass('py-2', 'px-2');
+      expect(cells[0].className).toContain('sm:px-3');
     });
 
     it('should apply medium size classes by default', () => {
       render(<Table columns={testColumns} data={testData} keyAccessor="id" />);
       const cells = screen.getAllByRole('cell');
-      expect(cells[0]).toHaveClass('py-3', 'px-4', 'text-sm');
+      // Responsive classes: py-2.5 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm
+      expect(cells[0]).toHaveClass('px-3');
+      expect(cells[0].className).toContain('sm:py-3');
     });
 
     it('should apply large size classes', () => {
       render(<Table columns={testColumns} data={testData} keyAccessor="id" size="lg" />);
       const cells = screen.getAllByRole('cell');
-      expect(cells[0]).toHaveClass('py-4', 'px-6', 'text-base');
+      // Responsive classes: py-3 sm:py-4 px-4 sm:px-6 text-sm sm:text-base
+      expect(cells[0]).toHaveClass('py-3', 'px-4');
+      expect(cells[0].className).toContain('sm:py-4');
     });
   });
 

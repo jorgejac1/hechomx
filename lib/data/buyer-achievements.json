@@ -1,0 +1,482 @@
+{
+  "juan@ejemplo.com": {
+    "userId": "juan@ejemplo.com",
+    "userType": "buyer",
+    "achievements": [
+      {
+        "id": "b-first-purchase",
+        "status": "unlocked",
+        "currentValue": 8,
+        "progress": 100,
+        "unlockedAt": "2024-02-10T00:00:00Z"
+      },
+      {
+        "id": "b-first-review",
+        "status": "unlocked",
+        "currentValue": 12,
+        "progress": 100,
+        "unlockedAt": "2024-02-15T00:00:00Z"
+      },
+      {
+        "id": "b-first-favorite",
+        "status": "unlocked",
+        "currentValue": 12,
+        "progress": 100,
+        "unlockedAt": "2024-02-12T00:00:00Z"
+      },
+      {
+        "id": "b-states-3",
+        "status": "unlocked",
+        "currentValue": 5,
+        "progress": 100,
+        "unlockedAt": "2024-05-10T00:00:00Z"
+      },
+      {
+        "id": "b-states-10",
+        "status": "in_progress",
+        "currentValue": 5,
+        "progress": 50
+      },
+      {
+        "id": "b-states-20",
+        "status": "locked",
+        "currentValue": 5,
+        "progress": 25
+      },
+      {
+        "id": "b-all-states",
+        "status": "locked",
+        "currentValue": 5,
+        "progress": 16
+      },
+      {
+        "id": "b-artisans-5",
+        "status": "unlocked",
+        "currentValue": 8,
+        "progress": 100,
+        "unlockedAt": "2024-05-10T00:00:00Z"
+      },
+      {
+        "id": "b-artisans-15",
+        "status": "in_progress",
+        "currentValue": 8,
+        "progress": 53
+      },
+      {
+        "id": "b-artisans-50",
+        "status": "locked",
+        "currentValue": 8,
+        "progress": 16
+      },
+      {
+        "id": "b-repeat-buyer",
+        "status": "unlocked",
+        "currentValue": 3,
+        "progress": 100,
+        "unlockedAt": "2024-06-15T00:00:00Z"
+      },
+      {
+        "id": "b-eco-10kg",
+        "status": "unlocked",
+        "currentValue": 45.5,
+        "progress": 100,
+        "unlockedAt": "2024-04-20T00:00:00Z"
+      },
+      {
+        "id": "b-eco-50kg",
+        "status": "in_progress",
+        "currentValue": 45.5,
+        "progress": 91
+      },
+      {
+        "id": "b-eco-100kg",
+        "status": "locked",
+        "currentValue": 45.5,
+        "progress": 46
+      },
+      {
+        "id": "b-orders-10",
+        "status": "in_progress",
+        "currentValue": 8,
+        "progress": 80
+      },
+      {
+        "id": "b-orders-25",
+        "status": "locked",
+        "currentValue": 8,
+        "progress": 32
+      },
+      {
+        "id": "b-orders-50",
+        "status": "locked",
+        "currentValue": 8,
+        "progress": 16
+      },
+      {
+        "id": "b-orders-100",
+        "status": "locked",
+        "currentValue": 8,
+        "progress": 8
+      },
+      {
+        "id": "b-cat-3",
+        "status": "unlocked",
+        "currentValue": 4,
+        "progress": 100,
+        "unlockedAt": "2024-03-25T00:00:00Z"
+      },
+      {
+        "id": "b-cat-all",
+        "status": "in_progress",
+        "currentValue": 4,
+        "progress": 40
+      },
+      {
+        "id": "b-reviews-5",
+        "status": "unlocked",
+        "currentValue": 12,
+        "progress": 100,
+        "unlockedAt": "2024-04-10T00:00:00Z"
+      },
+      {
+        "id": "b-reviews-15",
+        "status": "in_progress",
+        "currentValue": 12,
+        "progress": 80
+      },
+      {
+        "id": "b-reviews-50",
+        "status": "locked",
+        "currentValue": 12,
+        "progress": 24
+      },
+      {
+        "id": "b-photo-reviews-10",
+        "status": "in_progress",
+        "currentValue": 6,
+        "progress": 60
+      },
+      {
+        "id": "b-helpful-reviews",
+        "status": "in_progress",
+        "currentValue": 8,
+        "progress": 40
+      },
+      {
+        "id": "b-referral-1",
+        "status": "unlocked",
+        "currentValue": 3,
+        "progress": 100,
+        "unlockedAt": "2024-05-20T00:00:00Z"
+      },
+      {
+        "id": "b-referral-5",
+        "status": "in_progress",
+        "currentValue": 3,
+        "progress": 60
+      },
+      {
+        "id": "b-referral-10",
+        "status": "locked",
+        "currentValue": 3,
+        "progress": 30
+      },
+      {
+        "id": "b-gift-giver",
+        "status": "unlocked",
+        "currentValue": 2,
+        "progress": 100,
+        "unlockedAt": "2024-06-01T00:00:00Z"
+      },
+      {
+        "id": "b-gift-master",
+        "status": "locked",
+        "currentValue": 2,
+        "progress": 20
+      },
+      {
+        "id": "b-wishlist-shared",
+        "status": "unlocked",
+        "currentValue": 15,
+        "progress": 100,
+        "unlockedAt": "2024-03-15T00:00:00Z"
+      },
+      {
+        "id": "b-dia-muertos",
+        "status": "unlocked",
+        "currentValue": 1,
+        "progress": 100,
+        "unlockedAt": "2024-11-02T00:00:00Z"
+      },
+      {
+        "id": "b-navidad",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "b-buen-fin",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "b-early-adopter",
+        "status": "unlocked",
+        "currentValue": 1,
+        "progress": 100,
+        "unlockedAt": "2024-01-15T00:00:00Z"
+      },
+      {
+        "id": "b-night-owl",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "b-big-spender",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      }
+    ],
+    "totalUnlocked": 15,
+    "totalAvailable": 37
+  },
+  "maria@ejemplo.com": {
+    "userId": "maria@ejemplo.com",
+    "userType": "buyer",
+    "achievements": [
+      {
+        "id": "b-first-purchase",
+        "status": "unlocked",
+        "currentValue": 4,
+        "progress": 100,
+        "unlockedAt": "2024-03-10T00:00:00Z"
+      },
+      {
+        "id": "b-first-review",
+        "status": "unlocked",
+        "currentValue": 3,
+        "progress": 100,
+        "unlockedAt": "2024-03-20T00:00:00Z"
+      },
+      {
+        "id": "b-first-favorite",
+        "status": "unlocked",
+        "currentValue": 6,
+        "progress": 100,
+        "unlockedAt": "2024-03-15T00:00:00Z"
+      },
+      {
+        "id": "b-states-3",
+        "status": "in_progress",
+        "currentValue": 2,
+        "progress": 67
+      },
+      {
+        "id": "b-states-10",
+        "status": "locked",
+        "currentValue": 2,
+        "progress": 20
+      },
+      {
+        "id": "b-states-20",
+        "status": "locked",
+        "currentValue": 2,
+        "progress": 10
+      },
+      {
+        "id": "b-all-states",
+        "status": "locked",
+        "currentValue": 2,
+        "progress": 6
+      },
+      {
+        "id": "b-artisans-5",
+        "status": "in_progress",
+        "currentValue": 3,
+        "progress": 60
+      },
+      {
+        "id": "b-artisans-15",
+        "status": "locked",
+        "currentValue": 3,
+        "progress": 20
+      },
+      {
+        "id": "b-artisans-50",
+        "status": "locked",
+        "currentValue": 3,
+        "progress": 6
+      },
+      {
+        "id": "b-repeat-buyer",
+        "status": "in_progress",
+        "currentValue": 2,
+        "progress": 67
+      },
+      {
+        "id": "b-eco-10kg",
+        "status": "unlocked",
+        "currentValue": 22.8,
+        "progress": 100,
+        "unlockedAt": "2024-05-15T00:00:00Z"
+      },
+      {
+        "id": "b-eco-50kg",
+        "status": "in_progress",
+        "currentValue": 22.8,
+        "progress": 46
+      },
+      {
+        "id": "b-eco-100kg",
+        "status": "locked",
+        "currentValue": 22.8,
+        "progress": 23
+      },
+      {
+        "id": "b-orders-10",
+        "status": "in_progress",
+        "currentValue": 4,
+        "progress": 40
+      },
+      {
+        "id": "b-orders-25",
+        "status": "locked",
+        "currentValue": 4,
+        "progress": 16
+      },
+      {
+        "id": "b-orders-50",
+        "status": "locked",
+        "currentValue": 4,
+        "progress": 8
+      },
+      {
+        "id": "b-orders-100",
+        "status": "locked",
+        "currentValue": 4,
+        "progress": 4
+      },
+      {
+        "id": "b-cat-3",
+        "status": "in_progress",
+        "currentValue": 2,
+        "progress": 67
+      },
+      {
+        "id": "b-cat-all",
+        "status": "locked",
+        "currentValue": 2,
+        "progress": 20
+      },
+      {
+        "id": "b-reviews-5",
+        "status": "in_progress",
+        "currentValue": 3,
+        "progress": 60
+      },
+      {
+        "id": "b-reviews-15",
+        "status": "locked",
+        "currentValue": 3,
+        "progress": 20
+      },
+      {
+        "id": "b-reviews-50",
+        "status": "locked",
+        "currentValue": 3,
+        "progress": 6
+      },
+      {
+        "id": "b-photo-reviews-10",
+        "status": "in_progress",
+        "currentValue": 2,
+        "progress": 20
+      },
+      {
+        "id": "b-helpful-reviews",
+        "status": "locked",
+        "currentValue": 1,
+        "progress": 5
+      },
+      {
+        "id": "b-referral-1",
+        "status": "unlocked",
+        "currentValue": 1,
+        "progress": 100,
+        "unlockedAt": "2024-06-10T00:00:00Z"
+      },
+      {
+        "id": "b-referral-5",
+        "status": "locked",
+        "currentValue": 1,
+        "progress": 20
+      },
+      {
+        "id": "b-referral-10",
+        "status": "locked",
+        "currentValue": 1,
+        "progress": 10
+      },
+      {
+        "id": "b-gift-giver",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "b-gift-master",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "b-wishlist-shared",
+        "status": "in_progress",
+        "currentValue": 6,
+        "progress": 60
+      },
+      {
+        "id": "b-dia-muertos",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "b-navidad",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "b-buen-fin",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "b-early-adopter",
+        "status": "unlocked",
+        "currentValue": 1,
+        "progress": 100,
+        "unlockedAt": "2024-02-20T00:00:00Z"
+      },
+      {
+        "id": "b-night-owl",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      },
+      {
+        "id": "b-big-spender",
+        "status": "locked",
+        "currentValue": 0,
+        "progress": 0
+      }
+    ],
+    "totalUnlocked": 7,
+    "totalAvailable": 37
+  }
+}

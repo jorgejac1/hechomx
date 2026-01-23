@@ -16,6 +16,7 @@ import EmptyCart from './EmptyCart';
 import { useToast } from '@/contexts/ToastContext';
 import RecommendedProducts from './RecommendedProducts';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
+import ConfirmActionModal from '@/components/common/ConfirmActionModal';
 import { ArrowLeft, ShoppingBag } from 'lucide-react';
 import { Product } from '@/types';
 
@@ -24,6 +25,7 @@ export default function CartPageClient() {
   const { cartItems, cartCount, clearCart } = useCart();
   const [isHydrated, setIsHydrated] = useState(false);
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
+  const [showClearCartModal, setShowClearCartModal] = useState(false);
   const router = useRouter();
 
   // Wait for hydration
@@ -87,12 +89,7 @@ export default function CartPageClient() {
             </div>
 
             <button
-              onClick={() => {
-                if (window.confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
-                  clearCart();
-                  info('Carrito vaciado');
-                }
-              }}
+              onClick={() => setShowClearCartModal(true)}
               className="text-sm text-red-600 hover:text-red-700 font-medium hover:underline"
             >
               Vaciar carrito
@@ -204,6 +201,21 @@ export default function CartPageClient() {
           </div>
         </div>
       </div>
+
+      {/* Clear Cart Confirmation Modal */}
+      <ConfirmActionModal
+        isOpen={showClearCartModal}
+        onClose={() => setShowClearCartModal(false)}
+        onConfirm={() => {
+          clearCart();
+          setShowClearCartModal(false);
+          info('Carrito vaciado');
+        }}
+        title="Vaciar carrito"
+        message="¿Estás seguro de que quieres eliminar todos los productos de tu carrito? Esta acción no se puede deshacer."
+        confirmLabel="Vaciar carrito"
+        confirmVariant="danger"
+      />
     </div>
   );
 }

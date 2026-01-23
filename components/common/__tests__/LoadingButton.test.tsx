@@ -100,20 +100,23 @@ describe('LoadingButton', () => {
     it('should render medium size by default', () => {
       render(<LoadingButton>Submit</LoadingButton>);
       const button = screen.getByRole('button');
-      // Medium uses px-3 sm:px-4
-      expect(button.className).toContain('py-1.5');
+      // Medium uses responsive classes: px-3 sm:px-4 py-2 sm:py-2
+      expect(button.className).toContain('py-2');
+      expect(button.className).toContain('px-3');
     });
 
     it('should render small size', () => {
       render(<LoadingButton size="sm">Submit</LoadingButton>);
       const button = screen.getByRole('button');
-      expect(button.className).toContain('py-1');
+      // Small uses responsive classes: px-2 sm:px-3 py-1.5 sm:py-1.5
+      expect(button.className).toContain('py-1.5');
     });
 
     it('should render large size', () => {
       render(<LoadingButton size="lg">Submit</LoadingButton>);
       const button = screen.getByRole('button');
-      expect(button.className).toContain('py-2');
+      // Large uses responsive classes: px-4 sm:px-6 py-2.5 sm:py-3
+      expect(button.className).toContain('py-2.5');
     });
   });
 

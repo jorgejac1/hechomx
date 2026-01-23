@@ -12,6 +12,7 @@ import ProductsTab from '@/components/dashboard/tabs/ProductsTab';
 import ReviewsTab from '@/components/dashboard/tabs/ReviewsTab';
 import AnalyticsDashboard from '@/components/dashboard/AnalyticsDashboard';
 import CustomerInsights from '@/components/dashboard/CustomerInsights';
+import AchievementsTab from '@/components/dashboard/tabs/AchievementsTab';
 import LazyLoad from '@/components/common/LazyLoad';
 import Skeleton from '@/components/common/loading/Skeleton';
 import { CompleteOrder } from '@/lib/types/checkout';
@@ -58,7 +59,7 @@ function DashboardContent({ user }: DashboardContentProps) {
   const shopName = makerProfile.shopName;
 
   const [activeTab, setActiveTab] = useState<
-    'overview' | 'analytics' | 'customers' | 'orders' | 'products' | 'reviews'
+    'overview' | 'analytics' | 'customers' | 'achievements' | 'orders' | 'products' | 'reviews'
   >('overview');
   const [newOrders, setNewOrders] = useState<CompleteOrder[]>([]);
   const hasLoadedOrders = useRef(false);
@@ -80,7 +81,16 @@ function DashboardContent({ user }: DashboardContentProps) {
   }, [newOrders.length, shopName]);
 
   const handleTabChange = useCallback(
-    (tab: 'overview' | 'analytics' | 'customers' | 'orders' | 'products' | 'reviews') => {
+    (
+      tab:
+        | 'overview'
+        | 'analytics'
+        | 'customers'
+        | 'achievements'
+        | 'orders'
+        | 'products'
+        | 'reviews'
+    ) => {
       setActiveTab(tab);
       if (tab === 'orders' && newOrders.length > 0) {
         markAllOrdersAsSeen(shopName);
@@ -131,6 +141,11 @@ function DashboardContent({ user }: DashboardContentProps) {
             {activeTab === 'customers' && (
               <LazyLoad fallback={<DashboardSectionSkeleton />}>
                 <CustomerInsights userEmail={user.email} />
+              </LazyLoad>
+            )}
+            {activeTab === 'achievements' && (
+              <LazyLoad fallback={<DashboardSectionSkeleton />}>
+                <AchievementsTab userEmail={user.email} />
               </LazyLoad>
             )}
             {activeTab === 'orders' && <OrdersTab orders={makerProfile.recentOrders} />}

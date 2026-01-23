@@ -6,12 +6,19 @@
  * @module components/dashboard/TabNavigation
  */
 
-import { BarChart3, Users } from 'lucide-react';
+import { BarChart3, Users, Trophy } from 'lucide-react';
 
 /**
  * Available tab identifiers for dashboard navigation.
  */
-type TabType = 'overview' | 'analytics' | 'customers' | 'orders' | 'products' | 'reviews';
+type TabType =
+  | 'overview'
+  | 'analytics'
+  | 'customers'
+  | 'achievements'
+  | 'orders'
+  | 'products'
+  | 'reviews';
 
 /**
  * @interface TabNavigationProps
@@ -30,6 +37,8 @@ interface TabNavigationProps {
   reviewCount: number;
   /** Number of new orders for notification badge */
   newOrderCount?: number;
+  /** Number of unseen achievements for notification badge */
+  achievementBadge?: number;
 }
 
 export default function TabNavigation({
@@ -39,11 +48,19 @@ export default function TabNavigation({
   productCount,
   reviewCount,
   newOrderCount = 0,
+  achievementBadge = 0,
 }: TabNavigationProps) {
   const tabs = [
     { id: 'overview' as TabType, label: 'Resumen', count: null, icon: null, badge: null },
     { id: 'analytics' as TabType, label: 'Análisis', count: null, icon: BarChart3, badge: null },
     { id: 'customers' as TabType, label: 'Clientes', count: null, icon: Users, badge: null },
+    {
+      id: 'achievements' as TabType,
+      label: 'Logros',
+      count: null,
+      icon: Trophy,
+      badge: achievementBadge > 0 ? achievementBadge : null,
+    },
     {
       id: 'orders' as TabType,
       label: 'Pedidos',

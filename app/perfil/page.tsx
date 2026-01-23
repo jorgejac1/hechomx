@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
@@ -10,6 +10,9 @@ import { validate } from '@/validators/utils';
 import { ROUTES, formatRelativeTime } from '@/lib';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import SellerSetupForm from '@/components/profile/SellerSetupForm';
+import { AchievementBadge } from '@/components/achievements';
+import { BUYER_ACHIEVEMENTS } from '@/lib/constants/achievements';
+import type { Achievement } from '@/lib/types/achievements';
 import type { User } from '@/contexts/AuthContext';
 import {
   User as UserIcon,
@@ -28,6 +31,7 @@ import {
   CheckCircle2,
   TrendingUp,
   Store,
+  Trophy,
 } from 'lucide-react';
 import Alert from '@/components/common/Alert';
 import Divider from '@/components/common/Divider';
@@ -53,11 +57,43 @@ function ProfileContent({ user }: { user: User }) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [successMessage, setSuccessMessage] = useState('');
   const [showSellerSetup, setShowSellerSetup] = useState(false);
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [formData, setFormData] = useState<Omit<UpdateProfileInput, 'avatar'>>({
     name: user.name || '',
     email: user.email || '',
     phone: user.phone || undefined,
   });
+
+  // Load user achievements
+  useEffect(() => {
+    async function loadAchievements() {
+      try {
+        const response = await fetch('/api/buyer/achievements');
+        const result = await response.json();
+        if (result.success && result.data) {
+          const userData = result.data[user.email];
+          if (userData) {
+            const mergedAchievements: Achievement[] = BUYER_ACHIEVEMENTS.map((def) => {
+              const userProgress = userData.achievements.find(
+                (a: { id: string }) => a.id === def.id
+              );
+              return {
+                ...def,
+                status: userProgress?.status || 'locked',
+                currentValue: userProgress?.currentValue || 0,
+                progress: userProgress?.progress || 0,
+                unlockedAt: userProgress?.unlockedAt,
+              };
+            });
+            setAchievements(mergedAchievements);
+          }
+        }
+      } catch (error) {
+        console.error('[ProfilePage] Error loading achievements:', error);
+      }
+    }
+    loadAchievements();
+  }, [user.email]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -202,6 +238,22 @@ function ProfileContent({ user }: { user: User }) {
                     Miembro desde {memberSince}
                   </p>
                 </div>
+
+                {/* Achievement Badges */}
+                {achievements.length > 0 && (
+                  <div className="mt-4 w-full">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Trophy className="w-4 h-4 text-accent-600" />
+                      <span className="text-sm font-medium text-gray-700">Mis Logros</span>
+                    </div>
+                    <AchievementBadge
+                      achievements={achievements}
+                      maxDisplay={4}
+                      size="sm"
+                      userType="buyer"
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Quick Actions */}

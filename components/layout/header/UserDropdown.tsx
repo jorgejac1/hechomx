@@ -25,6 +25,7 @@ import {
   BarChart3,
   Settings,
   FileCheck,
+  Trophy,
 } from 'lucide-react';
 import { ROUTES } from '@/lib/constants/routes';
 import { getShopSlug } from '@/lib/utils/shop-utils';
@@ -275,6 +276,12 @@ export default function UserDropdown({ user, isAdmin, onLogout }: UserDropdownPr
                 href={ROUTES.MY_IMPACT}
                 icon={<Sparkles className="w-4 h-4" />}
                 label="Mi Impacto"
+                onClick={closeMenu}
+              />
+              <MenuItem
+                href={ROUTES.ACHIEVEMENTS}
+                icon={<Trophy className="w-4 h-4" />}
+                label="Mis Logros"
                 onClick={closeMenu}
               />
 

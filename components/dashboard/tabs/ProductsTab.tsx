@@ -8,7 +8,7 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -28,6 +28,26 @@ import { formatCurrency } from '@/lib';
 import { ROUTES } from '@/lib';
 import { SellerProduct } from '@/lib/types';
 import { useToast } from '@/contexts/ToastContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { getPublishedProducts } from '@/lib/utils/products';
+import type { DraftProduct } from '@/types/product';
+
+/**
+ * Convert a DraftProduct from localStorage to SellerProduct format
+ */
+function convertToSellerProduct(draft: DraftProduct): SellerProduct {
+  return {
+    id: draft.id,
+    name: draft.name,
+    image: draft.images[0] || '/images/placeholder-product.jpg',
+    price: draft.price,
+    stock: draft.stock,
+    sold: 0,
+    views: 0,
+    favorites: 0,
+    status: draft.stock > 0 ? 'active' : 'out_of_stock',
+  };
+}
 
 /**
  * @interface ProductsTabProps
@@ -39,9 +59,28 @@ interface ProductsTabProps {
 }
 
 export default function ProductsTab({ products: initialProducts }: ProductsTabProps) {
+  const { user } = useAuth();
   const [products, setProducts] = useState<SellerProduct[]>(initialProducts);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const { showToast } = useToast();
+
+  // Load products from localStorage and merge with initial products
+  useEffect(() => {
+    if (!user?.email) return;
+
+    try {
+      const localProducts = getPublishedProducts(user.email);
+      if (localProducts.length > 0) {
+        const convertedProducts = localProducts.map(convertToSellerProduct);
+        // Merge: localStorage products first (newest), then initial products that aren't duplicates
+        const existingIds = new Set(convertedProducts.map((p) => p.id));
+        const uniqueInitialProducts = initialProducts.filter((p) => !existingIds.has(p.id));
+        setProducts([...convertedProducts, ...uniqueInitialProducts]);
+      }
+    } catch (error) {
+      console.error('[ProductsTab] Error loading localStorage products:', error);
+    }
+  }, [user?.email, initialProducts]);
 
   const allSelected = products.length > 0 && selectedIds.size === products.length;
   const someSelected = selectedIds.size > 0 && selectedIds.size < products.length;

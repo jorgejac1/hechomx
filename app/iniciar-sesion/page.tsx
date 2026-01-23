@@ -11,7 +11,7 @@ import Button from '@/components/common/Button';
 import TextInput from '@/components/common/TextInput';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 import Alert from '@/components/common/Alert';
-import { Eye, EyeOff, Mail, Lock, AlertCircle, Shield } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -112,6 +112,7 @@ export default function LoginPage() {
           <Alert variant="info" layout="bordered" className="mb-6">
             <p className="text-sm font-semibold mb-2">🔐 Credenciales de prueba:</p>
             <div className="text-xs space-y-2">
+              {/* Admin credentials hidden in production
               <div className="pb-2 border-b border-blue-300">
                 <p className="font-semibold flex items-center gap-1">
                   <Shield className="w-3 h-3 text-purple-600" />
@@ -124,6 +125,7 @@ export default function LoginPage() {
                   <strong>Password:</strong> Admin123
                 </p>
               </div>
+              */}
               <div>
                 <p className="font-semibold">Usuario Regular:</p>
                 <p>

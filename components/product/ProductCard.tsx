@@ -208,7 +208,7 @@ const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
               {product.verified && (
                 <Tooltip
                   content="Producto verificado por nuestro equipo"
-                  placement="bottom"
+                  placement="right"
                   size="sm"
                 >
                   <div className="bg-green-500 text-white w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center shadow-xs shrink-0">
