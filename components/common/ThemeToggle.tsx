@@ -89,7 +89,7 @@ export default function ThemeToggle({
           <div className="fixed inset-0 z-40" onClick={() => setShowDropdown(false)} />
 
           {/* Dropdown menu */}
-          <div className="absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
+          <div className="absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900/50 border border-gray-200 dark:border-gray-700 py-1 z-50">
             <button
               onClick={() => {
                 setTheme('light');

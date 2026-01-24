@@ -197,7 +197,7 @@ export default function AdminReportesPage() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 text-purple-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">Cargando reportes...</p>
+          <p className="text-gray-600 dark:text-gray-400">Cargando reportes...</p>
         </div>
       </div>
     );
@@ -214,7 +214,7 @@ export default function AdminReportesPage() {
         <div className="mb-8">
           <Link
             href={ROUTES.ADMIN}
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition"
+            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 mb-4 transition"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver al Panel
@@ -223,14 +223,18 @@ export default function AdminReportesPage() {
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <BarChart3 className="w-8 h-8 text-purple-600" />
-                <h1 className="text-3xl font-bold text-gray-900">Reportes y Análisis</h1>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                  Reportes y Análisis
+                </h1>
               </div>
-              <p className="text-gray-600">Estadísticas detalladas de la plataforma</p>
+              <p className="text-gray-600 dark:text-gray-400">
+                Estadísticas detalladas de la plataforma
+              </p>
             </div>
 
             <div className="flex items-center gap-3">
               {/* Time Range Filter */}
-              <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1">
+              <div className="flex items-center gap-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-1">
                 {(['7d', '30d', '90d', '12m'] as TimeRange[]).map((range) => (
                   <button
                     key={range}
@@ -241,7 +245,7 @@ export default function AdminReportesPage() {
                     className={`px-3 py-1.5 text-sm font-medium rounded-md transition ${
                       timeRange === range
                         ? 'bg-purple-600 text-white'
-                        : 'text-gray-600 hover:bg-gray-100'
+                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
                   >
                     {range === '7d' && '7 días'}
@@ -258,7 +262,7 @@ export default function AdminReportesPage() {
                   className={`px-3 py-1.5 text-sm font-medium rounded-md transition ${
                     timeRange === 'custom'
                       ? 'bg-purple-600 text-white'
-                      : 'text-gray-600 hover:bg-gray-100'
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                   }`}
                 >
                   Personalizado
@@ -266,7 +270,7 @@ export default function AdminReportesPage() {
               </div>
 
               {/* Export Button */}
-              <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition text-sm font-medium">
+              <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition text-sm font-medium">
                 <Download className="w-4 h-4" />
                 <span className="hidden sm:inline">Exportar</span>
               </button>
@@ -275,14 +279,16 @@ export default function AdminReportesPage() {
 
           {/* Custom Date Range Picker */}
           {showCustomPicker && (
-            <div className="mt-4 p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+            <div className="mt-4 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm dark:shadow-gray-900/30">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-semibold text-gray-900">Seleccionar rango de fechas</h3>
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Seleccionar rango de fechas
+                </h3>
                 <button
                   onClick={() => setShowCustomPicker(false)}
-                  className="p-1 hover:bg-gray-100 rounded-full transition"
+                  className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition"
                 >
-                  <X className="w-4 h-4 text-gray-500" />
+                  <X className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                 </button>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -303,7 +309,7 @@ export default function AdminReportesPage() {
                 />
               </div>
               {customDateRange.start && customDateRange.end && (
-                <p className="mt-3 text-sm text-gray-600">
+                <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
                   Mostrando datos del{' '}
                   <span className="font-medium">
                     {customDateRange.start.toLocaleDateString('es-MX')}
@@ -353,9 +359,11 @@ export default function AdminReportesPage() {
         {/* Charts Row */}
         <div className="grid lg:grid-cols-2 gap-6 mb-8">
           {/* Revenue by Day */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold text-gray-900">Ingresos por Día</h2>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                Ingresos por Día
+              </h2>
               <Calendar className="w-5 h-5 text-gray-400" />
             </div>
             <HorizontalBarChart
@@ -367,9 +375,11 @@ export default function AdminReportesPage() {
           </div>
 
           {/* Revenue by Category */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold text-gray-900">Ingresos por Categoría</h2>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                Ingresos por Categoría
+              </h2>
               <Filter className="w-5 h-5 text-gray-400" />
             </div>
             <HorizontalBarChart
@@ -382,16 +392,20 @@ export default function AdminReportesPage() {
         </div>
 
         {/* Conversion Funnel */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-6">Embudo de Conversión</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-6 mb-8">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6">
+            Embudo de Conversión
+          </h2>
           <ConversionFunnel steps={funnelSteps} showPercentage />
         </div>
 
         {/* Category Distribution & Progress Stats */}
         <div className="grid lg:grid-cols-2 gap-6 mb-8">
           {/* Donut Chart */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-6">Distribución por Categoría</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-6">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6">
+              Distribución por Categoría
+            </h2>
             <DonutChart
               segments={categoryDistribution}
               size="md"
@@ -402,8 +416,10 @@ export default function AdminReportesPage() {
           </div>
 
           {/* Progress Stats */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-6">Metas del Mes</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-6">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6">
+              Metas del Mes
+            </h2>
             <div className="space-y-6">
               <ProgressStat
                 label="Meta de Ventas"
@@ -441,12 +457,14 @@ export default function AdminReportesPage() {
         {/* Bottom Row */}
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Top Products */}
-          <div className="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-6">
+          <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold text-gray-900">Productos Más Vendidos</h2>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                Productos Más Vendidos
+              </h2>
               <Link
                 href={ROUTES.PRODUCTS}
-                className="text-purple-600 hover:text-purple-700 text-sm font-medium"
+                className="text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 text-sm font-medium"
               >
                 Ver todos
               </Link>
@@ -455,9 +473,9 @@ export default function AdminReportesPage() {
           </div>
 
           {/* Top Sellers */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-bold text-gray-900">Top Vendedores</h2>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">Top Vendedores</h2>
               <Store className="w-5 h-5 text-gray-400" />
             </div>
             <RankedList items={topSellers} showRank showTrend rankColor="purple" />

@@ -61,7 +61,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
 
   if (isLoading) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
         <div className="flex items-center justify-center py-8">
           <Loader2 className="w-6 h-6 text-primary-600 animate-spin" />
         </div>
@@ -83,7 +83,7 @@ export default function QuickActions({ userEmail, shopName }: QuickActionsProps)
     data.pendingReviews.filter((r) => r.needsResponse).length;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Acciones Rápidas</h3>

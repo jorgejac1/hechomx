@@ -252,7 +252,7 @@ export default function Popover({
           aria-modal="false"
           className={`
             absolute z-50
-            bg-white rounded-lg shadow-lg border border-gray-200
+            bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900/50 border border-gray-200 dark:border-gray-700
             ${placementStyles[placement]}
             ${className}
           `}

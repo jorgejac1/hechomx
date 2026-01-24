@@ -52,7 +52,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
 
   if (isLoading) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
         <div className="flex items-center justify-center py-12">
           <Loader2 className="w-8 h-8 text-primary-600 animate-spin" />
         </div>
@@ -62,7 +62,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
 
   if (!data) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
         <p className="text-center text-gray-600 dark:text-gray-400">
           No hay datos de análisis disponibles
         </p>
@@ -95,7 +95,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
   return (
     <div className="space-y-6">
       {/* Header with Time Range Selector */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
             <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
@@ -249,7 +249,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
       </div>
 
       {/* Top Products */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-4 sm:p-6">
         <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
           <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-400" />
           Productos Más Vendidos
@@ -309,7 +309,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Traffic Sources */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-4 sm:p-6">
           <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
             Fuentes de Tráfico
           </h3>
@@ -344,7 +344,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
         </div>
 
         {/* Peak Times */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-4 sm:p-6">
           <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
             <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400" />
             Mejores Horarios
@@ -386,7 +386,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
         </div>
 
         {/* Top Cities */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-4 sm:p-6">
           <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
             <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 dark:text-red-400" />
             Ciudades Principales
@@ -419,7 +419,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
         </div>
 
         {/* Age Groups */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-4 sm:p-6">
           <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
             <Users className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400" />
             Grupos de Edad
@@ -452,7 +452,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
         </div>
 
         {/* Forecast */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-4 sm:p-6">
           <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
             <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-400" />
             Pronóstico

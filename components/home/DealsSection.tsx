@@ -263,7 +263,7 @@ export default function DealsSection() {
                   href={`/productos/${product.id}`}
                   className="shrink-0 w-[70vw] max-w-[280px]"
                 >
-                  <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow h-full flex flex-col">
+                  <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md dark:shadow-gray-900/50 hover:shadow-xl dark:hover:shadow-gray-900/70 transition-shadow h-full flex flex-col">
                     {/* Image */}
                     <div className="relative h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden shrink-0">
                       <Image

@@ -33,7 +33,7 @@ const FavoriteCard = memo(function FavoriteCard({
   onRemove,
 }: FavoriteCardProps) {
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition group">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden hover:shadow-lg dark:hover:shadow-gray-900/70 transition group">
       {/* Image */}
       <Link href={ROUTES.PRODUCT_DETAIL(favorite.id)} className="relative block">
         <div className="relative h-64">

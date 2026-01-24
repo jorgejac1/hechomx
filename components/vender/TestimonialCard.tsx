@@ -25,7 +25,7 @@ export default function TestimonialCard({
   gradientTo,
 }: TestimonialCardProps) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-xl transition">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6 hover:shadow-xl dark:hover:shadow-gray-900/70 transition">
       <div className="flex items-center gap-3 mb-4">
         {avatarUrl ? (
           <Image

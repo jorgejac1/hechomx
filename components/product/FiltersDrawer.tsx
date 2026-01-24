@@ -138,17 +138,17 @@ export default function FiltersDrawer({
 
       {/* Drawer - Left Side */}
       <div
-        className={`fixed top-0 left-0 h-full w-full sm:w-[400px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 h-full w-full sm:w-[400px] bg-white dark:bg-gray-900 shadow-2xl dark:shadow-gray-950/50 z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200 dark:border-gray-700">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Filtros</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Filtros</h2>
               {activeFilterCount > 0 && (
-                <p className="text-sm text-gray-600 mt-0.5">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">
                   {activeFilterCount}{' '}
                   {activeFilterCount === 1 ? 'filtro activo' : 'filtros activos'}
                 </p>
@@ -156,18 +156,20 @@ export default function FiltersDrawer({
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-full transition"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition"
               aria-label="Cerrar filtros"
             >
-              <X className="w-6 h-6 text-gray-900" />
+              <X className="w-6 h-6 text-gray-900 dark:text-gray-100" />
             </button>
           </div>
 
           {/* Scrollable Content */}
           <div className="flex-1 overflow-y-auto">
             {/* Categories Section */}
-            <div className="px-6 py-6 border-b border-gray-100">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Categorías</h3>
+            <div className="px-6 py-6 border-b border-gray-100 dark:border-gray-800">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                Categorías
+              </h3>
               <div className="space-y-1">
                 {/* All Categories Option */}
                 <button
@@ -177,8 +179,8 @@ export default function FiltersDrawer({
                   }}
                   className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base ${
                     filters.categories.length === 0
-                      ? 'bg-primary-100 text-primary-700 font-semibold'
-                      : 'text-gray-700 hover:bg-gray-50'
+                      ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
                   Todas las categorías
@@ -194,8 +196,8 @@ export default function FiltersDrawer({
                       onClick={() => onToggleCategory(category)}
                       className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base flex items-center gap-2 ${
                         filters.categories.includes(category)
-                          ? 'bg-primary-100 text-primary-700 font-semibold'
-                          : 'text-gray-700 hover:bg-gray-50'
+                          ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 font-semibold'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                       }`}
                     >
                       <IconComponent className="w-5 h-5" />
@@ -208,7 +210,7 @@ export default function FiltersDrawer({
                 {hasMoreCategories && (
                   <button
                     onClick={() => setShowAllCategories(!showAllCategories)}
-                    className="w-full text-left px-4 py-3 rounded-lg transition-colors text-base text-primary-600 hover:bg-primary-50 font-medium flex items-center justify-between"
+                    className="w-full text-left px-4 py-3 rounded-lg transition-colors text-base text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 font-medium flex items-center justify-between"
                   >
                     <span>
                       {showAllCategories
@@ -226,8 +228,8 @@ export default function FiltersDrawer({
             </div>
 
             {/* States Section */}
-            <div className="px-6 py-6 border-b border-gray-100">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Estados</h3>
+            <div className="px-6 py-6 border-b border-gray-100 dark:border-gray-800">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Estados</h3>
               <div className="space-y-1">
                 {/* All States Option */}
                 <button
@@ -237,8 +239,8 @@ export default function FiltersDrawer({
                   }}
                   className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base ${
                     filters.states.length === 0
-                      ? 'bg-primary-100 text-primary-700 font-semibold'
-                      : 'text-gray-700 hover:bg-gray-50'
+                      ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
                   Todos los estados
@@ -251,8 +253,8 @@ export default function FiltersDrawer({
                     onClick={() => onToggleState(state)}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base flex items-center gap-2 ${
                       filters.states.includes(state)
-                        ? 'bg-primary-100 text-primary-700 font-semibold'
-                        : 'text-gray-700 hover:bg-gray-50'
+                        ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 font-semibold'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                     }`}
                   >
                     <MapPin className="w-5 h-5" />
@@ -264,7 +266,7 @@ export default function FiltersDrawer({
                 {hasMoreStates && (
                   <button
                     onClick={() => setShowAllStates(!showAllStates)}
-                    className="w-full text-left px-4 py-3 rounded-lg transition-colors text-base text-primary-600 hover:bg-primary-50 font-medium flex items-center justify-between"
+                    className="w-full text-left px-4 py-3 rounded-lg transition-colors text-base text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 font-medium flex items-center justify-between"
                   >
                     <span>
                       {showAllStates ? 'Ver menos' : `Ver ${filterOptions.states.length - 3} más`}
@@ -280,7 +282,7 @@ export default function FiltersDrawer({
             </div>
 
             {/* Price Range Section */}
-            <div className="px-6 py-6 border-b border-gray-100">
+            <div className="px-6 py-6 border-b border-gray-100 dark:border-gray-800">
               <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Precio</h3>
               <div className="space-y-4">
                 <RangeSlider
@@ -295,8 +297,8 @@ export default function FiltersDrawer({
                   range
                   step={100}
                   formatValue={(v) => formatCurrency(v)}
-                  showTooltip
-                  alwaysShowTooltip
+                  showTooltip={false}
+                  showMinMax={false}
                   size="lg"
                   color="primary"
                   ariaLabel="Rango de precio"
@@ -309,16 +311,18 @@ export default function FiltersDrawer({
             </div>
 
             {/* Rating Section */}
-            <div className="px-6 py-6 border-b border-gray-100">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Calificación mínima</h3>
+            <div className="px-6 py-6 border-b border-gray-100 dark:border-gray-800">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                Calificación mínima
+              </h3>
               <div className="space-y-1">
                 {/* Clear rating filter */}
                 <button
                   onClick={() => onUpdateMinRating(0)}
                   className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base ${
                     filters.minRating === 0
-                      ? 'bg-primary-100 text-primary-700 font-semibold'
-                      : 'text-gray-700 hover:bg-gray-50'
+                      ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
                   Todas las calificaciones
@@ -330,8 +334,8 @@ export default function FiltersDrawer({
                     onClick={() => onUpdateMinRating(filters.minRating === rating ? 0 : rating)}
                     className={`w-full px-4 py-3 rounded-lg transition-colors ${
                       filters.minRating === rating
-                        ? 'bg-primary-100 text-primary-700'
-                        : 'hover:bg-gray-50'
+                        ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300'
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-800'
                     }`}
                   >
                     <div className="flex items-center gap-2">
@@ -340,7 +344,9 @@ export default function FiltersDrawer({
                           <svg
                             key={i}
                             className={`w-5 h-5 ${
-                              i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                              i < rating
+                                ? 'text-yellow-400 fill-current'
+                                : 'text-gray-300 dark:text-gray-600'
                             }`}
                             viewBox="0 0 20 20"
                           >
@@ -349,7 +355,7 @@ export default function FiltersDrawer({
                         ))}
                       </div>
                       <span
-                        className={`text-base ${filters.minRating === rating ? 'font-semibold' : ''}`}
+                        className={`text-base text-gray-700 dark:text-gray-300 ${filters.minRating === rating ? 'font-semibold' : ''}`}
                       >
                         y más
                       </span>
@@ -361,14 +367,14 @@ export default function FiltersDrawer({
 
             {/* Other Filters Section */}
             <div className="px-6 py-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Otros</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Otros</h3>
               <div className="space-y-1">
                 <button
                   onClick={onToggleInStock}
                   className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base ${
                     filters.inStock === true
-                      ? 'bg-primary-100 text-primary-700 font-semibold'
-                      : 'text-gray-700 hover:bg-gray-50'
+                      ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
                   Solo productos en stock
@@ -377,8 +383,8 @@ export default function FiltersDrawer({
                   onClick={onToggleVerified}
                   className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base ${
                     filters.verified === true
-                      ? 'bg-primary-100 text-primary-700 font-semibold'
-                      : 'text-gray-700 hover:bg-gray-50'
+                      ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
                   Solo vendedores verificados
@@ -387,8 +393,8 @@ export default function FiltersDrawer({
                   onClick={onToggleFeatured}
                   className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base ${
                     filters.featured === true
-                      ? 'bg-primary-100 text-primary-700 font-semibold'
-                      : 'text-gray-700 hover:bg-gray-50'
+                      ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
                   Solo productos destacados
@@ -398,11 +404,11 @@ export default function FiltersDrawer({
           </div>
 
           {/* Footer - Sticky */}
-          <div className="px-6 py-4 border-t border-gray-200 bg-white">
+          <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
             <button
               onClick={onResetFilters}
               disabled={activeFilterCount === 0}
-              className="w-full py-3 text-center text-base font-semibold text-gray-700 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full py-3 text-center text-base font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Limpiar filtros
             </button>

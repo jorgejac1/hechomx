@@ -23,12 +23,12 @@ export interface ConversionFunnelProps {
 }
 
 const variantStyles = {
-  gray: 'bg-gray-50 text-gray-500',
-  blue: 'bg-blue-50 text-blue-600',
-  purple: 'bg-purple-50 text-purple-600',
-  green: 'bg-green-50 text-green-600',
-  amber: 'bg-amber-50 text-amber-600',
-  red: 'bg-red-50 text-red-600',
+  gray: 'bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400',
+  blue: 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400',
+  purple: 'bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400',
+  green: 'bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400',
+  amber: 'bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400',
+  red: 'bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400',
 };
 
 const iconVariantStyles = {
@@ -41,12 +41,12 @@ const iconVariantStyles = {
 };
 
 const percentageVariantStyles = {
-  gray: 'text-gray-500',
-  blue: 'text-blue-600',
-  purple: 'text-purple-600',
-  green: 'text-green-600',
-  amber: 'text-amber-600',
-  red: 'text-red-600',
+  gray: 'text-gray-500 dark:text-gray-400',
+  blue: 'text-blue-600 dark:text-blue-400',
+  purple: 'text-purple-600 dark:text-purple-400',
+  green: 'text-green-600 dark:text-green-400',
+  amber: 'text-amber-600 dark:text-amber-400',
+  red: 'text-red-600 dark:text-red-400',
 };
 
 export default function ConversionFunnel({
@@ -75,8 +75,10 @@ export default function ConversionFunnel({
                     {step.icon}
                   </div>
                 )}
-                <p className="text-2xl font-bold text-gray-900">{formatValue(step.value)}</p>
-                <p className="text-sm text-gray-600">{step.label}</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {formatValue(step.value)}
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{step.label}</p>
                 {showPercentage && (
                   <p className={`text-xs mt-1 ${percentageVariantStyles[variant]}`}>
                     {percentage}%
@@ -85,7 +87,9 @@ export default function ConversionFunnel({
               </div>
               {showConversionRate && conversionRate && (
                 <div className="absolute -left-2 top-1/2 -translate-y-1/2 hidden md:block">
-                  <span className="text-xs text-gray-400 bg-white px-1">→ {conversionRate}%</span>
+                  <span className="text-xs text-gray-400 bg-white dark:bg-gray-800 px-1">
+                    → {conversionRate}%
+                  </span>
                 </div>
               )}
             </div>

@@ -16,7 +16,7 @@ export default function BenefitCard({
   description,
 }: BenefitCardProps) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-xl transition">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6 hover:shadow-xl dark:hover:shadow-gray-900/70 transition">
       <div
         className={`w-12 h-12 ${iconBg} dark:opacity-80 rounded-lg flex items-center justify-center mb-4`}
       >

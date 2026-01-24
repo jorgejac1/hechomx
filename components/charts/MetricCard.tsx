@@ -20,11 +20,11 @@ export interface MetricCardProps {
 }
 
 const variantStyles = {
-  default: 'bg-white border-gray-200',
-  success: 'bg-green-50 border-green-200',
-  warning: 'bg-amber-50 border-amber-200',
-  purple: 'bg-purple-50 border-purple-200',
-  blue: 'bg-blue-50 border-blue-200',
+  default: 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700',
+  success: 'bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800',
+  warning: 'bg-amber-50 dark:bg-amber-900/30 border-amber-200 dark:border-amber-800',
+  purple: 'bg-purple-50 dark:bg-purple-900/30 border-purple-200 dark:border-purple-800',
+  blue: 'bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-800',
 };
 
 export default function MetricCard({
@@ -42,12 +42,12 @@ export default function MetricCard({
 
   const content = (
     <div
-      className={`rounded-xl border-2 p-6 transition-shadow hover:shadow-md ${variantStyles[variant]} ${className}`}
+      className={`rounded-xl border-2 p-6 transition-shadow hover:shadow-md dark:hover:shadow-gray-900/50 ${variantStyles[variant]} ${className}`}
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className="mt-2 text-3xl font-bold text-gray-900">{value}</p>
+          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</p>
+          <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-gray-100">{value}</p>
           {hasChange && (
             <p
               className={`mt-1 text-sm flex items-center gap-1 ${
@@ -63,11 +63,17 @@ export default function MetricCard({
                 {isPositive ? '+' : ''}
                 {change}%
               </span>
-              {changeLabel && <span className="text-gray-500">{changeLabel}</span>}
+              {changeLabel && (
+                <span className="text-gray-500 dark:text-gray-400">{changeLabel}</span>
+              )}
             </p>
           )}
         </div>
-        {icon && <div className="p-3 bg-white rounded-lg shadow-xs">{icon}</div>}
+        {icon && (
+          <div className="p-3 bg-white dark:bg-gray-700 rounded-lg shadow-xs dark:shadow-gray-900/30">
+            {icon}
+          </div>
+        )}
       </div>
     </div>
   );

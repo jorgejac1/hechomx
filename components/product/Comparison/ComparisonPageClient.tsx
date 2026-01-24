@@ -167,7 +167,7 @@ function ComparisonPageContent() {
 
         {comparisonProducts.length >= 2 && <ComparisonProsCons products={comparisonProducts} />}
 
-        <div className="bg-white rounded-xl shadow-xs p-4 sm:p-6 md:p-8 mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 p-4 sm:p-6 md:p-8 mb-8">
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
             Descripciones
           </h2>

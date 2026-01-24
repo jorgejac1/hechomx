@@ -146,7 +146,7 @@ export default function AdminConfiguracionPage() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 text-purple-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">Cargando configuración...</p>
+          <p className="text-gray-600 dark:text-gray-400">Cargando configuración...</p>
         </div>
       </div>
     );
@@ -161,7 +161,7 @@ export default function AdminConfiguracionPage() {
         <div className="mb-8">
           <Link
             href={ROUTES.ADMIN}
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition"
+            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 mb-4 transition"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver al Panel
@@ -170,20 +170,24 @@ export default function AdminConfiguracionPage() {
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <Settings className="w-8 h-8 text-purple-600" />
-                <h1 className="text-3xl font-bold text-gray-900">Configuración</h1>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                  Configuración
+                </h1>
                 {hasChanges && (
-                  <span className="px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-700 rounded-full">
+                  <span className="px-2 py-0.5 text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded-full">
                     Sin guardar
                   </span>
                 )}
               </div>
-              <p className="text-gray-600">Administra la configuración de la plataforma</p>
+              <p className="text-gray-600 dark:text-gray-400">
+                Administra la configuración de la plataforma
+              </p>
             </div>
             <div className="flex gap-3">
               <button
                 onClick={() => setShowResetConfirm(true)}
                 disabled={isSaving}
-                className="flex items-center gap-2 px-4 py-2.5 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition disabled:opacity-50"
+                className="flex items-center gap-2 px-4 py-2.5 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition disabled:opacity-50"
               >
                 <RotateCcw className="w-4 h-4" />
                 Restablecer
@@ -207,7 +211,7 @@ export default function AdminConfiguracionPage() {
         <div className="grid lg:grid-cols-4 gap-6">
           {/* Sidebar Navigation */}
           <div className="lg:col-span-1">
-            <nav className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <nav className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-gray-900/30 overflow-hidden">
               {sections.map((section) => {
                 const Icon = section.icon;
                 const isActive = activeSection === section.id;
@@ -215,10 +219,10 @@ export default function AdminConfiguracionPage() {
                   <button
                     key={section.id}
                     onClick={() => setActiveSection(section.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 text-left transition border-b border-gray-100 last:border-0 ${
+                    className={`w-full flex items-center gap-3 px-4 py-3 text-left transition border-b border-gray-100 dark:border-gray-700 last:border-0 ${
                       isActive
-                        ? 'bg-purple-50 text-purple-700 border-l-4 border-l-purple-600'
-                        : 'text-gray-700 hover:bg-gray-50'
+                        ? 'bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 border-l-4 border-l-purple-600'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                     }`}
                   >
                     <Icon className="w-5 h-5" />
@@ -231,34 +235,38 @@ export default function AdminConfiguracionPage() {
           </div>
 
           {/* Settings Content */}
-          <div className="lg:col-span-3 bg-white rounded-xl border border-gray-200 p-6">
+          <div className="lg:col-span-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-gray-900/30 p-6">
             {/* General Settings */}
             {activeSection === 'general' && (
               <div>
-                <h2 className="text-lg font-bold text-gray-900 mb-6">Configuración General</h2>
+                <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6">
+                  Configuración General
+                </h2>
 
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Nombre del Sitio
                     </label>
                     <input
                       type="text"
                       value={settings.general.siteName}
                       onChange={(e) => updateSection('general', { siteName: e.target.value })}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 ${
-                        validationErrors['general.siteName'] ? 'border-red-300' : 'border-gray-300'
+                      className={`w-full px-4 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 ${
+                        validationErrors['general.siteName']
+                          ? 'border-red-300 dark:border-red-600'
+                          : 'border-gray-300 dark:border-gray-600'
                       }`}
                     />
                     {validationErrors['general.siteName'] && (
-                      <p className="mt-1 text-sm text-red-600">
+                      <p className="mt-1 text-sm text-red-600 dark:text-red-400">
                         {validationErrors['general.siteName']}
                       </p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Descripción del Sitio
                     </label>
                     <textarea
@@ -267,17 +275,19 @@ export default function AdminConfiguracionPage() {
                         updateSection('general', { siteDescription: e.target.value })
                       }
                       rows={3}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                     />
                   </div>
 
-                  <div className="border-t border-gray-200 pt-6">
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <div className="bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-4">
                       <div className="flex items-start gap-3">
-                        <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5" />
+                        <AlertTriangle className="w-5 h-5 text-amber-500 dark:text-amber-400 mt-0.5" />
                         <div>
-                          <p className="font-medium text-amber-800">Modo Mantenimiento</p>
-                          <p className="text-sm text-amber-600">
+                          <p className="font-medium text-amber-800 dark:text-amber-300">
+                            Modo Mantenimiento
+                          </p>
+                          <p className="text-sm text-amber-600 dark:text-amber-400">
                             Activar esto impedirá el acceso a todos los usuarios excepto
                             administradores.
                           </p>
@@ -310,12 +320,14 @@ export default function AdminConfiguracionPage() {
             {/* Payments Settings */}
             {activeSection === 'payments' && (
               <div>
-                <h2 className="text-lg font-bold text-gray-900 mb-6">Configuración de Pagos</h2>
+                <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6">
+                  Configuración de Pagos
+                </h2>
 
                 <div className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Monto Mínimo de Pedido (MXN)
                       </label>
                       <input
@@ -324,11 +336,11 @@ export default function AdminConfiguracionPage() {
                         onChange={(e) =>
                           updateSection('payments', { minOrderAmount: Number(e.target.value) })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Comisión de Plataforma (%)
                       </label>
                       <input
@@ -337,13 +349,15 @@ export default function AdminConfiguracionPage() {
                         onChange={(e) =>
                           updateSection('payments', { platformCommission: Number(e.target.value) })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                       />
                     </div>
                   </div>
 
-                  <div className="border-t border-gray-200 pt-6">
-                    <h3 className="font-medium text-gray-900 mb-4">Métodos de Pago</h3>
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-4">
+                      Métodos de Pago
+                    </h3>
                     <ToggleSwitch
                       enabled={settings.payments.stripeEnabled}
                       onChange={(v) => updateSection('payments', { stripeEnabled: v })}
@@ -370,7 +384,7 @@ export default function AdminConfiguracionPage() {
             {/* Notifications Settings */}
             {activeSection === 'notifications' && (
               <div>
-                <h2 className="text-lg font-bold text-gray-900 mb-6">
+                <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6">
                   Configuración de Notificaciones
                 </h2>
 
@@ -410,12 +424,14 @@ export default function AdminConfiguracionPage() {
             {/* Security Settings */}
             {activeSection === 'security' && (
               <div>
-                <h2 className="text-lg font-bold text-gray-900 mb-6">Configuración de Seguridad</h2>
+                <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6">
+                  Configuración de Seguridad
+                </h2>
 
                 <div className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Tiempo de Sesión (horas)
                       </label>
                       <input
@@ -424,11 +440,11 @@ export default function AdminConfiguracionPage() {
                         onChange={(e) =>
                           updateSection('security', { sessionTimeout: Number(e.target.value) })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Intentos de Login Máximos
                       </label>
                       <input
@@ -437,12 +453,12 @@ export default function AdminConfiguracionPage() {
                         onChange={(e) =>
                           updateSection('security', { maxLoginAttempts: Number(e.target.value) })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                       />
                     </div>
                   </div>
 
-                  <div className="border-t border-gray-200 pt-6">
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
                     <ToggleSwitch
                       enabled={settings.security.twoFactorRequired}
                       onChange={(v) => updateSection('security', { twoFactorRequired: v })}
@@ -463,23 +479,25 @@ export default function AdminConfiguracionPage() {
             {/* Email Settings */}
             {activeSection === 'email' && (
               <div>
-                <h2 className="text-lg font-bold text-gray-900 mb-6">Configuración de Email</h2>
+                <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6">
+                  Configuración de Email
+                </h2>
 
                 <div className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Servidor SMTP
                       </label>
                       <input
                         type="text"
                         value={settings.email.smtpHost}
                         onChange={(e) => updateSection('email', { smtpHost: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Puerto SMTP
                       </label>
                       <input
@@ -488,32 +506,32 @@ export default function AdminConfiguracionPage() {
                         onChange={(e) =>
                           updateSection('email', { smtpPort: Number(e.target.value) })
                         }
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                       />
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Email del Remitente
                       </label>
                       <input
                         type="email"
                         value={settings.email.senderEmail}
                         onChange={(e) => updateSection('email', { senderEmail: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Nombre del Remitente
                       </label>
                       <input
                         type="text"
                         value={settings.email.senderName}
                         onChange={(e) => updateSection('email', { senderName: e.target.value })}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                       />
                     </div>
                   </div>
@@ -521,7 +539,7 @@ export default function AdminConfiguracionPage() {
                   <button
                     onClick={handleTestEmail}
                     disabled={testingEmail}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition disabled:opacity-50"
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition disabled:opacity-50"
                   >
                     {testingEmail ? (
                       <>
@@ -542,13 +560,13 @@ export default function AdminConfiguracionPage() {
             {/* Appearance Settings */}
             {activeSection === 'appearance' && (
               <div>
-                <h2 className="text-lg font-bold text-gray-900 mb-6">
+                <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6">
                   Configuración de Apariencia
                 </h2>
 
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Color Principal
                     </label>
                     <div className="flex items-center gap-3">
@@ -558,7 +576,7 @@ export default function AdminConfiguracionPage() {
                         onChange={(e) =>
                           updateSection('appearance', { primaryColor: e.target.value })
                         }
-                        className="w-12 h-12 rounded-lg border border-gray-300 cursor-pointer"
+                        className="w-12 h-12 rounded-lg border border-gray-300 dark:border-gray-600 cursor-pointer"
                       />
                       <input
                         type="text"
@@ -566,12 +584,12 @@ export default function AdminConfiguracionPage() {
                         onChange={(e) =>
                           updateSection('appearance', { primaryColor: e.target.value })
                         }
-                        className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                       />
                     </div>
                   </div>
 
-                  <div className="border-t border-gray-200 pt-6">
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
                     <ToggleSwitch
                       enabled={settings.appearance.darkModeEnabled}
                       onChange={(v) => updateSection('appearance', { darkModeEnabled: v })}

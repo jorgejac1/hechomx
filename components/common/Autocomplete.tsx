@@ -465,7 +465,7 @@ function Autocomplete<T = string>({
           id={`${id}-listbox`}
           role="listbox"
           aria-label="Opciones"
-          className="absolute z-50 w-full mt-1 max-h-60 overflow-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1"
+          className="absolute z-50 w-full mt-1 max-h-60 overflow-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900/50 border border-gray-200 dark:border-gray-700 py-1"
         >
           {/* Ungrouped options */}
           {groupedOptions.ungrouped.map((option, index) => (

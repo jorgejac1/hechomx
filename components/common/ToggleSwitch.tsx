@@ -47,17 +47,17 @@ export default function ToggleSwitch({
 
   return (
     <div
-      className={`flex items-center justify-between py-4 border-b border-gray-100 last:border-0 ${className}`}
+      className={`flex items-center justify-between py-4 border-b border-gray-100 dark:border-gray-700 last:border-0 ${className}`}
     >
       <div>
-        <p className="font-medium text-gray-900">{label}</p>
-        {description && <p className="text-sm text-gray-500">{description}</p>}
+        <p className="font-medium text-gray-900 dark:text-gray-100">{label}</p>
+        {description && <p className="text-sm text-gray-500 dark:text-gray-400">{description}</p>}
       </div>
       <button
         type="button"
         onClick={() => !disabled && onChange(!enabled)}
         className={`relative ${sizes.track} rounded-full transition-colors ${
-          enabled ? 'bg-purple-600' : 'bg-gray-300'
+          enabled ? 'bg-purple-600' : 'bg-gray-300 dark:bg-gray-600'
         } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         role="switch"
         aria-checked={enabled}

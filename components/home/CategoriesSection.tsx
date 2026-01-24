@@ -80,7 +80,7 @@ export default function CategoriesSection() {
             <Link
               key={category.name}
               href={category.href}
-              className="group relative h-40 sm:h-44 md:h-48 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className="group relative h-40 sm:h-44 md:h-48 rounded-xl overflow-hidden shadow-md dark:shadow-gray-900/50 hover:shadow-xl dark:hover:shadow-gray-900/70 transition-all duration-300"
             >
               {/* Background Image */}
               <Image

@@ -36,7 +36,7 @@ export default function ComparisonBar() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg z-50 animate-slide-up"
+      className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t-2 border-gray-200 dark:border-gray-700 shadow-lg dark:shadow-gray-900/50 z-50 animate-slide-up"
       role="region"
       aria-label="Productos en comparación"
     >

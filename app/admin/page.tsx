@@ -33,27 +33,29 @@ interface StatCardProps {
 
 function StatCard({ title, value, icon, trend, variant = 'default', href }: StatCardProps) {
   const variantStyles = {
-    default: 'bg-white border-gray-200',
-    warning: 'bg-amber-50 border-amber-200',
-    success: 'bg-green-50 border-green-200',
-    purple: 'bg-purple-50 border-purple-200',
+    default: 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700',
+    warning: 'bg-amber-50 dark:bg-amber-900/30 border-amber-200 dark:border-amber-800',
+    success: 'bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800',
+    purple: 'bg-purple-50 dark:bg-purple-900/30 border-purple-200 dark:border-purple-800',
   };
 
   const content = (
     <div
-      className={`rounded-xl border-2 p-6 transition-shadow hover:shadow-md ${variantStyles[variant]}`}
+      className={`rounded-xl border-2 p-6 transition-shadow hover:shadow-md dark:hover:shadow-gray-900/50 ${variantStyles[variant]}`}
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className="mt-2 text-3xl font-bold text-gray-900">{value}</p>
+          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</p>
+          <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-gray-100">{value}</p>
           {trend && (
             <p className={`mt-1 text-sm ${trend.value >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               {trend.value >= 0 ? '↑' : '↓'} {Math.abs(trend.value)}% {trend.label}
             </p>
           )}
         </div>
-        <div className="p-3 bg-white rounded-lg shadow-xs">{icon}</div>
+        <div className="p-3 bg-white dark:bg-gray-700 rounded-lg shadow-xs dark:shadow-gray-900/30">
+          {icon}
+        </div>
       </div>
     </div>
   );
@@ -75,23 +77,29 @@ interface QuickActionProps {
 
 function QuickAction({ title, description, icon, href, variant = 'default' }: QuickActionProps) {
   const variantStyles = {
-    default: 'hover:bg-gray-50 border-gray-200',
-    purple: 'hover:bg-purple-50 border-purple-200',
-    amber: 'hover:bg-amber-50 border-amber-200',
-    green: 'hover:bg-green-50 border-green-200',
+    default:
+      'hover:bg-gray-50 dark:hover:bg-gray-700 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800',
+    purple:
+      'hover:bg-purple-50 dark:hover:bg-purple-900/30 border-purple-200 dark:border-purple-800 bg-white dark:bg-gray-800',
+    amber:
+      'hover:bg-amber-50 dark:hover:bg-amber-900/30 border-amber-200 dark:border-amber-800 bg-white dark:bg-gray-800',
+    green:
+      'hover:bg-green-50 dark:hover:bg-green-900/30 border-green-200 dark:border-green-800 bg-white dark:bg-gray-800',
   };
 
   return (
     <Link
       href={href}
-      className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-colors ${variantStyles[variant]}`}
+      className={`flex items-center gap-4 p-4 rounded-xl border-2 transition-colors shadow-sm dark:shadow-gray-900/30 ${variantStyles[variant]}`}
     >
-      <div className="p-3 bg-white rounded-lg shadow-xs">{icon}</div>
-      <div className="flex-1">
-        <p className="font-semibold text-gray-900">{title}</p>
-        <p className="text-sm text-gray-600">{description}</p>
+      <div className="p-3 bg-white dark:bg-gray-700 rounded-lg shadow-xs dark:shadow-gray-900/30">
+        {icon}
       </div>
-      <ArrowRight className="w-5 h-5 text-gray-400" />
+      <div className="flex-1">
+        <p className="font-semibold text-gray-900 dark:text-gray-100">{title}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
+      </div>
+      <ArrowRight className="w-5 h-5 text-gray-400 dark:text-gray-500" />
     </Link>
   );
 }
@@ -106,20 +114,20 @@ interface ActivityItemProps {
 
 function ActivityItem({ icon, title, description, time, variant = 'default' }: ActivityItemProps) {
   const variantStyles = {
-    default: 'bg-gray-100',
-    success: 'bg-green-100 text-green-600',
-    warning: 'bg-amber-100 text-amber-600',
-    info: 'bg-blue-100 text-blue-600',
+    default: 'bg-gray-100 dark:bg-gray-700',
+    success: 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400',
+    warning: 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400',
+    info: 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400',
   };
 
   return (
-    <div className="flex items-start gap-4 py-4 border-b border-gray-100 last:border-0">
+    <div className="flex items-start gap-4 py-4 border-b border-gray-100 dark:border-gray-700 last:border-0">
       <div className={`p-2 rounded-lg ${variantStyles[variant]}`}>{icon}</div>
       <div className="flex-1 min-w-0">
-        <p className="font-medium text-gray-900">{title}</p>
-        <p className="text-sm text-gray-600 truncate">{description}</p>
+        <p className="font-medium text-gray-900 dark:text-gray-100">{title}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 truncate">{description}</p>
       </div>
-      <p className="text-xs text-gray-500 whitespace-nowrap">{time}</p>
+      <p className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">{time}</p>
     </div>
   );
 }
@@ -171,9 +179,11 @@ export default function AdminDashboardPage() {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Shield className="w-8 h-8 text-purple-600" />
-            <h1 className="text-3xl font-bold text-gray-900">Panel de Administración</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+              Panel de Administración
+            </h1>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             Bienvenido, {user?.name}. Aquí está el resumen de la plataforma.
           </p>
         </div>
@@ -234,7 +244,9 @@ export default function AdminDashboardPage() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Quick Actions */}
           <div className="lg:col-span-1">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Acciones Rápidas</h2>
+            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Acciones Rápidas
+            </h2>
             <div className="space-y-3">
               <QuickAction
                 title="Revisar Verificaciones"
@@ -267,8 +279,10 @@ export default function AdminDashboardPage() {
 
           {/* Recent Activity */}
           <div className="lg:col-span-2">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Actividad Reciente</h2>
-            <div className="bg-white rounded-xl border border-gray-200 p-4">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Actividad Reciente
+            </h2>
+            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-gray-900/30 p-4">
               <ActivityItem
                 icon={<FileCheck className="w-4 h-4" />}
                 title="Nueva solicitud de verificación"
@@ -319,7 +333,7 @@ export default function AdminDashboardPage() {
         {/* Pending Verifications Preview */}
         <div className="mt-8">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-gray-900">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">
               Verificaciones que Requieren Atención
             </h2>
             <Link
@@ -329,23 +343,23 @@ export default function AdminDashboardPage() {
               Ver todas <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-gray-900/30 overflow-hidden">
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-50 dark:bg-gray-900/50">
                 <tr>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400">
                     Vendedor
                   </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 hidden sm:table-cell">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400 hidden sm:table-cell">
                     Nivel Solicitado
                   </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 hidden md:table-cell">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400 hidden md:table-cell">
                     Días Esperando
                   </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400">
                     Prioridad
                   </th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-gray-600">
+                  <th className="text-right py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400">
                     Acción
                   </th>
                 </tr>
@@ -355,13 +369,20 @@ export default function AdminDashboardPage() {
                   .filter((r) => r.status === 'submitted' || r.status === 'under_review')
                   .slice(0, 5)
                   .map((request) => (
-                    <tr key={request.id} className="border-t border-gray-100 hover:bg-gray-50">
+                    <tr
+                      key={request.id}
+                      className="border-t border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                    >
                       <td className="py-3 px-4">
-                        <p className="font-medium text-gray-900">{request.sellerName}</p>
-                        <p className="text-sm text-gray-500">{request.shopName}</p>
+                        <p className="font-medium text-gray-900 dark:text-gray-100">
+                          {request.sellerName}
+                        </p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {request.shopName}
+                        </p>
                       </td>
                       <td className="py-3 px-4 hidden sm:table-cell">
-                        <span className="text-sm text-gray-600">
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
                           {request.requestedLevel === 'verified_artisan' && 'Artesano Verificado'}
                           {request.requestedLevel === 'master_artisan' && 'Maestro Artesano'}
                           {request.requestedLevel === 'certified_workshop' && 'Taller Certificado'}
@@ -369,7 +390,7 @@ export default function AdminDashboardPage() {
                         </span>
                       </td>
                       <td className="py-3 px-4 hidden md:table-cell">
-                        <span className="flex items-center gap-1 text-sm text-gray-600">
+                        <span className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
                           <Clock className="w-4 h-4" />
                           {request.daysWaiting} días
                         </span>
@@ -378,12 +399,12 @@ export default function AdminDashboardPage() {
                         <span
                           className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                             request.priority === 'urgent'
-                              ? 'bg-red-100 text-red-700'
+                              ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
                               : request.priority === 'high'
-                                ? 'bg-orange-100 text-orange-700'
+                                ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400'
                                 : request.priority === 'normal'
-                                  ? 'bg-blue-100 text-blue-700'
-                                  : 'bg-gray-100 text-gray-700'
+                                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400'
+                                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                           }`}
                         >
                           {request.priority === 'urgent' && 'Urgente'}

@@ -93,7 +93,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
 
   if (isLoading) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
         <div className="flex items-center justify-center py-12">
           <Loader2 className="w-8 h-8 text-primary-600 animate-spin" />
         </div>
@@ -103,7 +103,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
 
   if (error) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
         <ErrorState
           type="error"
           title="Error al cargar datos"
@@ -116,7 +116,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
 
   if (!data) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
         <p className="text-center text-gray-600 dark:text-gray-400">
           No hay datos de clientes disponibles
         </p>
@@ -127,7 +127,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
   return (
     <div className="space-y-6">
       {/* Top Customers Overview */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
         <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
           <Crown className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
           Mejores Clientes
@@ -159,7 +159,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
       </div>
 
       {/* Repeat Customers */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
         <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
           <Heart className="w-5 h-5 text-red-600 dark:text-red-400" />
           Clientes Recurrentes ({data.repeatCustomers.length})
@@ -231,7 +231,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
       {/* Purchase Patterns */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Common Product Combinations */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
           <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
             <Package className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             Productos que se Compran Juntos
@@ -267,7 +267,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
         </div>
 
         {/* Seasonal Trends */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
           <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
             <Calendar className="w-5 h-5 text-purple-600 dark:text-purple-400" />
             Tendencias Estacionales
@@ -318,7 +318,7 @@ export default function CustomerInsights({ userEmail }: CustomerInsightsProps) {
 
       {/* Upcoming Birthdays */}
       {data.upcomingBirthdays.length > 0 && (
-        <div className="bg-linear-to-br from-pink-50 to-rose-50 dark:from-pink-900/30 dark:to-rose-900/30 rounded-xl shadow-md p-6 border-2 border-pink-200 dark:border-pink-700">
+        <div className="bg-linear-to-br from-pink-50 to-rose-50 dark:from-pink-900/30 dark:to-rose-900/30 rounded-xl shadow-md dark:shadow-gray-900/50 p-6 border-2 border-pink-200 dark:border-pink-700">
           <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
             <Cake className="w-5 h-5 text-pink-600 dark:text-pink-400" />
             Cumpleaños Próximos

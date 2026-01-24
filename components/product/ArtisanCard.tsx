@@ -30,7 +30,7 @@ export default function ArtisanCard({ artisanName, location, verified }: Artisan
 
   return (
     <>
-      <div className="bg-white rounded-xl shadow-md p-6 lg:p-8">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6 lg:p-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Conoce al Artesano</h2>
 
         <div className="flex flex-col sm:flex-row items-start gap-6">

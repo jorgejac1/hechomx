@@ -86,7 +86,7 @@ export default function StatesSection() {
             <Link
               key={state.name}
               href={`${ROUTES.PRODUCTS}?estado=${encodeURIComponent(state.name)}`}
-              className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md dark:shadow-gray-900/50 hover:shadow-xl dark:hover:shadow-gray-900/70 transition-all duration-300"
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-700">
@@ -126,7 +126,7 @@ export default function StatesSection() {
             {Object.entries(CRAFT_STATES).map(([craft, states]) => (
               <div
                 key={craft}
-                className="bg-white dark:bg-gray-700 rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-shadow"
+                className="bg-white dark:bg-gray-700 rounded-xl p-4 sm:p-5 shadow-xs dark:shadow-gray-900/30 hover:shadow-md dark:hover:shadow-gray-900/50 transition-shadow"
               >
                 <h4 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                   <span className="text-primary-600 dark:text-primary-400">{craft}:</span>

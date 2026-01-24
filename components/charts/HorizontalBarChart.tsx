@@ -55,11 +55,13 @@ export default function HorizontalBarChart({
 
         return (
           <div key={index} className="flex items-center gap-3">
-            <span className={`text-sm text-gray-600 ${labelWidth} shrink-0 truncate`}>
+            <span
+              className={`text-sm text-gray-600 dark:text-gray-400 ${labelWidth} shrink-0 truncate`}
+            >
               {item.label}
             </span>
             <div
-              className={`flex-1 bg-gray-100 rounded-full ${barHeightClasses[barHeight]} overflow-hidden`}
+              className={`flex-1 bg-gray-200 dark:bg-gray-700 rounded-full ${barHeightClasses[barHeight]} overflow-hidden`}
               role="progressbar"
               aria-valuenow={item.value}
               aria-valuemin={0}
@@ -72,7 +74,7 @@ export default function HorizontalBarChart({
               />
             </div>
             {showValues && (
-              <span className="text-sm font-medium text-gray-900 w-20 shrink-0 text-right">
+              <span className="text-sm font-medium text-gray-900 dark:text-gray-100 w-20 shrink-0 text-right">
                 {formatValue(item.value)}
               </span>
             )}

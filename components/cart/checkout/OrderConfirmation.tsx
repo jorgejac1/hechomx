@@ -107,7 +107,7 @@ export default function OrderConfirmationClient() {
         </div>
 
         {/* Order Number Card */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6 mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <p className="text-sm text-gray-500 mb-1">Número de pedido</p>
@@ -202,7 +202,7 @@ export default function OrderConfirmationClient() {
         )}
 
         {/* Order Summary Card */}
-        <div className="bg-white rounded-xl shadow-md overflow-hidden mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden mb-6">
           <div className="p-6 border-b">
             <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
               <Package className="w-5 h-5 text-primary-600" />
@@ -262,7 +262,7 @@ export default function OrderConfirmationClient() {
         {/* Shipping & Payment Info */}
         <div className="grid sm:grid-cols-2 gap-6 mb-8">
           {/* Shipping Address */}
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
             <h3 className="font-bold text-gray-900 flex items-center gap-2 mb-4">
               <MapPin className="w-5 h-5 text-primary-600" />
               Dirección de envío
@@ -286,7 +286,7 @@ export default function OrderConfirmationClient() {
           </div>
 
           {/* Delivery & Payment */}
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
             <h3 className="font-bold text-gray-900 flex items-center gap-2 mb-4">
               <Truck className="w-5 h-5 text-primary-600" />
               Entrega estimada

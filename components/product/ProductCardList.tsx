@@ -42,7 +42,7 @@ const ProductCardList = memo(function ProductCardList({ product }: ProductCardLi
 
   return (
     <article
-      className="flex flex-col sm:flex-row gap-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden group"
+      className="flex flex-col sm:flex-row gap-4 bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 hover:shadow-lg dark:hover:shadow-gray-900/70 transition-shadow overflow-hidden group"
       aria-label={`Producto: ${product.name}`}
     >
       {/* Image Section */}

@@ -95,7 +95,7 @@ export default function FeedbackWidget() {
       {/* Floating Trigger Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 group"
+        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-full shadow-lg dark:shadow-gray-900/50 hover:shadow-xl dark:hover:shadow-gray-900/70 transition-all duration-200 group"
         aria-label="Enviar opinión"
       >
         <MessageSquare className="w-5 h-5" />
@@ -115,7 +115,7 @@ export default function FeedbackWidget() {
           {/* Modal Container - Bottom drawer on mobile, centered on desktop */}
           <div className="flex min-h-full items-end sm:items-center justify-center sm:p-4">
             <div
-              className="relative bg-white dark:bg-gray-800 w-full sm:max-w-md sm:rounded-2xl rounded-t-2xl shadow-xl animate-slide-up sm:animate-modal-scale-in"
+              className="relative bg-white dark:bg-gray-800 w-full sm:max-w-md sm:rounded-2xl rounded-t-2xl shadow-xl dark:shadow-gray-900/50 animate-slide-up sm:animate-modal-scale-in"
               role="dialog"
               aria-modal="true"
               aria-labelledby="feedback-title"

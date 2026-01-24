@@ -67,18 +67,22 @@ export default function DataTable<T>({
   const paddingClasses = compact ? 'py-2 px-2' : 'py-3 px-4';
 
   if (data.length === 0) {
-    return <div className={`text-center py-8 text-gray-500 ${className}`}>{emptyMessage}</div>;
+    return (
+      <div className={`text-center py-8 text-gray-500 dark:text-gray-400 ${className}`}>
+        {emptyMessage}
+      </div>
+    );
   }
 
   return (
     <div className={`overflow-x-auto ${className}`}>
       <table className="w-full">
         <thead>
-          <tr className="border-b border-gray-200">
+          <tr className="border-b border-gray-200 dark:border-gray-700">
             {columns.map((column, index) => (
               <th
                 key={index}
-                className={`${paddingClasses} text-sm font-semibold text-gray-600 ${
+                className={`${paddingClasses} text-sm font-semibold text-gray-600 dark:text-gray-300 ${
                   alignmentClasses[column.align || 'left']
                 } ${column.hideOnMobile ? 'hidden sm:table-cell' : ''} ${
                   column.hideOnTablet ? 'hidden md:table-cell' : ''
@@ -93,8 +97,8 @@ export default function DataTable<T>({
           {data.map((row, rowIndex) => (
             <tr
               key={getKey(row, rowIndex)}
-              className={`border-b border-gray-100 ${hoverable ? 'hover:bg-gray-50' : ''} ${
-                striped && rowIndex % 2 === 1 ? 'bg-gray-50' : ''
+              className={`border-b border-gray-100 dark:border-gray-700 ${hoverable ? 'hover:bg-gray-50 dark:hover:bg-gray-700/50' : ''} ${
+                striped && rowIndex % 2 === 1 ? 'bg-gray-50 dark:bg-gray-800/50' : ''
               }`}
             >
               {columns.map((column, colIndex) => (
@@ -140,7 +144,7 @@ export function TrendCell({ value, suffix = '%' }: { value: number; suffix?: str
 
 export function CurrencyCell({ value, currency = '$' }: { value: number; currency?: string }) {
   return (
-    <span className="font-medium text-gray-900">
+    <span className="font-medium text-gray-900 dark:text-gray-100">
       {currency}
       {value.toLocaleString()}
     </span>
@@ -155,12 +159,12 @@ export function BadgeCell({
   variant?: 'gray' | 'green' | 'red' | 'blue' | 'amber' | 'purple';
 }) {
   const variantStyles = {
-    gray: 'bg-gray-100 text-gray-700',
-    green: 'bg-green-100 text-green-700',
-    red: 'bg-red-100 text-red-700',
-    blue: 'bg-blue-100 text-blue-700',
-    amber: 'bg-amber-100 text-amber-700',
-    purple: 'bg-purple-100 text-purple-700',
+    gray: 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300',
+    green: 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300',
+    red: 'bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300',
+    blue: 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300',
+    amber: 'bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300',
+    purple: 'bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300',
   };
 
   return (

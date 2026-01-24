@@ -91,7 +91,7 @@ export default function CheckoutSummary({
     : null;
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden sticky top-4">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden sticky top-4">
       {/* Header */}
       <div className="bg-gray-50 px-6 py-4 border-b">
         <div className="flex items-center justify-between">

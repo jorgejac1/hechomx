@@ -100,43 +100,81 @@ const STATUS_CONFIG: Record<
     icon: React.ComponentType<{ className?: string }>;
   }
 > = {
-  submitted: { label: 'Enviada', color: 'text-blue-700', bgColor: 'bg-blue-100', icon: Clock },
+  submitted: {
+    label: 'Enviada',
+    color: 'text-blue-700 dark:text-blue-300',
+    bgColor: 'bg-blue-100 dark:bg-blue-900/50',
+    icon: Clock,
+  },
   under_review: {
     label: 'En Revisión',
-    color: 'text-purple-700',
-    bgColor: 'bg-purple-100',
+    color: 'text-purple-700 dark:text-purple-300',
+    bgColor: 'bg-purple-100 dark:bg-purple-900/50',
     icon: Eye,
   },
   info_requested: {
     label: 'Info Solicitada',
-    color: 'text-amber-700',
-    bgColor: 'bg-amber-100',
+    color: 'text-amber-700 dark:text-amber-300',
+    bgColor: 'bg-amber-100 dark:bg-amber-900/50',
     icon: MessageSquare,
   },
   approved: {
     label: 'Aprobada',
-    color: 'text-green-700',
-    bgColor: 'bg-green-100',
+    color: 'text-green-700 dark:text-green-300',
+    bgColor: 'bg-green-100 dark:bg-green-900/50',
     icon: CheckCircle2,
   },
-  rejected: { label: 'Rechazada', color: 'text-red-700', bgColor: 'bg-red-100', icon: XCircle },
+  rejected: {
+    label: 'Rechazada',
+    color: 'text-red-700 dark:text-red-300',
+    bgColor: 'bg-red-100 dark:bg-red-900/50',
+    icon: XCircle,
+  },
 };
 
 const LEVEL_CONFIG: Record<
   VerificationLevel,
   { label: string; color: string; icon: React.ComponentType<{ className?: string }> }
 > = {
-  basic_seller: { label: 'Vendedor Básico', color: 'text-gray-600', icon: User },
-  verified_artisan: { label: 'Artesano Verificado', color: 'text-blue-600', icon: CheckCircle2 },
-  master_artisan: { label: 'Maestro Artesano', color: 'text-purple-600', icon: Star },
-  certified_workshop: { label: 'Taller Certificado', color: 'text-amber-600', icon: Award },
+  basic_seller: { label: 'Vendedor Básico', color: 'text-gray-600 dark:text-gray-400', icon: User },
+  verified_artisan: {
+    label: 'Artesano Verificado',
+    color: 'text-blue-600 dark:text-blue-400',
+    icon: CheckCircle2,
+  },
+  master_artisan: {
+    label: 'Maestro Artesano',
+    color: 'text-purple-600 dark:text-purple-400',
+    icon: Star,
+  },
+  certified_workshop: {
+    label: 'Taller Certificado',
+    color: 'text-amber-600 dark:text-amber-400',
+    icon: Award,
+  },
 };
 
 const PRIORITY_CONFIG: Record<Priority, { label: string; color: string; bgColor: string }> = {
-  urgent: { label: 'Urgente', color: 'text-red-700', bgColor: 'bg-red-100' },
-  high: { label: 'Alta', color: 'text-orange-700', bgColor: 'bg-orange-100' },
-  normal: { label: 'Normal', color: 'text-blue-700', bgColor: 'bg-blue-100' },
-  low: { label: 'Baja', color: 'text-gray-600', bgColor: 'bg-gray-100' },
+  urgent: {
+    label: 'Urgente',
+    color: 'text-red-700 dark:text-red-300',
+    bgColor: 'bg-red-100 dark:bg-red-900/50',
+  },
+  high: {
+    label: 'Alta',
+    color: 'text-orange-700 dark:text-orange-300',
+    bgColor: 'bg-orange-100 dark:bg-orange-900/50',
+  },
+  normal: {
+    label: 'Normal',
+    color: 'text-blue-700 dark:text-blue-300',
+    bgColor: 'bg-blue-100 dark:bg-blue-900/50',
+  },
+  low: {
+    label: 'Baja',
+    color: 'text-gray-600 dark:text-gray-400',
+    bgColor: 'bg-gray-100 dark:bg-gray-700',
+  },
 };
 
 export default function AdminVerificacionesPage() {
@@ -269,7 +307,7 @@ export default function AdminVerificacionesPage() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 text-primary-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">Cargando panel de administración...</p>
+          <p className="text-gray-600 dark:text-gray-400">Cargando panel de administración...</p>
         </div>
       </div>
     );
@@ -286,42 +324,52 @@ export default function AdminVerificacionesPage() {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Shield className="w-8 h-8 text-primary-600" />
-            <h1 className="text-3xl font-bold text-gray-900">Panel de Verificación</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+              Panel de Verificación
+            </h1>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             Revisa y gestiona las solicitudes de verificación de vendedores
           </p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
-          <div className="bg-white rounded-xl shadow-xs p-4">
-            <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-            <p className="text-sm text-gray-600">Total</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 p-4">
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.total}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Total</p>
           </div>
-          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-blue-500">
-            <p className="text-2xl font-bold text-blue-600">{stats.pending}</p>
-            <p className="text-sm text-gray-600">Pendientes</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 p-4 border-l-4 border-blue-500">
+            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{stats.pending}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Pendientes</p>
           </div>
-          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-purple-500">
-            <p className="text-2xl font-bold text-purple-600">{stats.underReview}</p>
-            <p className="text-sm text-gray-600">En Revisión</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 p-4 border-l-4 border-purple-500">
+            <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+              {stats.underReview}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">En Revisión</p>
           </div>
-          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-amber-500">
-            <p className="text-2xl font-bold text-amber-600">{stats.infoRequested}</p>
-            <p className="text-sm text-gray-600">Info Pedida</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 p-4 border-l-4 border-amber-500">
+            <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+              {stats.infoRequested}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Info Pedida</p>
           </div>
-          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-green-500">
-            <p className="text-2xl font-bold text-green-600">{stats.approved}</p>
-            <p className="text-sm text-gray-600">Aprobadas</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 p-4 border-l-4 border-green-500">
+            <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+              {stats.approved}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Aprobadas</p>
           </div>
-          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-red-500">
-            <p className="text-2xl font-bold text-red-600">{stats.rejected}</p>
-            <p className="text-sm text-gray-600">Rechazadas</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 p-4 border-l-4 border-red-500">
+            <p className="text-2xl font-bold text-red-600 dark:text-red-400">{stats.rejected}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Rechazadas</p>
           </div>
-          <div className="bg-white rounded-xl shadow-xs p-4 border-l-4 border-orange-500">
-            <p className="text-2xl font-bold text-orange-600">{stats.urgent}</p>
-            <p className="text-sm text-gray-600 flex items-center gap-1">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 p-4 border-l-4 border-orange-500">
+            <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+              {stats.urgent}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-1">
               <AlertCircle className="w-4 h-4 text-orange-500" />
               Urgentes
             </p>
@@ -329,7 +377,7 @@ export default function AdminVerificacionesPage() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-xl shadow-xs p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 p-4 mb-6">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
@@ -339,7 +387,7 @@ export default function AdminVerificacionesPage() {
                 placeholder="Buscar por nombre, email, tienda o ID..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               />
             </div>
 
@@ -349,7 +397,7 @@ export default function AdminVerificacionesPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value as VerificationStatus | 'all')}
-                className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               >
                 <option value="all">Todos los estados</option>
                 <option value="submitted">Enviadas</option>
@@ -365,10 +413,12 @@ export default function AdminVerificacionesPage() {
         {/* Requests List */}
         <div className="space-y-4">
           {filteredRequests.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-xs p-12 text-center">
-              <Shield className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No hay solicitudes</h3>
-              <p className="text-gray-600">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 p-12 text-center">
+              <Shield className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                No hay solicitudes
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
                 No se encontraron solicitudes con los filtros seleccionados
               </p>
             </div>
@@ -385,13 +435,13 @@ export default function AdminVerificacionesPage() {
               return (
                 <div
                   key={request.id}
-                  className={`bg-white rounded-xl shadow-xs overflow-hidden transition-all ${
-                    request.flagged ? 'ring-2 ring-red-300' : ''
-                  } ${isExpanded ? 'ring-2 ring-primary-300' : ''}`}
+                  className={`bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 overflow-hidden transition-all ${
+                    request.flagged ? 'ring-2 ring-red-300 dark:ring-red-500/50' : ''
+                  } ${isExpanded ? 'ring-2 ring-primary-300 dark:ring-primary-500/50' : ''}`}
                 >
                   {/* Request Header */}
                   <div
-                    className="p-6 cursor-pointer hover:bg-gray-50 transition"
+                    className="p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition"
                     onClick={() => setExpandedRequest(isExpanded ? null : request.id)}
                   >
                     <div className="flex items-start justify-between">
@@ -415,20 +465,24 @@ export default function AdminVerificacionesPage() {
                         {/* Info */}
                         <div>
                           <div className="flex items-center gap-2 mb-1">
-                            <h3 className="font-bold text-gray-900">{request.sellerName}</h3>
+                            <h3 className="font-bold text-gray-900 dark:text-gray-100">
+                              {request.sellerName}
+                            </h3>
                             <span
                               className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${priorityConfig.bgColor} ${priorityConfig.color}`}
                             >
                               {priorityConfig.label}
                             </span>
                           </div>
-                          <p className="text-sm text-gray-600 mb-1 flex items-center gap-1">
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-1 flex items-center gap-1">
                             {request.sellerType === 'company' && (
                               <Building2 className="w-4 h-4 text-gray-400" />
                             )}
                             {request.shopName}
                           </p>
-                          <p className="text-xs text-gray-500">{request.sellerEmail}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-500">
+                            {request.sellerEmail}
+                          </p>
                         </div>
                       </div>
 
@@ -439,7 +493,7 @@ export default function AdminVerificacionesPage() {
                             <LevelIcon className="w-4 h-4" />
                             <span className="text-sm font-medium">{levelConfig.label}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mt-1">
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                             {request.daysWaiting} día{request.daysWaiting !== 1 ? 's' : ''}{' '}
                             esperando
                           </p>
@@ -484,48 +538,48 @@ export default function AdminVerificacionesPage() {
 
                   {/* Expanded Details */}
                   {isExpanded && (
-                    <div className="border-t border-gray-200 p-6 bg-gray-50">
+                    <div className="border-t border-gray-200 dark:border-gray-700 p-6 bg-gray-50 dark:bg-gray-800/50">
                       <div className="grid md:grid-cols-2 gap-6">
                         {/* Left Column - Documents */}
                         <div>
-                          <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                          <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                             <FileText className="w-5 h-5" />
                             Documentos Enviados
                           </h4>
                           <div className="space-y-2">
                             {request.documents.governmentId && (
-                              <div className="flex items-center gap-2 text-sm">
+                              <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                 <CheckCircle2 className="w-4 h-4 text-green-500" />
                                 <span>Identificación oficial</span>
                               </div>
                             )}
                             {request.documents.proofOfAddress && (
-                              <div className="flex items-center gap-2 text-sm">
+                              <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                 <CheckCircle2 className="w-4 h-4 text-green-500" />
                                 <span>Comprobante de domicilio</span>
                               </div>
                             )}
                             {request.documents.curp && (
-                              <div className="flex items-center gap-2 text-sm">
+                              <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                 <CheckCircle2 className="w-4 h-4 text-green-500" />
                                 <span>CURP</span>
                               </div>
                             )}
                             {request.documents.rfc && (
-                              <div className="flex items-center gap-2 text-sm">
+                              <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                 <CheckCircle2 className="w-4 h-4 text-green-500" />
                                 <span>RFC</span>
                               </div>
                             )}
                             {request.documents.businessRegistration && (
-                              <div className="flex items-center gap-2 text-sm">
+                              <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                 <CheckCircle2 className="w-4 h-4 text-green-500" />
                                 <span>Acta constitutiva</span>
                               </div>
                             )}
                             {request.documents.craftPhotos &&
                               request.documents.craftPhotos.length > 0 && (
-                                <div className="flex items-center gap-2 text-sm">
+                                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                   <CheckCircle2 className="w-4 h-4 text-green-500" />
                                   <span>
                                     Fotos de artesanías ({request.documents.craftPhotos.length})
@@ -534,7 +588,7 @@ export default function AdminVerificacionesPage() {
                               )}
                             {request.documents.workshopPhotos &&
                               request.documents.workshopPhotos.length > 0 && (
-                                <div className="flex items-center gap-2 text-sm">
+                                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                   <CheckCircle2 className="w-4 h-4 text-green-500" />
                                   <span>
                                     Fotos del taller ({request.documents.workshopPhotos.length})
@@ -542,14 +596,14 @@ export default function AdminVerificacionesPage() {
                                 </div>
                               )}
                             {request.documents.processVideo && (
-                              <div className="flex items-center gap-2 text-sm">
+                              <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                 <CheckCircle2 className="w-4 h-4 text-green-500" />
                                 <span>Video del proceso</span>
                               </div>
                             )}
                             {request.documents.certifications &&
                               request.documents.certifications.length > 0 && (
-                                <div className="flex items-center gap-2 text-sm">
+                                <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                   <CheckCircle2 className="w-4 h-4 text-green-500" />
                                   <span>
                                     Certificaciones ({request.documents.certifications.length})
@@ -557,7 +611,7 @@ export default function AdminVerificacionesPage() {
                                 </div>
                               )}
                             {request.documents.awards && request.documents.awards.length > 0 && (
-                              <div className="flex items-center gap-2 text-sm">
+                              <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                                 <CheckCircle2 className="w-4 h-4 text-green-500" />
                                 <span>Premios ({request.documents.awards.length})</span>
                               </div>
@@ -567,38 +621,42 @@ export default function AdminVerificacionesPage() {
 
                         {/* Right Column - Questionnaire */}
                         <div>
-                          <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                          <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
                             <User className="w-5 h-5" />
                             Información del Artesano
                           </h4>
                           <div className="space-y-3 text-sm">
                             <div>
-                              <span className="text-gray-500">Tipo de artesanía:</span>
-                              <p className="font-medium">
+                              <span className="text-gray-500 dark:text-gray-400">
+                                Tipo de artesanía:
+                              </span>
+                              <p className="font-medium text-gray-900 dark:text-gray-100">
                                 {request.questionnaire.craftType.join(', ')}
                               </p>
                             </div>
                             <div>
-                              <span className="text-gray-500">Técnicas:</span>
-                              <p className="font-medium">
+                              <span className="text-gray-500 dark:text-gray-400">Técnicas:</span>
+                              <p className="font-medium text-gray-900 dark:text-gray-100">
                                 {request.questionnaire.techniques.join(', ')}
                               </p>
                             </div>
                             <div>
-                              <span className="text-gray-500">Años de experiencia:</span>
-                              <p className="font-medium">
+                              <span className="text-gray-500 dark:text-gray-400">
+                                Años de experiencia:
+                              </span>
+                              <p className="font-medium text-gray-900 dark:text-gray-100">
                                 {request.questionnaire.yearsOfExperience} años
                               </p>
                             </div>
                             <div className="flex items-start gap-1">
                               <MapPin className="w-4 h-4 text-gray-400 mt-0.5" />
                               <div>
-                                <p className="font-medium">
+                                <p className="font-medium text-gray-900 dark:text-gray-100">
                                   {request.questionnaire.location.city},{' '}
                                   {request.questionnaire.location.state}
                                 </p>
                                 {request.questionnaire.location.hasPhysicalWorkshop && (
-                                  <p className="text-xs text-green-600 flex items-center gap-1">
+                                  <p className="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
                                     <CheckCircle2 className="w-3 h-3" />
                                     Tiene taller físico
                                   </p>
@@ -607,20 +665,26 @@ export default function AdminVerificacionesPage() {
                             </div>
                             {request.questionnaire.heritageInfo && (
                               <div>
-                                <span className="text-gray-500">Historia/Herencia:</span>
-                                <p className="font-medium">{request.questionnaire.heritageInfo}</p>
+                                <span className="text-gray-500 dark:text-gray-400">
+                                  Historia/Herencia:
+                                </span>
+                                <p className="font-medium text-gray-900 dark:text-gray-100">
+                                  {request.questionnaire.heritageInfo}
+                                </p>
                               </div>
                             )}
                             {request.questionnaire.indigenousCommunity && (
                               <div>
-                                <span className="text-gray-500">Comunidad indígena:</span>
-                                <p className="font-medium">
+                                <span className="text-gray-500 dark:text-gray-400">
+                                  Comunidad indígena:
+                                </span>
+                                <p className="font-medium text-gray-900 dark:text-gray-100">
                                   {request.questionnaire.indigenousCommunity}
                                 </p>
                               </div>
                             )}
                             {request.submittedAt && (
-                              <div className="flex items-center gap-1 text-gray-500 pt-2 border-t border-gray-200">
+                              <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-200 dark:border-gray-700">
                                 <Calendar className="w-4 h-4" />
                                 <span>
                                   Enviada:{' '}
@@ -640,7 +704,7 @@ export default function AdminVerificacionesPage() {
                       {(request.status === 'submitted' ||
                         request.status === 'under_review' ||
                         request.status === 'info_requested') && (
-                        <div className="mt-6 pt-6 border-t border-gray-200">
+                        <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
                           <div className="flex flex-wrap gap-3">
                             {request.status === 'submitted' && (
                               <button
@@ -715,7 +779,7 @@ export default function AdminVerificacionesPage() {
                           </div>
 
                           {request.assignedTo && (
-                            <p className="text-xs text-gray-500 mt-3">
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-3">
                               Asignado a: {request.assignedTo}
                             </p>
                           )}
@@ -725,8 +789,10 @@ export default function AdminVerificacionesPage() {
                       {/* Completed Status */}
                       {(request.status === 'approved' || request.status === 'rejected') && (
                         <div
-                          className={`mt-6 pt-6 border-t border-gray-200 text-center ${
-                            request.status === 'approved' ? 'text-green-600' : 'text-red-600'
+                          className={`mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 text-center ${
+                            request.status === 'approved'
+                              ? 'text-green-600 dark:text-green-400'
+                              : 'text-red-600 dark:text-red-400'
                           }`}
                         >
                           {request.status === 'approved' ? (

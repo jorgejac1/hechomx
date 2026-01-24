@@ -135,7 +135,7 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-3 md:h-[400px]">
               {/* Left Panel - Info Card */}
               <div
-                className={`md:col-span-4 ${currentTheme.bgColor} rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col justify-between shadow-md`}
+                className={`md:col-span-4 ${currentTheme.bgColor} rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col justify-between shadow-md dark:shadow-gray-900/50`}
               >
                 <div>
                   <span className="inline-block bg-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold uppercase text-gray-900 mb-2 sm:mb-3">
@@ -174,7 +174,7 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
                     <Link
                       key={product.id}
                       href={`/productos/${product.id}`}
-                      className={`${sizeClass} col-span-1 group relative rounded-lg sm:rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-32 sm:h-40 md:h-auto`}
+                      className={`${sizeClass} col-span-1 group relative rounded-lg sm:rounded-xl overflow-hidden shadow-md dark:shadow-gray-900/50 hover:shadow-xl dark:hover:shadow-gray-900/70 transition-all duration-300 h-32 sm:h-40 md:h-auto`}
                     >
                       {/* Image */}
                       <div className="relative w-full h-full">

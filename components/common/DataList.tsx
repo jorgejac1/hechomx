@@ -201,7 +201,7 @@ export default function DataList<T>({
             className={`
               bg-white rounded-lg border border-gray-200
               ${sizeStyles[size].padding}
-              ${hoverable ? 'hover:shadow-md hover:border-gray-300 transition-all' : ''}
+              ${hoverable ? 'hover:shadow-md dark:hover:shadow-gray-900/50 hover:border-gray-300 dark:hover:border-gray-600 transition-all' : ''}
               ${onItemClick ? 'cursor-pointer' : ''}
               ${itemClassName}
             `}

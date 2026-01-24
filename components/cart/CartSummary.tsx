@@ -81,7 +81,7 @@ export default function CartSummary() {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 space-y-6">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6 space-y-6">
       <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Resumen del Pedido</h2>
 
       {/* Order Details */}

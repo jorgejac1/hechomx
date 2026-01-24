@@ -67,12 +67,12 @@ const ShopCard = memo(function ShopCard({ shop }: ShopCardProps) {
   return (
     <Link
       href={`/tienda/${getShopSlug(profile.shopName)}`}
-      className="bg-white rounded-xl shadow-md hover:shadow-xl transition overflow-hidden group"
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 hover:shadow-xl dark:hover:shadow-gray-900/70 transition overflow-hidden group"
     >
       {/* Shop Header with Avatar */}
       <div className="relative h-32 bg-linear-to-br from-primary-100 to-primary-200">
         <div className="absolute -bottom-12 left-6">
-          <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg overflow-hidden bg-white">
+          <div className="w-24 h-24 rounded-full border-4 border-white dark:border-gray-700 shadow-lg dark:shadow-gray-900/50 overflow-hidden bg-white dark:bg-gray-800">
             {shop.avatar ? (
               <Image
                 src={shop.avatar}

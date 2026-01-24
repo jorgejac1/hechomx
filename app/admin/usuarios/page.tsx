@@ -125,9 +125,9 @@ export default function AdminUsuariosPage() {
 
   const getRoleBadge = (role: MockUser['role']) => {
     const styles = {
-      buyer: 'bg-blue-100 text-blue-700',
-      seller: 'bg-purple-100 text-purple-700',
-      admin: 'bg-amber-100 text-amber-700',
+      buyer: 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300',
+      seller: 'bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300',
+      admin: 'bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300',
     };
     const labels = { buyer: 'Comprador', seller: 'Vendedor', admin: 'Admin' };
     return (
@@ -139,9 +139,9 @@ export default function AdminUsuariosPage() {
 
   const getStatusBadge = (status: MockUser['status']) => {
     const styles = {
-      active: 'bg-green-100 text-green-700',
-      suspended: 'bg-red-100 text-red-700',
-      pending: 'bg-amber-100 text-amber-700',
+      active: 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300',
+      suspended: 'bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300',
+      pending: 'bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300',
     };
     const labels = { active: 'Activo', suspended: 'Suspendido', pending: 'Pendiente' };
     return (
@@ -168,7 +168,10 @@ export default function AdminUsuariosPage() {
           {/* Stats Skeleton */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="bg-white rounded-xl border border-gray-200 p-4">
+              <div
+                key={i}
+                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4"
+              >
                 <Skeleton width={60} height={32} className="mb-2" />
                 <Skeleton width={100} height={16} />
               </div>
@@ -176,12 +179,15 @@ export default function AdminUsuariosPage() {
           </div>
 
           {/* Table Skeleton */}
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <div className="p-4 border-b border-gray-200">
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
               <Skeleton width="100%" height={40} />
             </div>
             {[...Array(5)].map((_, i) => (
-              <div key={i} className="p-4 border-b border-gray-200 flex items-center gap-4">
+              <div
+                key={i}
+                className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center gap-4"
+              >
                 <Skeleton variant="circular" width={40} height={40} />
                 <div className="flex-1">
                   <Skeleton width={180} height={20} className="mb-2" />
@@ -206,40 +212,46 @@ export default function AdminUsuariosPage() {
         <div className="mb-8">
           <Link
             href={ROUTES.ADMIN}
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition"
+            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 mb-4 transition"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver al Panel
           </Link>
           <div className="flex items-center gap-3 mb-2">
             <Users className="w-8 h-8 text-purple-600" />
-            <h1 className="text-3xl font-bold text-gray-900">Gestión de Usuarios</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+              Gestión de Usuarios
+            </h1>
           </div>
-          <p className="text-gray-600">Administra usuarios, vendedores y permisos</p>
+          <p className="text-gray-600 dark:text-gray-400">
+            Administra usuarios, vendedores y permisos
+          </p>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-xl border border-gray-200 p-4">
-            <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-            <p className="text-sm text-gray-600">Total Usuarios</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-4">
+            <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.total}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Total Usuarios</p>
           </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-4">
-            <p className="text-2xl font-bold text-blue-600">{stats.buyers}</p>
-            <p className="text-sm text-gray-600">Compradores</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-4">
+            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{stats.buyers}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Compradores</p>
           </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-4">
-            <p className="text-2xl font-bold text-purple-600">{stats.sellers}</p>
-            <p className="text-sm text-gray-600">Vendedores</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-4">
+            <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+              {stats.sellers}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Vendedores</p>
           </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-4">
-            <p className="text-2xl font-bold text-red-600">{stats.suspended}</p>
-            <p className="text-sm text-gray-600">Suspendidos</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-4">
+            <p className="text-2xl font-bold text-red-600 dark:text-red-400">{stats.suspended}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Suspendidos</p>
           </div>
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-xl border border-gray-200 p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 p-4 mb-6">
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -248,14 +260,14 @@ export default function AdminUsuariosPage() {
                 placeholder="Buscar por nombre, email o tienda..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               />
             </div>
             <div className="relative">
               <select
                 value={roleFilter}
                 onChange={(e) => setRoleFilter(e.target.value as UserRole)}
-                className="appearance-none pl-4 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white"
+                className="appearance-none pl-4 pr-10 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               >
                 <option value="all">Todos los roles</option>
                 <option value="buyer">Compradores</option>
@@ -268,7 +280,7 @@ export default function AdminUsuariosPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value as UserStatus)}
-                className="appearance-none pl-4 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white"
+                className="appearance-none pl-4 pr-10 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               >
                 <option value="all">Todos los estados</option>
                 <option value="active">Activos</option>
@@ -281,27 +293,27 @@ export default function AdminUsuariosPage() {
         </div>
 
         {/* Users List */}
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs dark:shadow-gray-900/30 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
                 <tr>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400">
                     Usuario
                   </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 hidden md:table-cell">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400 hidden md:table-cell">
                     Rol
                   </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 hidden sm:table-cell">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400 hidden sm:table-cell">
                     Estado
                   </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 hidden lg:table-cell">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400 hidden lg:table-cell">
                     Registro
                   </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 hidden lg:table-cell">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400 hidden lg:table-cell">
                     Última Actividad
                   </th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-gray-600">
+                  <th className="text-right py-3 px-4 text-sm font-semibold text-gray-600 dark:text-gray-400">
                     Acciones
                   </th>
                 </tr>
@@ -310,8 +322,8 @@ export default function AdminUsuariosPage() {
                 {filteredUsers.map((user) => (
                   <Fragment key={user.id}>
                     <tr
-                      className={`border-b border-gray-100 hover:bg-gray-50 cursor-pointer ${
-                        expandedUser === user.id ? 'bg-purple-50' : ''
+                      className={`border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer ${
+                        expandedUser === user.id ? 'bg-purple-50 dark:bg-purple-900/20' : ''
                       }`}
                       onClick={() => setExpandedUser(expandedUser === user.id ? null : user.id)}
                     >
@@ -326,12 +338,14 @@ export default function AdminUsuariosPage() {
                           />
                           <div>
                             <div className="flex items-center gap-2">
-                              <p className="font-medium text-gray-900">{user.name}</p>
+                              <p className="font-medium text-gray-900 dark:text-gray-100">
+                                {user.name}
+                              </p>
                               {user.verified && <CheckCircle className="w-4 h-4 text-green-500" />}
                             </div>
-                            <p className="text-sm text-gray-500">{user.email}</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{user.email}</p>
                             {user.shopName && (
-                              <p className="text-xs text-purple-600 flex items-center gap-1 mt-0.5">
+                              <p className="text-xs text-purple-600 dark:text-purple-400 flex items-center gap-1 mt-0.5">
                                 <Store className="w-3 h-3" />
                                 {user.shopName}
                               </p>
@@ -344,10 +358,14 @@ export default function AdminUsuariosPage() {
                         {getStatusBadge(user.status)}
                       </td>
                       <td className="py-4 px-4 hidden lg:table-cell">
-                        <span className="text-sm text-gray-600">{user.joinedAt}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          {user.joinedAt}
+                        </span>
                       </td>
                       <td className="py-4 px-4 hidden lg:table-cell">
-                        <span className="text-sm text-gray-600">{user.lastActive}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          {user.lastActive}
+                        </span>
                       </td>
                       <td className="py-4 px-4 text-right">
                         <div className="flex items-center justify-end gap-2">
@@ -358,8 +376,8 @@ export default function AdminUsuariosPage() {
                             }}
                             className={`p-2 rounded-lg transition ${
                               expandedUser === user.id
-                                ? 'text-purple-600 bg-purple-100'
-                                : 'text-gray-400 hover:text-purple-600 hover:bg-purple-50'
+                                ? 'text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/50'
+                                : 'text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30'
                             }`}
                             title="Ver detalles"
                           >
@@ -374,7 +392,7 @@ export default function AdminUsuariosPage() {
                               e.stopPropagation();
                               openProfileModal(user);
                             }}
-                            className="p-2 text-gray-400 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition"
+                            className="p-2 text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 rounded-lg transition"
                             title="Ver perfil"
                           >
                             <Eye className="w-4 h-4" />
@@ -384,7 +402,7 @@ export default function AdminUsuariosPage() {
                               e.stopPropagation();
                               window.location.href = `mailto:${user.email}`;
                             }}
-                            className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                            className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition"
                             title="Enviar mensaje"
                           >
                             <Mail className="w-4 h-4" />
@@ -395,7 +413,7 @@ export default function AdminUsuariosPage() {
                                 e.stopPropagation();
                                 openSuspendModal(user);
                               }}
-                              className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+                              className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition"
                               title="Suspender"
                             >
                               <Ban className="w-4 h-4" />
@@ -407,7 +425,7 @@ export default function AdminUsuariosPage() {
                                 e.stopPropagation();
                                 openReactivateModal(user);
                               }}
-                              className="p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition"
+                              className="p-2 text-gray-400 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 rounded-lg transition"
                               title="Reactivar"
                             >
                               <CheckCircle className="w-4 h-4" />
@@ -436,8 +454,8 @@ export default function AdminUsuariosPage() {
 
           {filteredUsers.length === 0 && (
             <div className="text-center py-12">
-              <Users className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-500">No se encontraron usuarios</p>
+              <Users className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+              <p className="text-gray-500 dark:text-gray-400">No se encontraron usuarios</p>
             </div>
           )}
         </div>

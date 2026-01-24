@@ -17,7 +17,7 @@ export default function OverheadCostsList({
   onUpdate,
 }: OverheadCostsListProps) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <TrendingUp className="w-5 h-5 text-purple-600 dark:text-purple-400" />

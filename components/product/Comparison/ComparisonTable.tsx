@@ -77,7 +77,7 @@ export default function ComparisonTable({ products, showOnlyDifferences }: Compa
   );
 
   return (
-    <div className="bg-white rounded-xl shadow-xs overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs dark:shadow-gray-900/30 overflow-hidden">
       {/* Sticky Header */}
       <div
         style={gridStyle}

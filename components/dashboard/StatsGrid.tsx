@@ -64,7 +64,10 @@ export default function StatsGrid({ stats }: StatsGridProps) {
       {cards.map((card, index) => {
         const Icon = card.icon;
         return (
-          <div key={index} className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <div
+            key={index}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 p-6"
+          >
             <div className="flex items-center justify-between mb-2">
               <div className={`p-3 ${card.bgColor} dark:opacity-80 rounded-lg`}>
                 <Icon className={`w-6 h-6 ${card.iconColor}`} />

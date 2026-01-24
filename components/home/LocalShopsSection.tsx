@@ -207,7 +207,7 @@ export default function LocalShopsSection() {
               <Link
                 key={shop.id}
                 href={`/tienda/${shop.username}`}
-                className={`group relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ${
+                className={`group relative rounded-xl overflow-hidden shadow-md dark:shadow-gray-900/50 hover:shadow-xl dark:hover:shadow-gray-900/70 transition-all duration-300 ${
                   isLarge ? 'md:row-span-2' : ''
                 }`}
                 style={{ minHeight: isLarge ? '320px' : '155px' }}

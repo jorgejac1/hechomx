@@ -54,7 +54,7 @@ export default function ScrollToTop() {
           />
         </svg>
       }
-      className="fixed bottom-20 right-4 sm:bottom-8 sm:right-8 z-40 p-2.5! sm:p-3! rounded-full shadow-lg hover:scale-110"
+      className="fixed bottom-20 right-4 sm:bottom-8 sm:right-8 z-40 p-2.5! sm:p-3! rounded-full shadow-lg dark:shadow-gray-900/50 hover:scale-110"
       ariaLabel="Volver arriba"
     />
   );

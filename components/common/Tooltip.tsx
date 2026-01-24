@@ -61,7 +61,8 @@ interface TooltipProps {
 // Variant styles
 const variantStyles: Record<TooltipVariant, string> = {
   dark: 'bg-gray-900 text-white',
-  light: 'bg-white text-gray-900 border border-gray-200 shadow-lg',
+  light:
+    'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700 shadow-lg dark:shadow-gray-900/50',
 };
 
 // Arrow styles by variant and placement

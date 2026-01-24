@@ -70,7 +70,7 @@ const variantStyles: Record<
   },
   separated: {
     container: 'space-y-4',
-    item: 'bg-white rounded-xl shadow-md overflow-hidden',
+    item: 'bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden',
     trigger:
       'flex items-center justify-between w-full p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors',
     content: 'px-5 pb-5 text-gray-700',

@@ -176,7 +176,7 @@ const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
       )}
 
       <Link href={`${ROUTES.PRODUCTS}/${product.id}`}>
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden hover:shadow-xl dark:hover:shadow-gray-900/70 transition-shadow duration-300 h-full flex flex-col">
           {/* Image */}
           <div className="relative h-40 sm:h-48 md:h-56 bg-gray-200 dark:bg-gray-700 overflow-hidden shrink-0">
             <Image

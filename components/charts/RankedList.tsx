@@ -32,11 +32,11 @@ export interface RankedListProps {
 }
 
 const rankColorStyles = {
-  purple: 'bg-purple-100 text-purple-700',
-  blue: 'bg-blue-100 text-blue-700',
-  green: 'bg-green-100 text-green-700',
-  amber: 'bg-amber-100 text-amber-700',
-  gray: 'bg-gray-100 text-gray-700',
+  purple: 'bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300',
+  blue: 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300',
+  green: 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300',
+  amber: 'bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300',
+  gray: 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300',
 };
 
 export default function RankedList({
@@ -54,7 +54,7 @@ export default function RankedList({
       {displayItems.map((item, index) => (
         <div
           key={index}
-          className="flex items-center gap-3 py-3 border-b border-gray-100 last:border-0"
+          className="flex items-center gap-3 py-3 border-b border-gray-100 dark:border-gray-700 last:border-0"
         >
           {/* Rank Badge */}
           {showRank && (
@@ -78,13 +78,15 @@ export default function RankedList({
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <p className="font-medium text-gray-900 truncate">{item.name}</p>
-            {item.subtitle && <p className="text-sm text-gray-500 truncate">{item.subtitle}</p>}
+            <p className="font-medium text-gray-900 dark:text-gray-100 truncate">{item.name}</p>
+            {item.subtitle && (
+              <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{item.subtitle}</p>
+            )}
           </div>
 
           {/* Value & Trend */}
           <div className="text-right shrink-0">
-            <p className="font-semibold text-gray-900">{item.value}</p>
+            <p className="font-semibold text-gray-900 dark:text-gray-100">{item.value}</p>
             {showTrend && item.trend !== undefined && (
               <p
                 className={`text-xs flex items-center justify-end gap-0.5 ${
