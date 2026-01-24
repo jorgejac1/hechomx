@@ -216,3 +216,56 @@ export function getProductCounts(sellerId: string): { drafts: number; published:
     published: getPublishedProducts(sellerId).length,
   };
 }
+
+// ============================================
+// Product Duplication
+// ============================================
+
+const DUPLICATE_PRODUCT_KEY = 'papalote-duplicate-product';
+
+/**
+ * Store product data for duplication
+ * @param product - The product to duplicate
+ */
+export function setDuplicateProduct(product: Partial<DraftProduct>): void {
+  try {
+    // Remove ID and timestamps so it creates a new product
+    const {
+      id: _id,
+      createdAt: _createdAt,
+      updatedAt: _updatedAt,
+      sellerId: _sellerId,
+      sellerName: _sellerName,
+      status: _status,
+      ...productData
+    } = product;
+    localStorage.setItem(DUPLICATE_PRODUCT_KEY, JSON.stringify(productData));
+  } catch (error) {
+    console.error('[products] Error storing duplicate product:', error);
+  }
+}
+
+/**
+ * Get stored product data for duplication
+ * @returns The product data to duplicate, or null if none
+ */
+export function getDuplicateProduct(): Partial<DraftProduct> | null {
+  try {
+    const stored = localStorage.getItem(DUPLICATE_PRODUCT_KEY);
+    return stored ? JSON.parse(stored) : null;
+  } catch (error) {
+    console.error('[products] Error loading duplicate product:', error);
+    return null;
+  }
+}
+
+/**
+ * Clear stored duplicate product data
+ */
+export function clearDuplicateProduct(): void {
+  try {
+    localStorage.removeItem(DUPLICATE_PRODUCT_KEY);
+  } catch (error) {
+    console.error('[products] Error clearing duplicate product:', error);
+  }
+}

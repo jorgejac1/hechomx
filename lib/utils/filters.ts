@@ -56,3 +56,83 @@ export const removeFilterParam = (
   params.delete(paramName);
   return params;
 };
+
+/**
+ * Filter state shape for URL building
+ */
+interface FilterState {
+  categories: string[];
+  states: string[];
+  materials: string[];
+  priceRange: { min: number; max: number };
+  minRating: number;
+  inStock: boolean | null;
+  verified: boolean | null;
+  featured: boolean | null;
+  sortBy: string;
+  searchQuery?: string;
+}
+
+/**
+ * Builds URL search params from filter state
+ * @param filters - Current filter state
+ * @param defaultPriceMax - Default max price from product range
+ * @param existingParams - Existing URL search params to preserve
+ * @returns URLSearchParams with filter values
+ */
+export const buildFilterParams = (
+  filters: FilterState,
+  defaultPriceMax: number,
+  existingParams?: URLSearchParams
+): URLSearchParams => {
+  const params = new URLSearchParams();
+
+  // Preserve existing query and subcategory params
+  if (existingParams) {
+    const query = existingParams.get(FILTER_PARAM_NAMES.QUERY);
+    const subcategory = existingParams.get(FILTER_PARAM_NAMES.SUBCATEGORY);
+    const subsubcategory = existingParams.get(FILTER_PARAM_NAMES.SUBSUBCATEGORY);
+
+    if (query) params.set(FILTER_PARAM_NAMES.QUERY, query);
+    if (subcategory) params.set(FILTER_PARAM_NAMES.SUBCATEGORY, subcategory);
+    if (subsubcategory) params.set(FILTER_PARAM_NAMES.SUBSUBCATEGORY, subsubcategory);
+  }
+
+  // Categories (single-select in this app, but supporting the array)
+  if (filters.categories.length > 0) {
+    params.set(FILTER_PARAM_NAMES.CATEGORY, filters.categories[0]);
+  }
+
+  // States (single value for URL)
+  if (filters.states.length > 0) {
+    params.set(FILTER_PARAM_NAMES.STATE, filters.states[0]);
+  }
+
+  // Materials (multi-select, use multiple params)
+  filters.materials.forEach((material) => {
+    params.append(FILTER_PARAM_NAMES.MATERIAL, material);
+  });
+
+  // Price range (only if below max)
+  if (filters.priceRange.max < defaultPriceMax) {
+    params.set(FILTER_PARAM_NAMES.PRICE, String(filters.priceRange.max));
+  }
+
+  // Sort (only if not default)
+  if (filters.sortBy !== 'relevance') {
+    params.set(FILTER_PARAM_NAMES.SORT, filters.sortBy);
+  }
+
+  // Boolean filters
+  if (filters.inStock === true) {
+    params.set(FILTER_PARAM_NAMES.IN_STOCK, 'si');
+  }
+  if (filters.verified === true) {
+    params.set(FILTER_PARAM_NAMES.VERIFIED, 'si');
+  }
+  if (filters.featured === true) {
+    params.set(FILTER_PARAM_NAMES.FEATURED, 'si');
+  }
+
+  return params;
+};

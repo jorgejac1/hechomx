@@ -293,18 +293,55 @@ import SizeSelector from '@/components/product/SizeSelector';
 
 ### FiltersDrawer
 
-Mobile-friendly filters panel.
+Full-screen slide-out drawer with comprehensive filtering options.
 
 ```tsx
 import FiltersDrawer from '@/components/product/FiltersDrawer';
 
 <FiltersDrawer
-  isOpen={showFilters}
-  onClose={() => setShowFilters(false)}
+  isOpen={isFilterOpen}
+  onClose={() => setIsFilterOpen(false)}
   filters={filters}
-  onFiltersChange={setFilters}
+  filterOptions={filterOptions}
+  priceRange={priceRange}
+  onToggleCategory={toggleCategory}
+  onToggleState={toggleState}
+  onToggleMaterial={toggleMaterial}
+  onUpdatePriceRange={updatePriceRange}
+  onUpdateMinRating={updateMinRating}
+  onToggleInStock={toggleInStock}
+  onToggleVerified={toggleVerified}
+  onToggleFeatured={toggleFeatured}
+  onResetFilters={resetFilters}
+  activeFilterCount={activeFilterCount}
 />;
 ```
+
+| Prop                 | Type                         | Description                                             |
+| -------------------- | ---------------------------- | ------------------------------------------------------- |
+| `isOpen`             | `boolean`                    | Controls drawer visibility                              |
+| `onClose`            | `() => void`                 | Close handler                                           |
+| `filters`            | `ProductFilters`             | Current filter state                                    |
+| `filterOptions`      | `FilterOptions`              | Available filter values (categories, states, materials) |
+| `priceRange`         | `{min, max}`                 | Price bounds from products                              |
+| `onToggleCategory`   | `(cat: string) => void`      | Toggle category filter                                  |
+| `onToggleState`      | `(state: string) => void`    | Toggle state filter                                     |
+| `onToggleMaterial`   | `(material: string) => void` | Toggle material filter (multi-select)                   |
+| `onUpdatePriceRange` | `(range) => void`            | Update price range                                      |
+| `onUpdateMinRating`  | `(rating: number) => void`   | Set minimum rating                                      |
+| `onToggleInStock`    | `() => void`                 | Toggle in-stock filter                                  |
+| `onToggleVerified`   | `() => void`                 | Toggle verified sellers                                 |
+| `onToggleFeatured`   | `() => void`                 | Toggle featured products                                |
+| `onResetFilters`     | `() => void`                 | Clear all filters                                       |
+| `activeFilterCount`  | `number`                     | Number of active filters                                |
+
+**Features:**
+
+- Categories, States, Materials sections with "show more" expansion
+- Price range slider
+- Rating filter (star-based)
+- Boolean toggles (in stock, verified, featured)
+- Filter state syncs to URL for shareable links
 
 ---
 

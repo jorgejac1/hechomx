@@ -11,9 +11,9 @@ import { X } from 'lucide-react';
 
 /**
  * Available color variants for filter badges
- * @typedef {'primary' | 'blue' | 'green' | 'yellow' | 'purple' | 'orange'} FilterBadgeVariant
+ * @typedef {'primary' | 'blue' | 'green' | 'yellow' | 'purple' | 'orange' | 'teal'} FilterBadgeVariant
  */
-type FilterBadgeVariant = 'primary' | 'blue' | 'green' | 'yellow' | 'purple' | 'orange';
+type FilterBadgeVariant = 'primary' | 'blue' | 'green' | 'yellow' | 'purple' | 'orange' | 'teal';
 
 /**
  * Props for the FilterBadge component
@@ -40,6 +40,7 @@ const VARIANT_STYLES: Record<FilterBadgeVariant, string> = {
     'bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-100',
   orange:
     'bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 hover:text-orange-900 dark:hover:text-orange-100',
+  teal: 'bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 hover:text-teal-900 dark:hover:text-teal-100',
 };
 
 export default function FilterBadge({ label, onRemove, variant = 'primary' }: FilterBadgeProps) {

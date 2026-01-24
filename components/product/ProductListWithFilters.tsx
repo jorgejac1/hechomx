@@ -42,6 +42,7 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
     priceRange,
     toggleCategory,
     toggleState,
+    toggleMaterial,
     updatePriceRange,
     updateMinRating,
     updateSortBy,
@@ -133,6 +134,14 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
                     className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium"
                   >
                     {state}
+                  </span>
+                ))}
+                {filters.materials.map((material) => (
+                  <span
+                    key={material}
+                    className="inline-flex items-center gap-1 px-3 py-1 bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 rounded-full text-sm font-medium"
+                  >
+                    {material}
                   </span>
                 ))}
                 {filters.minRating > 0 && (
@@ -256,6 +265,7 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
         priceRange={priceRange}
         onToggleCategory={toggleCategory}
         onToggleState={toggleState}
+        onToggleMaterial={toggleMaterial}
         onUpdatePriceRange={updatePriceRange}
         onUpdateMinRating={updateMinRating}
         onToggleInStock={toggleInStock}

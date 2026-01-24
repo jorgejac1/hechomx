@@ -17,6 +17,9 @@ export interface ProductFilters {
   // Location filters
   states: string[];
 
+  // Materials filters
+  materials: string[];
+
   // Price filters
   priceRange: PriceRange;
 

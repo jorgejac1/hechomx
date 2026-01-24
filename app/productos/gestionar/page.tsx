@@ -3,13 +3,16 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import AuthPageWrapper from '@/components/auth/AuthPageWrapper';
 import DataList from '@/components/common/DataList';
 import { ROUTES } from '@/lib/constants/routes';
 import { formatCurrency } from '@/lib';
+import { setDuplicateProduct } from '@/lib/utils/products';
+import { useToast } from '@/contexts/ToastContext';
 import type { User } from '@/contexts/AuthContext';
 import type { SellerProduct } from '@/lib/types';
-import { Plus, Edit, Trash2, Eye, Package, AlertCircle, Search, Filter } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, Package, AlertCircle, Search, Filter, Copy } from 'lucide-react';
 
 export default function ManageProductsPage() {
   return (
@@ -21,6 +24,20 @@ export default function ManageProductsPage() {
 
 function ManageProductsContent({ user }: { user: User }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+  const { showToast } = useToast();
+
+  const handleDuplicate = (product: SellerProduct) => {
+    // Store product data for duplication (excluding ID, timestamps, etc.)
+    setDuplicateProduct({
+      name: `${product.name} (Copia)`,
+      price: product.price,
+      stock: product.stock,
+      // Include other fields if available
+    });
+    showToast('Producto copiado. Completa los detalles del nuevo producto.', 'info');
+    router.push(ROUTES.PRODUCT_CREATE);
+  };
 
   const products = user.makerProfile!.products || [];
   const filteredProducts = products.filter((p) =>
@@ -119,18 +136,25 @@ function ManageProductsContent({ user }: { user: User }) {
               <div className="flex sm:flex-col gap-2">
                 <Link
                   href={`/productos/${product.id}`}
-                  className="flex-1 sm:flex-none px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition text-sm font-medium"
+                  className="flex-1 sm:flex-none px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition text-sm font-medium dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                   title="Ver"
                 >
                   <Eye className="w-4 h-4 mx-auto" />
                 </Link>
                 <Link
                   href={`/productos/editar/${product.id}`}
-                  className="flex-1 sm:flex-none px-4 py-2 border border-primary-300 text-primary-600 rounded-lg hover:bg-primary-50 transition text-sm font-medium"
+                  className="flex-1 sm:flex-none px-4 py-2 border border-primary-300 text-primary-600 rounded-lg hover:bg-primary-50 transition text-sm font-medium dark:border-primary-700 dark:text-primary-400 dark:hover:bg-primary-900/30"
                   title="Editar"
                 >
                   <Edit className="w-4 h-4 mx-auto" />
                 </Link>
+                <button
+                  onClick={() => handleDuplicate(product)}
+                  className="flex-1 sm:flex-none px-4 py-2 border border-secondary-300 text-secondary-600 rounded-lg hover:bg-secondary-50 transition text-sm font-medium dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-900/30"
+                  title="Duplicar"
+                >
+                  <Copy className="w-4 h-4 mx-auto" />
+                </button>
                 <button
                   onClick={() => {
                     if (confirm('¿Estás seguro de eliminar este producto?')) {
@@ -138,7 +162,7 @@ function ManageProductsContent({ user }: { user: User }) {
                       console.log('Delete:', product.id);
                     }
                   }}
-                  className="flex-1 sm:flex-none px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-sm font-medium"
+                  className="flex-1 sm:flex-none px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-sm font-medium dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900/30"
                   title="Eliminar"
                 >
                   <Trash2 className="w-4 h-4 mx-auto" />

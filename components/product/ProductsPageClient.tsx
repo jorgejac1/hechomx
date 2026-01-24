@@ -7,7 +7,7 @@
 
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useProductFilters } from '@/hooks/product/useProductFilters';
 import FiltersDrawer from '@/components/product/FiltersDrawer';
@@ -27,7 +27,7 @@ import {
   validateBooleanParam,
   validateStateParam,
 } from '@/validators/product';
-import { removeFilterParam } from '@/lib/utils/filters';
+import { removeFilterParam, buildFilterParams } from '@/lib/utils/filters';
 import {
   trackFilterUsage,
   trackSortChange,
@@ -69,6 +69,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
   const currentInStock = searchParams.has(FILTER_PARAM_NAMES.IN_STOCK)
     ? validateBooleanParam(searchParams.get(FILTER_PARAM_NAMES.IN_STOCK))
     : null;
+  const currentMaterials = searchParams.getAll(FILTER_PARAM_NAMES.MATERIAL);
 
   const {
     filters,
@@ -77,6 +78,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
     priceRange,
     toggleCategory,
     toggleState,
+    toggleMaterial,
     updatePriceRange,
     updateMinRating,
     updateSortBy,
@@ -94,6 +96,9 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
     }
   }, [currentQuery, filteredProducts.length]);
 
+  // Memoize materials array to avoid re-renders
+  const materialsDep = currentMaterials.join(',');
+
   // Sync filter state with URL params (only when URL params change)
   useEffect(() => {
     // Handle category filters
@@ -108,6 +113,25 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
       toggleState(currentState);
     } else if (!currentState && filters.states.length > 0) {
       filters.states.forEach((state) => toggleState(state));
+    }
+
+    // Handle material filters (multi-select via URL)
+    if (currentMaterials.length > 0) {
+      // Add materials from URL that aren't in filters
+      currentMaterials.forEach((material) => {
+        if (!filters.materials.includes(material)) {
+          toggleMaterial(material);
+        }
+      });
+      // Remove materials from filters that aren't in URL
+      filters.materials.forEach((material) => {
+        if (!currentMaterials.includes(material)) {
+          toggleMaterial(material);
+        }
+      });
+    } else if (filters.materials.length > 0) {
+      // Clear all materials if URL has none
+      filters.materials.forEach((material) => toggleMaterial(material));
     }
 
     // Handle sort with validation
@@ -125,7 +149,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentCategory, currentState, currentSort, currentPrice]);
+  }, [currentCategory, currentState, materialsDep, currentSort, currentPrice]);
 
   // Separate effect for boolean filters from URL - only runs on URL param changes
   useEffect(() => {
@@ -145,12 +169,51 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentFeatured, currentVerified, currentInStock]);
 
+  // Ref to track if we should skip URL sync (e.g., during initial load)
+  const isInitialMount = useRef(true);
+  const isSyncingFromUrl = useRef(false);
+
+  // Sync filter state TO URL (for shareable/bookmarkable URLs)
+  const syncFiltersToUrl = useCallback(() => {
+    if (isInitialMount.current || isSyncingFromUrl.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    const newParams = buildFilterParams(filters, priceRange.max, searchParams);
+    const newUrl = newParams.toString() ? `/productos?${newParams.toString()}` : '/productos';
+    const currentUrl = searchParams.toString()
+      ? `/productos?${searchParams.toString()}`
+      : '/productos';
+
+    // Only update if URL actually changed
+    if (newUrl !== currentUrl) {
+      router.replace(newUrl, { scroll: false });
+    }
+  }, [filters, priceRange.max, searchParams, router]);
+
+  // Debounced URL sync to avoid excessive URL updates during rapid filter changes
+  useEffect(() => {
+    const timeoutId = setTimeout(syncFiltersToUrl, 300);
+    return () => clearTimeout(timeoutId);
+  }, [syncFiltersToUrl]);
+
+  // Mark URL read operations to prevent sync loops
+  useEffect(() => {
+    isSyncingFromUrl.current = true;
+    const timeoutId = setTimeout(() => {
+      isSyncingFromUrl.current = false;
+    }, 100);
+    return () => clearTimeout(timeoutId);
+  }, [currentCategory, currentState, materialsDep, currentSort, currentPrice]);
+
   // Calculate active filter count - memoized to avoid recalculation on each render
   const totalActiveFilters = useMemo(() => {
     let count = 0;
 
     count += filters.categories.length;
     count += filters.states.length;
+    count += filters.materials.length;
 
     if (filters.priceRange.max < priceRange.max) count++;
     if (filters.minRating > 0) count++;
@@ -163,6 +226,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
   }, [
     filters.categories.length,
     filters.states.length,
+    filters.materials.length,
     filters.priceRange.max,
     priceRange.max,
     filters.minRating,
@@ -338,6 +402,18 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
                 />
               ))}
 
+              {/* Material Badges */}
+              {filters.materials.map((material) => (
+                <FilterBadge
+                  key={material}
+                  label={material}
+                  variant="teal"
+                  onRemove={() =>
+                    handleFilterChange(() => toggleMaterial(material), 'material', material)
+                  }
+                />
+              ))}
+
               {/* Price Badge */}
               {filters.priceRange.max < priceRange.max && (
                 <FilterBadge
@@ -436,6 +512,9 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
         priceRange={priceRange}
         onToggleCategory={(cat) => handleFilterChange(() => toggleCategory(cat), 'category', cat)}
         onToggleState={(state) => handleFilterChange(() => toggleState(state), 'state', state)}
+        onToggleMaterial={(material) =>
+          handleFilterChange(() => toggleMaterial(material), 'material', material)
+        }
         onUpdatePriceRange={(range) =>
           handleFilterChange(() => updatePriceRange(range), 'price', range.max)
         }

@@ -12,6 +12,7 @@ const DEFAULT_FILTERS: ProductFilters = {
   categories: [],
   subcategories: [],
   states: [],
+  materials: [],
   priceRange: { min: 0, max: 10000 },
   minRating: 0,
   inStock: null,
@@ -36,22 +37,27 @@ export function useProductFilters(initialProducts: Product[] = []) {
     };
   }, [initialProducts]);
 
-  // Extract unique categories, states, etc. from products
+  // Extract unique categories, states, materials, etc. from products
   const filterOptions = useMemo(() => {
     const categories = new Set<string>();
     const subcategories = new Set<string>();
     const states = new Set<string>();
+    const materials = new Set<string>();
 
     initialProducts.forEach((product) => {
       if (product.category) categories.add(product.category);
       if (product.subcategory) subcategories.add(product.subcategory);
       if (product.state) states.add(product.state);
+      if (product.materials) {
+        product.materials.forEach((material) => materials.add(material));
+      }
     });
 
     return {
       categories: Array.from(categories).sort(),
       subcategories: Array.from(subcategories).sort(),
       states: Array.from(states).sort(),
+      materials: Array.from(materials).sort(),
     };
   }, [initialProducts]);
 
@@ -61,6 +67,7 @@ export function useProductFilters(initialProducts: Product[] = []) {
     if (filters.categories.length > 0) count++;
     if (filters.subcategories.length > 0) count++;
     if (filters.states.length > 0) count++;
+    if (filters.materials.length > 0) count++;
     if (filters.priceRange.min > priceRange.min || filters.priceRange.max < priceRange.max) count++;
     if (filters.minRating > 0) count++;
     if (filters.inStock !== null) count++;
@@ -104,6 +111,13 @@ export function useProductFilters(initialProducts: Product[] = []) {
     // States
     if (filters.states.length > 0) {
       filtered = filtered.filter((product) => filters.states.includes(product.state));
+    }
+
+    // Materials
+    if (filters.materials.length > 0) {
+      filtered = filtered.filter((product) =>
+        product.materials?.some((material) => filters.materials.includes(material))
+      );
     }
 
     // Price range
@@ -212,6 +226,16 @@ export function useProductFilters(initialProducts: Product[] = []) {
     }));
   }, []);
 
+  // Toggle material - MULTI SELECT
+  const toggleMaterial = useCallback((material: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      materials: prev.materials.includes(material)
+        ? prev.materials.filter((m) => m !== material)
+        : [...prev.materials, material],
+    }));
+  }, []);
+
   // price range
   const updatePriceRange = useCallback((range: PriceRange) => {
     setFilters((prev) => ({ ...prev, priceRange: range }));
@@ -286,6 +310,7 @@ export function useProductFilters(initialProducts: Product[] = []) {
     toggleCategory,
     toggleSubcategory,
     toggleState,
+    toggleMaterial,
     updatePriceRange,
     updateMinRating,
     updateSortBy,

@@ -9,7 +9,12 @@ import { ROUTES } from '@/lib/constants/routes';
 import ProductForm from '@/components/product/ProductForm';
 import type { User } from '@/contexts/AuthContext';
 import type { ProductFormData, DraftProduct } from '@/types/product';
-import { savePublishedProduct, generateProductId } from '@/lib/utils/products';
+import {
+  savePublishedProduct,
+  generateProductId,
+  getDuplicateProduct,
+  clearDuplicateProduct,
+} from '@/lib/utils/products';
 import { Plus, Store, AlertCircle } from 'lucide-react';
 import Alert from '@/components/common/Alert';
 
@@ -28,11 +33,21 @@ function CreateProductContent({ user }: { user: User }) {
   const [shopName, setShopName] = useState('');
   const [location, setLocation] = useState('');
   const [shopDescription, setShopDescription] = useState('');
+  const [initialData, setInitialData] = useState<Partial<ProductFormData> | undefined>(undefined);
+  const [isDuplicate, setIsDuplicate] = useState(false);
 
-  // Check if user needs quick setup after component mounts
+  // Check for duplicate product data and quick setup
   useEffect(() => {
     if (!user.makerProfile) {
       setShowQuickSetup(true);
+    }
+
+    // Check for duplicate product data
+    const duplicateData = getDuplicateProduct();
+    if (duplicateData) {
+      setInitialData(duplicateData as Partial<ProductFormData>);
+      setIsDuplicate(true);
+      clearDuplicateProduct(); // Clear after loading
     }
   }, [user.makerProfile]);
 
@@ -88,11 +103,13 @@ function CreateProductContent({ user }: { user: User }) {
           <div className="flex items-center gap-3 mb-2">
             <Plus className="w-8 h-8 text-primary-600 dark:text-primary-400" />
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              Crear Nuevo Producto
+              {isDuplicate ? 'Duplicar Producto' : 'Crear Nuevo Producto'}
             </h1>
           </div>
           <p className="text-gray-600 dark:text-gray-400">
-            Completa la información de tu producto para publicarlo en tu tienda
+            {isDuplicate
+              ? 'Estás creando una copia. Modifica los detalles según necesites.'
+              : 'Completa la información de tu producto para publicarlo en tu tienda'}
           </p>
         </div>
 
@@ -181,7 +198,7 @@ function CreateProductContent({ user }: { user: User }) {
         )}
 
         {/* Product Form */}
-        {!showQuickSetup && <ProductForm onSubmit={handleSubmit} />}
+        {!showQuickSetup && <ProductForm onSubmit={handleSubmit} initialData={initialData} />}
       </div>
     </div>
   );

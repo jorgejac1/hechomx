@@ -8,6 +8,7 @@
 export const FILTER_PARAM_NAMES = {
   CATEGORY: 'categoria',
   STATE: 'estado',
+  MATERIAL: 'material',
   QUERY: 'q',
   SORT: 'ordenar',
   PRICE: 'precio',

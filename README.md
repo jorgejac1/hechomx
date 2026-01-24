@@ -9,7 +9,8 @@ A modern e-commerce platform dedicated to promoting authentic Mexican-made produ
 - 🗺️ **All States Represented** - Products from all regions of Mexico
 - ✅ **Verified Sellers** - Badge system for authenticated artisans
 - 📱 **Responsive Design** - Works perfectly on mobile, tablet, and desktop
-- 🎯 **Smart Filtering** - Filter by category, state, and search functionality
+- 🎯 **Smart Filtering** - Filter by category, state, materials, price with shareable/bookmarkable URLs
+- 📋 **Seller Tools** - Product duplication, draft management, bulk actions
 
 ## Tech Stack
 

@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { buildProductsUrl, getFilterParamFromType, removeFilterParam } from '../filters';
+import {
+  buildProductsUrl,
+  getFilterParamFromType,
+  removeFilterParam,
+  buildFilterParams,
+} from '../filters';
 
 describe('Filter Utilities', () => {
   describe('buildProductsUrl', () => {
@@ -120,6 +125,136 @@ describe('Filter Utilities', () => {
       const params = new URLSearchParams('destacado=si');
       const result = removeFilterParam(params, 'featured');
       expect(result).not.toBe(params);
+    });
+  });
+
+  describe('buildFilterParams', () => {
+    const defaultFilters = {
+      categories: [],
+      states: [],
+      materials: [],
+      priceRange: { min: 0, max: 10000 },
+      minRating: 0,
+      inStock: null,
+      verified: null,
+      featured: null,
+      sortBy: 'relevance',
+    };
+    const defaultPriceMax = 10000;
+
+    it('should return empty params for default filters', () => {
+      const params = buildFilterParams(defaultFilters, defaultPriceMax);
+      expect(params.toString()).toBe('');
+    });
+
+    it('should add category param', () => {
+      const filters = { ...defaultFilters, categories: ['Joyería'] };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      expect(params.get('categoria')).toBe('Joyería');
+    });
+
+    it('should add state param', () => {
+      const filters = { ...defaultFilters, states: ['Oaxaca'] };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      expect(params.get('estado')).toBe('Oaxaca');
+    });
+
+    it('should add multiple material params', () => {
+      const filters = { ...defaultFilters, materials: ['Plata', 'Oro', 'Cobre'] };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      const materials = params.getAll('material');
+      expect(materials).toEqual(['Plata', 'Oro', 'Cobre']);
+    });
+
+    it('should add single material param', () => {
+      const filters = { ...defaultFilters, materials: ['Barro'] };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      const materials = params.getAll('material');
+      expect(materials).toEqual(['Barro']);
+    });
+
+    it('should not add material params when empty', () => {
+      const filters = { ...defaultFilters, materials: [] };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      expect(params.getAll('material')).toEqual([]);
+    });
+
+    it('should add price param only when below max', () => {
+      const filters = { ...defaultFilters, priceRange: { min: 0, max: 5000 } };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      expect(params.get('precio')).toBe('5000');
+    });
+
+    it('should not add price param when at max', () => {
+      const filters = { ...defaultFilters, priceRange: { min: 0, max: 10000 } };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      expect(params.has('precio')).toBe(false);
+    });
+
+    it('should add sort param when not default', () => {
+      const filters = { ...defaultFilters, sortBy: 'price_asc' };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      expect(params.get('ordenar')).toBe('price_asc');
+    });
+
+    it('should not add sort param for default relevance', () => {
+      const params = buildFilterParams(defaultFilters, defaultPriceMax);
+      expect(params.has('ordenar')).toBe(false);
+    });
+
+    it('should add inStock param when true', () => {
+      const filters = { ...defaultFilters, inStock: true };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      expect(params.get('enstock')).toBe('si');
+    });
+
+    it('should not add inStock param when null', () => {
+      const params = buildFilterParams(defaultFilters, defaultPriceMax);
+      expect(params.has('enstock')).toBe(false);
+    });
+
+    it('should add verified param when true', () => {
+      const filters = { ...defaultFilters, verified: true };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      expect(params.get('verificado')).toBe('si');
+    });
+
+    it('should add featured param when true', () => {
+      const filters = { ...defaultFilters, featured: true };
+      const params = buildFilterParams(filters, defaultPriceMax);
+      expect(params.get('destacado')).toBe('si');
+    });
+
+    it('should preserve existing query param', () => {
+      const existingParams = new URLSearchParams('q=alebrije');
+      const params = buildFilterParams(defaultFilters, defaultPriceMax, existingParams);
+      expect(params.get('q')).toBe('alebrije');
+    });
+
+    it('should preserve existing subcategory param', () => {
+      const existingParams = new URLSearchParams('subcategoria=Anillos');
+      const params = buildFilterParams(defaultFilters, defaultPriceMax, existingParams);
+      expect(params.get('subcategoria')).toBe('Anillos');
+    });
+
+    it('should combine multiple filters', () => {
+      const filters = {
+        ...defaultFilters,
+        categories: ['Arte'],
+        states: ['Jalisco'],
+        materials: ['Vidrio', 'Metal'],
+        priceRange: { min: 0, max: 3000 },
+        verified: true,
+        sortBy: 'price_desc',
+      };
+      const params = buildFilterParams(filters, defaultPriceMax);
+
+      expect(params.get('categoria')).toBe('Arte');
+      expect(params.get('estado')).toBe('Jalisco');
+      expect(params.getAll('material')).toEqual(['Vidrio', 'Metal']);
+      expect(params.get('precio')).toBe('3000');
+      expect(params.get('verificado')).toBe('si');
+      expect(params.get('ordenar')).toBe('price_desc');
     });
   });
 });

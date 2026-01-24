@@ -102,16 +102,20 @@ flowchart LR
         B --> F[Category Page]
         F --> G[Price Filter]
         F --> H[State Filter]
-        F --> I[Sort Options]
+        F --> I[Materials Filter]
+        F --> J[Sort Options]
     end
 
     subgraph Detail["Product Detail"]
-        G --> J[Product Page]
-        H --> J
-        I --> J
-        C --> J
+        G --> K[Product Page]
+        H --> K
+        I --> K
+        J --> K
+        C --> K
     end
 ```
+
+> **Note:** Filter URLs are shareable - users can bookmark or share filtered product links.
 
 **Key Pages:**
 

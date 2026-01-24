@@ -12,6 +12,7 @@ import {
   ChevronDown,
   ChevronUp,
   MapPin,
+  Layers,
   Shirt,
   Container,
   Gem,
@@ -47,6 +48,8 @@ interface ProductFilters {
   categories: string[];
   /** Selected state filters */
   states: string[];
+  /** Selected material filters */
+  materials: string[];
   /** Price range bounds */
   priceRange: {
     min: number;
@@ -71,6 +74,8 @@ interface FilterOptions {
   categories: string[];
   /** Available states to filter by */
   states: string[];
+  /** Available materials to filter by */
+  materials: string[];
 }
 
 /**
@@ -86,6 +91,7 @@ interface FiltersDrawerProps {
   priceRange: { min: number; max: number };
   onToggleCategory: (category: string) => void;
   onToggleState: (state: string) => void;
+  onToggleMaterial: (material: string) => void;
   onUpdatePriceRange: (range: { min: number; max: number }) => void;
   onUpdateMinRating: (rating: number) => void;
   onToggleInStock: () => void;
@@ -103,6 +109,7 @@ export default function FiltersDrawer({
   priceRange,
   onToggleCategory,
   onToggleState,
+  onToggleMaterial,
   onUpdatePriceRange,
   onUpdateMinRating,
   onToggleInStock,
@@ -114,6 +121,7 @@ export default function FiltersDrawer({
   // State for show more/less
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [showAllStates, setShowAllStates] = useState(false);
+  const [showAllMaterials, setShowAllMaterials] = useState(false);
 
   // Get visible items (first 3 or all)
   const visibleCategories = showAllCategories
@@ -122,9 +130,14 @@ export default function FiltersDrawer({
 
   const visibleStates = showAllStates ? filterOptions.states : filterOptions.states.slice(0, 3);
 
+  const visibleMaterials = showAllMaterials
+    ? filterOptions.materials
+    : filterOptions.materials.slice(0, 3);
+
   // Check if we have more than 3 items
   const hasMoreCategories = filterOptions.categories.length > 3;
   const hasMoreStates = filterOptions.states.length > 3;
+  const hasMoreMaterials = filterOptions.materials.length > 3;
 
   return (
     <>
@@ -280,6 +293,66 @@ export default function FiltersDrawer({
                 )}
               </div>
             </div>
+
+            {/* Materials Section */}
+            {filterOptions.materials.length > 0 && (
+              <div className="px-6 py-6 border-b border-gray-100 dark:border-gray-800">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                  Materiales
+                </h3>
+                <div className="space-y-1">
+                  {/* All Materials Option */}
+                  <button
+                    onClick={() => {
+                      // Clear all materials
+                      filters.materials.forEach((material: string) => onToggleMaterial(material));
+                    }}
+                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base ${
+                      filters.materials.length === 0
+                        ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 font-semibold'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+                    }`}
+                  >
+                    Todos los materiales
+                  </button>
+
+                  {/* Material Options (First 3 or All) */}
+                  {visibleMaterials.map((material: string) => (
+                    <button
+                      key={material}
+                      onClick={() => onToggleMaterial(material)}
+                      className={`w-full text-left px-4 py-3 rounded-lg transition-colors text-base flex items-center gap-2 ${
+                        filters.materials.includes(material)
+                          ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 font-semibold'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+                      }`}
+                    >
+                      <Layers className="w-5 h-5" />
+                      <span>{material}</span>
+                    </button>
+                  ))}
+
+                  {/* Show More/Less Button for Materials */}
+                  {hasMoreMaterials && (
+                    <button
+                      onClick={() => setShowAllMaterials(!showAllMaterials)}
+                      className="w-full text-left px-4 py-3 rounded-lg transition-colors text-base text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 font-medium flex items-center justify-between"
+                    >
+                      <span>
+                        {showAllMaterials
+                          ? 'Ver menos'
+                          : `Ver ${filterOptions.materials.length - 3} más`}
+                      </span>
+                      {showAllMaterials ? (
+                        <ChevronUp className="w-5 h-5" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5" />
+                      )}
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* Price Range Section */}
             <div className="px-6 py-6 border-b border-gray-100 dark:border-gray-800">
