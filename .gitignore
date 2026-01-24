@@ -60,3 +60,5 @@ Thumbs.db
 CLAUDE.md
 FEATURE_HISTORY.md
 .claude
+*storybook.log
+storybook-static

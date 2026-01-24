@@ -20,7 +20,12 @@
     "validate": "npm run type-check && npm run lint && npm run test -- --run && npm run build",
     "preview": "next build && next start",
     "clean": "rm -rf .next out node_modules/.cache",
-    "prepare": "husky"
+    "prepare": "husky",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build -o storybook-static",
+    "docs": "typedoc",
+    "docs:watch": "typedoc --watch",
+    "docs:all": "npm run docs && npm run build-storybook"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -49,10 +54,14 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.39.0",
     "@next/bundle-analyzer": "^16.1.4",
     "@next/eslint-plugin-next": "^16.0.1",
+    "@storybook/addon-a11y": "^10.2.0",
+    "@storybook/addon-docs": "^10.2.0",
+    "@storybook/nextjs-vite": "^10.2.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
@@ -63,20 +72,25 @@
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
     "@vitejs/plugin-react": "^5.1.2",
-    "@vitest/coverage-v8": "^4.0.17",
+    "@vitest/coverage-v8": "^4.0.18",
     "eslint": "^9.39.0",
     "eslint-config-next": "^16.0.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-storybook": "^10.2.0",
     "globals": "^17.0.0",
     "husky": "^9.1.7",
     "jsdom": "^27.4.0",
     "lint-staged": "^15.5.2",
     "prettier": "^3.6.2",
+    "storybook": "^10.2.0",
+    "typedoc": "^0.28.16",
+    "typedoc-plugin-markdown": "^4.9.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.2",
-    "vitest": "^4.0.17"
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
   }
 }

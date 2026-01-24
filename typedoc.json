@@ -1,0 +1,30 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "components/common/Button.tsx",
+    "components/common/Modal.tsx",
+    "components/common/Badge.tsx",
+    "components/common/Alert.tsx",
+    "components/common/Card.tsx",
+    "contexts/AuthContext.tsx",
+    "contexts/CartContext.tsx",
+    "contexts/ToastContext.tsx",
+    "types/product.ts"
+  ],
+  "out": "docs/api",
+  "name": "Papalote Market API",
+  "readme": "none",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "includeVersion": true,
+  "categorizeByGroup": true,
+  "searchInComments": true,
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": true
+  },
+  "plugin": ["typedoc-plugin-markdown"],
+  "gitRevision": "main",
+  "skipErrorChecking": true
+}
