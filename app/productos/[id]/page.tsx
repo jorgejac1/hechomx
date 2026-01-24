@@ -1,9 +1,11 @@
 import { Suspense } from 'react';
+import Script from 'next/script';
 import { getProductById, getAllProducts } from '@/lib/server';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import { notFound } from 'next/navigation';
 import ProductDetailClient from '@/components/product/ProductDetailClient';
 import { Product } from '@/types';
+import { generateProductJsonLd, generateBreadcrumbJsonLd } from '@/config/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +22,8 @@ interface ProductDetailWrapperProps {
   product: Product;
   similarProducts: Product[];
   breadcrumbItems: BreadcrumbItem[];
+  productJsonLd: ReturnType<typeof generateProductJsonLd>;
+  breadcrumbJsonLd: ReturnType<typeof generateBreadcrumbJsonLd>;
 }
 
 // Keep or remove generateStaticParams - doesn't matter with force-dynamic
@@ -56,17 +60,31 @@ function ProductDetailWrapper({
   product,
   similarProducts,
   breadcrumbItems,
+  productJsonLd,
+  breadcrumbJsonLd,
 }: ProductDetailWrapperProps) {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Breadcrumbs items={breadcrumbItems} />
+    <>
+      <Script
+        id="product-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <Script
+        id="breadcrumb-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <Breadcrumbs items={breadcrumbItems} />
+          </div>
         </div>
-      </div>
 
-      <ProductDetailClient product={product} similarProducts={similarProducts} />
-    </div>
+        <ProductDetailClient product={product} similarProducts={similarProducts} />
+      </div>
+    </>
   );
 }
 
@@ -93,6 +111,21 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     { label: product.name },
   ];
 
+  // Generate JSON-LD structured data
+  const productJsonLd = generateProductJsonLd({
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    currency: 'MXN',
+    images: product.images,
+    rating: product.rating,
+    reviewCount: product.reviewCount,
+    inStock: (product.stock ?? 0) > 0,
+  });
+
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd(breadcrumbItems);
+
   return (
     <Suspense
       fallback={
@@ -116,6 +149,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         product={product}
         similarProducts={similarProducts}
         breadcrumbItems={breadcrumbItems}
+        productJsonLd={productJsonLd}
+        breadcrumbJsonLd={breadcrumbJsonLd}
       />
     </Suspense>
   );

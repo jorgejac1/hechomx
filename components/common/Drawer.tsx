@@ -180,6 +180,7 @@ export default function Drawer({
         previousActiveElement.current?.focus();
       };
     }
+    return undefined;
   }, [isOpen, handleKeyDown]);
 
   const positionConfig = positionStyles[position];

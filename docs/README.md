@@ -29,7 +29,8 @@
 | [API Routes](./guides/API-ROUTES.md)             | API endpoint reference           |
 | [Testing](./guides/TESTING.md)                   | Testing strategies and patterns  |
 | [Accessibility](./guides/ACCESSIBILITY.md)       | WCAG 2.1 AA compliance guide     |
-| [Performance](./guides/PERFORMANCE.md)           | Optimization strategies          |
+| [Performance](./guides/PERFORMANCE.md)           | Optimization and caching         |
+| [SEO](./guides/SEO.md)                           | Search engine optimization       |
 | [App Deployment](./guides/DEPLOYMENT-APP.md)     | Production deployment            |
 | [Docs Deployment](./guides/DEPLOYMENT.md)        | Documentation deployment         |
 

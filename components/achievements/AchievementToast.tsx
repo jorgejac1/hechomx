@@ -59,6 +59,7 @@ export default function AchievementToast({
       }, duration);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [isVisible, duration, onClose]);
 
   // Handle animation states
@@ -142,9 +143,11 @@ export function useAchievementToast() {
   useEffect(() => {
     if (!current && queue.length > 0) {
       const [next, ...rest] = queue;
-      setCurrent(next);
-      setQueue(rest);
-      setIsVisible(true);
+      if (next) {
+        setCurrent(next);
+        setQueue(rest);
+        setIsVisible(true);
+      }
     }
   }, [current, queue]);
 

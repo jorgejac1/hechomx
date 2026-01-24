@@ -116,7 +116,7 @@ export default function RegisterPage() {
       { strength: 4, text: 'Excelente', color: 'bg-green-500' },
     ];
 
-    return levels[strength];
+    return levels[strength] ?? { strength: 0, text: '', color: '' };
   };
 
   const passwordStrength = getPasswordStrength(formData.password);

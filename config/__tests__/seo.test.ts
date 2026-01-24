@@ -4,6 +4,10 @@ import {
   generateProductMetadata,
   generateProductJsonLd,
   generateOrganizationJsonLd,
+  generateBreadcrumbJsonLd,
+  generateLocalBusinessJsonLd,
+  generateFAQJsonLd,
+  generateWebsiteJsonLd,
 } from '../seo';
 import { siteConfig } from '../site';
 
@@ -336,6 +340,203 @@ describe('SEO Configuration', () => {
         email: siteConfig.contact.email,
         availableLanguage: ['Spanish'],
       });
+    });
+  });
+
+  describe('generateBreadcrumbJsonLd', () => {
+    const breadcrumbs = [
+      { label: 'Inicio', href: '/' },
+      { label: 'Productos', href: '/productos' },
+      { label: 'Alebrije de Madera' },
+    ];
+
+    it('generates correct JSON-LD context and type', () => {
+      const jsonLd = generateBreadcrumbJsonLd(breadcrumbs);
+      expect(jsonLd['@context']).toBe('https://schema.org');
+      expect(jsonLd['@type']).toBe('BreadcrumbList');
+    });
+
+    it('includes all breadcrumb items in itemListElement', () => {
+      const jsonLd = generateBreadcrumbJsonLd(breadcrumbs);
+      expect(jsonLd.itemListElement).toHaveLength(3);
+    });
+
+    it('sets correct position for each item (1-indexed)', () => {
+      const jsonLd = generateBreadcrumbJsonLd(breadcrumbs);
+      expect(jsonLd.itemListElement[0].position).toBe(1);
+      expect(jsonLd.itemListElement[1].position).toBe(2);
+      expect(jsonLd.itemListElement[2].position).toBe(3);
+    });
+
+    it('sets correct name for each item', () => {
+      const jsonLd = generateBreadcrumbJsonLd(breadcrumbs);
+      expect(jsonLd.itemListElement[0].name).toBe('Inicio');
+      expect(jsonLd.itemListElement[1].name).toBe('Productos');
+      expect(jsonLd.itemListElement[2].name).toBe('Alebrije de Madera');
+    });
+
+    it('includes item URL when href is provided', () => {
+      const jsonLd = generateBreadcrumbJsonLd(breadcrumbs);
+      expect(jsonLd.itemListElement[0].item).toBe(`${siteConfig.url}/`);
+      expect(jsonLd.itemListElement[1].item).toBe(`${siteConfig.url}/productos`);
+    });
+
+    it('does not include item URL when href is not provided', () => {
+      const jsonLd = generateBreadcrumbJsonLd(breadcrumbs);
+      expect(jsonLd.itemListElement[2]).not.toHaveProperty('item');
+    });
+
+    it('handles empty breadcrumbs array', () => {
+      const jsonLd = generateBreadcrumbJsonLd([]);
+      expect(jsonLd.itemListElement).toHaveLength(0);
+    });
+
+    it('handles single breadcrumb', () => {
+      const jsonLd = generateBreadcrumbJsonLd([{ label: 'Inicio', href: '/' }]);
+      expect(jsonLd.itemListElement).toHaveLength(1);
+      expect(jsonLd.itemListElement[0].position).toBe(1);
+    });
+  });
+
+  describe('generateLocalBusinessJsonLd', () => {
+    it('generates correct JSON-LD context and type', () => {
+      const jsonLd = generateLocalBusinessJsonLd();
+      expect(jsonLd['@context']).toBe('https://schema.org');
+      expect(jsonLd['@type']).toBe('OnlineStore');
+    });
+
+    it('includes business name and description', () => {
+      const jsonLd = generateLocalBusinessJsonLd();
+      expect(jsonLd.name).toBe(siteConfig.name);
+      expect(jsonLd.description).toBe(siteConfig.description);
+    });
+
+    it('includes contact information', () => {
+      const jsonLd = generateLocalBusinessJsonLd();
+      expect(jsonLd.telephone).toBe(siteConfig.contact.phone);
+      expect(jsonLd.email).toBe(siteConfig.contact.email);
+    });
+
+    it('includes postal address', () => {
+      const jsonLd = generateLocalBusinessJsonLd();
+      expect(jsonLd.address['@type']).toBe('PostalAddress');
+      expect(jsonLd.address.streetAddress).toBe(siteConfig.business.address.street);
+      expect(jsonLd.address.addressLocality).toBe(siteConfig.business.address.city);
+      expect(jsonLd.address.addressRegion).toBe(siteConfig.business.address.state);
+      expect(jsonLd.address.postalCode).toBe(siteConfig.business.address.postalCode);
+      expect(jsonLd.address.addressCountry).toBe('MX');
+    });
+
+    it('includes price range and currency', () => {
+      const jsonLd = generateLocalBusinessJsonLd();
+      expect(jsonLd.priceRange).toBe('$$');
+      expect(jsonLd.currenciesAccepted).toBe('MXN');
+    });
+
+    it('includes payment methods accepted', () => {
+      const jsonLd = generateLocalBusinessJsonLd();
+      expect(jsonLd.paymentAccepted).toBe('Credit Card, Debit Card, PayPal');
+    });
+
+    it('includes opening hours for all days', () => {
+      const jsonLd = generateLocalBusinessJsonLd();
+      expect(jsonLd.openingHoursSpecification['@type']).toBe('OpeningHoursSpecification');
+      expect(jsonLd.openingHoursSpecification.dayOfWeek).toHaveLength(7);
+      expect(jsonLd.openingHoursSpecification.dayOfWeek).toContain('Monday');
+      expect(jsonLd.openingHoursSpecification.dayOfWeek).toContain('Sunday');
+    });
+
+    it('sets 24/7 hours (online store)', () => {
+      const jsonLd = generateLocalBusinessJsonLd();
+      expect(jsonLd.openingHoursSpecification.opens).toBe('00:00');
+      expect(jsonLd.openingHoursSpecification.closes).toBe('23:59');
+    });
+
+    it('includes social media links', () => {
+      const jsonLd = generateLocalBusinessJsonLd();
+      expect(jsonLd.sameAs).toEqual(Object.values(siteConfig.social));
+    });
+  });
+
+  describe('generateFAQJsonLd', () => {
+    const faqs = [
+      {
+        question: '¿Cómo puedo comprar?',
+        answer: 'Agrega productos al carrito y procede al checkout.',
+      },
+      {
+        question: '¿Cuánto tarda el envío?',
+        answer: 'Entre 3 y 7 días hábiles dependiendo tu ubicación.',
+      },
+    ];
+
+    it('generates correct JSON-LD context and type', () => {
+      const jsonLd = generateFAQJsonLd(faqs);
+      expect(jsonLd['@context']).toBe('https://schema.org');
+      expect(jsonLd['@type']).toBe('FAQPage');
+    });
+
+    it('includes all FAQ items in mainEntity', () => {
+      const jsonLd = generateFAQJsonLd(faqs);
+      expect(jsonLd.mainEntity).toHaveLength(2);
+    });
+
+    it('formats questions correctly', () => {
+      const jsonLd = generateFAQJsonLd(faqs);
+      expect(jsonLd.mainEntity[0]['@type']).toBe('Question');
+      expect(jsonLd.mainEntity[0].name).toBe(faqs[0].question);
+      expect(jsonLd.mainEntity[1]['@type']).toBe('Question');
+      expect(jsonLd.mainEntity[1].name).toBe(faqs[1].question);
+    });
+
+    it('formats answers correctly', () => {
+      const jsonLd = generateFAQJsonLd(faqs);
+      expect(jsonLd.mainEntity[0].acceptedAnswer['@type']).toBe('Answer');
+      expect(jsonLd.mainEntity[0].acceptedAnswer.text).toBe(faqs[0].answer);
+      expect(jsonLd.mainEntity[1].acceptedAnswer['@type']).toBe('Answer');
+      expect(jsonLd.mainEntity[1].acceptedAnswer.text).toBe(faqs[1].answer);
+    });
+
+    it('handles empty FAQs array', () => {
+      const jsonLd = generateFAQJsonLd([]);
+      expect(jsonLd.mainEntity).toHaveLength(0);
+    });
+
+    it('handles single FAQ', () => {
+      const singleFaq = [{ question: '¿Qué es?', answer: 'Una tienda.' }];
+      const jsonLd = generateFAQJsonLd(singleFaq);
+      expect(jsonLd.mainEntity).toHaveLength(1);
+    });
+  });
+
+  describe('generateWebsiteJsonLd', () => {
+    it('generates correct JSON-LD context and type', () => {
+      const jsonLd = generateWebsiteJsonLd();
+      expect(jsonLd['@context']).toBe('https://schema.org');
+      expect(jsonLd['@type']).toBe('WebSite');
+    });
+
+    it('includes site name and URL', () => {
+      const jsonLd = generateWebsiteJsonLd();
+      expect(jsonLd.name).toBe(siteConfig.name);
+      expect(jsonLd.url).toBe(siteConfig.url);
+    });
+
+    it('includes SearchAction for sitelinks searchbox', () => {
+      const jsonLd = generateWebsiteJsonLd();
+      expect(jsonLd.potentialAction['@type']).toBe('SearchAction');
+    });
+
+    it('has correct search target configuration', () => {
+      const jsonLd = generateWebsiteJsonLd();
+      expect(jsonLd.potentialAction.target['@type']).toBe('EntryPoint');
+      expect(jsonLd.potentialAction.target.urlTemplate).toContain('/productos?search=');
+      expect(jsonLd.potentialAction.target.urlTemplate).toContain('{search_term_string}');
+    });
+
+    it('has correct query-input specification', () => {
+      const jsonLd = generateWebsiteJsonLd();
+      expect(jsonLd.potentialAction['query-input']).toBe('required name=search_term_string');
     });
   });
 });

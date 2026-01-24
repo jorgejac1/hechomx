@@ -6,6 +6,7 @@
 
 import { NextResponse } from 'next/server';
 import { MOCK_SELLER_USERS } from '@/lib/data/mockUsers';
+import { CACHE_HEADERS } from '@/lib/utils/cache';
 
 /**
  * Retrieves all available shops
@@ -35,10 +36,13 @@ export async function GET() {
           : undefined,
       }));
 
-    return NextResponse.json({
-      success: true,
-      data: shops,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        data: shops,
+      },
+      { headers: CACHE_HEADERS.PUBLIC_LISTINGS }
+    );
   } catch (error) {
     console.error('[api/shops] Error:', error);
     return NextResponse.json({ success: false, error: 'Failed to fetch shops' }, { status: 500 });

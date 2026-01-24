@@ -173,3 +173,92 @@ export function generateOrganizationJsonLd() {
     },
   };
 }
+
+/**
+ * JSON-LD structured data for breadcrumbs
+ */
+export function generateBreadcrumbJsonLd(items: Array<{ label: string; href?: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      ...(item.href && { item: `${siteConfig.url}${item.href}` }),
+    })),
+  };
+}
+
+/**
+ * JSON-LD structured data for local business / marketplace
+ */
+export function generateLocalBusinessJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'OnlineStore',
+    name: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    logo: `${siteConfig.url}/images/logo.png`,
+    image: `${siteConfig.url}/images/og-image.jpg`,
+    telephone: siteConfig.contact.phone,
+    email: siteConfig.contact.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: siteConfig.business.address.street,
+      addressLocality: siteConfig.business.address.city,
+      addressRegion: siteConfig.business.address.state,
+      postalCode: siteConfig.business.address.postalCode,
+      addressCountry: 'MX',
+    },
+    priceRange: '$$',
+    currenciesAccepted: 'MXN',
+    paymentAccepted: 'Credit Card, Debit Card, PayPal',
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '00:00',
+      closes: '23:59',
+    },
+    sameAs: Object.values(siteConfig.social),
+  };
+}
+
+/**
+ * JSON-LD structured data for FAQ page
+ */
+export function generateFAQJsonLd(faqs: Array<{ question: string; answer: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+/**
+ * JSON-LD structured data for search action (sitelinks searchbox)
+ */
+export function generateWebsiteJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteConfig.url}/productos?search={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}

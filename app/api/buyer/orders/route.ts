@@ -7,6 +7,7 @@
 
 import { NextResponse } from 'next/server';
 import buyerOrdersData from '@/lib/data/buyer-orders.json';
+import { CACHE_HEADERS } from '@/lib/utils/cache';
 
 /**
  * @interface BuyerOrdersResponse
@@ -39,16 +40,22 @@ export async function GET(request: Request) {
     const userOrders = buyerOrdersData[email as keyof typeof buyerOrdersData];
 
     if (!userOrders) {
-      return NextResponse.json({
-        success: true,
-        data: [],
-      });
+      return NextResponse.json(
+        {
+          success: true,
+          data: [],
+        },
+        { headers: CACHE_HEADERS.USER_DATA }
+      );
     }
 
-    return NextResponse.json({
-      success: true,
-      data: userOrders,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        data: userOrders,
+      },
+      { headers: CACHE_HEADERS.USER_DATA }
+    );
   } catch (error) {
     console.error('[api/buyer/orders] Error:', error);
     return NextResponse.json(

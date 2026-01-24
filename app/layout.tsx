@@ -4,7 +4,12 @@ import Script from 'next/script';
 import './globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/Footer';
-import { defaultMetadata } from '@/config/seo';
+import {
+  defaultMetadata,
+  generateOrganizationJsonLd,
+  generateLocalBusinessJsonLd,
+  generateWebsiteJsonLd,
+} from '@/config/seo';
 import ScrollToTop from '@/components/common/ScrollToTop';
 import { ComparisonProvider } from '@/contexts/ComparisonContext';
 import { CartProvider } from '@/contexts/CartContext';
@@ -53,6 +58,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </AuthProvider>
           </ToastProvider>
         </ThemeProvider>
+
+        {/* Structured Data - Organization */}
+        <Script
+          id="organization-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateOrganizationJsonLd()),
+          }}
+        />
+        <Script
+          id="local-business-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateLocalBusinessJsonLd()),
+          }}
+        />
+        <Script
+          id="website-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateWebsiteJsonLd()),
+          }}
+        />
 
         {/* Google Analytics */}
         <Script

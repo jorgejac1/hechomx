@@ -110,6 +110,8 @@ function VerificationApplicationContent({ user }: { user: User }) {
   };
 
   const levelInfo = VERIFICATION_LEVELS[formData.requestedLevel];
+  // basic_seller is guaranteed to exist in VERIFICATION_LEVELS
+  const defaultLevel = VERIFICATION_LEVELS.basic_seller!;
 
   const verificationSteps: Step[] = [
     { id: 'level', label: 'Nivel', description: 'Elige tu nivel', icon: Award },
@@ -380,7 +382,7 @@ function VerificationApplicationContent({ user }: { user: User }) {
                   <div className="text-sm text-secondary-800">
                     <p className="font-semibold mb-1">Documentos Requeridos:</p>
                     <ul className="space-y-1">
-                      {levelInfo.requirementsEs.map((req, i) => (
+                      {(levelInfo ?? defaultLevel).requirementsEs.map((req, i) => (
                         <li key={i}>• {req}</li>
                       ))}
                     </ul>
@@ -449,10 +451,14 @@ function VerificationApplicationContent({ user }: { user: User }) {
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">Nivel Solicitado</h3>
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl">{levelInfo.badge.icon}</span>
+                    <span className="text-3xl">{(levelInfo ?? defaultLevel).badge.icon}</span>
                     <div>
-                      <p className="font-semibold text-gray-900">{levelInfo.nameEs}</p>
-                      <p className="text-sm text-gray-600">Comisión: {levelInfo.commissionRate}%</p>
+                      <p className="font-semibold text-gray-900">
+                        {(levelInfo ?? defaultLevel).nameEs}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        Comisión: {(levelInfo ?? defaultLevel).commissionRate}%
+                      </p>
                     </div>
                   </div>
                 </div>

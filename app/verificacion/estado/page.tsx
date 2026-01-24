@@ -71,6 +71,16 @@ function VerificationStatusContent({ user }: { user: User }) {
   const statusInfo = STATUS_MESSAGES[request.status];
   const levelInfo = VERIFICATION_LEVELS[request.requestedLevel];
 
+  if (!statusInfo || !levelInfo) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <p className="text-gray-600">Error cargando información de verificación</p>
+        </div>
+      </div>
+    );
+  }
+
   const StatusIcon = {
     draft: Clock,
     submitted: Clock,

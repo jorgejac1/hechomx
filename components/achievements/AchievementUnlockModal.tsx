@@ -157,6 +157,7 @@ export default function AchievementUnlockModal({
         document.body.style.overflow = '';
       };
     }
+    return undefined;
   }, [isOpen, handleKeyDown]);
 
   if (!isOpen) return null;

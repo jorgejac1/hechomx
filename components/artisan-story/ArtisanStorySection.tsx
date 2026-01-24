@@ -53,8 +53,11 @@ export default function ArtisanStorySection({
     value: string
   ) => {
     const newTerms = [...indigenousLanguageTerms];
-    newTerms[index] = { ...newTerms[index], [field]: value };
-    onUpdateTerms(newTerms);
+    const existingTerm = newTerms[index];
+    if (existingTerm) {
+      newTerms[index] = { ...existingTerm, [field]: value };
+      onUpdateTerms(newTerms);
+    }
   };
 
   const removeIndigenousTerm = (index: number) => {

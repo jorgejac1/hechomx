@@ -7,6 +7,7 @@
 
 import { NextResponse } from 'next/server';
 import artisanStoriesData from '@/lib/data/artisan-stories.json';
+import { CACHE_HEADERS } from '@/lib/utils/cache';
 
 /**
  * @interface ArtisanStoriesResponse
@@ -21,7 +22,9 @@ import artisanStoriesData from '@/lib/data/artisan-stories.json';
  */
 export async function GET() {
   try {
-    return NextResponse.json(artisanStoriesData);
+    return NextResponse.json(artisanStoriesData, {
+      headers: CACHE_HEADERS.PUBLIC_LISTINGS,
+    });
   } catch (error) {
     console.error('[api/artisan-stories] Error:', error);
     return NextResponse.json(

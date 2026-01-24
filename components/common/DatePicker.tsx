@@ -258,7 +258,7 @@ export default function DatePicker({
 
   // Click outside handler
   useEffect(() => {
-    if (variant === 'inline') return;
+    if (variant === 'inline') return undefined;
 
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -270,6 +270,7 @@ export default function DatePicker({
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
+    return undefined;
   }, [isOpen, variant]);
 
   // Sync view date with value

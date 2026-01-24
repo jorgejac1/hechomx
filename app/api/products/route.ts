@@ -12,6 +12,7 @@ import {
   getProductsByState,
   searchProducts,
 } from '@/lib/server';
+import { CACHE_HEADERS } from '@/lib/utils/cache';
 
 /**
  * @interface ProductsResponse
@@ -53,11 +54,14 @@ export async function GET(request: Request) {
       products = getAllProducts();
     }
 
-    return NextResponse.json({
-      success: true,
-      count: products.length,
-      data: products,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        count: products.length,
+        data: products,
+      },
+      { headers: CACHE_HEADERS.PUBLIC_LISTINGS }
+    );
   } catch (error) {
     console.error('[api/products] Error:', error);
     return NextResponse.json(

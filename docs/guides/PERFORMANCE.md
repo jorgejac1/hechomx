@@ -345,18 +345,69 @@ function useProducts() {
 
 ### HTTP Caching Headers
 
+Use the cache utilities (`lib/utils/cache.ts`) for consistent cache headers across API routes:
+
+```typescript
+// lib/utils/cache.ts - Cache duration presets
+export const CACHE_DURATIONS = {
+  NONE: 0, // No caching - user-specific data
+  SHORT: 60, // 1 minute - semi-dynamic data
+  MEDIUM: 300, // 5 minutes - moderately dynamic data
+  LONG: 3600, // 1 hour - mostly static data
+  EXTENDED: 86400, // 24 hours - static reference data
+};
+
+// Pre-built header presets
+export const CACHE_HEADERS = {
+  PUBLIC_LISTINGS, // 1 min cache, 5 min stale
+  USER_DATA, // No cache
+  REFERENCE_DATA, // 1 hour cache, 24 hour stale
+  ANALYTICS, // 5 min private cache
+};
+```
+
+**Usage in API routes:**
+
 ```typescript
 // app/api/products/route.ts
+import { CACHE_HEADERS } from '@/lib/utils/cache';
+
 export async function GET() {
   const products = await getProducts();
 
-  return NextResponse.json(products, {
-    headers: {
-      'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
-    },
-  });
+  return NextResponse.json(
+    { success: true, data: products },
+    { headers: CACHE_HEADERS.PUBLIC_LISTINGS }
+  );
 }
+
+// app/api/buyer/orders/route.ts - User-specific data (no cache)
+export async function GET(request: Request) {
+  const orders = await getUserOrders(email);
+
+  return NextResponse.json({ success: true, data: orders }, { headers: CACHE_HEADERS.USER_DATA });
+}
+
+// Custom cache headers
+import { createCacheHeaders, CACHE_DURATIONS } from '@/lib/utils/cache';
+
+return NextResponse.json(data, {
+  headers: createCacheHeaders(CACHE_DURATIONS.LONG, {
+    private: true,
+    staleWhileRevalidate: CACHE_DURATIONS.EXTENDED,
+  }),
+});
 ```
+
+**Current API route cache settings:**
+
+| Route                   | Cache Type      | Duration            |
+| ----------------------- | --------------- | ------------------- |
+| `/api/products`         | PUBLIC_LISTINGS | 1 min + 5 min stale |
+| `/api/shops`            | PUBLIC_LISTINGS | 1 min + 5 min stale |
+| `/api/artisan-stories`  | PUBLIC_LISTINGS | 1 min + 5 min stale |
+| `/api/seller/analytics` | ANALYTICS       | 5 min private       |
+| `/api/buyer/orders`     | USER_DATA       | No cache            |
 
 ---
 

@@ -7,6 +7,7 @@
 
 import { NextResponse } from 'next/server';
 import analyticsData from '@/lib/data/seller-analytics.json';
+import { CACHE_HEADERS } from '@/lib/utils/cache';
 
 /**
  * @interface AnalyticsResponse
@@ -45,10 +46,13 @@ export async function GET(request: Request) {
       );
     }
 
-    return NextResponse.json({
-      success: true,
-      data: userAnalytics,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        data: userAnalytics,
+      },
+      { headers: CACHE_HEADERS.ANALYTICS }
+    );
   } catch (error) {
     console.error('[api/seller/analytics] Error:', error);
     return NextResponse.json(
