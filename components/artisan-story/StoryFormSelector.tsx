@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Story form type selector for artisan story creation.
+ * Allows selection of seller type, craft category, and indigenous connection.
+ * Dynamically shows relevant options based on seller type selection.
+ * @module components/artisan-story/StoryFormSelector
+ */
+
 'use client';
 
 import { Globe, Sprout, Leaf, BookOpen, Star, Home, Palette, Users, Building2 } from 'lucide-react';

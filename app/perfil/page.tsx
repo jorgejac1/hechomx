@@ -1,3 +1,10 @@
+/**
+ * @fileoverview User profile page for managing personal information and seller profile.
+ * Displays user info, achievements, quick actions, and allows profile editing.
+ * Includes seller profile setup/edit functionality via modal form.
+ * @module app/perfil/page
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';

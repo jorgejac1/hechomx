@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Zoom controls component for media viewers.
+ * Provides zoom in/out buttons with percentage display.
+ * Integrates with useZoomControls hook for state management.
+ * @module components/common/media/ZoomControls
+ */
+
 'use client';
 
 import { useEffect } from 'react';
@@ -23,12 +30,7 @@ export default function ZoomControls({
   showPercentage = true,
   className = '',
 }: ZoomControlsProps) {
-  const { zoom, zoomIn, zoomOut, canZoomIn, canZoomOut } = useZoomControls(
-    min,
-    max,
-    step,
-    initial
-  );
+  const { zoom, zoomIn, zoomOut, canZoomIn, canZoomOut } = useZoomControls(min, max, step, initial);
 
   // Notify parent of zoom changes
   useEffect(() => {

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Basic information section for artisan story form.
+ * Captures specialty, experience, location, and type-specific fields.
+ * Adapts fields shown based on seller type (hobby maker, artisan, workshop, company).
+ * @module components/artisan-story/BasicInfoSection
+ */
+
 'use client';
 
 import { Globe } from 'lucide-react';

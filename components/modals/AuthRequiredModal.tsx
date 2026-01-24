@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Authentication required modal for protected actions.
+ * Shows login form inline when user attempts action requiring auth.
+ * Provides options to login or register without page navigation.
+ * @module components/modals/AuthRequiredModal
+ */
+
 'use client';
 
 import { useState } from 'react';

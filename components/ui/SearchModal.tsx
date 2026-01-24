@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Global search modal with product and category search.
+ * Provides instant search results with keyboard navigation support.
+ * Displays matching products and category suggestions.
+ * @module components/ui/SearchModal
+ */
+
 'use client';
 
 import { useState, useEffect, useRef } from 'react';

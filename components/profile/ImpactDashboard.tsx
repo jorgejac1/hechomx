@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Buyer impact dashboard component.
+ * Displays buyer's social and environmental impact metrics.
+ * Shows artisans supported, communities helped, and sustainability stats.
+ * @module components/profile/ImpactDashboard
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';

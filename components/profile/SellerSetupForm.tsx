@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Seller setup form modal for creating or editing shop profiles.
+ * Provides a modal form for sellers to enter their shop name, location, and description.
+ * Supports both create and edit modes with Zod validation.
+ * @module components/profile/SellerSetupForm
+ */
+
 'use client';
 
 import { useState } from 'react';
@@ -6,17 +13,28 @@ import { validate } from '@/validators/utils';
 import { AlertCircle, Store, MapPin, FileText } from 'lucide-react';
 import LoadingSpinner from '@/components/common/feedback/LoadingSpinner';
 
+/**
+ * Zod schema for validating maker/seller profile data
+ */
 const makerProfileSchema = z.object({
   shopName: z.string().min(3, 'El nombre debe tener al menos 3 caracteres'),
   location: z.string().min(3, 'La ubicación es requerida'),
   description: z.string().min(20, 'Describe tu taller o tienda (mínimo 20 caracteres)').max(300),
 });
 
+/** Inferred type from the maker profile schema */
 type MakerProfileInput = z.infer<typeof makerProfileSchema>;
 
+/**
+ * Props for the SellerSetupForm component
+ * @interface SellerSetupFormProps
+ */
 interface SellerSetupFormProps {
+  /** Callback function to close the modal */
   onClose: () => void;
+  /** Callback function to save the form data */
   onSave: (data: MakerProfileInput) => Promise<void>;
+  /** Optional initial data for editing an existing profile */
   initialData?: {
     shopName?: string;
     location?: string;
@@ -24,6 +42,13 @@ interface SellerSetupFormProps {
   };
 }
 
+/**
+ * Modal form component for creating or editing seller/shop profiles.
+ * Displays a form with shop name, location, and description fields.
+ * Validates input using Zod schema and handles loading states.
+ * @param {SellerSetupFormProps} props - Component props
+ * @returns {JSX.Element} The seller setup form modal
+ */
 export default function SellerSetupForm({ onClose, onSave, initialData }: SellerSetupFormProps) {
   const isEditing = Boolean(initialData?.shopName);
   const [formData, setFormData] = useState<MakerProfileInput>({

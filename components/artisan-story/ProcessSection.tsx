@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Process section for documenting craft creation process.
+ * Captures materials, tools, process steps with images, timing, and video.
+ * Features tabbed interface for organizing different aspects of the craft process.
+ * @module components/artisan-story/ProcessSection
+ */
+
 'use client';
 
 import Image from 'next/image';

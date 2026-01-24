@@ -1,3 +1,10 @@
+/**
+ * @fileoverview User profile modal for admin user management.
+ * Displays comprehensive user information in a modal dialog with actions.
+ * Includes user stats, verification status, and admin action buttons.
+ * @module components/admin/UserProfileModal
+ */
+
 'use client';
 
 import Image from 'next/image';

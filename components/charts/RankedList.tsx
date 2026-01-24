@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Ranked list component for leaderboard-style displays.
+ * Shows ordered items with rank badges, avatars, values, and optional trends.
+ * Used for top sellers, best products, and similar rankings.
+ * @module components/charts/RankedList
+ */
+
 import Image from 'next/image';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 

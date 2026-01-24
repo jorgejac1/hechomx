@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Fair trade rates selector for pricing calculator.
+ * Allows artisans to select regional fair trade wage rates.
+ * Displays minimum wage information for different Mexican regions.
+ * @module components/pricing/FairTradeRatesSelector
+ */
+
 'use client';
 
 import { Heart } from 'lucide-react';

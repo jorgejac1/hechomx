@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Error boundary component for catching React errors.
+ * Prevents entire app from crashing by displaying fallback UI.
+ * Supports custom fallback components and error callbacks.
+ * @module components/common/feedback/ErrorBoundary
+ */
+
 'use client';
 
 import { Component, ReactNode } from 'react';

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Order review modal for rating purchased products.
+ * Allows buyers to rate and review individual items from their orders.
+ * Supports star ratings and text reviews for each product.
+ * @module components/orders/ReviewModal
+ */
+
 'use client';
 
 import { useState } from 'react';

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Product info section for pricing calculator.
+ * Captures basic product information like name and description.
+ * First step in the pricing calculation workflow.
+ * @module components/pricing/ProductInfo
+ */
+
 'use client';
 
 import { Package } from 'lucide-react';

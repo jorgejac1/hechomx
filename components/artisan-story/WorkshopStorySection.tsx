@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Workshop story section for team-based craft businesses.
+ * Captures team story, production process, daily life, and mission statement.
+ * Used in the artisan story form for workshop seller types.
+ * @module components/artisan-story/WorkshopStorySection
+ */
+
 'use client';
 
 import { Users, Target } from 'lucide-react';

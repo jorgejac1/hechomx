@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Theme provider component for dark/light mode support.
+ * Wraps next-themes provider with application-specific configuration.
+ * Enables class-based theme switching with light as default.
+ * @module components/providers/ThemeProvider
+ */
+
 'use client';
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes';

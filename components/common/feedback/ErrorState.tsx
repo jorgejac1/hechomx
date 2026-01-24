@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Error state display component.
+ * Shows user-friendly error messages with icons and retry actions.
+ * Supports error, warning, network, and server error types.
+ * @module components/common/feedback/ErrorState
+ */
+
 import { ReactNode } from 'react';
 import { AlertCircle, XCircle, WifiOff, ServerCrash } from 'lucide-react';
 import Button from '../Button';
@@ -50,19 +57,17 @@ export default function ErrorState({
   const Icon = config.icon;
 
   return (
-    <div className={`flex flex-col items-center justify-center py-12 px-4 text-center ${className}`}>
+    <div
+      className={`flex flex-col items-center justify-center py-12 px-4 text-center ${className}`}
+    >
       <div className={`w-16 h-16 mb-4 ${config.iconColor}`}>
         <Icon className="w-full h-full" />
       </div>
-      
-      <h3 className="text-lg font-semibold text-gray-900 mb-2">
-        {title || config.defaultTitle}
-      </h3>
-      
-      <p className="text-gray-600 mb-6 max-w-md">
-        {message || config.defaultMessage}
-      </p>
-      
+
+      <h3 className="text-lg font-semibold text-gray-900 mb-2">{title || config.defaultTitle}</h3>
+
+      <p className="text-gray-600 mb-6 max-w-md">{message || config.defaultMessage}</p>
+
       <div className="flex gap-3">
         {onRetry && (
           <Button onClick={onRetry} variant="primary">

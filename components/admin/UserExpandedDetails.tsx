@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Expanded user details component for admin user management.
+ * Displays detailed user information including contact, activity, and seller stats.
+ * Used in expandable table rows in the admin users page.
+ * @module components/admin/UserExpandedDetails
+ */
+
 import {
   Mail,
   Calendar,

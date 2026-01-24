@@ -1,3 +1,10 @@
+/**
+ * @fileoverview User settings page for managing payment methods, addresses, security, and notifications.
+ * Provides tabbed interface for organizing different setting categories.
+ * Includes saved cards, shipping addresses, password change, 2FA, and notification preferences.
+ * @module app/configuracion/page
+ */
+
 'use client';
 
 import { useState } from 'react';

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Common components barrel export.
+ * Re-exports all common/shared components for cleaner imports.
+ * Usage: import { Button, Card, Modal } from '@/components/common';
+ * @module components/common
+ */
+
 // =============================================================================
 // Common Components - Barrel Export
 // =============================================================================

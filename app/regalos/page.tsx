@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Gifts page for browsing artisan products by occasion and budget.
+ * Features occasion-based filtering, curated collections, gift guides, and price range filters.
+ * Showcases the unique value of gifting handmade Mexican artisan products.
+ * @module app/regalos/page
+ */
+
 'use client';
 
 import { useState } from 'react';

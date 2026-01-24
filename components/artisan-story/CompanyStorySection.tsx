@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Company story section for business-type sellers.
+ * Captures company history, mission statement, production process, and sustainability practices.
+ * Used in the artisan story form for company seller types.
+ * @module components/artisan-story/CompanyStorySection
+ */
+
 'use client';
 
 import { Building2, Leaf } from 'lucide-react';

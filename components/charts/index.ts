@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Analytics and chart components barrel export.
+ * Re-exports all chart and data visualization components for dashboards and reports.
+ * @module components/charts
+ */
+
 // Analytics & Chart Components
 // Reusable components for dashboards, reports, and data visualization
 

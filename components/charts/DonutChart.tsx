@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Donut chart component using SVG.
+ * Renders a circular chart with multiple segments, center value display, and legend.
+ * Supports various sizes and legend positions.
+ * @module components/charts/DonutChart
+ */
+
 export interface DonutSegment {
   /** Segment label */
   label: string;

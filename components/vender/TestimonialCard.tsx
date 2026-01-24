@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Testimonial card component for seller landing page.
+ * Displays success stories from existing sellers with avatar and stats.
+ * Shows monthly sales and location information.
+ * @module components/vender/TestimonialCard
+ */
+
 import Image from 'next/image';
 import { Heart } from 'lucide-react';
 

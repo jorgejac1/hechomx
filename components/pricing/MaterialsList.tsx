@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Materials list for pricing calculator.
+ * Manages list of materials with quantity and cost inputs.
+ * Calculates total material cost for product pricing.
+ * @module components/pricing/MaterialsList
+ */
+
 'use client';
 
 import { Plus, Trash2, Package } from 'lucide-react';

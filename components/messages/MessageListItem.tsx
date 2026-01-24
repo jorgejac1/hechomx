@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Message list item component for seller inbox.
+ * Displays individual message preview with sender info, subject, and read status.
+ * Memoized for performance in long message lists.
+ * @module components/messages/MessageListItem
+ */
+
 'use client';
 
 import { memo } from 'react';

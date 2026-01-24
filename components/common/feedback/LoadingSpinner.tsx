@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Loading spinner component for async operations.
+ * Displays animated spinner with optional text and full-screen mode.
+ * Supports multiple sizes and color variants.
+ * @module components/common/feedback/LoadingSpinner
+ */
+
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
   color?: 'primary' | 'white' | 'gray';

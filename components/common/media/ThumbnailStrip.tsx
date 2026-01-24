@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Thumbnail strip component for media galleries.
+ * Displays scrollable strip of image/video thumbnails.
+ * Supports horizontal and vertical orientations with multiple sizes.
+ * @module components/common/media/ThumbnailStrip
+ */
+
 'use client';
 
 import { useRef } from 'react';
@@ -72,13 +79,7 @@ export default function ThumbnailStrip({
           aria-label={`${item.type === 'video' ? 'Video' : 'Imagen'} ${index + 1}`}
         >
           {item.type === 'image' ? (
-            <Image
-              src={item.url}
-              alt=""
-              fill
-              className="object-cover"
-              sizes="96px"
-            />
+            <Image src={item.url} alt="" fill className="object-cover" sizes="96px" />
           ) : (
             <div className="relative w-full h-full bg-gray-900">
               <video src={item.url} className="w-full h-full object-cover" muted />

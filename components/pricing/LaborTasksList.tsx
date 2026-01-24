@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Labor tasks list for pricing calculator.
+ * Manages list of labor tasks with time and rate inputs.
+ * Calculates total labor cost based on hours and hourly rates.
+ * @module components/pricing/LaborTasksList
+ */
+
 'use client';
 
 import { Plus, Trash2, Clock } from 'lucide-react';

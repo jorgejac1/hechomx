@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Social media section for artisan online presence.
+ * Captures links to Instagram, Facebook, YouTube, TikTok, and website.
+ * All fields are optional to accommodate various online presence levels.
+ * @module components/artisan-story/SocialMediaSection
+ */
+
 'use client';
 
 import { Globe, Instagram, Facebook, Youtube, Video } from 'lucide-react';

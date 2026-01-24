@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Image skeleton loading placeholder component.
+ * Displays animated placeholder for images during loading.
+ * Supports different aspect ratios: square, video, wide, portrait.
+ * @module components/common/loading/ImageSkeleton
+ */
+
 import Skeleton from './Skeleton';
 
 interface ImageSkeletonProps {

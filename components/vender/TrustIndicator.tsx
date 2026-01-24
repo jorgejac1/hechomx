@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Trust indicator component for seller landing page.
+ * Displays key platform metrics like active sellers and monthly sales.
+ * Used in the hero section to build trust with potential sellers.
+ * @module components/vender/TrustIndicator
+ */
+
 import { LucideIcon } from 'lucide-react';
 
 interface TrustIndicatorProps {

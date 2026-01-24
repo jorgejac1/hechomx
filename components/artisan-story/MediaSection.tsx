@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Media section for artisan story form.
+ * Handles video intro and photo uploads for workshop, process, family, and team photos.
+ * Adapts photo categories based on seller type.
+ * @module components/artisan-story/MediaSection
+ */
+
 'use client';
 
 import { useState } from 'react';

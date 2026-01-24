@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Benefit card component for seller landing page.
+ * Highlights seller benefits with icon, title, and description.
+ * Features hover animation and shadow effects.
+ * @module components/vender/BenefitCard
+ */
+
 import { LucideIcon } from 'lucide-react';
 
 interface BenefitCardProps {

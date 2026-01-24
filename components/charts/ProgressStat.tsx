@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Progress statistic component with animated bar.
+ * Displays a labeled progress bar with current/max values and optional percentage.
+ * Supports multiple color themes and size variants.
+ * @module components/charts/ProgressStat
+ */
+
 export interface ProgressStatProps {
   /** Stat label */
   label: string;

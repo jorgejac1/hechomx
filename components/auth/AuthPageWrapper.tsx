@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Authentication wrapper component for protected pages.
+ * Handles auth state checking, loading states, and redirects for unauthenticated users.
+ * Centralizes auth logic for 14+ protected pages using render prop pattern.
+ * @module components/auth/AuthPageWrapper
+ */
+
 'use client';
 
 import { ReactNode } from 'react';

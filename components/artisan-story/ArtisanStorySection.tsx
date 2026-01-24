@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Artisan story section for detailed cultural heritage information.
+ * Captures artisan's personal story, heritage, craft techniques, and indigenous language terms.
+ * Used in the artisan story form for artisan_individual seller types.
+ * @module components/artisan-story/ArtisanStorySection
+ */
+
 'use client';
 
 import { BookOpen, Plus, Globe } from 'lucide-react';

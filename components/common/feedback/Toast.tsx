@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Toast notification component for user feedback.
+ * Displays temporary messages with auto-dismiss and close button.
+ * Supports success, error, info, and warning variants.
+ * @module components/common/feedback/Toast
+ */
+
 'use client';
 
 import { useEffect } from 'react';

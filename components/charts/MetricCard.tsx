@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Metric card component for KPI display.
+ * Shows a single metric with optional trend indicator, icon, and change percentage.
+ * Supports multiple color variants for different metric types.
+ * @module components/charts/MetricCard
+ */
+
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 export interface MetricCardProps {

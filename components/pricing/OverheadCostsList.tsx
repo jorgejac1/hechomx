@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Overhead costs list for pricing calculator.
+ * Manages list of overhead expenses like rent, utilities, tools.
+ * Calculates per-unit overhead cost allocation.
+ * @module components/pricing/OverheadCostsList
+ */
+
 'use client';
 
 import { Plus, Trash2, TrendingUp } from 'lucide-react';

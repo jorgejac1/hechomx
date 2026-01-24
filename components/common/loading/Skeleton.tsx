@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Base skeleton loading placeholder component.
+ * Displays animated placeholder for content during loading.
+ * Supports text, circular, and rectangular variants with pulse or wave animation.
+ * @module components/common/loading/Skeleton
+ */
+
 interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'text' | 'circular' | 'rectangular';
   width?: string | number;

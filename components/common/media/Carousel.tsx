@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Generic carousel component for any content type.
+ * Supports autoplay, loop, navigation controls, and indicators.
+ * Uses render prop pattern for flexible item rendering.
+ * @module components/common/media/Carousel
+ */
+
 'use client';
 
 import { ReactNode } from 'react';

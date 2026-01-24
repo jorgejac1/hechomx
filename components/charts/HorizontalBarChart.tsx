@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Horizontal bar chart component.
+ * Renders labeled horizontal bars with optional animation and value display.
+ * Supports automatic scaling and custom value formatting.
+ * @module components/charts/HorizontalBarChart
+ */
+
 export interface BarChartItem {
   /** Label for the bar */
   label: string;

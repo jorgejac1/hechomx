@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Feature card component for seller landing page.
+ * Displays platform features with icon, title, and description.
+ * Uses customizable icon colors and backgrounds.
+ * @module components/vender/FeatureCard
+ */
+
 import { LucideIcon } from 'lucide-react';
 
 interface FeatureCardProps {

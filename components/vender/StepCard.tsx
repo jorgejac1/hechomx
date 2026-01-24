@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Step card component for seller onboarding flow.
+ * Displays numbered steps with title and description.
+ * Shows connecting arrows between steps in the process.
+ * @module components/vender/StepCard
+ */
+
 import { ArrowRight } from 'lucide-react';
 
 interface StepCardProps {

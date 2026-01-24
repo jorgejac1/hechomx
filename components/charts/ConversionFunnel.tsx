@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Conversion funnel visualization component.
+ * Displays a step-by-step funnel with values, icons, and conversion rates between steps.
+ * Used for analytics dashboards to show user flow through stages.
+ * @module components/charts/ConversionFunnel
+ */
+
 export interface FunnelStep {
   /** Label for this step */
   label: string;

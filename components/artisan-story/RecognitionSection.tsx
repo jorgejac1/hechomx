@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Recognition section for awards and certifications.
+ * Captures awards, certifications, and community projects.
+ * Used to showcase artisan achievements and community involvement.
+ * @module components/artisan-story/RecognitionSection
+ */
+
 'use client';
 
 import { Award, Plus, X, Shield } from 'lucide-react';

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Hobby maker story section for casual crafters.
+ * Captures personal story, production process, and daily life in a casual tone.
+ * Used in the artisan story form for hobby_maker seller types.
+ * @module components/artisan-story/HobbyMakerStorySection
+ */
+
 'use client';
 
 import { Heart, Lightbulb } from 'lucide-react';

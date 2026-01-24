@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Contact form component for the contact page.
+ * Handles customer inquiries with subject selection, validation, and submission.
+ * Includes fields for name, email, phone, subject, and message.
+ * @module components/contact/ContactForm
+ */
+
 'use client';
 
 import { useState } from 'react';

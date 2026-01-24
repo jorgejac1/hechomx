@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Pricing summary component for calculator results.
+ * Displays cost breakdown, profit margin slider, and calculated prices.
+ * Shows wholesale and retail price recommendations.
+ * @module components/pricing/PricingSummary
+ */
+
 'use client';
 
 import { DollarSign, AlertCircle, CheckCircle2 } from 'lucide-react';

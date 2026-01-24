@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Media viewer component for images and videos.
+ * Displays media gallery with thumbnail navigation.
+ * Supports both image and video content with play buttons.
+ * @module components/common/media/MediaViewer
+ */
+
 'use client';
 
 import { useState } from 'react';

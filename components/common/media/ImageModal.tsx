@@ -1,11 +1,18 @@
+/**
+ * @fileoverview Focus trap hook for modal accessibility.
+ * Traps keyboard focus within a container element.
+ * Returns focus to original element when closed.
+ * @module components/common/media/ImageModal
+ */
+
 import { useEffect, RefObject } from 'react';
 
 /**
  * Traps focus within a container (for modals, drawers, etc.)
- * 
+ *
  * @param containerRef - Ref to the container element
  * @param options - Configuration options
- * 
+ *
  * @example
  * const modalRef = useRef<HTMLDivElement>(null);
  * useFocusTrap(modalRef, { enabled: isOpen, returnFocus: true });
@@ -74,7 +81,7 @@ export function useFocusTrap<T extends HTMLElement = HTMLElement>(
     // Cleanup
     return () => {
       container.removeEventListener('keydown', handleKeyDown);
-      
+
       if (returnFocus && previouslyFocusedElement) {
         previouslyFocusedElement.focus();
       }

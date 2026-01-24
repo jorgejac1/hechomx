@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Contact modal for messaging sellers.
+ * Provides a modal dialog for buyers to send messages to shop owners.
+ * Pre-fills user info when authenticated.
+ * @module components/contact/ContactModal
+ */
+
 'use client';
 
 import { useState } from 'react';

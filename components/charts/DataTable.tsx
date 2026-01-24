@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Generic data table component with responsive columns.
+ * Supports custom column rendering, sorting indicators, and responsive hiding.
+ * Features striped rows, hover effects, and trend indicators.
+ * @module components/charts/DataTable
+ */
+
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 export interface TableColumn<T> {

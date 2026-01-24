@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Artisan story form components barrel export.
+ * Re-exports all artisan story section components for use in the story editor.
+ * @module components/artisan-story
+ */
+
 export { default as StoryFormSelector } from './StoryFormSelector';
 export { default as BasicInfoSection } from './BasicInfoSection';
 export { default as HobbyMakerStorySection } from './HobbyMakerStorySection';
