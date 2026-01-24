@@ -221,13 +221,13 @@ describe('Checkbox', () => {
 
   describe('ref forwarding', () => {
     it('should forward ref to input element', () => {
-      const ref = { current: null } as React.RefObject<HTMLInputElement>;
+      const ref = { current: null as HTMLInputElement | null };
       render(<Checkbox ref={ref} />);
       expect(ref.current).toBeInstanceOf(HTMLInputElement);
     });
 
     it('should allow programmatic focus via ref', () => {
-      const ref = { current: null } as React.RefObject<HTMLInputElement>;
+      const ref = { current: null as HTMLInputElement | null };
       render(<Checkbox ref={ref} />);
       ref.current?.focus();
       expect(document.activeElement).toBe(ref.current);

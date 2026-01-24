@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { CACHE_DURATIONS, createCacheHeaders, CACHE_HEADERS } from '../cache';
 
+type CacheHeaders = Record<string, string>;
+
 describe('Cache Utilities', () => {
   describe('CACHE_DURATIONS', () => {
     it('should have correct duration values in seconds', () => {
@@ -14,14 +16,14 @@ describe('Cache Utilities', () => {
 
   describe('createCacheHeaders', () => {
     it('should return no-cache headers for duration 0', () => {
-      const headers = createCacheHeaders(0);
+      const headers = createCacheHeaders(0) as CacheHeaders;
 
       expect(headers['Cache-Control']).toBe('no-store, no-cache, must-revalidate');
       expect(headers['Pragma']).toBe('no-cache');
     });
 
     it('should return public cache headers by default', () => {
-      const headers = createCacheHeaders(60);
+      const headers = createCacheHeaders(60) as CacheHeaders;
 
       expect(headers['Cache-Control']).toContain('public');
       expect(headers['Cache-Control']).toContain('max-age=60');
@@ -29,7 +31,7 @@ describe('Cache Utilities', () => {
     });
 
     it('should return private cache headers when specified', () => {
-      const headers = createCacheHeaders(300, { private: true });
+      const headers = createCacheHeaders(300, { private: true }) as CacheHeaders;
 
       expect(headers['Cache-Control']).toContain('private');
       expect(headers['Cache-Control']).toContain('max-age=300');
@@ -37,7 +39,7 @@ describe('Cache Utilities', () => {
     });
 
     it('should include stale-while-revalidate when specified', () => {
-      const headers = createCacheHeaders(60, { staleWhileRevalidate: 300 });
+      const headers = createCacheHeaders(60, { staleWhileRevalidate: 300 }) as CacheHeaders;
 
       expect(headers['Cache-Control']).toContain('stale-while-revalidate=300');
     });
@@ -46,7 +48,7 @@ describe('Cache Utilities', () => {
       const headers = createCacheHeaders(120, {
         private: true,
         staleWhileRevalidate: 600,
-      });
+      }) as CacheHeaders;
 
       const cacheControl = headers['Cache-Control'];
       expect(cacheControl).toContain('private');
@@ -58,7 +60,8 @@ describe('Cache Utilities', () => {
 
   describe('CACHE_HEADERS presets', () => {
     it('PUBLIC_LISTINGS should have short cache with stale-while-revalidate', () => {
-      const cacheControl = CACHE_HEADERS.PUBLIC_LISTINGS['Cache-Control'];
+      const headers = CACHE_HEADERS.PUBLIC_LISTINGS as CacheHeaders;
+      const cacheControl = headers['Cache-Control'];
 
       expect(cacheControl).toContain('public');
       expect(cacheControl).toContain('max-age=60');
@@ -66,12 +69,14 @@ describe('Cache Utilities', () => {
     });
 
     it('USER_DATA should have no-cache headers', () => {
-      expect(CACHE_HEADERS.USER_DATA['Cache-Control']).toBe('no-store, no-cache, must-revalidate');
-      expect(CACHE_HEADERS.USER_DATA['Pragma']).toBe('no-cache');
+      const headers = CACHE_HEADERS.USER_DATA as CacheHeaders;
+      expect(headers['Cache-Control']).toBe('no-store, no-cache, must-revalidate');
+      expect(headers['Pragma']).toBe('no-cache');
     });
 
     it('REFERENCE_DATA should have long cache', () => {
-      const cacheControl = CACHE_HEADERS.REFERENCE_DATA['Cache-Control'];
+      const headers = CACHE_HEADERS.REFERENCE_DATA as CacheHeaders;
+      const cacheControl = headers['Cache-Control'];
 
       expect(cacheControl).toContain('public');
       expect(cacheControl).toContain('max-age=3600');
@@ -79,7 +84,8 @@ describe('Cache Utilities', () => {
     });
 
     it('ANALYTICS should have private medium cache', () => {
-      const cacheControl = CACHE_HEADERS.ANALYTICS['Cache-Control'];
+      const headers = CACHE_HEADERS.ANALYTICS as CacheHeaders;
+      const cacheControl = headers['Cache-Control'];
 
       expect(cacheControl).toContain('private');
       expect(cacheControl).toContain('max-age=300');

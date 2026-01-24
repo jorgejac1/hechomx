@@ -70,9 +70,9 @@ describe('Shop Utilities', () => {
       {
         id: '1',
         name: 'Product 1',
-        slug: 'product-1',
         description: 'Test product',
         price: 100,
+        currency: 'MXN',
         category: 'Joyería',
         state: 'Oaxaca',
         maker: 'Tejidos Sofía',
@@ -80,13 +80,13 @@ describe('Shop Utilities', () => {
         rating: 4.5,
         reviewCount: 10,
         inStock: true,
-      } as Product,
+      },
       {
         id: '2',
         name: 'Product 2',
-        slug: 'product-2',
         description: 'Test product 2',
         price: 200,
+        currency: 'MXN',
         category: 'Arte',
         state: 'Oaxaca',
         maker: 'Alebrijes Don Pedro',
@@ -94,13 +94,13 @@ describe('Shop Utilities', () => {
         rating: 5.0,
         reviewCount: 20,
         inStock: true,
-      } as Product,
+      },
       {
         id: '3',
         name: 'Product 3',
-        slug: 'product-3',
         description: 'Test product 3',
         price: 150,
+        currency: 'MXN',
         category: 'Textiles',
         state: 'Oaxaca',
         maker: 'Tejidos Sofía',
@@ -108,7 +108,7 @@ describe('Shop Utilities', () => {
         rating: 4.8,
         reviewCount: 15,
         inStock: true,
-      } as Product,
+      },
     ];
 
     it('should return products for valid shop', () => {

@@ -147,20 +147,22 @@ describe('SEO Utilities', () => {
       const metadata = generateProductsMetadata({ categories: ['Joyería'], states: [] }, 50);
 
       expect(metadata.openGraph).toBeDefined();
-      expect(metadata.openGraph?.title).toBeDefined();
-      expect(metadata.openGraph?.description).toBeDefined();
-      expect(metadata.openGraph?.type).toBe('website');
-      expect(metadata.openGraph?.locale).toBe('es_MX');
-      expect(metadata.openGraph?.siteName).toBe('Papalote Market');
+      const og = metadata.openGraph as Record<string, unknown>;
+      expect(og?.title).toBeDefined();
+      expect(og?.description).toBeDefined();
+      expect(og?.type).toBe('website');
+      expect(og?.locale).toBe('es_MX');
+      expect(og?.siteName).toBe('Papalote Market');
     });
 
     it('should include twitter card metadata', () => {
       const metadata = generateProductsMetadata({ categories: [], states: [] }, 25);
 
       expect(metadata.twitter).toBeDefined();
-      expect(metadata.twitter?.card).toBe('summary_large_image');
-      expect(metadata.twitter?.title).toBeDefined();
-      expect(metadata.twitter?.description).toBeDefined();
+      const twitter = metadata.twitter as Record<string, unknown>;
+      expect(twitter?.card).toBe('summary_large_image');
+      expect(twitter?.title).toBeDefined();
+      expect(twitter?.description).toBeDefined();
     });
 
     it('should include canonical URL', () => {

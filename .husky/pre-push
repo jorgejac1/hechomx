@@ -1,0 +1,2 @@
+# Full validation before pushing
+npm run validate

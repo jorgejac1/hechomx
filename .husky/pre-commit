@@ -1,1 +1,14 @@
+# Type checking
+npm run type-check
+
+# Linting (full project)
+npm run lint
+
+# Tests for changed files only
+npm run test -- --run --changed HEAD~1 --passWithNoTests
+
+# Auto-fix and format staged files
 npx lint-staged
+
+# Build check
+npm run build
