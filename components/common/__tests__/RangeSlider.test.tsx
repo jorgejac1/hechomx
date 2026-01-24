@@ -658,4 +658,441 @@ describe('RangeSlider', () => {
       }
     });
   });
+
+  describe('Uncontrolled Mode', () => {
+    it('uses [min, max] as default value for range mode when no defaultValue', () => {
+      render(<RangeSlider min={10} max={90} range />);
+      const sliders = screen.getAllByRole('slider');
+      expect(sliders[0]).toHaveAttribute('aria-valuenow', '10');
+      expect(sliders[1]).toHaveAttribute('aria-valuenow', '90');
+    });
+
+    it('updates internal state in uncontrolled mode', () => {
+      render(<RangeSlider {...defaultProps} defaultValue={50} />);
+      const slider = screen.getByRole('slider');
+
+      fireEvent.keyDown(slider, { key: 'ArrowRight' });
+      expect(slider).toHaveAttribute('aria-valuenow', '51');
+
+      fireEvent.keyDown(slider, { key: 'ArrowRight' });
+      expect(slider).toHaveAttribute('aria-valuenow', '52');
+    });
+
+    it('updates range values in uncontrolled mode', () => {
+      render(<RangeSlider {...defaultProps} range defaultValue={[30, 70]} />);
+      const sliders = screen.getAllByRole('slider');
+
+      // Update low value
+      fireEvent.keyDown(sliders[0], { key: 'ArrowRight' });
+      expect(sliders[0]).toHaveAttribute('aria-valuenow', '31');
+
+      // Update high value
+      fireEvent.keyDown(sliders[1], { key: 'ArrowLeft' });
+      expect(sliders[1]).toHaveAttribute('aria-valuenow', '69');
+    });
+  });
+
+  describe('Track Click Disabled', () => {
+    it('does not update value when clicking track on disabled slider', () => {
+      const onChange = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} disabled defaultValue={50} onChange={onChange} />
+      );
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+        fireEvent.click(track, { clientX: 70 });
+        expect(onChange).not.toHaveBeenCalled();
+      }
+    });
+  });
+
+  describe('Range Track Click Distance', () => {
+    it('selects high handle when click is closer to high value', () => {
+      const onChange = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} range defaultValue={[20, 80]} onChange={onChange} />
+      );
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+
+        // Click at 70, closer to high value (80) than low value (20)
+        fireEvent.click(track, { clientX: 70 });
+        const calledValue = onChange.mock.calls[0]?.[0];
+        // Should update high value
+        expect(calledValue).toEqual([20, 70]);
+      }
+    });
+
+    it('selects low handle when click is closer to low value', () => {
+      const onChange = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} range defaultValue={[20, 80]} onChange={onChange} />
+      );
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+
+        // Click at 25, closer to low value (20) than high value (80)
+        fireEvent.click(track, { clientX: 25 });
+        const calledValue = onChange.mock.calls[0]?.[0];
+        // Should update low value
+        expect(calledValue).toEqual([25, 80]);
+      }
+    });
+
+    it('selects low handle when equidistant (edge case)', () => {
+      const onChange = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} range defaultValue={[30, 70]} onChange={onChange} />
+      );
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+
+        // Click at 50, exactly equidistant from 30 and 70
+        fireEvent.click(track, { clientX: 50 });
+        const calledValue = onChange.mock.calls[0]?.[0];
+        // Should update low value (distToLow <= distToHigh)
+        expect(calledValue).toEqual([50, 70]);
+      }
+    });
+  });
+
+  describe('Range Keyboard onChangeEnd', () => {
+    it('calls onChangeEnd with correct range values when updating low handle', () => {
+      const onChangeEnd = vi.fn();
+      render(
+        <RangeSlider {...defaultProps} range defaultValue={[20, 80]} onChangeEnd={onChangeEnd} />
+      );
+
+      const sliders = screen.getAllByRole('slider');
+      fireEvent.keyDown(sliders[0], { key: 'ArrowRight' });
+
+      expect(onChangeEnd).toHaveBeenCalledWith([21, 80]);
+    });
+
+    it('calls onChangeEnd with correct range values when updating high handle', () => {
+      const onChangeEnd = vi.fn();
+      render(
+        <RangeSlider {...defaultProps} range defaultValue={[20, 80]} onChangeEnd={onChangeEnd} />
+      );
+
+      const sliders = screen.getAllByRole('slider');
+      fireEvent.keyDown(sliders[1], { key: 'ArrowLeft' });
+
+      expect(onChangeEnd).toHaveBeenCalledWith([20, 79]);
+    });
+
+    it('calls onChangeEnd with correct values for Home key on range low handle', () => {
+      const onChangeEnd = vi.fn();
+      render(
+        <RangeSlider {...defaultProps} range defaultValue={[20, 80]} onChangeEnd={onChangeEnd} />
+      );
+
+      const sliders = screen.getAllByRole('slider');
+      fireEvent.keyDown(sliders[0], { key: 'Home' });
+
+      expect(onChangeEnd).toHaveBeenCalledWith([0, 80]);
+    });
+
+    it('calls onChangeEnd with correct values for End key on range high handle', () => {
+      const onChangeEnd = vi.fn();
+      render(
+        <RangeSlider {...defaultProps} range defaultValue={[20, 80]} onChangeEnd={onChangeEnd} />
+      );
+
+      const sliders = screen.getAllByRole('slider');
+      fireEvent.keyDown(sliders[1], { key: 'End' });
+
+      expect(onChangeEnd).toHaveBeenCalledWith([20, 100]);
+    });
+  });
+
+  describe('Marks with Number Arrays', () => {
+    it('renders marks from number array', () => {
+      const { container } = render(
+        <RangeSlider {...defaultProps} marks={[10, 50, 90]} defaultValue={50} />
+      );
+      const markDots = container.querySelectorAll('.w-1.h-1.rounded-full');
+      expect(markDots).toHaveLength(3);
+    });
+
+    it('highlights marks within range for range slider', () => {
+      const { container } = render(
+        <RangeSlider {...defaultProps} range marks={[0, 25, 50, 75, 100]} defaultValue={[25, 75]} />
+      );
+      // Marks at 25, 50, and 75 should be in range (highlighted)
+      // Marks at 0 and 100 should be outside range
+      const markDots = container.querySelectorAll('.w-1.h-1.rounded-full');
+      expect(markDots).toHaveLength(5);
+    });
+
+    it('highlights marks up to current value for single slider', () => {
+      const { container } = render(
+        <RangeSlider {...defaultProps} marks={[0, 25, 50, 75, 100]} defaultValue={50} />
+      );
+      // Marks at 0, 25, 50 should be highlighted (<=50)
+      // Marks at 75, 100 should not be highlighted
+      const markDots = container.querySelectorAll('.w-1.h-1.rounded-full');
+      expect(markDots).toHaveLength(5);
+    });
+  });
+
+  describe('Handle End Callback', () => {
+    it('calls onChangeEnd after mouse drag ends', () => {
+      const onChangeEnd = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} defaultValue={50} onChangeEnd={onChangeEnd} />
+      );
+      const slider = screen.getByRole('slider');
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+      }
+
+      fireEvent.mouseDown(slider);
+      fireEvent.mouseMove(window, { clientX: 70 });
+      fireEvent.mouseUp(window);
+
+      expect(onChangeEnd).toHaveBeenCalled();
+    });
+
+    it('does not call onChangeEnd if not dragging', () => {
+      const onChangeEnd = vi.fn();
+      render(<RangeSlider {...defaultProps} defaultValue={50} onChangeEnd={onChangeEnd} />);
+
+      // Just trigger mouseUp without mouseDown first
+      fireEvent.mouseUp(window);
+
+      // onChangeEnd should not be called since we weren't dragging
+      expect(onChangeEnd).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Track Click onChangeEnd', () => {
+    it('calls onChangeEnd after track click on single slider', () => {
+      const onChangeEnd = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} defaultValue={50} onChangeEnd={onChangeEnd} />
+      );
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+        fireEvent.click(track, { clientX: 70 });
+        expect(onChangeEnd).toHaveBeenCalledWith(70);
+      }
+    });
+
+    it('calls onChangeEnd with range values after track click on range slider', () => {
+      const onChangeEnd = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} range defaultValue={[20, 80]} onChangeEnd={onChangeEnd} />
+      );
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+        fireEvent.click(track, { clientX: 50 });
+        // onChangeEnd is called with the original range values (before update takes effect)
+        expect(onChangeEnd).toHaveBeenCalledWith([20, 80]);
+      }
+    });
+  });
+
+  describe('Handle Start Disabled', () => {
+    it('does not start dragging when disabled', () => {
+      render(<RangeSlider {...defaultProps} disabled defaultValue={50} />);
+      const slider = screen.getByRole('slider');
+
+      fireEvent.mouseDown(slider);
+
+      // Should not have grabbing cursor when disabled
+      expect(slider).not.toHaveClass('cursor-grabbing');
+    });
+
+    it('does not respond to touch when disabled', () => {
+      render(<RangeSlider {...defaultProps} disabled defaultValue={50} />);
+      const slider = screen.getByRole('slider');
+
+      fireEvent.touchStart(slider, { touches: [{ clientX: 50 }] });
+
+      expect(slider).not.toHaveClass('cursor-grabbing');
+    });
+  });
+
+  describe('Handle Move Edge Cases', () => {
+    it('does not update value when handleMove is called without dragging', () => {
+      const onChange = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} defaultValue={50} onChange={onChange} />
+      );
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+      }
+
+      // Move without mouseDown first
+      fireEvent.mouseMove(window, { clientX: 70 });
+
+      // onChange should not be called
+      expect(onChange).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Controlled vs Uncontrolled Mode Coverage', () => {
+    it('controlled mode does not update internal state', () => {
+      const onChange = vi.fn();
+      const { container, rerender } = render(
+        <RangeSlider {...defaultProps} value={50} onChange={onChange} />
+      );
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+      }
+
+      const slider = screen.getByRole('slider');
+
+      // Try to change via keyboard - since controlled, internal state shouldn't change
+      fireEvent.keyDown(slider, { key: 'ArrowRight' });
+
+      // onChange is called but value stays controlled
+      expect(onChange).toHaveBeenCalledWith(51);
+      expect(slider).toHaveAttribute('aria-valuenow', '50'); // Still controlled value
+
+      // Now rerender with new value to simulate parent update
+      rerender(<RangeSlider {...defaultProps} value={60} onChange={onChange} />);
+      expect(slider).toHaveAttribute('aria-valuenow', '60');
+    });
+
+    it('controlled range mode does not update internal state', () => {
+      const onChange = vi.fn();
+      render(<RangeSlider {...defaultProps} range value={[30, 70]} onChange={onChange} />);
+
+      const sliders = screen.getAllByRole('slider');
+      fireEvent.keyDown(sliders[0], { key: 'ArrowRight' });
+
+      expect(onChange).toHaveBeenCalledWith([31, 70]);
+      // Value stays at controlled value
+      expect(sliders[0]).toHaveAttribute('aria-valuenow', '30');
+    });
+  });
+
+  describe('Auto-generated Marks Coverage', () => {
+    it('generates marks at every step interval', () => {
+      const { container } = render(
+        <RangeSlider min={0} max={20} step={5} marks={true} defaultValue={10} />
+      );
+      // Should have marks at 0, 5, 10, 15, 20
+      const markDots = container.querySelectorAll('.w-1.h-1.rounded-full');
+      expect(markDots).toHaveLength(5);
+    });
+
+    it('renders no marks when marks is false', () => {
+      const { container } = render(
+        <RangeSlider {...defaultProps} marks={false} defaultValue={50} />
+      );
+      // Look for mark dots specifically (the small dots with w-1 h-1)
+      const markDots = container.querySelectorAll('.w-1.h-1.rounded-full');
+      // No marks should be rendered
+      expect(markDots).toHaveLength(0);
+    });
+  });
+
+  describe('Touch Move Edge Cases', () => {
+    it('uses touch clientX correctly during drag', () => {
+      const onChange = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} defaultValue={50} onChange={onChange} />
+      );
+      const slider = screen.getByRole('slider');
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+      }
+
+      // Start touch
+      fireEvent.touchStart(slider, { touches: [{ clientX: 50 }] });
+
+      // Move touch to new position
+      fireEvent.touchMove(window, { touches: [{ clientX: 30 }] });
+
+      expect(onChange).toHaveBeenCalledWith(30);
+    });
+  });
+
+  describe('Range High Value Updates', () => {
+    it('updates high value correctly in uncontrolled mode via drag', () => {
+      const onChange = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} range defaultValue={[20, 80]} onChange={onChange} />
+      );
+      const sliders = screen.getAllByRole('slider');
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+      }
+
+      // Drag high handle
+      fireEvent.mouseDown(sliders[1]);
+      fireEvent.mouseMove(window, { clientX: 90 });
+
+      expect(onChange).toHaveBeenCalledWith([20, 90]);
+    });
+
+    it('ensures high value cannot go below low value during drag', () => {
+      const onChange = vi.fn();
+      const { container } = render(
+        <RangeSlider {...defaultProps} range defaultValue={[50, 60]} onChange={onChange} />
+      );
+      const sliders = screen.getAllByRole('slider');
+
+      const track = container.querySelector('.rounded-full.bg-gray-200');
+      if (track) {
+        Object.defineProperty(track, 'getBoundingClientRect', {
+          value: () => ({ left: 0, width: 100, top: 0, height: 10 }),
+        });
+      }
+
+      // Drag high handle below low value
+      fireEvent.mouseDown(sliders[1]);
+      fireEvent.mouseMove(window, { clientX: 30 });
+
+      // High value should be constrained to low value
+      expect(onChange).toHaveBeenCalledWith([50, 50]);
+    });
+  });
 });

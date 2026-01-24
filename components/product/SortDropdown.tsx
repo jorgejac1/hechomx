@@ -53,7 +53,9 @@ function SortDropdownContent({ currentSort = 'relevance' }: SortDropdownProps) {
 
 export default function SortDropdown({ currentSort }: SortDropdownProps) {
   return (
-    <Suspense fallback={<div className="h-10 w-64 animate-pulse bg-gray-200 rounded-lg" />}>
+    <Suspense
+      fallback={<div className="h-10 w-64 animate-pulse bg-gray-200 dark:bg-gray-700 rounded-lg" />}
+    >
       <SortDropdownContent currentSort={currentSort} />
     </Suspense>
   );

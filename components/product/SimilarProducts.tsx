@@ -26,12 +26,12 @@ export default function SimilarProducts({ products, category }: SimilarProductsP
   if (products.length === 0) return null;
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 lg:p-8">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 lg:p-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Productos Similares</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Productos Similares</h2>
         <Link
           href={`/productos?category=${category}`}
-          className="text-primary-600 hover:text-primary-700 font-medium text-sm flex items-center gap-1"
+          className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium text-sm flex items-center gap-1"
         >
           <span>Ver más</span>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

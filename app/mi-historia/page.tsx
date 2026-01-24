@@ -60,7 +60,7 @@ function MiHistoriaContent({ user }: { user: User }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-6">
@@ -70,8 +70,10 @@ function MiHistoriaContent({ user }: { user: User }) {
           >
             ← Volver al Dashboard
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{config.storyTitle}</h1>
-          <p className="text-gray-600 mt-1">{config.storySubtitle}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
+            {config.storyTitle}
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">{config.storySubtitle}</p>
         </div>
 
         {/* Progress Tabs */}
@@ -83,7 +85,7 @@ function MiHistoriaContent({ user }: { user: User }) {
         />
 
         {/* Form Sections */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6">
           {activeSection === 'classification' && (
             <StoryFormSelector
               sellerType={story.sellerType}
@@ -214,7 +216,7 @@ function MiHistoriaContent({ user }: { user: User }) {
             href={`/artesano/${story.artisanId}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition font-medium"
+            className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition font-medium"
           >
             <Eye className="w-5 h-5" />
             Vista Previa
@@ -223,7 +225,7 @@ function MiHistoriaContent({ user }: { user: User }) {
 
         {/* Help Text */}
         <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             {story.sellerType === 'hobby_maker'
               ? 'Tómate tu tiempo. Una buena historia puede aumentar tus ventas hasta un 40%'
               : 'Una historia completa y auténtica puede aumentar tus ventas hasta un 80%'}
@@ -268,7 +270,7 @@ function ProgressTabs({
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-4 mb-6">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 mb-6">
       <div className="flex items-center justify-between text-sm overflow-x-auto gap-1">
         {tabs
           .filter((t) => t.show)
@@ -278,8 +280,8 @@ function ProgressTabs({
               onClick={() => setActiveSection(tab.key)}
               className={`flex-1 py-2 px-2 text-center rounded-lg transition whitespace-nowrap ${
                 activeSection === tab.key
-                  ? 'bg-primary-100 text-primary-700 font-semibold'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 font-semibold'
+                  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
               {tab.label}

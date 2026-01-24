@@ -247,8 +247,10 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
               )}
             </button>
 
-            <p className="text-base text-gray-600 font-medium">
-              <span className="font-bold text-gray-900">{filteredProducts.length}</span>{' '}
+            <p className="text-base text-gray-600 dark:text-gray-400 font-medium">
+              <span className="font-bold text-gray-900 dark:text-gray-100">
+                {filteredProducts.length}
+              </span>{' '}
               {pluralize(filteredProducts.length, 'producto', 'productos')}
             </p>
           </div>
@@ -262,7 +264,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
               <select
                 value={filters.sortBy}
                 onChange={(e) => handleSortChange(e.target.value as SortOption)}
-                className="appearance-none pl-10 pr-10 py-2 bg-white border-2 border-gray-300 rounded-lg hover:border-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer transition-all font-medium text-gray-900 text-base min-w-[280px]"
+                className="appearance-none pl-10 pr-10 py-2 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-gray-400 dark:hover:border-gray-500 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-primary-500 dark:focus:border-primary-400 cursor-pointer transition-all font-medium text-gray-900 dark:text-gray-100 text-base min-w-[280px]"
               >
                 {SORT_OPTIONS.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -273,7 +275,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
 
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
-                  className="w-5 h-5 text-gray-600"
+                  className="w-5 h-5 text-gray-600 dark:text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -289,7 +291,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
 
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 <svg
-                  className="w-5 h-5 text-gray-600"
+                  className="w-5 h-5 text-gray-600 dark:text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -308,9 +310,11 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
 
         {/* Active Filters Display */}
         {totalActiveFilters > 0 && (
-          <div className="mt-4 p-4 bg-white rounded-xl border-2 border-gray-200">
+          <div className="mt-4 p-4 bg-white dark:bg-gray-800 rounded-xl border-2 border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-sm font-semibold text-gray-700">Filtros activos:</span>
+              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Filtros activos:
+              </span>
 
               {/* Category Badges */}
               {filters.categories.map((category) => (
@@ -391,7 +395,7 @@ export default function ProductsPageClient({ products }: ProductsPageClientProps
               {/* Clear All Button */}
               <button
                 onClick={handleResetFilters}
-                className="text-sm text-primary-600 hover:text-primary-700 font-semibold hover:underline ml-auto"
+                className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold hover:underline ml-auto"
               >
                 Limpiar todo
               </button>

@@ -22,81 +22,101 @@ export default function WorkshopStorySection({
       <div>
         <div className="flex items-center gap-2 mb-2">
           <Users className="w-5 h-5 text-blue-600" />
-          <h2 className="text-xl font-bold text-gray-900">Nuestra Historia</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Nuestra Historia</h2>
         </div>
-        <p className="text-sm text-gray-600">Comparte la historia de tu taller y equipo</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Comparte la historia de tu taller y equipo
+        </p>
       </div>
 
       {/* Team Story */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           Nuestra Historia *
-          <span className="text-gray-500 font-normal ml-2">(¿Cómo comenzó el taller?)</span>
+          <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
+            (¿Cómo comenzó el taller?)
+          </span>
         </label>
         <textarea
           value={personalStory}
           onChange={(e) => onUpdate('personalStory', e.target.value)}
           rows={6}
           placeholder="Cuenten la historia de su taller: ¿Cómo comenzaron? ¿Quiénes forman el equipo?..."
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none dark:bg-gray-800 dark:text-gray-100"
         />
-        <p className="text-xs text-gray-500 mt-1">{personalStory.length} caracteres</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          {personalStory.length} caracteres
+        </p>
       </div>
 
       {/* Production Process */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           Nuestro Proceso *
-          <span className="text-gray-500 font-normal ml-2">(¿Cómo trabajan juntos?)</span>
+          <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
+            (¿Cómo trabajan juntos?)
+          </span>
         </label>
         <textarea
           value={productionProcess}
           onChange={(e) => onUpdate('productionProcess', e.target.value)}
           rows={6}
           placeholder="Describe cómo trabajan en equipo, el proceso de producción, control de calidad..."
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none dark:bg-gray-800 dark:text-gray-100"
         />
-        <p className="text-xs text-gray-500 mt-1">{productionProcess.length} caracteres</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          {productionProcess.length} caracteres
+        </p>
       </div>
 
       {/* Mission Statement */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           Nuestra Misión
-          <span className="text-gray-500 font-normal ml-2">(¿Qué los impulsa como equipo?)</span>
+          <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
+            (¿Qué los impulsa como equipo?)
+          </span>
         </label>
         <textarea
           value={missionStatement}
           onChange={(e) => onUpdate('missionStatement', e.target.value)}
           rows={4}
           placeholder="¿Cuál es la misión de su taller? ¿Qué valores los guían como equipo?..."
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none dark:bg-gray-800 dark:text-gray-100"
         />
-        <p className="text-xs text-gray-500 mt-1">{missionStatement.length} caracteres</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          {missionStatement.length} caracteres
+        </p>
       </div>
 
       {/* Daily Operations */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           Un Día en el Taller
-          <span className="text-gray-500 font-normal ml-2">(Rutina del equipo)</span>
+          <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
+            (Rutina del equipo)
+          </span>
         </label>
         <textarea
           value={dailyLife}
           onChange={(e) => onUpdate('dailyLife', e.target.value)}
           rows={5}
           placeholder="Describe un día típico en el taller, cómo se organiza el equipo, el espacio de trabajo..."
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none dark:bg-gray-800 dark:text-gray-100"
         />
-        <p className="text-xs text-gray-500 mt-1">{dailyLife.length} caracteres</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          {dailyLife.length} caracteres
+        </p>
       </div>
 
       {/* Team tip */}
-      <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-start gap-3">
+      <div className="p-4 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg flex items-start gap-3">
         <Target className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
         <div>
-          <p className="text-sm text-blue-900 font-semibold">Consejo: Destaquen lo colaborativo</p>
-          <p className="text-sm text-blue-800">
+          <p className="text-sm text-blue-900 dark:text-blue-100 font-semibold">
+            Consejo: Destaquen lo colaborativo
+          </p>
+          <p className="text-sm text-blue-800 dark:text-blue-200">
             Los clientes valoran el trabajo en equipo. Mencionen cómo cada persona contribuye al
             resultado final.
           </p>

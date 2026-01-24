@@ -10,10 +10,12 @@ import { ComparisonProvider } from '@/contexts/ComparisonContext';
 import { CartProvider } from '@/contexts/CartContext';
 import { ToastProvider } from '@/contexts/ToastContext';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { CookieConsentProvider } from '@/contexts/CookieConsentContext';
 import ComparisonBar from '@/components/product/Comparison/ComparisonBar';
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import { MaintenanceProvider } from '@/components/providers/MaintenanceProvider';
 import FeedbackWidget from '@/components/common/FeedbackWidget';
+import { CookieConsentBanner, CookiePreferencesModal } from '@/components/cookies';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,22 +30,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <ToastProvider>
             <AuthProvider>
-              <MaintenanceProvider>
-                <CartProvider>
-                  <ComparisonProvider>
-                    <Header />
-                    <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
-                      {children}
-                    </main>
-                    <Footer />
-                    <ScrollToTop />
-                    <Suspense fallback={null}>
-                      <ComparisonBar />
-                    </Suspense>
-                    <FeedbackWidget />
-                  </ComparisonProvider>
-                </CartProvider>
-              </MaintenanceProvider>
+              <CookieConsentProvider>
+                <MaintenanceProvider>
+                  <CartProvider>
+                    <ComparisonProvider>
+                      <Header />
+                      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+                        {children}
+                      </main>
+                      <Footer />
+                      <ScrollToTop />
+                      <Suspense fallback={null}>
+                        <ComparisonBar />
+                      </Suspense>
+                      <FeedbackWidget />
+                      <CookieConsentBanner />
+                      <CookiePreferencesModal />
+                    </ComparisonProvider>
+                  </CartProvider>
+                </MaintenanceProvider>
+              </CookieConsentProvider>
             </AuthProvider>
           </ToastProvider>
         </ThemeProvider>

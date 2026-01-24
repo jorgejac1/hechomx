@@ -52,7 +52,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
 
   if (isLoading) {
     return (
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
         <div className="flex items-center justify-center py-12">
           <Loader2 className="w-8 h-8 text-primary-600 animate-spin" />
         </div>
@@ -62,8 +62,10 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
 
   if (!data) {
     return (
-      <div className="bg-white rounded-xl shadow-md p-6">
-        <p className="text-center text-gray-600">No hay datos de análisis disponibles</p>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <p className="text-center text-gray-600 dark:text-gray-400">
+          No hay datos de análisis disponibles
+        </p>
       </div>
     );
   }
@@ -93,11 +95,15 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
   return (
     <div className="space-y-6">
       {/* Header with Time Range Selector */}
-      <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900">Análisis de Ventas</h3>
-            <p className="text-xs sm:text-sm text-gray-600">Desempeño de tu tienda</p>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
+              Análisis de Ventas
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+              Desempeño de tu tienda
+            </p>
           </div>
           <div className="flex gap-2">
             <button
@@ -105,7 +111,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
               className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition min-h-[44px] ${
                 timeRange === 'week'
                   ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               Esta Semana
@@ -115,7 +121,7 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
               className={`flex-1 sm:flex-none px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition min-h-[44px] ${
                 timeRange === 'month'
                   ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               Este Mes
@@ -125,66 +131,74 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
 
         {/* Revenue Overview */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6">
-          <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-lg p-4 sm:p-6 border-2 border-green-200 sm:col-span-2 lg:col-span-1">
+          <div className="bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 rounded-lg p-4 sm:p-6 border-2 border-green-200 dark:border-green-700 sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 sm:gap-3 mb-2">
               <div className="p-1.5 sm:p-2 bg-green-600 rounded-lg">
                 <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
-              <p className="text-xs sm:text-sm font-semibold text-gray-700">
+              <p className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">
                 {timeRange === 'week' ? 'Esta Semana' : 'Este Mes'}
               </p>
             </div>
-            <p className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
               {formatCurrency(
                 timeRange === 'week' ? data.revenue.thisWeek : data.revenue.thisMonth
               )}
             </p>
             <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               {isPositiveChange ? (
-                <TrendingUp className="w-4 h-4 text-green-600" />
+                <TrendingUp className="w-4 h-4 text-green-600 dark:text-green-400" />
               ) : (
-                <TrendingDown className="w-4 h-4 text-red-600" />
+                <TrendingDown className="w-4 h-4 text-red-600 dark:text-red-400" />
               )}
               <span
-                className={`text-xs sm:text-sm font-semibold ${isPositiveChange ? 'text-green-600' : 'text-red-600'}`}
+                className={`text-xs sm:text-sm font-semibold ${isPositiveChange ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}
               >
                 {isPositiveChange ? '+' : ''}
                 {revenueChange.toFixed(1)}%
               </span>
-              <span className="text-xs sm:text-sm text-gray-600">{comparisonText}</span>
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                {comparisonText}
+              </span>
             </div>
           </div>
 
-          <div className="bg-blue-50 rounded-lg p-4 sm:p-6 border border-blue-200">
+          <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4 sm:p-6 border border-blue-200 dark:border-blue-700">
             <div className="flex items-center gap-2 sm:gap-3 mb-2">
               <div className="p-1.5 sm:p-2 bg-blue-600 rounded-lg">
                 <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
-              <p className="text-xs sm:text-sm font-semibold text-gray-700">Ticket Promedio</p>
+              <p className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Ticket Promedio
+              </p>
             </div>
-            <p className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1 sm:mb-2">
               {formatCurrency(periodStats.averageOrderValue)}
             </p>
-            <p className="text-xs sm:text-sm text-gray-600">Por pedido</p>
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Por pedido</p>
           </div>
 
-          <div className="bg-purple-50 rounded-lg p-4 sm:p-6 border border-purple-200">
+          <div className="bg-purple-50 dark:bg-purple-900/30 rounded-lg p-4 sm:p-6 border border-purple-200 dark:border-purple-700">
             <div className="flex items-center gap-2 sm:gap-3 mb-2">
               <div className="p-1.5 sm:p-2 bg-purple-600 rounded-lg">
                 <Target className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
-              <p className="text-xs sm:text-sm font-semibold text-gray-700">Conversión</p>
+              <p className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Conversión
+              </p>
             </div>
-            <p className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1 sm:mb-2">
               {periodStats.conversionRate}%
             </p>
-            <p className="text-xs sm:text-sm text-gray-600">De visitantes a compradores</p>
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+              De visitantes a compradores
+            </p>
           </div>
         </div>
 
         {/* Sales Trend Mini Chart */}
         <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
-          <h4 className="text-xs sm:text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+          <h4 className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
             <BarChart3 className="w-4 h-4" />
             Tendencia de Ventas ({trendTitle})
           </h4>
@@ -218,13 +232,13 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
                       style={{ height: `${heightPx}px` }}
                     />
                     {/* Tooltip */}
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 sm:px-3 py-1.5 sm:py-2 bg-gray-900 dark:bg-gray-700 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
                       <p className="font-semibold">{formatCurrency(day.revenue)}</p>
                       <p>{day.sales} ventas</p>
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900" />
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700" />
                     </div>
                   </div>
-                  <p className="text-[10px] sm:text-xs text-gray-600 font-medium truncate w-full text-center">
+                  <p className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400 font-medium truncate w-full text-center">
                     {dateLabel}
                   </p>
                 </div>
@@ -235,49 +249,53 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
       </div>
 
       {/* Top Products */}
-      <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
-        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-          <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
+          <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-400" />
           Productos Más Vendidos
         </h3>
         <div className="space-y-2 sm:space-y-3">
           {data.topProducts.map((product, index) => (
             <div
               key={product.id}
-              className="flex items-start sm:items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
+              className="flex items-start sm:items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition"
             >
-              <div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 bg-primary-100 rounded-full shrink-0">
-                <span className="text-xs sm:text-sm font-bold text-primary-700">#{index + 1}</span>
+              <div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 bg-primary-100 dark:bg-primary-900/30 rounded-full shrink-0">
+                <span className="text-xs sm:text-sm font-bold text-primary-700 dark:text-primary-400">
+                  #{index + 1}
+                </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-gray-900 text-sm sm:text-base truncate">
+                <p className="font-semibold text-gray-900 dark:text-gray-100 text-sm sm:text-base truncate">
                   {product.name}
                 </p>
-                <p className="text-xs sm:text-sm text-gray-600">{product.sales} unidades</p>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                  {product.sales} unidades
+                </p>
               </div>
               <div className="text-right shrink-0">
-                <p className="font-bold text-gray-900 text-sm sm:text-base">
+                <p className="font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base">
                   {formatCurrency(product.revenue)}
                 </p>
                 <div className="flex items-center gap-1 justify-end">
                   {product.trend === 'up' && (
                     <>
-                      <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />
-                      <span className="text-[10px] sm:text-xs text-green-600 font-semibold hidden sm:inline">
+                      <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 dark:text-green-400" />
+                      <span className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 font-semibold hidden sm:inline">
                         En aumento
                       </span>
                     </>
                   )}
                   {product.trend === 'down' && (
                     <>
-                      <TrendingDown className="w-3 h-3 sm:w-4 sm:h-4 text-red-600" />
-                      <span className="text-[10px] sm:text-xs text-red-600 font-semibold hidden sm:inline">
+                      <TrendingDown className="w-3 h-3 sm:w-4 sm:h-4 text-red-600 dark:text-red-400" />
+                      <span className="text-[10px] sm:text-xs text-red-600 dark:text-red-400 font-semibold hidden sm:inline">
                         En descenso
                       </span>
                     </>
                   )}
                   {product.trend === 'stable' && (
-                    <span className="text-[10px] sm:text-xs text-gray-600 font-semibold hidden sm:inline">
+                    <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400 font-semibold hidden sm:inline">
                       Estable
                     </span>
                   )}
@@ -291,32 +309,32 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Traffic Sources */}
-        <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
-          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
             Fuentes de Tráfico
           </h3>
           <div className="space-y-3 sm:space-y-4">
             {data.trafficSources.map((source) => (
               <div key={source.source}>
                 <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-                  <span className="text-xs sm:text-sm font-semibold text-gray-900">
+                  <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100">
                     {source.source}
                   </span>
-                  <span className="text-xs sm:text-sm font-bold text-primary-600">
+                  <span className="text-xs sm:text-sm font-bold text-primary-600 dark:text-primary-400">
                     {source.percentage}%
                   </span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-1.5 sm:h-2">
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 sm:h-2">
                   <div
                     className="bg-primary-600 h-1.5 sm:h-2 rounded-full transition-all"
                     style={{ width: `${source.percentage}%` }}
                   />
                 </div>
                 <div className="flex items-center justify-between mt-1">
-                  <span className="text-[10px] sm:text-xs text-gray-600">
+                  <span className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">
                     {source.visits} visitas
                   </span>
-                  <span className="text-[10px] sm:text-xs text-green-600 font-semibold">
+                  <span className="text-[10px] sm:text-xs text-green-600 dark:text-green-400 font-semibold">
                     {source.conversions} conv.
                   </span>
                 </div>
@@ -326,34 +344,40 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
         </div>
 
         {/* Peak Times */}
-        <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
-          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-            <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
+            <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400" />
             Mejores Horarios
           </h3>
           <div className="space-y-3 sm:space-y-4">
-            <div className="p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <p className="text-xs sm:text-sm text-gray-600 mb-1">Mejor día</p>
-              <p className="text-xl sm:text-2xl font-bold text-gray-900">
+            <div className="p-3 sm:p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">Mejor día</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {data.peakTimes.bestDay}
               </p>
             </div>
-            <div className="p-3 sm:p-4 bg-purple-50 rounded-lg border border-purple-200">
-              <p className="text-xs sm:text-sm text-gray-600 mb-1">Mejor horario</p>
-              <p className="text-lg sm:text-2xl font-bold text-gray-900">
+            <div className="p-3 sm:p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-700">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">
+                Mejor horario
+              </p>
+              <p className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {data.peakTimes.bestHour}
               </p>
             </div>
             <div className="grid grid-cols-2 gap-2 sm:gap-3">
-              <div className="p-2 sm:p-3 bg-gray-50 rounded-lg">
-                <p className="text-[10px] sm:text-xs text-gray-600 mb-1">Entre semana</p>
-                <p className="text-lg sm:text-xl font-bold text-gray-900">
+              <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <p className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400 mb-1">
+                  Entre semana
+                </p>
+                <p className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
                   {data.peakTimes.weekdayVsWeekend.weekday}%
                 </p>
               </div>
-              <div className="p-2 sm:p-3 bg-gray-50 rounded-lg">
-                <p className="text-[10px] sm:text-xs text-gray-600 mb-1">Fin de semana</p>
-                <p className="text-lg sm:text-xl font-bold text-gray-900">
+              <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <p className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400 mb-1">
+                  Fin de semana
+                </p>
+                <p className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
                   {data.peakTimes.weekdayVsWeekend.weekend}%
                 </p>
               </div>
@@ -362,9 +386,9 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
         </div>
 
         {/* Top Cities */}
-        <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
-          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-            <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
+            <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 dark:text-red-400" />
             Ciudades Principales
           </h3>
           <div className="space-y-2 sm:space-y-3">
@@ -375,14 +399,14 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs sm:text-sm font-semibold text-gray-900 truncate">
+                    <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
                       {city.city}
                     </span>
-                    <span className="text-xs sm:text-sm font-bold text-gray-900 ml-2">
+                    <span className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 ml-2">
                       {city.percentage}%
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-1 sm:h-1.5">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1 sm:h-1.5">
                     <div
                       className="bg-red-500 h-1 sm:h-1.5 rounded-full"
                       style={{ width: `${city.percentage}%` }}
@@ -395,9 +419,9 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
         </div>
 
         {/* Age Groups */}
-        <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
-          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-            <Users className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
+            <Users className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400" />
             Grupos de Edad
           </h3>
           <div className="space-y-2 sm:space-y-3">
@@ -408,14 +432,14 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
                 </span>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs sm:text-sm font-semibold text-gray-900">
+                    <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100">
                       {group.range} años
                     </span>
-                    <span className="text-xs sm:text-sm font-bold text-gray-900">
+                    <span className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100">
                       {group.percentage}%
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-1 sm:h-1.5">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1 sm:h-1.5">
                     <div
                       className="bg-indigo-500 h-1 sm:h-1.5 rounded-full"
                       style={{ width: `${group.percentage}%` }}
@@ -428,22 +452,24 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
         </div>
 
         {/* Forecast */}
-        <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
-          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-            <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6">
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4 flex items-center gap-2">
+            <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-400" />
             Pronóstico
           </h3>
-          <div className="p-4 sm:p-6 bg-linear-to-br from-purple-50 to-pink-50 rounded-lg border-2 border-purple-200">
-            <p className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">Estimado próximo mes</p>
-            <p className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
+          <div className="p-4 sm:p-6 bg-linear-to-br from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/30 rounded-lg border-2 border-purple-200 dark:border-purple-700">
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1 sm:mb-2">
+              Estimado próximo mes
+            </p>
+            <p className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2 sm:mb-3">
               {formatCurrency(data.forecast.nextMonth)}
             </p>
             <div className="flex items-center gap-2">
               <div
                 className={`px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold ${
                   data.forecast.confidence === 'high'
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-yellow-100 text-yellow-800'
+                    ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400'
+                    : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400'
                 }`}
               >
                 Confianza: {data.forecast.confidence === 'high' ? 'Alta' : 'Media'}

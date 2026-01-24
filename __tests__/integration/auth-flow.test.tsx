@@ -439,6 +439,9 @@ describe('Auth Integration Tests', () => {
     });
 
     it('should handle corrupted localStorage gracefully', async () => {
+      // Suppress expected console.error for this test
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
       localStorage.setItem('auth_user', 'invalid-json');
 
       render(
@@ -456,6 +459,14 @@ describe('Auth Integration Tests', () => {
 
       // localStorage should be cleared
       expect(localStorage.getItem('auth_user')).toBeNull();
+
+      // Verify error was logged
+      expect(consoleSpy).toHaveBeenCalledWith(
+        '[AuthContext] Failed to load user session - data corrupted:',
+        expect.any(SyntaxError)
+      );
+
+      consoleSpy.mockRestore();
     });
   });
 

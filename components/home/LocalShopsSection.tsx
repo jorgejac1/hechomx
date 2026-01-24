@@ -164,27 +164,27 @@ export default function LocalShopsSection() {
   };
 
   return (
-    <section className="py-8 sm:py-10 md:py-12 bg-gray-50">
+    <section className="py-8 sm:py-10 md:py-12 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - POLISHED: Better mobile button sizing */}
         <div className="mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
             Descubre artesanos locales de {userState}
           </h2>
-          <p className="text-xs sm:text-sm text-gray-600 mb-3">
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">
             Productos únicos de talleres cercanos a ti
           </p>
           {/* POLISHED: Smaller padding on mobile, tighter gap, max-width */}
           <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-2 max-w-md sm:max-w-none">
             <Link
               href={`/tiendas?estado=${encodeURIComponent(userState)}`}
-              className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-200 text-gray-900 rounded-full text-sm font-semibold hover:bg-gray-300 transition text-center sm:text-left"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-full text-sm font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition text-center sm:text-left"
             >
               Inspírate
             </Link>
             <button
               onClick={handleChangeLocation}
-              className="px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-gray-300 text-gray-700 rounded-full text-sm font-semibold hover:border-gray-400 transition flex items-center justify-center gap-2"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-full text-sm font-semibold hover:border-gray-400 dark:hover:border-gray-500 transition flex items-center justify-center gap-2"
             >
               <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -319,7 +319,7 @@ export default function LocalShopsSection() {
         <div className="mt-4 sm:mt-6 text-center">
           <Link
             href={`/tiendas?estado=${encodeURIComponent(userState)}`}
-            className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-sm sm:text-base"
+            className="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold text-sm sm:text-base"
           >
             Ver todos los artesanos de {userState}
             <svg

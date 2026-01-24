@@ -112,7 +112,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
       <div className="bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 py-16 sm:py-24">
@@ -134,12 +134,14 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Mission */}
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6">
-              <Target className="w-8 h-8 text-primary-600" />
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+            <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mb-6">
+              <Target className="w-8 h-8 text-primary-600 dark:text-primary-400" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Nuestra Misión</h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Nuestra Misión
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
               Empoderar a los artesanos mexicanos proporcionándoles una plataforma digital que les
               permita llegar a más clientes, obtener precios justos y preservar sus tradiciones
               ancestrales para las futuras generaciones.
@@ -147,12 +149,14 @@ export default function AboutPage() {
           </div>
 
           {/* Vision */}
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
-              <Eye className="w-8 h-8 text-purple-600" />
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+            <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mb-6">
+              <Eye className="w-8 h-8 text-purple-600 dark:text-purple-400" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Nuestra Visión</h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Nuestra Visión
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
               Ser la plataforma líder en México para la comercialización de productos artesanales,
               donde cada compra preserve tradiciones, apoye comunidades y celebre la riqueza
               cultural de nuestros pueblos.
@@ -162,13 +166,13 @@ export default function AboutPage() {
       </div>
 
       {/* Why We're Different - NEW SECTION */}
-      <div className="bg-linear-to-br from-primary-50 to-white py-16">
+      <div className="bg-linear-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900 py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               Por Qué Somos Diferentes
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               No somos un marketplace común. Somos una comunidad comprometida con la excelencia y el
               comercio justo
             </p>
@@ -178,20 +182,24 @@ export default function AboutPage() {
             {differentiators.map((item, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition-all hover:-translate-y-1"
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-xl transition-all hover:-translate-y-1"
               >
                 <div
-                  className={`w-14 h-14 ${item.bgColor} rounded-xl flex items-center justify-center mb-4`}
+                  className={`w-14 h-14 ${item.bgColor} dark:opacity-80 rounded-xl flex items-center justify-center mb-4`}
                 >
                   <item.icon className={`w-7 h-7 ${item.color}`} />
                 </div>
                 <div
-                  className={`inline-flex items-center gap-1 px-3 py-1 ${item.bgColor} ${item.color} rounded-full text-xs font-bold mb-3`}
+                  className={`inline-flex items-center gap-1 px-3 py-1 ${item.bgColor} ${item.color} dark:opacity-90 rounded-full text-xs font-bold mb-3`}
                 >
                   {item.stat}
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  {item.description}
+                </p>
               </div>
             ))}
           </div>
@@ -199,14 +207,14 @@ export default function AboutPage() {
       </div>
 
       {/* Our Story */}
-      <div className="bg-white py-16">
+      <div className="bg-white dark:bg-gray-800 py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
                 Nuestra Historia
               </h2>
-              <div className="space-y-4 text-gray-600 text-lg">
+              <div className="space-y-4 text-gray-600 dark:text-gray-400 text-lg">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
                   incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -241,8 +249,10 @@ export default function AboutPage() {
       {/* Values */}
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Nuestros Valores</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Nuestros Valores
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Los principios que guían cada decisión que tomamos
           </p>
         </div>
@@ -251,13 +261,15 @@ export default function AboutPage() {
           {values.map((value, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition text-center"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-lg transition text-center"
             >
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <value.icon className="w-8 h-8 text-primary-600" />
+              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                <value.icon className="w-8 h-8 text-primary-600 dark:text-primary-400" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">{value.title}</h3>
-              <p className="text-gray-600">{value.description}</p>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
+                {value.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">{value.description}</p>
             </div>
           ))}
         </div>
@@ -266,8 +278,10 @@ export default function AboutPage() {
       {/* Team */}
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Nuestro Equipo</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Nuestro Equipo
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Personas apasionadas trabajando para preservar el arte mexicano
           </p>
         </div>
@@ -276,15 +290,19 @@ export default function AboutPage() {
           {team.map((member, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
             >
               <div className="relative h-64">
                 <Image src={member.image} alt={member.name} fill className="object-cover" />
               </div>
               <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-1">{member.name}</h3>
-                <p className="text-primary-600 font-semibold text-sm mb-3">{member.role}</p>
-                <p className="text-gray-600 text-sm">{member.description}</p>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">
+                  {member.name}
+                </h3>
+                <p className="text-primary-600 dark:text-primary-400 font-semibold text-sm mb-3">
+                  {member.role}
+                </p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{member.description}</p>
               </div>
             </div>
           ))}

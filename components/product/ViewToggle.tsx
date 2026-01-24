@@ -27,8 +27,8 @@ export default function ViewToggle({ view, onViewChange }: ViewToggleProps) {
       <label
         className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
           view === 'grid'
-            ? 'bg-primary-100 text-primary-700 ring-2 ring-primary-500'
-            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 ring-2 ring-primary-500 dark:ring-primary-400'
+            : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
         }`}
       >
         <Radio
@@ -44,8 +44,8 @@ export default function ViewToggle({ view, onViewChange }: ViewToggleProps) {
       <label
         className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
           view === 'list'
-            ? 'bg-primary-100 text-primary-700 ring-2 ring-primary-500'
-            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            ? 'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 ring-2 ring-primary-500 dark:ring-primary-400'
+            : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
         }`}
       >
         <Radio

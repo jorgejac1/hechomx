@@ -81,26 +81,28 @@ export default function CartSummary() {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 space-y-6">
-      <h2 className="text-xl font-bold text-gray-900">Resumen del Pedido</h2>
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 space-y-6">
+      <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Resumen del Pedido</h2>
 
       {/* Order Details */}
       <div className="space-y-3 text-sm">
-        <div className="flex justify-between text-gray-600">
+        <div className="flex justify-between text-gray-600 dark:text-gray-400">
           <span>
             Subtotal ({cartCount} {cartCount === 1 ? 'producto' : 'productos'})
           </span>
-          <span className="font-semibold text-gray-900">{formatCurrency(subtotal)}</span>
+          <span className="font-semibold text-gray-900 dark:text-gray-100">
+            {formatCurrency(subtotal)}
+          </span>
         </div>
 
-        <div className="flex justify-between text-gray-600">
+        <div className="flex justify-between text-gray-600 dark:text-gray-400">
           <div className="flex items-center gap-1">
             <Truck className="w-4 h-4" />
             <span>Envío</span>
           </div>
-          <span className="font-semibold text-gray-900">
+          <span className="font-semibold text-gray-900 dark:text-gray-100">
             {shippingCost === 0 ? (
-              <span className="text-green-600">GRATIS</span>
+              <span className="text-green-600 dark:text-green-500">GRATIS</span>
             ) : (
               formatCurrency(shippingCost)
             )}
@@ -109,7 +111,7 @@ export default function CartSummary() {
 
         {/* Applied Coupon Display */}
         {appliedCoupon && (
-          <div className="flex justify-between items-center text-green-600 bg-green-50 p-2 rounded-lg">
+          <div className="flex justify-between items-center text-green-600 dark:text-green-500 bg-green-50 dark:bg-green-900/20 p-2 rounded-lg">
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4" />
               <span className="text-sm font-medium">
@@ -118,7 +120,7 @@ export default function CartSummary() {
             </div>
             <button
               onClick={handleRemoveCoupon}
-              className="p-1 hover:bg-green-100 rounded-full transition-colors"
+              className="p-1 hover:bg-green-100 dark:hover:bg-green-900/40 rounded-full transition-colors"
               aria-label="Eliminar cupón"
             >
               <X className="w-4 h-4" />
@@ -128,14 +130,14 @@ export default function CartSummary() {
 
         {/* Discount Line */}
         {productDiscount > 0 && (
-          <div className="flex justify-between text-green-600">
+          <div className="flex justify-between text-green-600 dark:text-green-500">
             <span>Descuento</span>
             <span className="font-semibold">-{formatCurrency(productDiscount)}</span>
           </div>
         )}
 
         {cartTotal < 1000 && !isFreeShippingCoupon && (
-          <div className="flex items-start gap-2 text-xs text-primary-700 bg-primary-50 p-3 rounded-lg">
+          <div className="flex items-start gap-2 text-xs text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/20 p-3 rounded-lg">
             <Tag className="w-4 h-4 shrink-0 mt-0.5" />
             <p>
               Agrega <strong>{formatCurrency(1000 - cartTotal)}</strong> más para obtener{' '}
@@ -144,16 +146,18 @@ export default function CartSummary() {
           </div>
         )}
 
-        <div className="border-t border-gray-200 pt-3 flex justify-between text-lg font-bold text-gray-900">
+        <div className="border-t border-gray-200 dark:border-gray-700 pt-3 flex justify-between text-lg font-bold text-gray-900 dark:text-gray-100">
           <span>Total</span>
-          <span className="text-primary-600">{formatCurrency(total)} MXN</span>
+          <span className="text-primary-600 dark:text-primary-400">
+            {formatCurrency(total)} MXN
+          </span>
         </div>
       </div>
 
       {/* Coupon Code Input */}
       {!appliedCoupon && (
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             ¿Tienes un cupón de descuento?
           </label>
           <div className="flex gap-2">
@@ -165,8 +169,10 @@ export default function CartSummary() {
                 setCouponError('');
               }}
               placeholder="Ej: PRIMERA10"
-              className={`flex-1 px-4 py-2 border rounded-lg text-sm uppercase focus:ring-2 focus:ring-primary-500 focus:border-primary-500 ${
-                couponError ? 'border-red-300' : 'border-gray-300'
+              className={`flex-1 px-4 py-2 border rounded-lg text-sm uppercase focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 ${
+                couponError
+                  ? 'border-red-300 dark:border-red-700'
+                  : 'border-gray-300 dark:border-gray-600'
               }`}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
@@ -179,13 +185,15 @@ export default function CartSummary() {
               type="button"
               onClick={handleApplyCoupon}
               disabled={isApplyingCoupon || !couponCode.trim()}
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isApplyingCoupon ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Aplicar'}
             </button>
           </div>
-          {couponError && <p className="text-sm text-red-600">{couponError}</p>}
-          <p className="text-xs text-gray-500">Prueba: PRIMERA10, ENVIOGRATIS</p>
+          {couponError && <p className="text-sm text-red-600 dark:text-red-500">{couponError}</p>}
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Prueba: PRIMERA10{baseShippingCost > 0 && ', ENVIOGRATIS'}
+          </p>
         </div>
       )}
 
@@ -207,9 +215,13 @@ export default function CartSummary() {
       </Link>
 
       {/* Security Info */}
-      <div className="pt-4 border-t border-gray-200 space-y-2 text-xs text-gray-600">
+      <div className="pt-4 border-t border-gray-200 dark:border-gray-700 space-y-2 text-xs text-gray-600 dark:text-gray-400">
         <div className="flex items-center gap-2">
-          <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+          <svg
+            className="w-4 h-4 text-green-600 dark:text-green-500"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
             <path
               fillRule="evenodd"
               d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
@@ -219,7 +231,11 @@ export default function CartSummary() {
           <span>Pago 100% seguro y encriptado</span>
         </div>
         <div className="flex items-center gap-2">
-          <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+          <svg
+            className="w-4 h-4 text-green-600 dark:text-green-500"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
             <path
               fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -229,7 +245,11 @@ export default function CartSummary() {
           <span>Garantía de satisfacción</span>
         </div>
         <div className="flex items-center gap-2">
-          <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+          <svg
+            className="w-4 h-4 text-green-600 dark:text-green-500"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
             <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
             <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
           </svg>

@@ -25,7 +25,7 @@ export default function TestimonialCard({
   gradientTo,
 }: TestimonialCardProps) {
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-xl transition">
       <div className="flex items-center gap-3 mb-4">
         {avatarUrl ? (
           <Image
@@ -43,8 +43,8 @@ export default function TestimonialCard({
           </div>
         )}
         <div>
-          <p className="font-bold text-gray-900">{name}</p>
-          <p className="text-sm text-gray-600">
+          <p className="font-bold text-gray-900 dark:text-gray-100">{name}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             {shopName} - {location}
           </p>
         </div>
@@ -54,9 +54,10 @@ export default function TestimonialCard({
           <Heart key={i} className="w-4 h-4 text-red-500 fill-red-500" />
         ))}
       </div>
-      <p className="text-gray-700 italic mb-3">{testimonial}</p>
-      <p className="text-sm text-gray-600">
-        Ventas mensuales: <span className="font-bold text-green-600">{monthlySales}</span>
+      <p className="text-gray-700 dark:text-gray-300 italic mb-3">{testimonial}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        Ventas mensuales:{' '}
+        <span className="font-bold text-green-600 dark:text-green-400">{monthlySales}</span>
       </p>
     </div>
   );

@@ -63,17 +63,19 @@ export default function RecentlyViewedSection({ allProducts }: RecentlyViewedSec
   }
 
   return (
-    <section className="py-8 sm:py-12 lg:py-16 bg-white">
+    <section className="py-8 sm:py-12 lg:py-16 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-6 sm:mb-8">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary-100 rounded-lg">
-              <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-primary-600" />
+            <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
+              <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-primary-600 dark:text-primary-400" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Vistos Recientemente</h2>
-              <p className="text-sm text-gray-600 hidden sm:block">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
+                Vistos Recientemente
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400 hidden sm:block">
                 Productos que has visto últimamente
               </p>
             </div>
@@ -82,14 +84,14 @@ export default function RecentlyViewedSection({ allProducts }: RecentlyViewedSec
           <div className="flex items-center gap-3">
             <button
               onClick={handleClearHistory}
-              className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+              className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
             >
               <X className="w-4 h-4" />
               <span className="hidden sm:inline">Limpiar</span>
             </button>
             <Link
               href="/productos"
-              className="flex items-center gap-1 text-primary-600 hover:text-primary-700 font-medium text-sm sm:text-base"
+              className="flex items-center gap-1 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium text-sm sm:text-base"
             >
               Ver todos
               <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />

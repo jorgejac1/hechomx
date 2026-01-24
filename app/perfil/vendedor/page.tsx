@@ -97,7 +97,7 @@ function SellerProfileContent({ user }: { user: User }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-6">
@@ -107,12 +107,16 @@ function SellerProfileContent({ user }: { user: User }) {
           >
             ← Volver al Perfil
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Perfil de Vendedor</h1>
-          <p className="text-gray-600 mt-1">Administra tu negocio y cuenta financiera</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
+            Perfil de Vendedor
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            Administra tu negocio y cuenta financiera
+          </p>
         </div>
 
         {/* Shop Header Card */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-6">
           <div className="flex items-center gap-4">
             {user.avatar ? (
               <Image
@@ -123,21 +127,23 @@ function SellerProfileContent({ user }: { user: User }) {
                 className="rounded-full border-4 border-primary-100"
               />
             ) : (
-              <div className="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center border-4 border-primary-200">
-                <Store className="w-10 h-10 text-primary-600" />
+              <div className="w-20 h-20 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center border-4 border-primary-200 dark:border-primary-700">
+                <Store className="w-10 h-10 text-primary-600 dark:text-primary-400" />
               </div>
             )}
             <div className="flex-1">
-              <h2 className="text-xl font-bold text-gray-900">{makerProfile!.shopName}</h2>
-              <p className="text-gray-600">{makerProfile!.location}</p>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                {makerProfile!.shopName}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400">{makerProfile!.location}</p>
               <div className="flex items-center gap-2 mt-2">
                 {makerProfile!.verified && (
-                  <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full flex items-center gap-1">
+                  <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs font-semibold rounded-full flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3" />
                     Verificado
                   </span>
                 )}
-                <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full capitalize">
+                <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs font-semibold rounded-full capitalize">
                   {makerProfile!.sellerType === 'individual' && 'Individual'}
                   {makerProfile!.sellerType === 'artisan' && 'Artesano'}
                   {makerProfile!.sellerType === 'company' && 'Empresa'}
@@ -149,35 +155,37 @@ function SellerProfileContent({ user }: { user: User }) {
 
         {/* Stats Overview */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Ventas Totales</p>
-                <p className="text-2xl font-bold text-gray-900">{makerProfile!.stats.salesCount}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Ventas Totales</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {makerProfile!.stats.salesCount}
+                </p>
               </div>
-              <TrendingUp className="w-8 h-8 text-green-600" />
+              <TrendingUp className="w-8 h-8 text-green-600 dark:text-green-400" />
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Calificación</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Calificación</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {makerProfile!.stats.rating.toFixed(1)}
                 </p>
               </div>
-              <CheckCircle2 className="w-8 h-8 text-yellow-600" />
+              <CheckCircle2 className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Productos</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Productos</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {makerProfile!.stats.productsCount}
                 </p>
               </div>
-              <Store className="w-8 h-8 text-blue-600" />
+              <Store className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             </div>
           </div>
         </div>
@@ -265,15 +273,15 @@ function SellerProfileContent({ user }: { user: User }) {
         </div>
 
         {/* Tabs */}
-        <div className="bg-white rounded-xl shadow-md mb-6">
-          <div className="border-b border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md mb-6">
+          <div className="border-b border-gray-200 dark:border-gray-700">
             <nav className="flex overflow-x-auto">
               <button
                 onClick={() => setActiveSection('business')}
                 className={`px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
                   activeSection === 'business'
-                    ? 'border-primary-600 text-primary-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                    ? 'border-primary-600 text-primary-600 dark:text-primary-400'
+                    : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
                 }`}
               >
                 Información del Negocio
@@ -282,8 +290,8 @@ function SellerProfileContent({ user }: { user: User }) {
                 onClick={() => setActiveSection('financial')}
                 className={`px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
                   activeSection === 'financial'
-                    ? 'border-primary-600 text-primary-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                    ? 'border-primary-600 text-primary-600 dark:text-primary-400'
+                    : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
                 }`}
               >
                 Información Financiera
@@ -292,8 +300,8 @@ function SellerProfileContent({ user }: { user: User }) {
                 onClick={() => setActiveSection('policies')}
                 className={`px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
                   activeSection === 'policies'
-                    ? 'border-primary-600 text-primary-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                    ? 'border-primary-600 text-primary-600 dark:text-primary-400'
+                    : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
                 }`}
               >
                 Políticas y Configuración
@@ -307,14 +315,18 @@ function SellerProfileContent({ user }: { user: User }) {
               <div className="space-y-6">
                 {/* Shop Details */}
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Detalles de la Tienda</h3>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+                    Detalles de la Tienda
+                  </h3>
                   <div className="space-y-4">
                     {/* Business Type */}
-                    <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                      <Building2 className="w-6 h-6 text-gray-600 mt-1" />
+                    <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <Building2 className="w-6 h-6 text-gray-600 dark:text-gray-400 mt-1" />
                       <div className="flex-1">
-                        <p className="text-sm font-semibold text-gray-700">Tipo de Negocio</p>
-                        <p className="text-gray-900 capitalize">
+                        <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                          Tipo de Negocio
+                        </p>
+                        <p className="text-gray-900 dark:text-gray-100 capitalize">
                           {makerProfile!.sellerType === 'individual' && 'Vendedor Individual'}
                           {makerProfile!.sellerType === 'artisan' && 'Artesano Certificado'}
                           {makerProfile!.sellerType === 'company' && 'Empresa'}
@@ -322,25 +334,33 @@ function SellerProfileContent({ user }: { user: User }) {
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                      <Store className="w-6 h-6 text-gray-600 mt-1" />
+                    <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <Store className="w-6 h-6 text-gray-600 dark:text-gray-400 mt-1" />
                       <div className="flex-1">
-                        <p className="text-sm font-semibold text-gray-700">Nombre de la Tienda</p>
-                        <p className="text-gray-900">{makerProfile!.shopName}</p>
+                        <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                          Nombre de la Tienda
+                        </p>
+                        <p className="text-gray-900 dark:text-gray-100">{makerProfile!.shopName}</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                      <MapPin className="w-6 h-6 text-gray-600 mt-1" />
+                    <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <MapPin className="w-6 h-6 text-gray-600 dark:text-gray-400 mt-1" />
                       <div className="flex-1">
-                        <p className="text-sm font-semibold text-gray-700">Ubicación</p>
-                        <p className="text-gray-900">{makerProfile!.location}</p>
+                        <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                          Ubicación
+                        </p>
+                        <p className="text-gray-900 dark:text-gray-100">{makerProfile!.location}</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                      <FileText className="w-6 h-6 text-gray-600 mt-1" />
+                    <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <FileText className="w-6 h-6 text-gray-600 dark:text-gray-400 mt-1" />
                       <div className="flex-1">
-                        <p className="text-sm font-semibold text-gray-700">Descripción</p>
-                        <p className="text-gray-900">{makerProfile!.description}</p>
+                        <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                          Descripción
+                        </p>
+                        <p className="text-gray-900 dark:text-gray-100">
+                          {makerProfile!.description}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -350,20 +370,24 @@ function SellerProfileContent({ user }: { user: User }) {
                 {makerProfile!.businessHours && (
                   <div>
                     <div className="flex items-center gap-2 mb-4">
-                      <Clock className="w-5 h-5 text-gray-600" />
-                      <h3 className="text-lg font-bold text-gray-900">Horario de Atención</h3>
+                      <Clock className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                      <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                        Horario de Atención
+                      </h3>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {makerProfile!.businessHours.map((day) => (
                         <div
                           key={day.day}
-                          className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                          className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
                         >
-                          <span className="font-medium text-gray-900">{day.day}</span>
+                          <span className="font-medium text-gray-900 dark:text-gray-100">
+                            {day.day}
+                          </span>
                           {day.closed ? (
-                            <span className="text-red-600 text-sm">Cerrado</span>
+                            <span className="text-red-600 dark:text-red-400 text-sm">Cerrado</span>
                           ) : (
-                            <span className="text-gray-700 text-sm">
+                            <span className="text-gray-700 dark:text-gray-300 text-sm">
                               {day.open} - {day.close}
                             </span>
                           )}
@@ -376,12 +400,14 @@ function SellerProfileContent({ user }: { user: User }) {
                 {/* Certifications */}
                 {makerProfile!.certifications.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-4">Certificaciones</h3>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+                      Certificaciones
+                    </h3>
                     <div className="flex flex-wrap gap-2">
                       {makerProfile!.certifications.map((cert, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-2 bg-green-50 text-green-800 rounded-full text-sm font-medium flex items-center gap-1"
+                          className="px-3 py-2 bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-sm font-medium flex items-center gap-1"
                         >
                           <Shield className="w-4 h-4" />
                           {cert}
@@ -394,12 +420,14 @@ function SellerProfileContent({ user }: { user: User }) {
                 {/* Specialties */}
                 {makerProfile!.specialties.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-4">Especialidades</h3>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+                      Especialidades
+                    </h3>
                     <div className="flex flex-wrap gap-2">
                       {makerProfile!.specialties.map((specialty, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-2 bg-blue-50 text-blue-800 rounded-full text-sm font-medium"
+                          className="px-3 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium"
                         >
                           {specialty}
                         </span>
@@ -426,7 +454,9 @@ function SellerProfileContent({ user }: { user: User }) {
                 {/* Bank Account */}
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-gray-900">Cuenta Bancaria</h3>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                      Cuenta Bancaria
+                    </h3>
                     {!isEditing ? (
                       <button
                         onClick={handleEditStart}
@@ -439,7 +469,7 @@ function SellerProfileContent({ user }: { user: User }) {
                       <div className="flex gap-2">
                         <button
                           onClick={handleEditCancel}
-                          className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition font-medium"
+                          className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition font-medium"
                         >
                           <X className="w-4 h-4" />
                           Cancelar
@@ -466,44 +496,54 @@ function SellerProfileContent({ user }: { user: User }) {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="p-4 bg-gray-50 rounded-lg">
+                    <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                       <div className="flex items-center gap-3 mb-3">
-                        <Landmark className="w-6 h-6 text-gray-600" />
-                        <p className="font-semibold text-gray-900">{financialData.bankName}</p>
+                        <Landmark className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+                        <p className="font-semibold text-gray-900 dark:text-gray-100">
+                          {financialData.bankName}
+                        </p>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <p className="text-xs text-gray-600 mb-1">Cuenta</p>
-                          <p className="text-gray-900 font-medium">{financialData.accountNumber}</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Cuenta</p>
+                          <p className="text-gray-900 dark:text-gray-100 font-medium">
+                            {financialData.accountNumber}
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-gray-600 mb-1">CLABE</p>
-                          <p className="text-gray-900 font-medium">{financialData.clabe}</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">CLABE</p>
+                          <p className="text-gray-900 dark:text-gray-100 font-medium">
+                            {financialData.clabe}
+                          </p>
                         </div>
                         <div>
-                          <p className="text-xs text-gray-600 mb-1">Beneficiario</p>
-                          <p className="text-gray-900 font-medium">
+                          <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                            Beneficiario
+                          </p>
+                          <p className="text-gray-900 dark:text-gray-100 font-medium">
                             {financialData.beneficiaryName}
                           </p>
                         </div>
                         <div>
-                          <p className="text-xs text-gray-600 mb-1">RFC</p>
-                          <p className="text-gray-900 font-medium">{financialData.rfc}</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">RFC</p>
+                          <p className="text-gray-900 dark:text-gray-100 font-medium">
+                            {financialData.rfc}
+                          </p>
                         </div>
                       </div>
                     </div>
 
                     {isEditing && (
-                      <div className="space-y-4 border-t border-gray-200 pt-4">
+                      <div className="space-y-4 border-t border-gray-200 dark:border-gray-600 pt-4">
                         <div>
-                          <label className="block text-sm font-semibold text-gray-900 mb-2">
+                          <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                             Banco
                           </label>
                           <select
                             name="bankName"
                             value={editForm.bankName}
                             onChange={handleEditChange}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                            className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                           >
                             <option>BBVA México</option>
                             <option>Santander</option>
@@ -513,7 +553,7 @@ function SellerProfileContent({ user }: { user: User }) {
                           </select>
                         </div>
                         <div>
-                          <label className="block text-sm font-semibold text-gray-900 mb-2">
+                          <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                             Número de Cuenta
                           </label>
                           <input
@@ -523,11 +563,11 @@ function SellerProfileContent({ user }: { user: User }) {
                             onChange={handleEditChange}
                             placeholder="10 dígitos"
                             maxLength={10}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                            className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-semibold text-gray-900 mb-2">
+                          <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                             CLABE Interbancaria
                           </label>
                           <input
@@ -537,11 +577,11 @@ function SellerProfileContent({ user }: { user: User }) {
                             onChange={handleEditChange}
                             placeholder="18 dígitos"
                             maxLength={18}
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                            className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-semibold text-gray-900 mb-2">
+                          <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                             Nombre del Beneficiario
                           </label>
                           <input
@@ -550,7 +590,7 @@ function SellerProfileContent({ user }: { user: User }) {
                             value={editForm.beneficiaryName}
                             onChange={handleEditChange}
                             placeholder="Nombre completo"
-                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                            className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                           />
                         </div>
                       </div>
@@ -560,19 +600,27 @@ function SellerProfileContent({ user }: { user: User }) {
 
                 {/* Tax Information */}
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Información Fiscal</h3>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+                    Información Fiscal
+                  </h3>
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                       <div>
-                        <p className="text-sm font-semibold text-gray-700">RFC</p>
-                        <p className="text-gray-900">{financialData.rfc}</p>
+                        <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                          RFC
+                        </p>
+                        <p className="text-gray-900 dark:text-gray-100">{financialData.rfc}</p>
                       </div>
-                      <CheckCircle2 className="w-5 h-5 text-green-600" />
+                      <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400" />
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                       <div>
-                        <p className="text-sm font-semibold text-gray-700">Régimen Fiscal</p>
-                        <p className="text-gray-900">Persona Física con Actividad Empresarial</p>
+                        <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                          Régimen Fiscal
+                        </p>
+                        <p className="text-gray-900 dark:text-gray-100">
+                          Persona Física con Actividad Empresarial
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -584,34 +632,40 @@ function SellerProfileContent({ user }: { user: User }) {
             {activeSection === 'policies' && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Política de Devoluciones</h3>
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <p className="text-gray-900">{makerProfile!.returnPolicy}</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+                    Política de Devoluciones
+                  </h3>
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <p className="text-gray-900 dark:text-gray-100">{makerProfile!.returnPolicy}</p>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
                     Política de Cancelaciones
                   </h3>
-                  <div className="p-4 bg-gray-50 rounded-lg">
-                    <p className="text-gray-900">{makerProfile!.cancellationPolicy}</p>
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <p className="text-gray-900 dark:text-gray-100">
+                      {makerProfile!.cancellationPolicy}
+                    </p>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Opciones de Envío</h3>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+                    Opciones de Envío
+                  </h3>
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                      <span className="text-gray-900">Envío Nacional</span>
-                      <CheckCircle2 className="w-5 h-5 text-green-600" />
+                    <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <span className="text-gray-900 dark:text-gray-100">Envío Nacional</span>
+                      <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400" />
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                      <span className="text-gray-900">Envío Internacional</span>
+                    <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <span className="text-gray-900 dark:text-gray-100">Envío Internacional</span>
                       {makerProfile!.shippingOptions.international ? (
-                        <CheckCircle2 className="w-5 h-5 text-green-600" />
+                        <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400" />
                       ) : (
-                        <X className="w-5 h-5 text-red-600" />
+                        <X className="w-5 h-5 text-red-600 dark:text-red-400" />
                       )}
                     </div>
                     {makerProfile!.shippingOptions.freeShippingOver && (
@@ -624,14 +678,14 @@ function SellerProfileContent({ user }: { user: User }) {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
                     Métodos de Pago Aceptados
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {makerProfile!.paymentMethods.map((method, idx) => (
                       <span
                         key={idx}
-                        className="px-4 py-2 bg-gray-100 text-gray-900 rounded-lg text-sm font-medium flex items-center gap-2"
+                        className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg text-sm font-medium flex items-center gap-2"
                       >
                         <CreditCard className="w-4 h-4" />
                         {method === 'card' && 'Tarjeta'}

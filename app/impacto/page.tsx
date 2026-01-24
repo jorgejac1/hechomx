@@ -101,7 +101,7 @@ export default function ImpactPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
       <div className="bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 py-16 sm:py-24">
@@ -144,8 +144,10 @@ export default function ImpactPage() {
       {/* Social Impact Section */}
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Impacto Social</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Impacto Social
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Construyendo comunidades más fuertes y equitativas a través del comercio justo
           </p>
         </div>
@@ -154,16 +156,18 @@ export default function ImpactPage() {
           {socialImpact.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 hover:shadow-lg transition"
             >
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center shrink-0">
-                  <item.icon className="w-6 h-6 text-primary-600" />
+                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center shrink-0">
+                  <item.icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 mb-3">{item.description}</p>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-50 text-green-800 rounded-full text-sm font-semibold">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-3">{item.description}</p>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-sm font-semibold">
                     <TrendingUp className="w-4 h-4" />
                     {item.stats}
                   </div>
@@ -175,11 +179,13 @@ export default function ImpactPage() {
       </div>
 
       {/* Environmental Impact Section */}
-      <div className="bg-green-50 py-16">
+      <div className="bg-green-50 dark:bg-green-900/20 py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Impacto Ambiental</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Impacto Ambiental
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               Promoviendo prácticas sostenibles que cuidan nuestro planeta
             </p>
           </div>
@@ -188,13 +194,15 @@ export default function ImpactPage() {
             {environmentalImpact.map((item, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl shadow-md p-8 text-center hover:shadow-lg transition"
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 text-center hover:shadow-lg transition"
               >
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <item.icon className="w-8 h-8 text-green-600" />
+                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <item.icon className="w-8 h-8 text-green-600 dark:text-green-400" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">{item.description}</p>
               </div>
             ))}
           </div>
@@ -204,17 +212,17 @@ export default function ImpactPage() {
       {/* Stories Section */}
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Historias de Impacto
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Conoce cómo estamos transformando vidas reales
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Story 1 */}
-          <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
             <div className="relative h-64">
               <Image
                 src="https://images.unsplash.com/photo-1582053433009-c6a36688d1f3?w=800"
@@ -224,12 +232,14 @@ export default function ImpactPage() {
               />
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">María - Oaxaca</h3>
-              <p className="text-gray-600 mb-4">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                María - Oaxaca
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
                 "Gracias a la plataforma, pude expandir mi taller de alebrijes y ahora empleo a 5
                 artesanas de mi comunidad. Mis hijas están estudiando la universidad."
               </p>
-              <div className="flex items-center gap-2 text-sm text-green-600 font-semibold">
+              <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-semibold">
                 <TrendingUp className="w-4 h-4" />
                 Ingresos aumentados 300%
               </div>
@@ -237,7 +247,7 @@ export default function ImpactPage() {
           </div>
 
           {/* Story 2 */}
-          <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
             <div className="relative h-64">
               <Image
                 src="https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800"
@@ -247,12 +257,14 @@ export default function ImpactPage() {
               />
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Carlos - Michoacán</h3>
-              <p className="text-gray-600 mb-4">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                Carlos - Michoacán
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
                 "Aprendí alfarería de mi abuelo. Ahora mis productos llegan a todo México y puedo
                 enseñar el oficio a jóvenes de mi pueblo para que no se pierda."
               </p>
-              <div className="flex items-center gap-2 text-sm text-green-600 font-semibold">
+              <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 font-semibold">
                 <Award className="w-4 h-4" />
                 Técnica ancestral preservada
               </div>

@@ -22,12 +22,12 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Back Button */}
         <Link
           href={ROUTES.HOME}
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition"
+          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-6 transition"
         >
           <ArrowLeft className="w-5 h-5" />
           Volver al inicio
@@ -35,8 +35,10 @@ export default function ContactPage() {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Contáctanos</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Contáctanos
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos lo antes posible.
           </p>
         </div>
@@ -44,8 +46,10 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-md p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Envíanos un Mensaje</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+                Envíanos un Mensaje
+              </h2>
               <ContactForm />
             </div>
           </div>
@@ -53,16 +57,18 @@ export default function ContactPage() {
           {/* Contact Information */}
           <div className="space-y-6">
             {/* Contact Details */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Información de Contacto</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                Información de Contacto
+              </h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-primary-600 shrink-0 mt-1" />
+                  <Mail className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm">Email</p>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100 text-sm">Email</p>
                     <a
                       href={`mailto:${siteConfig.contact.email}`}
-                      className="text-primary-600 hover:underline text-sm"
+                      className="text-primary-600 dark:text-primary-400 hover:underline text-sm"
                     >
                       {siteConfig.contact.email}
                     </a>
@@ -70,12 +76,14 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-primary-600 shrink-0 mt-1" />
+                  <Phone className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm">Teléfono</p>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                      Teléfono
+                    </p>
                     <a
                       href={`tel:${siteConfig.contact.phone}`}
-                      className="text-primary-600 hover:underline text-sm"
+                      className="text-primary-600 dark:text-primary-400 hover:underline text-sm"
                     >
                       {siteConfig.contact.phone}
                     </a>
@@ -83,14 +91,16 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <MessageCircle className="w-5 h-5 text-primary-600 shrink-0 mt-1" />
+                  <MessageCircle className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm">WhatsApp</p>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                      WhatsApp
+                    </p>
                     <a
                       href={`https://wa.me/${siteConfig.contact.whatsapp.replace(/[^0-9]/g, '')}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-primary-600 hover:underline text-sm"
+                      className="text-primary-600 dark:text-primary-400 hover:underline text-sm"
                     >
                       {siteConfig.contact.whatsapp}
                     </a>
@@ -98,10 +108,12 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-primary-600 shrink-0 mt-1" />
+                  <MapPin className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm">Dirección</p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                      Dirección
+                    </p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
                       {siteConfig.business.address.street}
                       <br />
                       {siteConfig.business.address.city}, {siteConfig.business.address.postalCode}
@@ -112,15 +124,19 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-primary-600 shrink-0 mt-1" />
+                  <Clock className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm">Horario de Atención</p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                      Horario de Atención
+                    </p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
                       Lunes a Viernes: 9:00 AM - 6:00 PM
                       <br />
                       Sábados: 10:00 AM - 2:00 PM
                       <br />
-                      <span className="text-gray-500">Hora de México (GMT-6)</span>
+                      <span className="text-gray-500 dark:text-gray-500">
+                        Hora de México (GMT-6)
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -165,30 +181,32 @@ export default function ContactPage() {
             </div>
 
             {/* Quick Links */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Enlaces Rápidos</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                Enlaces Rápidos
+              </h3>
               <div className="space-y-2">
                 <Link
                   href={ROUTES.FAQ}
-                  className="block text-primary-600 hover:text-primary-700 text-sm font-medium"
+                  className="block text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm font-medium"
                 >
                   → Preguntas Frecuentes
                 </Link>
                 <Link
                   href={ROUTES.SHIPPING_INFO}
-                  className="block text-primary-600 hover:text-primary-700 text-sm font-medium"
+                  className="block text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm font-medium"
                 >
                   → Información de Envíos
                 </Link>
                 <Link
                   href={ROUTES.RETURNS_POLICY}
-                  className="block text-primary-600 hover:text-primary-700 text-sm font-medium"
+                  className="block text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm font-medium"
                 >
                   → Política de Devoluciones
                 </Link>
                 <Link
                   href={ROUTES.SELL}
-                  className="block text-primary-600 hover:text-primary-700 text-sm font-medium"
+                  className="block text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm font-medium"
                 >
                   → Vender en Papalote Market
                 </Link>
@@ -198,29 +216,35 @@ export default function ContactPage() {
         </div>
 
         {/* FAQ Section - Full Width */}
-        <div className="bg-white rounded-xl shadow-md p-8 mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
             Preguntas Frecuentes
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">¿Cuánto tardan en responder?</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  ¿Cuánto tardan en responder?
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
                   Respondemos todos los mensajes en menos de 24 horas hábiles. Los mensajes urgentes
                   suelen ser respondidos en menos de 2 horas.
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">¿Puedo visitar sus oficinas?</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  ¿Puedo visitar sus oficinas?
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
                   Sí, pero recomendamos agendar una cita previa para asegurar que alguien esté
                   disponible para atenderte. Contáctanos para coordinar tu visita.
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">¿Cómo puedo rastrear mi pedido?</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  ¿Cómo puedo rastrear mi pedido?
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
                   Una vez enviado tu pedido, recibirás un email con el número de rastreo. También
                   puedes consultar el estado en la sección "Mis Pedidos" de tu cuenta.
                 </p>
@@ -228,22 +252,28 @@ export default function ContactPage() {
             </div>
             <div className="space-y-6">
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">¿Atienden fines de semana?</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  ¿Atienden fines de semana?
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
                   Atendemos sábados por la mañana. Los mensajes recibidos después del horario o
                   domingos serán respondidos el siguiente día hábil.
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">¿Tienen chat en vivo?</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  ¿Tienen chat en vivo?
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
                   Próximamente habilitaremos chat en vivo durante horario de oficina. Por ahora,
                   WhatsApp es nuestra opción de respuesta más rápida.
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 mb-2">¿Puedo cambiar mi pedido?</h3>
-                <p className="text-gray-600 text-sm">
+                <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  ¿Puedo cambiar mi pedido?
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
                   Puedes modificar tu pedido dentro de las primeras 2 horas. Después, el artesano ya
                   habrá comenzado a prepararlo. Contáctanos lo antes posible.
                 </p>
@@ -253,9 +283,11 @@ export default function ContactPage() {
         </div>
 
         {/* Map Section */}
-        <div className="bg-white rounded-xl shadow-md p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Encuéntranos</h2>
-          <div className="aspect-video w-full bg-gray-200 rounded-lg overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">
+            Encuéntranos
+          </h2>
+          <div className="aspect-video w-full bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.5991478729245!2d-99.16512368509292!3d19.426472686887586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x6c366f0e2de02ff7!2sAv.%20Paseo%20de%20la%20Reforma%2C%20Ju%C3%A1rez%2C%20Cuauht%C3%A9moc%2C%2006600%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX%2C%20Mexico!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
               width="100%"
@@ -267,7 +299,7 @@ export default function ContactPage() {
               title="Ubicación de Papalote Market"
             />
           </div>
-          <p className="text-center text-gray-600 text-sm mt-4">
+          <p className="text-center text-gray-600 dark:text-gray-400 text-sm mt-4">
             {siteConfig.business.address.street}, {siteConfig.business.address.city},{' '}
             {siteConfig.business.address.postalCode}, {siteConfig.business.address.country}
           </p>

@@ -61,22 +61,22 @@ describe('ThemeProvider', () => {
       expect(screen.getByTestId('theme-provider')).toHaveAttribute('data-attribute', 'class');
     });
 
-    it('should use system as default theme', () => {
+    it('should use light as default theme', () => {
       render(
         <ThemeProvider>
           <div>Content</div>
         </ThemeProvider>
       );
-      expect(screen.getByTestId('theme-provider')).toHaveAttribute('data-default-theme', 'system');
+      expect(screen.getByTestId('theme-provider')).toHaveAttribute('data-default-theme', 'light');
     });
 
-    it('should enable system preference detection', () => {
+    it('should disable system preference detection', () => {
       render(
         <ThemeProvider>
           <div>Content</div>
         </ThemeProvider>
       );
-      expect(screen.getByTestId('theme-provider')).toHaveAttribute('data-enable-system', 'true');
+      expect(screen.getByTestId('theme-provider')).toHaveAttribute('data-enable-system', 'false');
     });
 
     it('should disable transition on theme change', () => {

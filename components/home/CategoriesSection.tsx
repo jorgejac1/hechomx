@@ -62,14 +62,14 @@ const categories = [
  */
 export default function CategoriesSection() {
   return (
-    <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
+    <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - Mobile Optimized */}
         <div className="text-center mb-6 sm:mb-8 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2 sm:mb-4">
             Explora por Categoría
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 px-4">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-400 px-4">
             Descubre productos únicos organizados por categoría
           </p>
         </div>

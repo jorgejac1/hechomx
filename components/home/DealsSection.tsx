@@ -174,13 +174,15 @@ export default function DealsSection() {
   };
 
   return (
-    <section className="py-8 sm:py-10 md:py-12 bg-white">
+    <section className="py-8 sm:py-10 md:py-12 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - Mobile Optimized */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Ofertas del día</h2>
-            <div className="flex items-center gap-2 text-gray-600">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
+              Ofertas del día
+            </h2>
+            <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
               <svg
                 className="w-4 h-4 sm:w-5 sm:h-5"
                 fill="none"
@@ -210,7 +212,7 @@ export default function DealsSection() {
             <button
               onClick={handlePrev}
               disabled={currentIndex === 0}
-              className="p-2 rounded-full border-2 border-gray-300 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition"
+              className="p-2 rounded-full border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed transition"
               aria-label="Anterior"
             >
               <svg
@@ -230,7 +232,7 @@ export default function DealsSection() {
             <button
               onClick={handleNext}
               disabled={currentIndex >= maxIndex}
-              className="p-2 rounded-full border-2 border-gray-300 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition"
+              className="p-2 rounded-full border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-gray-700 dark:text-gray-300 disabled:opacity-30 disabled:cursor-not-allowed transition"
               aria-label="Siguiente"
             >
               <svg
@@ -261,9 +263,9 @@ export default function DealsSection() {
                   href={`/productos/${product.id}`}
                   className="shrink-0 w-[70vw] max-w-[280px]"
                 >
-                  <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow h-full flex flex-col">
+                  <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow h-full flex flex-col">
                     {/* Image */}
-                    <div className="relative h-48 bg-gray-200 overflow-hidden shrink-0">
+                    <div className="relative h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden shrink-0">
                       <Image
                         src={product.images[0]}
                         alt={product.name}
@@ -276,13 +278,15 @@ export default function DealsSection() {
                     {/* Content */}
                     <div className="p-3 flex-1 flex flex-col">
                       {/* Product Name */}
-                      <h3 className="text-sm font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[40px]">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2 min-h-[40px]">
                         {product.name}
                       </h3>
 
                       {/* Rating */}
                       <div className="flex items-center gap-1 mb-2">
-                        <span className="text-sm font-bold">{product.rating}</span>
+                        <span className="text-sm font-bold text-gray-900 dark:text-gray-100">
+                          {product.rating}
+                        </span>
                         <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
                           <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                         </svg>
@@ -290,11 +294,13 @@ export default function DealsSection() {
 
                       {/* Price */}
                       <div className="flex items-center gap-2 mb-2 flex-wrap">
-                        <span className="text-xl font-bold text-primary-600">${product.price}</span>
-                        <span className="text-xs text-gray-500 line-through">
+                        <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
+                          ${product.price}
+                        </span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400 line-through">
                           ${product.originalPrice}
                         </span>
-                        <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-sm">
+                        <span className="text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-sm">
                           {product.discount}% off
                         </span>
                       </div>
@@ -302,10 +308,14 @@ export default function DealsSection() {
                       {/* Tags */}
                       <div className="mt-auto space-y-1">
                         {product.dealTag && (
-                          <p className="text-xs text-gray-600 line-clamp-1">{product.dealTag}</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-1">
+                            {product.dealTag}
+                          </p>
                         )}
                         {product.discount >= 30 && (
-                          <p className="text-xs text-gray-600 font-semibold">Envío gratis</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 font-semibold">
+                            Envío gratis
+                          </p>
                         )}
                       </div>
                     </div>
@@ -327,9 +337,9 @@ export default function DealsSection() {
                   href={`/productos/${product.id}`}
                   className="shrink-0 w-[calc(25%-18px)] min-w-[240px] group"
                 >
-                  <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow flex flex-col h-full">
+                  <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow flex flex-col h-full">
                     {/* Image */}
-                    <div className="relative h-56 lg:h-64 bg-gray-200 overflow-hidden shrink-0">
+                    <div className="relative h-56 lg:h-64 bg-gray-200 dark:bg-gray-700 overflow-hidden shrink-0">
                       <Image
                         src={product.images[0]}
                         alt={product.name}
@@ -341,13 +351,15 @@ export default function DealsSection() {
                     {/* Content */}
                     <div className="p-4 flex-1 flex flex-col min-h-0">
                       {/* Product Name */}
-                      <h3 className="text-sm font-semibold text-gray-900 mb-2 h-10 line-clamp-2 group-hover:text-primary-600 transition-colors">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2 h-10 line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                         {product.name}
                       </h3>
 
                       {/* Rating */}
                       <div className="flex items-center gap-1 mb-3">
-                        <span className="text-sm font-bold">{product.rating}</span>
+                        <span className="text-sm font-bold text-gray-900 dark:text-gray-100">
+                          {product.rating}
+                        </span>
                         <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
                           <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                         </svg>
@@ -355,13 +367,13 @@ export default function DealsSection() {
 
                       {/* Price */}
                       <div className="flex items-center gap-2 mb-3 flex-wrap">
-                        <span className="text-2xl font-bold text-primary-600">
+                        <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                           ${product.price}
                         </span>
-                        <span className="text-sm text-gray-500 line-through">
+                        <span className="text-sm text-gray-500 dark:text-gray-400 line-through">
                           ${product.originalPrice}
                         </span>
-                        <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-1 rounded-sm">
+                        <span className="text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-1 rounded-sm">
                           {product.discount}% off
                         </span>
                       </div>
@@ -369,10 +381,14 @@ export default function DealsSection() {
                       {/* Tags */}
                       <div className="mt-auto space-y-1">
                         {product.dealTag && (
-                          <p className="text-xs text-gray-600">{product.dealTag}</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">
+                            {product.dealTag}
+                          </p>
                         )}
                         {product.discount >= 30 && (
-                          <p className="text-xs text-gray-600 font-semibold">Envío gratis</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 font-semibold">
+                            Envío gratis
+                          </p>
                         )}
                       </div>
                     </div>
@@ -387,7 +403,7 @@ export default function DealsSection() {
         <div className="mt-6 sm:mt-8 text-center">
           <Link
             href="/ofertas"
-            className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-base sm:text-lg"
+            className="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold text-base sm:text-lg"
           >
             Ver todas las ofertas
             <svg

@@ -176,9 +176,9 @@ const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
       )}
 
       <Link href={`${ROUTES.PRODUCTS}/${product.id}`}>
-        <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
           {/* Image */}
-          <div className="relative h-40 sm:h-48 md:h-56 bg-gray-200 overflow-hidden shrink-0">
+          <div className="relative h-40 sm:h-48 md:h-56 bg-gray-200 dark:bg-gray-700 overflow-hidden shrink-0">
             <Image
               src={product.images[0]}
               alt={product.name}
@@ -241,7 +241,7 @@ const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
 
           {/* Content */}
           <div className="p-2.5 sm:p-3 flex-1 flex flex-col">
-            <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-1 sm:mb-1.5 line-clamp-2 group-hover:text-primary-600 transition-colors leading-tight min-h-8 sm:min-h-10">
+            <h3 className="text-xs sm:text-sm font-bold text-gray-900 dark:text-gray-100 mb-1 sm:mb-1.5 line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors leading-tight min-h-8 sm:min-h-10">
               {product.name}
             </h3>
 
@@ -263,7 +263,9 @@ const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
                 size="sm"
                 productId={product.id}
               />
-              <span className="text-gray-500 truncate sm:ml-2">{product.state}</span>
+              <span className="text-gray-500 dark:text-gray-400 truncate sm:ml-2">
+                {product.state}
+              </span>
             </div>
 
             {/* Price & Stock */}
@@ -273,12 +275,14 @@ const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
                   <span className="text-base sm:text-lg font-bold text-primary-600">
                     {formatCurrency(product.price)}
                   </span>
-                  <span className="text-[10px] sm:text-xs text-gray-500">{product.currency}</span>
+                  <span className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">
+                    {product.currency}
+                  </span>
                 </div>
 
                 {/* Maker Name + Artisan Story Badge */}
                 <div className="flex items-center gap-1.5">
-                  <p className="text-[10px] sm:text-xs text-gray-500 truncate shrink">
+                  <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 truncate shrink">
                     {product.maker}
                   </p>
 

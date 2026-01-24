@@ -27,7 +27,10 @@ function DashboardSectionSkeleton() {
       <Skeleton width={200} height={24} className="mb-4" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {[...Array(4)].map((_, i) => (
-          <div key={i} className="bg-white rounded-xl border border-gray-200 p-4">
+          <div
+            key={i}
+            className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4"
+          >
             <Skeleton width={80} height={32} className="mb-2" />
             <Skeleton width={120} height={16} />
           </div>
@@ -104,7 +107,7 @@ function DashboardContent({ user }: DashboardContentProps) {
   const outOfStockProducts = makerProfile.products.filter((p) => p.stock === 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 px-4">
       <div className="max-w-7xl mx-auto">
         <DashboardHeader shopName={shopName} newOrderCount={newOrders.length} />
         <AlertsSection
@@ -115,7 +118,7 @@ function DashboardContent({ user }: DashboardContentProps) {
           onViewOrders={handleViewOrders}
         />
         <StatsGrid stats={makerProfile.stats} />
-        <div className="bg-white rounded-xl shadow-md mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md mb-6">
           <TabNavigation
             activeTab={activeTab}
             setActiveTab={handleTabChange}

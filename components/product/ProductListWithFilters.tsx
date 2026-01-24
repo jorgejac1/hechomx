@@ -112,13 +112,15 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
 
           {/* Active Filters Summary */}
           {isFilterActive && (
-            <div className="mt-4 pt-4 border-t border-gray-200">
+            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-sm font-medium text-gray-700">Filtros activos:</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Filtros activos:
+                </span>
                 {filters.categories.map((cat) => (
                   <span
                     key={cat}
-                    className="inline-flex items-center gap-1 px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium"
+                    className="inline-flex items-center gap-1 px-3 py-1 bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium"
                   >
                     {cat}
                   </span>
@@ -126,34 +128,34 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
                 {filters.states.map((state) => (
                   <span
                     key={state}
-                    className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium"
+                    className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium"
                   >
                     {state}
                   </span>
                 ))}
                 {filters.minRating > 0 && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-medium">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 rounded-full text-sm font-medium">
                     {filters.minRating}+ estrellas
                   </span>
                 )}
                 {filters.inStock === true && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
                     En stock
                   </span>
                 )}
                 {filters.verified === true && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium">
                     Verificados
                   </span>
                 )}
                 {filters.featured === true && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 rounded-full text-sm font-medium">
                     Destacados
                   </span>
                 )}
                 <button
                   onClick={resetFilters}
-                  className="text-sm text-primary-600 hover:text-primary-700 font-medium hover:underline"
+                  className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium hover:underline"
                 >
                   Limpiar todo
                 </button>

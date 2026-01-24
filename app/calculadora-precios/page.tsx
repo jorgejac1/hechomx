@@ -217,24 +217,24 @@ function PricingCalculatorContent({ user }: { user: User }) {
     laborTasks.every((task) => task.hourlyRate >= fairTradeRates.recommendedHourlyRate);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-6">
           <Link
             href={ROUTES.DASHBOARD}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition"
+            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-4 transition"
           >
             <ArrowLeft className="w-5 h-5" />
             Volver al Dashboard
           </Link>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
-                <Calculator className="w-8 h-8 text-primary-600" />
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+                <Calculator className="w-8 h-8 text-primary-600 dark:text-primary-400" />
                 Calculadora de Precios Justos
               </h1>
-              <p className="text-gray-600 mt-1">
+              <p className="text-gray-600 dark:text-gray-400 mt-1">
                 Calcula precios justos considerando materiales, tiempo y salario digno
               </p>
             </div>

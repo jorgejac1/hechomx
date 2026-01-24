@@ -58,19 +58,21 @@ export default function ArtisanStorySection({
     <div className="space-y-6">
       <div>
         <div className="flex items-center gap-2 mb-2">
-          <BookOpen className="w-5 h-5 text-primary-600" />
-          <h2 className="text-xl font-bold text-gray-900">Mi Historia Artesanal</h2>
+          <BookOpen className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+            Mi Historia Artesanal
+          </h2>
         </div>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Comparte tu historia, herencia y proceso creativo con el mundo
         </p>
       </div>
 
       {/* Personal Story */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           Tu Historia Personal *
-          <span className="text-gray-500 font-normal ml-2">
+          <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
             (¿Cómo comenzaste? ¿Qué te inspiró?)
           </span>
         </label>
@@ -79,32 +81,40 @@ export default function ArtisanStorySection({
           onChange={(e) => onUpdate('personalStory', e.target.value)}
           rows={6}
           placeholder="Cuéntanos tu historia: ¿Cómo aprendiste este oficio? ¿Qué te inspiró a dedicarte a este arte?..."
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none dark:bg-gray-800 dark:text-gray-100"
         />
-        <p className="text-xs text-gray-500 mt-1">{personalStory.length} caracteres</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          {personalStory.length} caracteres
+        </p>
       </div>
 
       {/* Heritage Story */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           Historia de tu Herencia
-          <span className="text-gray-500 font-normal ml-2">(Tu familia, tradición, ancestros)</span>
+          <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
+            (Tu familia, tradición, ancestros)
+          </span>
         </label>
         <textarea
           value={heritageStory}
           onChange={(e) => onUpdate('heritageStory', e.target.value)}
           rows={6}
           placeholder="Comparte la historia de tu familia, las generaciones previas, cómo se ha transmitido este conocimiento..."
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none dark:bg-gray-800 dark:text-gray-100"
         />
-        <p className="text-xs text-gray-500 mt-1">{heritageStory.length} caracteres</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          {heritageStory.length} caracteres
+        </p>
       </div>
 
       {/* Craft Technique */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           Técnica y Proceso *
-          <span className="text-gray-500 font-normal ml-2">(¿Cómo creas tus piezas?)</span>
+          <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
+            (¿Cómo creas tus piezas?)
+          </span>
         </label>
         <textarea
           value={craftTechnique}
@@ -115,33 +125,39 @@ export default function ArtisanStorySection({
               ? `Describe tu proceso creativo de ${CRAFT_CATEGORIES[craftCategory].label.toLowerCase()}, materiales que usas, técnicas tradicionales, tiempo que tomas...`
               : 'Describe tu proceso creativo, materiales que usas, técnicas tradicionales, tiempo que tomas...'
           }
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none dark:bg-gray-800 dark:text-gray-100"
         />
-        <p className="text-xs text-gray-500 mt-1">{craftTechnique.length} caracteres</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          {craftTechnique.length} caracteres
+        </p>
       </div>
 
       {/* Daily Life */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           Tu Vida Diaria
-          <span className="text-gray-500 font-normal ml-2">(Un día típico en tu taller)</span>
+          <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
+            (Un día típico en tu taller)
+          </span>
         </label>
         <textarea
           value={dailyLife}
           onChange={(e) => onUpdate('dailyLife', e.target.value)}
           rows={5}
           placeholder="Describe un día típico en tu vida como artesano, tu rutina, tu espacio de trabajo..."
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none dark:bg-gray-800 dark:text-gray-100"
         />
-        <p className="text-xs text-gray-500 mt-1">{dailyLife.length} caracteres</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          {dailyLife.length} caracteres
+        </p>
       </div>
 
       {/* Cultural Significance - Only for native/descendant */}
       {(indigenousConnection === 'native' || indigenousConnection === 'descendant') && (
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
             Significado Cultural
-            <span className="text-gray-500 font-normal ml-2">
+            <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
               (¿Por qué es importante tu arte?)
             </span>
           </label>
@@ -150,17 +166,19 @@ export default function ArtisanStorySection({
             onChange={(e) => onUpdate('culturalSignificance', e.target.value)}
             rows={5}
             placeholder="Explica el significado cultural y la importancia de tu artesanía para tu comunidad y cultura..."
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none dark:bg-gray-800 dark:text-gray-100"
           />
-          <p className="text-xs text-gray-500 mt-1">{culturalSignificance.length} caracteres</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            {culturalSignificance.length} caracteres
+          </p>
         </div>
       )}
 
       {/* Traditional Techniques */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
           Técnicas Tradicionales
-          <span className="text-gray-500 font-normal ml-2">(Una por línea)</span>
+          <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">(Una por línea)</span>
         </label>
         <textarea
           value={traditionalTechniques.join('\n')}
@@ -172,18 +190,20 @@ export default function ArtisanStorySection({
           }
           rows={5}
           placeholder="Teñido con cochinilla grana&#10;Tejido en telar de pedal&#10;Hilado a mano de lana virgen&#10;Diseños geométricos tradicionales"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none dark:bg-gray-800 dark:text-gray-100"
         />
-        <p className="text-xs text-gray-500 mt-1">Escribe cada técnica en una línea nueva</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          Escribe cada técnica en una línea nueva
+        </p>
       </div>
 
       {/* Indigenous Language Terms - Only if native */}
       {indigenousConnection === 'native' && (
         <div>
           <div className="flex items-center justify-between mb-4">
-            <label className="text-sm font-semibold text-gray-700">
+            <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
               Términos en Lengua Indígena
-              <span className="text-gray-500 font-normal ml-2">
+              <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
                 (Palabras importantes en tu lengua)
               </span>
             </label>
@@ -198,10 +218,10 @@ export default function ArtisanStorySection({
           </div>
 
           {indigenousLanguageTerms.length === 0 ? (
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
               <Globe className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-              <p className="text-sm text-gray-600">No hay términos agregados</p>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-sm text-gray-600 dark:text-gray-400">No hay términos agregados</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 Agrega palabras importantes de tu lengua indígena
               </p>
             </div>
@@ -210,7 +230,7 @@ export default function ArtisanStorySection({
               {indigenousLanguageTerms.map((term, idx) => (
                 <div
                   key={idx}
-                  className="p-4 bg-linear-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200 space-y-3"
+                  className="p-4 bg-linear-to-r from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 rounded-lg border border-green-200 dark:border-green-700 space-y-3"
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
@@ -218,14 +238,14 @@ export default function ArtisanStorySection({
                       value={term.term}
                       onChange={(e) => updateIndigenousTerm(idx, 'term', e.target.value)}
                       placeholder="Término (ej: Didxa')"
-                      className="px-3 py-2 text-sm border border-green-300 rounded-sm focus:ring-2 focus:ring-green-500 bg-white"
+                      className="px-3 py-2 text-sm border border-green-300 dark:border-green-600 rounded-sm focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-800 dark:text-gray-100"
                     />
                     <input
                       type="text"
                       value={term.language}
                       onChange={(e) => updateIndigenousTerm(idx, 'language', e.target.value)}
                       placeholder="Lengua (ej: Zapoteco)"
-                      className="px-3 py-2 text-sm border border-green-300 rounded-sm focus:ring-2 focus:ring-green-500 bg-white"
+                      className="px-3 py-2 text-sm border border-green-300 dark:border-green-600 rounded-sm focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-800 dark:text-gray-100"
                     />
                   </div>
                   <div className="flex items-center gap-2">
@@ -234,12 +254,12 @@ export default function ArtisanStorySection({
                       value={term.meaning}
                       onChange={(e) => updateIndigenousTerm(idx, 'meaning', e.target.value)}
                       placeholder="Significado (ej: Palabra o lengua)"
-                      className="flex-1 px-3 py-2 text-sm border border-green-300 rounded-sm focus:ring-2 focus:ring-green-500 bg-white"
+                      className="flex-1 px-3 py-2 text-sm border border-green-300 dark:border-green-600 rounded-sm focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-800 dark:text-gray-100"
                     />
                     <button
                       type="button"
                       onClick={() => removeIndigenousTerm(idx)}
-                      className="px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-sm transition"
+                      className="px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-sm transition"
                     >
                       Eliminar
                     </button>
@@ -249,7 +269,7 @@ export default function ArtisanStorySection({
             </div>
           )}
 
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
             Ejemplos: Didxa' (Palabra/lengua), Guenda' (Vida), Xhoba (Telar) en Zapoteco
           </p>
         </div>

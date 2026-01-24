@@ -84,10 +84,12 @@ export default function MediaSection({
     <div className="space-y-6">
       <div>
         <div className="flex items-center gap-2 mb-2">
-          <Camera className="w-5 h-5 text-indigo-600" />
-          <h2 className="text-xl font-bold text-gray-900">{getPhotoSectionTitle()}</h2>
+          <Camera className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+            {getPhotoSectionTitle()}
+          </h2>
         </div>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           {sellerType === 'hobby_maker'
             ? 'Las fotos ayudan a que los clientes confíen en ti (opcional pero recomendado)'
             : 'Las fotos ayudan a que los clientes conozcan tu espacio y proceso'}
@@ -97,9 +99,11 @@ export default function MediaSection({
       {/* Video Introduction */}
       {sellerType !== 'hobby_maker' && (
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
             Video de Introducción (Opcional)
-            <span className="text-gray-500 font-normal ml-2">(URL de YouTube o Vimeo)</span>
+            <span className="text-gray-500 dark:text-gray-400 font-normal ml-2">
+              (URL de YouTube o Vimeo)
+            </span>
           </label>
           <div className="flex items-center gap-2">
             <Film className="w-5 h-5 text-gray-400" />
@@ -108,10 +112,10 @@ export default function MediaSection({
               value={videoIntro}
               onChange={(e) => onUpdate('videoIntro', e.target.value)}
               placeholder="https://www.youtube.com/watch?v=..."
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-gray-100"
             />
           </div>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
             Un video corto (1-2 minutos) puede aumentar la confianza hasta 80%
           </p>
         </div>
@@ -121,7 +125,7 @@ export default function MediaSection({
       {sellerType !== 'company' && (
         <div>
           <div className="flex items-center justify-between mb-3">
-            <label className="text-sm font-semibold text-gray-700">
+            <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
               {sellerType === 'hobby_maker' ? 'Fotos de tu Espacio' : 'Fotos del Taller'}{' '}
               {sellerType === 'hobby_maker' ? '(Opcional)' : '*'}
             </label>
@@ -138,13 +142,13 @@ export default function MediaSection({
           </div>
 
           {activePhotoType === 'workshop' && (
-            <div className="mb-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+            <div className="mb-3 p-3 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-700 rounded-lg">
               <input
                 type="url"
                 value={newPhotoUrl}
                 onChange={(e) => setNewPhotoUrl(e.target.value)}
                 placeholder="https://images.unsplash.com/..."
-                className="w-full px-3 py-2 border border-indigo-300 rounded-sm mb-2"
+                className="w-full px-3 py-2 border border-indigo-300 dark:border-indigo-600 rounded-sm mb-2 dark:bg-gray-800 dark:text-gray-100"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
@@ -166,7 +170,7 @@ export default function MediaSection({
                     setActivePhotoType(null);
                     setNewPhotoUrl('');
                   }}
-                  className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-sm"
+                  className="px-3 py-1 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-sm"
                 >
                   Cancelar
                 </button>
@@ -175,9 +179,9 @@ export default function MediaSection({
           )}
 
           {workshopPhotos.length === 0 ? (
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
               <Camera className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-              <p className="text-sm text-gray-600">No hay fotos agregadas</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">No hay fotos agregadas</p>
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -206,7 +210,7 @@ export default function MediaSection({
       {/* Process Photos */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <label className="text-sm font-semibold text-gray-700">
+          <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
             {sellerType === 'company' ? 'Fotos del Proceso de Producción' : 'Fotos del Proceso'}{' '}
             {sellerType === 'hobby_maker' ? '(Opcional)' : '*'}
           </label>
@@ -223,13 +227,13 @@ export default function MediaSection({
         </div>
 
         {activePhotoType === 'process' && (
-          <div className="mb-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+          <div className="mb-3 p-3 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-700 rounded-lg">
             <input
               type="url"
               value={newPhotoUrl}
               onChange={(e) => setNewPhotoUrl(e.target.value)}
               placeholder="https://images.unsplash.com/..."
-              className="w-full px-3 py-2 border border-indigo-300 rounded-sm mb-2"
+              className="w-full px-3 py-2 border border-indigo-300 dark:border-indigo-600 rounded-sm mb-2 dark:bg-gray-800 dark:text-gray-100"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
@@ -251,7 +255,7 @@ export default function MediaSection({
                   setActivePhotoType(null);
                   setNewPhotoUrl('');
                 }}
-                className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-sm"
+                className="px-3 py-1 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-sm"
               >
                 Cancelar
               </button>
@@ -260,9 +264,9 @@ export default function MediaSection({
         )}
 
         {processPhotos.length === 0 ? (
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+          <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
             <Camera className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-            <p className="text-sm text-gray-600">No hay fotos agregadas</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">No hay fotos agregadas</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -291,7 +295,7 @@ export default function MediaSection({
       {sellerType === 'artisan_individual' && (
         <div>
           <div className="flex items-center justify-between mb-3">
-            <label className="text-sm font-semibold text-gray-700">
+            <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
               Fotos Familiares (Opcional)
             </label>
             {activePhotoType !== 'family' && (
@@ -307,13 +311,13 @@ export default function MediaSection({
           </div>
 
           {activePhotoType === 'family' && (
-            <div className="mb-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+            <div className="mb-3 p-3 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-700 rounded-lg">
               <input
                 type="url"
                 value={newPhotoUrl}
                 onChange={(e) => setNewPhotoUrl(e.target.value)}
                 placeholder="https://images.unsplash.com/..."
-                className="w-full px-3 py-2 border border-indigo-300 rounded-sm mb-2"
+                className="w-full px-3 py-2 border border-indigo-300 dark:border-indigo-600 rounded-sm mb-2 dark:bg-gray-800 dark:text-gray-100"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
@@ -335,7 +339,7 @@ export default function MediaSection({
                     setActivePhotoType(null);
                     setNewPhotoUrl('');
                   }}
-                  className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-sm"
+                  className="px-3 py-1 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-sm"
                 >
                   Cancelar
                 </button>
@@ -371,7 +375,9 @@ export default function MediaSection({
       {(sellerType === 'workshop' || sellerType === 'company') && (
         <div>
           <div className="flex items-center justify-between mb-3">
-            <label className="text-sm font-semibold text-gray-700">Fotos del Equipo *</label>
+            <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+              Fotos del Equipo *
+            </label>
             {activePhotoType !== 'team' && (
               <button
                 type="button"
@@ -385,13 +391,13 @@ export default function MediaSection({
           </div>
 
           {activePhotoType === 'team' && (
-            <div className="mb-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+            <div className="mb-3 p-3 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-700 rounded-lg">
               <input
                 type="url"
                 value={newPhotoUrl}
                 onChange={(e) => setNewPhotoUrl(e.target.value)}
                 placeholder="https://images.unsplash.com/..."
-                className="w-full px-3 py-2 border border-indigo-300 rounded-sm mb-2"
+                className="w-full px-3 py-2 border border-indigo-300 dark:border-indigo-600 rounded-sm mb-2 dark:bg-gray-800 dark:text-gray-100"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
@@ -413,7 +419,7 @@ export default function MediaSection({
                     setActivePhotoType(null);
                     setNewPhotoUrl('');
                   }}
-                  className="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-sm"
+                  className="px-3 py-1 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-sm"
                 >
                   Cancelar
                 </button>
@@ -422,9 +428,9 @@ export default function MediaSection({
           )}
 
           {teamPhotos.length === 0 ? (
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
               <Camera className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-              <p className="text-sm text-gray-600">No hay fotos agregadas</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">No hay fotos agregadas</p>
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -451,9 +457,11 @@ export default function MediaSection({
       )}
 
       {/* Photo Tips */}
-      <div className="p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
-        <p className="text-sm text-indigo-900 font-semibold mb-2">Consejos para buenas fotos:</p>
-        <ul className="text-sm text-indigo-800 space-y-1">
+      <div className="p-4 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-700 rounded-lg">
+        <p className="text-sm text-indigo-900 dark:text-indigo-100 font-semibold mb-2">
+          Consejos para buenas fotos:
+        </p>
+        <ul className="text-sm text-indigo-800 dark:text-indigo-200 space-y-1">
           <li>• Usa buena iluminación natural</li>
           <li>• Muestra tu espacio de trabajo y herramientas</li>
           <li>• Incluye fotos del proceso paso a paso</li>

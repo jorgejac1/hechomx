@@ -54,7 +54,7 @@ export default function CartPageClient() {
   // Show loading during hydration
   if (!isHydrated) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 flex items-center justify-center">
         <LoadingSpinner />
       </div>
     );
@@ -66,13 +66,13 @@ export default function CartPageClient() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 sm:py-8 lg:py-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-8 lg:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors"
+            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-4 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             <span className="text-sm font-medium">Continuar comprando</span>
@@ -80,17 +80,17 @@ export default function CartPageClient() {
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                 Carrito de Compras
               </h1>
-              <p className="text-sm sm:text-base text-gray-600">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
                 {cartCount} {cartCount === 1 ? 'producto' : 'productos'} en tu carrito
               </p>
             </div>
 
             <button
               onClick={() => setShowClearCartModal(true)}
-              className="text-sm text-red-600 hover:text-red-700 font-medium hover:underline"
+              className="text-sm text-red-600 dark:text-red-500 hover:text-red-700 dark:hover:text-red-400 font-medium hover:underline"
             >
               Vaciar carrito
             </button>
@@ -102,12 +102,12 @@ export default function CartPageClient() {
           {/* Left: Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {/* Trust Banner */}
-            <div className="bg-primary-50 border-2 border-primary-200 rounded-xl p-4">
+            <div className="bg-primary-50 dark:bg-primary-900/20 border-2 border-primary-200 dark:border-primary-800 rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <ShoppingBag className="w-5 h-5 text-primary-600 shrink-0 mt-0.5" />
-                <div className="text-sm text-primary-900">
+                <ShoppingBag className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0 mt-0.5" />
+                <div className="text-sm text-primary-900 dark:text-primary-100">
                   <p className="font-semibold mb-1">Compra segura y protegida</p>
-                  <p className="text-primary-700">
+                  <p className="text-primary-700 dark:text-primary-300">
                     Todos tus productos están protegidos. Envío seguro a toda la República Mexicana.
                   </p>
                 </div>
@@ -117,7 +117,10 @@ export default function CartPageClient() {
             {/* Cart Items */}
             <div className="space-y-3 sm:space-y-4">
               {cartItems.map((item) => (
-                <CartItemCard key={item.id} item={item} />
+                <CartItemCard
+                  key={item.selectedSize ? `${item.id}-${item.selectedSize}` : item.id}
+                  item={item}
+                />
               ))}
             </div>
           </div>
@@ -136,15 +139,15 @@ export default function CartPageClient() {
         )}
 
         {/* Trust Indicators */}
-        <div className="mt-12 bg-white rounded-xl shadow-xs p-6 sm:p-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-6 text-center">
+        <div className="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6 sm:p-8">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">
             ¿Por qué comprar con nosotros?
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 rounded-full mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-3">
                 <svg
-                  className="w-6 h-6 text-primary-600"
+                  className="w-6 h-6 text-primary-600 dark:text-primary-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -157,13 +160,17 @@ export default function CartPageClient() {
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-1">Productos Auténticos</h3>
-              <p className="text-sm text-gray-600">100% hechos a mano por artesanos mexicanos</p>
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                Productos Auténticos
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                100% hechos a mano por artesanos mexicanos
+              </p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 rounded-full mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-3">
                 <svg
-                  className="w-6 h-6 text-primary-600"
+                  className="w-6 h-6 text-primary-600 dark:text-primary-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -176,13 +183,15 @@ export default function CartPageClient() {
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-1">Pago Seguro</h3>
-              <p className="text-sm text-gray-600">Transacciones protegidas y encriptadas</p>
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">Pago Seguro</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Transacciones protegidas y encriptadas
+              </p>
             </div>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 rounded-full mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-3">
                 <svg
-                  className="w-6 h-6 text-primary-600"
+                  className="w-6 h-6 text-primary-600 dark:text-primary-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -195,8 +204,12 @@ export default function CartPageClient() {
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-1">Envío Nacional</h3>
-              <p className="text-sm text-gray-600">A toda la República Mexicana</p>
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                Envío Nacional
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                A toda la República Mexicana
+              </p>
             </div>
           </div>
         </div>

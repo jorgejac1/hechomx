@@ -17,7 +17,7 @@ function ProductsGridSkeleton() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {[...Array(8)].map((_, i) => (
-        <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden">
+        <div key={i} className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
           <ImageSkeleton aspectRatio="square" rounded={false} />
           <div className="p-4">
             <Skeleton height={20} className="mb-2" />
@@ -160,13 +160,17 @@ export default async function ProductsPage({
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <Breadcrumbs items={breadcrumbItems} />
 
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">{getTitle()}</h1>
-            <p className="text-gray-600">Descubre productos auténticos hechos en México</p>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              {getTitle()}
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400">
+              Descubre productos auténticos hechos en México
+            </p>
           </div>
 
           {params.categoria && !params.subcategoria && subcategories.length > 0 && (

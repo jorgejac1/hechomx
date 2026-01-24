@@ -59,6 +59,10 @@ export interface Product {
       level: 'basic_seller' | 'verified_artisan' | 'master_artisan' | 'certified_workshop';
     };
   };
+  /** Available sizes for clothing, shoes, or rings */
+  availableSizes?: string[];
+  /** Type of size (clothing, shoes, rings) for display purposes */
+  sizeType?: 'clothing' | 'shoes' | 'rings' | 'one_size';
 }
 
 export interface Category {

@@ -22,13 +22,15 @@ export default function ProductHighlights() {
   ];
 
   return (
-    <div className="bg-teal-50 rounded-lg p-6 border border-teal-100">
-      <h3 className="font-bold text-gray-900 mb-4 text-lg">Detalles de la Artesanía</h3>
+    <div className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-6 border border-teal-100 dark:border-teal-800">
+      <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-4 text-lg">
+        Detalles de la Artesanía
+      </h3>
       <div className="space-y-3">
         {highlights.map((highlight, idx) => (
           <div key={idx} className="flex items-start gap-3">
-            <CheckCircle className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
-            <span className="text-gray-700">{highlight}</span>
+            <CheckCircle className="w-5 h-5 text-teal-600 dark:text-teal-400 shrink-0 mt-0.5" />
+            <span className="text-gray-700 dark:text-gray-300">{highlight}</span>
           </div>
         ))}
       </div>

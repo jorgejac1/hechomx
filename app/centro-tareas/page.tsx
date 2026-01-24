@@ -175,21 +175,23 @@ function TasksCenterContent({ user }: { user: User }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto p-4 sm:p-6">
         {/* Header */}
         <div className="mb-6">
           <Link
             href={ROUTES.DASHBOARD}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition"
+            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-4 transition"
           >
             <ArrowLeft className="w-5 h-5" />
             Volver al Dashboard
           </Link>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Centro de Tareas</h1>
-              <p className="text-gray-600 mt-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
+                Centro de Tareas
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">
                 {tasks.length} {tasks.length === 1 ? 'tarea pendiente' : 'tareas pendientes'}
               </p>
             </div>
@@ -198,40 +200,42 @@ function TasksCenterContent({ user }: { user: User }) {
 
         {/* Stats Overview */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border-l-4 border-primary-600">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-5 border-l-4 border-primary-600">
             <div className="flex items-center justify-between gap-3">
               <div className="flex-1">
-                <p className="text-sm text-gray-600 mb-1">Total Tareas</p>
-                <p className="text-2xl sm:text-3xl font-bold text-gray-900">{tasks.length}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Tareas</p>
+                <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
+                  {tasks.length}
+                </p>
               </div>
-              <Zap className="w-10 h-10 text-primary-600 shrink-0" />
+              <Zap className="w-10 h-10 text-primary-600 dark:text-primary-400 shrink-0" />
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border-l-4 border-red-600">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-5 border-l-4 border-red-600">
             <div className="flex items-center justify-between gap-3">
               <div className="flex-1">
-                <p className="text-sm text-gray-600 mb-1">Críticas</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Críticas</p>
                 <p className="text-2xl sm:text-3xl font-bold text-red-600">{criticalCount}</p>
               </div>
               <AlertCircle className="w-10 h-10 text-red-600 shrink-0" />
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border-l-4 border-orange-600">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-5 border-l-4 border-orange-600">
             <div className="flex items-center justify-between gap-3">
               <div className="flex-1">
-                <p className="text-sm text-gray-600 mb-1">Alta Prioridad</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Alta Prioridad</p>
                 <p className="text-2xl sm:text-3xl font-bold text-orange-600">{highCount}</p>
               </div>
               <AlertTriangle className="w-10 h-10 text-orange-600 shrink-0" />
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border-l-4 border-yellow-600">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-5 border-l-4 border-yellow-600">
             <div className="flex items-center justify-between gap-3">
               <div className="flex-1">
-                <p className="text-sm text-gray-600 mb-1">Urgentes</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Urgentes</p>
                 <p className="text-2xl sm:text-3xl font-bold text-yellow-600">{urgentCount}</p>
               </div>
               <Clock className="w-10 h-10 text-yellow-600 shrink-0" />
@@ -251,19 +255,21 @@ function TasksCenterContent({ user }: { user: User }) {
                 className={`p-4 rounded-xl border-2 transition text-center ${
                   filterType === type
                     ? `${config.bgColor} ${config.borderColor}`
-                    : 'bg-white border-gray-200 hover:border-gray-300'
+                    : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 <Icon className={`w-6 h-6 ${config.color} mx-auto mb-2`} />
-                <p className="text-xs font-semibold text-gray-600 mb-1">{config.label}</p>
-                <p className="text-lg font-bold text-gray-900">{count}</p>
+                <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">
+                  {config.label}
+                </p>
+                <p className="text-lg font-bold text-gray-900 dark:text-gray-100">{count}</p>
               </button>
             );
           })}
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-xl shadow-md p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 mb-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
             {/* Search */}
             <div>
@@ -274,7 +280,7 @@ function TasksCenterContent({ user }: { user: User }) {
                   placeholder="Buscar tareas..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full pl-9 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
             </div>
@@ -282,13 +288,15 @@ function TasksCenterContent({ user }: { user: User }) {
             {/* Priority Filter */}
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <Filter className="w-3 h-3 text-gray-600" />
-                <label className="text-xs font-semibold text-gray-700">Prioridad</label>
+                <Filter className="w-3 h-3 text-gray-600 dark:text-gray-400" />
+                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+                  Prioridad
+                </label>
               </div>
               <select
                 value={filterPriority}
                 onChange={(e) => setFilterPriority(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value="all">Todas las prioridades</option>
                 <option value="critical">Crítico</option>
@@ -301,13 +309,15 @@ function TasksCenterContent({ user }: { user: User }) {
             {/* Type Filter (visible on mobile) */}
             <div className="lg:hidden">
               <div className="flex items-center gap-2 mb-1">
-                <Filter className="w-3 h-3 text-gray-600" />
-                <label className="text-xs font-semibold text-gray-700">Tipo</label>
+                <Filter className="w-3 h-3 text-gray-600 dark:text-gray-400" />
+                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+                  Tipo
+                </label>
               </div>
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value="all">Todos los tipos</option>
                 <option value="order">Pedidos</option>
@@ -322,12 +332,12 @@ function TasksCenterContent({ user }: { user: User }) {
 
         {/* Tasks List */}
         {filteredTasks.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-md p-12 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-12 text-center">
             <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
               {tasks.length === 0 ? '¡Todo al día!' : 'No se encontraron tareas'}
             </h3>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               {tasks.length === 0
                 ? 'No tienes tareas pendientes en este momento'
                 : 'Intenta con otros filtros'}
@@ -344,7 +354,7 @@ function TasksCenterContent({ user }: { user: User }) {
               return (
                 <div
                   key={task.id}
-                  className={`bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition border-l-4 ${
+                  className={`bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition border-l-4 ${
                     task.priority === 'critical'
                       ? 'border-red-500'
                       : task.priority === 'high'
@@ -364,7 +374,9 @@ function TasksCenterContent({ user }: { user: User }) {
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2 flex-wrap">
-                              <h3 className="font-bold text-gray-900">{task.title}</h3>
+                              <h3 className="font-bold text-gray-900 dark:text-gray-100">
+                                {task.title}
+                              </h3>
                               <span
                                 className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold border ${priorityConfig.bgColor} ${priorityConfig.color} ${priorityConfig.borderColor}`}
                               >
@@ -377,11 +389,13 @@ function TasksCenterContent({ user }: { user: User }) {
                                 {typeConfig.label}
                               </span>
                             </div>
-                            <p className="text-sm text-gray-600 mb-2">{task.description}</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                              {task.description}
+                            </p>
 
                             {/* Related Data */}
                             {task.relatedData && (
-                              <div className="flex flex-wrap gap-3 text-xs text-gray-600 mb-2">
+                              <div className="flex flex-wrap gap-3 text-xs text-gray-600 dark:text-gray-400 mb-2">
                                 {task.relatedData.customerName && (
                                   <span className="flex items-center gap-1">
                                     <UserIcon className="w-3 h-3" />
@@ -395,7 +409,7 @@ function TasksCenterContent({ user }: { user: User }) {
                                   </span>
                                 )}
                                 {task.relatedData.amount && (
-                                  <span className="font-semibold text-primary-600">
+                                  <span className="font-semibold text-primary-600 dark:text-primary-400">
                                     {formatCurrency(task.relatedData.amount)}
                                   </span>
                                 )}
@@ -421,7 +435,7 @@ function TasksCenterContent({ user }: { user: User }) {
                             )}
 
                             {/* Metadata */}
-                            <div className="flex items-center gap-3 text-xs text-gray-500">
+                            <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-500">
                               <span className="flex items-center gap-1">
                                 <Clock className="w-3 h-3" />
                                 {formatRelativeTime(task.createdAt)}
@@ -448,7 +462,7 @@ function TasksCenterContent({ user }: { user: User }) {
                         </Link>
                         <button
                           onClick={() => handleCompleteTask(task.id)}
-                          className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition font-medium text-sm whitespace-nowrap"
+                          className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 transition font-medium text-sm whitespace-nowrap"
                         >
                           <CheckCircle2 className="w-4 h-4" />
                           Completar

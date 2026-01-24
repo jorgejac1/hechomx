@@ -179,12 +179,16 @@ function ProfileContent({ user }: { user: User }) {
   const memberSince = user.createdAt ? formatRelativeTime(user.createdAt) : 'Recientemente';
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 sm:py-8 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Mi Perfil</h1>
-          <p className="text-gray-600 mt-1">Administra tu información personal</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
+            Mi Perfil
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            Administra tu información personal
+          </p>
         </div>
 
         {/* Success Message */}
@@ -204,7 +208,7 @@ function ProfileContent({ user }: { user: User }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column - Profile Card */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-md p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
               {/* Avatar */}
               <div className="flex flex-col items-center">
                 <div className="relative">
@@ -214,11 +218,11 @@ function ProfileContent({ user }: { user: User }) {
                       alt={user.name}
                       width={120}
                       height={120}
-                      className="rounded-full border-4 border-primary-100"
+                      className="rounded-full border-4 border-primary-100 dark:border-primary-900"
                     />
                   ) : (
-                    <div className="w-28 h-28 sm:w-32 sm:h-32 bg-primary-100 rounded-full flex items-center justify-center border-4 border-primary-200">
-                      <UserIcon className="w-12 h-12 sm:w-16 sm:h-16 text-primary-600" />
+                    <div className="w-28 h-28 sm:w-32 sm:h-32 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center border-4 border-primary-200 dark:border-primary-800">
+                      <UserIcon className="w-12 h-12 sm:w-16 sm:h-16 text-primary-600 dark:text-primary-400" />
                     </div>
                   )}
                   <button
@@ -229,11 +233,13 @@ function ProfileContent({ user }: { user: User }) {
                   </button>
                 </div>
 
-                <h2 className="mt-4 text-xl font-bold text-gray-900 text-center">{user.name}</h2>
-                <p className="text-sm text-gray-600 text-center">{user.email}</p>
+                <h2 className="mt-4 text-xl font-bold text-gray-900 dark:text-gray-100 text-center">
+                  {user.name}
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-400 text-center">{user.email}</p>
 
-                <div className="mt-3 px-3 py-1 bg-primary-50 rounded-full">
-                  <p className="text-xs font-medium text-primary-700 flex items-center gap-1">
+                <div className="mt-3 px-3 py-1 bg-primary-50 dark:bg-primary-900/20 rounded-full">
+                  <p className="text-xs font-medium text-primary-700 dark:text-primary-300 flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
                     Miembro desde {memberSince}
                   </p>
@@ -243,8 +249,10 @@ function ProfileContent({ user }: { user: User }) {
                 {achievements.length > 0 && (
                   <div className="mt-4 w-full">
                     <div className="flex items-center gap-2 mb-2">
-                      <Trophy className="w-4 h-4 text-accent-600" />
-                      <span className="text-sm font-medium text-gray-700">Mis Logros</span>
+                      <Trophy className="w-4 h-4 text-accent-600 dark:text-accent-400" />
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Mis Logros
+                      </span>
                     </div>
                     <AchievementBadge
                       achievements={achievements}
@@ -262,39 +270,39 @@ function ProfileContent({ user }: { user: User }) {
                   <>
                     <Link
                       href={ROUTES.DASHBOARD}
-                      className="w-full flex items-center gap-3 p-3 rounded-lg bg-primary-50 hover:bg-primary-100 transition text-left text-primary-700 font-medium border-2 border-primary-200"
+                      className="w-full flex items-center gap-3 p-3 rounded-lg bg-primary-50 dark:bg-primary-900/20 hover:bg-primary-100 dark:hover:bg-primary-900/30 transition text-left text-primary-700 dark:text-primary-300 font-medium border-2 border-primary-200 dark:border-primary-800"
                     >
-                      <TrendingUp className="w-5 h-5 text-primary-600" />
+                      <TrendingUp className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                       Dashboard de Ventas
                     </Link>
                     <Link
                       href="/perfil/vendedor"
-                      className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition text-left text-gray-700 font-medium"
+                      className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition text-left text-gray-700 dark:text-gray-300 font-medium"
                     >
-                      <Store className="w-5 h-5 text-gray-600" />
+                      <Store className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                       Perfil de Vendedor
                     </Link>
                   </>
                 )}
                 <Link
                   href={ROUTES.ORDERS}
-                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition text-left text-gray-700 font-medium"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition text-left text-gray-700 dark:text-gray-300 font-medium"
                 >
-                  <Package className="w-5 h-5 text-gray-600" />
+                  <Package className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                   Mis Pedidos
                 </Link>
                 <Link
                   href={ROUTES.WISHLIST}
-                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition text-left text-gray-700 font-medium"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition text-left text-gray-700 dark:text-gray-300 font-medium"
                 >
-                  <Heart className="w-5 h-5 text-gray-600" />
+                  <Heart className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                   Favoritos
                 </Link>
                 <Link
                   href="/configuracion"
-                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition text-left text-gray-700 font-medium"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition text-left text-gray-700 dark:text-gray-300 font-medium"
                 >
-                  <Settings className="w-5 h-5 text-gray-600" />
+                  <Settings className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                   Configuración
                 </Link>
               </div>
@@ -303,7 +311,7 @@ function ProfileContent({ user }: { user: User }) {
               <Divider spacing="md" />
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition font-medium border-2 border-red-200"
+                className="w-full flex items-center justify-center gap-2 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/30 transition font-medium border-2 border-red-200 dark:border-red-800"
               >
                 <LogOut className="w-5 h-5" />
                 Cerrar Sesión
@@ -314,9 +322,11 @@ function ProfileContent({ user }: { user: User }) {
           {/* Right Column - Profile Information */}
           <div className="lg:col-span-2 space-y-6">
             {/* Personal Information Card */}
-            <div className="bg-white rounded-xl shadow-md p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-bold text-gray-900">Información Personal</h3>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                  Información Personal
+                </h3>
                 {!isEditing ? (
                   <button
                     onClick={() => setIsEditing(true)}
@@ -330,7 +340,7 @@ function ProfileContent({ user }: { user: User }) {
                     <button
                       onClick={handleCancel}
                       disabled={isSaving}
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition font-medium text-sm disabled:opacity-50"
+                      className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition font-medium text-sm disabled:opacity-50"
                     >
                       <X className="w-4 h-4" />
                       Cancelar
@@ -359,7 +369,7 @@ function ProfileContent({ user }: { user: User }) {
               <div className="space-y-5">
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                     Nombre completo
                   </label>
                   {isEditing ? (
@@ -373,30 +383,32 @@ function ProfileContent({ user }: { user: User }) {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className={`block w-full pl-10 pr-3 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base ${
-                            errors.name ? 'border-red-300' : 'border-gray-300'
+                          className={`block w-full pl-10 pr-3 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${
+                            errors.name
+                              ? 'border-red-300 dark:border-red-600'
+                              : 'border-gray-300 dark:border-gray-600'
                           }`}
                           placeholder="Tu nombre completo"
                         />
                       </div>
                       {errors.name && (
-                        <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
+                        <p className="mt-1.5 text-sm text-red-600 dark:text-red-400 flex items-center gap-1">
                           <AlertCircle className="w-4 h-4" />
                           {errors.name}
                         </p>
                       )}
                     </>
                   ) : (
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <UserIcon className="w-5 h-5 text-gray-500" />
-                      <p className="text-gray-900 font-medium">{user.name}</p>
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <UserIcon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                      <p className="text-gray-900 dark:text-gray-100 font-medium">{user.name}</p>
                     </div>
                   )}
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
                     Correo electrónico
                   </label>
                   {isEditing ? (
@@ -410,31 +422,34 @@ function ProfileContent({ user }: { user: User }) {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className={`block w-full pl-10 pr-3 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base ${
-                            errors.email ? 'border-red-300' : 'border-gray-300'
+                          className={`block w-full pl-10 pr-3 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${
+                            errors.email
+                              ? 'border-red-300 dark:border-red-600'
+                              : 'border-gray-300 dark:border-gray-600'
                           }`}
                           placeholder="tu@ejemplo.com"
                         />
                       </div>
                       {errors.email && (
-                        <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
+                        <p className="mt-1.5 text-sm text-red-600 dark:text-red-400 flex items-center gap-1">
                           <AlertCircle className="w-4 h-4" />
                           {errors.email}
                         </p>
                       )}
                     </>
                   ) : (
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <Mail className="w-5 h-5 text-gray-500" />
-                      <p className="text-gray-900 font-medium">{user.email}</p>
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <Mail className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                      <p className="text-gray-900 dark:text-gray-100 font-medium">{user.email}</p>
                     </div>
                   )}
                 </div>
 
                 {/* Phone (Optional) */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
-                    Teléfono <span className="text-gray-500 font-normal">(opcional)</span>
+                  <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                    Teléfono{' '}
+                    <span className="text-gray-500 dark:text-gray-400 font-normal">(opcional)</span>
                   </label>
                   {isEditing ? (
                     <>
@@ -447,23 +462,27 @@ function ProfileContent({ user }: { user: User }) {
                           name="phone"
                           value={formData.phone || ''}
                           onChange={handleChange}
-                          className={`block w-full pl-10 pr-3 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base ${
-                            errors.phone ? 'border-red-300' : 'border-gray-300'
+                          className={`block w-full pl-10 pr-3 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-base bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${
+                            errors.phone
+                              ? 'border-red-300 dark:border-red-600'
+                              : 'border-gray-300 dark:border-gray-600'
                           }`}
                           placeholder="55 1234 5678"
                         />
                       </div>
                       {errors.phone && (
-                        <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
+                        <p className="mt-1.5 text-sm text-red-600 dark:text-red-400 flex items-center gap-1">
                           <AlertCircle className="w-4 h-4" />
                           {errors.phone}
                         </p>
                       )}
                     </>
                   ) : (
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <Phone className="w-5 h-5 text-gray-500" />
-                      <p className="text-gray-900 font-medium">{user.phone || 'No registrado'}</p>
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <Phone className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                      <p className="text-gray-900 dark:text-gray-100 font-medium">
+                        {user.phone || 'No registrado'}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -471,14 +490,18 @@ function ProfileContent({ user }: { user: User }) {
             </div>
 
             {/* Seller Profile Card */}
-            <div className="bg-white rounded-xl shadow-md p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900">Perfil de Vendedor</h3>
-                  <p className="text-sm text-gray-600 mt-1">Información de tu tienda o taller</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                    Perfil de Vendedor
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    Información de tu tienda o taller
+                  </p>
                 </div>
                 {user.makerProfile ? (
-                  <span className="px-3 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full flex items-center gap-1">
+                  <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 text-xs font-semibold rounded-full flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3" />
                     Activo
                   </span>
@@ -494,49 +517,55 @@ function ProfileContent({ user }: { user: User }) {
 
               {user.makerProfile ? (
                 <div className="space-y-4">
-                  <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
-                    <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center shrink-0">
-                      <span className="text-2xl font-bold text-primary-700">
+                  <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center shrink-0">
+                      <span className="text-2xl font-bold text-primary-700 dark:text-primary-300">
                         {user.makerProfile.shopName.charAt(0)}
                       </span>
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <h4 className="font-bold text-gray-900">{user.makerProfile.shopName}</h4>
+                        <h4 className="font-bold text-gray-900 dark:text-gray-100">
+                          {user.makerProfile.shopName}
+                        </h4>
                         {user.makerProfile.verified && (
-                          <CheckCircle2 className="w-5 h-5 text-green-600" />
+                          <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400" />
                         )}
                       </div>
-                      <p className="text-sm text-gray-600">{user.makerProfile.location}</p>
-                      <p className="text-sm text-gray-700 mt-2">{user.makerProfile.description}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {user.makerProfile.location}
+                      </p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">
+                        {user.makerProfile.description}
+                      </p>
                     </div>
                   </div>
 
                   {/* Stats */}
                   <div className="grid grid-cols-3 gap-4">
-                    <div className="text-center p-4 bg-gray-50 rounded-lg">
-                      <p className="text-2xl font-bold text-gray-900">
+                    <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {user.makerProfile.stats.productsCount}+
                       </p>
-                      <p className="text-sm text-gray-600">Productos</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Productos</p>
                     </div>
-                    <div className="text-center p-4 bg-gray-50 rounded-lg">
-                      <p className="text-2xl font-bold text-gray-900">
+                    <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {user.makerProfile.stats.rating}
                       </p>
-                      <p className="text-sm text-gray-600">Calificación</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Calificación</p>
                     </div>
-                    <div className="text-center p-4 bg-gray-50 rounded-lg">
-                      <p className="text-2xl font-bold text-gray-900">
+                    <div className="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {user.makerProfile.stats.salesCount}+
                       </p>
-                      <p className="text-sm text-gray-600">Ventas</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Ventas</p>
                     </div>
                   </div>
 
                   <button
                     onClick={() => setShowSellerSetup(true)}
-                    className="w-full flex items-center justify-center gap-2 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 transition font-medium text-gray-700"
+                    className="w-full flex items-center justify-center gap-2 p-3 border-2 border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-medium text-gray-700 dark:text-gray-300"
                   >
                     <Edit2 className="w-4 h-4" />
                     Editar Información de Tienda
@@ -544,9 +573,9 @@ function ProfileContent({ user }: { user: User }) {
                 </div>
               ) : (
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg
-                      className="w-8 h-8 text-primary-600"
+                      className="w-8 h-8 text-primary-600 dark:text-primary-400"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -559,10 +588,10 @@ function ProfileContent({ user }: { user: User }) {
                       />
                     </svg>
                   </div>
-                  <h4 className="text-lg font-bold text-gray-900 mb-2">
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
                     ¿Quieres vender tus productos?
                   </h4>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
                     Activa tu tienda y comienza a vender artesanías mexicanas
                   </p>
                   <button

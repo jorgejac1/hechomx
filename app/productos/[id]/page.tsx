@@ -58,16 +58,14 @@ function ProductDetailWrapper({
   breadcrumbItems,
 }: ProductDetailWrapperProps) {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-200">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <ProductDetailClient product={product} similarProducts={similarProducts} />
-      </div>
+      <ProductDetailClient product={product} similarProducts={similarProducts} />
     </div>
   );
 }
@@ -98,15 +96,15 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="animate-pulse space-y-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="h-96 bg-gray-200 rounded-xl" />
+                <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-xl" />
                 <div className="space-y-4">
-                  <div className="h-8 bg-gray-200 rounded-sm w-3/4" />
-                  <div className="h-6 bg-gray-200 rounded-sm w-1/2" />
-                  <div className="h-32 bg-gray-200 rounded-sm" />
+                  <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-sm w-3/4" />
+                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-sm w-1/2" />
+                  <div className="h-32 bg-gray-200 dark:bg-gray-700 rounded-sm" />
                 </div>
               </div>
             </div>

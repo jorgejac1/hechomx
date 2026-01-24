@@ -13,6 +13,7 @@ import { useToast } from '@/contexts/ToastContext';
 import ShareModal from '@/components/common/ShareModal';
 import { Product } from '@/types';
 import { formatRelativeTime } from '@/lib';
+import { getSizeTypeForProduct } from '@/lib/constants/sizes';
 import {
   Heart,
   Share2,
@@ -26,6 +27,7 @@ import {
 import DeliveryEstimate from './DeliveryEstimate';
 import TrustIndicators from './TrustIndicators';
 import SellerBadge from './SellerBadge';
+import SizeSelector from './SizeSelector';
 import Badge from '@/components/common/Badge';
 import Button from '@/components/common/Button';
 import StarRating from '@/components/common/StarRating';
@@ -50,18 +52,35 @@ export default function ProductInfo({
 }: ProductInfoProps) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const { addToCart, isInCart } = useCart();
-  const { success } = useToast();
+  const { success, error } = useToast();
+
+  // Determine if this product requires size selection
+  const sizeType = product.sizeType || getSizeTypeForProduct(product.category, product.subcategory);
+  const requiresSize =
+    sizeType !== null && product.availableSizes && product.availableSizes.length > 0;
 
   const handleAddToCart = () => {
-    addToCart(product, selectedQuantity);
+    // Validate size selection if required
+    if (requiresSize && !selectedSize) {
+      error('Por favor selecciona una talla');
+      return;
+    }
+    addToCart(product, selectedQuantity, selectedSize || undefined);
+    const sizeText = selectedSize ? ` (Talla ${selectedSize})` : '';
     success(
-      `Agregado ${selectedQuantity} ${selectedQuantity === 1 ? 'unidad' : 'unidades'} al carrito`
+      `Agregado ${selectedQuantity} ${selectedQuantity === 1 ? 'unidad' : 'unidades'}${sizeText} al carrito`
     );
   };
 
   const handleBuyNow = () => {
-    addToCart(product, selectedQuantity);
+    // Validate size selection if required
+    if (requiresSize && !selectedSize) {
+      error('Por favor selecciona una talla');
+      return;
+    }
+    addToCart(product, selectedQuantity, selectedSize || undefined);
     success('Producto agregado al carrito');
     window.location.href = '/carrito';
   };
@@ -116,14 +135,16 @@ export default function ProductInfo({
 
       {/* Product Name */}
       <div>
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{product.name}</h1>
-        <div className="flex items-center gap-4 text-sm text-gray-600">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+          {product.name}
+        </h1>
+        <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
           <div className="flex items-center gap-1">
             <MapPin className="w-4 h-4" />
             <span>{product.state}, México</span>
           </div>
-          <span className="text-gray-400">•</span>
-          <button className="font-semibold text-gray-900 hover:text-teal-600 transition-colors">
+          <span className="text-gray-400 dark:text-gray-500">•</span>
+          <button className="font-semibold text-gray-900 dark:text-gray-100 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
             {product.maker}
           </button>
         </div>
@@ -131,9 +152,12 @@ export default function ProductInfo({
 
       {/* Rating */}
       {product.rating && product.reviewCount && (
-        <div className="flex items-center gap-3 pb-4 border-b border-gray-200">
+        <div className="flex items-center gap-3 pb-4 border-b border-gray-200 dark:border-gray-700">
           <StarRating rating={product.rating} size="lg" showValue productId={product.id} />
-          <a href="#reviews" className="text-teal-600 hover:text-teal-700 underline font-medium">
+          <a
+            href="#reviews"
+            className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 underline font-medium"
+          >
             ({product.reviewCount.toLocaleString('es-MX')}{' '}
             {product.reviewCount === 1 ? 'reseña' : 'reseñas'})
           </a>
@@ -141,10 +165,10 @@ export default function ProductInfo({
       )}
 
       {product.createdAt && (
-        <div className="pb-4 border-b border-gray-200">
-          <p className="text-sm text-gray-600 flex items-center gap-1.5">
+        <div className="pb-4 border-b border-gray-200 dark:border-gray-700">
+          <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-1.5">
             <svg
-              className="w-4 h-4 text-gray-400"
+              className="w-4 h-4 text-gray-400 dark:text-gray-500"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -162,14 +186,14 @@ export default function ProductInfo({
       )}
 
       {/* Price */}
-      <div className="py-4 border-b border-gray-200">
+      <div className="py-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-baseline gap-2 mb-2">
-          <span className="text-4xl font-bold text-gray-900">
+          <span className="text-4xl font-bold text-gray-900 dark:text-gray-100">
             ${product.price.toLocaleString('es-MX')}
           </span>
-          <span className="text-xl text-gray-600">{product.currency}</span>
+          <span className="text-xl text-gray-600 dark:text-gray-400">{product.currency}</span>
         </div>
-        <p className="text-sm text-gray-600">Impuestos incluidos</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">Impuestos incluidos</p>
       </div>
 
       {/* Delivery Estimate */}
@@ -197,30 +221,43 @@ export default function ProductInfo({
         )}
       </div>
 
+      {/* Size Selector - Only shown for products with sizes */}
+      {requiresSize && product.availableSizes && sizeType && (
+        <SizeSelector
+          availableSizes={product.availableSizes}
+          sizeType={sizeType}
+          selectedSize={selectedSize}
+          onSizeSelect={setSelectedSize}
+          disabled={!product.inStock}
+        />
+      )}
+
       {/* Quantity Selector */}
       {product.inStock && (
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-3">Cantidad</label>
+          <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
+            Cantidad
+          </label>
           <div className="flex items-center gap-3">
             <button
               onClick={decreaseQuantity}
               disabled={selectedQuantity <= 1}
-              className="p-2 border-2 border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="p-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               aria-label="Disminuir cantidad"
             >
-              <Minus className="w-5 h-5 text-gray-600" />
+              <Minus className="w-5 h-5 text-gray-600 dark:text-gray-400" />
             </button>
-            <span className="inline-flex items-center justify-center w-20 py-2 border-2 border-gray-300 rounded-lg bg-white text-gray-900 font-semibold text-lg">
+            <span className="inline-flex items-center justify-center w-20 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-semibold text-lg">
               {selectedQuantity}
             </span>
             <button
               onClick={increaseQuantity}
-              className="p-2 border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="p-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               aria-label="Aumentar cantidad"
             >
-              <Plus className="w-5 h-5 text-gray-600" />
+              <Plus className="w-5 h-5 text-gray-600 dark:text-gray-400" />
             </button>
-            <span className="text-sm text-gray-600 ml-2">
+            <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">
               {product.inStock ? 'Disponible' : 'Agotado'}
             </span>
           </div>
@@ -238,7 +275,9 @@ export default function ProductInfo({
               icon={<ShoppingCart className="w-5 h-5" />}
               fullWidth
             >
-              {isInCart(product.id) ? 'Agregar más al carrito' : 'Agregar al carrito'}
+              {isInCart(product.id, selectedSize || undefined)
+                ? 'Agregar más al carrito'
+                : 'Agregar al carrito'}
             </Button>
 
             <Button variant="secondary" size="lg" onClick={handleBuyNow} fullWidth>
@@ -276,10 +315,10 @@ export default function ProductInfo({
       </div>
 
       {/* Additional Info */}
-      <div className="bg-gray-50 rounded-lg p-4 space-y-2 text-sm text-gray-600">
+      <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 space-y-2 text-sm text-gray-600 dark:text-gray-300">
         <div className="flex items-start gap-2">
           <svg
-            className="w-5 h-5 text-teal-600 shrink-0 mt-0.5"
+            className="w-5 h-5 text-teal-600 dark:text-teal-400 shrink-0 mt-0.5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -290,7 +329,7 @@ export default function ProductInfo({
         </div>
         <div className="flex items-start gap-2">
           <svg
-            className="w-5 h-5 text-teal-600 shrink-0 mt-0.5"
+            className="w-5 h-5 text-teal-600 dark:text-teal-400 shrink-0 mt-0.5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -301,7 +340,7 @@ export default function ProductInfo({
         </div>
         <div className="flex items-start gap-2">
           <svg
-            className="w-5 h-5 text-teal-600 shrink-0 mt-0.5"
+            className="w-5 h-5 text-teal-600 dark:text-teal-400 shrink-0 mt-0.5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

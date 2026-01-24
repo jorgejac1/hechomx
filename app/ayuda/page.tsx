@@ -237,7 +237,7 @@ export default function HelpPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
       <div className="bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 py-16">
@@ -266,7 +266,9 @@ export default function HelpPage() {
 
       {/* Quick Links Section - NEW */}
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Accesos Rápidos</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+          Accesos Rápidos
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {quickLinks.map((link, index) => {
             const Icon = link.icon;
@@ -274,15 +276,17 @@ export default function HelpPage() {
               <Link
                 key={index}
                 href={link.href}
-                className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-all hover:-translate-y-1"
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-lg transition-all hover:-translate-y-1"
               >
                 <div
                   className={`w-12 h-12 ${link.bgColor} rounded-lg flex items-center justify-center mb-4`}
                 >
                   <Icon className={`w-6 h-6 ${link.color}`} />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{link.title}</h3>
-                <p className="text-sm text-gray-600">{link.description}</p>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  {link.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{link.description}</p>
               </Link>
             );
           })}
@@ -290,7 +294,7 @@ export default function HelpPage() {
       </div>
 
       {/* Category Filters */}
-      <div className="bg-white shadow-md sticky top-0 z-10">
+      <div className="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex overflow-x-auto py-4 gap-3 hide-scrollbar">
             {categories.map((cat) => {
@@ -302,7 +306,7 @@ export default function HelpPage() {
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition ${
                     activeCategory === cat.id
                       ? 'bg-primary-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600'
                   }`}
                 >
                   <Icon className="w-5 h-5" />
@@ -319,8 +323,10 @@ export default function HelpPage() {
         {filteredFAQs.length === 0 ? (
           <div className="text-center py-12">
             <HelpCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">No se encontraron preguntas</h3>
-            <p className="text-gray-600">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+              No se encontraron preguntas
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
               Intenta con otros términos de búsqueda o contacta a nuestro equipo de soporte
             </p>
           </div>
@@ -330,9 +336,13 @@ export default function HelpPage() {
               <Accordion.Item
                 key={faq.id}
                 itemId={faq.id}
-                title={<span className="text-lg font-bold text-gray-900">{faq.question}</span>}
+                title={
+                  <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                    {faq.question}
+                  </span>
+                }
               >
-                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{faq.answer}</p>
               </Accordion.Item>
             ))}
           </Accordion>
@@ -340,15 +350,19 @@ export default function HelpPage() {
       </div>
 
       {/* Contact Section - Enhanced with Clock */}
-      <div className="bg-white border-t border-gray-200 py-12">
+      <div className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">¿Aún necesitas ayuda?</h2>
-            <p className="text-gray-600 text-lg">Nuestro equipo está aquí para ayudarte</p>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+              ¿Aún necesitas ayuda?
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 text-lg">
+              Nuestro equipo está aquí para ayudarte
+            </p>
 
             {/* Operating Hours with Clock Icon */}
-            <div className="flex items-center justify-center gap-2 mt-4 text-gray-600">
-              <Clock className="w-5 h-5 text-primary-600" />
+            <div className="flex items-center justify-center gap-2 mt-4 text-gray-600 dark:text-gray-400">
+              <Clock className="w-5 h-5 text-primary-600 dark:text-primary-400" />
               <p className="text-sm font-medium">
                 Horario de atención: Lunes a Viernes, 9:00 AM - 6:00 PM (Hora del Centro)
               </p>
@@ -357,51 +371,53 @@ export default function HelpPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Email */}
-            <div className="bg-gray-50 rounded-xl p-6 text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-primary-600" />
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-8 h-8 text-primary-600 dark:text-primary-400" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Email</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Email</h3>
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Clock className="w-4 h-4 text-gray-500" />
-                <p className="text-sm text-gray-600">Respuesta en 24 horas</p>
+                <Clock className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                <p className="text-sm text-gray-600 dark:text-gray-400">Respuesta en 24 horas</p>
               </div>
               <a
                 href="mailto:ayuda@papalotemarket.mx"
-                className="text-primary-600 font-semibold hover:text-primary-700"
+                className="text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300"
               >
                 ayuda@papalotemarket.mx
               </a>
             </div>
 
             {/* Chat */}
-            <div className="bg-gray-50 rounded-xl p-6 text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="w-8 h-8 text-green-600" />
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                <MessageCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Chat en Vivo</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
+                Chat en Vivo
+              </h3>
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Clock className="w-4 h-4 text-gray-500" />
-                <p className="text-sm text-gray-600">Lun-Vie 9am-6pm</p>
+                <Clock className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                <p className="text-sm text-gray-600 dark:text-gray-400">Lun-Vie 9am-6pm</p>
               </div>
-              <button className="text-green-600 font-semibold hover:text-green-700">
+              <button className="text-green-600 dark:text-green-400 font-semibold hover:text-green-700 dark:hover:text-green-300">
                 Iniciar Chat
               </button>
             </div>
 
             {/* Phone */}
-            <div className="bg-gray-50 rounded-xl p-6 text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-8 h-8 text-blue-600" />
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Phone className="w-8 h-8 text-blue-600 dark:text-blue-400" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Teléfono</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Teléfono</h3>
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Clock className="w-4 h-4 text-gray-500" />
-                <p className="text-sm text-gray-600">Lun-Vie 9am-6pm</p>
+                <Clock className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                <p className="text-sm text-gray-600 dark:text-gray-400">Lun-Vie 9am-6pm</p>
               </div>
               <a
                 href="tel:+525555555555"
-                className="text-blue-600 font-semibold hover:text-blue-700"
+                className="text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-700 dark:hover:text-blue-300"
               >
                 55 5555 5555
               </a>

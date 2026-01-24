@@ -57,21 +57,21 @@ const FEATURED_STATES = [
  */
 export default function StatesSection() {
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-white">
+    <section className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
               Explora por Estado
             </h2>
-            <p className="text-base text-gray-600">
+            <p className="text-base text-gray-600 dark:text-gray-400">
               Descubre las artesanías tradicionales de cada región de México
             </p>
           </div>
           <Link
             href={ROUTES.PRODUCTS}
-            className="hidden sm:flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold transition"
+            className="hidden sm:flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold transition"
           >
             Ver todo
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,10 +86,10 @@ export default function StatesSection() {
             <Link
               key={state.name}
               href={`${ROUTES.PRODUCTS}?estado=${encodeURIComponent(state.name)}`}
-              className="group relative bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
             >
               {/* Image */}
-              <div className="relative h-48 overflow-hidden bg-gray-100">
+              <div className="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-700">
                 <Image
                   src={state.image}
                   alt={`Artesanías de ${state.name}`}
@@ -115,26 +115,28 @@ export default function StatesSection() {
         </div>
 
         {/* Craft Specialties - Clean white cards */}
-        <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
+        <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 sm:p-8">
           <div className="flex items-center justify-center gap-2 mb-6">
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Cubrimos todo México</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
+              Cubrimos todo México
+            </h3>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {Object.entries(CRAFT_STATES).map(([craft, states]) => (
               <div
                 key={craft}
-                className="bg-white rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-shadow"
+                className="bg-white dark:bg-gray-700 rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-shadow"
               >
-                <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <span className="text-primary-600">{craft}:</span>
+                <h4 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-2">
+                  <span className="text-primary-600 dark:text-primary-400">{craft}:</span>
                 </h4>
                 <div className="space-y-1.5">
                   {states.map((state) => (
                     <Link
                       key={state}
                       href={`${ROUTES.PRODUCTS}?estado=${encodeURIComponent(state.replace(' (Guerrero)', ''))}`}
-                      className="block text-sm text-gray-600 hover:text-primary-600 hover:underline transition-colors"
+                      className="block text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:underline transition-colors"
                     >
                       {state}
                     </Link>
@@ -146,9 +148,14 @@ export default function StatesSection() {
 
           {/* Stats */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
-              Más de <span className="font-bold text-primary-600">1,500 artesanos</span> de los{' '}
-              <span className="font-bold text-primary-600">32 estados</span> de México
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Más de{' '}
+              <span className="font-bold text-primary-600 dark:text-primary-400">
+                1,500 artesanos
+              </span>{' '}
+              de los{' '}
+              <span className="font-bold text-primary-600 dark:text-primary-400">32 estados</span>{' '}
+              de México
             </p>
           </div>
         </div>
@@ -157,7 +164,7 @@ export default function StatesSection() {
         <div className="mt-6 text-center sm:hidden">
           <Link
             href={ROUTES.PRODUCTS}
-            className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold"
+            className="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold"
           >
             Ver todos los estados
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

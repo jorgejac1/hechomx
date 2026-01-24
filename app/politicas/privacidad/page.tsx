@@ -21,29 +21,33 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
         <Link
           href={ROUTES.HOME}
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition"
+          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-6 transition"
         >
           <ArrowLeft className="w-5 h-5" />
           Volver al inicio
         </Link>
 
         {/* Header */}
-        <div className="bg-white rounded-xl shadow-md p-8 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mb-6">
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 bg-primary-100 rounded-lg">
-              <Shield className="w-8 h-8 text-primary-600" />
+            <div className="p-3 bg-primary-100 dark:bg-primary-900/50 rounded-lg">
+              <Shield className="w-8 h-8 text-primary-600 dark:text-primary-400" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Política de Privacidad</h1>
-              <p className="text-gray-600 mt-1">Última actualización: Noviembre 2024</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                Política de Privacidad
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">
+                Última actualización: Noviembre 2024
+              </p>
             </div>
           </div>
-          <p className="text-gray-700 leading-relaxed">
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
             En Papalote Market, respetamos tu privacidad y nos comprometemos a proteger tu
             información personal. Esta política describe cómo recopilamos, usamos y protegemos tus
             datos.
@@ -52,32 +56,34 @@ export default function PrivacyPage() {
 
         {/* Trust Badges */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white rounded-lg shadow-md p-6 text-center">
-            <Lock className="w-8 h-8 text-green-600 mx-auto mb-3" />
-            <h3 className="font-bold text-gray-900 mb-1">Datos Encriptados</h3>
-            <p className="text-sm text-gray-600">SSL 256-bit</p>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-center">
+            <Lock className="w-8 h-8 text-green-600 dark:text-green-400 mx-auto mb-3" />
+            <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">Datos Encriptados</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">SSL 256-bit</p>
           </div>
-          <div className="bg-white rounded-lg shadow-md p-6 text-center">
-            <Shield className="w-8 h-8 text-blue-600 mx-auto mb-3" />
-            <h3 className="font-bold text-gray-900 mb-1">LFPDPPP Compliant</h3>
-            <p className="text-sm text-gray-600">Ley Federal de México</p>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-center">
+            <Shield className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3" />
+            <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">LFPDPPP Compliant</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Ley Federal de México</p>
           </div>
-          <div className="bg-white rounded-lg shadow-md p-6 text-center">
-            <UserCheck className="w-8 h-8 text-purple-600 mx-auto mb-3" />
-            <h3 className="font-bold text-gray-900 mb-1">Control Total</h3>
-            <p className="text-sm text-gray-600">Sobre tus datos</p>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-center">
+            <UserCheck className="w-8 h-8 text-purple-600 dark:text-purple-400 mx-auto mb-3" />
+            <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">Control Total</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Sobre tus datos</p>
           </div>
         </div>
 
         {/* Main Content */}
         <div className="space-y-6">
           {/* Información Recopilada */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <Database className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">1. Información que Recopilamos</h2>
+              <Database className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                1. Información que Recopilamos
+              </h2>
             </div>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <h3 className="text-lg font-bold mt-4 mb-2">1.1 Información que Proporcionas</h3>
               <p>Recopilamos información que nos proporcionas directamente cuando:</p>
               <ul className="list-disc ml-6 space-y-1">
@@ -113,12 +119,14 @@ export default function PrivacyPage() {
           </section>
 
           {/* Uso de la Información */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <Eye className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">2. Cómo Usamos tu Información</h2>
+              <Eye className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                2. Cómo Usamos tu Información
+              </h2>
             </div>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>Utilizamos tu información personal para:</p>
 
               <h3 className="text-lg font-bold mt-4 mb-2">2.1 Proporcionar Servicios</h3>
@@ -158,12 +166,14 @@ export default function PrivacyPage() {
           </section>
 
           {/* Compartir Información */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <UserCheck className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">3. Compartir tu Información</h2>
+              <UserCheck className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                3. Compartir tu Información
+              </h2>
             </div>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>Compartimos tu información personal solo en las siguientes circunstancias:</p>
 
               <h3 className="text-lg font-bold mt-4 mb-2">3.1 Con Artesanos</h3>
@@ -208,12 +218,14 @@ export default function PrivacyPage() {
           </section>
 
           {/* Seguridad */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <Lock className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">4. Seguridad de la Información</h2>
+              <Lock className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                4. Seguridad de la Información
+              </h2>
             </div>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Implementamos medidas técnicas y organizativas para proteger tu información personal
                 contra acceso, uso, modificación o divulgación no autorizados:
@@ -235,39 +247,41 @@ export default function PrivacyPage() {
           </section>
 
           {/* Tus Derechos */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <UserCheck className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">5. Tus Derechos (Derechos ARCO)</h2>
+              <UserCheck className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                5. Tus Derechos (Derechos ARCO)
+              </h2>
             </div>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Conforme a la Ley Federal de Protección de Datos Personales en Posesión de los
                 Particulares, tienes derecho a:
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-bold text-gray-900 mb-2">Acceso</h4>
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <h4 className="font-bold text-gray-900 dark:text-gray-100 mb-2">Acceso</h4>
                   <p className="text-sm">
                     Solicitar información sobre qué datos personales tenemos sobre ti
                   </p>
                 </div>
 
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-bold text-gray-900 mb-2">Rectificación</h4>
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <h4 className="font-bold text-gray-900 dark:text-gray-100 mb-2">Rectificación</h4>
                   <p className="text-sm">Corregir datos personales incorrectos o desactualizados</p>
                 </div>
 
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-bold text-gray-900 mb-2">Cancelación</h4>
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <h4 className="font-bold text-gray-900 dark:text-gray-100 mb-2">Cancelación</h4>
                   <p className="text-sm">
                     Solicitar la eliminación de tus datos personales de nuestros registros
                   </p>
                 </div>
 
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <h4 className="font-bold text-gray-900 mb-2">Oposición</h4>
+                <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <h4 className="font-bold text-gray-900 dark:text-gray-100 mb-2">Oposición</h4>
                   <p className="text-sm">
                     Oponerte al uso de tus datos personales para fines específicos
                   </p>
@@ -280,7 +294,7 @@ export default function PrivacyPage() {
                   <strong>Email:</strong>{' '}
                   <a
                     href="mailto:privacidad@@papalotemarket.com"
-                    className="text-primary-600 hover:underline"
+                    className="text-primary-600 dark:text-primary-400 hover:underline"
                   >
                     privacidad@@papalotemarket.com
                   </a>
@@ -302,14 +316,14 @@ export default function PrivacyPage() {
           </section>
 
           {/* Cookies */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <FileText className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">
+              <FileText className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 6. Cookies y Tecnologías Similares
               </h2>
             </div>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Utilizamos cookies y tecnologías similares para mejorar tu experiencia, analizar el
                 uso del sitio y personalizar contenido. Puedes controlar las cookies a través de la
@@ -317,7 +331,10 @@ export default function PrivacyPage() {
               </p>
               <p>
                 Para más información, consulta nuestra{' '}
-                <Link href={ROUTES.COOKIES} className="text-primary-600 hover:underline">
+                <Link
+                  href={ROUTES.COOKIES}
+                  className="text-primary-600 dark:text-primary-400 hover:underline"
+                >
                   Política de Cookies
                 </Link>
                 .
@@ -326,12 +343,14 @@ export default function PrivacyPage() {
           </section>
 
           {/* Retención */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <Database className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">7. Retención de Datos</h2>
+              <Database className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                7. Retención de Datos
+              </h2>
             </div>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>Retenemos tu información personal durante el tiempo necesario para:</p>
               <ul className="list-disc ml-6 space-y-1">
                 <li>Proporcionar nuestros servicios</li>
@@ -347,12 +366,14 @@ export default function PrivacyPage() {
           </section>
 
           {/* Menores */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <AlertCircle className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">8. Privacidad de Menores</h2>
+              <AlertCircle className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                8. Privacidad de Menores
+              </h2>
             </div>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Nuestros servicios están dirigidos a personas mayores de 18 años. No recopilamos
                 intencionalmente información personal de menores de 18 años. Si descubrimos que
@@ -363,7 +384,7 @@ export default function PrivacyPage() {
                 contáctanos en{' '}
                 <a
                   href="mailto:privacidad@@papalotemarket.com"
-                  className="text-primary-600 hover:underline"
+                  className="text-primary-600 dark:text-primary-400 hover:underline"
                 >
                   privacidad@@papalotemarket.com
                 </a>
@@ -372,12 +393,14 @@ export default function PrivacyPage() {
           </section>
 
           {/* Cambios */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <FileText className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">9. Cambios a esta Política</h2>
+              <FileText className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                9. Cambios a esta Política
+              </h2>
             </div>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Podemos actualizar esta Política de Privacidad periódicamente. Te notificaremos
                 sobre cambios significativos publicando la nueva política en esta página y
@@ -401,7 +424,7 @@ export default function PrivacyPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
                   href="mailto:privacidad@@papalotemarket.com"
-                  className="px-6 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition"
+                  className="px-6 py-3 bg-white text-primary-600 dark:text-primary-400 rounded-lg font-semibold hover:bg-gray-100 transition"
                 >
                   privacidad@@papalotemarket.com
                 </a>
@@ -415,33 +438,35 @@ export default function PrivacyPage() {
           </div>
 
           {/* Related Links */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3 className="font-bold text-gray-900 mb-4">Políticas Relacionadas</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Políticas Relacionadas
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Link
                 href={ROUTES.TERMS}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <FileText className="w-4 h-4" />
                 <span>Términos y Condiciones</span>
               </Link>
               <Link
                 href={ROUTES.COOKIES}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <FileText className="w-4 h-4" />
                 <span>Política de Cookies</span>
               </Link>
               <Link
                 href={ROUTES.RETURNS_POLICY}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <FileText className="w-4 h-4" />
                 <span>Política de Devoluciones</span>
               </Link>
               <Link
                 href={ROUTES.LEGAL_NOTICE}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <FileText className="w-4 h-4" />
                 <span>Aviso Legal</span>

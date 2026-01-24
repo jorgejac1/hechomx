@@ -16,12 +16,14 @@ export default function BenefitCard({
   description,
 }: BenefitCardProps) {
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-xl transition">
-      <div className={`w-12 h-12 ${iconBg} rounded-lg flex items-center justify-center mb-4`}>
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-xl transition">
+      <div
+        className={`w-12 h-12 ${iconBg} dark:opacity-80 rounded-lg flex items-center justify-center mb-4`}
+      >
         <Icon className={`w-6 h-6 ${iconColor}`} />
       </div>
-      <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">{title}</h3>
+      <p className="text-gray-600 dark:text-gray-400">{description}</p>
     </div>
   );
 }

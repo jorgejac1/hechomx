@@ -253,7 +253,7 @@ export default function VenderPage() {
   const hasMakerProfile = user?.makerProfile !== undefined;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
       <section className="relative bg-linear-to-br from-primary-600 via-primary-700 to-primary-900 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -327,13 +327,13 @@ export default function VenderPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 sm:py-24 bg-gray-50">
+      <section className="py-16 sm:py-24 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               ¿Por qué vender con nosotros?
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Herramientas diseñadas para artesanos que quieren crecer
             </p>
           </div>
@@ -347,11 +347,13 @@ export default function VenderPage() {
       </section>
 
       {/* How It Works Section */}
-      <section id="como-funciona" className="py-16 sm:py-24 bg-white">
+      <section id="como-funciona" className="py-16 sm:py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">¿Cómo funciona?</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              ¿Cómo funciona?
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Comienza a vender en 4 pasos sencillos
             </p>
           </div>
@@ -391,17 +393,19 @@ export default function VenderPage() {
       </section>
 
       {/* Success Stories Section */}
-      <section className="py-16 sm:py-24 bg-linear-to-br from-pink-50 to-red-50">
+      <section className="py-16 sm:py-24 bg-linear-to-br from-pink-50 to-red-50 dark:from-pink-900/20 dark:to-red-900/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-100 rounded-full mb-4">
-              <TrendingUp className="w-5 h-5 text-red-600" />
-              <span className="font-semibold text-red-900">Historias de Éxito</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-100 dark:bg-red-900/30 rounded-full mb-4">
+              <TrendingUp className="w-5 h-5 text-red-600 dark:text-red-400" />
+              <span className="font-semibold text-red-900 dark:text-red-100">
+                Historias de Éxito
+              </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               Artesanos que han transformado su negocio
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Lee cómo otros artesanos están creciendo con nosotros
             </p>
           </div>
@@ -415,13 +419,13 @@ export default function VenderPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 sm:py-24 bg-white">
+      <section className="py-16 sm:py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               Herramientas que impulsan tu éxito
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Todo lo que necesitas para vender profesionalmente
             </p>
           </div>
@@ -435,23 +439,27 @@ export default function VenderPage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-16 sm:py-24 bg-gray-50">
+      <section className="py-16 sm:py-24 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               Precios transparentes
             </h2>
-            <p className="text-xl text-gray-600">Sin sorpresas, sin costos ocultos</p>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
+              Sin sorpresas, sin costos ocultos
+            </p>
           </div>
 
-          <div className="bg-linear-to-br from-primary-50 to-primary-100 rounded-2xl p-8 sm:p-12 border-2 border-primary-200">
+          <div className="bg-linear-to-br from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 rounded-2xl p-8 sm:p-12 border-2 border-primary-200 dark:border-primary-700">
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-full mb-4">
                 <CheckCircle2 className="w-5 h-5" />
                 <span className="font-semibold">Plan Único</span>
               </div>
-              <h3 className="text-4xl font-bold text-gray-900 mb-2">10% de comisión</h3>
-              <p className="text-gray-600">Solo pagas cuando vendes</p>
+              <h3 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                10% de comisión
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">Solo pagas cuando vendes</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -464,8 +472,8 @@ export default function VenderPage() {
                 'Sin contratos ni compromisos',
               ].map((feature, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-green-600 shrink-0" />
-                  <span className="text-gray-700">{feature}</span>
+                  <CheckCircle2 className="w-6 h-6 text-green-600 dark:text-green-400 shrink-0" />
+                  <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                 </div>
               ))}
             </div>
@@ -487,39 +495,43 @@ export default function VenderPage() {
                     : 'Activar Tienda'
                   : 'Comenzar Gratis'}
               </Link>
-              <p className="text-sm text-gray-600 mt-4">No se requiere tarjeta de crédito</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
+                No se requiere tarjeta de crédito
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 sm:py-24 bg-white">
+      <section className="py-16 sm:py-24 bg-white dark:bg-gray-900">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               Preguntas Frecuentes
             </h2>
-            <p className="text-xl text-gray-600">Todo lo que necesitas saber</p>
+            <p className="text-xl text-gray-600 dark:text-gray-400">Todo lo que necesitas saber</p>
           </div>
 
           <div className="space-y-4">
             {FAQS.map((faq, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl overflow-hidden">
+              <div key={index} className="bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden">
                 <button
                   onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-100 transition"
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                 >
-                  <span className="font-bold text-gray-900 pr-4">{faq.question}</span>
+                  <span className="font-bold text-gray-900 dark:text-gray-100 pr-4">
+                    {faq.question}
+                  </span>
                   {openFAQ === index ? (
-                    <ChevronUp className="w-5 h-5 text-primary-600 shrink-0" />
+                    <ChevronUp className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0" />
                   ) : (
                     <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
                   )}
                 </button>
                 {openFAQ === index && (
                   <div className="px-6 pb-6">
-                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{faq.answer}</p>
                   </div>
                 )}
               </div>
@@ -527,7 +539,7 @@ export default function VenderPage() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-gray-600 mb-4">¿Tienes más preguntas?</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">¿Tienes más preguntas?</p>
             <Link
               href="/contacto"
               className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold"

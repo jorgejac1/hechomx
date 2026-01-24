@@ -122,16 +122,16 @@ export default function RegisterPage() {
   const passwordStrength = getPasswordStrength(formData.password);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-4 text-center text-2xl sm:text-3xl font-bold text-gray-900">
+        <h2 className="mt-4 text-center text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
           Crea tu cuenta gratis
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
           ¿Ya tienes cuenta?{' '}
           <Link
             href={ROUTES.LOGIN}
-            className="font-semibold text-primary-600 hover:text-primary-700"
+            className="font-semibold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300"
           >
             Inicia sesión aquí
           </Link>
@@ -139,10 +139,10 @@ export default function RegisterPage() {
       </div>
 
       <div className="mt-6 sm:mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-6 sm:py-8 px-4 sm:px-10 shadow-lg sm:rounded-xl">
+        <div className="bg-white dark:bg-gray-800 py-6 sm:py-8 px-4 sm:px-10 shadow-lg sm:rounded-xl">
           {/* User Type Selection */}
           <div className="mb-6">
-            <label className="block text-sm font-semibold text-gray-900 mb-3">
+            <label className="block text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
               ¿Qué quieres hacer?
             </label>
             <div className="grid grid-cols-2 gap-3">
@@ -151,14 +151,16 @@ export default function RegisterPage() {
                 onClick={() => setUserType('buyer')}
                 className={`p-4 rounded-lg border-2 transition-all ${
                   userType === 'buyer'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20'
+                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
                 }`}
               >
                 <div className="text-center">
-                  <ShoppingBag className="w-8 h-8 mx-auto mb-2 text-primary-600" />
-                  <p className="font-semibold text-sm">Comprar</p>
-                  <p className="text-xs text-gray-600 mt-1">Productos artesanales</p>
+                  <ShoppingBag className="w-8 h-8 mx-auto mb-2 text-primary-600 dark:text-primary-400" />
+                  <p className="font-semibold text-sm text-gray-900 dark:text-gray-100">Comprar</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                    Productos artesanales
+                  </p>
                 </div>
               </button>
               <button
@@ -166,14 +168,14 @@ export default function RegisterPage() {
                 onClick={() => setUserType('seller')}
                 className={`p-4 rounded-lg border-2 transition-all ${
                   userType === 'seller'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/20'
+                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
                 }`}
               >
                 <div className="text-center">
-                  <Palette className="w-8 h-8 mx-auto mb-2 text-primary-600" />
-                  <p className="font-semibold text-sm">Vender</p>
-                  <p className="text-xs text-gray-600 mt-1">Mis productos</p>
+                  <Palette className="w-8 h-8 mx-auto mb-2 text-primary-600 dark:text-primary-400" />
+                  <p className="font-semibold text-sm text-gray-900 dark:text-gray-100">Vender</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Mis productos</p>
                 </div>
               </button>
             </div>
@@ -249,13 +251,13 @@ export default function RegisterPage() {
                         className={`h-1 flex-1 rounded-full ${
                           level <= passwordStrength.strength
                             ? passwordStrength.color
-                            : 'bg-gray-200'
+                            : 'bg-gray-200 dark:bg-gray-600'
                         }`}
                       />
                     ))}
                   </div>
                   {passwordStrength.text && (
-                    <p className="text-xs text-gray-600">
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
                       Seguridad: <span className="font-semibold">{passwordStrength.text}</span>
                     </p>
                   )}
@@ -264,45 +266,47 @@ export default function RegisterPage() {
 
               {/* Password requirements */}
               <div className="mt-2 space-y-1">
-                <p className="text-xs text-gray-600 font-medium">Tu contraseña debe tener:</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                  Tu contraseña debe tener:
+                </p>
                 <div className="space-y-1">
                   <p
-                    className={`text-xs flex items-center gap-1 ${formData.password.length >= 8 ? 'text-green-600' : 'text-gray-500'}`}
+                    className={`text-xs flex items-center gap-1 ${formData.password.length >= 8 ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`}
                   >
                     {formData.password.length >= 8 ? (
                       <CheckCircle2 className="w-3 h-3" />
                     ) : (
-                      <span className="w-3 h-3 rounded-full border border-gray-300" />
+                      <span className="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-600" />
                     )}
                     Mínimo 8 caracteres
                   </p>
                   <p
-                    className={`text-xs flex items-center gap-1 ${/[A-Z]/.test(formData.password) ? 'text-green-600' : 'text-gray-500'}`}
+                    className={`text-xs flex items-center gap-1 ${/[A-Z]/.test(formData.password) ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`}
                   >
                     {/[A-Z]/.test(formData.password) ? (
                       <CheckCircle2 className="w-3 h-3" />
                     ) : (
-                      <span className="w-3 h-3 rounded-full border border-gray-300" />
+                      <span className="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-600" />
                     )}
                     Una letra mayúscula
                   </p>
                   <p
-                    className={`text-xs flex items-center gap-1 ${/[a-z]/.test(formData.password) ? 'text-green-600' : 'text-gray-500'}`}
+                    className={`text-xs flex items-center gap-1 ${/[a-z]/.test(formData.password) ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`}
                   >
                     {/[a-z]/.test(formData.password) ? (
                       <CheckCircle2 className="w-3 h-3" />
                     ) : (
-                      <span className="w-3 h-3 rounded-full border border-gray-300" />
+                      <span className="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-600" />
                     )}
                     Una letra minúscula
                   </p>
                   <p
-                    className={`text-xs flex items-center gap-1 ${/[0-9]/.test(formData.password) ? 'text-green-600' : 'text-gray-500'}`}
+                    className={`text-xs flex items-center gap-1 ${/[0-9]/.test(formData.password) ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`}
                   >
                     {/[0-9]/.test(formData.password) ? (
                       <CheckCircle2 className="w-3 h-3" />
                     ) : (
-                      <span className="w-3 h-3 rounded-full border border-gray-300" />
+                      <span className="w-3 h-3 rounded-full border border-gray-300 dark:border-gray-600" />
                     )}
                     Un número
                   </p>
@@ -346,20 +350,23 @@ export default function RegisterPage() {
                   type="checkbox"
                   checked={formData.acceptTerms}
                   onChange={handleChange}
-                  className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded-sm mt-0.5"
+                  className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 rounded-sm mt-0.5 bg-white dark:bg-gray-700"
                 />
-                <label htmlFor="acceptTerms" className="ml-2 block text-sm text-gray-700">
+                <label
+                  htmlFor="acceptTerms"
+                  className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
+                >
                   Acepto los{' '}
                   <Link
                     href="/terminos"
-                    className="text-primary-600 hover:text-primary-700 font-semibold"
+                    className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold"
                   >
                     términos y condiciones
                   </Link>{' '}
                   y la{' '}
                   <Link
                     href="/privacidad"
-                    className="text-primary-600 hover:text-primary-700 font-semibold"
+                    className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold"
                   >
                     política de privacidad
                   </Link>

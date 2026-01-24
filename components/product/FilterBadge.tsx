@@ -29,12 +29,17 @@ interface FilterBadgeProps {
 }
 
 const VARIANT_STYLES: Record<FilterBadgeVariant, string> = {
-  primary: 'bg-primary-100 text-primary-700 hover:text-primary-900',
-  blue: 'bg-blue-100 text-blue-700 hover:text-blue-900',
-  green: 'bg-green-100 text-green-700 hover:text-green-900',
-  yellow: 'bg-yellow-100 text-yellow-700 hover:text-yellow-900',
-  purple: 'bg-purple-100 text-purple-700 hover:text-purple-900',
-  orange: 'bg-orange-100 text-orange-700 hover:text-orange-900',
+  primary:
+    'bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 hover:text-primary-900 dark:hover:text-primary-100',
+  blue: 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-100',
+  green:
+    'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 hover:text-green-900 dark:hover:text-green-100',
+  yellow:
+    'bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 hover:text-yellow-900 dark:hover:text-yellow-100',
+  purple:
+    'bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-100',
+  orange:
+    'bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 hover:text-orange-900 dark:hover:text-orange-100',
 };
 
 export default function FilterBadge({ label, onRemove, variant = 'primary' }: FilterBadgeProps) {

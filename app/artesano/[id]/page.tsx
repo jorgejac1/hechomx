@@ -59,11 +59,15 @@ export default function ArtisanProfilePage() {
 
   if (!story) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl shadow-lg p-8 max-w-md text-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 max-w-md text-center">
           <Sparkles className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Historia No Encontrada</h2>
-          <p className="text-gray-600 mb-6">Esta historia artesanal aún no está disponible.</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+            Historia No Encontrada
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            Esta historia artesanal aún no está disponible.
+          </p>
           <Link
             href="/"
             className="inline-block px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium"
@@ -76,7 +80,7 @@ export default function ArtisanProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section with Cover Image */}
       <div className="relative h-[400px] bg-linear-to-br from-primary-600 to-primary-800">
         {story.coverImage && (
@@ -206,34 +210,42 @@ export default function ArtisanProfilePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Stats Bar */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-xl shadow-md p-4 text-center">
-            <p className="text-3xl font-bold text-primary-600">{story.yearsOfExperience}</p>
-            <p className="text-sm text-gray-600">Años</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 text-center">
+            <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
+              {story.yearsOfExperience}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Años</p>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-4 text-center">
-            <p className="text-3xl font-bold text-primary-600">{story.generationsOfCraft}</p>
-            <p className="text-sm text-gray-600">Generaciones</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 text-center">
+            <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
+              {story.generationsOfCraft}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Generaciones</p>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-4 text-center">
-            <p className="text-3xl font-bold text-primary-600">{story.apprentices || 0}</p>
-            <p className="text-sm text-gray-600">Aprendices</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 text-center">
+            <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
+              {story.apprentices || 0}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Aprendices</p>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-4 text-center">
-            <p className="text-3xl font-bold text-primary-600">{story.awards?.length || 0}</p>
-            <p className="text-sm text-gray-600">Premios</p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 text-center">
+            <p className="text-3xl font-bold text-primary-600 dark:text-primary-400">
+              {story.awards?.length || 0}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Premios</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="bg-white rounded-xl shadow-md mb-8">
-          <div className="border-b border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md mb-8">
+          <div className="border-b border-gray-200 dark:border-gray-700">
             <nav className="flex overflow-x-auto">
               <button
                 onClick={() => setActiveSection('story')}
                 className={`px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
                   activeSection === 'story'
-                    ? 'border-primary-600 text-primary-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                    ? 'border-primary-600 text-primary-600 dark:text-primary-400'
+                    : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
                 }`}
               >
                 Mi Historia
@@ -242,8 +254,8 @@ export default function ArtisanProfilePage() {
                 onClick={() => setActiveSection('process')}
                 className={`px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
                   activeSection === 'process'
-                    ? 'border-primary-600 text-primary-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                    ? 'border-primary-600 text-primary-600 dark:text-primary-400'
+                    : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
                 }`}
               >
                 Detrás del Arte
@@ -252,8 +264,8 @@ export default function ArtisanProfilePage() {
                 onClick={() => setActiveSection('recognition')}
                 className={`px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
                   activeSection === 'recognition'
-                    ? 'border-primary-600 text-primary-600'
-                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                    ? 'border-primary-600 text-primary-600 dark:text-primary-400'
+                    : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
                 }`}
               >
                 Reconocimientos
@@ -280,8 +292,10 @@ export default function ArtisanProfilePage() {
                 {/* Personal Story */}
                 {story.personalStory && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Mi Historia</h2>
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                      Mi Historia
+                    </h2>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
                       {story.personalStory}
                     </p>
                   </div>
@@ -290,8 +304,10 @@ export default function ArtisanProfilePage() {
                 {/* Heritage Story */}
                 {story.heritageStory && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Herencia Familiar</h2>
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                      Herencia Familiar
+                    </h2>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
                       {story.heritageStory}
                     </p>
                   </div>
@@ -300,8 +316,10 @@ export default function ArtisanProfilePage() {
                 {/* Daily Life */}
                 {story.dailyLife && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Un Día en Mi Taller</h2>
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                      Un Día en Mi Taller
+                    </h2>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
                       {story.dailyLife}
                     </p>
                   </div>
@@ -310,7 +328,9 @@ export default function ArtisanProfilePage() {
                 {/* Workshop Photos */}
                 {story.workshopPhotos && story.workshopPhotos.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Mi Taller</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                      Mi Taller
+                    </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {story.workshopPhotos.map((photo, idx) => (
                         <div
@@ -331,14 +351,14 @@ export default function ArtisanProfilePage() {
 
                 {/* Cultural Significance */}
                 {story.culturalSignificance && (
-                  <div className="bg-linear-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-2 border-amber-200">
+                  <div className="bg-linear-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl p-6 border-2 border-amber-200 dark:border-amber-800">
                     <div className="flex items-start gap-3 mb-4">
-                      <Globe className="w-6 h-6 text-amber-600 shrink-0 mt-1" />
+                      <Globe className="w-6 h-6 text-amber-600 dark:text-amber-400 shrink-0 mt-1" />
                       <div>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                           Significado Cultural
                         </h2>
-                        <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
                           {story.culturalSignificance}
                         </p>
                       </div>
@@ -349,18 +369,24 @@ export default function ArtisanProfilePage() {
                 {/* Indigenous Language Terms */}
                 {story.indigenousLanguageTerms && story.indigenousLanguageTerms.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
                       Términos en Lengua Indígena
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {story.indigenousLanguageTerms.map((term, idx) => (
                         <div
                           key={idx}
-                          className="p-4 bg-linear-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200"
+                          className="p-4 bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800"
                         >
-                          <p className="text-lg font-bold text-gray-900 mb-1">{term.term}</p>
-                          <p className="text-sm text-gray-700 mb-2">{term.meaning}</p>
-                          <p className="text-xs text-green-700 font-semibold">{term.language}</p>
+                          <p className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">
+                            {term.term}
+                          </p>
+                          <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                            {term.meaning}
+                          </p>
+                          <p className="text-xs text-green-700 dark:text-green-400 font-semibold">
+                            {term.language}
+                          </p>
                         </div>
                       ))}
                     </div>
@@ -375,13 +401,15 @@ export default function ArtisanProfilePage() {
                 {/* Time Investment Badge */}
                 {story.totalCraftTime && (
                   <div className="flex items-center justify-center">
-                    <div className="inline-flex items-center gap-3 px-6 py-3 bg-linear-to-r from-primary-50 to-primary-100 rounded-full border-2 border-primary-200">
-                      <Clock className="w-6 h-6 text-primary-600" />
+                    <div className="inline-flex items-center gap-3 px-6 py-3 bg-linear-to-r from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 rounded-full border-2 border-primary-200 dark:border-primary-700">
+                      <Clock className="w-6 h-6 text-primary-600 dark:text-primary-400" />
                       <div>
-                        <p className="text-xs text-primary-600 font-medium uppercase tracking-wide">
+                        <p className="text-xs text-primary-600 dark:text-primary-400 font-medium uppercase tracking-wide">
                           Tiempo de Creación
                         </p>
-                        <p className="text-lg font-bold text-primary-800">{story.totalCraftTime}</p>
+                        <p className="text-lg font-bold text-primary-800 dark:text-primary-300">
+                          {story.totalCraftTime}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -391,10 +419,12 @@ export default function ArtisanProfilePage() {
                 {story.processVideo && (
                   <div>
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="p-2 bg-primary-100 rounded-lg">
-                        <Play className="w-5 h-5 text-primary-600" />
+                      <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
+                        <Play className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900">Video del Proceso</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        Video del Proceso
+                      </h2>
                     </div>
                     <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
                       <iframe
@@ -410,8 +440,10 @@ export default function ArtisanProfilePage() {
                 {/* Craft Technique Description */}
                 {story.craftTechnique && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Técnica y Proceso</h2>
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                      Técnica y Proceso
+                    </h2>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
                       {story.craftTechnique}
                     </p>
                   </div>
@@ -421,16 +453,18 @@ export default function ArtisanProfilePage() {
                 {story.materials && story.materials.length > 0 && (
                   <div>
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="p-2 bg-green-100 rounded-lg">
-                        <Leaf className="w-5 h-5 text-green-600" />
+                      <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                        <Leaf className="w-5 h-5 text-green-600 dark:text-green-400" />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900">Materiales</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        Materiales
+                      </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {story.materials.map((material, idx) => (
                         <div
                           key={idx}
-                          className="flex gap-4 p-4 bg-linear-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200 hover:shadow-md transition"
+                          className="flex gap-4 p-4 bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border border-green-200 dark:border-green-800 hover:shadow-md transition"
                         >
                           {material.image && (
                             <div className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden">
@@ -443,13 +477,15 @@ export default function ArtisanProfilePage() {
                             </div>
                           )}
                           <div className="flex-1 min-w-0">
-                            <h3 className="font-bold text-gray-900 mb-1">{material.name}</h3>
-                            <p className="text-sm text-green-700 font-medium mb-2 flex items-center gap-1">
+                            <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">
+                              {material.name}
+                            </h3>
+                            <p className="text-sm text-green-700 dark:text-green-400 font-medium mb-2 flex items-center gap-1">
                               <MapPin className="w-3 h-3" />
                               {material.source}
                             </p>
                             {material.description && (
-                              <p className="text-sm text-gray-600 line-clamp-2">
+                              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
                                 {material.description}
                               </p>
                             )}
@@ -464,16 +500,18 @@ export default function ArtisanProfilePage() {
                 {story.tools && story.tools.length > 0 && (
                   <div>
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="p-2 bg-amber-100 rounded-lg">
-                        <Hammer className="w-5 h-5 text-amber-600" />
+                      <div className="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
+                        <Hammer className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900">Herramientas</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        Herramientas
+                      </h2>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                       {story.tools.map((tool, idx) => (
                         <div
                           key={idx}
-                          className="p-4 bg-linear-to-br from-amber-50 to-orange-50 rounded-xl border border-amber-200 hover:shadow-md transition"
+                          className="p-4 bg-linear-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl border border-amber-200 dark:border-amber-800 hover:shadow-md transition"
                         >
                           {tool.image && (
                             <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-3">
@@ -485,8 +523,12 @@ export default function ArtisanProfilePage() {
                               />
                             </div>
                           )}
-                          <h3 className="font-bold text-gray-900 mb-1">{tool.name}</h3>
-                          <p className="text-sm text-gray-600 line-clamp-3">{tool.description}</p>
+                          <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">
+                            {tool.name}
+                          </h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+                            {tool.description}
+                          </p>
                         </div>
                       ))}
                     </div>
@@ -497,10 +539,12 @@ export default function ArtisanProfilePage() {
                 {story.processSteps && story.processSteps.length > 0 && (
                   <div>
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="p-2 bg-blue-100 rounded-lg">
-                        <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                      <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                        <CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900">Paso a Paso</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        Paso a Paso
+                      </h2>
                     </div>
                     <div className="space-y-4">
                       {story.processSteps.map((step, idx) => (
@@ -508,22 +552,26 @@ export default function ArtisanProfilePage() {
                           key={idx}
                           className={`border-2 rounded-xl overflow-hidden transition-all ${
                             expandedStep === idx
-                              ? 'border-primary-300 shadow-lg'
-                              : 'border-gray-200 hover:border-gray-300'
+                              ? 'border-primary-300 dark:border-primary-600 shadow-lg'
+                              : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                           }`}
                         >
                           <button
                             onClick={() => setExpandedStep(expandedStep === idx ? null : idx)}
-                            className="w-full flex items-center gap-4 p-4 text-left hover:bg-gray-50 transition"
+                            className="w-full flex items-center gap-4 p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition"
                           >
                             <div className="shrink-0 w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold">
                               {step.step}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <h3 className="font-bold text-gray-900">{step.title}</h3>
+                              <h3 className="font-bold text-gray-900 dark:text-gray-100">
+                                {step.title}
+                              </h3>
                               <div className="flex items-center gap-2 mt-1">
                                 <Clock className="w-4 h-4 text-gray-400" />
-                                <span className="text-sm text-gray-600">{step.duration}</span>
+                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                  {step.duration}
+                                </span>
                               </div>
                             </div>
                             <ChevronRight
@@ -533,7 +581,7 @@ export default function ArtisanProfilePage() {
                             />
                           </button>
                           {expandedStep === idx && (
-                            <div className="px-4 pb-4 border-t border-gray-100">
+                            <div className="px-4 pb-4 border-t border-gray-100 dark:border-gray-700">
                               <div className="pt-4 flex flex-col md:flex-row gap-4">
                                 {step.image && (
                                   <div className="relative w-full md:w-64 aspect-video md:aspect-square rounded-lg overflow-hidden shrink-0">
@@ -546,12 +594,12 @@ export default function ArtisanProfilePage() {
                                   </div>
                                 )}
                                 <div className="flex-1">
-                                  <p className="text-gray-700 leading-relaxed">
+                                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                                     {step.description}
                                   </p>
-                                  <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-primary-50 rounded-full">
-                                    <Clock className="w-4 h-4 text-primary-600" />
-                                    <span className="text-sm font-medium text-primary-700">
+                                  <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-primary-50 dark:bg-primary-900/30 rounded-full">
+                                    <Clock className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                                    <span className="text-sm font-medium text-primary-700 dark:text-primary-300">
                                       Duración: {step.duration}
                                     </span>
                                   </div>
@@ -568,17 +616,17 @@ export default function ArtisanProfilePage() {
                 {/* Traditional Techniques */}
                 {story.traditionalTechniques && story.traditionalTechniques.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
                       Técnicas Tradicionales
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {story.traditionalTechniques.map((technique, idx) => (
                         <div
                           key={idx}
-                          className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
+                          className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
                         >
-                          <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
-                          <span className="text-gray-900">{technique}</span>
+                          <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0" />
+                          <span className="text-gray-900 dark:text-gray-100">{technique}</span>
                         </div>
                       ))}
                     </div>
@@ -588,7 +636,9 @@ export default function ArtisanProfilePage() {
                 {/* Process Photos (legacy) */}
                 {story.processPhotos && story.processPhotos.length > 0 && !story.processSteps && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Galería del Proceso</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                      Galería del Proceso
+                    </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {story.processPhotos.map((photo, idx) => (
                         <div
@@ -615,20 +665,24 @@ export default function ArtisanProfilePage() {
                 {/* Awards */}
                 {story.awards && story.awards.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
                       Premios y Reconocimientos
                     </h2>
                     <div className="space-y-4">
                       {story.awards.map((award, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-4 p-4 bg-linear-to-r from-yellow-50 to-amber-50 rounded-lg border-2 border-yellow-200"
+                          className="flex items-start gap-4 p-4 bg-linear-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 rounded-lg border-2 border-yellow-200 dark:border-yellow-800"
                         >
-                          <Award className="w-6 h-6 text-yellow-600 shrink-0 mt-1" />
+                          <Award className="w-6 h-6 text-yellow-600 dark:text-yellow-400 shrink-0 mt-1" />
                           <div className="flex-1">
-                            <p className="font-bold text-gray-900 text-lg">{award.title}</p>
-                            <p className="text-gray-700">{award.organization}</p>
-                            <p className="text-sm text-gray-600 mt-1">{award.year}</p>
+                            <p className="font-bold text-gray-900 dark:text-gray-100 text-lg">
+                              {award.title}
+                            </p>
+                            <p className="text-gray-700 dark:text-gray-300">{award.organization}</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                              {award.year}
+                            </p>
                           </div>
                         </div>
                       ))}
@@ -639,18 +693,24 @@ export default function ArtisanProfilePage() {
                 {/* Certifications */}
                 {story.certifications && story.certifications.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">Certificaciones</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                      Certificaciones
+                    </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {story.certifications.map((cert, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-3 p-4 bg-green-50 rounded-lg border border-green-200"
+                          className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800"
                         >
-                          <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0 mt-1" />
+                          <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0 mt-1" />
                           <div className="flex-1">
-                            <p className="font-semibold text-gray-900">{cert.name}</p>
-                            <p className="text-sm text-gray-700">{cert.issuer}</p>
-                            <p className="text-xs text-gray-600 mt-1">
+                            <p className="font-semibold text-gray-900 dark:text-gray-100">
+                              {cert.name}
+                            </p>
+                            <p className="text-sm text-gray-700 dark:text-gray-300">
+                              {cert.issuer}
+                            </p>
+                            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                               {new Date(cert.date).toLocaleDateString('es-MX', {
                                 year: 'numeric',
                                 month: 'long',
@@ -667,14 +727,17 @@ export default function ArtisanProfilePage() {
                 {/* Community Projects */}
                 {story.communityProjects && story.communityProjects.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
                       Proyectos Comunitarios
                     </h2>
                     <div className="space-y-3">
                       {story.communityProjects.map((project, idx) => (
-                        <div key={idx} className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-                          <Heart className="w-5 h-5 text-blue-600 shrink-0 mt-1" />
-                          <p className="text-gray-900">{project}</p>
+                        <div
+                          key={idx}
+                          className="flex items-start gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
+                        >
+                          <Heart className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-1" />
+                          <p className="text-gray-900 dark:text-gray-100">{project}</p>
                         </div>
                       ))}
                     </div>

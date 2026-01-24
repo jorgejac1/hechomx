@@ -51,7 +51,7 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
 
   if (isLoading) {
     return (
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
         <div className="flex items-center justify-center py-12">
           <Loader2 className="w-8 h-8 text-primary-600 animate-spin" />
         </div>
@@ -61,11 +61,13 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
 
   if (!data) {
     return (
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
         <div className="text-center py-12">
           <ShoppingBag className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-gray-900 mb-2">Comienza tu Viaje</h3>
-          <p className="text-gray-600 mb-6">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+            Comienza tu Viaje
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Realiza tu primera compra para ver tu impacto en la comunidad artesanal
           </p>
           <Link
@@ -121,81 +123,87 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
       </div>
 
       {/* Environmental Impact */}
-      <div className="bg-white rounded-xl shadow-md p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <Leaf className="w-6 h-6 text-green-600" />
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+          <Leaf className="w-6 h-6 text-green-600 dark:text-green-400" />
           Impacto Ambiental
         </h3>
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 dark:text-gray-400 mb-6">
           Al elegir productos artesanales sobre producción masiva, contribuyes a un futuro más
           sostenible
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-linear-to-br from-green-50 to-emerald-50 rounded-lg p-6 border-2 border-green-200">
+          <div className="bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 rounded-lg p-6 border-2 border-green-200 dark:border-green-800">
             <div className="flex items-center gap-3 mb-3">
               <div className="p-3 bg-green-600 rounded-full">
                 <Leaf className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-3xl font-bold text-gray-900">{data.impactMetrics.co2Saved} kg</p>
-                <p className="text-sm text-gray-600">CO₂ ahorrado</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                  {data.impactMetrics.co2Saved} kg
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">CO₂ ahorrado</p>
               </div>
             </div>
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-600 dark:text-gray-400">
               vs. productos equivalentes de fabricación masiva
             </p>
           </div>
 
-          <div className="bg-linear-to-br from-blue-50 to-cyan-50 rounded-lg p-6 border-2 border-blue-200">
+          <div className="bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-lg p-6 border-2 border-blue-200 dark:border-blue-800">
             <div className="flex items-center gap-3 mb-3">
               <div className="p-3 bg-blue-600 rounded-full">
                 <TreePine className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-3xl font-bold text-gray-900">
+                <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                   {data.impactMetrics.treesEquivalent}
                 </p>
-                <p className="text-sm text-gray-600">Árboles equivalentes</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Árboles equivalentes</p>
               </div>
             </div>
-            <p className="text-xs text-gray-600">en absorción de CO₂ por año</p>
+            <p className="text-xs text-gray-600 dark:text-gray-400">en absorción de CO₂ por año</p>
           </div>
         </div>
       </div>
 
       {/* Cultural Impact */}
-      <div className="bg-white rounded-xl shadow-md p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <Sparkles className="w-6 h-6 text-yellow-600" />
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+          <Sparkles className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
           Impacto Cultural
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-6 bg-linear-to-br from-yellow-50 to-orange-50 rounded-lg border-2 border-yellow-200">
+          <div className="p-6 bg-linear-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/30 dark:to-orange-900/30 rounded-lg border-2 border-yellow-200 dark:border-yellow-800">
             <div className="flex items-center gap-3 mb-3">
-              <Award className="w-8 h-8 text-yellow-600" />
+              <Award className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
               <div>
-                <p className="text-3xl font-bold text-gray-900">
+                <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                   {data.impactMetrics.traditionalTechniquesPreserved}
                 </p>
-                <p className="text-sm text-gray-600">Técnicas tradicionales preservadas</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Técnicas tradicionales preservadas
+                </p>
               </div>
             </div>
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-600 dark:text-gray-400">
               Cada compra apoya la continuidad de técnicas ancestrales mexicanas
             </p>
           </div>
 
-          <div className="p-6 bg-linear-to-br from-purple-50 to-pink-50 rounded-lg border-2 border-purple-200">
+          <div className="p-6 bg-linear-to-br from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/30 rounded-lg border-2 border-purple-200 dark:border-purple-800">
             <div className="flex items-center gap-3 mb-3">
-              <Users className="w-8 h-8 text-purple-600" />
+              <Users className="w-8 h-8 text-purple-600 dark:text-purple-400" />
               <div>
-                <p className="text-3xl font-bold text-gray-900">
+                <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                   {data.impactMetrics.artisanFamiliesSupported}
                 </p>
-                <p className="text-sm text-gray-600">Familias artesanas apoyadas</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Familias artesanas apoyadas
+                </p>
               </div>
             </div>
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-600 dark:text-gray-400">
               Tu apoyo directo mejora la calidad de vida de familias mexicanas
             </p>
           </div>
@@ -203,16 +211,16 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
       </div>
 
       {/* Supported Artisans */}
-      <div className="bg-white rounded-xl shadow-md p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <Heart className="w-6 h-6 text-red-600" />
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+          <Heart className="w-6 h-6 text-red-600 dark:text-red-400" />
           Artesanos que Apoyas ({data.artisansSupported})
         </h3>
         <div className="space-y-4">
           {data.supportedArtisans.map((artisan) => (
             <div
               key={artisan.id}
-              className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
+              className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
             >
               {artisan.avatar ? (
                 <Image
@@ -223,19 +231,19 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
                   className="rounded-full"
                 />
               ) : (
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
-                  <Users className="w-8 h-8 text-primary-600" />
+                <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center">
+                  <Users className="w-8 h-8 text-primary-600 dark:text-primary-400" />
                 </div>
               )}
 
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <p className="font-bold text-gray-900">{artisan.name}</p>
-                  <span className="px-2 py-0.5 bg-primary-100 text-primary-700 text-xs rounded-full font-semibold">
+                  <p className="font-bold text-gray-900 dark:text-gray-100">{artisan.name}</p>
+                  <span className="px-2 py-0.5 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs rounded-full font-semibold">
                     {artisan.shopName}
                   </span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-600 mb-2">
+                <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400 mb-2">
                   <span className="flex items-center gap-1">
                     <MapPin className="w-3 h-3" />
                     {artisan.state}
@@ -244,17 +252,19 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
                   <span>{artisan.specialty}</span>
                 </div>
                 <div className="flex items-center gap-4 text-sm">
-                  <div className="bg-white rounded-lg px-3 py-1">
-                    <span className="text-gray-600">Compras: </span>
-                    <span className="font-bold text-gray-900">{artisan.purchaseCount}</span>
+                  <div className="bg-white dark:bg-gray-800 rounded-lg px-3 py-1">
+                    <span className="text-gray-600 dark:text-gray-400">Compras: </span>
+                    <span className="font-bold text-gray-900 dark:text-gray-100">
+                      {artisan.purchaseCount}
+                    </span>
                   </div>
-                  <div className="bg-white rounded-lg px-3 py-1">
-                    <span className="text-gray-600">Total: </span>
-                    <span className="font-bold text-primary-600">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg px-3 py-1">
+                    <span className="text-gray-600 dark:text-gray-400">Total: </span>
+                    <span className="font-bold text-primary-600 dark:text-primary-400">
                       {formatCurrency(artisan.totalSpent)}
                     </span>
                   </div>
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-gray-500 dark:text-gray-500">
                     Cliente desde {formatRelativeTime(artisan.firstPurchase)}
                   </div>
                 </div>
@@ -267,9 +277,9 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
       {/* Categories & Milestones Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top Categories */}
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-blue-600" />
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+            <TrendingUp className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             Tus Categorías Favoritas
           </h3>
           <div className="space-y-4">
@@ -278,13 +288,15 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-bold text-gray-400">#{index + 1}</span>
-                    <span className="text-sm font-semibold text-gray-900">{category.category}</span>
+                    <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                      {category.category}
+                    </span>
                   </div>
-                  <span className="text-sm font-bold text-primary-600">
+                  <span className="text-sm font-bold text-primary-600 dark:text-primary-400">
                     {category.count} compras
                   </span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                   <div
                     className="bg-primary-600 h-2 rounded-full transition-all"
                     style={{ width: `${category.percentage}%` }}
@@ -296,9 +308,9 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
         </div>
 
         {/* Milestones */}
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <Award className="w-5 h-5 text-yellow-600" />
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+            <Award className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
             Logros
           </h3>
           <div className="space-y-3">
@@ -310,8 +322,8 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
                   key={milestone.id}
                   className={`flex items-start gap-3 p-4 rounded-lg border-2 transition ${
                     milestone.achieved
-                      ? 'bg-yellow-50 border-yellow-200'
-                      : 'bg-gray-50 border-gray-200 opacity-60'
+                      ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800'
+                      : 'bg-gray-50 dark:bg-gray-700/50 border-gray-200 dark:border-gray-700 opacity-60'
                   }`}
                 >
                   <div
@@ -326,8 +338,12 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
                     )}
                   </div>
                   <div className="flex-1">
-                    <p className="font-bold text-gray-900 mb-1">{milestone.title}</p>
-                    <p className="text-sm text-gray-600">{milestone.description}</p>
+                    <p className="font-bold text-gray-900 dark:text-gray-100 mb-1">
+                      {milestone.title}
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {milestone.description}
+                    </p>
                     {milestone.achieved && milestone.date && (
                       <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
                         <CheckCircle2 className="w-3 h-3" />
@@ -343,13 +359,15 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
       </div>
 
       {/* Recent Purchases */}
-      <div className="bg-white rounded-xl shadow-md p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Compras Recientes</h3>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+          Compras Recientes
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {data.recentPurchases.map((purchase) => (
             <div
               key={purchase.id}
-              className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
+              className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition"
             >
               <Image
                 src={purchase.image}
@@ -359,10 +377,12 @@ export default function ImpactDashboard({ userEmail }: ImpactDashboardProps) {
                 className="rounded-lg object-cover"
               />
               <div className="flex-1">
-                <p className="font-semibold text-gray-900 mb-1">{purchase.productName}</p>
-                <p className="text-sm text-gray-600 mb-2">{purchase.artisan}</p>
+                <p className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                  {purchase.productName}
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{purchase.artisan}</p>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-bold text-primary-600">
+                  <p className="text-sm font-bold text-primary-600 dark:text-primary-400">
                     {formatCurrency(purchase.amount)}
                   </p>
                   <p className="text-xs text-gray-500">{formatRelativeTime(purchase.date)}</p>

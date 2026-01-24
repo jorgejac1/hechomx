@@ -47,10 +47,12 @@ export default function BasicInfoSection({
     <div className="space-y-6">
       <div>
         <div className="flex items-center gap-2 mb-2">
-          <Globe className="w-5 h-5 text-primary-600" />
-          <h2 className="text-xl font-bold text-gray-900">Información Básica</h2>
+          <Globe className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Información Básica</h2>
         </div>
-        <p className="text-sm text-gray-600">Esta información aparecerá en tu perfil público</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Esta información aparecerá en tu perfil público
+        </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -23,8 +23,8 @@ import ImageSkeleton from '@/components/common/loading/ImageSkeleton';
  * @interface CartItemCardProps
  */
 interface CartItemCardProps {
-  /** The product item with quantity information */
-  item: Product & { quantity: number };
+  /** The product item with quantity and optional size information */
+  item: Product & { quantity: number; selectedSize?: string };
 }
 
 export default function CartItemCard({ item }: CartItemCardProps) {
@@ -36,19 +36,19 @@ export default function CartItemCard({ item }: CartItemCardProps) {
   const handleRemove = () => {
     setIsRemoving(true);
     setTimeout(() => {
-      removeFromCart(item.id);
+      removeFromCart(item.id, item.selectedSize);
       info(`${item.name} eliminado del carrito`);
     }, 300);
   };
 
   const decreaseQuantity = () => {
     if (item.quantity > 1) {
-      updateQuantity(item.id, item.quantity - 1);
+      updateQuantity(item.id, item.quantity - 1, item.selectedSize);
     }
   };
 
   const increaseQuantity = () => {
-    updateQuantity(item.id, item.quantity + 1);
+    updateQuantity(item.id, item.quantity + 1, item.selectedSize);
   };
 
   const itemTotal = item.price * item.quantity;
@@ -63,7 +63,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
         {/* Product Image */}
         <Link
           href={`/productos/${item.id}`}
-          className="relative w-24 h-24 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden bg-gray-100"
+          className="relative w-24 h-24 sm:w-32 sm:h-32 shrink-0 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700"
         >
           {!imageLoaded && <ImageSkeleton aspectRatio="square" rounded={false} />}
           <Image
@@ -84,22 +84,29 @@ export default function CartItemCard({ item }: CartItemCardProps) {
             <div className="flex-1 min-w-0">
               <Link
                 href={`/productos/${item.id}`}
-                className="font-semibold text-gray-900 hover:text-primary-600 transition-colors line-clamp-2"
+                className="font-semibold text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors line-clamp-2"
               >
                 {item.name}
               </Link>
-              <div className="flex items-center gap-2 mt-1 text-sm text-gray-600">
+              <div className="flex items-center gap-2 mt-1 text-sm text-gray-600 dark:text-gray-400">
                 <MapPin className="w-3 h-3" />
                 <span>{item.state}</span>
-                <span className="text-gray-400">•</span>
+                <span className="text-gray-400 dark:text-gray-500">•</span>
                 <span>{item.maker}</span>
               </div>
+              {item.selectedSize && (
+                <div className="mt-1">
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Talla: {item.selectedSize}
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Remove Button - Desktop */}
             <button
               onClick={handleRemove}
-              className="hidden sm:block text-gray-400 hover:text-red-600 transition-colors"
+              className="hidden sm:block text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-500 transition-colors"
               aria-label="Eliminar producto"
             >
               <Trash2 className="w-5 h-5" />
@@ -113,30 +120,34 @@ export default function CartItemCard({ item }: CartItemCardProps) {
               <button
                 onClick={decreaseQuantity}
                 disabled={item.quantity <= 1}
-                className="w-8 h-8 flex items-center justify-center border-2 border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-8 h-8 flex items-center justify-center border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 aria-label="Disminuir cantidad"
               >
-                <Minus className="w-4 h-4 text-gray-600" />
+                <Minus className="w-4 h-4 text-gray-600 dark:text-gray-400" />
               </button>
 
-              <span className="w-12 text-center font-semibold text-gray-900">{item.quantity}</span>
+              <span className="w-12 text-center font-semibold text-gray-900 dark:text-gray-100">
+                {item.quantity}
+              </span>
 
               <button
                 onClick={increaseQuantity}
-                className="w-8 h-8 flex items-center justify-center border-2 border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                className="w-8 h-8 flex items-center justify-center border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 aria-label="Aumentar cantidad"
               >
-                <Plus className="w-4 h-4 text-gray-600" />
+                <Plus className="w-4 h-4 text-gray-600 dark:text-gray-400" />
               </button>
             </div>
 
-            {/* Price - UPDATED */}
+            {/* Price */}
             <div className="text-right">
-              <p className="text-lg sm:text-xl font-bold text-primary-600">
+              <p className="text-lg sm:text-xl font-bold text-primary-600 dark:text-primary-400">
                 {formatCurrency(itemTotal)}
               </p>
               {item.quantity > 1 && (
-                <p className="text-xs sm:text-sm text-gray-500">{formatCurrency(item.price)} c/u</p>
+                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                  {formatCurrency(item.price)} c/u
+                </p>
               )}
             </div>
           </div>
@@ -144,7 +155,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
           {/* Remove Button - Mobile */}
           <button
             onClick={handleRemove}
-            className="sm:hidden flex items-center gap-2 text-red-600 hover:text-red-700 text-sm font-medium mt-3"
+            className="sm:hidden flex items-center gap-2 text-red-600 dark:text-red-500 hover:text-red-700 dark:hover:text-red-400 text-sm font-medium mt-3"
           >
             <Trash2 className="w-4 h-4" />
             Eliminar

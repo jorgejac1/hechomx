@@ -105,11 +105,13 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
   const currentTheme = activeThemes.find((t) => t.id === selectedTheme) || activeThemes[0];
 
   return (
-    <section className="py-8 sm:py-10 md:py-12 bg-gray-50">
+    <section className="py-8 sm:py-10 md:py-12 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Seasonal Filters */}
         <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Compra por temporada:</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
+            Compra por temporada:
+          </h2>
           <div className="flex flex-wrap gap-2 sm:gap-3">
             {activeThemes.map((theme) => (
               <button
@@ -118,7 +120,7 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
                 className={`px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-sm sm:text-base font-semibold transition-all ${
                   selectedTheme === theme.id
                     ? `${theme.bgColor} ${theme.color} shadow-md`
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                    : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600'
                 }`}
               >
                 {theme.icon} {theme.name}
@@ -207,7 +209,7 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
             <div className="mt-4 sm:mt-6 text-center">
               <Link
                 href={`/productos?q=${currentTheme.keywords[0]}`}
-                className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-sm sm:text-base"
+                className="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold text-sm sm:text-base"
               >
                 Ver toda la colección
                 <svg
@@ -227,8 +229,10 @@ export default function SeasonalSection({ products }: SeasonalSectionProps) {
             </div>
           </>
         ) : (
-          <div className="text-center py-12 bg-white rounded-xl">
-            <p className="text-gray-600">No hay productos disponibles para esta temporada.</p>
+          <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl">
+            <p className="text-gray-600 dark:text-gray-400">
+              No hay productos disponibles para esta temporada.
+            </p>
           </div>
         )}
       </div>

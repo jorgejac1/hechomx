@@ -156,26 +156,30 @@ const faqs = [
 
 export default function FAQPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
         <Link
           href={ROUTES.HOME}
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition"
+          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-6 transition"
         >
           <ArrowLeft className="w-5 h-5" />
           Volver al inicio
         </Link>
 
         {/* Header */}
-        <div className="bg-white rounded-xl shadow-md p-8 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mb-6">
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 bg-primary-100 rounded-lg">
-              <HelpCircle className="w-8 h-8 text-primary-600" />
+            <div className="p-3 bg-primary-100 dark:bg-primary-900/50 rounded-lg">
+              <HelpCircle className="w-8 h-8 text-primary-600 dark:text-primary-400" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Preguntas Frecuentes</h1>
-              <p className="text-gray-600 mt-1">Encuentra respuestas rápidas a tus dudas</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                Preguntas Frecuentes
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">
+                Encuentra respuestas rápidas a tus dudas
+              </p>
             </div>
           </div>
         </div>
@@ -185,20 +189,27 @@ export default function FAQPage() {
           {faqs.map((category) => {
             const Icon = category.icon;
             return (
-              <div key={category.category} className="bg-white rounded-xl shadow-md p-6">
+              <div
+                key={category.category}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6"
+              >
                 <div className="flex items-center gap-3 mb-6">
-                  <Icon className="w-6 h-6 text-primary-600" />
-                  <h2 className="text-2xl font-bold text-gray-900">{category.category}</h2>
+                  <Icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {category.category}
+                  </h2>
                 </div>
 
                 <div className="space-y-6">
                   {category.questions.map((item, index) => (
                     <div
                       key={index}
-                      className="border-b border-gray-200 last:border-0 pb-6 last:pb-0"
+                      className="border-b border-gray-200 dark:border-gray-700 last:border-0 pb-6 last:pb-0"
                     >
-                      <h3 className="font-bold text-gray-900 mb-2">{item.q}</h3>
-                      <p className="text-gray-700 text-sm leading-relaxed">{item.a}</p>
+                      <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-2">{item.q}</h3>
+                      <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                        {item.a}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -218,13 +229,13 @@ export default function FAQPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href={ROUTES.CONTACT}
-                className="px-6 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition"
+                className="px-6 py-3 bg-white dark:bg-gray-100 text-primary-600 rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-white transition"
               >
                 Contactar Soporte
               </Link>
               <a
                 href="mailto:ayuda@@papalotemarket.com"
-                className="px-6 py-3 bg-primary-800 text-white rounded-lg font-semibold hover:bg-primary-900 transition"
+                className="px-6 py-3 bg-primary-800 dark:bg-primary-900 text-white rounded-lg font-semibold hover:bg-primary-900 dark:hover:bg-primary-950 transition"
               >
                 Enviar Email
               </a>
@@ -233,33 +244,33 @@ export default function FAQPage() {
         </div>
 
         {/* Related Links */}
-        <div className="bg-white rounded-xl shadow-md p-6 mt-6">
-          <h3 className="font-bold text-gray-900 mb-4">Recursos Útiles</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mt-6">
+          <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-4">Recursos Útiles</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Link
               href={ROUTES.SHIPPING_INFO}
-              className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+              className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
             >
               <Truck className="w-4 h-4" />
               <span>Información de Envíos</span>
             </Link>
             <Link
               href={ROUTES.RETURNS_POLICY}
-              className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+              className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
             >
               <RefreshCcw className="w-4 h-4" />
               <span>Política de Devoluciones</span>
             </Link>
             <Link
               href={ROUTES.PAYMENT_INFO}
-              className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+              className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
             >
               <CreditCard className="w-4 h-4" />
               <span>Métodos de Pago</span>
             </Link>
             <Link
               href={ROUTES.PRIVACY}
-              className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+              className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
             >
               <Shield className="w-4 h-4" />
               <span>Política de Privacidad</span>

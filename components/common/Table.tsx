@@ -257,23 +257,23 @@ export default function Table<T>({
         <div className={`overflow-x-auto ${className}`}>
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200">
+              <tr className="border-b border-gray-200 dark:border-gray-700">
                 {columns.map((column) => (
                   <th
                     key={column.key}
-                    className={`${sizeStyles[size].header} bg-gray-50 font-semibold text-gray-600`}
+                    className={`${sizeStyles[size].header} bg-gray-50 dark:bg-gray-800 font-semibold text-gray-600 dark:text-gray-400`}
                   >
-                    <div className="h-4 bg-gray-200 rounded-sm animate-pulse w-20" />
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded-sm animate-pulse w-20" />
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {[1, 2, 3, 4, 5].map((i) => (
-                <tr key={i} className="border-b border-gray-100">
+                <tr key={i} className="border-b border-gray-100 dark:border-gray-800">
                   {columns.map((column) => (
                     <td key={column.key} className={sizeStyles[size].cell}>
-                      <div className="h-4 bg-gray-100 rounded-sm animate-pulse" />
+                      <div className="h-4 bg-gray-100 dark:bg-gray-700 rounded-sm animate-pulse" />
                     </td>
                   ))}
                 </tr>
@@ -291,7 +291,7 @@ export default function Table<T>({
       <TableContext.Provider value={contextValue}>
         <div className={`text-center py-12 ${className}`}>
           {emptyIcon && <div className="mb-4">{emptyIcon}</div>}
-          <p className="text-gray-500">{emptyMessage}</p>
+          <p className="text-gray-500 dark:text-gray-400">{emptyMessage}</p>
         </div>
       </TableContext.Provider>
     );
@@ -304,15 +304,15 @@ export default function Table<T>({
           {caption && <caption className="sr-only">{caption}</caption>}
           <thead className={stickyHeader ? 'sticky top-0 z-10' : ''}>
             <tr
-              className={`border-b border-gray-200 ${variant === 'bordered' ? 'bg-gray-50' : ''}`}
+              className={`border-b border-gray-200 dark:border-gray-700 ${variant === 'bordered' ? 'bg-gray-50 dark:bg-gray-800' : ''}`}
             >
               {selectable && (
-                <th className={`${sizeStyles[size].header} bg-gray-50 w-12`}>
+                <th className={`${sizeStyles[size].header} bg-gray-50 dark:bg-gray-800 w-12`}>
                   <input
                     type="checkbox"
                     checked={selectedKeys?.size === sortedData.length && sortedData.length > 0}
                     onChange={handleSelectAll}
-                    className="w-4 h-4 rounded-sm border-gray-300 text-primary-600 focus:ring-primary-500"
+                    className="w-4 h-4 rounded-sm border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
                   />
                 </th>
               )}
@@ -323,13 +323,13 @@ export default function Table<T>({
                     key={column.key}
                     className={`
                       ${sizeStyles[size].header}
-                      ${variant !== 'default' ? 'bg-gray-50' : ''}
-                      font-semibold text-gray-600
+                      ${variant !== 'default' ? 'bg-gray-50 dark:bg-gray-800' : ''}
+                      font-semibold text-gray-600 dark:text-gray-300
                       ${alignmentClasses[column.align || 'left']}
                       ${column.hideOnMobile ? 'hidden sm:table-cell' : ''}
                       ${column.hideOnTablet ? 'hidden md:table-cell' : ''}
                       ${column.width || ''}
-                      ${column.sortable ? 'cursor-pointer select-none hover:bg-gray-100' : ''}
+                      ${column.sortable ? 'cursor-pointer select-none hover:bg-gray-100 dark:hover:bg-gray-700' : ''}
                       ${column.headerClassName || ''}
                     `}
                     onClick={column.sortable ? () => handleSort(column.key) : undefined}
@@ -340,7 +340,7 @@ export default function Table<T>({
                     <div className="flex items-center gap-1">
                       <span>{column.header}</span>
                       {column.sortable && (
-                        <span className="text-gray-400">
+                        <span className="text-gray-400 dark:text-gray-500">
                           {isSorted ? (
                             sortDirection === 'asc' ? (
                               <ChevronUp className="w-4 h-4" />
@@ -358,7 +358,7 @@ export default function Table<T>({
               })}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-gray-900 dark:text-gray-100">
             {sortedData.map((row, rowIndex) => {
               const rowKey = getRowKey(row, rowIndex);
               const isSelected = selectedKeys?.has(rowKey);
@@ -367,12 +367,12 @@ export default function Table<T>({
                 <tr
                   key={rowKey}
                   className={`
-                    border-b border-gray-100
-                    ${hoverable ? 'hover:bg-gray-50' : ''}
-                    ${variant === 'striped' && rowIndex % 2 === 1 ? 'bg-gray-50' : ''}
-                    ${variant === 'bordered' ? 'border border-gray-200' : ''}
+                    border-b border-gray-100 dark:border-gray-800
+                    ${hoverable ? 'hover:bg-gray-50 dark:hover:bg-gray-700' : ''}
+                    ${variant === 'striped' ? (rowIndex % 2 === 1 ? 'bg-gray-50 dark:bg-gray-800' : 'bg-white dark:bg-gray-900') : ''}
+                    ${variant === 'bordered' ? 'border border-gray-200 dark:border-gray-700' : ''}
                     ${onRowClick ? 'cursor-pointer' : ''}
-                    ${isSelected ? 'bg-primary-50' : ''}
+                    ${isSelected ? 'bg-primary-50 dark:bg-primary-900/30' : ''}
                   `}
                   onClick={() => onRowClick?.(row, rowIndex)}
                 >
@@ -385,7 +385,7 @@ export default function Table<T>({
                         type="checkbox"
                         checked={isSelected}
                         onChange={() => handleSelectRow(rowKey)}
-                        className="w-4 h-4 rounded-sm border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="w-4 h-4 rounded-sm border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-400"
                       />
                     </td>
                   )}

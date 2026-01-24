@@ -176,11 +176,11 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-4">
-          <h3 className="text-lg font-bold text-gray-900">Mis Productos</h3>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Mis Productos</h3>
           {products.length > 0 && (
             <button
               onClick={toggleSelectAll}
-              className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition"
+              className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition"
             >
               {allSelected ? (
                 <CheckSquare className="w-5 h-5 text-primary-600" />
@@ -206,7 +206,7 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
           </Link>
           <Link
             href={ROUTES.PRODUCT_MANAGE}
-            className="inline-flex items-center gap-2 px-4 py-2 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-semibold text-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-semibold text-sm"
           >
             <span className="hidden sm:inline">Gestionar Todo</span>
             <span className="sm:hidden">Gestionar</span>
@@ -217,7 +217,7 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
       {/* Empty State */}
       {products.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">No tienes productos aún</p>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">No tienes productos aún</p>
           <Link
             href={ROUTES.PRODUCT_CREATE}
             className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-semibold"
@@ -234,10 +234,10 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
             return (
               <div
                 key={product.id}
-                className={`border-2 rounded-lg overflow-hidden transition-all ${
+                className={`bg-white dark:bg-gray-800 border-2 rounded-lg overflow-hidden transition-all ${
                   isSelected
-                    ? 'border-primary-500 ring-2 ring-primary-200'
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-primary-500 ring-2 ring-primary-200 dark:ring-primary-800'
+                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 {/* Image with Checkbox */}
@@ -282,33 +282,37 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
 
                 {/* Product Info */}
                 <div className="p-4">
-                  <h4 className="font-bold text-gray-900 mb-2 line-clamp-1">{product.name}</h4>
-                  <p className="text-xl font-bold text-primary-600 mb-3">
+                  <h4 className="font-bold text-gray-900 dark:text-gray-100 mb-2 line-clamp-1">
+                    {product.name}
+                  </h4>
+                  <p className="text-xl font-bold text-primary-600 dark:text-primary-400 mb-3">
                     {formatCurrency(product.price)}
                   </p>
 
                   <div className="grid grid-cols-2 gap-2 text-sm mb-3">
-                    <div className="bg-gray-50 p-2 rounded-sm">
-                      <p className="text-gray-600">Stock</p>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-2 rounded-sm">
+                      <p className="text-gray-600 dark:text-gray-400">Stock</p>
                       <p
                         className={`font-semibold ${
                           product.stock === 0
-                            ? 'text-red-600'
+                            ? 'text-red-600 dark:text-red-400'
                             : product.stock <= 5
-                              ? 'text-amber-600'
-                              : 'text-gray-900'
+                              ? 'text-amber-600 dark:text-amber-400'
+                              : 'text-gray-900 dark:text-gray-100'
                         }`}
                       >
                         {product.stock}
                       </p>
                     </div>
-                    <div className="bg-gray-50 p-2 rounded-sm">
-                      <p className="text-gray-600">Vendidos</p>
-                      <p className="font-semibold text-gray-900">{product.sold}</p>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-2 rounded-sm">
+                      <p className="text-gray-600 dark:text-gray-400">Vendidos</p>
+                      <p className="font-semibold text-gray-900 dark:text-gray-100">
+                        {product.sold}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between text-xs text-gray-600">
+                  <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
                     <span className="flex items-center gap-1">
                       <Eye className="w-3 h-3" />
                       {product.views} vistas

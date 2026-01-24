@@ -39,12 +39,36 @@ const ORDER_STATUS_CONFIG: Record<
   OrderStatus,
   { label: string; color: string; icon: React.ComponentType<{ className?: string }> }
 > = {
-  pending: { label: 'Pendiente', color: 'bg-yellow-100 text-yellow-800', icon: Clock },
-  confirmed: { label: 'Confirmado', color: 'bg-blue-100 text-blue-800', icon: CheckCheck },
-  processing: { label: 'Procesando', color: 'bg-indigo-100 text-indigo-800', icon: Package },
-  shipped: { label: 'Enviado', color: 'bg-purple-100 text-purple-800', icon: Truck },
-  delivered: { label: 'Entregado', color: 'bg-green-100 text-green-800', icon: CheckCircle2 },
-  cancelled: { label: 'Cancelado', color: 'bg-red-100 text-red-800', icon: XCircle },
+  pending: {
+    label: 'Pendiente',
+    color: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400',
+    icon: Clock,
+  },
+  confirmed: {
+    label: 'Confirmado',
+    color: 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400',
+    icon: CheckCheck,
+  },
+  processing: {
+    label: 'Procesando',
+    color: 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-400',
+    icon: Package,
+  },
+  shipped: {
+    label: 'Enviado',
+    color: 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-400',
+    icon: Truck,
+  },
+  delivered: {
+    label: 'Entregado',
+    color: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400',
+    icon: CheckCircle2,
+  },
+  cancelled: {
+    label: 'Cancelado',
+    color: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400',
+    icon: XCircle,
+  },
 };
 
 /**
@@ -116,16 +140,16 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-bold text-gray-900">Todos los Pedidos</h3>
-        <p className="text-sm text-gray-500">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Todos los Pedidos</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           {orders.length} pedido{orders.length !== 1 ? 's' : ''}
         </p>
       </div>
 
       {orders.length === 0 ? (
         <div className="text-center py-12">
-          <Package className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-          <p className="text-gray-600">No hay pedidos</p>
+          <Package className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+          <p className="text-gray-600 dark:text-gray-400">No hay pedidos</p>
         </div>
       ) : (
         orders.map((order) => {
@@ -139,16 +163,20 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
           return (
             <div
               key={order.id}
-              className={`border rounded-xl overflow-hidden transition-all ${
-                isExpanded ? 'border-primary-300 shadow-md' : 'border-gray-200'
+              className={`bg-white dark:bg-gray-800 border rounded-xl overflow-hidden transition-all ${
+                isExpanded
+                  ? 'border-primary-300 dark:border-primary-600 shadow-md'
+                  : 'border-gray-200 dark:border-gray-700'
               }`}
             >
               {/* Order Header */}
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <p className="font-bold text-gray-900">Pedido #{order.id}</p>
-                    <p className="text-sm text-gray-600">{formatRelativeTime(order.createdAt)}</p>
+                    <p className="font-bold text-gray-900 dark:text-gray-100">Pedido #{order.id}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {formatRelativeTime(order.createdAt)}
+                    </p>
                   </div>
                   <span
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${statusConfig.color}`}
@@ -159,11 +187,13 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                 </div>
 
                 {/* Customer Info */}
-                <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-                  <p className="text-sm font-semibold text-gray-900">{order.customer.name}</p>
-                  <p className="text-sm text-gray-600">{order.customer.email}</p>
+                <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    {order.customer.name}
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{order.customer.email}</p>
                   {order.tracking && (
-                    <p className="text-xs text-purple-600 font-medium mt-1 flex items-center gap-1">
+                    <p className="text-xs text-purple-600 dark:text-purple-400 font-medium mt-1 flex items-center gap-1">
                       <Package className="w-3 h-3" />
                       Rastreo: {order.tracking}
                     </p>
@@ -182,12 +212,14 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                         className="rounded-lg object-cover"
                       />
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">{item.name}</p>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                          {item.name}
+                        </p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">
                           {item.quantity} × {formatCurrency(item.price)}
                         </p>
                       </div>
-                      <p className="font-semibold text-gray-900">
+                      <p className="font-semibold text-gray-900 dark:text-gray-100">
                         {formatCurrency(item.quantity * item.price)}
                       </p>
                     </div>
@@ -195,10 +227,10 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                 </div>
 
                 {/* Total & Actions */}
-                <div className="border-t border-gray-200 pt-4">
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
                   <div className="flex justify-between items-center">
-                    <p className="font-bold text-gray-900">Total</p>
-                    <p className="text-xl font-bold text-primary-600">
+                    <p className="font-bold text-gray-900 dark:text-gray-100">Total</p>
+                    <p className="text-xl font-bold text-primary-600 dark:text-primary-400">
                       {formatCurrency(order.total)}
                     </p>
                   </div>
@@ -208,7 +240,7 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                     <div className="mt-4">
                       <button
                         onClick={() => toggleExpand(order.id)}
-                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition font-medium text-sm"
+                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition font-medium text-sm"
                       >
                         {isExpanded ? (
                           <>
@@ -229,13 +261,15 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
 
               {/* Expanded Status Options */}
               {isExpanded && nextStatuses.length > 0 && (
-                <div className="border-t border-gray-200 bg-gray-50 p-4">
-                  <p className="text-sm font-medium text-gray-700 mb-3">Cambiar estado a:</p>
+                <div className="border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 p-4">
+                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                    Cambiar estado a:
+                  </p>
 
                   {/* Tracking Input for Shipped */}
                   {nextStatuses.includes('shipped') && (
                     <div className="mb-4">
-                      <label className="block text-sm text-gray-600 mb-1">
+                      <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">
                         Número de rastreo (requerido para envío)
                       </label>
                       <input
@@ -245,7 +279,7 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                           setTrackingInputs((prev) => ({ ...prev, [order.id]: e.target.value }))
                         }
                         placeholder="Ej: MEX123456789"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                       />
                     </div>
                   )}
@@ -271,7 +305,7 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                           disabled={isUpdating}
                           className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition disabled:opacity-50 ${
                             isCancelled
-                              ? 'bg-red-100 hover:bg-red-200 text-red-700'
+                              ? 'bg-red-100 dark:bg-red-900/30 hover:bg-red-200 dark:hover:bg-red-900/50 text-red-700 dark:text-red-400'
                               : 'bg-primary-600 hover:bg-primary-700 text-white'
                           }`}
                         >
@@ -289,7 +323,7 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                   </div>
 
                   {/* Quick Actions Info */}
-                  <div className="mt-3 text-xs text-gray-500">
+                  <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
                     {order.status === 'pending' && (
                       <p>Confirma el pedido para comenzar a prepararlo</p>
                     )}
@@ -311,10 +345,10 @@ export default function OrdersTab({ orders: initialOrders }: OrdersTabProps) {
                 <div
                   className={`px-6 py-3 text-center text-sm font-medium ${
                     order.status === 'delivered'
-                      ? 'bg-green-50 text-green-700'
+                      ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400'
                       : order.status === 'cancelled'
-                        ? 'bg-red-50 text-red-700'
-                        : 'bg-gray-50 text-gray-700'
+                        ? 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400'
+                        : 'bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                   }`}
                 >
                   {order.status === 'delivered' && (

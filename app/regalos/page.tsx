@@ -166,7 +166,7 @@ export default function GiftsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
       <div className="relative bg-linear-to-br from-primary-600 via-primary-700 to-primary-800 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -199,10 +199,10 @@ export default function GiftsPage() {
       </div>
 
       {/* Filters Section - NEW */}
-      <div className="bg-white shadow-md sticky top-0 z-10 border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-10 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center gap-4 overflow-x-auto">
-            <div className="flex items-center gap-2 text-gray-700 font-semibold whitespace-nowrap">
+            <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300 font-semibold whitespace-nowrap">
               <Filter className="w-5 h-5" />
               Filtrar por:
             </div>
@@ -211,7 +211,7 @@ export default function GiftsPage() {
             <select
               value={occasionFilter}
               onChange={(e) => setOccasionFilter(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 font-medium"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 font-medium bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             >
               <option value="all">Todas las Ocasiones</option>
               {occasions.map((occasion) => (
@@ -225,7 +225,7 @@ export default function GiftsPage() {
             <select
               value={priceFilter}
               onChange={(e) => setPriceFilter(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 font-medium"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 font-medium bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             >
               {priceRanges.map((range) => (
                 <option key={range.id} value={range.id}>
@@ -241,7 +241,7 @@ export default function GiftsPage() {
                   setOccasionFilter('all');
                   setPriceFilter('all');
                 }}
-                className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold hover:bg-primary-200 transition whitespace-nowrap"
+                className="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-semibold hover:bg-primary-200 dark:hover:bg-primary-900/50 transition whitespace-nowrap"
               >
                 Limpiar Filtros
               </button>
@@ -253,8 +253,10 @@ export default function GiftsPage() {
       {/* Occasions Grid */}
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Regalos por Ocasión</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Regalos por Ocasión
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Encuentra el regalo perfecto para cada momento especial
           </p>
         </div>
@@ -293,13 +295,13 @@ export default function GiftsPage() {
       </div>
 
       {/* Curated Collections */}
-      <div className="bg-white py-16">
+      <div className="bg-white dark:bg-gray-800 py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               Colecciones Curadas
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               Selecciones especiales de nuestros mejores productos artesanales
             </p>
           </div>
@@ -311,7 +313,7 @@ export default function GiftsPage() {
                 <Link
                   key={index}
                   href={ROUTES.PRODUCTS}
-                  className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all"
+                  className="group bg-white dark:bg-gray-700 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all"
                 >
                   <div className="relative h-64">
                     <Image
@@ -330,11 +332,11 @@ export default function GiftsPage() {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition">
                       {collection.title}
                     </h3>
-                    <p className="text-gray-600">{collection.description}</p>
-                    <div className="mt-4 flex items-center gap-2 text-primary-600 font-semibold text-sm">
+                    <p className="text-gray-600 dark:text-gray-400">{collection.description}</p>
+                    <div className="mt-4 flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold text-sm">
                       Ver Colección
                       <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
@@ -347,11 +349,15 @@ export default function GiftsPage() {
       </div>
 
       {/* Price Range Filter */}
-      <div className="bg-gray-50 py-12">
+      <div className="bg-gray-50 dark:bg-gray-900 py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Compra por Presupuesto</h2>
-            <p className="text-gray-600">Encuentra el regalo perfecto dentro de tu presupuesto</p>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Compra por Presupuesto
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400">
+              Encuentra el regalo perfecto dentro de tu presupuesto
+            </p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -362,7 +368,7 @@ export default function GiftsPage() {
                 className={`px-6 py-3 rounded-lg font-semibold transition ${
                   priceFilter === range.id
                     ? 'bg-primary-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-md'
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -378,8 +384,10 @@ export default function GiftsPage() {
       {/* Gift Guides */}
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Guías de Regalo</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Guías de Regalo
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Ideas organizadas para ayudarte a encontrar el regalo ideal
           </p>
         </div>
@@ -389,7 +397,7 @@ export default function GiftsPage() {
             <Link
               key={index}
               href={ROUTES.PRODUCTS}
-              className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all"
+              className="group bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all"
             >
               <div className="relative h-48">
                 <Image
@@ -406,8 +414,11 @@ export default function GiftsPage() {
               <div className="p-4">
                 <ul className="space-y-2">
                   {guide.items.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-gray-600">
-                      <ChevronRight className="w-4 h-4 text-primary-600" />
+                    <li
+                      key={idx}
+                      className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400"
+                    >
+                      <ChevronRight className="w-4 h-4 text-primary-600 dark:text-primary-400" />
                       {item}
                     </li>
                   ))}
@@ -449,16 +460,16 @@ export default function GiftsPage() {
 
       {/* CTA Section */}
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
           ¿Necesitas Ayuda para Elegir?
         </h2>
-        <p className="text-xl text-gray-600 mb-8">
+        <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
           Nuestro equipo puede ayudarte a encontrar el regalo perfecto
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href={ROUTES.HELP}
-            className="px-8 py-4 bg-gray-100 text-gray-900 rounded-lg hover:bg-gray-200 transition font-bold text-lg"
+            className="px-8 py-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition font-bold text-lg"
           >
             Contactar Soporte
           </Link>

@@ -10,26 +10,28 @@ export const metadata: Metadata = {
 
 export default function LegalNoticePage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
         <Link
           href={ROUTES.HOME}
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition"
+          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-6 transition"
         >
           <ArrowLeft className="w-5 h-5" />
           Volver al inicio
         </Link>
 
         {/* Header */}
-        <div className="bg-white rounded-xl shadow-md p-8 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mb-6">
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 bg-primary-100 rounded-lg">
-              <FileText className="w-8 h-8 text-primary-600" />
+            <div className="p-3 bg-primary-100 dark:bg-primary-900/50 rounded-lg">
+              <FileText className="w-8 h-8 text-primary-600 dark:text-primary-400" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Aviso Legal</h1>
-              <p className="text-gray-600 mt-1">Información legal y corporativa</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Aviso Legal</h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">
+                Información legal y corporativa
+              </p>
             </div>
           </div>
         </div>
@@ -37,34 +39,38 @@ export default function LegalNoticePage() {
         {/* Main Content */}
         <div className="space-y-6">
           {/* Identificación */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <Building className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">1. Identificación del Titular</h2>
+              <Building className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                1. Identificación del Titular
+              </h2>
             </div>
             <div className="prose prose-gray max-w-none">
-              <div className="bg-gray-50 rounded-lg p-6 space-y-3">
+              <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 space-y-3">
                 <div className="flex items-start gap-3">
-                  <Building className="w-5 h-5 text-gray-600 shrink-0 mt-1" />
+                  <Building className="w-5 h-5 text-gray-600 dark:text-gray-400 shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-gray-900">Razón Social:</p>
-                    <p className="text-gray-700">Papalote Market S.A. de C.V.</p>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">Razón Social:</p>
+                    <p className="text-gray-700 dark:text-gray-300">Papalote Market S.A. de C.V.</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <FileText className="w-5 h-5 text-gray-600 shrink-0 mt-1" />
+                  <FileText className="w-5 h-5 text-gray-600 dark:text-gray-400 shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-gray-900">RFC:</p>
-                    <p className="text-gray-700">HEM123456789</p>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">RFC:</p>
+                    <p className="text-gray-700 dark:text-gray-300">HEM123456789</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-gray-600 shrink-0 mt-1" />
+                  <MapPin className="w-5 h-5 text-gray-600 dark:text-gray-400 shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-gray-900">Domicilio Fiscal:</p>
-                    <p className="text-gray-700">
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">
+                      Domicilio Fiscal:
+                    </p>
+                    <p className="text-gray-700 dark:text-gray-300">
                       Av. Reforma 123
                       <br />
                       Col. Juárez, C.P. 06600
@@ -77,12 +83,12 @@ export default function LegalNoticePage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-gray-600 shrink-0 mt-1" />
+                  <Mail className="w-5 h-5 text-gray-600 dark:text-gray-400 shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-gray-900">Email:</p>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">Email:</p>
                     <a
                       href="mailto:legal@@papalotemarket.com"
-                      className="text-primary-600 hover:underline"
+                      className="text-primary-600 dark:text-primary-400 hover:underline"
                     >
                       legal@@papalotemarket.com
                     </a>
@@ -90,10 +96,10 @@ export default function LegalNoticePage() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-gray-600 shrink-0 mt-1" />
+                  <Phone className="w-5 h-5 text-gray-600 dark:text-gray-400 shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-gray-900">Teléfono:</p>
-                    <p className="text-gray-700">+52 55 1234 5678</p>
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">Teléfono:</p>
+                    <p className="text-gray-700 dark:text-gray-300">+52 55 1234 5678</p>
                   </div>
                 </div>
               </div>
@@ -101,9 +107,11 @@ export default function LegalNoticePage() {
           </section>
 
           {/* Objeto del Sitio Web */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Objeto del Sitio Web</h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              2. Objeto del Sitio Web
+            </h2>
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Papalote Market es una plataforma de comercio electrónico que conecta a artesanos
                 mexicanos con compradores interesados en productos artesanales auténticos y de alta
@@ -118,9 +126,11 @@ export default function LegalNoticePage() {
           </section>
 
           {/* Condiciones de Uso */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Condiciones de Uso</h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              3. Condiciones de Uso
+            </h2>
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 El acceso y uso de este sitio web atribuye la condición de usuario y supone la
                 aceptación plena de todas las condiciones incluidas en este Aviso Legal, los
@@ -134,11 +144,11 @@ export default function LegalNoticePage() {
           </section>
 
           {/* Propiedad Intelectual */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               4. Propiedad Intelectual e Industrial
             </h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Todos los contenidos del sitio web, incluyendo pero no limitado a textos,
                 fotografías, gráficos, imágenes, iconos, tecnología, software, links y demás
@@ -160,11 +170,11 @@ export default function LegalNoticePage() {
           </section>
 
           {/* Exclusión de Garantías */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               5. Exclusión de Garantías y Responsabilidad
             </h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <h3 className="text-lg font-bold mt-4 mb-2">5.1 Contenido del Sitio</h3>
               <p>
                 Papalote Market no garantiza la licitud, fiabilidad, exactitud, exhaustividad y
@@ -197,14 +207,14 @@ export default function LegalNoticePage() {
           </section>
 
           {/* Protección de Datos */}
-          <section className="bg-white rounded-xl shadow-md p-6">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
             <div className="flex items-center gap-3 mb-4">
-              <Shield className="w-6 h-6 text-primary-600" />
-              <h2 className="text-2xl font-bold text-gray-900">
+              <Shield className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                 6. Protección de Datos Personales
               </h2>
             </div>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 De conformidad con la Ley Federal de Protección de Datos Personales en Posesión de
                 los Particulares (LFPDPPP), Papalote Market S.A. de C.V. es responsable del
@@ -213,7 +223,10 @@ export default function LegalNoticePage() {
               <p>
                 Los datos personales que recabamos serán utilizados para las finalidades descritas
                 en nuestro{' '}
-                <Link href={ROUTES.PRIVACY} className="text-primary-600 hover:underline">
+                <Link
+                  href={ROUTES.PRIVACY}
+                  className="text-primary-600 dark:text-primary-400 hover:underline"
+                >
                   Aviso de Privacidad
                 </Link>
                 , el cual ponemos a tu disposición para su consulta.
@@ -223,7 +236,7 @@ export default function LegalNoticePage() {
                 puedes contactarnos en{' '}
                 <a
                   href="mailto:privacidad@@papalotemarket.com"
-                  className="text-primary-600 hover:underline"
+                  className="text-primary-600 dark:text-primary-400 hover:underline"
                 >
                   privacidad@@papalotemarket.com
                 </a>
@@ -232,11 +245,11 @@ export default function LegalNoticePage() {
           </section>
 
           {/* Legislación Aplicable */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               7. Legislación Aplicable y Jurisdicción
             </h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Este Aviso Legal se rige por la legislación mexicana vigente. Para cualquier
                 controversia que pudiera derivarse del acceso o uso del sitio web, las partes se
@@ -247,29 +260,31 @@ export default function LegalNoticePage() {
           </section>
 
           {/* Contacto */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Contacto</h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              8. Contacto
+            </h2>
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Para cualquier consulta relacionada con este Aviso Legal o con el funcionamiento del
                 sitio web, puedes contactarnos a través de:
               </p>
               <ul className="list-none ml-0 space-y-2">
                 <li className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-primary-600" />
+                  <Mail className="w-4 h-4 text-primary-600 dark:text-primary-400" />
                   <a
                     href="mailto:legal@@papalotemarket.com"
-                    className="text-primary-600 hover:underline"
+                    className="text-primary-600 dark:text-primary-400 hover:underline"
                   >
                     legal@@papalotemarket.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-primary-600" />
+                  <Phone className="w-4 h-4 text-primary-600 dark:text-primary-400" />
                   <span>+52 55 1234 5678</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 text-primary-600 shrink-0 mt-1" />
+                  <MapPin className="w-4 h-4 text-primary-600 dark:text-primary-400 shrink-0 mt-1" />
                   <span>
                     Av. Reforma 123, Col. Juárez
                     <br />
@@ -281,33 +296,35 @@ export default function LegalNoticePage() {
           </section>
 
           {/* Related Links */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3 className="font-bold text-gray-900 mb-4">Documentos Legales Relacionados</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Documentos Legales Relacionados
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Link
                 href={ROUTES.TERMS}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <FileText className="w-4 h-4" />
                 <span>Términos y Condiciones</span>
               </Link>
               <Link
                 href={ROUTES.PRIVACY}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <Shield className="w-4 h-4" />
                 <span>Política de Privacidad</span>
               </Link>
               <Link
                 href={ROUTES.COOKIES}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <FileText className="w-4 h-4" />
                 <span>Política de Cookies</span>
               </Link>
               <Link
                 href={ROUTES.RETURNS_POLICY}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <FileText className="w-4 h-4" />
                 <span>Política de Devoluciones</span>

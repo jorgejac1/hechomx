@@ -172,18 +172,20 @@ function OrdersContent({ user }: { user: User }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Mis Pedidos</h1>
-          <p className="text-gray-600 mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
+            Mis Pedidos
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
             {orders.length} {orders.length === 1 ? 'pedido' : 'pedidos'} en total
           </p>
         </div>
 
         {/* Filters & Search */}
-        <div className="bg-white rounded-xl shadow-md p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 mb-6">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1">
@@ -194,18 +196,18 @@ function OrdersContent({ user }: { user: User }) {
                   placeholder="Buscar por número de pedido o producto..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
             </div>
 
             {/* Status Filter */}
             <div className="flex items-center gap-2">
-              <Filter className="w-5 h-5 text-gray-600" />
+              <Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value="all">Todos los estados</option>
                 <option value="processing">Procesando</option>
@@ -234,7 +236,7 @@ function OrdersContent({ user }: { user: User }) {
           }
           emptyIcon={<Package className="w-16 h-16 text-gray-400" />}
           className="space-y-4"
-          itemClassName="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+          itemClassName="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
           renderItem={(order) => {
             const statusConfig = ORDER_STATUS_CONFIG[order.status];
             const StatusIcon = statusConfig.icon;
@@ -242,11 +244,13 @@ function OrdersContent({ user }: { user: User }) {
             return (
               <>
                 {/* Order Header */}
-                <div className="p-4 sm:p-6 border-b border-gray-200">
+                <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <p className="font-bold text-gray-900">Pedido #{order.id}</p>
+                        <p className="font-bold text-gray-900 dark:text-gray-100">
+                          Pedido #{order.id}
+                        </p>
                         <span
                           className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold border ${statusConfig.color}`}
                         >
@@ -254,17 +258,19 @@ function OrdersContent({ user }: { user: User }) {
                           {statusConfig.label}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
                         {formatRelativeTime(order.date)} • {order.itemsCount}{' '}
                         {order.itemsCount === 1 ? 'producto' : 'productos'}
                       </p>
                     </div>
                     <div className="text-left sm:text-right">
-                      <p className="text-2xl font-bold text-primary-600">
+                      <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">
                         {formatCurrency(order.total)}
                       </p>
                       {order.tracking && (
-                        <p className="text-xs text-gray-600 mt-1">Rastreo: {order.tracking}</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                          Rastreo: {order.tracking}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -274,7 +280,10 @@ function OrdersContent({ user }: { user: User }) {
                 <div className="p-4 sm:p-6">
                   <div className="space-y-3">
                     {order.items.map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                      <div
+                        key={idx}
+                        className="flex items-center gap-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+                      >
                         <Image
                           src={item.image}
                           alt={item.name}
@@ -283,14 +292,18 @@ function OrdersContent({ user }: { user: User }) {
                           className="rounded-lg object-cover"
                         />
                         <div className="flex-1">
-                          <p className="font-semibold text-gray-900 mb-1">{item.name}</p>
-                          <p className="text-sm text-gray-600 mb-1">{item.artisan.shopName}</p>
+                          <p className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                            {item.name}
+                          </p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                            {item.artisan.shopName}
+                          </p>
                           <div className="flex items-center gap-3 text-sm">
-                            <span className="text-gray-600">
+                            <span className="text-gray-600 dark:text-gray-400">
                               Cantidad: <strong>{item.quantity}</strong>
                             </span>
-                            <span className="text-gray-400">•</span>
-                            <span className="font-bold text-primary-600">
+                            <span className="text-gray-400 dark:text-gray-500">•</span>
+                            <span className="font-bold text-primary-600 dark:text-primary-400">
                               {formatCurrency(item.price)}
                             </span>
                           </div>
@@ -334,7 +347,7 @@ function OrdersContent({ user }: { user: User }) {
                   <div className="mt-4 flex flex-wrap gap-3">
                     <button
                       onClick={() => setSelectedOrder(order)}
-                      className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium text-sm"
+                      className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-medium text-sm text-gray-900 dark:text-gray-100"
                     >
                       Ver Detalles
                       <ChevronRight className="w-4 h-4" />

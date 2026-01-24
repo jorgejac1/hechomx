@@ -11,29 +11,33 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
         <Link
           href={ROUTES.HOME}
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition"
+          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-6 transition"
         >
           <ArrowLeft className="w-5 h-5" />
           Volver al inicio
         </Link>
 
         {/* Header */}
-        <div className="bg-white rounded-xl shadow-md p-8 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mb-6">
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 bg-primary-100 rounded-lg">
-              <FileText className="w-8 h-8 text-primary-600" />
+            <div className="p-3 bg-primary-100 dark:bg-primary-900/50 rounded-lg">
+              <FileText className="w-8 h-8 text-primary-600 dark:text-primary-400" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Términos y Condiciones</h1>
-              <p className="text-gray-600 mt-1">Última actualización: Noviembre 2024</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                Términos y Condiciones
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">
+                Última actualización: Noviembre 2024
+              </p>
             </div>
           </div>
-          <p className="text-gray-700 leading-relaxed">
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
             Al acceder y utilizar Papalote Market, aceptas estar sujeto a estos términos y
             condiciones. Por favor, léelos cuidadosamente antes de usar nuestra plataforma.
           </p>
@@ -42,12 +46,12 @@ export default function TermsPage() {
         {/* Main Content */}
         <div className="space-y-6">
           {/* Aceptación */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <CheckCircle className="w-6 h-6 text-primary-600" />
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <CheckCircle className="w-6 h-6 text-primary-600 dark:text-primary-400" />
               1. Aceptación de Términos
             </h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Al acceder y utilizar Papalote Market (el "Sitio"), aceptas cumplir con estos
                 Términos y Condiciones ("Términos"). Si no estás de acuerdo con alguna parte de
@@ -62,9 +66,11 @@ export default function TermsPage() {
           </section>
 
           {/* Uso del Sitio */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Uso del Sitio</h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              2. Uso del Sitio
+            </h2>
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <h3 className="text-lg font-bold mt-4 mb-2">2.1 Elegibilidad</h3>
               <p>
                 Debes tener al menos 18 años para usar nuestro Sitio y realizar compras. Al usar el
@@ -96,9 +102,11 @@ export default function TermsPage() {
           </section>
 
           {/* Compras */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Compras y Pagos</h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              3. Compras y Pagos
+            </h2>
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <h3 className="text-lg font-bold mt-4 mb-2">3.1 Productos</h3>
               <p>
                 Los productos artesanales listados en el Sitio son vendidos directamente por
@@ -125,9 +133,11 @@ export default function TermsPage() {
           </section>
 
           {/* Envíos */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Envíos y Entregas</h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              4. Envíos y Entregas
+            </h2>
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Los tiempos de envío son estimados y pueden variar. No somos responsables por
                 retrasos causados por la paquetería, condiciones climáticas, o eventos fuera de
@@ -142,9 +152,11 @@ export default function TermsPage() {
           </section>
 
           {/* Devoluciones */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Devoluciones y Reembolsos</h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              5. Devoluciones y Reembolsos
+            </h2>
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Nuestra política de devoluciones permite devolver la mayoría de los productos dentro
                 de los 30 días posteriores a la recepción. Los productos personalizados o hechos
@@ -159,9 +171,11 @@ export default function TermsPage() {
           </section>
 
           {/* Propiedad Intelectual */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Propiedad Intelectual</h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              6. Propiedad Intelectual
+            </h2>
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Todo el contenido del Sitio, incluyendo textos, gráficos, logos, imágenes, videos y
                 software, es propiedad de Papalote Market o sus proveedores de contenido y está
@@ -176,11 +190,11 @@ export default function TermsPage() {
           </section>
 
           {/* Limitación de Responsabilidad */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               7. Limitación de Responsabilidad
             </h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Papalote Market actúa como plataforma intermediaria entre compradores y artesanos.
                 No fabricamos los productos y no somos responsables por defectos de fabricación,
@@ -195,9 +209,11 @@ export default function TermsPage() {
           </section>
 
           {/* Para Vendedores */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Términos para Vendedores</h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              8. Términos para Vendedores
+            </h2>
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <h3 className="text-lg font-bold mt-4 mb-2">8.1 Registro</h3>
               <p>
                 Los artesanos deben completar un proceso de verificación antes de vender en la
@@ -224,11 +240,11 @@ export default function TermsPage() {
           </section>
 
           {/* Ley Aplicable */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               9. Ley Aplicable y Jurisdicción
             </h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>
                 Estos Términos se regirán e interpretarán de acuerdo con las leyes de los Estados
                 Unidos Mexicanos. Cualquier disputa relacionada con estos Términos estará sujeta a
@@ -238,16 +254,18 @@ export default function TermsPage() {
           </section>
 
           {/* Contacto */}
-          <section className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">10. Contacto</h2>
-            <div className="prose prose-gray max-w-none text-gray-700">
+          <section className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              10. Contacto
+            </h2>
+            <div className="prose prose-gray max-w-none text-gray-700 dark:text-gray-300">
               <p>Si tienes preguntas sobre estos Términos y Condiciones, contáctanos en:</p>
               <ul className="list-none ml-0 space-y-1">
                 <li>
                   <strong>Email:</strong>{' '}
                   <a
                     href="mailto:legal@@papalotemarket.com"
-                    className="text-primary-600 hover:underline"
+                    className="text-primary-600 dark:text-primary-400 hover:underline"
                   >
                     legal@@papalotemarket.com
                   </a>
@@ -270,33 +288,35 @@ export default function TermsPage() {
           </Alert>
 
           {/* Related Links */}
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h3 className="font-bold text-gray-900 mb-4">Políticas Relacionadas</h3>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Políticas Relacionadas
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Link
                 href={ROUTES.PRIVACY}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <Shield className="w-4 h-4" />
                 <span>Política de Privacidad</span>
               </Link>
               <Link
                 href={ROUTES.RETURNS_POLICY}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <FileText className="w-4 h-4" />
                 <span>Política de Devoluciones</span>
               </Link>
               <Link
                 href={ROUTES.COOKIES}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <FileText className="w-4 h-4" />
                 <span>Política de Cookies</span>
               </Link>
               <Link
                 href={ROUTES.SHIPPING_POLICY}
-                className="flex items-center gap-2 text-primary-600 hover:text-primary-700 transition"
+                className="flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition"
               >
                 <FileText className="w-4 h-4" />
                 <span>Política de Envíos</span>

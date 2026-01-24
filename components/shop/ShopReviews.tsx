@@ -27,10 +27,14 @@ interface ShopReviewsProps {
 export default function ShopReviews({ reviews }: ShopReviewsProps) {
   if (reviews.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-xs p-8 text-center">
-        <MessageSquare className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Sin reseñas aún</h3>
-        <p className="text-gray-600">Esta tienda aún no tiene reseñas de clientes.</p>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs p-8 text-center">
+        <MessageSquare className="w-16 h-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+          Sin reseñas aún
+        </h3>
+        <p className="text-gray-600 dark:text-gray-400">
+          Esta tienda aún no tiene reseñas de clientes.
+        </p>
       </div>
     );
   }
@@ -48,11 +52,13 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
   return (
     <div className="space-y-6">
       {/* Rating Summary */}
-      <div className="bg-white rounded-xl shadow-xs p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Average Rating */}
           <div className="text-center">
-            <p className="text-6xl font-bold text-gray-900 mb-2">{averageRating.toFixed(1)}</p>
+            <p className="text-6xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+              {averageRating.toFixed(1)}
+            </p>
             <div className="flex items-center justify-center mb-2">
               <StarRating
                 rating={averageRating}
@@ -61,7 +67,7 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
                 productId="shop-average"
               />
             </div>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               Basado en {reviews.length} {reviews.length === 1 ? 'reseña' : 'reseñas'}
             </p>
           </div>
@@ -74,14 +80,18 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
 
               return (
                 <div key={rating} className="flex items-center gap-3">
-                  <span className="text-sm font-medium text-gray-700 w-12">{rating} est.</span>
-                  <div className="flex-1 h-4 bg-gray-200 rounded-full overflow-hidden">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 w-12">
+                    {rating} est.
+                  </span>
+                  <div className="flex-1 h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-yellow-400 transition-all"
+                      className="h-full bg-yellow-400 dark:bg-yellow-500 transition-all"
                       style={{ width: `${percentage}%` }}
                     />
                   </div>
-                  <span className="text-sm text-gray-600 w-12 text-right">{count}</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400 w-12 text-right">
+                    {count}
+                  </span>
                 </div>
               );
             })}
@@ -92,7 +102,7 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
       {/* Reviews List */}
       <div className="space-y-4">
         {reviews.map((review) => (
-          <div key={review.id} className="bg-white rounded-xl shadow-xs p-6">
+          <div key={review.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6">
             {/* Reviewer Info */}
             <div className="flex items-start gap-4 mb-4">
               <Avatar
@@ -104,8 +114,12 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
 
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-1">
-                  <h4 className="font-semibold text-gray-900">{review.buyerName}</h4>
-                  <span className="text-sm text-gray-500">{formatRelativeTime(review.date)}</span>
+                  <h4 className="font-semibold text-gray-900 dark:text-gray-100">
+                    {review.buyerName}
+                  </h4>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    {formatRelativeTime(review.date)}
+                  </span>
                 </div>
 
                 <div className="flex items-center gap-2 mb-2">
@@ -116,26 +130,30 @@ export default function ShopReviews({ reviews }: ShopReviewsProps) {
                     productId={review.id}
                   />
                   {review.productName && (
-                    <span className="text-sm text-gray-500">· {review.productName}</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      · {review.productName}
+                    </span>
                   )}
                 </div>
 
-                <p className="text-gray-700 mb-3">{review.comment}</p>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">{review.comment}</p>
 
                 {/* Helpful Button */}
-                <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition">
+                <button className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition">
                   <ThumbsUp className="w-4 h-4" />
                   <span>Útil ({review.helpful})</span>
                 </button>
 
                 {/* Seller Response */}
                 {review.response && (
-                  <div className="mt-4 pl-4 border-l-2 border-primary-200 bg-primary-50 p-4 rounded-r-lg">
-                    <p className="text-sm font-semibold text-gray-900 mb-1">
+                  <div className="mt-4 pl-4 border-l-2 border-primary-200 dark:border-primary-700 bg-primary-50 dark:bg-primary-900/30 p-4 rounded-r-lg">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
                       Respuesta del vendedor
                     </p>
-                    <p className="text-sm text-gray-700 mb-2">{review.response.text}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                      {review.response.text}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
                       {formatRelativeTime(review.response.date)}
                     </p>
                   </div>

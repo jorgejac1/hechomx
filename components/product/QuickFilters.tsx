@@ -35,7 +35,9 @@ function FilterPresetsContent() {
 
   return (
     <div className="mb-6">
-      <h3 className="text-sm font-semibold text-gray-700 mb-3">Filtros rápidos:</h3>
+      <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+        Filtros rápidos:
+      </h3>
       <div className="flex gap-3 flex-wrap">
         {FILTER_PRESETS.map((preset) => {
           const isActive = matchesPreset(searchParams, preset);
@@ -47,7 +49,7 @@ function FilterPresetsContent() {
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
                 isActive
                   ? 'bg-primary-600 text-white shadow-md'
-                  : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-primary-500'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-2 border-gray-300 dark:border-gray-600 hover:border-primary-500 dark:hover:border-primary-400'
               }`}
               title={preset.description}
             >
@@ -63,7 +65,9 @@ function FilterPresetsContent() {
 
 export default function QuickFilters() {
   return (
-    <Suspense fallback={<div className="h-16 animate-pulse bg-gray-200 rounded-lg" />}>
+    <Suspense
+      fallback={<div className="h-16 animate-pulse bg-gray-200 dark:bg-gray-700 rounded-lg" />}
+    >
       <FilterPresetsContent />
     </Suspense>
   );

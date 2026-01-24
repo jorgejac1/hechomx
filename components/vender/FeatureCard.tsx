@@ -16,15 +16,15 @@ export default function FeatureCard({
   description,
 }: FeatureCardProps) {
   return (
-    <div className="flex gap-4 p-6 bg-gray-50 rounded-xl">
+    <div className="flex gap-4 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl">
       <div
-        className={`w-12 h-12 ${iconBg} rounded-lg flex items-center justify-center shrink-0`}
+        className={`w-12 h-12 ${iconBg} dark:opacity-80 rounded-lg flex items-center justify-center shrink-0`}
       >
         <Icon className={`w-6 h-6 ${iconColor}`} />
       </div>
       <div>
-        <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
-        <p className="text-gray-600">{description}</p>
+        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">{title}</h3>
+        <p className="text-gray-600 dark:text-gray-400">{description}</p>
       </div>
     </div>
   );

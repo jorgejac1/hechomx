@@ -116,11 +116,13 @@ export default function CheckoutPageClient() {
   if (cartCount === 0) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-        <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-6">
+        <div className="w-20 h-20 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-6">
           <AlertCircle className="w-10 h-10 text-gray-400" />
         </div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Tu carrito está vacío</h2>
-        <p className="text-gray-600 mb-6 max-w-md">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+          Tu carrito está vacío
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md">
           Agrega algunos productos a tu carrito para continuar con la compra.
         </p>
         <Link
@@ -138,25 +140,27 @@ export default function CheckoutPageClient() {
   if (hasStockIssues && currentStep === 'shipping') {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-        <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mb-6">
-          <AlertTriangle className="w-10 h-10 text-amber-600" />
+        <div className="w-20 h-20 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center mb-6">
+          <AlertTriangle className="w-10 h-10 text-amber-600 dark:text-amber-400" />
         </div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
           Algunos productos no están disponibles
         </h2>
-        <p className="text-gray-600 mb-6 max-w-md">
+        <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md">
           Los siguientes productos en tu carrito ya no están en stock:
         </p>
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6 max-w-md w-full">
+        <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6 max-w-md w-full">
           <ul className="space-y-2">
             {outOfStockItems.map((item) => (
               <li key={item.id} className="flex items-center gap-3 text-left">
-                <div className="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden shrink-0 relative">
+                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shrink-0 relative">
                   <Image src={item.images[0]} alt={item.name} fill className="object-cover" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900 text-sm">{item.name}</p>
-                  <p className="text-xs text-amber-700">No disponible</p>
+                  <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">
+                    {item.name}
+                  </p>
+                  <p className="text-xs text-amber-700 dark:text-amber-400">No disponible</p>
                 </div>
               </li>
             ))}
@@ -175,7 +179,7 @@ export default function CheckoutPageClient() {
                 removeFromCart(item.id);
               });
             }}
-            className="inline-flex items-center justify-center gap-2 border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+            className="inline-flex items-center justify-center gap-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
             Eliminar productos agotados
           </button>
@@ -359,7 +363,7 @@ export default function CheckoutPageClient() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Auth Required Modal */}
       <AuthRequiredModal
         isOpen={showAuthModal}
@@ -370,7 +374,7 @@ export default function CheckoutPageClient() {
       />
 
       {/* Header */}
-      <div className="bg-white border-b sticky top-0 z-10">
+      <div className="bg-white dark:bg-gray-800 border-b dark:border-gray-700 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <button
@@ -383,7 +387,7 @@ export default function CheckoutPageClient() {
                   setCurrentStep('payment');
                 }
               }}
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
               <span className="hidden sm:inline">
@@ -410,11 +414,13 @@ export default function CheckoutPageClient() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Form Section */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-md p-6 sm:p-8">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 sm:p-8">
               {/* Shipping Step */}
               {currentStep === 'shipping' && (
                 <>
-                  <h1 className="text-2xl font-bold text-gray-900 mb-6">Dirección de envío</h1>
+                  <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+                    Dirección de envío
+                  </h1>
                   <ShippingForm
                     value={shippingAddress}
                     onChange={setShippingAddress}
@@ -422,15 +428,15 @@ export default function CheckoutPageClient() {
                   />
 
                   {/* Save Address Checkbox */}
-                  <div className="mt-6 pt-6 border-t">
+                  <div className="mt-6 pt-6 border-t dark:border-gray-700">
                     <label className="flex items-center gap-3 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={saveAddressChecked}
                         onChange={(e) => setSaveAddressChecked(e.target.checked)}
-                        className="h-4 w-4 rounded-sm border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="h-4 w-4 rounded-sm border-gray-300 dark:border-gray-600 text-primary-600 focus:ring-primary-500 bg-white dark:bg-gray-700"
                       />
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
                         Guardar esta dirección para futuras compras
                       </span>
                     </label>
@@ -452,7 +458,9 @@ export default function CheckoutPageClient() {
               {/* Payment Step */}
               {currentStep === 'payment' && (
                 <>
-                  <h1 className="text-2xl font-bold text-gray-900 mb-6">Método de pago</h1>
+                  <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+                    Método de pago
+                  </h1>
                   <PaymentMethodSelector
                     value={paymentMethod}
                     onChange={setPaymentMethod}
@@ -475,49 +483,55 @@ export default function CheckoutPageClient() {
               {/* Review Step */}
               {currentStep === 'review' && (
                 <>
-                  <h1 className="text-2xl font-bold text-gray-900 mb-6">Confirmar pedido</h1>
+                  <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+                    Confirmar pedido
+                  </h1>
 
                   {/* Order Review */}
                   <div className="space-y-6">
                     {/* Shipping Summary */}
-                    <div className="p-4 bg-gray-50 rounded-lg">
+                    <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold text-gray-900">Enviar a:</h3>
+                        <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                          Enviar a:
+                        </h3>
                         <button
                           type="button"
                           onClick={() => setCurrentStep('shipping')}
-                          className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+                          className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
                         >
                           Cambiar
                         </button>
                       </div>
-                      <p className="text-gray-600">
+                      <p className="text-gray-600 dark:text-gray-400">
                         {shippingAddress.firstName} {shippingAddress.lastName}
                       </p>
-                      <p className="text-gray-600">
+                      <p className="text-gray-600 dark:text-gray-400">
                         {shippingAddress.street} {shippingAddress.streetNumber}
                         {shippingAddress.apartment && `, Int. ${shippingAddress.apartment}`}
                       </p>
-                      <p className="text-gray-600">
+                      <p className="text-gray-600 dark:text-gray-400">
                         {shippingAddress.neighborhood}, {shippingAddress.city},{' '}
                         {shippingAddress.state} {shippingAddress.postalCode}
                       </p>
-                      <p className="text-gray-600">{shippingAddress.phone}</p>
+                      <p className="text-gray-600 dark:text-gray-400">{shippingAddress.phone}</p>
                     </div>
 
                     {/* Payment Summary */}
-                    <div className="p-4 bg-gray-50 rounded-lg">
+                    <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold text-gray-900">Método de pago:</h3>
+                        <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                          Método de pago:
+                        </h3>
                         <button
                           type="button"
                           onClick={() => setCurrentStep('payment')}
-                          className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+                          className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
                         >
                           Cambiar
                         </button>
                       </div>
-                      <p className="text-gray-600 capitalize">
+                      <p className="text-gray-600 dark:text-gray-400 capitalize">
                         {paymentMethod === 'card' && 'Tarjeta de crédito o débito'}
                         {paymentMethod === 'mercadopago' && 'Mercado Pago'}
                         {paymentMethod === 'oxxo' && 'Pago en OXXO'}
@@ -532,17 +546,23 @@ export default function CheckoutPageClient() {
 
             {/* Trust Badges */}
             <div className="mt-6 grid grid-cols-3 gap-4">
-              <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg">
-                <ShieldCheck className="w-8 h-8 text-green-600 mb-2" />
-                <p className="text-xs sm:text-sm font-medium text-gray-700">Compra segura</p>
+              <div className="flex flex-col items-center text-center p-4 bg-white dark:bg-gray-800 rounded-lg">
+                <ShieldCheck className="w-8 h-8 text-green-600 dark:text-green-400 mb-2" />
+                <p className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Compra segura
+                </p>
               </div>
-              <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg">
-                <Truck className="w-8 h-8 text-blue-600 mb-2" />
-                <p className="text-xs sm:text-sm font-medium text-gray-700">Envío rastreable</p>
+              <div className="flex flex-col items-center text-center p-4 bg-white dark:bg-gray-800 rounded-lg">
+                <Truck className="w-8 h-8 text-blue-600 dark:text-blue-400 mb-2" />
+                <p className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Envío rastreable
+                </p>
               </div>
-              <div className="flex flex-col items-center text-center p-4 bg-white rounded-lg">
-                <RefreshCcw className="w-8 h-8 text-amber-600 mb-2" />
-                <p className="text-xs sm:text-sm font-medium text-gray-700">Devolución fácil</p>
+              <div className="flex flex-col items-center text-center p-4 bg-white dark:bg-gray-800 rounded-lg">
+                <RefreshCcw className="w-8 h-8 text-amber-600 dark:text-amber-400 mb-2" />
+                <p className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Devolución fácil
+                </p>
               </div>
             </div>
           </div>

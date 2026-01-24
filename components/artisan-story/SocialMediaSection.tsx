@@ -24,9 +24,11 @@ export default function SocialMediaSection({
       <div>
         <div className="flex items-center gap-2 mb-2">
           <Globe className="w-5 h-5 text-blue-600" />
-          <h2 className="text-xl font-bold text-gray-900">Redes Sociales (Opcional)</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+            Redes Sociales (Opcional)
+          </h2>
         </div>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Conecta tus redes sociales para que los clientes puedan seguirte
         </p>
       </div>
@@ -34,7 +36,7 @@ export default function SocialMediaSection({
       <div className="space-y-4">
         {/* Instagram */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
             <Instagram className="w-4 h-4 text-pink-600" />
             Instagram
           </label>
@@ -43,13 +45,13 @@ export default function SocialMediaSection({
             value={instagram || ''}
             onChange={(e) => onUpdate('instagram', e.target.value)}
             placeholder="https://instagram.com/tu_usuario"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-gray-100"
           />
         </div>
 
         {/* Facebook */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
             <Facebook className="w-4 h-4 text-blue-600" />
             Facebook
           </label>
@@ -58,13 +60,13 @@ export default function SocialMediaSection({
             value={facebook || ''}
             onChange={(e) => onUpdate('facebook', e.target.value)}
             placeholder="https://facebook.com/tu_pagina"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-gray-100"
           />
         </div>
 
         {/* YouTube */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
             <Youtube className="w-4 h-4 text-red-600" />
             YouTube
           </label>
@@ -73,14 +75,14 @@ export default function SocialMediaSection({
             value={youtube || ''}
             onChange={(e) => onUpdate('youtube', e.target.value)}
             placeholder="https://youtube.com/@tu_canal"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-gray-100"
           />
         </div>
 
         {/* TikTok */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-            <Video className="w-4 h-4 text-gray-900" />
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+            <Video className="w-4 h-4 text-gray-900 dark:text-gray-100" />
             TikTok
           </label>
           <input
@@ -88,14 +90,14 @@ export default function SocialMediaSection({
             value={tiktok || ''}
             onChange={(e) => onUpdate('tiktok', e.target.value)}
             placeholder="https://tiktok.com/@tu_usuario"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-gray-100"
           />
         </div>
 
         {/* Website */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-            <Globe className="w-4 h-4 text-primary-600" />
+          <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+            <Globe className="w-4 h-4 text-primary-600 dark:text-primary-400" />
             Sitio Web
           </label>
           <input
@@ -103,15 +105,17 @@ export default function SocialMediaSection({
             value={website || ''}
             onChange={(e) => onUpdate('website', e.target.value)}
             placeholder="https://tusitio.com"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-gray-100"
           />
         </div>
       </div>
 
       {/* Social Media Tips */}
-      <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-        <p className="text-sm text-blue-900 font-semibold mb-2">Consejos para redes sociales:</p>
-        <ul className="text-sm text-blue-800 space-y-1">
+      <div className="p-4 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg">
+        <p className="text-sm text-blue-900 dark:text-blue-100 font-semibold mb-2">
+          Consejos para redes sociales:
+        </p>
+        <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
           <li>• Comparte fotos del proceso detrás de tus productos</li>
           <li>• Publica regularmente para mantener a tus seguidores interesados</li>
           <li>• Responde a comentarios y mensajes rápidamente</li>

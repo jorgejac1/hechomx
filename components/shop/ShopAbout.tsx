@@ -36,37 +36,43 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
   return (
     <div className="space-y-6">
       {/* Story */}
-      <div className="bg-white rounded-xl shadow-xs p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Nuestra Historia</h2>
-        <p className="text-gray-700 leading-relaxed whitespace-pre-line">{profile.story}</p>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          Nuestra Historia
+        </h2>
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
+          {profile.story}
+        </p>
       </div>
 
       {/* Features */}
-      <div className="bg-white rounded-xl shadow-xs p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Características</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          Características
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {profile.features.customDesigns && (
-            <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
-              <span className="text-gray-900">Diseños personalizados</span>
+            <div className="flex items-center gap-3 p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+              <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0" />
+              <span className="text-gray-900 dark:text-gray-100">Diseños personalizados</span>
             </div>
           )}
           {profile.features.bulkOrders && (
-            <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
-              <span className="text-gray-900">Pedidos al mayoreo</span>
+            <div className="flex items-center gap-3 p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+              <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0" />
+              <span className="text-gray-900 dark:text-gray-100">Pedidos al mayoreo</span>
             </div>
           )}
           {profile.features.giftWrapping && (
-            <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
-              <span className="text-gray-900">Envoltorio para regalo</span>
+            <div className="flex items-center gap-3 p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+              <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0" />
+              <span className="text-gray-900 dark:text-gray-100">Envoltorio para regalo</span>
             </div>
           )}
           {profile.features.expressShipping && (
-            <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
-              <span className="text-gray-900">Envío express</span>
+            <div className="flex items-center gap-3 p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+              <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0" />
+              <span className="text-gray-900 dark:text-gray-100">Envío express</span>
             </div>
           )}
         </div>
@@ -76,10 +82,12 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Certifications */}
         {profile.certifications.length > 0 && (
-          <div className="bg-white rounded-xl shadow-xs p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6">
             <div className="flex items-center gap-2 mb-4">
-              <Award className="w-6 h-6 text-amber-600" />
-              <h3 className="text-xl font-bold text-gray-900">Certificaciones</h3>
+              <Award className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                Certificaciones
+              </h3>
             </div>
             <div className="space-y-2">
               {profile.certifications.map((cert, index) => (
@@ -93,10 +101,10 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
 
         {/* Specialties */}
         {profile.specialties.length > 0 && (
-          <div className="bg-white rounded-xl shadow-xs p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6">
             <div className="flex items-center gap-2 mb-4">
-              <Package className="w-6 h-6 text-primary-600" />
-              <h3 className="text-xl font-bold text-gray-900">Especialidades</h3>
+              <Package className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Especialidades</h3>
             </div>
             <div className="space-y-2">
               {profile.specialties.map((specialty, index) => (
@@ -112,16 +120,16 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
       {/* Shipping & Payment Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Shipping */}
-        <div className="bg-white rounded-xl shadow-xs p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Truck className="w-6 h-6 text-blue-600" />
-            <h3 className="text-xl font-bold text-gray-900">Envíos</h3>
+            <Truck className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Envíos</h3>
           </div>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">Nacional:</span>
+              <span className="text-gray-600 dark:text-gray-400">Nacional:</span>
               <span
-                className={`font-medium flex items-center gap-1 ${profile.shippingOptions.national ? 'text-green-600' : 'text-gray-500'}`}
+                className={`font-medium flex items-center gap-1 ${profile.shippingOptions.national ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-500'}`}
               >
                 {profile.shippingOptions.national ? (
                   <>
@@ -135,9 +143,9 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Internacional:</span>
+              <span className="text-gray-600 dark:text-gray-400">Internacional:</span>
               <span
-                className={`font-medium flex items-center gap-1 ${profile.shippingOptions.international ? 'text-green-600' : 'text-gray-500'}`}
+                className={`font-medium flex items-center gap-1 ${profile.shippingOptions.international ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-500'}`}
               >
                 {profile.shippingOptions.international ? (
                   <>
@@ -152,15 +160,15 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
             </div>
             {profile.shippingOptions.freeShippingOver && (
               <div className="flex justify-between">
-                <span className="text-gray-600">Envío gratis:</span>
-                <span className="font-medium text-gray-900">
+                <span className="text-gray-600 dark:text-gray-400">Envío gratis:</span>
+                <span className="font-medium text-gray-900 dark:text-gray-100">
                   ${profile.shippingOptions.freeShippingOver} MXN
                 </span>
               </div>
             )}
             <div className="flex justify-between">
-              <span className="text-gray-600">Tiempo de proceso:</span>
-              <span className="font-medium text-gray-900">
+              <span className="text-gray-600 dark:text-gray-400">Tiempo de proceso:</span>
+              <span className="font-medium text-gray-900 dark:text-gray-100">
                 {profile.shippingOptions.averageProcessingTime}
               </span>
             </div>
@@ -168,10 +176,10 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
         </div>
 
         {/* Payment Methods */}
-        <div className="bg-white rounded-xl shadow-xs p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6">
           <div className="flex items-center gap-2 mb-4">
-            <CreditCard className="w-6 h-6 text-green-600" />
-            <h3 className="text-xl font-bold text-gray-900">Formas de Pago</h3>
+            <CreditCard className="w-6 h-6 text-green-600 dark:text-green-400" />
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Formas de Pago</h3>
           </div>
           <div className="flex flex-wrap gap-2">
             {profile.paymentMethods.map((method, index) => (
@@ -209,16 +217,20 @@ export default function ShopAbout({ profile }: ShopAboutProps) {
 
       {/* Business Hours */}
       {profile.businessHours && (
-        <div className="bg-white rounded-xl shadow-xs p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Clock className="w-6 h-6 text-purple-600" />
-            <h3 className="text-xl font-bold text-gray-900">Horario de Atención</h3>
+            <Clock className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+              Horario de Atención
+            </h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {profile.businessHours.map((schedule, index) => (
               <div key={index} className="flex justify-between text-sm">
-                <span className="font-medium text-gray-900">{schedule.day}:</span>
-                <span className="text-gray-600">
+                <span className="font-medium text-gray-900 dark:text-gray-100">
+                  {schedule.day}:
+                </span>
+                <span className="text-gray-600 dark:text-gray-400">
                   {schedule.closed ? 'Cerrado' : `${schedule.open} - ${schedule.close}`}
                 </span>
               </div>

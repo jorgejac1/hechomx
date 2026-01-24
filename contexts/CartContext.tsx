@@ -11,12 +11,22 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { Product } from '@/types';
 
 /**
- * Cart item extending Product with quantity
+ * Cart item extending Product with quantity and optional size
  * @interface CartItem
  */
 interface CartItem extends Product {
   /** Number of this product in the cart */
   quantity: number;
+  /** Selected size for clothing/shoes/rings (if applicable) */
+  selectedSize?: string;
+}
+
+/**
+ * Generate a unique cart item ID that includes size
+ * Products with different sizes are treated as different items
+ */
+function getCartItemId(productId: string, size?: string): string {
+  return size ? `${productId}-${size}` : productId;
 }
 
 /**
@@ -27,11 +37,11 @@ interface CartContextType {
   cartItems: CartItem[];
   cartCount: number;
   cartTotal: number;
-  addToCart: (product: Product, quantity?: number) => void;
-  removeFromCart: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  addToCart: (product: Product, quantity?: number, selectedSize?: string) => void;
+  removeFromCart: (productId: string, selectedSize?: string) => void;
+  updateQuantity: (productId: string, quantity: number, selectedSize?: string) => void;
   clearCart: () => void;
-  isInCart: (productId: string) => boolean;
+  isInCart: (productId: string, selectedSize?: string) => boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -71,18 +81,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const addToCart = (product: Product, quantity: number = 1) => {
+  const addToCart = (product: Product, quantity: number = 1, selectedSize?: string) => {
+    const cartItemId = getCartItemId(product.id, selectedSize);
+
     setCartItems((prev) => {
-      const existingItem = prev.find((item) => item.id === product.id);
+      // Find existing item with same product ID AND size
+      const existingItem = prev.find(
+        (item) => getCartItemId(item.id, item.selectedSize) === cartItemId
+      );
 
       if (existingItem) {
-        // Update quantity if already in cart
+        // Update quantity if already in cart with same size
         return prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
+          getCartItemId(item.id, item.selectedSize) === cartItemId
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
         );
       } else {
-        // Add new item
-        return [...prev, { ...product, quantity }];
+        // Add new item with size
+        return [...prev, { ...product, quantity, selectedSize }];
       }
     });
 
@@ -97,24 +114,31 @@ export function CartProvider({ children }: { children: ReactNode }) {
             item_name: product.name,
             price: product.price,
             quantity: quantity,
+            item_variant: selectedSize,
           },
         ],
       });
     }
   };
 
-  const removeFromCart = (productId: string) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== productId));
+  const removeFromCart = (productId: string, selectedSize?: string) => {
+    const cartItemId = getCartItemId(productId, selectedSize);
+    setCartItems((prev) =>
+      prev.filter((item) => getCartItemId(item.id, item.selectedSize) !== cartItemId)
+    );
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = (productId: string, quantity: number, selectedSize?: string) => {
     if (quantity <= 0) {
-      removeFromCart(productId);
+      removeFromCart(productId, selectedSize);
       return;
     }
 
+    const cartItemId = getCartItemId(productId, selectedSize);
     setCartItems((prev) =>
-      prev.map((item) => (item.id === productId ? { ...item, quantity } : item))
+      prev.map((item) =>
+        getCartItemId(item.id, item.selectedSize) === cartItemId ? { ...item, quantity } : item
+      )
     );
   };
 
@@ -122,8 +146,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCartItems([]);
   };
 
-  const isInCart = (productId: string) => {
-    return cartItems.some((item) => item.id === productId);
+  const isInCart = (productId: string, selectedSize?: string) => {
+    const cartItemId = getCartItemId(productId, selectedSize);
+    return cartItems.some((item) => getCartItemId(item.id, item.selectedSize) === cartItemId);
   };
 
   return (

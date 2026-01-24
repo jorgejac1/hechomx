@@ -1,8 +1,9 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Calendar, User, Clock, ArrowRight } from 'lucide-react';
-import { ROUTES } from '@/lib';
+import { ArrowLeft, Calendar, User, Clock, ArrowRight, Search } from 'lucide-react';
+import { ROUTES, formatDate } from '@/lib';
+import { getBlogCategories, getBlogPosts } from '@/lib/data/blog-posts';
 
 export const metadata: Metadata = {
   title: 'Blog | Papalote Market',
@@ -10,139 +11,73 @@ export const metadata: Metadata = {
     'Descubre historias de artesanos, técnicas tradicionales y la cultura artesanal mexicana',
 };
 
-// Mock blog posts data
-const blogPosts = [
-  {
-    id: '1',
-    slug: 'talavera-puebla-tradicion',
-    title: 'La Talavera de Puebla: 500 Años de Tradición',
-    excerpt:
-      'Descubre la historia y el proceso detrás de una de las artesanías más emblemáticas de México, reconocida por la UNESCO como Patrimonio Cultural Inmaterial de la Humanidad.',
-    content: '',
-    author: 'María González',
-    date: '2024-11-10',
-    readTime: '8 min',
-    category: 'Cerámica',
-    image: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&q=80',
-    featured: true,
-  },
-  {
-    id: '2',
-    slug: 'alebrijes-oaxaca-arte-color',
-    title: 'Alebrijes de Oaxaca: Arte y Color que Cobran Vida',
-    excerpt:
-      'Conoce a los maestros artesanos que dan vida a estas fantásticas criaturas llenas de color y significado, símbolos de la creatividad mexicana.',
-    content: '',
-    author: 'Carlos Hernández',
-    date: '2024-11-08',
-    readTime: '6 min',
-    category: 'Madera',
-    image: 'https://images.unsplash.com/photo-1589802829985-817e51171b92?w=800&q=80',
-    featured: true,
-  },
-  {
-    id: '3',
-    slug: 'textiles-chiapas-telar-cintura',
-    title: 'Textiles de Chiapas: El Arte del Telar de Cintura',
-    excerpt:
-      'Una técnica milenaria que se transmite de generación en generación. Conoce el proceso detrás de los hermosos textiles chiapanecos.',
-    content: '',
-    author: 'Ana Martínez',
-    date: '2024-11-05',
-    readTime: '7 min',
-    category: 'Textiles',
-    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80',
-    featured: true,
-  },
-  {
-    id: '4',
-    slug: 'plata-taxco-tradicion-minera',
-    title: 'La Plata de Taxco: Tradición Minera y Orfebrería',
-    excerpt:
-      'Taxco es sinónimo de plata de calidad mundial. Explora la historia y el arte detrás de las joyas más codiciadas de México.',
-    content: '',
-    author: 'Roberto Silva',
-    date: '2024-11-02',
-    readTime: '5 min',
-    category: 'Joyería',
-    image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=800&q=80',
-    featured: false,
-  },
-  {
-    id: '5',
-    slug: 'barro-negro-oaxaca',
-    title: 'Barro Negro de Oaxaca: Técnica Ancestral de Cocción',
-    excerpt:
-      'Descubre cómo los artesanos de San Bartolo Coyotepec crean estas piezas únicas con una técnica de cocción de más de mil años.',
-    content: '',
-    author: 'Laura Ramírez',
-    date: '2024-10-28',
-    readTime: '6 min',
-    category: 'Cerámica',
-    image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800&q=80',
-    featured: false,
-  },
-  {
-    id: '6',
-    slug: 'papel-picado-tradicion-mexicana',
-    title: 'Papel Picado: Una Tradición que Flota en el Aire',
-    excerpt:
-      'El arte de transformar papel en delicadas obras de arte que decoran nuestras celebraciones más importantes.',
-    content: '',
-    author: 'José Torres',
-    date: '2024-10-25',
-    readTime: '4 min',
-    category: 'Papel',
-    image: 'https://images.unsplash.com/photo-1604881991720-f91add269bed?w=800&q=80',
-    featured: false,
-  },
-  {
-    id: '7',
-    slug: 'huichol-arte-cuentas',
-    title: 'Arte Huichol: El Lenguaje Sagrado de las Cuentas',
-    excerpt:
-      'Cada pieza cuenta una historia espiritual. Conoce el significado detrás del arte Huichol y su importancia cultural.',
-    content: '',
-    author: 'Diana Flores',
-    date: '2024-10-22',
-    readTime: '9 min',
-    category: 'Arte Indígena',
-    image: 'https://images.unsplash.com/photo-1582739542921-2c8d9113e5c2?w=800&q=80',
-    featured: false,
-  },
-  {
-    id: '8',
-    slug: 'cuero-leon-guanajuato',
-    title: 'Cuero de León: Capital del Calzado Artesanal',
-    excerpt:
-      'León, Guanajuato es reconocido mundialmente por su calidad en productos de cuero. Descubre por qué.',
-    content: '',
-    author: 'Miguel Sánchez',
-    date: '2024-10-18',
-    readTime: '5 min',
-    category: 'Cuero',
-    image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800&q=80',
-    featured: false,
-  },
-];
+type BlogSearchParams = {
+  category?: string | string[];
+  page?: string | string[];
+  q?: string | string[];
+  subscribed?: string | string[];
+  newsletterEmail?: string | string[];
+};
 
-const categories = [
-  'Todos',
-  'Cerámica',
-  'Textiles',
-  'Madera',
-  'Joyería',
-  'Cuero',
-  'Arte Indígena',
-  'Papel',
-];
+function getParam(value?: string | string[]): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
 
-export default function BlogPage() {
-  const featuredPosts = blogPosts.filter((post) => post.featured);
-  const regularPosts = blogPosts.filter((post) => !post.featured);
+function buildQuery(params: Record<string, string | undefined>): string {
+  const searchParams = new URLSearchParams();
+  Object.entries(params).forEach(([key, val]) => {
+    if (val) searchParams.set(key, val);
+  });
+  const query = searchParams.toString();
+  return query ? `?${query}` : '';
+}
+
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<BlogSearchParams>;
+}) {
+  const params = await searchParams;
+  const posts = getBlogPosts();
+  const categories = ['Todos', ...getBlogCategories()];
+
+  const query = getParam(params?.q)?.trim() ?? '';
+  const pageParam = Number(getParam(params?.page) ?? '1');
+  const selectedCategory = (getParam(params?.category) ?? 'Todos').toString().trim();
+  const subscribed = getParam(params?.subscribed) === 'true';
+  const subscribedEmail = getParam(params?.newsletterEmail);
+
+  const activeCategory =
+    categories.find((category) => category.toLowerCase() === selectedCategory.toLowerCase()) ??
+    'Todos';
+  const normalizedQuery = query.toLowerCase();
+
+  const filteredPosts = posts.filter((post) => {
+    const matchesCategory = activeCategory === 'Todos' || post.category === activeCategory;
+    if (!matchesCategory) return false;
+    if (!normalizedQuery) return true;
+
+    const haystack = [post.title, post.excerpt, post.author, post.category].join(' ').toLowerCase();
+    return haystack.includes(normalizedQuery);
+  });
+
+  const featuredPosts = filteredPosts.filter((post) => post.featured);
+  const regularPosts = filteredPosts.filter((post) => !post.featured);
+
+  const pageSize = 4;
+  const totalPages = Math.max(1, Math.ceil(regularPosts.length / pageSize));
+  const currentPage = Math.min(Math.max(pageParam || 1, 1), totalPages);
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedPosts = regularPosts.slice(startIndex, startIndex + pageSize);
+  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+
+  const baseQuery = {
+    category: activeCategory !== 'Todos' ? activeCategory : undefined,
+    q: query || undefined,
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
       <div className="bg-linear-to-r from-primary-600 to-primary-700 text-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
@@ -162,132 +97,200 @@ export default function BlogPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Categories */}
-        <div className="mb-8">
+        {/* Filters */}
+        <div className="mb-8 space-y-4">
+          <form action={ROUTES.BLOG} method="get" className="flex flex-col sm:flex-row gap-3">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                type="search"
+                name="q"
+                defaultValue={query}
+                placeholder="Buscar por tema, autor o categoría"
+                className="w-full pl-9 pr-4 py-3 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 border border-gray-200 dark:border-gray-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500"
+              />
+            </div>
+            {activeCategory !== 'Todos' && (
+              <input type="hidden" name="category" value={activeCategory} />
+            )}
+            <button
+              type="submit"
+              className="px-6 py-3 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition"
+            >
+              Buscar
+            </button>
+          </form>
+
           <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                  category === 'Todos'
-                    ? 'bg-primary-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+            {categories.map((category) => {
+              const href = `${ROUTES.BLOG}${buildQuery({
+                category: category === 'Todos' ? undefined : category,
+                q: query || undefined,
+              })}`;
+
+              return (
+                <Link
+                  key={category}
+                  href={href}
+                  scroll={false}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+                    category === activeCategory
+                      ? 'bg-primary-600 text-white'
+                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  {category}
+                </Link>
+              );
+            })}
           </div>
         </div>
 
         {/* Featured Posts */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Artículos Destacados</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredPosts.map((post) => (
-              <article
-                key={post.id}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-300"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-primary-600 text-white text-xs font-semibold rounded-full">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      {new Date(post.date).toLocaleDateString('es-MX', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      {post.readTime}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{post.excerpt}</p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <User className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-gray-600">{post.author}</span>
+        {featuredPosts.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+              Artículos Destacados
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {featuredPosts.map((post) => (
+                <Link
+                  key={post.id}
+                  href={ROUTES.BLOG_POST(post.slug)}
+                  className="block bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group"
+                >
+                  <article>
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition duration-300"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1 bg-primary-600 text-white text-xs font-semibold rounded-full">
+                          {post.category}
+                        </span>
+                      </div>
                     </div>
-                    <Link
-                      href={`${ROUTES.BLOG}/${post.slug}`}
-                      className="text-primary-600 hover:text-primary-700 font-semibold text-sm flex items-center gap-1"
-                    >
-                      Leer más
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
+                    <div className="p-6">
+                      <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {formatDate(post.date)}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          {post.readTime}
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition">
+                        {post.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <User className="w-4 h-4 text-gray-400" />
+                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                            {post.author}
+                          </span>
+                        </div>
+                        <span className="text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300 font-semibold text-sm flex items-center gap-1">
+                          Leer más
+                          <ArrowRight className="w-4 h-4" />
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Recent Posts */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Artículos Recientes</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {regularPosts.map((post) => (
-              <article
-                key={post.id}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group"
-              >
-                <div className="relative h-40 overflow-hidden">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-300"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="px-2 py-1 bg-primary-600 text-white text-xs font-semibold rounded-full">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <div className="flex items-center gap-2 text-xs text-gray-600 mb-2">
-                    <Calendar className="w-3 h-3" />
-                    {new Date(post.date).toLocaleDateString('es-MX', {
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                    <span>•</span>
-                    <Clock className="w-3 h-3" />
-                    {post.readTime}
-                  </div>
-                  <h3 className="text-base font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary-600 transition">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">{post.excerpt}</p>
-                  <Link
-                    href={`${ROUTES.BLOG}/${post.slug}`}
-                    className="text-primary-600 hover:text-primary-700 font-semibold text-sm flex items-center gap-1"
-                  >
-                    Leer más
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </article>
-            ))}
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              Artículos Recientes
+            </h2>
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              {filteredPosts.length} resultados
+            </span>
           </div>
+
+          {filteredPosts.length === 0 ? (
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 text-center">
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
+                No encontramos artículos con esos filtros.
+              </p>
+              <Link
+                href={ROUTES.BLOG}
+                className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold"
+              >
+                Limpiar filtros
+              </Link>
+            </div>
+          ) : regularPosts.length === 0 ? (
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 text-center">
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
+                No hay artículos recientes para esta selección.
+              </p>
+              <Link
+                href={ROUTES.BLOG}
+                className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold"
+              >
+                Ver todos los artículos
+              </Link>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {paginatedPosts.map((post) => (
+                <Link
+                  key={post.id}
+                  href={ROUTES.BLOG_POST(post.slug)}
+                  className="block bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group"
+                >
+                  <article>
+                    <div className="relative h-40 overflow-hidden">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition duration-300"
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="px-2 py-1 bg-primary-600 text-white text-xs font-semibold rounded-full">
+                          {post.category}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400 mb-2">
+                        <Calendar className="w-3 h-3" />
+                        {formatDate(post.date, { month: 'short', day: 'numeric' })}
+                        <span>•</span>
+                        <Clock className="w-3 h-3" />
+                        {post.readTime}
+                      </div>
+                      <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition">
+                        {post.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">
+                        {post.excerpt}
+                      </p>
+                      <span className="text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300 font-semibold text-sm flex items-center gap-1">
+                        Leer más
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Newsletter Subscription */}
@@ -298,15 +301,23 @@ export default function BlogPage() {
               Recibe las últimas historias de artesanos, técnicas tradicionales y novedades del
               mundo artesanal mexicano directamente en tu correo.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3">
+            {subscribed && (
+              <div className="mb-4 rounded-lg bg-white/15 px-4 py-3 text-sm text-white">
+                Gracias por suscribirte{subscribedEmail ? `, ${subscribedEmail}` : ''}. Pronto
+                recibirás nuevas historias.
+              </div>
+            )}
+            <form className="flex flex-col sm:flex-row gap-3" action={ROUTES.BLOG} method="get">
               <input
                 type="email"
+                name="newsletterEmail"
                 placeholder="Tu correo electrónico"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-hidden focus:ring-2 focus:ring-primary-300"
+                className="flex-1 px-4 py-3 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 border-2 border-white/20 dark:border-gray-600 focus:outline-hidden focus:ring-2 focus:ring-primary-300 dark:focus:ring-primary-400 focus:border-transparent"
               />
+              <input type="hidden" name="subscribed" value="true" />
               <button
                 type="submit"
-                className="px-6 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition"
+                className="px-6 py-3 bg-white dark:bg-gray-100 text-primary-600 rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-white transition"
               >
                 Suscribirme
               </button>
@@ -319,22 +330,55 @@ export default function BlogPage() {
         </section>
 
         {/* Pagination */}
-        <div className="mt-12 flex justify-center">
-          <div className="flex gap-2">
-            <button className="px-4 py-2 bg-primary-600 text-white rounded-lg font-semibold">
-              1
-            </button>
-            <button className="px-4 py-2 bg-white text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition">
-              2
-            </button>
-            <button className="px-4 py-2 bg-white text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition">
-              3
-            </button>
-            <button className="px-4 py-2 bg-white text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition">
-              Siguiente →
-            </button>
+        {totalPages > 1 && (
+          <div className="mt-12 flex justify-center">
+            <div className="flex flex-wrap gap-2">
+              {currentPage > 1 && (
+                <Link
+                  href={`${ROUTES.BLOG}${buildQuery({
+                    ...baseQuery,
+                    page: String(currentPage - 1),
+                  })}`}
+                  scroll={false}
+                  className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                >
+                  ← Anterior
+                </Link>
+              )}
+
+              {pageNumbers.map((page) => (
+                <Link
+                  key={page}
+                  href={`${ROUTES.BLOG}${buildQuery({
+                    ...baseQuery,
+                    page: page === 1 ? undefined : String(page),
+                  })}`}
+                  scroll={false}
+                  className={`px-4 py-2 rounded-lg font-semibold transition ${
+                    page === currentPage
+                      ? 'bg-primary-600 text-white'
+                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  {page}
+                </Link>
+              ))}
+
+              {currentPage < totalPages && (
+                <Link
+                  href={`${ROUTES.BLOG}${buildQuery({
+                    ...baseQuery,
+                    page: String(currentPage + 1),
+                  })}`}
+                  scroll={false}
+                  className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                >
+                  Siguiente →
+                </Link>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

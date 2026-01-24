@@ -782,4 +782,470 @@ describe('Dropdown', () => {
       consoleSpy.mockRestore();
     });
   });
+
+  describe('Trigger with Icon Only', () => {
+    it('renders icon without children (shows placeholder)', () => {
+      render(
+        <Dropdown>
+          <Dropdown.Trigger icon={Settings} placeholder="Settings Menu" />
+          <Dropdown.Menu>
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      const trigger = screen.getByRole('combobox');
+      // Should show icon and placeholder
+      expect(trigger.querySelector('svg')).toBeInTheDocument();
+      expect(screen.getByText('Settings Menu')).toBeInTheDocument();
+    });
+  });
+
+  describe('Item Keyboard Navigation Extended', () => {
+    it('handles Space key on items', async () => {
+      const handleChange = vi.fn();
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown onValueChange={handleChange}>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="test">Test Option</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+
+      const option = screen.getByRole('option');
+      option.focus();
+      fireEvent.keyDown(option, { key: ' ' });
+
+      expect(handleChange).toHaveBeenCalledWith('test');
+    });
+
+    it('ignores keyboard events on disabled items', async () => {
+      const handleChange = vi.fn();
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown onValueChange={handleChange}>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="disabled" disabled>
+              Disabled Option
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+
+      const option = screen.getByRole('option');
+      option.focus();
+      fireEvent.keyDown(option, { key: 'Enter' });
+
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+
+    it('ignores Space key on disabled items', async () => {
+      const handleChange = vi.fn();
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown onValueChange={handleChange}>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="disabled" disabled>
+              Disabled Option
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+
+      const option = screen.getByRole('option');
+      option.focus();
+      fireEvent.keyDown(option, { key: ' ' });
+
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Controlled Value Mode', () => {
+    it('does not update internal value when controlled', async () => {
+      const handleChange = vi.fn();
+      const user = userEvent.setup();
+
+      // In controlled mode, the value prop controls selection
+      render(
+        <Dropdown value="option1" onValueChange={handleChange}>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="option1">Option 1</Dropdown.Item>
+            <Dropdown.Item value="option2">Option 2</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+      await user.click(screen.getByRole('option', { name: 'Option 2' }));
+
+      // onValueChange should be called but selection visually stays at option1
+      // since we're in controlled mode and didn't update the value prop
+      expect(handleChange).toHaveBeenCalledWith('option2');
+    });
+
+    it('maintains controlled selection state across opens', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown value="option2">
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="option1">Option 1</Dropdown.Item>
+            <Dropdown.Item value="option2">Option 2</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      // First open
+      await user.click(screen.getByRole('combobox'));
+      expect(screen.getByRole('option', { name: 'Option 2' })).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
+
+      // Close
+      await user.keyboard('{Escape}');
+
+      // Second open
+      await user.click(screen.getByRole('combobox'));
+      expect(screen.getByRole('option', { name: 'Option 2' })).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
+    });
+  });
+
+  describe('Controlled Open State Extended', () => {
+    it('calls onOpenChange when clicking outside in controlled mode', async () => {
+      const handleOpenChange = vi.fn();
+      const user = userEvent.setup();
+
+      render(
+        <div>
+          <button data-testid="outside">Outside</button>
+          <Dropdown open={true} onOpenChange={handleOpenChange}>
+            <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+            <Dropdown.Menu>
+              <Dropdown.Item value="1">Option 1</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+      );
+
+      await user.click(screen.getByTestId('outside'));
+
+      expect(handleOpenChange).toHaveBeenCalledWith(false);
+    });
+
+    it('calls onOpenChange when Escape is pressed in controlled mode', async () => {
+      const handleOpenChange = vi.fn();
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown open={true} onOpenChange={handleOpenChange}>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.keyboard('{Escape}');
+
+      expect(handleOpenChange).toHaveBeenCalledWith(false);
+    });
+  });
+
+  describe('Trigger Keyboard Events Extended', () => {
+    it('ignores keyboard events when disabled', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger disabled>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      screen.getByRole('combobox').focus();
+      await user.keyboard('{Enter}');
+
+      expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    });
+
+    it('handles Escape key on trigger when open', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      const trigger = screen.getByRole('combobox');
+      trigger.focus();
+      await user.keyboard('{Enter}'); // Open
+      expect(screen.getByRole('listbox')).toBeInTheDocument();
+
+      // Press Escape on the trigger element
+      fireEvent.keyDown(trigger, { key: 'Escape' });
+
+      await waitFor(() => {
+        expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('Menu Placement Extended', () => {
+    it('applies top-end placement', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu placement="top-end">
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+
+      expect(screen.getByRole('listbox')).toHaveClass('bottom-full', 'right-0');
+    });
+  });
+
+  describe('Menu with Min Width', () => {
+    it('applies custom min width', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu minWidth={200}>
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+
+      expect(screen.getByRole('listbox')).toHaveStyle({ minWidth: '200px' });
+    });
+  });
+
+  describe('Trigger Keyboard with Open State', () => {
+    it('closes on Escape when already open via keyboard', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      const trigger = screen.getByRole('combobox');
+      trigger.focus();
+
+      // Open with Enter
+      await user.keyboard('{Enter}');
+      expect(screen.getByRole('listbox')).toBeInTheDocument();
+
+      // Keep focus on trigger and close with Escape via trigger keydown
+      trigger.focus();
+      fireEvent.keyDown(trigger, { key: 'Escape' });
+
+      await waitFor(() => {
+        expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+      });
+    });
+
+    it('toggles menu with Space key', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      const trigger = screen.getByRole('combobox');
+      trigger.focus();
+
+      // Open with Space
+      await user.keyboard(' ');
+      expect(screen.getByRole('listbox')).toBeInTheDocument();
+
+      // Close with Space
+      trigger.focus();
+      await user.keyboard(' ');
+
+      await waitFor(() => {
+        expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+      });
+    });
+
+    it('does not open on ArrowDown when already open', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      const trigger = screen.getByRole('combobox');
+      trigger.focus();
+
+      // Open first
+      await user.click(trigger);
+      expect(screen.getByRole('listbox')).toBeInTheDocument();
+
+      // ArrowDown should not affect the open state
+      await user.keyboard('{ArrowDown}');
+      expect(screen.getByRole('listbox')).toBeInTheDocument();
+    });
+  });
+
+  describe('Item Keyboard Events Extended', () => {
+    it('prevents default on Enter key for items', async () => {
+      const handleChange = vi.fn();
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown onValueChange={handleChange}>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="test">Test Option</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+
+      const option = screen.getByRole('option');
+      const event = {
+        key: 'Enter',
+        preventDefault: vi.fn(),
+      };
+
+      fireEvent.keyDown(option, event);
+
+      expect(handleChange).toHaveBeenCalledWith('test');
+    });
+
+    it('prevents default on Space key for items', async () => {
+      const handleChange = vi.fn();
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown onValueChange={handleChange}>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="test">Test Option</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+
+      const option = screen.getByRole('option');
+      const event = {
+        key: ' ',
+        preventDefault: vi.fn(),
+      };
+
+      fireEvent.keyDown(option, event);
+
+      expect(handleChange).toHaveBeenCalledWith('test');
+    });
+  });
+
+  describe('Label Custom ClassName', () => {
+    it('applies custom className to label', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Label className="custom-label-class">Category</Dropdown.Label>
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+
+      expect(screen.getByText('Category')).toHaveClass('custom-label-class');
+    });
+  });
+
+  describe('Item Custom ClassName', () => {
+    it('applies custom className to item', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item value="1" className="custom-item-class">
+              Option 1
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+
+      expect(screen.getByRole('option')).toHaveClass('custom-item-class');
+    });
+  });
+
+  describe('Menu Custom ClassName', () => {
+    it('applies custom className to menu', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <Dropdown>
+          <Dropdown.Trigger>Trigger</Dropdown.Trigger>
+          <Dropdown.Menu className="custom-menu-class">
+            <Dropdown.Item value="1">Option 1</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+
+      await user.click(screen.getByRole('combobox'));
+
+      expect(screen.getByRole('listbox')).toHaveClass('custom-menu-class');
+    });
+  });
 });

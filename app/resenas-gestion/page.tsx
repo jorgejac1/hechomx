@@ -139,28 +139,34 @@ function ReviewsManagementContent({ user }: { user: User }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto p-4 sm:p-6">
         {/* Header */}
         <div className="mb-6">
           <Link
             href={ROUTES.DASHBOARD}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition"
+            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-4 transition"
           >
             <ArrowLeft className="w-5 h-5" />
             Volver al Dashboard
           </Link>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Gestión de Reseñas</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
+                Gestión de Reseñas
+              </h1>
               <div className="flex items-center gap-4 mt-2">
                 <div className="flex items-center gap-2">
                   <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  <span className="text-lg font-bold text-gray-900">{averageRating}</span>
-                  <span className="text-sm text-gray-600">({reviews.length} reseñas)</span>
+                  <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                    {averageRating}
+                  </span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                    ({reviews.length} reseñas)
+                  </span>
                 </div>
                 {pendingCount > 0 && (
-                  <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-semibold rounded-full">
+                  <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-sm font-semibold rounded-full">
                     {pendingCount} pendiente{pendingCount > 1 ? 's' : ''}
                   </span>
                 )}
@@ -170,7 +176,7 @@ function ReviewsManagementContent({ user }: { user: User }) {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-xl shadow-md p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 mb-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
             {/* Search */}
             <div className="lg:col-span-2">
@@ -181,7 +187,7 @@ function ReviewsManagementContent({ user }: { user: User }) {
                   placeholder="Buscar por cliente, producto o comentario..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full pl-9 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
             </div>
@@ -189,13 +195,15 @@ function ReviewsManagementContent({ user }: { user: User }) {
             {/* Status Filter */}
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <Filter className="w-3 h-3 text-gray-600" />
-                <label className="text-xs font-semibold text-gray-700">Estado</label>
+                <Filter className="w-3 h-3 text-gray-600 dark:text-gray-400" />
+                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+                  Estado
+                </label>
               </div>
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value as 'all' | 'pending' | 'responded')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value="all">Todas</option>
                 <option value="pending">Pendientes</option>
@@ -207,14 +215,16 @@ function ReviewsManagementContent({ user }: { user: User }) {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <Star className="w-3 h-3 text-yellow-500" />
-                <label className="text-xs font-semibold text-gray-700">Calificación</label>
+                <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+                  Calificación
+                </label>
               </div>
               <select
                 value={filterRating}
                 onChange={(e) =>
                   setFilterRating(e.target.value as 'all' | '5' | '4' | '3' | '2' | '1')
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               >
                 <option value="all">Todas las estrellas</option>
                 <option value="5">5 estrellas</option>
@@ -230,10 +240,12 @@ function ReviewsManagementContent({ user }: { user: User }) {
         {/* Reviews Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {filteredReviews.length === 0 ? (
-            <div className="lg:col-span-2 bg-white rounded-xl shadow-md p-12 text-center">
+            <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-md p-12 text-center">
               <Star className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-2">No hay reseñas</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                No hay reseñas
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
                 {searchQuery || filterStatus !== 'all' || filterRating !== 'all'
                   ? 'Intenta con otros filtros'
                   : 'Aún no tienes reseñas de clientes'}
@@ -243,13 +255,13 @@ function ReviewsManagementContent({ user }: { user: User }) {
             filteredReviews.map((review) => (
               <div
                 key={review.id}
-                className={`bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer ${
+                className={`bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer ${
                   selectedReview?.id === review.id ? 'ring-2 ring-primary-500' : ''
                 }`}
                 onClick={() => setSelectedReview(review)}
               >
                 {/* Review Header */}
-                <div className="p-4 sm:p-6 border-b border-gray-200">
+                <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
                   <div className="flex items-start gap-3 mb-3">
                     {review.buyer.avatar ? (
                       <Image
@@ -260,35 +272,37 @@ function ReviewsManagementContent({ user }: { user: User }) {
                         className="rounded-full shrink-0"
                       />
                     ) : (
-                      <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center shrink-0">
-                        <span className="text-gray-600 font-semibold">
+                      <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center shrink-0">
+                        <span className="text-gray-600 dark:text-gray-300 font-semibold">
                           {review.buyer.name.charAt(0)}
                         </span>
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <p className="font-semibold text-gray-900 truncate">{review.buyer.name}</p>
+                        <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">
+                          {review.buyer.name}
+                        </p>
                         {review.buyer.verified && (
-                          <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
+                          <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
                         )}
                       </div>
                       <div className="flex items-center gap-2 mb-1">
                         {renderStars(review.rating, 'sm')}
-                        <span className="text-xs text-gray-600">
+                        <span className="text-xs text-gray-600 dark:text-gray-400">
                           {formatRelativeTime(review.date)}
                         </span>
                       </div>
                     </div>
                     {review.status === 'responded' ? (
-                      <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
+                      <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 shrink-0" />
                     ) : (
-                      <Clock className="w-5 h-5 text-yellow-600 shrink-0" />
+                      <Clock className="w-5 h-5 text-yellow-600 dark:text-yellow-400 shrink-0" />
                     )}
                   </div>
 
                   {/* Product Info */}
-                  <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                  <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                     <Image
                       src={review.product.image}
                       alt={review.product.name}
@@ -296,7 +310,7 @@ function ReviewsManagementContent({ user }: { user: User }) {
                       height={48}
                       className="rounded-lg object-cover shrink-0"
                     />
-                    <p className="text-sm font-semibold text-gray-900 flex-1 truncate">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 flex-1 truncate">
                       {review.product.name}
                     </p>
                   </div>
@@ -304,7 +318,9 @@ function ReviewsManagementContent({ user }: { user: User }) {
 
                 {/* Review Content */}
                 <div className="p-4 sm:p-6">
-                  <p className="text-sm text-gray-900 mb-3 line-clamp-3">{review.review}</p>
+                  <p className="text-sm text-gray-900 dark:text-gray-100 mb-3 line-clamp-3">
+                    {review.review}
+                  </p>
 
                   {/* Review Images */}
                   {review.images && review.images.length > 0 && (
@@ -333,7 +349,7 @@ function ReviewsManagementContent({ user }: { user: User }) {
                   )}
 
                   {/* Helpful Count */}
-                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
+                  <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-3">
                     <ThumbsUp className="w-4 h-4" />
                     <span>
                       {review.helpful} {review.helpful === 1 ? 'persona' : 'personas'} encontraron
@@ -343,15 +359,19 @@ function ReviewsManagementContent({ user }: { user: User }) {
 
                   {/* Response */}
                   {review.response ? (
-                    <div className="p-3 bg-primary-50 rounded-lg border-l-4 border-primary-500">
+                    <div className="p-3 bg-primary-50 dark:bg-primary-900/20 rounded-lg border-l-4 border-primary-500">
                       <div className="flex items-center gap-2 mb-2">
-                        <MessageSquare className="w-4 h-4 text-primary-600" />
-                        <p className="text-xs font-semibold text-primary-900">Tu respuesta</p>
-                        <span className="text-xs text-gray-600">
+                        <MessageSquare className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                        <p className="text-xs font-semibold text-primary-900 dark:text-primary-300">
+                          Tu respuesta
+                        </p>
+                        <span className="text-xs text-gray-600 dark:text-gray-400">
                           {formatRelativeTime(review.response.date)}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-900">{review.response.text}</p>
+                      <p className="text-sm text-gray-900 dark:text-gray-100">
+                        {review.response.text}
+                      </p>
                     </div>
                   ) : (
                     <button

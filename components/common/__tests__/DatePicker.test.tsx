@@ -359,4 +359,204 @@ describe('DatePicker', () => {
       expect(june15).toHaveAttribute('aria-label');
     });
   });
+
+  describe('Inline Variant Extended', () => {
+    it('should render inline variant with label', () => {
+      render(<DatePicker variant="inline" label="Fecha de evento" />);
+      expect(screen.getByText('Fecha de evento')).toBeInTheDocument();
+    });
+
+    it('should render inline variant with required indicator', () => {
+      render(<DatePicker variant="inline" label="Fecha" required />);
+      expect(screen.getByText('*')).toBeInTheDocument();
+    });
+
+    it('should render inline variant without label', () => {
+      render(<DatePicker variant="inline" />);
+      // Calendar should still be visible without label
+      expect(screen.getByText('Junio 2024')).toBeInTheDocument();
+    });
+  });
+
+  describe('Form Integration', () => {
+    it('should render hidden input with name attribute', () => {
+      const date = new Date(2024, 5, 20);
+      const { container } = render(<DatePicker value={date} name="appointment_date" />);
+      const hiddenInput = container.querySelector('input[type="hidden"]');
+      expect(hiddenInput).toBeInTheDocument();
+      expect(hiddenInput).toHaveAttribute('name', 'appointment_date');
+      expect(hiddenInput).toHaveAttribute('value', date.toISOString());
+    });
+
+    it('should render hidden input with empty value when no date', () => {
+      const { container } = render(<DatePicker name="appointment_date" />);
+      const hiddenInput = container.querySelector('input[type="hidden"]');
+      expect(hiddenInput).toBeInTheDocument();
+      expect(hiddenInput).toHaveAttribute('value', '');
+    });
+
+    it('should not render hidden input without name prop', () => {
+      const date = new Date(2024, 5, 20);
+      const { container } = render(<DatePicker value={date} />);
+      const hiddenInput = container.querySelector('input[type="hidden"]');
+      expect(hiddenInput).not.toBeInTheDocument();
+    });
+  });
+
+  describe('Date Formatting', () => {
+    it('should format date with short format', () => {
+      const date = new Date(2024, 5, 20);
+      render(<DatePicker value={date} dateFormat="short" />);
+      // Short format should show day/month/year in short form
+      expect(screen.getByText(/20/)).toBeInTheDocument();
+    });
+
+    it('should format date with long format', () => {
+      const date = new Date(2024, 5, 20);
+      render(<DatePicker value={date} dateFormat="long" />);
+      // Long format should show full month name
+      expect(screen.getByText(/junio/i)).toBeInTheDocument();
+    });
+
+    it('should format date with medium format (default)', () => {
+      const date = new Date(2024, 5, 20);
+      render(<DatePicker value={date} dateFormat="medium" />);
+      // Medium format includes abbreviated month
+      expect(screen.getByText(/20/)).toBeInTheDocument();
+    });
+  });
+
+  describe('Calendar Day Styling', () => {
+    it('should style previous month days differently', () => {
+      render(<DatePicker />);
+      fireEvent.click(getTriggerButton());
+
+      // May 26-31 are the days before June in the calendar grid
+      // These should have muted styling (text-gray-400)
+      const mayDay = screen.getByLabelText(/26 may 2024/i);
+      expect(mayDay).toHaveClass('text-gray-400');
+    });
+
+    it('should style next month days differently', () => {
+      render(<DatePicker />);
+      fireEvent.click(getTriggerButton());
+
+      // July 1+ are the days after June in the calendar grid
+      const julyDay = screen.getByLabelText(/1 jul 2024/i);
+      expect(julyDay).toHaveClass('text-gray-400');
+    });
+
+    it('should style current month days normally', () => {
+      render(<DatePicker />);
+      fireEvent.click(getTriggerButton());
+
+      // A non-today, non-selected date in current month
+      const june20 = screen.getByLabelText(/20 jun 2024/i);
+      expect(june20).toHaveClass('text-gray-900');
+    });
+  });
+
+  describe('Clear Button with Error State', () => {
+    it('should style clear button with error border when error is present', () => {
+      const date = new Date(2024, 5, 20);
+      const { container } = render(<DatePicker value={date} error="Invalid date" clearable />);
+      const clearButton = screen.getByLabelText('Limpiar fecha');
+      expect(clearButton).toHaveClass('border-red-500');
+    });
+  });
+
+  describe('View Date Sync', () => {
+    it('should sync view date when value changes', () => {
+      const { rerender } = render(<DatePicker value={new Date(2024, 5, 15)} />);
+      fireEvent.click(getTriggerButton());
+      expect(screen.getByText('Junio 2024')).toBeInTheDocument();
+
+      // Change value to a different month
+      rerender(<DatePicker value={new Date(2024, 11, 25)} />);
+
+      // Re-open calendar to check the view date changed
+      fireEvent.mouseDown(document.body);
+      fireEvent.click(getTriggerButton());
+      expect(screen.getByText('Diciembre 2024')).toBeInTheDocument();
+    });
+  });
+
+  describe('goToToday Extended', () => {
+    it('should stay open and navigate to today month when today is disabled', () => {
+      // Today (June 15, 2024) is disabled
+      const disabledDates = [new Date(2024, 5, 15)];
+      render(<DatePicker disabledDates={disabledDates} onChange={mockOnChange} />);
+      fireEvent.click(getTriggerButton());
+
+      // Navigate to a different month first
+      fireEvent.click(screen.getByLabelText('Mes siguiente'));
+      expect(screen.getByText('Julio 2024')).toBeInTheDocument();
+
+      // Click "Hoy" button
+      fireEvent.click(screen.getByText('Hoy'));
+
+      // Should navigate back to June (current month) but stay open since today is disabled
+      expect(screen.getByText('Junio 2024')).toBeInTheDocument();
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+      expect(mockOnChange).not.toHaveBeenCalled();
+    });
+
+    it('should navigate to today and close when today is not disabled', () => {
+      render(<DatePicker onChange={mockOnChange} />);
+      fireEvent.click(getTriggerButton());
+
+      // Navigate to a different month first
+      fireEvent.click(screen.getByLabelText('Mes siguiente'));
+      expect(screen.getByText('Julio 2024')).toBeInTheDocument();
+
+      // Click "Hoy" button
+      fireEvent.click(screen.getByText('Hoy'));
+
+      // Should close and call onChange
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      expect(mockOnChange).toHaveBeenCalled();
+    });
+  });
+
+  describe('Click Outside Cleanup', () => {
+    it('should cleanup click outside handler when calendar closes', () => {
+      render(<DatePicker />);
+
+      // Open calendar
+      fireEvent.click(getTriggerButton());
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+      // Close by clicking outside
+      fireEvent.mouseDown(document.body);
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+      // Clicking outside again should not cause any errors
+      fireEvent.mouseDown(document.body);
+    });
+
+    it('should not add click handler for inline variant', () => {
+      render(<DatePicker variant="inline" />);
+      // Calendar is always visible in inline mode
+      expect(screen.getByText('Junio 2024')).toBeInTheDocument();
+
+      // Clicking outside should not affect inline calendar
+      fireEvent.mouseDown(document.body);
+      expect(screen.getByText('Junio 2024')).toBeInTheDocument();
+    });
+  });
+
+  describe('Value not set', () => {
+    it('should not highlight any day when value is null', () => {
+      render(<DatePicker value={null} />);
+      fireEvent.click(getTriggerButton());
+
+      // Get all day buttons that have aria-selected=true
+      const selectedButtons = screen
+        .getAllByRole('button')
+        .filter((btn) => btn.getAttribute('aria-selected') === 'true');
+
+      // None should be selected (only today might have different styling but not selected)
+      expect(selectedButtons.length).toBe(0);
+    });
+  });
 });

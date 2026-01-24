@@ -73,7 +73,7 @@ export default function TabNavigation({
   ];
 
   return (
-    <div className="border-b border-gray-200">
+    <div className="border-b border-gray-200 dark:border-gray-700">
       <nav className="flex overflow-x-auto">
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -83,8 +83,8 @@ export default function TabNavigation({
               onClick={() => setActiveTab(tab.id)}
               className={`relative px-6 py-4 font-medium text-sm whitespace-nowrap border-b-2 transition ${
                 activeTab === tab.id
-                  ? 'border-primary-600 text-primary-600'
-                  : 'border-transparent text-gray-600 hover:text-gray-900'
+                  ? 'border-primary-600 text-primary-600 dark:text-primary-400'
+                  : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
               }`}
             >
               <span className="flex items-center gap-2">

@@ -63,15 +63,15 @@ export default function ShopProducts({ products, shopName }: ShopProductsProps) 
     <div className="space-y-6">
       {/* Sort Controls */}
       <div className="flex items-center justify-between">
-        <p className="text-gray-600">
-          <span className="font-semibold text-gray-900">{products.length}</span> productos
-          disponibles
+        <p className="text-gray-600 dark:text-gray-400">
+          <span className="font-semibold text-gray-900 dark:text-gray-100">{products.length}</span>{' '}
+          productos disponibles
         </p>
 
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as SortOption)}
-          className="px-4 py-2 bg-white border-2 border-gray-300 rounded-lg hover:border-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer transition-all font-medium text-gray-900"
+          className="px-4 py-2 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-gray-400 dark:hover:border-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer transition-all font-medium text-gray-900 dark:text-gray-100"
         >
           <option value="newest">Más recientes</option>
           <option value="popular">Más populares</option>

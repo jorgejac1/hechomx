@@ -47,15 +47,15 @@ export default function SubcategoriesGrid({
   };
 
   return (
-    <div className="mb-8 bg-white rounded-xl shadow-xs p-6">
-      <h2 className="text-lg font-semibold text-gray-900 mb-4">
+    <div className="mb-8 bg-white dark:bg-gray-800 rounded-xl shadow-xs p-6">
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
         {currentSubcategory ? 'Refina tu búsqueda' : 'Explora por tipo'}
       </h2>
 
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
         {subcategories.map((sub) => (
           <Link key={sub.slug} href={buildUrl(sub.slug)} className="group">
-            <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-100 mb-2 shadow-xs group-hover:shadow-lg transition-all border-2 border-transparent group-hover:border-primary-500">
+            <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-700 mb-2 shadow-xs group-hover:shadow-lg transition-all border-2 border-transparent group-hover:border-primary-500 dark:group-hover:border-primary-400">
               <Image
                 src={sub.image}
                 alt={sub.name}
@@ -68,9 +68,9 @@ export default function SubcategoriesGrid({
 
               {/* Ícono de flecha en hover */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="bg-white/90 rounded-full p-2">
+                <div className="bg-white/90 dark:bg-gray-800/90 rounded-full p-2">
                   <svg
-                    className="w-6 h-6 text-primary-600"
+                    className="w-6 h-6 text-primary-600 dark:text-primary-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -86,10 +86,12 @@ export default function SubcategoriesGrid({
               </div>
             </div>
             <div className="text-center">
-              <p className="text-xs font-medium text-gray-900 line-clamp-2 group-hover:text-primary-600 transition-colors">
+              <p className="text-xs font-medium text-gray-900 dark:text-gray-100 line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                 {sub.name}
               </p>
-              {sub.count && <p className="text-xs text-gray-500 mt-0.5">{sub.count}</p>}
+              {sub.count && (
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{sub.count}</p>
+              )}
             </div>
           </Link>
         ))}

@@ -62,10 +62,11 @@ function useDropdownContext() {
 // Variant styles for trigger
 const triggerVariantStyles: Record<DropdownVariant, string> = {
   default:
-    'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-2 focus:ring-primary-500 focus:border-primary-500',
+    'bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-primary-500 dark:focus:border-primary-400',
   outline:
-    'bg-transparent border border-gray-300 text-gray-700 hover:border-gray-400 focus:ring-2 focus:ring-primary-500',
-  ghost: 'bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-primary-500',
+    'bg-transparent border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:border-gray-400 dark:hover:border-gray-500 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+  ghost:
+    'bg-transparent text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
 };
 
 // Size styles
@@ -205,7 +206,7 @@ function DropdownMenu({
       role="listbox"
       aria-labelledby={`${baseId}-trigger`}
       className={`
-        absolute z-50 bg-white border border-gray-200 rounded-lg shadow-lg py-1 overflow-hidden
+        absolute z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg dark:shadow-gray-900/50 py-1 overflow-hidden
         ${placementStyles[placement]}
         ${sizes.menu}
         ${className}
@@ -276,7 +277,7 @@ function DropdownItem({
       className={`
         flex items-center justify-between gap-2 cursor-pointer transition-colors
         ${sizes.item}
-        ${isSelected ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:bg-gray-50'}
+        ${isSelected ? 'bg-primary-50 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'}
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
         ${className}
       `}
@@ -285,14 +286,16 @@ function DropdownItem({
         {Icon && <Icon className="w-4 h-4" aria-hidden="true" />}
         <span>{children}</span>
       </span>
-      {isSelected && <Check className="w-4 h-4 text-primary-600" aria-hidden="true" />}
+      {isSelected && (
+        <Check className="w-4 h-4 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+      )}
     </div>
   );
 }
 
 // ========== DropdownDivider Component ==========
 function DropdownDivider() {
-  return <div className="border-t border-gray-200 my-1" role="separator" />;
+  return <div className="border-t border-gray-200 dark:border-gray-700 my-1" role="separator" />;
 }
 
 // ========== DropdownLabel Component ==========
@@ -304,7 +307,7 @@ interface DropdownLabelProps {
 function DropdownLabel({ children, className = '' }: DropdownLabelProps) {
   return (
     <div
-      className={`px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider ${className}`}
+      className={`px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider ${className}`}
     >
       {children}
     </div>

@@ -72,7 +72,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-white dark:bg-gray-900 shadow-md dark:shadow-gray-800/50 sticky top-0 z-50 transition-colors">
+      <header className="bg-white dark:bg-gray-950 shadow-md dark:shadow-gray-800/50 sticky top-0 z-50 transition-colors">
         {isAdmin && <AdminBanner />}
 
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

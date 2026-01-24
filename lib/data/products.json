@@ -182,7 +182,9 @@
       "Diseños florales tradicionales tzotziles",
       "Cada huipil cuenta una historia única",
       "Confeccionado por cooperativa de mujeres artesanas"
-    ]
+    ],
+    "availableSizes": ["CH", "M", "G", "XG"],
+    "sizeType": "clothing"
   },
   {
     "id": "5",
@@ -361,7 +363,9 @@
       "Diseño de ikat (amarrado antes de teñir)",
       "Flecos elaborados uno por uno a mano",
       "Versatil: abrigo, chal o accesorio de moda"
-    ]
+    ],
+    "availableSizes": ["unica"],
+    "sizeType": "one_size"
   },
   {
     "id": "9",
@@ -499,7 +503,9 @@
       "Diseños florales tradicionales zapotecas",
       "Cada blusa toma 2-3 semanas en completarse",
       "Cuello y mangas con acabados tradicionales"
-    ]
+    ],
+    "availableSizes": ["XCH", "CH", "M", "G", "XG"],
+    "sizeType": "clothing"
   },
   {
     "id": "12",
@@ -671,7 +677,9 @@
       "Bordados florales vibrantes y detallados",
       "Holán amplio con caída elegante",
       "Ideal para eventos especiales y festividades"
-    ]
+    ],
+    "availableSizes": ["CH", "M", "G", "XG"],
+    "sizeType": "clothing"
   },
   {
     "id": "16",
@@ -715,7 +723,9 @@
       "Destellos únicos en tonos naranja y rojo",
       "Diseño contemporáneo minimalista",
       "Plata de ley con sello de garantía"
-    ]
+    ],
+    "availableSizes": ["5", "6", "7", "8", "9"],
+    "sizeType": "rings"
   },
   {
     "id": "17",
@@ -1051,7 +1061,55 @@
       "Diseños florales únicos de Yucatán",
       "Confeccionada por cooperativa de mujeres",
       "Cintura ajustable con cordón tradicional"
-    ]
+    ],
+    "availableSizes": ["CH", "M", "G"],
+    "sizeType": "clothing"
+  },
+  {
+    "id": "26",
+    "name": "Huaraches Artesanales de Cuero",
+    "description": "Huaraches tradicionales tejidos a mano con cuero 100% natural. Siguiendo técnicas de manufactura que datan de tiempos prehispánicos, cada par es único y se adapta perfectamente al pie con el uso. El cuero se suaviza y moldea para máxima comodidad.",
+    "price": 890,
+    "currency": "MXN",
+    "category": "Cuero y Piel",
+    "subcategory": "Huaraches",
+    "state": "Jalisco",
+    "maker": "Artesanías de México",
+    "images": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800",
+      "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800",
+      "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800",
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800"
+    ],
+    "inStock": true,
+    "featured": true,
+    "verified": true,
+    "rating": 4.8,
+    "reviewCount": 145,
+    "materials": [
+      "Cuero de res 100% natural",
+      "Suela de cuero o hule según modelo",
+      "Tejido artesanal tradicional"
+    ],
+    "dimensions": {
+      "sizes": "Tallas MX 22 a 30",
+      "width": "Ancho estándar",
+      "style": "Cerrado tradicional"
+    },
+    "careInstructions": [
+      "Aplicar grasa de cuero cada 3 meses",
+      "Limpiar con trapo húmedo",
+      "Secar a la sombra, nunca al sol directo",
+      "Guardar con horma para mantener forma"
+    ],
+    "features": [
+      "Tejido a mano por artesanos jaliscienses",
+      "Se adaptan al pie con el uso",
+      "Diseño ergonómico tradicional",
+      "Ideales para uso diario y ocasiones especiales"
+    ],
+    "availableSizes": ["24", "24.5", "25", "25.5", "26", "26.5", "27", "27.5", "28", "28.5", "29"],
+    "sizeType": "shoes"
   },
   {
     "id": "25",

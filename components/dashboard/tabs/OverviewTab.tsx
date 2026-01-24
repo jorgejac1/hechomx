@@ -31,12 +31,36 @@ import ImageSkeleton from '@/components/common/loading/ImageSkeleton';
  * Each status has a localized label, color classes, and icon component.
  */
 const ORDER_STATUS_CONFIG = {
-  pending: { label: 'Pendiente', color: 'bg-yellow-100 text-yellow-800', icon: Clock },
-  confirmed: { label: 'Confirmado', color: 'bg-blue-100 text-blue-800', icon: CheckCheck },
-  processing: { label: 'Procesando', color: 'bg-blue-100 text-blue-800', icon: Package },
-  shipped: { label: 'Enviado', color: 'bg-purple-100 text-purple-800', icon: Truck },
-  delivered: { label: 'Entregado', color: 'bg-green-100 text-green-800', icon: CheckCircle2 },
-  cancelled: { label: 'Cancelado', color: 'bg-red-100 text-red-800', icon: XCircle },
+  pending: {
+    label: 'Pendiente',
+    color: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300',
+    icon: Clock,
+  },
+  confirmed: {
+    label: 'Confirmado',
+    color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300',
+    icon: CheckCheck,
+  },
+  processing: {
+    label: 'Procesando',
+    color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300',
+    icon: Package,
+  },
+  shipped: {
+    label: 'Enviado',
+    color: 'bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300',
+    icon: Truck,
+  },
+  delivered: {
+    label: 'Entregado',
+    color: 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300',
+    icon: CheckCircle2,
+  },
+  cancelled: {
+    label: 'Cancelado',
+    color: 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300',
+    icon: XCircle,
+  },
 } as const;
 
 /**
@@ -115,14 +139,16 @@ export default function OverviewTab({
       {trendingProducts.length > 0 && (
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <TrendingUp className="w-5 h-5 text-green-600" />
-            <h3 className="text-lg font-bold text-gray-900">Productos en Tendencia</h3>
+            <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400" />
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+              Productos en Tendencia
+            </h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             {trendingProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-linear-to-br from-green-50 to-emerald-50 rounded-lg p-4 border-2 border-green-200"
+                className="bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 rounded-lg p-4 border-2 border-green-200 dark:border-green-700"
               >
                 <div className="flex items-start justify-between mb-2">
                   <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-600 text-white text-xs font-semibold rounded-full">
@@ -137,11 +163,13 @@ export default function OverviewTab({
                   height={200}
                   className="w-full h-32 object-cover rounded-lg mb-3"
                 />
-                <p className="font-semibold text-gray-900 mb-1 text-sm">{product.name}</p>
-                <p className="text-base font-bold text-primary-600 mb-2">
+                <p className="font-semibold text-gray-900 dark:text-gray-100 mb-1 text-sm">
+                  {product.name}
+                </p>
+                <p className="text-base font-bold text-primary-600 dark:text-primary-400 mb-2">
                   {formatCurrency(product.price)}
                 </p>
-                <div className="flex items-center justify-between text-xs text-gray-600">
+                <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
                   <span className="flex items-center gap-1">
                     <Eye className="w-3 h-3" />
                     {product.views}
@@ -150,7 +178,9 @@ export default function OverviewTab({
                     <Heart className="w-3 h-3" />
                     {product.favorites}
                   </span>
-                  <span className="font-semibold text-green-600">+{product.sold} ventas</span>
+                  <span className="font-semibold text-green-600 dark:text-green-400">
+                    +{product.sold} ventas
+                  </span>
                 </div>
               </div>
             ))}
@@ -160,7 +190,9 @@ export default function OverviewTab({
 
       {/* Recent Orders */}
       <div>
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Pedidos Recientes</h3>
+        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+          Pedidos Recientes
+        </h3>
         {recentOrders.length > 0 ? (
           <div className="space-y-3">
             {recentOrders.slice(0, 3).map((order) => {
@@ -171,7 +203,10 @@ export default function OverviewTab({
               const firstImage = order.items?.[0]?.images?.[0] || '/placeholder.jpg';
 
               return (
-                <div key={order.id} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                <div
+                  key={order.id}
+                  className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg"
+                >
                   <ProductImageWithSkeleton
                     src={firstImage}
                     alt={order.items[0]?.name || 'Product'}
@@ -180,15 +215,21 @@ export default function OverviewTab({
                     className="w-[60px] h-[60px] rounded-lg object-cover"
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-900 truncate">{order.customer.name}</p>
-                    <p className="text-sm text-gray-600 truncate">
+                    <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">
+                      {order.customer.name}
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
                       {order.items[0]?.name || 'Unknown product'}
                       {order.items.length > 1 && ` +${order.items.length - 1} más`}
                     </p>
-                    <p className="text-xs text-gray-500">{formatRelativeTime(order.createdAt)}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {formatRelativeTime(order.createdAt)}
+                    </p>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold text-gray-900">{formatCurrency(order.total)}</p>
+                    <p className="font-bold text-gray-900 dark:text-gray-100">
+                      {formatCurrency(order.total)}
+                    </p>
                     <span
                       className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${statusConfig.color}`}
                     >
@@ -201,16 +242,20 @@ export default function OverviewTab({
             })}
           </div>
         ) : (
-          <p className="text-gray-600 text-center py-8">No hay pedidos recientes</p>
+          <p className="text-gray-600 dark:text-gray-400 text-center py-8">
+            No hay pedidos recientes
+          </p>
         )}
       </div>
 
       {/* Featured Products */}
       <div>
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Productos Destacados</h3>
+        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+          Productos Destacados
+        </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {products.slice(0, 3).map((product) => (
-            <div key={product.id} className="bg-gray-50 rounded-lg p-4">
+            <div key={product.id} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
               <ProductImageWithSkeleton
                 src={product.image}
                 alt={product.name}
@@ -218,11 +263,11 @@ export default function OverviewTab({
                 height={200}
                 className="w-full h-40 object-cover rounded-lg mb-3"
               />
-              <p className="font-semibold text-gray-900 mb-1">{product.name}</p>
-              <p className="text-lg font-bold text-primary-600 mb-2">
+              <p className="font-semibold text-gray-900 dark:text-gray-100 mb-1">{product.name}</p>
+              <p className="text-lg font-bold text-primary-600 dark:text-primary-400 mb-2">
                 {formatCurrency(product.price)}
               </p>
-              <div className="flex items-center justify-between text-xs text-gray-600">
+              <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
                 <span className="flex items-center gap-1">
                   <Eye className="w-3 h-3" />
                   {product.views}

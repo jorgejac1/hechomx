@@ -51,12 +51,12 @@ export default function ShopPageClient({ shop, products }: ShopPageClientProps) 
   }, [profile.shopName]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Shop Header */}
       <ShopHeader shop={shop} />
 
       {/* Shop Stats */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <ShopStats
             stats={profile.stats}
@@ -69,7 +69,7 @@ export default function ShopPageClient({ shop, products }: ShopPageClientProps) 
       </div>
 
       {/* Navigation Tabs */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex gap-8">
             <button
@@ -77,7 +77,7 @@ export default function ShopPageClient({ shop, products }: ShopPageClientProps) 
               className={`py-4 font-medium text-sm border-b-2 transition ${
                 activeTab === 'productos'
                   ? 'border-primary-600 text-primary-600'
-                  : 'border-transparent text-gray-600 hover:text-gray-900'
+                  : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
               }`}
             >
               Productos ({products.length})
@@ -87,7 +87,7 @@ export default function ShopPageClient({ shop, products }: ShopPageClientProps) 
               className={`py-4 font-medium text-sm border-b-2 transition ${
                 activeTab === 'resenas'
                   ? 'border-primary-600 text-primary-600'
-                  : 'border-transparent text-gray-600 hover:text-gray-900'
+                  : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
               }`}
             >
               Reseñas ({profile.reviews.length})
@@ -97,7 +97,7 @@ export default function ShopPageClient({ shop, products }: ShopPageClientProps) 
               className={`py-4 font-medium text-sm border-b-2 transition ${
                 activeTab === 'info'
                   ? 'border-primary-600 text-primary-600'
-                  : 'border-transparent text-gray-600 hover:text-gray-900'
+                  : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
               }`}
             >
               Información

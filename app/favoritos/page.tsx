@@ -217,17 +217,17 @@ function FavoritesContent({ user }: { user: User }) {
     categoryFilter !== 'all' || priceRangeFilter !== 'all' || stockFilter !== 'all';
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-3">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-3">
                 <Heart className="w-8 h-8 text-red-500 fill-red-500" />
                 Mis Favoritos
               </h1>
-              <p className="text-gray-600 mt-1">
+              <p className="text-gray-600 dark:text-gray-400 mt-1">
                 {favorites.length} {favorites.length === 1 ? 'producto' : 'productos'} guardados
               </p>
             </div>
@@ -236,7 +236,7 @@ function FavoritesContent({ user }: { user: User }) {
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleShare}
-                  className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium text-sm"
+                  className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition font-medium text-sm"
                 >
                   <Share2 className="w-4 h-4" />
                   <span className="hidden sm:inline">Compartir</span>
@@ -254,7 +254,7 @@ function FavoritesContent({ user }: { user: User }) {
         </div>
 
         {favorites.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-md">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md">
             <EmptyState
               title="Tu lista de favoritos está vacía"
               description="Explora productos artesanales y guarda tus favoritos para verlos más tarde"
@@ -270,7 +270,7 @@ function FavoritesContent({ user }: { user: User }) {
         ) : (
           <>
             {/* Toolbar */}
-            <div className="bg-white rounded-xl shadow-md p-4 mb-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 mb-6">
               <div className="flex flex-col gap-4">
                 {/* Top Row - View & Sort Controls */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -281,7 +281,7 @@ function FavoritesContent({ user }: { user: User }) {
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${
                         showFilters || hasActiveFilters
                           ? 'bg-primary-600 text-white'
-                          : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
+                          : 'border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                       }`}
                     >
                       <Filter className="w-5 h-5" />
@@ -300,13 +300,13 @@ function FavoritesContent({ user }: { user: User }) {
                     </button>
 
                     {/* View Toggle */}
-                    <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
+                    <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
                       <button
                         onClick={() => setViewMode('grid')}
                         className={`p-2 rounded transition ${
                           viewMode === 'grid'
-                            ? 'bg-white shadow-xs text-primary-600'
-                            : 'text-gray-600 hover:text-gray-900'
+                            ? 'bg-white dark:bg-gray-600 shadow-xs text-primary-600 dark:text-primary-400'
+                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
                         }`}
                       >
                         <Grid3x3 className="w-5 h-5" />
@@ -315,8 +315,8 @@ function FavoritesContent({ user }: { user: User }) {
                         onClick={() => setViewMode('list')}
                         className={`p-2 rounded transition ${
                           viewMode === 'list'
-                            ? 'bg-white shadow-xs text-primary-600'
-                            : 'text-gray-600 hover:text-gray-900'
+                            ? 'bg-white dark:bg-gray-600 shadow-xs text-primary-600 dark:text-primary-400'
+                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
                         }`}
                       >
                         <List className="w-5 h-5" />
@@ -325,11 +325,11 @@ function FavoritesContent({ user }: { user: User }) {
 
                     {/* Sort Dropdown */}
                     <div className="flex items-center gap-2">
-                      <SortAsc className="w-5 h-5 text-gray-600" />
+                      <SortAsc className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                       <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value as SortOption)}
-                        className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm"
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                       >
                         <option value="recent">Agregados recientemente</option>
                         <option value="name">Nombre (A-Z)</option>
@@ -340,12 +340,12 @@ function FavoritesContent({ user }: { user: User }) {
                   </div>
 
                   {/* Stats */}
-                  <div className="flex items-center gap-4 text-sm text-gray-600">
+                  <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
                     <span>{sortedFavorites.filter((f) => f.inStock).length} disponibles</span>
                     <span>•</span>
                     <span>
                       Total:{' '}
-                      <strong className="text-primary-600">
+                      <strong className="text-primary-600 dark:text-primary-400">
                         {formatCurrency(sortedFavorites.reduce((sum, f) => sum + f.price, 0))}
                       </strong>
                     </span>
@@ -354,17 +354,17 @@ function FavoritesContent({ user }: { user: User }) {
 
                 {/* Filters Panel */}
                 {showFilters && (
-                  <div className="pt-4 border-t border-gray-200">
+                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {/* Category Filter */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Categoría
                         </label>
                         <select
                           value={categoryFilter}
                           onChange={(e) => setCategoryFilter(e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                         >
                           <option value="all">Todas las categorías</option>
                           {categories.map((category) => (
@@ -377,13 +377,13 @@ function FavoritesContent({ user }: { user: User }) {
 
                       {/* Price Range Filter */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Rango de Precio
                         </label>
                         <select
                           value={priceRangeFilter}
                           onChange={(e) => setPriceRangeFilter(e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                         >
                           <option value="all">Todos los precios</option>
                           <option value="under-500">Menos de $500</option>
@@ -395,13 +395,13 @@ function FavoritesContent({ user }: { user: User }) {
 
                       {/* Stock Filter */}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Disponibilidad
                         </label>
                         <select
                           value={stockFilter}
                           onChange={(e) => setStockFilter(e.target.value)}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm"
+                          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                         >
                           <option value="all">Todos</option>
                           <option value="instock">En stock</option>
@@ -413,7 +413,7 @@ function FavoritesContent({ user }: { user: User }) {
                     {/* Clear Filters */}
                     {hasActiveFilters && (
                       <div className="mt-4 flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-sm text-blue-600">
+                        <div className="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400">
                           <AlertCircle className="w-4 h-4" />
                           <span>
                             Mostrando {sortedFavorites.length} de {favorites.length} productos
@@ -421,7 +421,7 @@ function FavoritesContent({ user }: { user: User }) {
                         </div>
                         <button
                           onClick={clearFilters}
-                          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition"
+                          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition"
                         >
                           <X className="w-4 h-4" />
                           Limpiar filtros
@@ -435,7 +435,7 @@ function FavoritesContent({ user }: { user: User }) {
 
             {/* No Results Message */}
             {sortedFavorites.length === 0 && hasActiveFilters && (
-              <div className="bg-white rounded-xl shadow-md">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md">
                 <EmptyState
                   title="No se encontraron productos"
                   description="Intenta ajustar los filtros para ver más resultados"

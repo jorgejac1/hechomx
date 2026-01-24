@@ -785,5 +785,318 @@ describe('FileUpload', () => {
       render(<FileUpload files={files} />);
       expect(screen.getByText('5 MB')).toBeInTheDocument();
     });
+
+    it('should format GB correctly', () => {
+      const files: UploadedFile[] = [
+        {
+          id: '1',
+          file: createMockFile('huge.zip', 2147483648, 'application/zip'),
+          name: 'huge.zip',
+          size: 2147483648, // 2GB
+          type: 'application/zip',
+        },
+      ];
+      render(<FileUpload files={files} />);
+      expect(screen.getByText('2 GB')).toBeInTheDocument();
+    });
+  });
+
+  describe('Compact Variant Disabled State', () => {
+    it('should apply disabled styles to add button in compact variant', () => {
+      render(<FileUpload variant="compact" disabled />);
+      const addButton = screen.getByRole('button', { name: /agregar/i });
+      expect(addButton).toBeDisabled();
+      expect(addButton).toHaveClass('opacity-50', 'cursor-not-allowed');
+    });
+
+    it('should not open file dialog when disabled in compact variant', () => {
+      render(<FileUpload variant="compact" disabled />);
+      const addButton = screen.getByRole('button', { name: /agregar/i });
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement;
+
+      const clickSpy = vi.spyOn(input, 'click');
+      fireEvent.click(addButton);
+
+      expect(clickSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Avatar Variant Extended', () => {
+    it('should render avatar variant with label', () => {
+      render(<FileUpload variant="avatar" label="Foto de perfil" />);
+      expect(screen.getByText('Foto de perfil')).toBeInTheDocument();
+    });
+
+    it('should apply disabled styles to avatar container', () => {
+      const { container } = render(<FileUpload variant="avatar" disabled />);
+      const avatarZone = container.querySelector('.rounded-full');
+      expect(avatarZone).toHaveClass('opacity-50', 'cursor-not-allowed');
+    });
+
+    it('should show helper text in avatar variant', () => {
+      render(<FileUpload variant="avatar" helperText="JPG o PNG, máximo 2MB" />);
+      expect(screen.getByText('JPG o PNG, máximo 2MB')).toBeInTheDocument();
+    });
+
+    it('should not trigger file input when avatar is disabled', () => {
+      const { container } = render(<FileUpload variant="avatar" disabled />);
+      const avatarZone = container.querySelector('.rounded-full') as HTMLElement;
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement;
+
+      const clickSpy = vi.spyOn(input, 'click');
+      fireEvent.click(avatarZone);
+
+      expect(clickSpy).not.toHaveBeenCalled();
+    });
+
+    it('should not process dropped files when avatar is disabled', async () => {
+      const handleFilesChange = vi.fn();
+      const { container } = render(
+        <FileUpload variant="avatar" onFilesChange={handleFilesChange} disabled />
+      );
+      const avatarZone = container.querySelector('.rounded-full') as HTMLElement;
+
+      const file = createMockFile('avatar.jpg', 1024, 'image/jpeg');
+      fireEvent.drop(avatarZone, { dataTransfer: { files: [file] } });
+
+      await waitFor(() => {
+        expect(handleFilesChange).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('Default Variant Extended', () => {
+    it('should show accepted types in drop zone', () => {
+      render(<FileUpload accept=".pdf,.doc" />);
+      expect(screen.getByText(/Tipos permitidos: .pdf,.doc/)).toBeInTheDocument();
+    });
+
+    it('should show all types message when no accept prop', () => {
+      render(<FileUpload />);
+      expect(screen.getByText(/Todos los tipos de archivo/)).toBeInTheDocument();
+    });
+
+    it('should apply error styling to drop zone', () => {
+      const { container } = render(<FileUpload error="Upload failed" />);
+      const dropZone = container.querySelector('.border-dashed');
+      expect(dropZone).toHaveClass('border-red-300', 'bg-red-50');
+    });
+  });
+
+  describe('File Type Icons', () => {
+    it('should show PDF icon for PDF files', () => {
+      const files: UploadedFile[] = [
+        {
+          id: '1',
+          file: createMockFile('document.pdf', 1024, 'application/pdf'),
+          name: 'document.pdf',
+          size: 1024,
+          type: 'application/pdf',
+        },
+      ];
+      const { container } = render(<FileUpload files={files} />);
+      // FileText icon should be rendered
+      expect(container.querySelector('svg')).toBeInTheDocument();
+    });
+
+    it('should show document icon for word documents', () => {
+      const files: UploadedFile[] = [
+        {
+          id: '1',
+          file: createMockFile(
+            'doc.docx',
+            1024,
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+          ),
+          name: 'doc.docx',
+          size: 1024,
+          type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        },
+      ];
+      const { container } = render(<FileUpload files={files} />);
+      expect(container.querySelector('svg')).toBeInTheDocument();
+    });
+
+    it('should show generic file icon for unknown types', () => {
+      const files: UploadedFile[] = [
+        {
+          id: '1',
+          file: createMockFile('data.xyz', 1024, 'application/octet-stream'),
+          name: 'data.xyz',
+          size: 1024,
+          type: 'application/octet-stream',
+        },
+      ];
+      const { container } = render(<FileUpload files={files} />);
+      expect(container.querySelector('svg')).toBeInTheDocument();
+    });
+  });
+
+  describe('Empty File List', () => {
+    it('should not render file list when no files', () => {
+      const { container } = render(<FileUpload files={[]} />);
+      expect(container.querySelector('.space-y-2')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('Drop with Empty DataTransfer', () => {
+    it('should not process when dataTransfer files is empty', async () => {
+      const handleFilesChange = vi.fn();
+      const { container } = render(<FileUpload onFilesChange={handleFilesChange} />);
+      const dropZone = container.querySelector('.border-dashed') as HTMLElement;
+
+      fireEvent.drop(dropZone, { dataTransfer: { files: [] } });
+
+      await waitFor(() => {
+        expect(handleFilesChange).not.toHaveBeenCalled();
+      });
+    });
+
+    it('should reset dragging state on drop even with empty files', () => {
+      const { container } = render(<FileUpload />);
+      const dropZone = container.querySelector('.border-dashed') as HTMLElement;
+
+      // Start dragging
+      fireEvent.dragEnter(dropZone);
+      expect(dropZone).toHaveClass('border-primary-500');
+
+      // Drop with empty files
+      fireEvent.drop(dropZone, { dataTransfer: { files: [] } });
+
+      // Should reset dragging state
+      expect(dropZone).not.toHaveClass('border-primary-500');
+    });
+  });
+
+  describe('Compact Variant with Multiple Files and maxFiles', () => {
+    it('should hide add button when maxFiles reached in compact variant with existing files', () => {
+      const files: UploadedFile[] = [
+        {
+          id: '1',
+          file: createMockFile('file1.pdf', 1024, 'application/pdf'),
+          name: 'file1.pdf',
+          size: 1024,
+          type: 'application/pdf',
+        },
+        {
+          id: '2',
+          file: createMockFile('file2.pdf', 1024, 'application/pdf'),
+          name: 'file2.pdf',
+          size: 1024,
+          type: 'application/pdf',
+        },
+      ];
+      render(<FileUpload variant="compact" files={files} maxFiles={2} multiple />);
+
+      // Add button should not be visible since max is reached
+      expect(screen.queryByRole('button', { name: /agregar/i })).not.toBeInTheDocument();
+    });
+
+    it('should show add button when under maxFiles limit in compact variant', () => {
+      const files: UploadedFile[] = [
+        {
+          id: '1',
+          file: createMockFile('file1.pdf', 1024, 'application/pdf'),
+          name: 'file1.pdf',
+          size: 1024,
+          type: 'application/pdf',
+        },
+      ];
+      render(<FileUpload variant="compact" files={files} maxFiles={3} multiple />);
+
+      // Add button should be visible
+      expect(screen.getByRole('button', { name: /agregar/i })).toBeInTheDocument();
+    });
+  });
+
+  describe('Avatar Variant Drag Events', () => {
+    it('should handle drag over on avatar', () => {
+      const { container } = render(<FileUpload variant="avatar" />);
+      const avatarZone = container.querySelector('.rounded-full') as HTMLElement;
+
+      fireEvent.dragOver(avatarZone);
+
+      // dragOver should be handled without errors
+      expect(avatarZone).toBeInTheDocument();
+    });
+  });
+
+  describe('Default Variant Label', () => {
+    it('should render label in default variant', () => {
+      render(<FileUpload label="Documentos requeridos" />);
+      expect(screen.getByText('Documentos requeridos')).toBeInTheDocument();
+    });
+
+    it('should show label even when files are present', () => {
+      const files: UploadedFile[] = [
+        {
+          id: '1',
+          file: createMockFile('file.pdf', 1024, 'application/pdf'),
+          name: 'file.pdf',
+          size: 1024,
+          type: 'application/pdf',
+        },
+      ];
+      render(<FileUpload label="Documentos" files={files} maxFiles={5} />);
+      expect(screen.getByText('Documentos')).toBeInTheDocument();
+    });
+  });
+
+  describe('Multiple Selection Edge Cases', () => {
+    it('should add only up to available slots when multiple files dropped', async () => {
+      const handleFilesChange = vi.fn();
+      const existingFiles: UploadedFile[] = [
+        {
+          id: '1',
+          file: createMockFile('existing1.pdf', 1024, 'application/pdf'),
+          name: 'existing1.pdf',
+          size: 1024,
+          type: 'application/pdf',
+        },
+        {
+          id: '2',
+          file: createMockFile('existing2.pdf', 1024, 'application/pdf'),
+          name: 'existing2.pdf',
+          size: 1024,
+          type: 'application/pdf',
+        },
+      ];
+
+      const { container } = render(
+        <FileUpload files={existingFiles} onFilesChange={handleFilesChange} multiple maxFiles={3} />
+      );
+      const dropZone = container.querySelector('.border-dashed') as HTMLElement;
+
+      const file1 = createMockFile('new1.pdf', 1024, 'application/pdf');
+      const file2 = createMockFile('new2.pdf', 1024, 'application/pdf');
+      const file3 = createMockFile('new3.pdf', 1024, 'application/pdf');
+
+      fireEvent.drop(dropZone, { dataTransfer: { files: [file1, file2, file3] } });
+
+      await waitFor(() => {
+        expect(handleFilesChange).toHaveBeenCalled();
+        // Should only add 1 file (3 max - 2 existing = 1 slot)
+        const newFiles = handleFilesChange.mock.calls[0][0];
+        expect(newFiles).toHaveLength(3); // 2 existing + 1 new
+      });
+    });
+  });
+
+  describe('File Validation with Multiple Accept Types', () => {
+    it('should accept files matching multiple accept patterns', async () => {
+      const handleFilesChange = vi.fn();
+      render(<FileUpload accept="image/jpeg,image/png,.pdf" onFilesChange={handleFilesChange} />);
+
+      const input = document.querySelector('input[type="file"]') as HTMLInputElement;
+      const jpegFile = createMockFile('photo.jpg', 1024, 'image/jpeg');
+
+      fireEvent.change(input, { target: { files: [jpegFile] } });
+
+      await waitFor(() => {
+        expect(handleFilesChange).toHaveBeenCalled();
+        const files = handleFilesChange.mock.calls[0][0];
+        expect(files[0].error).toBeUndefined();
+      });
+    });
   });
 });
