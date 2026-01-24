@@ -33,6 +33,9 @@ next-env.d.ts
 # Testing
 coverage
 .nyc_output
+playwright-report
+playwright/.cache
+test-results
 
 # IDE & Editors
 .idea
@@ -55,6 +58,8 @@ Thumbs.db
 # Misc
 .eslintcache
 .cache
+.turbo
+.swc
 
 # Project docs (local only)
 CLAUDE.md
