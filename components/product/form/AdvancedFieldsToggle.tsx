@@ -26,7 +26,7 @@ export default function AdvancedFieldsToggle({
     <button
       type="button"
       onClick={() => setShowAdvanced(!showAdvanced)}
-      className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition font-medium text-gray-700"
+      className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition font-medium text-gray-700 dark:text-gray-300"
     >
       <Sparkles className="w-5 h-5" />
       {showAdvanced ? 'Ocultar' : 'Mostrar'} Opciones Avanzadas

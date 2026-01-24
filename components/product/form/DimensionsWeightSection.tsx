@@ -49,11 +49,13 @@ export default function DimensionsWeightSection({
   setWeight,
 }: DimensionsWeightSectionProps) {
   return (
-    <div className="bg-white rounded-xl shadow-md p-6">
-      <h3 className="text-lg font-bold text-gray-900 mb-4">Dimensiones y Peso</h3>
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Dimensiones y Peso</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">Dimensiones</label>
+          <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
+            Dimensiones
+          </label>
           <div className="space-y-2">
             <div className="grid grid-cols-3 gap-2">
               <TextInput
@@ -96,7 +98,9 @@ export default function DimensionsWeightSection({
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">Peso</label>
+          <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
+            Peso
+          </label>
           <div className="space-y-2">
             <TextInput
               type="number"

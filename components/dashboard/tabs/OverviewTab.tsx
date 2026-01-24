@@ -188,12 +188,12 @@ export default function OverviewTab({
         </div>
       )}
 
-      {/* Recent Orders */}
-      <div>
-        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
-          Pedidos Recientes
-        </h3>
-        {recentOrders.length > 0 ? (
+      {/* Recent Orders - Only show if there are orders */}
+      {recentOrders.length > 0 && (
+        <div>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Pedidos Recientes
+          </h3>
           <div className="space-y-3">
             {recentOrders.slice(0, 3).map((order) => {
               const statusConfig = ORDER_STATUS_CONFIG[order.status];
@@ -241,47 +241,61 @@ export default function OverviewTab({
               );
             })}
           </div>
-        ) : (
-          <p className="text-gray-600 dark:text-gray-400 text-center py-8">
-            No hay pedidos recientes
-          </p>
-        )}
-      </div>
-
-      {/* Featured Products */}
-      <div>
-        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
-          Productos Destacados
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {products.slice(0, 3).map((product) => (
-            <div key={product.id} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-              <ProductImageWithSkeleton
-                src={product.image}
-                alt={product.name}
-                width={200}
-                height={200}
-                className="w-full h-40 object-cover rounded-lg mb-3"
-              />
-              <p className="font-semibold text-gray-900 dark:text-gray-100 mb-1">{product.name}</p>
-              <p className="text-lg font-bold text-primary-600 dark:text-primary-400 mb-2">
-                {formatCurrency(product.price)}
-              </p>
-              <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
-                <span className="flex items-center gap-1">
-                  <Eye className="w-3 h-3" />
-                  {product.views}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Heart className="w-3 h-3" />
-                  {product.favorites}
-                </span>
-                <span>Vendidos: {product.sold}</span>
-              </div>
-            </div>
-          ))}
         </div>
-      </div>
+      )}
+
+      {/* Featured Products - Only show if there are products */}
+      {products.length > 0 && (
+        <div>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Productos Destacados
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {products.slice(0, 3).map((product) => (
+              <div key={product.id} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                <ProductImageWithSkeleton
+                  src={product.image}
+                  alt={product.name}
+                  width={200}
+                  height={200}
+                  className="w-full h-40 object-cover rounded-lg mb-3"
+                />
+                <p className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                  {product.name}
+                </p>
+                <p className="text-lg font-bold text-primary-600 dark:text-primary-400 mb-2">
+                  {formatCurrency(product.price)}
+                </p>
+                <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
+                  <span className="flex items-center gap-1">
+                    <Eye className="w-3 h-3" />
+                    {product.views}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Heart className="w-3 h-3" />
+                    {product.favorites}
+                  </span>
+                  <span>Vendidos: {product.sold}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Empty state when no products and no orders */}
+      {products.length === 0 && recentOrders.length === 0 && trendingProducts.length === 0 && (
+        <div className="text-center py-12 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <Package className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            ¡Comienza a vender!
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+            Aún no tienes productos ni pedidos. Agrega tu primer producto para comenzar a recibir
+            ventas.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

@@ -119,18 +119,18 @@ const statusStyles: Record<
     icon: Check,
   },
   current: {
-    dot: 'bg-primary-500 border-primary-500 ring-4 ring-primary-100',
-    connector: 'bg-gray-300',
+    dot: 'bg-primary-500 border-primary-500 ring-4 ring-primary-100 dark:ring-primary-900',
+    connector: 'bg-gray-300 dark:bg-gray-600',
     icon: Circle,
   },
   pending: {
-    dot: 'bg-gray-200 border-gray-300',
-    connector: 'bg-gray-200',
+    dot: 'bg-gray-200 border-gray-300 dark:bg-gray-600 dark:border-gray-500',
+    connector: 'bg-gray-200 dark:bg-gray-600',
     icon: Circle,
   },
   error: {
     dot: 'bg-red-500 border-red-500',
-    connector: 'bg-red-300',
+    connector: 'bg-red-300 dark:bg-red-700',
     icon: Circle,
   },
 };
@@ -181,13 +181,17 @@ function TimelineItemComponent({
   const ContentComponent = (
     <div className={`flex-1 min-w-0 pb-8 ${isLast ? 'pb-0' : ''}`}>
       <div className={`flex items-center ${sizes.gap} mb-1`}>
-        <h3 className={`${sizes.title} text-gray-900`}>{item.title}</h3>
+        <h3 className={`${sizes.title} text-gray-900 dark:text-white`}>{item.title}</h3>
         {item.timestamp && (
-          <span className={`${sizes.timestamp} text-gray-500`}>{item.timestamp}</span>
+          <span className={`${sizes.timestamp} text-gray-500 dark:text-gray-400`}>
+            {item.timestamp}
+          </span>
         )}
       </div>
       {item.description && (
-        <p className={`${sizes.description} text-gray-600 mb-2`}>{item.description}</p>
+        <p className={`${sizes.description} text-gray-600 dark:text-gray-300 mb-2`}>
+          {item.description}
+        </p>
       )}
       {item.content && <div className="mt-2">{item.content}</div>}
     </div>

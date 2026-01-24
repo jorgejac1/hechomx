@@ -50,10 +50,10 @@ export default function LoadingSpinner({
 
   if (fullScreen) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           {spinner}
-          {text && <p className="mt-4 text-gray-600">{text}</p>}
+          {text && <p className="mt-4 text-gray-600 dark:text-gray-400">{text}</p>}
         </div>
       </div>
     );

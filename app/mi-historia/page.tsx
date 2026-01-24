@@ -19,8 +19,9 @@ import {
   SocialMediaSection,
   ProcessSection,
 } from '@/components/artisan-story';
-import { Save, Eye } from 'lucide-react';
+import { Save, Eye, ChevronLeft, ChevronRight, AlertCircle } from 'lucide-react';
 import { SELLER_TYPE_CONFIG } from '@/lib/types/seller-types';
+import { useToast } from '@/contexts/ToastContext';
 
 type ActiveSection =
   | 'classification'
@@ -41,11 +42,116 @@ export default function MiHistoriaPage() {
 
 function MiHistoriaContent({ user }: { user: User }) {
   const [activeSection, setActiveSection] = useState<ActiveSection>('classification');
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const { showToast } = useToast();
 
   const story = useArtisanStory(user);
   const config = SELLER_TYPE_CONFIG[story.sellerType];
   const showProcessStep =
     story.sellerType === 'artisan_individual' || story.sellerType === 'workshop';
+
+  // Get visible sections based on seller type
+  const visibleSections: ActiveSection[] = [
+    'classification',
+    'basic',
+    'story',
+    'media',
+    ...(showProcessStep && story.sellerType !== 'hobby_maker' ? ['process' as ActiveSection] : []),
+    ...(story.sellerType !== 'hobby_maker' ? ['recognition' as ActiveSection] : []),
+    ...(story.sellerType !== 'hobby_maker' ? ['social' as ActiveSection] : []),
+  ];
+
+  const currentIndex = visibleSections.indexOf(activeSection);
+  const isFirstSection = currentIndex === 0;
+  const isLastSection = currentIndex === visibleSections.length - 1;
+
+  // Validate current section before proceeding
+  const validateCurrentSection = (): { isValid: boolean; errors: string[] } => {
+    const errors: string[] = [];
+
+    switch (activeSection) {
+      case 'classification':
+        if (!story.sellerType) errors.push('Selecciona tu tipo de vendedor');
+        if (!story.craftCategory) errors.push('Selecciona una categoría de artesanía');
+        break;
+
+      case 'basic':
+        if (!story.specialty?.trim()) errors.push('La especialidad es requerida');
+        if (!story.city?.trim()) errors.push('La ciudad es requerida');
+        if (!story.state?.trim()) errors.push('El estado es requerido');
+        if (story.sellerType === 'artisan_individual' || story.sellerType === 'workshop') {
+          if (!story.yearsOfExperience || story.yearsOfExperience < 1) {
+            errors.push('Los años de experiencia son requeridos');
+          }
+        }
+        if (story.sellerType === 'workshop' || story.sellerType === 'company') {
+          if (!story.foundingYear || story.foundingYear < 1900) {
+            errors.push('El año de fundación es requerido');
+          }
+        }
+        break;
+
+      case 'story':
+        if (!story.personalStory?.trim() || story.personalStory.length < 50) {
+          errors.push('La historia personal debe tener al menos 50 caracteres');
+        }
+        if (story.sellerType === 'artisan_individual' && story.indigenousConnection) {
+          if (!story.heritageStory?.trim()) {
+            errors.push('La historia de herencia cultural es requerida');
+          }
+        }
+        if (story.sellerType === 'workshop' || story.sellerType === 'company') {
+          if (!story.missionStatement?.trim()) {
+            errors.push('La misión es requerida');
+          }
+        }
+        break;
+
+      case 'media':
+        // Media section is optional but we can add minimum requirements
+        break;
+
+      case 'process':
+        if (showProcessStep) {
+          if (!story.processSteps || story.processSteps.length === 0) {
+            errors.push('Agrega al menos un paso del proceso');
+          }
+        }
+        break;
+
+      case 'recognition':
+        // Recognition is optional
+        break;
+
+      case 'social':
+        // Social media is optional
+        break;
+    }
+
+    return { isValid: errors.length === 0, errors };
+  };
+
+  const goToNextSection = () => {
+    const { isValid, errors } = validateCurrentSection();
+
+    if (!isValid) {
+      setValidationErrors(errors);
+      showToast(errors[0], 'error');
+      return;
+    }
+
+    setValidationErrors([]);
+    if (!isLastSection) {
+      setActiveSection(visibleSections[currentIndex + 1]);
+    }
+  };
+
+  const goToPreviousSection = () => {
+    setValidationErrors([]);
+    if (!isFirstSection) {
+      setActiveSection(visibleSections[currentIndex - 1]);
+    }
+  };
 
   if (story.isLoading) {
     return <LoadingSpinner size="lg" fullScreen text="Cargando tu historia..." />;
@@ -190,6 +296,60 @@ function MiHistoriaContent({ user }: { user: User }) {
               }}
             />
           )}
+
+          {/* Validation Errors */}
+          {validationErrors.length > 0 && (
+            <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-red-800 dark:text-red-300">
+                    Por favor completa los siguientes campos:
+                  </p>
+                  <ul className="mt-2 space-y-1">
+                    {validationErrors.map((error, idx) => (
+                      <li key={idx} className="text-sm text-red-700 dark:text-red-400">
+                        • {error}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Navigation Buttons */}
+          <div className="flex justify-between items-center pt-6 mt-6 border-t border-gray-200 dark:border-gray-700">
+            <button
+              onClick={goToPreviousSection}
+              disabled={isFirstSection}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${
+                isFirstSection
+                  ? 'text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              <ChevronLeft className="w-5 h-5" />
+              Anterior
+            </button>
+
+            <span className="text-sm text-gray-500 dark:text-gray-400">
+              {currentIndex + 1} de {visibleSections.length}
+            </span>
+
+            <button
+              onClick={goToNextSection}
+              disabled={isLastSection}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition ${
+                isLastSection
+                  ? 'text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                  : 'bg-primary-600 text-white hover:bg-primary-700'
+              }`}
+            >
+              Siguiente
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Action Buttons */}

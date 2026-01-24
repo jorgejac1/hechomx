@@ -45,9 +45,12 @@ export default function PricingStockSection({
           leftIcon={<DollarSign className="w-5 h-5" />}
           required
         />
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Usa la{' '}
-          <Link href={ROUTES.PRICING_CALCULATOR} className="text-primary-600 hover:underline">
+          <Link
+            href={ROUTES.PRICING_CALCULATOR}
+            className="text-primary-600 dark:text-primary-400 hover:underline"
+          >
             calculadora de precios
           </Link>{' '}
           para precios justos

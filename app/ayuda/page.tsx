@@ -257,7 +257,7 @@ export default function HelpPage() {
                 placeholder="Buscar en preguntas frecuentes..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-14 pr-4 py-4 rounded-xl text-gray-900 text-lg focus:ring-4 focus:ring-primary-300 outline-hidden"
+                className="w-full pl-14 pr-4 py-4 rounded-xl text-gray-900 text-lg border-2 border-white/50 focus:border-white focus:ring-4 focus:ring-primary-300 outline-hidden"
               />
             </div>
           </div>

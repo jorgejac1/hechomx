@@ -20,7 +20,10 @@ export async function getSellerAnalytics(email: string): Promise<AnalyticsData |
     const result = await response.json();
 
     if (!result.success) {
-      console.error('[seller/analytics] Error fetching analytics:', result.error);
+      // 404 "not found" is expected for new users with no data
+      if (response.status !== 404) {
+        console.error('[seller/analytics] Error fetching analytics:', result.error);
+      }
       return null;
     }
 
@@ -38,7 +41,10 @@ export async function getPendingActions(email: string): Promise<PendingActionsDa
     const result = await response.json();
 
     if (!result.success) {
-      console.error('[seller/analytics] Error fetching pending actions:', result.error);
+      // 404 "not found" is expected for new users with no data
+      if (response.status !== 404) {
+        console.error('[seller/analytics] Error fetching pending actions:', result.error);
+      }
       return null;
     }
 
@@ -58,7 +64,10 @@ export async function getCustomerInsights(email: string): Promise<CustomerInsigh
     const result = await response.json();
 
     if (!result.success) {
-      console.error('[seller/analytics] Error fetching customer insights:', result.error);
+      // 404 "not found" is expected for new users with no data
+      if (response.status !== 404) {
+        console.error('[seller/analytics] Error fetching customer insights:', result.error);
+      }
       return null;
     }
 

@@ -4,15 +4,17 @@ export const dynamic = 'force-dynamic';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4">
       <div className="text-center max-w-md">
         <div className="mb-8">
-          <h1 className="text-9xl font-bold text-primary-600">404</h1>
+          <h1 className="text-9xl font-bold text-primary-600 dark:text-primary-400">404</h1>
         </div>
 
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Página no encontrada</h2>
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+          Página no encontrada
+        </h2>
 
-        <p className="text-gray-600 mb-8">
+        <p className="text-gray-600 dark:text-gray-400 mb-8">
           Lo sentimos, la página que estás buscando no existe o ha sido movida.
         </p>
 
@@ -25,7 +27,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/productos"
-            className="inline-block px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-primary-500 hover:text-primary-600 transition font-medium"
+            className="inline-block px-6 py-3 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:border-primary-500 dark:hover:border-primary-400 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium"
           >
             Ver productos
           </Link>

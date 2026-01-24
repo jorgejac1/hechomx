@@ -86,10 +86,12 @@ function CreateProductContent({ user }: { user: User }) {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <Plus className="w-8 h-8 text-primary-600" />
-            <h1 className="text-3xl font-bold text-gray-900">Crear Nuevo Producto</h1>
+            <Plus className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              Crear Nuevo Producto
+            </h1>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             Completa la información de tu producto para publicarlo en tu tienda
           </p>
         </div>
@@ -97,10 +99,12 @@ function CreateProductContent({ user }: { user: User }) {
         {/* Quick Setup Modal */}
         {showQuickSetup && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-md w-full p-6">
               <div className="flex items-center gap-3 mb-4">
-                <Store className="w-8 h-8 text-primary-600" />
-                <h2 className="text-2xl font-bold text-gray-900">Activa Tu Tienda</h2>
+                <Store className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  Activa Tu Tienda
+                </h2>
               </div>
 
               <Alert
@@ -115,7 +119,7 @@ function CreateProductContent({ user }: { user: User }) {
 
               <div className="space-y-4 mb-6">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                     Nombre de tu Tienda *
                   </label>
                   <input
@@ -123,12 +127,12 @@ function CreateProductContent({ user }: { user: User }) {
                     value={shopName}
                     onChange={(e) => setShopName(e.target.value)}
                     placeholder="Ej: Artesanías María"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                     Ubicación *
                   </label>
                   <input
@@ -136,12 +140,12 @@ function CreateProductContent({ user }: { user: User }) {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="Ej: Oaxaca, México"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                     Descripción Breve (Opcional)
                   </label>
                   <textarea
@@ -149,7 +153,7 @@ function CreateProductContent({ user }: { user: User }) {
                     onChange={(e) => setShopDescription(e.target.value)}
                     rows={3}
                     placeholder="Ej: Artesanías tradicionales de Oaxaca"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-primary-500"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg resize-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
               </div>
@@ -157,7 +161,7 @@ function CreateProductContent({ user }: { user: User }) {
               <div className="flex gap-3">
                 <Link
                   href={ROUTES.HOME}
-                  className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-semibold text-center"
+                  className="flex-1 px-4 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition font-semibold text-center"
                 >
                   Cancelar
                 </Link>
@@ -169,7 +173,7 @@ function CreateProductContent({ user }: { user: User }) {
                 </button>
               </div>
 
-              <p className="text-xs text-gray-500 mt-4 text-center">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
                 Puedes completar más detalles de tu tienda después desde tu perfil
               </p>
             </div>

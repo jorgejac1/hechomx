@@ -47,11 +47,11 @@ export default function BasicInfoSection({
   const subcategories = category ? getSubcategoriesByCategory(category) : [];
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
       <div className="flex items-center gap-2 mb-6">
-        <Package className="w-5 h-5 text-primary-600" />
-        <h2 className="text-xl font-bold text-gray-900">Información Básica</h2>
-        <span className="text-sm text-red-600">*Obligatorio</span>
+        <Package className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">Información Básica</h2>
+        <span className="text-sm text-red-600 dark:text-red-400">*Obligatorio</span>
       </div>
 
       <div className="space-y-4">

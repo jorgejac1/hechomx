@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { getShopBySlug, getProductsByShop } from '@/lib/utils/shop';
 import { getAllProducts } from '@/lib/server';
 import ShopPageClient from '@/components/shop/ShopPageClient';
+import DynamicShopPage from '@/components/shop/DynamicShopPage';
 
 interface ShopPageProps {
   params: Promise<{ shopName: string }>;
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: ShopPageProps): Promise<Metad
 
   if (!shop || !shop.makerProfile) {
     return {
-      title: 'Tienda no encontrada',
+      title: 'Mi Tienda - Papalote Market',
     };
   }
 
@@ -28,8 +28,9 @@ export default async function ShopPage({ params }: ShopPageProps) {
   const { shopName } = await params;
   const shop = getShopBySlug(shopName);
 
+  // If shop not found in mock data, use client component to check localStorage
   if (!shop || !shop.makerProfile) {
-    notFound();
+    return <DynamicShopPage shopSlug={shopName} />;
   }
 
   const allProducts = getAllProducts();

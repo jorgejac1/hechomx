@@ -427,7 +427,7 @@ function OrderDetailModal({ order, onClose }: { order: BuyerOrder; onClose: () =
     <Modal isOpen={true} onClose={onClose} title="Detalles del Pedido" size="lg" footer={footer}>
       {/* Order ID and Status */}
       <div className="flex items-center gap-2 mb-6">
-        <p className="text-lg font-semibold text-gray-900">#{order.id}</p>
+        <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">#{order.id}</p>
         <span
           className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-semibold border ${statusConfig.color}`}
         >
@@ -437,7 +437,9 @@ function OrderDetailModal({ order, onClose }: { order: BuyerOrder; onClose: () =
 
       {/* Timeline */}
       <div className="mb-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Estado del Pedido</h3>
+        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">
+          Estado del Pedido
+        </h3>
         <Timeline
           items={order.timeline.map((event, index): TimelineItem => {
             const isLast = index === order.timeline.length - 1;
@@ -466,10 +468,14 @@ function OrderDetailModal({ order, onClose }: { order: BuyerOrder; onClose: () =
               content: (
                 <>
                   {event.carrier && (
-                    <p className="text-sm text-gray-600 mt-1">Paquetería: {event.carrier}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      Paquetería: {event.carrier}
+                    </p>
                   )}
                   {event.reason && (
-                    <p className="text-sm text-red-600 mt-1">Motivo: {event.reason}</p>
+                    <p className="text-sm text-red-600 dark:text-red-400 mt-1">
+                      Motivo: {event.reason}
+                    </p>
                   )}
                 </>
               ),
@@ -480,12 +486,12 @@ function OrderDetailModal({ order, onClose }: { order: BuyerOrder; onClose: () =
       </div>
 
       {/* Shipping Address */}
-      <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+      <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
         <div className="flex items-center gap-2 mb-3">
-          <MapPin className="w-5 h-5 text-gray-600" />
-          <h3 className="font-bold text-gray-900">Dirección de Envío</h3>
+          <MapPin className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+          <h3 className="font-bold text-gray-900 dark:text-gray-100">Dirección de Envío</h3>
         </div>
-        <div className="text-sm text-gray-700 space-y-1">
+        <div className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
           <p className="font-semibold">{order.shippingAddress.name}</p>
           <p>{order.shippingAddress.street}</p>
           <p>
@@ -498,10 +504,15 @@ function OrderDetailModal({ order, onClose }: { order: BuyerOrder; onClose: () =
 
       {/* Items */}
       <div>
-        <h3 className="font-bold text-gray-900 mb-3">Productos ({order.itemsCount})</h3>
+        <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-3">
+          Productos ({order.itemsCount})
+        </h3>
         <div className="space-y-3">
           {order.items.map((item, idx) => (
-            <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+            <div
+              key={idx}
+              className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+            >
               <Image
                 src={item.image}
                 alt={item.name}
@@ -510,21 +521,29 @@ function OrderDetailModal({ order, onClose }: { order: BuyerOrder; onClose: () =
                 className="rounded-lg object-cover"
               />
               <div className="flex-1">
-                <p className="font-semibold text-gray-900 text-sm">{item.name}</p>
-                <p className="text-xs text-gray-600">{item.artisan.shopName}</p>
-                <p className="text-xs text-gray-600">Cantidad: {item.quantity}</p>
+                <p className="font-semibold text-gray-900 dark:text-gray-100 text-sm">
+                  {item.name}
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">{item.artisan.shopName}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  Cantidad: {item.quantity}
+                </p>
               </div>
-              <p className="font-bold text-primary-600">{formatCurrency(item.price)}</p>
+              <p className="font-bold text-primary-600 dark:text-primary-400">
+                {formatCurrency(item.price)}
+              </p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Total */}
-      <div className="mt-6 pt-4 border-t border-gray-200">
+      <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-600">
         <div className="flex justify-between items-center">
-          <p className="text-lg font-bold text-gray-900">Total</p>
-          <p className="text-2xl font-bold text-primary-600">{formatCurrency(order.total)}</p>
+          <p className="text-lg font-bold text-gray-900 dark:text-gray-100">Total</p>
+          <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">
+            {formatCurrency(order.total)}
+          </p>
         </div>
       </div>
     </Modal>

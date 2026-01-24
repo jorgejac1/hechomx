@@ -10,6 +10,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/lib';
 import {
   Gift,
@@ -29,8 +30,58 @@ import {
 } from 'lucide-react';
 
 export default function GiftsPage() {
+  const router = useRouter();
   const [priceFilter, setPriceFilter] = useState<string>('all');
   const [occasionFilter, setOccasionFilter] = useState<string>('all');
+
+  /** Navigate to products page with combined filters */
+  const navigateWithFilters = (occasion: string, priceId: string) => {
+    const params = new URLSearchParams();
+
+    if (occasion !== 'all') {
+      params.set('ocasion', occasion);
+    }
+
+    if (priceId !== 'all') {
+      const range = priceRanges.find((r) => r.id === priceId);
+      if (range) {
+        params.set('minPrice', range.min.toString());
+        if (range.max !== Infinity) {
+          params.set('maxPrice', range.max.toString());
+        }
+      }
+    }
+
+    const queryString = params.toString();
+    router.push(queryString ? `${ROUTES.PRODUCTS}?${queryString}` : ROUTES.PRODUCTS);
+  };
+
+  /** Handle occasion filter change */
+  const handleOccasionChange = (occasion: string) => {
+    setOccasionFilter(occasion);
+    navigateWithFilters(occasion, priceFilter);
+  };
+
+  /** Handle price filter change from dropdown */
+  const handlePriceChange = (priceId: string) => {
+    setPriceFilter(priceId);
+    navigateWithFilters(occasionFilter, priceId);
+  };
+
+  /** Navigate to products page with price filter (from buttons) */
+  const handlePriceFilterClick = (rangeId: string, min: number, max: number) => {
+    setPriceFilter(rangeId);
+    if (rangeId === 'all') {
+      router.push(ROUTES.PRODUCTS);
+    } else {
+      const params = new URLSearchParams();
+      params.set('minPrice', min.toString());
+      if (max !== Infinity) {
+        params.set('maxPrice', max.toString());
+      }
+      router.push(`${ROUTES.PRODUCTS}?${params.toString()}`);
+    }
+  };
 
   const occasions = [
     {
@@ -217,7 +268,7 @@ export default function GiftsPage() {
             {/* Occasion Filter */}
             <select
               value={occasionFilter}
-              onChange={(e) => setOccasionFilter(e.target.value)}
+              onChange={(e) => handleOccasionChange(e.target.value)}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 font-medium bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             >
               <option value="all">Todas las Ocasiones</option>
@@ -231,7 +282,7 @@ export default function GiftsPage() {
             {/* Price Filter */}
             <select
               value={priceFilter}
-              onChange={(e) => setPriceFilter(e.target.value)}
+              onChange={(e) => handlePriceChange(e.target.value)}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 font-medium bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             >
               {priceRanges.map((range) => (
@@ -371,7 +422,7 @@ export default function GiftsPage() {
             {priceRanges.map((range) => (
               <button
                 key={range.id}
-                onClick={() => setPriceFilter(range.id)}
+                onClick={() => handlePriceFilterClick(range.id, range.min, range.max)}
                 className={`px-6 py-3 rounded-lg font-semibold transition ${
                   priceFilter === range.id
                     ? 'bg-primary-600 text-white shadow-lg'

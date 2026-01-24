@@ -59,7 +59,19 @@ interface DashboardContentProps {
 
 function DashboardContent({ user }: DashboardContentProps) {
   const { makerProfile } = user;
-  const shopName = makerProfile.shopName;
+  const shopName = makerProfile?.shopName || '';
+
+  // Defensive defaults for makerProfile properties
+  const products = makerProfile?.products || [];
+  const recentOrders = makerProfile?.recentOrders || [];
+  const reviews = makerProfile?.reviews || [];
+  const stats = makerProfile?.stats || {
+    totalSales: 0,
+    totalOrders: 0,
+    totalProducts: 0,
+    averageRating: 0,
+    totalReviews: 0,
+  };
 
   const [activeTab, setActiveTab] = useState<
     'overview' | 'analytics' | 'customers' | 'achievements' | 'orders' | 'products' | 'reviews'
@@ -103,8 +115,8 @@ function DashboardContent({ user }: DashboardContentProps) {
     [newOrders.length, shopName]
   );
 
-  const lowStockProducts = makerProfile.products.filter((p) => p.stock > 0 && p.stock <= 5);
-  const outOfStockProducts = makerProfile.products.filter((p) => p.stock === 0);
+  const lowStockProducts = products.filter((p) => p.stock > 0 && p.stock <= 5);
+  const outOfStockProducts = products.filter((p) => p.stock === 0);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 px-4">
@@ -117,14 +129,14 @@ function DashboardContent({ user }: DashboardContentProps) {
           sellerName={shopName}
           onViewOrders={handleViewOrders}
         />
-        <StatsGrid stats={makerProfile.stats} />
+        <StatsGrid stats={stats} />
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md mb-6">
           <TabNavigation
             activeTab={activeTab}
             setActiveTab={handleTabChange}
-            orderCount={makerProfile.recentOrders.length}
-            productCount={makerProfile.products.length}
-            reviewCount={makerProfile.reviews.length}
+            orderCount={recentOrders.length}
+            productCount={products.length}
+            reviewCount={reviews.length}
             newOrderCount={newOrders.length}
           />
           <div className="p-6">
@@ -132,8 +144,8 @@ function DashboardContent({ user }: DashboardContentProps) {
               <OverviewTab
                 userEmail={user.email}
                 shopName={shopName}
-                products={makerProfile.products}
-                recentOrders={makerProfile.recentOrders}
+                products={products}
+                recentOrders={recentOrders}
               />
             )}
             {activeTab === 'analytics' && (
@@ -151,9 +163,9 @@ function DashboardContent({ user }: DashboardContentProps) {
                 <AchievementsTab userEmail={user.email} />
               </LazyLoad>
             )}
-            {activeTab === 'orders' && <OrdersTab orders={makerProfile.recentOrders} />}
-            {activeTab === 'products' && <ProductsTab products={makerProfile.products} />}
-            {activeTab === 'reviews' && <ReviewsTab reviews={makerProfile.reviews} />}
+            {activeTab === 'orders' && <OrdersTab orders={recentOrders} />}
+            {activeTab === 'products' && <ProductsTab products={products} />}
+            {activeTab === 'reviews' && <ReviewsTab reviews={reviews} />}
           </div>
         </div>
       </div>

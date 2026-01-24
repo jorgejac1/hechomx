@@ -195,7 +195,7 @@ export default function ProductForm({
       />
 
       {/* Pricing & Stock */}
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
         <PricingStockSection price={price} setPrice={setPrice} stock={stock} setStock={setStock} />
       </div>
 
