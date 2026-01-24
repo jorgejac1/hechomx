@@ -23,25 +23,33 @@ Papalote Market performance metrics (measured January 2026 via Lighthouse):
 
 | Metric                         | Target  | Current | Status |
 | ------------------------------ | ------- | ------- | ------ |
-| Performance Score              | > 90    | 71      | ⚠️     |
-| LCP (Largest Contentful Paint) | < 2.5s  | 6.5s    | ❌     |
-| FCP (First Contentful Paint)   | < 1.8s  | 2.8s    | ⚠️     |
-| TBT (Total Blocking Time)      | < 200ms | 20ms    | ✅     |
+| Performance Score              | > 90    | 96      | ✅     |
+| LCP (Largest Contentful Paint) | < 2.5s  | 2.7s    | ⚠️     |
+| FCP (First Contentful Paint)   | < 1.8s  | 1.2s    | ✅     |
+| TBT (Total Blocking Time)      | < 200ms | 10ms    | ✅     |
 | CLS (Cumulative Layout Shift)  | < 0.1   | 0       | ✅     |
-| TTI (Time to Interactive)      | < 3.5s  | 6.7s    | ❌     |
-| Speed Index                    | < 3.0s  | 4.0s    | ⚠️     |
-| Total Page Weight              | < 500KB | 1,232KB | ❌     |
+| TTI (Time to Interactive)      | < 3.5s  | 3.3s    | ✅     |
+| Speed Index                    | < 3.0s  | ~2.5s   | ✅     |
+| Total Page Weight              | < 500KB | 1,233KB | ⚠️     |
 
-### Priority Improvements Needed
+### Recent Optimizations (January 2026)
 
-1. **LCP (6.5s → < 2.5s)**: Optimize hero images, add `priority` prop, use WebP/AVIF
-2. **Page Weight (1.2MB → < 500KB)**: Compress images, lazy load below-fold content
-3. **TTI (6.7s → < 3.5s)**: Code split heavy components, defer non-critical JS
+1. **HeroSlider**: Only render current/adjacent slide images (reduced initial load from 4 to 1 image)
+2. **Lazy Loading**: Below-fold sections loaded via `next/dynamic` with Suspense
+3. **Image Optimization**: Reduced Unsplash image sizes, added proper `sizes` props
+4. **Result**: Performance score improved from 71 → 96 (+35%)
+
+### Remaining Improvements
+
+1. **LCP (2.7s → < 2.5s)**: Consider local hero images or CDN with better caching
+2. **Page Weight (1.2MB)**: Compress/optimize images further, audit third-party scripts
 
 ### What's Working Well
 
-- **TBT (20ms)**: Minimal JavaScript blocking - excellent interactivity
-- **CLS (0)**: No layout shifts - stable visual experience
+- **TBT (10ms)**: Excellent - minimal JavaScript blocking
+- **CLS (0)**: Perfect - no layout shifts
+- **FCP (1.2s)**: Fast first paint
+- **TTI (3.3s)**: Good time to interactive
 
 ---
 
