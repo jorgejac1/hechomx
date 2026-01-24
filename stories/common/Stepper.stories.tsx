@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { useState } from 'react';
-import { Package, Truck, CreditCard, Check, User, MapPin, ShoppingCart } from 'lucide-react';
+import { Truck, CreditCard, Check, User, MapPin, ShoppingCart } from 'lucide-react';
 import Stepper, { Step } from '@/components/common/Stepper';
 
 /**

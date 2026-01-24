@@ -19,14 +19,14 @@
 
 ```mermaid
 flowchart TD
-    A[User visits protected page] --> B{Is authenticated?}
-    B -->|Yes| C[Show page content]
-    B -->|No| D[Redirect to /iniciar-sesion]
-    D --> E[User enters credentials]
-    E --> F{Valid credentials?}
-    F -->|Yes| G[Set auth state]
-    G --> H[Redirect to original page]
-    F -->|No| I[Show error message]
+    A["User visits protected page"] --> B{"Is authenticated?"}
+    B -->|Yes| C["Show page content"]
+    B -->|No| D["Redirect to login"]
+    D --> E["User enters credentials"]
+    E --> F{"Valid credentials?"}
+    F -->|Yes| G["Set auth state"]
+    G --> H["Redirect to original page"]
+    F -->|No| I["Show error message"]
     I --> E
 ```
 
@@ -40,17 +40,17 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[User clicks 'Registrarse'] --> B[/registro page]
-    B --> C[Fill registration form]
-    C --> D{Form valid?}
-    D -->|No| E[Show validation errors]
+    A["User clicks 'Registrarse'"] --> B["Registration page"]
+    B --> C["Fill registration form"]
+    C --> D{"Form valid?"}
+    D -->|No| E["Show validation errors"]
     E --> C
-    D -->|Yes| F[Create account]
-    F --> G[Auto-login user]
-    G --> H[Redirect to /perfil]
-    H --> I{Want to sell?}
-    I -->|Yes| J[Show seller setup modal]
-    I -->|No| K[Continue as buyer]
+    D -->|Yes| F["Create account"]
+    F --> G["Auto-login user"]
+    G --> H["Redirect to profile"]
+    H --> I{"Want to sell?"}
+    I -->|Yes| J["Show seller setup modal"]
+    I -->|No| K["Continue as buyer"]
 ```
 
 **Key Files:**
@@ -128,18 +128,18 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A[Registered User] --> B[Visit /perfil]
-    B --> C[Click 'Activar Tienda']
-    C --> D[Seller Setup Modal]
-    D --> E[Enter shop details]
-    E --> F{Valid input?}
-    F -->|No| G[Show errors]
+    A["Registered User"] --> B["Visit profile page"]
+    B --> C["Click 'Activar Tienda'"]
+    C --> D["Seller Setup Modal"]
+    D --> E["Enter shop details"]
+    E --> F{"Valid input?"}
+    F -->|No| G["Show errors"]
     G --> E
-    F -->|Yes| H[Create seller profile]
-    H --> I[Redirect to /dashboard]
-    I --> J[Complete artisan story]
-    J --> K[Add first product]
-    K --> L[Ready to sell!]
+    F -->|Yes| H["Create seller profile"]
+    H --> I["Redirect to dashboard"]
+    I --> J["Complete artisan story"]
+    J --> K["Add first product"]
+    K --> L["Ready to sell!"]
 ```
 
 ### Seller Setup Form
@@ -163,24 +163,24 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[Cart Page] --> B{User logged in?}
-    B -->|No| C[Show AuthRequiredModal]
-    C --> D[Login/Register]
-    D --> E[Return to cart]
+    A["Cart Page"] --> B{"User logged in?"}
+    B -->|No| C["Show AuthRequiredModal"]
+    C --> D["Login or Register"]
+    D --> E["Return to cart"]
     B -->|Yes| E
-    E --> F[Click 'Proceder al pago']
-    F --> G[/checkout page]
+    E --> F["Click 'Proceder al pago'"]
+    F --> G["Checkout page"]
 
     subgraph Checkout["Checkout Steps"]
-        G --> H[Shipping Address]
-        H --> I[Payment Method]
-        I --> J[Review Order]
-        J --> K[Apply Coupon - Optional]
-        K --> L[Confirm Order]
+        G --> H["Shipping Address"]
+        H --> I["Payment Method"]
+        I --> J["Review Order"]
+        J --> K["Apply Coupon - Optional"]
+        K --> L["Confirm Order"]
     end
 
-    L --> M[Order Confirmation]
-    M --> N[Email Confirmation]
+    L --> M["Order Confirmation"]
+    M --> N["Email Confirmation"]
 ```
 
 ### Checkout Components
@@ -218,26 +218,26 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A[/dashboard] --> B[DashboardHeader]
-    A --> C[TabNavigation]
+    A["Dashboard Page"] --> B["DashboardHeader"]
+    A --> C["TabNavigation"]
 
-    C --> D[Overview Tab]
-    C --> E[Products Tab]
-    C --> F[Orders Tab]
-    C --> G[Reviews Tab]
-    C --> H[Achievements Tab]
+    C --> D["Overview Tab"]
+    C --> E["Products Tab"]
+    C --> F["Orders Tab"]
+    C --> G["Reviews Tab"]
+    C --> H["Achievements Tab"]
 
-    D --> I[StatsGrid]
-    D --> J[QuickActions]
-    D --> K[AlertsSection]
-    D --> L[CustomerInsights]
+    D --> I["StatsGrid"]
+    D --> J["QuickActions"]
+    D --> K["AlertsSection"]
+    D --> L["CustomerInsights"]
 
-    E --> M[Product List]
-    E --> N[Add Product]
-    E --> O[Bulk Actions]
+    E --> M["Product List"]
+    E --> N["Add Product"]
+    E --> O["Bulk Actions"]
 
-    F --> P[Order Management]
-    F --> Q[Status Updates]
+    F --> P["Order Management"]
+    F --> Q["Status Updates"]
 ```
 
 ### Product Management Flow
@@ -279,21 +279,21 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[/admin/usuarios] --> B[User List Table]
-    B --> C{Action}
+    A["Admin Users Page"] --> B["User List Table"]
+    B --> C{"Action"}
 
-    C -->|View| D[User Profile Modal]
-    C -->|Suspend| E[Confirm Suspension]
-    C -->|Reactivate| F[Reactivate Account]
-    C -->|Filter| G[Filter by Role/Status]
+    C -->|View| D["User Profile Modal"]
+    C -->|Suspend| E["Confirm Suspension"]
+    C -->|Reactivate| F["Reactivate Account"]
+    C -->|Filter| G["Filter by Role/Status"]
 
-    D --> H[User Details]
-    D --> I[Activity Stats]
-    D --> J[Admin Actions]
+    D --> H["User Details"]
+    D --> I["Activity Stats"]
+    D --> J["Admin Actions"]
 
-    E --> K[Update User Status]
+    E --> K["Update User Status"]
     F --> K
-    K --> L[Refresh List]
+    K --> L["Refresh List"]
 ```
 
 ### Verification Workflow

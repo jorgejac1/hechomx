@@ -4,7 +4,6 @@ import {
   Settings,
   User,
   LogOut,
-  ChevronDown,
   Package,
   ShoppingCart,
   Heart,

@@ -70,206 +70,191 @@ const sampleProducts: Product[] = [
 
 // Default list
 export const Default: Story = {
-  args: {
-    data: sampleProducts,
-    keyAccessor: 'id',
-    renderItem: (item: Product) => (
-      <DataList.Item
-        leading={<div className="w-12 h-12 bg-gray-100 rounded-lg" />}
-        primary={item.name}
-        secondary={item.category}
-        trailing={
-          <span className="font-bold text-primary-600">${item.price.toLocaleString()}</span>
-        }
+  render: () => (
+    <div className="max-w-lg">
+      <DataList
+        data={sampleProducts}
+        keyAccessor="id"
+        renderItem={(item: Product) => (
+          <DataList.Item
+            leading={<div className="w-12 h-12 bg-gray-100 rounded-lg" />}
+            primary={item.name}
+            secondary={item.category}
+            trailing={
+              <span className="font-bold text-primary-600">${item.price.toLocaleString()}</span>
+            }
+          />
+        )}
       />
-    ),
-  },
-  decorators: [
-    (Story) => (
-      <div className="max-w-lg">
-        <Story />
-      </div>
-    ),
-  ],
+    </div>
+  ),
 };
 
 // Grid layout
 export const GridLayout: Story = {
-  args: {
-    data: sampleProducts,
-    keyAccessor: 'id',
-    layout: 'grid',
-    columns: 3,
-    renderItem: (item: Product) => (
-      <div className="text-center">
-        <div className="w-full aspect-square bg-gray-100 rounded-lg mb-3" />
-        <h4 className="font-medium text-gray-900 truncate">{item.name}</h4>
-        <p className="text-sm text-gray-500">{item.category}</p>
-        <p className="font-bold text-primary-600 mt-1">${item.price.toLocaleString()}</p>
-      </div>
-    ),
-  },
+  render: () => (
+    <DataList
+      data={sampleProducts}
+      keyAccessor="id"
+      layout="grid"
+      columns={3}
+      renderItem={(item: Product) => (
+        <div className="text-center">
+          <div className="w-full aspect-square bg-gray-100 rounded-lg mb-3" />
+          <h4 className="font-medium text-gray-900 truncate">{item.name}</h4>
+          <p className="text-sm text-gray-500">{item.category}</p>
+          <p className="font-bold text-primary-600 mt-1">${item.price.toLocaleString()}</p>
+        </div>
+      )}
+    />
+  ),
 };
 
 // Compact layout
 export const CompactLayout: Story = {
-  args: {
-    data: sampleProducts,
-    keyAccessor: 'id',
-    layout: 'compact',
-    renderItem: (item: Product) => (
-      <DataList.Item
-        primary={item.name}
-        secondary={item.category}
-        trailing={<span className="text-sm text-gray-500">${item.price}</span>}
+  render: () => (
+    <div className="max-w-md">
+      <DataList
+        data={sampleProducts}
+        keyAccessor="id"
+        layout="compact"
+        renderItem={(item: Product) => (
+          <DataList.Item
+            primary={item.name}
+            secondary={item.category}
+            trailing={<span className="text-sm text-gray-500">${item.price}</span>}
+          />
+        )}
       />
-    ),
-  },
-  decorators: [
-    (Story) => (
-      <div className="max-w-md">
-        <Story />
-      </div>
-    ),
-  ],
+    </div>
+  ),
 };
 
 // Sizes
 export const SizeSmall: Story = {
-  args: {
-    data: sampleProducts.slice(0, 3),
-    keyAccessor: 'id',
-    size: 'sm',
-    renderItem: (item: Product) => <DataList.Item primary={item.name} secondary={item.category} />,
-  },
-  decorators: [
-    (Story) => (
-      <div className="max-w-md">
-        <Story />
-      </div>
-    ),
-  ],
+  render: () => (
+    <div className="max-w-md">
+      <DataList
+        data={sampleProducts.slice(0, 3)}
+        keyAccessor="id"
+        size="sm"
+        renderItem={(item: Product) => (
+          <DataList.Item primary={item.name} secondary={item.category} />
+        )}
+      />
+    </div>
+  ),
 };
 
 export const SizeMedium: Story = {
-  args: {
-    data: sampleProducts.slice(0, 3),
-    keyAccessor: 'id',
-    size: 'md',
-    renderItem: (item: Product) => <DataList.Item primary={item.name} secondary={item.category} />,
-  },
-  decorators: [
-    (Story) => (
-      <div className="max-w-md">
-        <Story />
-      </div>
-    ),
-  ],
+  render: () => (
+    <div className="max-w-md">
+      <DataList
+        data={sampleProducts.slice(0, 3)}
+        keyAccessor="id"
+        size="md"
+        renderItem={(item: Product) => (
+          <DataList.Item primary={item.name} secondary={item.category} />
+        )}
+      />
+    </div>
+  ),
 };
 
 export const SizeLarge: Story = {
-  args: {
-    data: sampleProducts.slice(0, 3),
-    keyAccessor: 'id',
-    size: 'lg',
-    renderItem: (item: Product) => <DataList.Item primary={item.name} secondary={item.category} />,
-  },
-  decorators: [
-    (Story) => (
-      <div className="max-w-md">
-        <Story />
-      </div>
-    ),
-  ],
+  render: () => (
+    <div className="max-w-md">
+      <DataList
+        data={sampleProducts.slice(0, 3)}
+        keyAccessor="id"
+        size="lg"
+        renderItem={(item: Product) => (
+          <DataList.Item primary={item.name} secondary={item.category} />
+        )}
+      />
+    </div>
+  ),
 };
 
 // Without dividers
 export const WithoutDividers: Story = {
-  args: {
-    data: sampleProducts.slice(0, 3),
-    keyAccessor: 'id',
-    divided: false,
-    renderItem: (item: Product) => (
-      <DataList.Item
-        leading={<div className="w-10 h-10 bg-gray-100 rounded-lg" />}
-        primary={item.name}
-        secondary={item.category}
+  render: () => (
+    <div className="max-w-md">
+      <DataList
+        data={sampleProducts.slice(0, 3)}
+        keyAccessor="id"
+        divided={false}
+        renderItem={(item: Product) => (
+          <DataList.Item
+            leading={<div className="w-10 h-10 bg-gray-100 rounded-lg" />}
+            primary={item.name}
+            secondary={item.category}
+          />
+        )}
       />
-    ),
-  },
-  decorators: [
-    (Story) => (
-      <div className="max-w-md">
-        <Story />
-      </div>
-    ),
-  ],
+    </div>
+  ),
 };
 
 // Without hover
 export const WithoutHover: Story = {
-  args: {
-    data: sampleProducts.slice(0, 3),
-    keyAccessor: 'id',
-    hoverable: false,
-    renderItem: (item: Product) => <DataList.Item primary={item.name} secondary={item.category} />,
-  },
-  decorators: [
-    (Story) => (
-      <div className="max-w-md">
-        <Story />
-      </div>
-    ),
-  ],
+  render: () => (
+    <div className="max-w-md">
+      <DataList
+        data={sampleProducts.slice(0, 3)}
+        keyAccessor="id"
+        hoverable={false}
+        renderItem={(item: Product) => (
+          <DataList.Item primary={item.name} secondary={item.category} />
+        )}
+      />
+    </div>
+  ),
 };
 
 // Loading
 export const Loading: Story = {
-  args: {
-    data: [],
-    keyAccessor: 'id',
-    loading: true,
-    loadingItems: 5,
-    renderItem: () => null,
-  },
-  decorators: [
-    (Story) => (
-      <div className="max-w-lg">
-        <Story />
-      </div>
-    ),
-  ],
+  render: () => (
+    <div className="max-w-lg">
+      <DataList
+        data={[] as Product[]}
+        keyAccessor="id"
+        loading={true}
+        loadingItems={5}
+        renderItem={() => null}
+      />
+    </div>
+  ),
 };
 
 // Loading grid
 export const LoadingGrid: Story = {
-  args: {
-    data: [],
-    keyAccessor: 'id',
-    layout: 'grid',
-    columns: 3,
-    loading: true,
-    loadingItems: 6,
-    renderItem: () => null,
-  },
+  render: () => (
+    <DataList
+      data={[] as Product[]}
+      keyAccessor="id"
+      layout="grid"
+      columns={3}
+      loading={true}
+      loadingItems={6}
+      renderItem={() => null}
+    />
+  ),
 };
 
 // Empty state
 export const EmptyState: Story = {
-  args: {
-    data: [],
-    keyAccessor: 'id',
-    emptyMessage: 'No hay productos disponibles',
-    emptyIcon: <Package className="w-10 h-10 text-gray-300" />,
-    renderItem: () => null,
-  },
-  decorators: [
-    (Story) => (
-      <div className="max-w-lg">
-        <Story />
-      </div>
-    ),
-  ],
+  render: () => (
+    <div className="max-w-lg">
+      <DataList
+        data={[] as Product[]}
+        keyAccessor="id"
+        emptyMessage="No hay productos disponibles"
+        emptyIcon={<Package className="w-10 h-10 text-gray-300" />}
+        renderItem={() => null}
+      />
+    </div>
+  ),
 };
 
 // With click handler
@@ -304,35 +289,39 @@ export const WithClickHandler: Story = {
 
 // Grid columns
 export const Grid2Columns: Story = {
-  args: {
-    data: sampleProducts,
-    keyAccessor: 'id',
-    layout: 'grid',
-    columns: 2,
-    renderItem: (item: Product) => (
-      <div>
-        <div className="aspect-square bg-gray-100 rounded-lg mb-2" />
-        <h4 className="font-medium text-gray-900">{item.name}</h4>
-        <p className="text-sm text-gray-500">${item.price}</p>
-      </div>
-    ),
-  },
+  render: () => (
+    <DataList
+      data={sampleProducts}
+      keyAccessor="id"
+      layout="grid"
+      columns={2}
+      renderItem={(item: Product) => (
+        <div>
+          <div className="aspect-square bg-gray-100 rounded-lg mb-2" />
+          <h4 className="font-medium text-gray-900">{item.name}</h4>
+          <p className="text-sm text-gray-500">${item.price}</p>
+        </div>
+      )}
+    />
+  ),
 };
 
 export const Grid4Columns: Story = {
-  args: {
-    data: sampleProducts,
-    keyAccessor: 'id',
-    layout: 'grid',
-    columns: 4,
-    renderItem: (item: Product) => (
-      <div>
-        <div className="aspect-square bg-gray-100 rounded-lg mb-2" />
-        <h4 className="font-medium text-gray-900 text-sm truncate">{item.name}</h4>
-        <p className="text-xs text-gray-500">${item.price}</p>
-      </div>
-    ),
-  },
+  render: () => (
+    <DataList
+      data={sampleProducts}
+      keyAccessor="id"
+      layout="grid"
+      columns={4}
+      renderItem={(item: Product) => (
+        <div>
+          <div className="aspect-square bg-gray-100 rounded-lg mb-2" />
+          <h4 className="font-medium text-gray-900 text-sm truncate">{item.name}</h4>
+          <p className="text-xs text-gray-500">${item.price}</p>
+        </div>
+      )}
+    />
+  ),
 };
 
 // Orders list example

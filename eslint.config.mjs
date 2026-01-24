@@ -18,6 +18,7 @@ export default [{
     'next-env.d.ts',
     '.git/**',
     'coverage/**',
+    'storybook-static/**',
   ],
 }, js.configs.recommended, ...tseslint.configs.recommended, {
   files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],

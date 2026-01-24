@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { Package, Truck, CheckCircle, Clock, AlertCircle, MapPin } from 'lucide-react';
+import { Package, Truck, CheckCircle, MapPin } from 'lucide-react';
 import Timeline from '@/components/common/Timeline';
 
 /**

@@ -137,59 +137,34 @@ const columns = [
 
 // Default
 export const Default: Story = {
-  args: {
-    columns,
-    data: sampleProducts,
-    keyAccessor: 'id',
-  },
+  render: () => <Table columns={columns} data={sampleProducts} keyAccessor="id" />,
 };
 
 // Striped variant
 export const Striped: Story = {
-  args: {
-    columns,
-    data: sampleProducts,
-    keyAccessor: 'id',
-    variant: 'striped',
-  },
+  render: () => (
+    <Table columns={columns} data={sampleProducts} keyAccessor="id" variant="striped" />
+  ),
 };
 
 // Bordered variant
 export const Bordered: Story = {
-  args: {
-    columns,
-    data: sampleProducts,
-    keyAccessor: 'id',
-    variant: 'bordered',
-  },
+  render: () => (
+    <Table columns={columns} data={sampleProducts} keyAccessor="id" variant="bordered" />
+  ),
 };
 
 // Sizes
 export const SizeSmall: Story = {
-  args: {
-    columns,
-    data: sampleProducts,
-    keyAccessor: 'id',
-    size: 'sm',
-  },
+  render: () => <Table columns={columns} data={sampleProducts} keyAccessor="id" size="sm" />,
 };
 
 export const SizeMedium: Story = {
-  args: {
-    columns,
-    data: sampleProducts,
-    keyAccessor: 'id',
-    size: 'md',
-  },
+  render: () => <Table columns={columns} data={sampleProducts} keyAccessor="id" size="md" />,
 };
 
 export const SizeLarge: Story = {
-  args: {
-    columns,
-    data: sampleProducts,
-    keyAccessor: 'id',
-    size: 'lg',
-  },
+  render: () => <Table columns={columns} data={sampleProducts} keyAccessor="id" size="lg" />,
 };
 
 // With sorting
@@ -277,23 +252,20 @@ export const StickyHeader: Story = {
 
 // Loading
 export const Loading: Story = {
-  args: {
-    columns,
-    data: [],
-    keyAccessor: 'id',
-    loading: true,
-  },
+  render: () => <Table columns={columns} data={[]} keyAccessor="id" loading />,
 };
 
 // Empty state
 export const EmptyState: Story = {
-  args: {
-    columns,
-    data: [],
-    keyAccessor: 'id',
-    emptyMessage: 'No se encontraron productos',
-    emptyIcon: <Package className="w-12 h-12 text-gray-300" />,
-  },
+  render: () => (
+    <Table
+      columns={columns}
+      data={[]}
+      keyAccessor="id"
+      emptyMessage="No se encontraron productos"
+      emptyIcon={<Package className="w-12 h-12 text-gray-300" />}
+    />
+  ),
 };
 
 // With actions column
@@ -359,7 +331,16 @@ export const ResponsiveColumns: Story = {
             inactive: 'danger',
             pending: 'warning',
           } as const;
-          return <Badge variant={variants[row.status]} size="sm" />;
+          const labels = {
+            active: 'Activo',
+            inactive: 'Inactivo',
+            pending: 'Pendiente',
+          };
+          return (
+            <Badge variant={variants[row.status]} size="sm">
+              {labels[row.status]}
+            </Badge>
+          );
         },
       },
     ];
@@ -377,12 +358,9 @@ export const ResponsiveColumns: Story = {
 
 // Without hover
 export const WithoutHover: Story = {
-  args: {
-    columns,
-    data: sampleProducts,
-    keyAccessor: 'id',
-    hoverable: false,
-  },
+  render: () => (
+    <Table columns={columns} data={sampleProducts} keyAccessor="id" hoverable={false} />
+  ),
 };
 
 // Orders table example

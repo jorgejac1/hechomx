@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { useState, useEffect } from 'react';
 import Autocomplete, { AutocompleteOption } from '@/components/common/Autocomplete';
-import { MapPin, User, Package, Tag, Store } from 'lucide-react';
+import { MapPin, User, Tag } from 'lucide-react';
 
 /**
  * Autocomplete component for searchable dropdown selection.

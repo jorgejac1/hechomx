@@ -196,9 +196,15 @@ export const Interactive: Story = {
 export const AllSizes: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <LoadingButton size="sm" isLoading loadingText="Cargando..." />
-      <LoadingButton size="md" isLoading loadingText="Cargando..." />
-      <LoadingButton size="lg" isLoading loadingText="Cargando..." />
+      <LoadingButton size="sm" isLoading loadingText="Cargando...">
+        Guardar
+      </LoadingButton>
+      <LoadingButton size="md" isLoading loadingText="Cargando...">
+        Guardar
+      </LoadingButton>
+      <LoadingButton size="lg" isLoading loadingText="Cargando...">
+        Guardar
+      </LoadingButton>
     </div>
   ),
 };
@@ -207,10 +213,18 @@ export const AllSizes: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <LoadingButton variant="primary" isLoading loadingText="Primary..." />
-      <LoadingButton variant="secondary" isLoading loadingText="Secondary..." />
-      <LoadingButton variant="outline" isLoading loadingText="Outline..." />
-      <LoadingButton variant="ghost" isLoading loadingText="Ghost..." />
+      <LoadingButton variant="primary" isLoading loadingText="Primary...">
+        Primary
+      </LoadingButton>
+      <LoadingButton variant="secondary" isLoading loadingText="Secondary...">
+        Secondary
+      </LoadingButton>
+      <LoadingButton variant="outline" isLoading loadingText="Outline...">
+        Outline
+      </LoadingButton>
+      <LoadingButton variant="ghost" isLoading loadingText="Ghost...">
+        Ghost
+      </LoadingButton>
     </div>
   ),
 };
