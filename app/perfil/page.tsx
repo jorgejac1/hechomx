@@ -330,7 +330,7 @@ function ProfileContent({ user }: { user: User }) {
                 {!isEditing ? (
                   <button
                     onClick={() => setIsEditing(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium text-sm"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium text-sm cursor-pointer"
                   >
                     <Edit2 className="w-4 h-4" />
                     Editar
@@ -629,6 +629,15 @@ function ProfileContent({ user }: { user: User }) {
         <SellerSetupForm
           onClose={() => setShowSellerSetup(false)}
           onSave={handleSaveSellerProfile}
+          initialData={
+            user.makerProfile
+              ? {
+                  shopName: user.makerProfile.shopName,
+                  location: user.makerProfile.location,
+                  description: user.makerProfile.description,
+                }
+              : undefined
+          }
         />
       )}
     </div>

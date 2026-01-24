@@ -338,7 +338,7 @@ export default function GiftsPage() {
                     <p className="text-gray-600 dark:text-gray-400">{collection.description}</p>
                     <div className="mt-4 flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold text-sm">
                       Ver Colección
-                      <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <ChevronRight className="w-4 h-4" />
                     </div>
                   </div>
                 </Link>

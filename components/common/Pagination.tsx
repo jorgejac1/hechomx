@@ -91,8 +91,8 @@ function PaginationContent({ currentPage, totalPages, baseUrl }: PaginationProps
         href={buildUrl(Math.max(1, currentPage - 1))}
         className={`px-4 py-2 rounded-lg border font-medium transition ${
           currentPage === 1
-            ? 'border-gray-200 text-gray-400 cursor-not-allowed pointer-events-none'
-            : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+            ? 'border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed pointer-events-none'
+            : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer'
         }`}
         aria-disabled={currentPage === 1}
       >
@@ -104,7 +104,10 @@ function PaginationContent({ currentPage, totalPages, baseUrl }: PaginationProps
         {getPageNumbers().map((page, index) => {
           if (page === '...') {
             return (
-              <span key={`ellipsis-${index}`} className="px-3 py-2 text-gray-400">
+              <span
+                key={`ellipsis-${index}`}
+                className="px-3 py-2 text-gray-400 dark:text-gray-500"
+              >
                 ...
               </span>
             );
@@ -117,8 +120,10 @@ function PaginationContent({ currentPage, totalPages, baseUrl }: PaginationProps
             <Link
               key={pageNumber}
               href={buildUrl(pageNumber)}
-              className={`min-w-[40px] h-10 flex items-center justify-center rounded-lg font-medium transition ${
-                isActive ? 'bg-primary-600 text-white' : 'text-gray-700 hover:bg-gray-100'
+              className={`min-w-[40px] h-10 flex items-center justify-center rounded-lg font-medium transition cursor-pointer ${
+                isActive
+                  ? 'bg-primary-600 text-white'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
               {pageNumber}
@@ -132,7 +137,7 @@ function PaginationContent({ currentPage, totalPages, baseUrl }: PaginationProps
         <span className="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium">
           {currentPage}
         </span>
-        <span className="text-gray-600">de {totalPages}</span>
+        <span className="text-gray-600 dark:text-gray-400">de {totalPages}</span>
       </div>
 
       {/* Next Button */}
@@ -140,8 +145,8 @@ function PaginationContent({ currentPage, totalPages, baseUrl }: PaginationProps
         href={buildUrl(Math.min(totalPages, currentPage + 1))}
         className={`px-4 py-2 rounded-lg border font-medium transition ${
           currentPage === totalPages
-            ? 'border-gray-200 text-gray-400 cursor-not-allowed pointer-events-none'
-            : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+            ? 'border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed pointer-events-none'
+            : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer'
         }`}
         aria-disabled={currentPage === totalPages}
       >

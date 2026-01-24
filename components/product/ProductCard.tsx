@@ -179,14 +179,16 @@ const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden hover:shadow-xl dark:hover:shadow-gray-900/70 transition-shadow duration-300 h-full flex flex-col">
           {/* Image */}
           <div className="relative h-40 sm:h-48 md:h-56 bg-gray-200 dark:bg-gray-700 overflow-hidden shrink-0">
-            <Image
-              src={product.images[0]}
-              alt={product.name}
-              fill
-              sizes="(max-width: 640px) 60vw, (max-width: 1024px) 45vw, 25vw"
-              className="object-cover group-hover:scale-110 transition-transform duration-300"
-              loading="lazy"
-            />
+            <div className="absolute inset-0 overflow-hidden">
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                fill
+                sizes="(max-width: 640px) 60vw, (max-width: 1024px) 45vw, 25vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
 
             {/* Left Side - Badges Group (New + Featured + Verified) */}
             <div className="absolute top-1.5 sm:top-2 left-1.5 sm:left-2 z-1 flex items-center gap-1.5 sm:gap-2">

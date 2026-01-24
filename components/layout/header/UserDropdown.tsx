@@ -175,7 +175,7 @@ export default function UserDropdown({ user, isAdmin, onLogout }: UserDropdownPr
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-1.5 transition ${
+        className={`flex items-center gap-1.5 transition cursor-pointer ${
           isAdmin ? 'text-purple-600 hover:text-purple-700' : 'text-gray-700 hover:text-primary-600'
         }`}
         aria-expanded={isOpen}

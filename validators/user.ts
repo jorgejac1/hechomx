@@ -57,7 +57,7 @@ export const updateProfileSchema = z.object({
   email: z.string().email('Correo electrónico inválido'),
   phone: z
     .string()
-    .regex(/^\+?52?\s?\d{10}$/, 'Número de teléfono inválido')
+    .regex(/^\+?52?\s?[\d\s]{10,14}$/, 'Número de teléfono inválido')
     .optional(),
   avatar: z.instanceof(File).optional(),
 });

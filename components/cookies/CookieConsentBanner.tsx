@@ -5,7 +5,7 @@
  * @module components/cookies/CookieConsentBanner
  */
 
-import { Cookie, Settings, X } from 'lucide-react';
+import { Cookie, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { useCookieConsent } from '@/contexts/CookieConsentContext';
 import { ROUTES } from '@/lib';

@@ -17,13 +17,19 @@ type MakerProfileInput = z.infer<typeof makerProfileSchema>;
 interface SellerSetupFormProps {
   onClose: () => void;
   onSave: (data: MakerProfileInput) => Promise<void>;
+  initialData?: {
+    shopName?: string;
+    location?: string;
+    description?: string;
+  };
 }
 
-export default function SellerSetupForm({ onClose, onSave }: SellerSetupFormProps) {
+export default function SellerSetupForm({ onClose, onSave, initialData }: SellerSetupFormProps) {
+  const isEditing = Boolean(initialData?.shopName);
   const [formData, setFormData] = useState<MakerProfileInput>({
-    shopName: '',
-    location: '',
-    description: '',
+    shopName: initialData?.shopName || '',
+    location: initialData?.location || '',
+    description: initialData?.description || '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -65,8 +71,14 @@ export default function SellerSetupForm({ onClose, onSave }: SellerSetupFormProp
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Activa tu Tienda</h2>
-        <p className="text-gray-600 mb-6">Completa esta información para empezar a vender</p>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          {isEditing ? 'Editar Tienda' : 'Activa tu Tienda'}
+        </h2>
+        <p className="text-gray-600 mb-6">
+          {isEditing
+            ? 'Actualiza la información de tu tienda'
+            : 'Completa esta información para empezar a vender'}
+        </p>
 
         {errors._form && (
           <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
@@ -176,6 +188,8 @@ export default function SellerSetupForm({ onClose, onSave }: SellerSetupFormProp
                   <LoadingSpinner size="sm" color="white" />
                   Guardando...
                 </>
+              ) : isEditing ? (
+                'Guardar Cambios'
               ) : (
                 'Activar Tienda'
               )}

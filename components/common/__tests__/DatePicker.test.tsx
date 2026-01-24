@@ -459,7 +459,7 @@ describe('DatePicker', () => {
   describe('Clear Button with Error State', () => {
     it('should style clear button with error border when error is present', () => {
       const date = new Date(2024, 5, 20);
-      const { container } = render(<DatePicker value={date} error="Invalid date" clearable />);
+      render(<DatePicker value={date} error="Invalid date" clearable />);
       const clearButton = screen.getByLabelText('Limpiar fecha');
       expect(clearButton).toHaveClass('border-red-500');
     });

@@ -177,10 +177,10 @@ function SettingsContent() {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <button className="p-2 text-gray-600 hover:text-primary-600 transition">
+                        <button className="p-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition cursor-pointer">
                           <Edit2 className="w-5 h-5" />
                         </button>
-                        <button className="p-2 text-gray-600 hover:text-red-600 transition">
+                        <button className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition cursor-pointer">
                           <Trash2 className="w-5 h-5" />
                         </button>
                       </div>
@@ -237,10 +237,10 @@ function SettingsContent() {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <button className="p-2 text-gray-600 hover:text-primary-600 transition">
+                        <button className="p-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition cursor-pointer">
                           <Edit2 className="w-5 h-5" />
                         </button>
-                        <button className="p-2 text-gray-600 hover:text-red-600 transition">
+                        <button className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition cursor-pointer">
                           <Trash2 className="w-5 h-5" />
                         </button>
                       </div>

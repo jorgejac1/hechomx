@@ -194,7 +194,6 @@ function TabList({ tabs, className = '', fullWidth = false }: TabListProps) {
       className={`
         ${styles.container}
         ${fullWidth ? 'flex w-full' : 'inline-flex'}
-        overflow-x-auto
         ${className}
       `}
     >
