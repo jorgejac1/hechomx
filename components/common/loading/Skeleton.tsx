@@ -40,7 +40,7 @@ export default function Skeleton({
   return (
     <div
       className={`
-        bg-gray-200
+        bg-gray-200 dark:bg-gray-700
         ${variantClasses[variant]}
         ${animationClasses[animation]}
         ${className}

@@ -413,23 +413,69 @@ return NextResponse.json(data, {
 
 ## Bundle Optimization
 
-### Analyze Bundle
+### Available Scripts
+
+The project includes several scripts for bundle analysis and performance checking:
 
 ```bash
-# Install analyzer
-npm install --save-dev @next/bundle-analyzer
+# Visual bundle analyzer - opens interactive treemap in browser
+npm run analyze
 
-# Add to next.config.js
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
+# Check bundle sizes against performance budgets
+npm run bundle:check
 
-module.exports = withBundleAnalyzer({
-  // config
-});
+# Run comprehensive performance audit (score 0-100)
+npm run perf:audit
 
-# Run analysis
-ANALYZE=true npm run build
+# Build and check bundle sizes in one command
+npm run size
+```
+
+### Performance Budgets
+
+Budgets are configured in `config/performance-budget.json`:
+
+| Metric                    | Warning | Error   |
+| ------------------------- | ------- | ------- |
+| Chunk size (uncompressed) | 500 KB  | 1000 KB |
+| Shared JS                 | 700 KB  | 1200 KB |
+| Individual images         | 200 KB  | 500 KB  |
+| Total fonts               | 100 KB  | 200 KB  |
+
+### Bundle Checker Output
+
+```bash
+$ npm run bundle:check
+
+📦 Bundle Size Analysis
+
+Top 10 Largest Chunks:
+  ⚠    918.01 KB  7de68e1082650641.js  # html2pdf (lazy-loaded)
+  ✓    268.05 KB  b9dbe27b29f967c9.js
+  ✓    218.31 KB  d6c3161eafdca609.js
+
+Summary:
+  ✓ Shared JS:     0.00 KB (budget: 700KB warning / 1200KB error)
+  ℹ Total JS:      5.74 MB
+  ℹ Total Chunks:  76
+
+Build passed with 4 warning(s).
+```
+
+### Current Bundle Composition (January 2026)
+
+| Chunk                  | Size (disk) | Content                  | Status       |
+| ---------------------- | ----------- | ------------------------ | ------------ |
+| html2pdf + html2canvas | 728 KB      | PDF export (lazy-loaded) | ✅ Lazy      |
+| React DOM              | 188 KB      | Framework                | Expected     |
+| lucide-react           | 152 KB      | Icons (tree-shaken)      | ✅ Optimized |
+| Zod                    | 100 KB      | Validation               | Expected     |
+
+### Analyze Bundle (Manual)
+
+```bash
+# Run visual analyzer (with webpack flag for Turbopack compatibility)
+ANALYZE=true npx next build --webpack
 ```
 
 ### Tree Shaking

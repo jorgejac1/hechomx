@@ -174,7 +174,10 @@ describe('Radio', () => {
   describe('Accessibility', () => {
     it('should have proper focus styles class', () => {
       render(<Radio />);
-      expect(screen.getByRole('radio')).toHaveClass('focus:ring-primary-500', 'focus:ring-2');
+      expect(screen.getByRole('radio')).toHaveClass(
+        'focus-visible:ring-primary-500',
+        'focus-visible:ring-2'
+      );
     });
 
     it('should support custom id', () => {

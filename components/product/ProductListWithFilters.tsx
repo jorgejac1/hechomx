@@ -8,7 +8,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Filter, SlidersHorizontal, Search } from 'lucide-react';
+import { SearchX, SlidersHorizontal, Search, Package } from 'lucide-react';
 import { Product } from '@/types';
 import { useProductFilters } from '@/hooks/product/useProductFilters';
 import FiltersDrawer from './FiltersDrawer';
@@ -53,28 +53,30 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
   } = useProductFilters(products);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">
             Productos Artesanales
           </h1>
-          <p className="text-gray-600">Descubre auténticas artesanías mexicanas</p>
+          <p className="text-gray-600 dark:text-gray-400">
+            Descubre auténticas artesanías mexicanas
+          </p>
         </div>
 
         {/* Search and Filter Bar */}
-        <div className="bg-white rounded-xl shadow-xs border border-gray-200 p-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs border border-gray-200 dark:border-gray-700 p-4 mb-6">
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
               <input
                 type="text"
                 placeholder="Buscar productos, artesanos, categorías..."
                 value={filters.searchQuery}
                 onChange={(e) => updateSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all"
               />
             </div>
 
@@ -83,7 +85,7 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
               <select
                 value={filters.sortBy}
                 onChange={(e) => updateSortBy(e.target.value as SortOption)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white cursor-pointer transition-all"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white cursor-pointer transition-all"
               >
                 <option value="relevance">Más relevantes</option>
                 <option value="price-asc">Precio: Menor a Mayor</option>
@@ -166,15 +168,26 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
 
         {/* Results Count */}
         <div className="flex justify-between items-center mb-6">
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             {filteredProducts.length === products.length ? (
               <>
-                Mostrando <span className="font-semibold">{filteredProducts.length}</span> productos
+                Mostrando{' '}
+                <span className="font-semibold text-gray-900 dark:text-white">
+                  {filteredProducts.length}
+                </span>{' '}
+                productos
               </>
             ) : (
               <>
-                Mostrando <span className="font-semibold">{filteredProducts.length}</span> de{' '}
-                <span className="font-semibold">{products.length}</span> productos
+                Mostrando{' '}
+                <span className="font-semibold text-gray-900 dark:text-white">
+                  {filteredProducts.length}
+                </span>{' '}
+                de{' '}
+                <span className="font-semibold text-gray-900 dark:text-white">
+                  {products.length}
+                </span>{' '}
+                productos
               </>
             )}
           </p>
@@ -188,20 +201,48 @@ export default function ProductListWithFilters({ products }: ProductListWithFilt
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-xs border border-gray-200 p-12 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-4">
-              <Filter className="w-10 h-10 text-gray-400" />
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xs border border-gray-200 dark:border-gray-700 p-12 text-center">
+            {/* Empty State Illustration */}
+            <div className="inline-flex items-center justify-center w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-full mb-6">
+              {filters.searchQuery ? (
+                <SearchX className="w-12 h-12 text-gray-400 dark:text-gray-500" />
+              ) : (
+                <Package className="w-12 h-12 text-gray-400 dark:text-gray-500" />
+              )}
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              No se encontraron productos
+
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              {filters.searchQuery
+                ? `No hay resultados para "${filters.searchQuery}"`
+                : 'No se encontraron productos'}
             </h3>
-            <p className="text-gray-600 mb-6 max-w-md mx-auto">
-              No hay productos que coincidan con tus criterios de búsqueda. Intenta ajustar los
-              filtros o realizar una búsqueda diferente.
+
+            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md mx-auto">
+              {filters.searchQuery
+                ? 'Intenta con otras palabras clave o revisa los filtros aplicados.'
+                : 'No hay productos que coincidan con tus criterios de búsqueda. Intenta ajustar los filtros.'}
             </p>
-            <Button variant="primary" size="lg" onClick={resetFilters}>
-              Limpiar todos los filtros
-            </Button>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button variant="primary" size="lg" onClick={resetFilters}>
+                Limpiar todos los filtros
+              </Button>
+              {filters.searchQuery && (
+                <Button variant="outline" size="lg" onClick={() => updateSearchQuery('')}>
+                  Limpiar búsqueda
+                </Button>
+              )}
+            </div>
+
+            {/* Suggestions */}
+            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Sugerencias:</p>
+              <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                <li>• Revisa la ortografía de tu búsqueda</li>
+                <li>• Usa palabras más generales</li>
+                <li>• Prueba con sinónimos o términos relacionados</li>
+              </ul>
+            </div>
           </div>
         )}
       </div>

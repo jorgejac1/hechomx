@@ -56,7 +56,7 @@ export default function ToggleSwitch({
       <button
         type="button"
         onClick={() => !disabled && onChange(!enabled)}
-        className={`relative ${sizes.track} rounded-full transition-colors ${
+        className={`relative ${sizes.track} rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 ${
           enabled ? 'bg-purple-600' : 'bg-gray-300 dark:bg-gray-600'
         } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         role="switch"

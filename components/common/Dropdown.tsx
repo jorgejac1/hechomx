@@ -59,14 +59,14 @@ function useDropdownContext() {
   return context;
 }
 
-// Variant styles for trigger
+// Variant styles for trigger with focus-visible for keyboard navigation
 const triggerVariantStyles: Record<DropdownVariant, string> = {
   default:
-    'bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-primary-500 dark:focus:border-primary-400',
+    'bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:border-primary-500 dark:focus-visible:ring-offset-gray-900',
   outline:
-    'bg-transparent border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:border-gray-400 dark:hover:border-gray-500 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+    'bg-transparent border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:border-gray-400 dark:hover:border-gray-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 dark:focus-visible:ring-offset-gray-900',
   ghost:
-    'bg-transparent text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
+    'bg-transparent text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 dark:focus-visible:ring-offset-gray-900',
 };
 
 // Size styles
@@ -279,6 +279,7 @@ function DropdownItem({
         ${sizes.item}
         ${isSelected ? 'bg-primary-50 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'}
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+        focus:outline-none focus-visible:bg-gray-100 dark:focus-visible:bg-gray-700
         ${className}
       `}
     >

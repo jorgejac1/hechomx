@@ -44,7 +44,7 @@ function useAccordionContext() {
   return context;
 }
 
-// Variant styles
+// Variant styles with dark mode support
 const variantStyles: Record<
   AccordionVariant,
   {
@@ -55,25 +55,25 @@ const variantStyles: Record<
   }
 > = {
   default: {
-    container: 'divide-y divide-gray-200',
+    container: 'divide-y divide-gray-200 dark:divide-gray-700',
     item: '',
     trigger:
-      'flex items-center justify-between w-full py-4 text-left font-medium text-gray-900 hover:text-primary-600 transition-colors',
-    content: 'pb-4 text-gray-700',
+      'flex items-center justify-between w-full py-4 text-left font-medium text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset',
+    content: 'pb-4 text-gray-700 dark:text-gray-300',
   },
   bordered: {
     container: 'space-y-2',
-    item: 'border border-gray-200 rounded-lg overflow-hidden',
+    item: 'border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden',
     trigger:
-      'flex items-center justify-between w-full p-4 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors',
-    content: 'px-4 pb-4 text-gray-700',
+      'flex items-center justify-between w-full p-4 text-left font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset',
+    content: 'px-4 pb-4 text-gray-700 dark:text-gray-300',
   },
   separated: {
     container: 'space-y-4',
     item: 'bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-gray-900/50 overflow-hidden',
     trigger:
-      'flex items-center justify-between w-full p-5 text-left font-medium text-gray-900 hover:bg-gray-50 transition-colors',
-    content: 'px-5 pb-5 text-gray-700',
+      'flex items-center justify-between w-full p-5 text-left font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset',
+    content: 'px-5 pb-5 text-gray-700 dark:text-gray-300',
   },
 };
 
@@ -155,7 +155,7 @@ function AccordionItem({
           <span>{title}</span>
         </span>
         <ChevronDown
-          className={`w-5 h-5 text-gray-500 transition-transform duration-200 shrink-0 ${
+          className={`w-5 h-5 text-gray-500 dark:text-gray-400 transition-transform duration-200 shrink-0 ${
             isExpanded ? 'rotate-180' : ''
           }`}
           aria-hidden="true"

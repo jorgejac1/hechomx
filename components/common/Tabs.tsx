@@ -148,6 +148,7 @@ function Tab({ tab, className = '' }: TabProps) {
         ${sizes.tab}
         ${isActive ? styles.activeTab : styles.inactiveTab}
         ${tab.disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900
         ${className}
       `}
     >

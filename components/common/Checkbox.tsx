@@ -65,16 +65,18 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       lg: 'text-lg',
     };
 
-    // Checkbox base styles with dark mode support
+    // Checkbox base styles with dark mode support and improved keyboard focus
     const checkboxStyles = `
       ${sizeStyles[size]}
       text-primary-600
       border-gray-300 dark:border-gray-600
       bg-white dark:bg-gray-800
       rounded-sm
-      focus:ring-primary-500
-      focus:ring-2
-      focus:ring-offset-0
+      focus:outline-none
+      focus-visible:ring-primary-500
+      focus-visible:ring-2
+      focus-visible:ring-offset-0
+      dark:focus-visible:ring-offset-gray-900
       disabled:opacity-50
       disabled:cursor-not-allowed
       cursor-pointer

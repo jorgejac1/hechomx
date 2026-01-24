@@ -22,17 +22,17 @@
 
 ## Guides
 
-| Guide                                            | Description                      |
-| ------------------------------------------------ | -------------------------------- |
-| [Contributing](./guides/CONTRIBUTING.md)         | How to contribute to the project |
-| [Folder Structure](./guides/FOLDER-STRUCTURE.md) | Project organization             |
-| [API Routes](./guides/API-ROUTES.md)             | API endpoint reference           |
-| [Testing](./guides/TESTING.md)                   | Testing strategies and patterns  |
-| [Accessibility](./guides/ACCESSIBILITY.md)       | WCAG 2.1 AA compliance guide     |
-| [Performance](./guides/PERFORMANCE.md)           | Optimization and caching         |
-| [SEO](./guides/SEO.md)                           | Search engine optimization       |
-| [App Deployment](./guides/DEPLOYMENT-APP.md)     | Production deployment            |
-| [Docs Deployment](./guides/DEPLOYMENT.md)        | Documentation deployment         |
+| Guide                                            | Description                                |
+| ------------------------------------------------ | ------------------------------------------ |
+| [Contributing](./guides/CONTRIBUTING.md)         | How to contribute to the project           |
+| [Folder Structure](./guides/FOLDER-STRUCTURE.md) | Project organization                       |
+| [API Routes](./guides/API-ROUTES.md)             | API endpoint reference                     |
+| [Testing](./guides/TESTING.md)                   | Testing strategies and patterns            |
+| [Accessibility](./guides/ACCESSIBILITY.md)       | WCAG 2.1 AA compliance guide               |
+| [Performance](./guides/PERFORMANCE.md)           | Optimization, caching, and bundle analysis |
+| [SEO](./guides/SEO.md)                           | Search engine optimization                 |
+| [App Deployment](./guides/DEPLOYMENT-APP.md)     | Production deployment                      |
+| [Docs Deployment](./guides/DEPLOYMENT.md)        | Documentation deployment                   |
 
 ## Interactive Documentation
 
@@ -86,6 +86,15 @@ npm run docs:watch  # Watch mode for development
 - **State:** React Context + localStorage
 - **Hosting:** Vercel
 
+## Performance Tools
+
+| Script                | Command                | Description                                 |
+| --------------------- | ---------------------- | ------------------------------------------- |
+| **Bundle Analyzer**   | `npm run analyze`      | Visual bundle treemap (opens in browser)    |
+| **Bundle Check**      | `npm run bundle:check` | Check bundle sizes against budgets          |
+| **Performance Audit** | `npm run perf:audit`   | Run performance audit with score (0-100)    |
+| **Size Check**        | `npm run size`         | Build and check bundle sizes in one command |
+
 ## Getting Started
 
 ```bash
@@ -97,8 +106,11 @@ npm run dev
 
 # Build for production
 npm run build
+
+# Check performance
+npm run size
 ```
 
 ---
 
-_Last updated: January 2026_
+_Last updated: January 24, 2026_

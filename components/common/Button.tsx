@@ -64,9 +64,9 @@ export default function Button({
   className = '',
   ariaLabel,
 }: ButtonProps) {
-  // Base styles
+  // Base styles with improved keyboard focus visibility
   const baseStyles =
-    'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-hidden focus:ring-2 focus:ring-offset-2';
+    'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900';
 
   // Variant styles with dark mode support
   const variantStyles = {

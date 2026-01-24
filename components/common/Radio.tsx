@@ -64,14 +64,17 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
       lg: 'text-lg',
     };
 
-    // Radio base styles
+    // Radio base styles with dark mode support and improved keyboard focus
     const radioStyles = `
       ${sizeStyles[size]}
       text-primary-600
-      border-gray-300
-      focus:ring-primary-500
-      focus:ring-2
-      focus:ring-offset-0
+      border-gray-300 dark:border-gray-600
+      bg-white dark:bg-gray-800
+      focus:outline-none
+      focus-visible:ring-primary-500
+      focus-visible:ring-2
+      focus-visible:ring-offset-0
+      dark:focus-visible:ring-offset-gray-900
       disabled:opacity-50
       disabled:cursor-not-allowed
       cursor-pointer
@@ -79,20 +82,20 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
       .trim()
       .replace(/\s+/g, ' ');
 
-    // Label styles
+    // Label styles with dark mode
     const labelStyles = `
       ${labelSizeStyles[size]}
-      ${disabled ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 cursor-pointer'}
+      ${disabled ? 'text-gray-400 dark:text-gray-500 cursor-not-allowed' : 'text-gray-700 dark:text-gray-300 cursor-pointer'}
       select-none
     `
       .trim()
       .replace(/\s+/g, ' ');
 
-    // Error styles
-    const errorStyles = 'text-sm text-red-600 mt-1';
+    // Error styles with dark mode
+    const errorStyles = 'text-sm text-red-600 dark:text-red-400 mt-1';
 
-    // Hint styles
-    const hintStyles = 'text-sm text-gray-500 mt-1';
+    // Hint styles with dark mode
+    const hintStyles = 'text-sm text-gray-500 dark:text-gray-400 mt-1';
 
     const radioElement = (
       <input

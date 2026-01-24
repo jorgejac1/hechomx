@@ -68,7 +68,10 @@ export default function LazyLoad({
   }, [useViewport, isVisible, rootMargin, threshold]);
 
   const defaultFallback = (
-    <div className="animate-pulse bg-gray-100 rounded-lg" style={{ minHeight: minHeight || 100 }} />
+    <div
+      className="animate-pulse bg-gray-100 dark:bg-gray-700 rounded-lg"
+      style={{ minHeight: minHeight || 100 }}
+    />
   );
 
   if (useViewport && !isVisible) {
@@ -106,7 +109,7 @@ export function createLazyComponent<P extends object>(
   // Create a wrapper component that includes Suspense
   const WrappedComponent = (props: P) => {
     const fallback = options?.fallback || (
-      <div className="animate-pulse bg-gray-100 rounded-lg h-24" />
+      <div className="animate-pulse bg-gray-100 dark:bg-gray-700 rounded-lg h-24" />
     );
 
     return (
@@ -200,7 +203,7 @@ export function withLazyLoad<P extends object>(
 
     const fallback = options?.fallback || (
       <div
-        className="animate-pulse bg-gray-100 rounded-lg"
+        className="animate-pulse bg-gray-100 dark:bg-gray-700 rounded-lg"
         style={{ minHeight: options?.minHeight || 100 }}
       />
     );

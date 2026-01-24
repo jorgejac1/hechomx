@@ -26,7 +26,9 @@ export default function CardSkeleton({
   className = '',
 }: CardSkeletonProps) {
   return (
-    <div className={`bg-white rounded-lg border border-gray-200 overflow-hidden ${className}`}>
+    <div
+      className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden ${className}`}
+    >
       {showImage && <ImageSkeleton aspectRatio="square" rounded={false} />}
 
       <div className="p-4 space-y-3">

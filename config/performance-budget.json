@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Performance budgets for Papalote Market",
+  "budgets": {
+    "firstLoadJS": {
+      "description": "First Load JS per page",
+      "warningKB": 150,
+      "errorKB": 250
+    },
+    "chunks": {
+      "description": "Individual chunk size",
+      "warningKB": 100,
+      "errorKB": 200
+    },
+    "sharedJS": {
+      "description": "Total shared JS (framework, webpack, etc.)",
+      "warningKB": 200,
+      "errorKB": 350
+    },
+    "images": {
+      "description": "Individual image size",
+      "warningKB": 200,
+      "errorKB": 500
+    },
+    "fonts": {
+      "description": "Total fonts size",
+      "warningKB": 100,
+      "errorKB": 200
+    }
+  },
+  "targets": {
+    "LCP": {
+      "description": "Largest Contentful Paint",
+      "good": 2500,
+      "needsImprovement": 4000
+    },
+    "FID": {
+      "description": "First Input Delay",
+      "good": 100,
+      "needsImprovement": 300
+    },
+    "CLS": {
+      "description": "Cumulative Layout Shift",
+      "good": 0.1,
+      "needsImprovement": 0.25
+    },
+    "TTFB": {
+      "description": "Time to First Byte",
+      "good": 800,
+      "needsImprovement": 1800
+    }
+  },
+  "notes": [
+    "All JS sizes are gzipped sizes",
+    "Image budget applies to lazy-loaded images",
+    "Core Web Vitals targets based on Google's recommendations",
+    "Run 'npm run analyze' to visualize bundle composition",
+    "Run 'npm run bundle:check' to validate against these budgets"
+  ]
+}

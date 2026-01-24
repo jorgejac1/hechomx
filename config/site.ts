@@ -59,10 +59,10 @@ export const siteConfig = {
     ordersPerPage: 10,
   },
 
-  // Image optimization
+  // Image optimization (mirrors next.config.js - that file is source of truth)
   images: {
-    domains: ['images.unsplash.com', 'placeholder.com'],
-    formats: ['image/webp'],
+    domains: ['images.unsplash.com', 'placeholder.com', 'i.pravatar.cc'],
+    formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },

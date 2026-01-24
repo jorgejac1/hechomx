@@ -115,18 +115,18 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       lg: 'right-4',
     };
 
-    // Base select styles with dark mode support
+    // Base select styles with dark mode support and improved keyboard focus
     const baseSelectStyles = `
       border rounded-lg transition-all duration-200
-      focus:outline-none focus:ring-2 focus:ring-offset-0
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-0 dark:focus-visible:ring-offset-gray-900
       disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed disabled:text-gray-500
       appearance-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 cursor-pointer
     `;
 
     // State-based styles with dark mode
     const stateStyles = error
-      ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
-      : 'border-gray-300 dark:border-gray-600 focus:ring-primary-500 focus:border-transparent';
+      ? 'border-red-500 focus-visible:ring-red-500 focus-visible:border-red-500'
+      : 'border-gray-300 dark:border-gray-600 focus-visible:ring-primary-500 focus-visible:border-transparent';
 
     // Combine select styles
     const selectStyles = `

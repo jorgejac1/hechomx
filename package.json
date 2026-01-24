@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "analyze": "next experimental-analyze",
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -25,7 +24,13 @@
     "build-storybook": "storybook build -o storybook-static",
     "docs": "typedoc",
     "docs:watch": "typedoc --watch",
-    "docs:all": "npm run docs && npm run build-storybook"
+    "docs:all": "npm run docs && npm run build-storybook",
+    "analyze": "ANALYZE=true next build",
+    "analyze:server": "BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "BUNDLE_ANALYZE=browser next build",
+    "bundle:check": "node scripts/check-bundle-size.js",
+    "perf:audit": "node scripts/performance-audit.js",
+    "size": "npm run build && npm run bundle:check"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

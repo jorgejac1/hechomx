@@ -6,25 +6,42 @@
  */
 
 import type { Product } from '@/types';
+import { api, isSuccess } from '@/lib/utils/api-client';
 
 export interface FavoriteProduct extends Product {
   addedAt: string;
   notes: string;
 }
 
+/**
+ * Fetch user's favorite products
+ * @param userEmail - The user's email address
+ * @returns Array of favorite products or empty array on error
+ */
 export async function getUserFavorites(userEmail: string): Promise<FavoriteProduct[]> {
-  try {
-    const response = await fetch(`/api/favorites?email=${encodeURIComponent(userEmail)}`);
-    const result = await response.json();
-
-    if (!result.success) {
-      console.error('[favorites] Failed to fetch favorites:', result.error);
-      return [];
+  const result = await api.get<FavoriteProduct[]>(
+    `/api/favorites?email=${encodeURIComponent(userEmail)}`,
+    {
+      context: 'favorites/getUserFavorites',
+      errorKey: 'FAVORITES_LOAD_FAILED',
     }
+  );
 
+  if (isSuccess(result)) {
     return result.data;
-  } catch (error) {
-    console.error('[favorites] Error loading favorites:', error);
-    return [];
   }
+
+  // Return empty array as fallback (graceful degradation)
+  return [];
+}
+
+/**
+ * Get user favorites with error information
+ * Use this when you need to show error state in UI
+ */
+export async function getUserFavoritesWithError(userEmail: string) {
+  return api.get<FavoriteProduct[]>(`/api/favorites?email=${encodeURIComponent(userEmail)}`, {
+    context: 'favorites/getUserFavoritesWithError',
+    errorKey: 'FAVORITES_LOAD_FAILED',
+  });
 }
