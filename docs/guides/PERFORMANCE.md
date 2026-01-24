@@ -19,15 +19,29 @@
 
 ## Overview
 
-Papalote Market targets these performance goals:
+Papalote Market performance metrics (measured January 2026 via Lighthouse):
 
-| Metric                         | Target  | Current |
-| ------------------------------ | ------- | ------- |
-| LCP (Largest Contentful Paint) | < 2.5s  | ~2.0s   |
-| FID (First Input Delay)        | < 100ms | ~50ms   |
-| CLS (Cumulative Layout Shift)  | < 0.1   | ~0.05   |
-| TTI (Time to Interactive)      | < 3.5s  | ~3.0s   |
-| Bundle Size (JS)               | < 200KB | ~180KB  |
+| Metric                         | Target  | Current | Status |
+| ------------------------------ | ------- | ------- | ------ |
+| Performance Score              | > 90    | 71      | ⚠️     |
+| LCP (Largest Contentful Paint) | < 2.5s  | 6.5s    | ❌     |
+| FCP (First Contentful Paint)   | < 1.8s  | 2.8s    | ⚠️     |
+| TBT (Total Blocking Time)      | < 200ms | 20ms    | ✅     |
+| CLS (Cumulative Layout Shift)  | < 0.1   | 0       | ✅     |
+| TTI (Time to Interactive)      | < 3.5s  | 6.7s    | ❌     |
+| Speed Index                    | < 3.0s  | 4.0s    | ⚠️     |
+| Total Page Weight              | < 500KB | 1,232KB | ❌     |
+
+### Priority Improvements Needed
+
+1. **LCP (6.5s → < 2.5s)**: Optimize hero images, add `priority` prop, use WebP/AVIF
+2. **Page Weight (1.2MB → < 500KB)**: Compress images, lazy load below-fold content
+3. **TTI (6.7s → < 3.5s)**: Code split heavy components, defer non-critical JS
+
+### What's Working Well
+
+- **TBT (20ms)**: Minimal JavaScript blocking - excellent interactivity
+- **CLS (0)**: No layout shifts - stable visual experience
 
 ---
 
@@ -628,8 +642,26 @@ export default function RootLayout({ children }) {
 ### Lighthouse
 
 ```bash
-# Run Lighthouse audit
+# Run Lighthouse audit (opens report in browser)
 npx lighthouse https://hechomx.vercel.app --view
+
+# Run and save JSON report
+npx lighthouse https://hechomx.vercel.app \
+  --output=json \
+  --output-path=./lighthouse-report.json \
+  --chrome-flags="--headless --no-sandbox" \
+  --only-categories=performance
+
+# Extract key metrics from JSON
+cat lighthouse-report.json | jq '{
+  score: (.categories.performance.score * 100),
+  LCP: .audits["largest-contentful-paint"].displayValue,
+  FCP: .audits["first-contentful-paint"].displayValue,
+  TBT: .audits["total-blocking-time"].displayValue,
+  CLS: .audits["cumulative-layout-shift"].displayValue,
+  TTI: .audits["interactive"].displayValue,
+  totalSize: .audits["total-byte-weight"].displayValue
+}'
 
 # Categories
 # - Performance
@@ -637,6 +669,8 @@ npx lighthouse https://hechomx.vercel.app --view
 # - Best Practices
 # - SEO
 ```
+
+> **Note:** Update the metrics table in this document after running audits on the deployed site.
 
 ### Web Vitals Reporting
 

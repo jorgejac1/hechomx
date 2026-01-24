@@ -20,37 +20,37 @@ import Image from 'next/image';
 const categories = [
   {
     name: 'Arte',
-    image: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=600',
+    image: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=400&q=75',
     count: '2,453 productos',
     href: '/productos?categoria=Arte',
   },
   {
     name: 'Joyería',
-    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600',
+    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=75',
     count: '1,892 productos',
     href: '/productos?categoria=Joyería',
   },
   {
     name: 'Decoración del Hogar',
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800',
+    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&q=75',
     count: '3,124 productos',
     href: '/productos?categoria=Decoración del Hogar',
   },
   {
     name: 'Ropa',
-    image: 'https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=600',
+    image: 'https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=400&q=75',
     count: '1,567 productos',
     href: '/productos?categoria=Ropa',
   },
   {
     name: 'Cocina',
-    image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=600',
+    image: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=400&q=75',
     count: '987 productos',
     href: '/productos?categoria=Cocina',
   },
   {
     name: 'Textiles',
-    image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=600',
+    image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=400&q=75',
     count: '756 productos',
     href: '/productos?categoria=Textiles',
   },
@@ -87,7 +87,9 @@ export default function CategoriesSection() {
                 src={category.image}
                 alt={category.name}
                 fill
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
                 className="object-cover group-hover:scale-110 transition-transform duration-300"
+                loading="lazy"
               />
 
               {/* Consistent Overlay */}

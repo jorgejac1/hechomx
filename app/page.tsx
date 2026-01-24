@@ -1,14 +1,9 @@
 import Link from 'next/link';
 import { getFeaturedProducts, getAllProducts } from '@/lib/server';
 import ProductCarousel from '@/components/product/ProductCarousel';
-import AboutSection from '@/components/home/AboutSection';
-import SeasonalSection from '@/components/home/SeasonalSection';
-import CategoriesSection from '@/components/home/CategoriesSection';
-import DealsSection from '@/components/home/DealsSection';
-import LocalShopsSection from '@/components/home/LocalShopsSection';
 import HeroSlider from '@/components/home/HeroSlider';
-import StatesSection from '@/components/home/StatesSection';
 import RecentlyViewedSection from '@/components/home/RecentlyViewedSection';
+import LazySection from '@/components/home/LazySection';
 
 export const dynamic = 'force-dynamic';
 
@@ -103,13 +98,7 @@ export default function Home() {
       {/* Recently Viewed - Shows only if user has history */}
       <RecentlyViewedSection allProducts={allProducts} />
 
-      {/* Deals Section */}
-      <DealsSection />
-
-      {/* Seasonal Section */}
-      <SeasonalSection products={allProducts} />
-
-      {/* Featured Products - Now with Carousel */}
+      {/* Featured Products - Above fold, loads immediately */}
       <ProductCarousel
         products={featuredProducts}
         title="Productos Destacados"
@@ -117,16 +106,8 @@ export default function Home() {
         itemsToShow={4}
       />
 
-      <StatesSection />
-
-      {/* Categories Section */}
-      <CategoriesSection />
-
-      {/* Local Shops Section */}
-      <LocalShopsSection />
-
-      {/* About Section */}
-      <AboutSection />
+      {/* Below-fold sections - Lazy loaded for performance */}
+      <LazySection allProducts={allProducts} />
 
       {/* CTA Section */}
       <section className="py-8 sm:py-12 lg:py-16 bg-primary-600 text-white">

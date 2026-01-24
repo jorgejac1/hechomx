@@ -25,28 +25,28 @@ const FEATURED_STATES = [
     name: 'Oaxaca',
     craft: 'Cerámica',
     description: 'Barro negro y alebrijes únicos',
-    image: 'https://images.unsplash.com/photo-1582845512747-e42001c95638?w=800',
+    image: 'https://images.unsplash.com/photo-1582845512747-e42001c95638?w=500&q=75',
     count: '500+',
   },
   {
     name: 'Chiapas',
     craft: 'Textiles',
     description: 'Bordados tradicionales mayas',
-    image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=800',
+    image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=500&q=75',
     count: '350+',
   },
   {
     name: 'Michoacán',
     craft: 'Madera',
     description: 'Tallado en madera y muebles',
-    image: 'https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=800',
+    image: 'https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=500&q=75',
     count: '420+',
   },
   {
     name: 'Puebla',
     craft: 'Cerámica',
     description: 'Talavera tradicional poblana',
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800',
+    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&q=75',
     count: '380+',
   },
 ] as const;
@@ -94,7 +94,9 @@ export default function StatesSection() {
                   src={state.image}
                   alt={`Artesanías de ${state.name}`}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
 

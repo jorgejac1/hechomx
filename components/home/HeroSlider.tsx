@@ -8,7 +8,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -51,7 +51,7 @@ const SLIDES: Slide[] = [
     title: 'Descubre lo Auténtico de México',
     subtitle: 'Artesanías y productos únicos hechos a mano',
     description: 'Apoya a artesanos mexicanos y lleva a casa piezas únicas con historia',
-    image: 'https://images.unsplash.com/photo-1582845512747-e42001c95638?w=1200',
+    image: 'https://images.unsplash.com/photo-1582845512747-e42001c95638?w=1080&q=75',
     primaryCTA: {
       text: 'Explorar Productos',
       href: '/productos',
@@ -68,7 +68,7 @@ const SLIDES: Slide[] = [
     subtitle: 'Cada producto cuenta una historia',
     description:
       'Todos nuestros artesanos están verificados y certificados. Calidad 100% mexicana.',
-    image: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=1200',
+    image: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=1080&q=75',
     primaryCTA: {
       text: 'Ver Productos Verificados',
       href: '/productos',
@@ -84,7 +84,7 @@ const SLIDES: Slide[] = [
     title: '¿Eres Artesano o Creador?',
     subtitle: 'Únete a nuestra plataforma',
     description: 'Lleva tus creaciones a miles de clientes. Sin comisiones los primeros 3 meses.',
-    image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=1200',
+    image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=1080&q=75',
     primaryCTA: {
       text: 'Vender en la Plataforma',
       href: '/vendedores',
@@ -100,7 +100,7 @@ const SLIDES: Slide[] = [
     title: 'De Tu Estado a Tu Puerta',
     subtitle: 'Envíos a toda la República',
     description: 'Conectamos artesanos locales contigo. Productos únicos de cada región de México.',
-    image: 'https://images.unsplash.com/photo-1612892483236-52d32a0e0ac1?w=1200',
+    image: 'https://images.unsplash.com/photo-1612892483236-52d32a0e0ac1?w=1080&q=75',
     primaryCTA: {
       text: 'Explorar por Estado',
       href: '/productos',
@@ -124,6 +124,13 @@ const AUTO_PLAY_INTERVAL = 5000;
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Only render current, previous, and next slides for performance
+  const visibleSlideIndices = useMemo(() => {
+    const prev = (currentSlide - 1 + SLIDES.length) % SLIDES.length;
+    const next = (currentSlide + 1) % SLIDES.length;
+    return new Set([prev, currentSlide, next]);
+  }, [currentSlide]);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -173,71 +180,80 @@ export default function HeroSlider() {
 
   return (
     <section className="relative h-[360px] sm:h-[420px] lg:h-[480px] overflow-hidden">
-      {/* Slides */}
-      {SLIDES.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-            index === currentSlide
-              ? 'opacity-100 translate-x-0'
-              : index < currentSlide
-                ? 'opacity-0 -translate-x-full'
-                : 'opacity-0 translate-x-full'
-          }`}
-        >
-          {/* Background Image */}
-          <div className="absolute inset-0">
-            <Image
-              src={slide.image}
-              alt={slide.title}
-              fill
-              className="object-cover"
-              priority={index === 0}
-            />
-            <div
-              className={`absolute inset-0 bg-linear-to-r ${getGradientClasses(
-                slide.theme
-              )} opacity-50`}
-            />
-          </div>
+      {/* Slides - Only render visible slides for performance */}
+      {SLIDES.map((slide, index) => {
+        const isVisible = visibleSlideIndices.has(index);
+        const isCurrent = index === currentSlide;
 
-          {/* Content */}
-          <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
-            <div className="max-w-2xl text-white">
-              {/* Subtitle */}
-              <p className="text-xs sm:text-sm md:text-base mb-1 sm:mb-2 font-medium opacity-90">
-                {slide.subtitle}
-              </p>
+        return (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+              isCurrent
+                ? 'opacity-100 translate-x-0'
+                : index < currentSlide
+                  ? 'opacity-0 -translate-x-full'
+                  : 'opacity-0 translate-x-full'
+            }`}
+          >
+            {/* Background Image - Only load visible slides */}
+            <div className="absolute inset-0">
+              {isVisible && (
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                  priority={index === 0}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+              )}
+              <div
+                className={`absolute inset-0 bg-linear-to-r ${getGradientClasses(
+                  slide.theme
+                )} opacity-50`}
+              />
+            </div>
 
-              {/* Title */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 leading-tight">
-                {slide.title}
-              </h1>
+            {/* Content */}
+            <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+              <div className="max-w-2xl text-white">
+                {/* Subtitle */}
+                <p className="text-xs sm:text-sm md:text-base mb-1 sm:mb-2 font-medium opacity-90">
+                  {slide.subtitle}
+                </p>
 
-              {/* Description */}
-              <p className="text-sm sm:text-base md:text-lg mb-4 sm:mb-5 md:mb-6 opacity-90 max-w-lg">
-                {slide.description}
-              </p>
+                {/* Title */}
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3 leading-tight">
+                  {slide.title}
+                </h1>
 
-              {/* CTAs - FIXED: Always horizontal, compact sizing */}
-              <div className="flex flex-row items-center gap-2">
-                <Link
-                  href={slide.primaryCTA.href}
-                  className="bg-white text-primary-600 px-3 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-lg text-xs sm:text-base font-semibold hover:bg-gray-100 transition shadow-lg whitespace-nowrap flex-1 text-center"
-                >
-                  {slide.primaryCTA.text}
-                </Link>
-                <Link
-                  href={slide.secondaryCTA.href}
-                  className="bg-transparent border-2 border-white text-white px-3 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-lg text-xs sm:text-base font-semibold hover:bg-white hover:text-primary-600 transition whitespace-nowrap flex-1 text-center"
-                >
-                  {slide.secondaryCTA.text}
-                </Link>
+                {/* Description */}
+                <p className="text-sm sm:text-base md:text-lg mb-4 sm:mb-5 md:mb-6 opacity-90 max-w-lg">
+                  {slide.description}
+                </p>
+
+                {/* CTAs - FIXED: Always horizontal, compact sizing */}
+                <div className="flex flex-row items-center gap-2">
+                  <Link
+                    href={slide.primaryCTA.href}
+                    className="bg-white text-primary-600 px-3 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-lg text-xs sm:text-base font-semibold hover:bg-gray-100 transition shadow-lg whitespace-nowrap flex-1 text-center"
+                  >
+                    {slide.primaryCTA.text}
+                  </Link>
+                  <Link
+                    href={slide.secondaryCTA.href}
+                    className="bg-transparent border-2 border-white text-white px-3 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-lg text-xs sm:text-base font-semibold hover:bg-white hover:text-primary-600 transition whitespace-nowrap flex-1 text-center"
+                  >
+                    {slide.secondaryCTA.text}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       {/* Navigation Arrows - Visible on mobile */}
       <button
