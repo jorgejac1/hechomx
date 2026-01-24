@@ -8,7 +8,7 @@
 
 > **default**(`__namedParameters`): `Element`
 
-Defined in: [components/common/Alert.tsx:100](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L100)
+Defined in: [components/common/Alert.tsx:100](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L100)
 
 ## Parameters
 

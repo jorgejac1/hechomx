@@ -8,6 +8,6 @@
 
 > **AlertVariant** = `"info"` \| `"success"` \| `"warning"` \| `"error"`
 
-Defined in: [components/common/Alert.tsx:15](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L15)
+Defined in: [components/common/Alert.tsx:15](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L15)
 
 Available alert color variants

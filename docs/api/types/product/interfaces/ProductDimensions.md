@@ -6,7 +6,7 @@
 
 # Interface: ProductDimensions
 
-Defined in: [types/product.ts:9](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L9)
+Defined in: [types/product.ts:9](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L9)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/product.ts:9](https://github.com/jorgejac1/hechomx/blob/main/
 
 > `optional` **capacity**: `string`
 
-Defined in: [types/product.ts:14](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L14)
+Defined in: [types/product.ts:14](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L14)
 
 ---
 
@@ -22,7 +22,7 @@ Defined in: [types/product.ts:14](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **chain**: `string`
 
-Defined in: [types/product.ts:19](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L19)
+Defined in: [types/product.ts:19](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L19)
 
 ---
 
@@ -30,7 +30,7 @@ Defined in: [types/product.ts:19](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **diameter**: `string`
 
-Defined in: [types/product.ts:13](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L13)
+Defined in: [types/product.ts:13](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L13)
 
 ---
 
@@ -38,7 +38,7 @@ Defined in: [types/product.ts:13](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **height**: `string` \| `number`
 
-Defined in: [types/product.ts:12](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L12)
+Defined in: [types/product.ts:12](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L12)
 
 ---
 
@@ -46,7 +46,7 @@ Defined in: [types/product.ts:12](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **holán**: `string`
 
-Defined in: [types/product.ts:25](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L25)
+Defined in: [types/product.ts:25](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L25)
 
 ---
 
@@ -54,7 +54,7 @@ Defined in: [types/product.ts:25](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **length**: `string` \| `number`
 
-Defined in: [types/product.ts:10](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L10)
+Defined in: [types/product.ts:10](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L10)
 
 ---
 
@@ -62,7 +62,7 @@ Defined in: [types/product.ts:10](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **opening**: `string`
 
-Defined in: [types/product.ts:15](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L15)
+Defined in: [types/product.ts:15](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L15)
 
 ---
 
@@ -70,7 +70,7 @@ Defined in: [types/product.ts:15](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **pendant**: `string`
 
-Defined in: [types/product.ts:18](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L18)
+Defined in: [types/product.ts:18](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L18)
 
 ---
 
@@ -78,7 +78,7 @@ Defined in: [types/product.ts:18](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **quantity**: `string`
 
-Defined in: [types/product.ts:23](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L23)
+Defined in: [types/product.ts:23](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L23)
 
 ---
 
@@ -86,7 +86,7 @@ Defined in: [types/product.ts:23](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **size**: `string`
 
-Defined in: [types/product.ts:16](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L16)
+Defined in: [types/product.ts:16](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L16)
 
 ---
 
@@ -94,7 +94,7 @@ Defined in: [types/product.ts:16](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **sizes**: `string`
 
-Defined in: [types/product.ts:17](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L17)
+Defined in: [types/product.ts:17](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L17)
 
 ---
 
@@ -102,7 +102,7 @@ Defined in: [types/product.ts:17](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **stone**: `string`
 
-Defined in: [types/product.ts:21](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L21)
+Defined in: [types/product.ts:21](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L21)
 
 ---
 
@@ -110,7 +110,7 @@ Defined in: [types/product.ts:21](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **thickness**: `string`
 
-Defined in: [types/product.ts:20](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L20)
+Defined in: [types/product.ts:20](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L20)
 
 ---
 
@@ -118,7 +118,7 @@ Defined in: [types/product.ts:20](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **unit**: `"cm"` \| `"in"`
 
-Defined in: [types/product.ts:26](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L26)
+Defined in: [types/product.ts:26](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L26)
 
 ---
 
@@ -126,7 +126,7 @@ Defined in: [types/product.ts:26](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **waist**: `string`
 
-Defined in: [types/product.ts:24](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L24)
+Defined in: [types/product.ts:24](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L24)
 
 ---
 
@@ -134,7 +134,7 @@ Defined in: [types/product.ts:24](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **weight**: `string`
 
-Defined in: [types/product.ts:22](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L22)
+Defined in: [types/product.ts:22](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L22)
 
 ---
 
@@ -142,4 +142,4 @@ Defined in: [types/product.ts:22](https://github.com/jorgejac1/hechomx/blob/main
 
 > `optional` **width**: `string` \| `number`
 
-Defined in: [types/product.ts:11](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L11)
+Defined in: [types/product.ts:11](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L11)

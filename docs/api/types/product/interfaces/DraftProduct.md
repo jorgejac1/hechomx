@@ -6,7 +6,7 @@
 
 # Interface: DraftProduct
 
-Defined in: [types/product.ts:145](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L145)
+Defined in: [types/product.ts:145](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L145)
 
 Draft product stored in localStorage
 
@@ -20,7 +20,7 @@ Draft product stored in localStorage
 
 > `optional` **careInstructions**: `string`
 
-Defined in: [types/product.ts:137](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L137)
+Defined in: [types/product.ts:137](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L137)
 
 #### Inherited from
 
@@ -32,7 +32,7 @@ Defined in: [types/product.ts:137](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **category**: `string`
 
-Defined in: [types/product.ts:117](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L117)
+Defined in: [types/product.ts:117](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L117)
 
 #### Inherited from
 
@@ -44,7 +44,7 @@ Defined in: [types/product.ts:117](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **createdAt**: `string`
 
-Defined in: [types/product.ts:147](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L147)
+Defined in: [types/product.ts:147](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L147)
 
 ---
 
@@ -52,7 +52,7 @@ Defined in: [types/product.ts:147](https://github.com/jorgejac1/hechomx/blob/mai
 
 > `optional` **customizable**: `boolean`
 
-Defined in: [types/product.ts:135](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L135)
+Defined in: [types/product.ts:135](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L135)
 
 #### Inherited from
 
@@ -64,7 +64,7 @@ Defined in: [types/product.ts:135](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **description**: `string`
 
-Defined in: [types/product.ts:120](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L120)
+Defined in: [types/product.ts:120](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L120)
 
 #### Inherited from
 
@@ -76,7 +76,7 @@ Defined in: [types/product.ts:120](https://github.com/jorgejac1/hechomx/blob/mai
 
 > `optional` **dimensions**: `object`
 
-Defined in: [types/product.ts:125](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L125)
+Defined in: [types/product.ts:125](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L125)
 
 #### height
 
@@ -104,7 +104,7 @@ Defined in: [types/product.ts:125](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **id**: `string`
 
-Defined in: [types/product.ts:146](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L146)
+Defined in: [types/product.ts:146](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L146)
 
 ---
 
@@ -112,7 +112,7 @@ Defined in: [types/product.ts:146](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **images**: `string`[]
 
-Defined in: [types/product.ts:121](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L121)
+Defined in: [types/product.ts:121](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L121)
 
 #### Inherited from
 
@@ -124,7 +124,7 @@ Defined in: [types/product.ts:121](https://github.com/jorgejac1/hechomx/blob/mai
 
 > `optional` **materials**: `string`[]
 
-Defined in: [types/product.ts:124](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L124)
+Defined in: [types/product.ts:124](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L124)
 
 #### Inherited from
 
@@ -136,7 +136,7 @@ Defined in: [types/product.ts:124](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **name**: `string`
 
-Defined in: [types/product.ts:116](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L116)
+Defined in: [types/product.ts:116](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L116)
 
 #### Inherited from
 
@@ -148,7 +148,7 @@ Defined in: [types/product.ts:116](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **price**: `number`
 
-Defined in: [types/product.ts:119](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L119)
+Defined in: [types/product.ts:119](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L119)
 
 #### Inherited from
 
@@ -160,7 +160,7 @@ Defined in: [types/product.ts:119](https://github.com/jorgejac1/hechomx/blob/mai
 
 > `optional` **productionTime**: `number`
 
-Defined in: [types/product.ts:136](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L136)
+Defined in: [types/product.ts:136](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L136)
 
 #### Inherited from
 
@@ -172,7 +172,7 @@ Defined in: [types/product.ts:136](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **sellerId**: `string`
 
-Defined in: [types/product.ts:149](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L149)
+Defined in: [types/product.ts:149](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L149)
 
 ---
 
@@ -180,7 +180,7 @@ Defined in: [types/product.ts:149](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **sellerName**: `string`
 
-Defined in: [types/product.ts:150](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L150)
+Defined in: [types/product.ts:150](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L150)
 
 ---
 
@@ -188,7 +188,7 @@ Defined in: [types/product.ts:150](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **status**: [`ProductStatus`](../type-aliases/ProductStatus.md)
 
-Defined in: [types/product.ts:123](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L123)
+Defined in: [types/product.ts:123](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L123)
 
 #### Inherited from
 
@@ -200,7 +200,7 @@ Defined in: [types/product.ts:123](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **stock**: `number`
 
-Defined in: [types/product.ts:122](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L122)
+Defined in: [types/product.ts:122](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L122)
 
 #### Inherited from
 
@@ -212,7 +212,7 @@ Defined in: [types/product.ts:122](https://github.com/jorgejac1/hechomx/blob/mai
 
 > `optional` **story**: `string`
 
-Defined in: [types/product.ts:138](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L138)
+Defined in: [types/product.ts:138](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L138)
 
 #### Inherited from
 
@@ -224,7 +224,7 @@ Defined in: [types/product.ts:138](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **subcategory**: `string`
 
-Defined in: [types/product.ts:118](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L118)
+Defined in: [types/product.ts:118](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L118)
 
 #### Inherited from
 
@@ -236,7 +236,7 @@ Defined in: [types/product.ts:118](https://github.com/jorgejac1/hechomx/blob/mai
 
 > `optional` **tags**: `string`[]
 
-Defined in: [types/product.ts:139](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L139)
+Defined in: [types/product.ts:139](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L139)
 
 #### Inherited from
 
@@ -248,7 +248,7 @@ Defined in: [types/product.ts:139](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **updatedAt**: `string`
 
-Defined in: [types/product.ts:148](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L148)
+Defined in: [types/product.ts:148](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L148)
 
 ---
 
@@ -256,7 +256,7 @@ Defined in: [types/product.ts:148](https://github.com/jorgejac1/hechomx/blob/mai
 
 > `optional` **weight**: `object`
 
-Defined in: [types/product.ts:131](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L131)
+Defined in: [types/product.ts:131](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L131)
 
 #### unit
 

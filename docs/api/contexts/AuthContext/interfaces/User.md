@@ -6,7 +6,7 @@
 
 # Interface: User
 
-Defined in: [contexts/AuthContext.tsx:24](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L24)
+Defined in: [contexts/AuthContext.tsx:24](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L24)
 
 User type with extended maker profile for sellers
 User
@@ -17,7 +17,7 @@ User
 
 > `optional` **avatar**: `string`
 
-Defined in: [contexts/AuthContext.tsx:28](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L28)
+Defined in: [contexts/AuthContext.tsx:28](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L28)
 
 ---
 
@@ -25,7 +25,7 @@ Defined in: [contexts/AuthContext.tsx:28](https://github.com/jorgejac1/hechomx/b
 
 > **createdAt**: `string`
 
-Defined in: [contexts/AuthContext.tsx:30](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L30)
+Defined in: [contexts/AuthContext.tsx:30](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L30)
 
 ---
 
@@ -33,7 +33,7 @@ Defined in: [contexts/AuthContext.tsx:30](https://github.com/jorgejac1/hechomx/b
 
 > **email**: `string`
 
-Defined in: [contexts/AuthContext.tsx:27](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L27)
+Defined in: [contexts/AuthContext.tsx:27](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L27)
 
 ---
 
@@ -41,7 +41,7 @@ Defined in: [contexts/AuthContext.tsx:27](https://github.com/jorgejac1/hechomx/b
 
 > **id**: `string`
 
-Defined in: [contexts/AuthContext.tsx:25](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L25)
+Defined in: [contexts/AuthContext.tsx:25](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L25)
 
 ---
 
@@ -49,7 +49,7 @@ Defined in: [contexts/AuthContext.tsx:25](https://github.com/jorgejac1/hechomx/b
 
 > `optional` **isAdmin**: `boolean`
 
-Defined in: [contexts/AuthContext.tsx:32](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L32)
+Defined in: [contexts/AuthContext.tsx:32](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L32)
 
 ---
 
@@ -57,7 +57,7 @@ Defined in: [contexts/AuthContext.tsx:32](https://github.com/jorgejac1/hechomx/b
 
 > `optional` **makerProfile**: `ExtendedMakerProfile`
 
-Defined in: [contexts/AuthContext.tsx:31](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L31)
+Defined in: [contexts/AuthContext.tsx:31](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L31)
 
 ---
 
@@ -65,7 +65,7 @@ Defined in: [contexts/AuthContext.tsx:31](https://github.com/jorgejac1/hechomx/b
 
 > **name**: `string`
 
-Defined in: [contexts/AuthContext.tsx:26](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L26)
+Defined in: [contexts/AuthContext.tsx:26](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L26)
 
 ---
 
@@ -73,4 +73,4 @@ Defined in: [contexts/AuthContext.tsx:26](https://github.com/jorgejac1/hechomx/b
 
 > `optional` **phone**: `string`
 
-Defined in: [contexts/AuthContext.tsx:29](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L29)
+Defined in: [contexts/AuthContext.tsx:29](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L29)

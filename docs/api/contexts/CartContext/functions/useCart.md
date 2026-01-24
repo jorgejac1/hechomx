@@ -8,7 +8,7 @@
 
 > **useCart**(): `CartContextType`
 
-Defined in: [contexts/CartContext.tsx:172](https://github.com/jorgejac1/hechomx/blob/main/contexts/CartContext.tsx#L172)
+Defined in: [contexts/CartContext.tsx:172](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/CartContext.tsx#L172)
 
 ## Returns
 

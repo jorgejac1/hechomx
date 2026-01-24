@@ -6,7 +6,7 @@
 
 # Interface: State
 
-Defined in: [types/product.ts:76](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L76)
+Defined in: [types/product.ts:76](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L76)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/product.ts:76](https://github.com/jorgejac1/hechomx/blob/main
 
 > **description**: `string`
 
-Defined in: [types/product.ts:80](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L80)
+Defined in: [types/product.ts:80](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L80)
 
 ---
 
@@ -22,7 +22,7 @@ Defined in: [types/product.ts:80](https://github.com/jorgejac1/hechomx/blob/main
 
 > **id**: `string`
 
-Defined in: [types/product.ts:77](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L77)
+Defined in: [types/product.ts:77](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L77)
 
 ---
 
@@ -30,7 +30,7 @@ Defined in: [types/product.ts:77](https://github.com/jorgejac1/hechomx/blob/main
 
 > **name**: `string`
 
-Defined in: [types/product.ts:78](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L78)
+Defined in: [types/product.ts:78](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L78)
 
 ---
 
@@ -38,7 +38,7 @@ Defined in: [types/product.ts:78](https://github.com/jorgejac1/hechomx/blob/main
 
 > **slug**: `string`
 
-Defined in: [types/product.ts:79](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L79)
+Defined in: [types/product.ts:79](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L79)
 
 ---
 
@@ -46,4 +46,4 @@ Defined in: [types/product.ts:79](https://github.com/jorgejac1/hechomx/blob/main
 
 > **specialties**: `string`[]
 
-Defined in: [types/product.ts:81](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L81)
+Defined in: [types/product.ts:81](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L81)

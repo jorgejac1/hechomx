@@ -8,7 +8,7 @@
 
 > **default**(`__namedParameters`): `Element`
 
-Defined in: [components/common/Button.tsx:53](https://github.com/jorgejac1/hechomx/blob/main/components/common/Button.tsx#L53)
+Defined in: [components/common/Button.tsx:53](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Button.tsx#L53)
 
 ## Parameters
 

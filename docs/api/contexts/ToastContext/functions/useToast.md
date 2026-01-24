@@ -8,7 +8,7 @@
 
 > **useToast**(): `ToastContextType`
 
-Defined in: [contexts/ToastContext.tsx:97](https://github.com/jorgejac1/hechomx/blob/main/contexts/ToastContext.tsx#L97)
+Defined in: [contexts/ToastContext.tsx:97](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/ToastContext.tsx#L97)
 
 ## Returns
 

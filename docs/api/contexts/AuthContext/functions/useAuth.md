@@ -8,7 +8,7 @@
 
 > **useAuth**(): `AuthContextType`
 
-Defined in: [contexts/AuthContext.tsx:213](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L213)
+Defined in: [contexts/AuthContext.tsx:213](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L213)
 
 ## Returns
 

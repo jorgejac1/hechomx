@@ -8,7 +8,7 @@
 
 > **ToastProvider**(`__namedParameters`): `Element`
 
-Defined in: [contexts/ToastContext.tsx:42](https://github.com/jorgejac1/hechomx/blob/main/contexts/ToastContext.tsx#L42)
+Defined in: [contexts/ToastContext.tsx:42](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/ToastContext.tsx#L42)
 
 ## Parameters
 

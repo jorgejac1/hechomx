@@ -31,7 +31,7 @@ A modern e-commerce platform dedicated to promoting authentic Mexican-made produ
 1. Navigate to the project directory:
 
 ```bash
-cd hecho-en-mexico
+cd papalotemarket
 ```
 
 2. Install dependencies:
@@ -55,7 +55,7 @@ http://localhost:3000
 ## Project Structure
 
 ```
-hecho-en-mexico/
+papalotemarket/
 ├── app/                      # Next.js app directory
 │   ├── api/                 # API routes
 │   │   └── products/        # Products API endpoint

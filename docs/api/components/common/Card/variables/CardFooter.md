@@ -8,4 +8,4 @@
 
 > `const` **CardFooter**: `NamedExoticComponent`\<`CardFooterProps`\>
 
-Defined in: [components/common/Card.tsx:238](https://github.com/jorgejac1/hechomx/blob/main/components/common/Card.tsx#L238)
+Defined in: [components/common/Card.tsx:238](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Card.tsx#L238)

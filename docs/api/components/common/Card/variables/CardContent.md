@@ -8,4 +8,4 @@
 
 > `const` **CardContent**: `NamedExoticComponent`\<`CardContentProps`\>
 
-Defined in: [components/common/Card.tsx:225](https://github.com/jorgejac1/hechomx/blob/main/components/common/Card.tsx#L225)
+Defined in: [components/common/Card.tsx:225](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Card.tsx#L225)

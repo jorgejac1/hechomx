@@ -25,6 +25,36 @@
     "includeGroups": true
   },
   "plugin": ["typedoc-plugin-markdown"],
+  "blockTags": [
+    "@param",
+    "@returns",
+    "@example",
+    "@description",
+    "@fileoverview",
+    "@module",
+    "@extends",
+    "@typedef",
+    "@default",
+    "@see",
+    "@since",
+    "@deprecated",
+    "@throws"
+  ],
   "gitRevision": "main",
-  "skipErrorChecking": true
+  "skipErrorChecking": true,
+  "intentionallyNotExported": [
+    "BadgeProps",
+    "ButtonProps",
+    "ModalProps",
+    "CardProps",
+    "CardHeaderProps",
+    "CardTitleProps",
+    "CardDescriptionProps",
+    "CardContentProps",
+    "CardFooterProps",
+    "AuthContextType",
+    "CartContextType",
+    "ToastContextType",
+    "ExtendedMakerProfile"
+  ]
 }

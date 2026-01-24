@@ -8,4 +8,4 @@
 
 > **ProductStatus** = `"draft"` \| `"published"`
 
-Defined in: [types/product.ts:7](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L7)
+Defined in: [types/product.ts:7](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L7)

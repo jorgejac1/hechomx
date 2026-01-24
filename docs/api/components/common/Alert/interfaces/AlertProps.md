@@ -6,7 +6,7 @@
 
 # Interface: AlertProps
 
-Defined in: [components/common/Alert.tsx:27](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L27)
+Defined in: [components/common/Alert.tsx:27](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L27)
 
 Props for the Alert component
 AlertProps
@@ -17,7 +17,7 @@ AlertProps
 
 > `optional` **actions**: `ReactNode`
 
-Defined in: [components/common/Alert.tsx:47](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L47)
+Defined in: [components/common/Alert.tsx:47](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L47)
 
 Action buttons or links to render at the bottom
 
@@ -27,7 +27,7 @@ Action buttons or links to render at the bottom
 
 > **children**: `ReactNode`
 
-Defined in: [components/common/Alert.tsx:35](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L35)
+Defined in: [components/common/Alert.tsx:35](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L35)
 
 Main content/description of the alert
 
@@ -37,7 +37,7 @@ Main content/description of the alert
 
 > `optional` **className**: `string`
 
-Defined in: [components/common/Alert.tsx:45](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L45)
+Defined in: [components/common/Alert.tsx:45](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L45)
 
 Additional CSS classes
 
@@ -47,7 +47,7 @@ Additional CSS classes
 
 > `optional` **dismissible**: `boolean`
 
-Defined in: [components/common/Alert.tsx:41](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L41)
+Defined in: [components/common/Alert.tsx:41](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L41)
 
 Whether to show a dismiss/close button
 
@@ -57,7 +57,7 @@ Whether to show a dismiss/close button
 
 > `optional` **hideIcon**: `boolean`
 
-Defined in: [components/common/Alert.tsx:39](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L39)
+Defined in: [components/common/Alert.tsx:39](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L39)
 
 Whether to hide the icon completely
 
@@ -67,7 +67,7 @@ Whether to hide the icon completely
 
 > `optional` **icon**: `LucideIcon`
 
-Defined in: [components/common/Alert.tsx:37](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L37)
+Defined in: [components/common/Alert.tsx:37](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L37)
 
 Custom icon component - overrides the default variant icon
 
@@ -77,7 +77,7 @@ Custom icon component - overrides the default variant icon
 
 > `optional` **layout**: [`AlertLayout`](../type-aliases/AlertLayout.md)
 
-Defined in: [components/common/Alert.tsx:31](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L31)
+Defined in: [components/common/Alert.tsx:31](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L31)
 
 Layout style: default (full border), bordered (rounded with border), sidebar (left accent border)
 
@@ -87,7 +87,7 @@ Layout style: default (full border), bordered (rounded with border), sidebar (le
 
 > `optional` **onDismiss**: () => `void`
 
-Defined in: [components/common/Alert.tsx:43](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L43)
+Defined in: [components/common/Alert.tsx:43](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L43)
 
 Callback fired when the dismiss button is clicked
 
@@ -101,7 +101,7 @@ Callback fired when the dismiss button is clicked
 
 > `optional` **title**: `string`
 
-Defined in: [components/common/Alert.tsx:33](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L33)
+Defined in: [components/common/Alert.tsx:33](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L33)
 
 Optional title displayed in bold above the content
 
@@ -111,6 +111,6 @@ Optional title displayed in bold above the content
 
 > `optional` **variant**: [`AlertVariant`](../type-aliases/AlertVariant.md)
 
-Defined in: [components/common/Alert.tsx:29](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L29)
+Defined in: [components/common/Alert.tsx:29](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L29)
 
 Color variant - determines the alert's color scheme and default icon

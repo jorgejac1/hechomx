@@ -8,7 +8,7 @@
 
 > **AuthProvider**(`__namedParameters`): `Element`
 
-Defined in: [contexts/AuthContext.tsx:107](https://github.com/jorgejac1/hechomx/blob/main/contexts/AuthContext.tsx#L107)
+Defined in: [contexts/AuthContext.tsx:107](https://github.com/jorgejac1/papalotemarket/blob/main/contexts/AuthContext.tsx#L107)
 
 ## Parameters
 

@@ -6,7 +6,7 @@
 
 # Interface: ProductImage
 
-Defined in: [types/product.ts:107](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L107)
+Defined in: [types/product.ts:107](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L107)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/product.ts:107](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **alt**: `string`
 
-Defined in: [types/product.ts:109](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L109)
+Defined in: [types/product.ts:109](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L109)
 
 ---
 
@@ -22,7 +22,7 @@ Defined in: [types/product.ts:109](https://github.com/jorgejac1/hechomx/blob/mai
 
 > `optional` **height**: `number`
 
-Defined in: [types/product.ts:111](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L111)
+Defined in: [types/product.ts:111](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L111)
 
 ---
 
@@ -30,7 +30,7 @@ Defined in: [types/product.ts:111](https://github.com/jorgejac1/hechomx/blob/mai
 
 > `optional` **isPrimary**: `boolean`
 
-Defined in: [types/product.ts:112](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L112)
+Defined in: [types/product.ts:112](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L112)
 
 ---
 
@@ -38,7 +38,7 @@ Defined in: [types/product.ts:112](https://github.com/jorgejac1/hechomx/blob/mai
 
 > **url**: `string`
 
-Defined in: [types/product.ts:108](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L108)
+Defined in: [types/product.ts:108](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L108)
 
 ---
 
@@ -46,4 +46,4 @@ Defined in: [types/product.ts:108](https://github.com/jorgejac1/hechomx/blob/mai
 
 > `optional` **width**: `number`
 
-Defined in: [types/product.ts:110](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L110)
+Defined in: [types/product.ts:110](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L110)

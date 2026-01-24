@@ -8,4 +8,4 @@
 
 > `const` **default**: `NamedExoticComponent`\<`BadgeProps`\>
 
-Defined in: [components/common/Badge.tsx:55](https://github.com/jorgejac1/hechomx/blob/main/components/common/Badge.tsx#L55)
+Defined in: [components/common/Badge.tsx:55](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Badge.tsx#L55)

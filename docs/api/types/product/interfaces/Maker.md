@@ -6,7 +6,7 @@
 
 # Interface: Maker
 
-Defined in: [types/product.ts:84](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L84)
+Defined in: [types/product.ts:84](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L84)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [types/product.ts:84](https://github.com/jorgejac1/hechomx/blob/main
 
 > **bio**: `string`
 
-Defined in: [types/product.ts:87](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L87)
+Defined in: [types/product.ts:87](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L87)
 
 ---
 
@@ -22,7 +22,7 @@ Defined in: [types/product.ts:87](https://github.com/jorgejac1/hechomx/blob/main
 
 > **id**: `string`
 
-Defined in: [types/product.ts:85](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L85)
+Defined in: [types/product.ts:85](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L85)
 
 ---
 
@@ -30,7 +30,7 @@ Defined in: [types/product.ts:85](https://github.com/jorgejac1/hechomx/blob/main
 
 > **name**: `string`
 
-Defined in: [types/product.ts:86](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L86)
+Defined in: [types/product.ts:86](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L86)
 
 ---
 
@@ -38,7 +38,7 @@ Defined in: [types/product.ts:86](https://github.com/jorgejac1/hechomx/blob/main
 
 > **products**: `string`[]
 
-Defined in: [types/product.ts:90](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L90)
+Defined in: [types/product.ts:90](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L90)
 
 ---
 
@@ -46,7 +46,7 @@ Defined in: [types/product.ts:90](https://github.com/jorgejac1/hechomx/blob/main
 
 > **state**: `string`
 
-Defined in: [types/product.ts:88](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L88)
+Defined in: [types/product.ts:88](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L88)
 
 ---
 
@@ -54,4 +54,4 @@ Defined in: [types/product.ts:88](https://github.com/jorgejac1/hechomx/blob/main
 
 > **verified**: `boolean`
 
-Defined in: [types/product.ts:89](https://github.com/jorgejac1/hechomx/blob/main/types/product.ts#L89)
+Defined in: [types/product.ts:89](https://github.com/jorgejac1/papalotemarket/blob/main/types/product.ts#L89)

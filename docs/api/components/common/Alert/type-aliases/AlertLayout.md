@@ -8,6 +8,6 @@
 
 > **AlertLayout** = `"default"` \| `"bordered"` \| `"sidebar"`
 
-Defined in: [components/common/Alert.tsx:21](https://github.com/jorgejac1/hechomx/blob/main/components/common/Alert.tsx#L21)
+Defined in: [components/common/Alert.tsx:21](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Alert.tsx#L21)
 
 Available alert layout styles

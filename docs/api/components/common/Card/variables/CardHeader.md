@@ -8,4 +8,4 @@
 
 > `const` **CardHeader**: `NamedExoticComponent`\<`CardHeaderProps`\>
 
-Defined in: [components/common/Card.tsx:168](https://github.com/jorgejac1/hechomx/blob/main/components/common/Card.tsx#L168)
+Defined in: [components/common/Card.tsx:168](https://github.com/jorgejac1/papalotemarket/blob/main/components/common/Card.tsx#L168)

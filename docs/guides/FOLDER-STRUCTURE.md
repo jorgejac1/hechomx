@@ -5,7 +5,7 @@
 ## Root Directory
 
 ```
-hecho-en-mexico/
+papalotemarket/
 ├── app/                    # Next.js App Router pages
 ├── components/             # React components
 ├── contexts/               # React Context providers
