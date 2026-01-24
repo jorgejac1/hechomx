@@ -22,11 +22,10 @@ Papalote Market is deployed to **Vercel** with automatic deployments on push to 
 
 ### Current Infrastructure
 
-| Service    | URL                           | Purpose       |
-| ---------- | ----------------------------- | ------------- |
-| Production | https://hechomx.vercel.app    | Main site     |
-| Preview    | https://hechomx-\*.vercel.app | PR previews   |
-| Future     | https://papalotemarket.com    | Custom domain |
+| Service    | URL                                  | Purpose     |
+| ---------- | ------------------------------------ | ----------- |
+| Production | https://papalotemarket.vercel.app    | Main site   |
+| Preview    | https://papalotemarket-\*.vercel.app | PR previews |
 
 ---
 

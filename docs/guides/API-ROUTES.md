@@ -21,8 +21,7 @@ All API routes are located in `app/api/` and follow Next.js App Router conventio
 
 ```
 Development: http://localhost:3000/api
-Production:  https://hechomx.vercel.app/api
-Future:      https://papalotemarket.com/api
+Production:  https://papalotemarket.vercel.app/api
 ```
 
 ### Authentication

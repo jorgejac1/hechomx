@@ -748,10 +748,10 @@ export default function RootLayout({ children }) {
 
 ```bash
 # Run Lighthouse audit (opens report in browser)
-npx lighthouse https://hechomx.vercel.app --view
+npx lighthouse https://papalotemarket.vercel.app --view
 
 # Run and save JSON report
-npx lighthouse https://hechomx.vercel.app \
+npx lighthouse https://papalotemarket.vercel.app \
   --output=json \
   --output-path=./lighthouse-report.json \
   --chrome-flags="--headless --no-sandbox" \
@@ -809,8 +809,8 @@ Add to CI/CD:
   uses: treosh/lighthouse-ci-action@v10
   with:
     urls: |
-      https://hechomx.vercel.app/
-      https://hechomx.vercel.app/productos
+      https://papalotemarket.vercel.app/
+      https://papalotemarket.vercel.app/productos
     budgetPath: ./budget.json
 ```
 
