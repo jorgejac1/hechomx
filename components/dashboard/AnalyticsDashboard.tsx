@@ -25,6 +25,8 @@ import {
   Calendar,
   BarChart3,
 } from 'lucide-react';
+import ConversionFunnel from './ConversionFunnel';
+import ProductConversions from './ProductConversions';
 
 /**
  * @interface AnalyticsDashboardProps
@@ -91,6 +93,10 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
 
   const comparisonText = timeRange === 'week' ? 'vs. semana anterior' : 'vs. mes anterior';
   const trendTitle = timeRange === 'week' ? 'Últimos 7 días' : 'Últimas 5 semanas';
+
+  // Get conversion funnel data for the selected period
+  const funnelData = data.conversionFunnel?.[timeRange] || [];
+  const funnelPeriodLabel = timeRange === 'week' ? 'Esta semana' : 'Este mes';
 
   return (
     <div className="space-y-6">
@@ -305,6 +311,16 @@ export default function AnalyticsDashboard({ userEmail }: AnalyticsDashboardProp
           ))}
         </div>
       </div>
+
+      {/* Conversion Funnel */}
+      {funnelData.length > 0 && (
+        <ConversionFunnel stages={funnelData} periodLabel={funnelPeriodLabel} />
+      )}
+
+      {/* Product Conversions */}
+      {data.productConversions && data.productConversions.length > 0 && (
+        <ProductConversions products={data.productConversions} />
+      )}
 
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

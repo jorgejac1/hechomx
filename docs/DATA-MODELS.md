@@ -313,6 +313,66 @@ interface CheckoutFormData {
 
 **Location:** `lib/types/seller.ts`, `lib/types/seller-types.ts`
 
+### Analytics Types
+
+#### FunnelStage
+
+Single stage in the conversion funnel:
+
+```typescript
+interface FunnelStage {
+  /** Stage identifier */
+  id: string;
+  /** Display label for the stage */
+  label: string;
+  /** Total count at this stage */
+  count: number;
+  /** Conversion rate from previous stage (percentage) */
+  conversionFromPrevious: number;
+}
+```
+
+#### ProductConversion
+
+Per-product conversion metrics:
+
+```typescript
+interface ProductConversion {
+  /** Product ID */
+  productId: string;
+  /** Product name */
+  productName: string;
+  /** Number of product page views */
+  views: number;
+  /** Number of times added to cart */
+  addToCart: number;
+  /** Number of purchases */
+  purchases: number;
+  /** View to cart conversion rate */
+  viewToCartRate: number;
+  /** Cart to purchase conversion rate */
+  cartToPurchaseRate: number;
+}
+```
+
+#### AnalyticsData (extended)
+
+```typescript
+interface AnalyticsData {
+  // ... existing fields (revenue, orders, traffic, etc.)
+
+  /** Conversion funnel data showing customer journey stages */
+  conversionFunnel?: {
+    week: FunnelStage[];
+    month: FunnelStage[];
+  };
+  /** Per-product conversion metrics */
+  productConversions?: ProductConversion[];
+}
+```
+
+---
+
 ### SellerType
 
 ```typescript

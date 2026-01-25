@@ -95,7 +95,102 @@
     "forecast": {
       "nextMonth": 21500,
       "confidence": "high"
-    }
+    },
+    "conversionFunnel": {
+      "week": [
+        {
+          "id": "store_visits",
+          "label": "Visitas a tienda",
+          "count": 1234,
+          "conversionFromPrevious": 100
+        },
+        {
+          "id": "product_views",
+          "label": "Vistas de producto",
+          "count": 741,
+          "conversionFromPrevious": 60
+        },
+        {
+          "id": "add_to_cart",
+          "label": "Agregados al carrito",
+          "count": 112,
+          "conversionFromPrevious": 15
+        },
+        {
+          "id": "checkout_started",
+          "label": "Checkout iniciado",
+          "count": 56,
+          "conversionFromPrevious": 50
+        },
+        {
+          "id": "purchases",
+          "label": "Compras completadas",
+          "count": 47,
+          "conversionFromPrevious": 84
+        }
+      ],
+      "month": [
+        {
+          "id": "store_visits",
+          "label": "Visitas a tienda",
+          "count": 4850,
+          "conversionFromPrevious": 100
+        },
+        {
+          "id": "product_views",
+          "label": "Vistas de producto",
+          "count": 2910,
+          "conversionFromPrevious": 60
+        },
+        {
+          "id": "add_to_cart",
+          "label": "Agregados al carrito",
+          "count": 437,
+          "conversionFromPrevious": 15
+        },
+        {
+          "id": "checkout_started",
+          "label": "Checkout iniciado",
+          "count": 219,
+          "conversionFromPrevious": 50
+        },
+        {
+          "id": "purchases",
+          "label": "Compras completadas",
+          "count": 204,
+          "conversionFromPrevious": 93
+        }
+      ]
+    },
+    "productConversions": [
+      {
+        "productId": "p2",
+        "productName": "Cojín Tejido Geometrico",
+        "views": 890,
+        "addToCart": 156,
+        "purchases": 45,
+        "viewToCartRate": 17.5,
+        "cartToPurchaseRate": 28.8
+      },
+      {
+        "productId": "p1",
+        "productName": "Manta Tejida Artesanal",
+        "views": 620,
+        "addToCart": 87,
+        "purchases": 23,
+        "viewToCartRate": 14.0,
+        "cartToPurchaseRate": 26.4
+      },
+      {
+        "productId": "p3",
+        "productName": "Canasta Macramé",
+        "views": 445,
+        "addToCart": 52,
+        "purchases": 18,
+        "viewToCartRate": 11.7,
+        "cartToPurchaseRate": 34.6
+      }
+    ]
   },
   "pedro@ejemplo.com": {
     "revenue": {
@@ -193,7 +288,102 @@
     "forecast": {
       "nextMonth": 112000,
       "confidence": "high"
-    }
+    },
+    "conversionFunnel": {
+      "week": [
+        {
+          "id": "store_visits",
+          "label": "Visitas a tienda",
+          "count": 2341,
+          "conversionFromPrevious": 100
+        },
+        {
+          "id": "product_views",
+          "label": "Vistas de producto",
+          "count": 1639,
+          "conversionFromPrevious": 70
+        },
+        {
+          "id": "add_to_cart",
+          "label": "Agregados al carrito",
+          "count": 311,
+          "conversionFromPrevious": 19
+        },
+        {
+          "id": "checkout_started",
+          "label": "Checkout iniciado",
+          "count": 218,
+          "conversionFromPrevious": 70
+        },
+        {
+          "id": "purchases",
+          "label": "Compras completadas",
+          "count": 192,
+          "conversionFromPrevious": 88
+        }
+      ],
+      "month": [
+        {
+          "id": "store_visits",
+          "label": "Visitas a tienda",
+          "count": 9500,
+          "conversionFromPrevious": 100
+        },
+        {
+          "id": "product_views",
+          "label": "Vistas de producto",
+          "count": 6650,
+          "conversionFromPrevious": 70
+        },
+        {
+          "id": "add_to_cart",
+          "label": "Agregados al carrito",
+          "count": 1264,
+          "conversionFromPrevious": 19
+        },
+        {
+          "id": "checkout_started",
+          "label": "Checkout iniciado",
+          "count": 885,
+          "conversionFromPrevious": 70
+        },
+        {
+          "id": "purchases",
+          "label": "Compras completadas",
+          "count": 836,
+          "conversionFromPrevious": 94
+        }
+      ]
+    },
+    "productConversions": [
+      {
+        "productId": "ap2",
+        "productName": "Alebrije Búho Mediano",
+        "views": 2150,
+        "addToCart": 387,
+        "purchases": 89,
+        "viewToCartRate": 18.0,
+        "cartToPurchaseRate": 23.0
+      },
+      {
+        "productId": "ap1",
+        "productName": "Alebrije León Grande",
+        "views": 1890,
+        "addToCart": 245,
+        "purchases": 45,
+        "viewToCartRate": 13.0,
+        "cartToPurchaseRate": 18.4
+      },
+      {
+        "productId": "ap3",
+        "productName": "Alebrije Dragón",
+        "views": 1450,
+        "addToCart": 189,
+        "purchases": 34,
+        "viewToCartRate": 13.0,
+        "cartToPurchaseRate": 18.0
+      }
+    ]
   },
   "ventas@artesaniasdemexico.com": {
     "revenue": {
@@ -291,6 +481,101 @@
     "forecast": {
       "nextMonth": 280000,
       "confidence": "high"
-    }
+    },
+    "conversionFunnel": {
+      "week": [
+        {
+          "id": "store_visits",
+          "label": "Visitas a tienda",
+          "count": 4523,
+          "conversionFromPrevious": 100
+        },
+        {
+          "id": "product_views",
+          "label": "Vistas de producto",
+          "count": 3392,
+          "conversionFromPrevious": 75
+        },
+        {
+          "id": "add_to_cart",
+          "label": "Agregados al carrito",
+          "count": 610,
+          "conversionFromPrevious": 18
+        },
+        {
+          "id": "checkout_started",
+          "label": "Checkout iniciado",
+          "count": 488,
+          "conversionFromPrevious": 80
+        },
+        {
+          "id": "purchases",
+          "label": "Compras completadas",
+          "count": 430,
+          "conversionFromPrevious": 88
+        }
+      ],
+      "month": [
+        {
+          "id": "store_visits",
+          "label": "Visitas a tienda",
+          "count": 18250,
+          "conversionFromPrevious": 100
+        },
+        {
+          "id": "product_views",
+          "label": "Vistas de producto",
+          "count": 13688,
+          "conversionFromPrevious": 75
+        },
+        {
+          "id": "add_to_cart",
+          "label": "Agregados al carrito",
+          "count": 2464,
+          "conversionFromPrevious": 18
+        },
+        {
+          "id": "checkout_started",
+          "label": "Checkout iniciado",
+          "count": 1971,
+          "conversionFromPrevious": 80
+        },
+        {
+          "id": "purchases",
+          "label": "Compras completadas",
+          "count": 1862,
+          "conversionFromPrevious": 94
+        }
+      ]
+    },
+    "productConversions": [
+      {
+        "productId": "comp1",
+        "productName": "Set Talavera Premium (6 piezas)",
+        "views": 4250,
+        "addToCart": 680,
+        "purchases": 156,
+        "viewToCartRate": 16.0,
+        "cartToPurchaseRate": 22.9
+      },
+      {
+        "productId": "comp2",
+        "productName": "Colección Textiles Chiapanecos",
+        "views": 3180,
+        "addToCart": 445,
+        "purchases": 98,
+        "viewToCartRate": 14.0,
+        "cartToPurchaseRate": 22.0
+      },
+      {
+        "productId": "comp3",
+        "productName": "Pack Artesanías Variadas",
+        "views": 2890,
+        "addToCart": 376,
+        "purchases": 87,
+        "viewToCartRate": 13.0,
+        "cartToPurchaseRate": 23.1
+      }
+    ]
   }
 }

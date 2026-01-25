@@ -176,6 +176,36 @@ export interface PeriodStats {
   conversionRate: number;
 }
 
+/** Single stage in the conversion funnel */
+export interface FunnelStage {
+  /** Stage identifier */
+  id: string;
+  /** Display label for the stage */
+  label: string;
+  /** Total count at this stage */
+  count: number;
+  /** Conversion rate from previous stage (percentage) */
+  conversionFromPrevious: number;
+}
+
+/** Product conversion metrics */
+export interface ProductConversion {
+  /** Product ID */
+  productId: string;
+  /** Product name */
+  productName: string;
+  /** Number of product page views */
+  views: number;
+  /** Number of times added to cart */
+  addToCart: number;
+  /** Number of purchases */
+  purchases: number;
+  /** View to cart conversion rate */
+  viewToCartRate: number;
+  /** Cart to purchase conversion rate */
+  cartToPurchaseRate: number;
+}
+
 export interface AnalyticsData {
   revenue: {
     today: number;
@@ -235,6 +265,13 @@ export interface AnalyticsData {
     nextMonth: number;
     confidence: string;
   };
+  /** Conversion funnel data showing customer journey stages */
+  conversionFunnel?: {
+    week: FunnelStage[];
+    month: FunnelStage[];
+  };
+  /** Per-product conversion metrics */
+  productConversions?: ProductConversion[];
 }
 
 // ============================================================================

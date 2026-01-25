@@ -249,14 +249,18 @@ export default function FileUpload({
   if (variant === 'compact') {
     return (
       <div className={className}>
-        {label && <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>}
+        {label && (
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            {label}
+          </label>
+        )}
         <div className="flex flex-wrap items-center gap-2">
           {files.map((file) => (
             <div
               key={file.id}
               className={`
                 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm
-                ${file.error ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'}
+                ${file.error ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300' : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'}
               `}
             >
               {file.preview ? (
@@ -272,7 +276,7 @@ export default function FileUpload({
               <button
                 type="button"
                 onClick={() => handleRemove(file.id)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                 aria-label="Eliminar archivo"
               >
                 <X className="w-4 h-4" />
@@ -286,8 +290,8 @@ export default function FileUpload({
               disabled={disabled}
               className={`
                 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium
-                border-2 border-dashed border-gray-300 text-gray-600
-                hover:border-primary-400 hover:text-primary-600 transition
+                border-2 border-dashed border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400
+                hover:border-primary-400 dark:hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition
                 ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
               `}
             >
@@ -305,9 +309,11 @@ export default function FileUpload({
           className="hidden"
           disabled={disabled}
         />
-        {helperText && !error && <p className="mt-1.5 text-xs text-gray-500">{helperText}</p>}
+        {helperText && !error && (
+          <p className="mt-1.5 text-xs text-gray-500 dark:text-gray-400">{helperText}</p>
+        )}
         {error && (
-          <p className="mt-1.5 text-xs text-red-600 flex items-center gap-1">
+          <p className="mt-1.5 text-xs text-red-600 dark:text-red-400 flex items-center gap-1">
             <AlertCircle className="w-3 h-3" />
             {error}
           </p>
@@ -321,14 +327,18 @@ export default function FileUpload({
     const currentFile = files[0];
     return (
       <div className={className}>
-        {label && <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>}
+        {label && (
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            {label}
+          </label>
+        )}
         <div className="flex items-center gap-4">
           <div
             onClick={handleClick}
             className={`
-              relative w-24 h-24 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center
+              relative w-24 h-24 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-700 flex items-center justify-center
               border-2 border-dashed transition cursor-pointer
-              ${isDragging ? 'border-primary-500 bg-primary-50' : 'border-gray-300 hover:border-primary-400'}
+              ${isDragging ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300 dark:border-gray-600 hover:border-primary-400 dark:hover:border-primary-500'}
               ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
             `}
             onDragEnter={handleDragEnter}
@@ -340,7 +350,7 @@ export default function FileUpload({
               /* eslint-disable-next-line @next/next/no-img-element */
               <img src={currentFile.preview} alt="Preview" className="w-full h-full object-cover" />
             ) : (
-              <Upload className="w-8 h-8 text-gray-400" />
+              <Upload className="w-8 h-8 text-gray-400 dark:text-gray-500" />
             )}
           </div>
           <div>
@@ -348,7 +358,7 @@ export default function FileUpload({
               type="button"
               onClick={handleClick}
               disabled={disabled}
-              className="text-sm font-medium text-primary-600 hover:text-primary-700"
+              className="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
             >
               {currentFile ? 'Cambiar imagen' : 'Subir imagen'}
             </button>
@@ -356,12 +366,14 @@ export default function FileUpload({
               <button
                 type="button"
                 onClick={() => handleRemove(currentFile.id)}
-                className="block text-sm text-red-600 hover:text-red-700 mt-1"
+                className="block text-sm text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 mt-1"
               >
                 Eliminar
               </button>
             )}
-            {helperText && <p className="text-xs text-gray-500 mt-1">{helperText}</p>}
+            {helperText && (
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{helperText}</p>
+            )}
           </div>
         </div>
         <input
@@ -373,7 +385,7 @@ export default function FileUpload({
           disabled={disabled}
         />
         {error && (
-          <p className="mt-2 text-xs text-red-600 flex items-center gap-1">
+          <p className="mt-2 text-xs text-red-600 dark:text-red-400 flex items-center gap-1">
             <AlertCircle className="w-3 h-3" />
             {error}
           </p>
@@ -385,7 +397,11 @@ export default function FileUpload({
   // Default variant
   return (
     <div className={className}>
-      {label && <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>}
+      {label && (
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          {label}
+        </label>
+      )}
 
       {/* Drop zone */}
       {canAddMore && (
@@ -397,18 +413,18 @@ export default function FileUpload({
           onDrop={handleDrop}
           className={`
             relative border-2 border-dashed rounded-xl p-8 text-center transition cursor-pointer
-            ${isDragging ? 'border-primary-500 bg-primary-50' : 'border-gray-300 hover:border-primary-400'}
+            ${isDragging ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-300 dark:border-gray-600 hover:border-primary-400 dark:hover:border-primary-500'}
             ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-            ${error ? 'border-red-300 bg-red-50' : ''}
+            ${error ? 'border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/20' : ''}
           `}
         >
           {placeholder || (
             <>
-              <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-sm font-medium text-gray-700 mb-1">
+              <Upload className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Arrastra archivos aquí o haz clic para seleccionar
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
                 {accept ? `Tipos permitidos: ${accept}` : 'Todos los tipos de archivo'}
                 {' • '}
                 Máximo {formatFileSize(maxSize)}
@@ -438,7 +454,7 @@ export default function FileUpload({
                 key={file.id}
                 className={`
                   flex items-center gap-3 p-3 rounded-lg
-                  ${file.error ? 'bg-red-50 border border-red-200' : 'bg-gray-50'}
+                  ${file.error ? 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800' : 'bg-gray-50 dark:bg-gray-700/50'}
                 `}
               >
                 {/* Preview or icon */}
@@ -450,24 +466,28 @@ export default function FileUpload({
                     className="w-10 h-10 rounded-lg object-cover"
                   />
                 ) : (
-                  <div className="w-10 h-10 rounded-lg bg-gray-200 flex items-center justify-center">
-                    <FileIcon className="w-5 h-5 text-gray-500" />
+                  <div className="w-10 h-10 rounded-lg bg-gray-200 dark:bg-gray-600 flex items-center justify-center">
+                    <FileIcon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                   </div>
                 )}
 
                 {/* File info */}
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                    {file.name}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     {formatFileSize(file.size)}
-                    {file.error && <span className="text-red-600 ml-2">{file.error}</span>}
+                    {file.error && (
+                      <span className="text-red-600 dark:text-red-400 ml-2">{file.error}</span>
+                    )}
                   </p>
                 </div>
 
                 {/* Progress or remove */}
                 {file.progress !== undefined && file.progress < 100 ? (
                   <div className="w-20">
-                    <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-primary-600 transition-all"
                         style={{ width: `${file.progress}%` }}
@@ -478,7 +498,7 @@ export default function FileUpload({
                   <button
                     type="button"
                     onClick={() => handleRemove(file.id)}
-                    className="p-1 text-gray-400 hover:text-gray-600 transition"
+                    className="p-1 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition"
                     aria-label="Eliminar archivo"
                   >
                     <X className="w-5 h-5" />
@@ -490,9 +510,11 @@ export default function FileUpload({
         </div>
       )}
 
-      {helperText && !error && <p className="mt-2 text-xs text-gray-500">{helperText}</p>}
+      {helperText && !error && (
+        <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">{helperText}</p>
+      )}
       {error && (
-        <p className="mt-2 text-xs text-red-600 flex items-center gap-1">
+        <p className="mt-2 text-xs text-red-600 dark:text-red-400 flex items-center gap-1">
           <AlertCircle className="w-3 h-3" />
           {error}
         </p>

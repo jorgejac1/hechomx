@@ -444,6 +444,76 @@ Individual tab content components:
 
 ---
 
+### ConversionFunnel
+
+Visual funnel showing customer journey from visit to purchase.
+
+```tsx
+import ConversionFunnel from '@/components/dashboard/ConversionFunnel';
+
+<ConversionFunnel
+  stages={[
+    { id: 'store_visits', label: 'Visitas a tienda', count: 1000, conversionFromPrevious: 100 },
+    { id: 'product_views', label: 'Vistas de producto', count: 600, conversionFromPrevious: 60 },
+    { id: 'add_to_cart', label: 'Agregados al carrito', count: 100, conversionFromPrevious: 16.7 },
+    { id: 'checkout_started', label: 'Checkout iniciado', count: 50, conversionFromPrevious: 50 },
+    { id: 'purchases', label: 'Compras completadas', count: 40, conversionFromPrevious: 80 },
+  ]}
+  periodLabel="Esta semana"
+/>;
+```
+
+| Prop          | Type            | Default          | Description                   |
+| ------------- | --------------- | ---------------- | ----------------------------- |
+| `stages`      | `FunnelStage[]` | -                | Array of funnel stages        |
+| `periodLabel` | `string`        | `'Este período'` | Time period label for display |
+
+**Features:**
+
+- Visual progress bars with color gradient (blue → green)
+- Drop-off percentages between stages
+- Summary stats: cart abandonment, checkout rate, view-to-purchase
+- Color-coded conversion indicators (green ≥50%, yellow ≥25%, red <25%)
+- Responsive design with dark mode support
+
+---
+
+### ProductConversions
+
+Per-product conversion metrics table.
+
+```tsx
+import ProductConversions from '@/components/dashboard/ProductConversions';
+
+<ProductConversions
+  products={[
+    {
+      productId: 'p1',
+      productName: 'Cojín Tejido',
+      views: 890,
+      addToCart: 156,
+      purchases: 45,
+      viewToCartRate: 17.5,
+      cartToPurchaseRate: 28.8,
+    },
+  ]}
+/>;
+```
+
+| Prop       | Type                  | Description                      |
+| ---------- | --------------------- | -------------------------------- |
+| `products` | `ProductConversion[]` | Array of product conversion data |
+
+**Features:**
+
+- Desktop table view with sortable columns
+- Mobile card layout for responsive design
+- Color-coded conversion rates (green/yellow/red thresholds)
+- Trend indicators comparing to average
+- Average summary at bottom
+
+---
+
 ## Charts & Data
 
 **Location:** `components/charts/`
