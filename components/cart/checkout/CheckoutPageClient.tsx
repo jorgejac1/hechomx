@@ -404,7 +404,7 @@ export default function CheckoutPageClient() {
               showNumbers={false}
               className="flex-1 max-w-md"
             />
-            <div className="w-24" /> {/* Spacer for centering */}
+            <div className="w-5 sm:w-24" /> {/* Spacer matches back button width for centering */}
           </div>
         </div>
       </div>

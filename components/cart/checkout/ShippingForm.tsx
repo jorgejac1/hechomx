@@ -65,7 +65,7 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
       {/* Saved Addresses */}
       {savedAddresses.length > 0 && (
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Direcciones guardadas
           </label>
           <div className="space-y-2">
@@ -76,31 +76,31 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
                 onClick={() => handleSavedAddressSelect(address.id)}
                 className={`w-full p-4 rounded-lg border-2 text-left transition-all ${
                   selectedAddressId === address.id
-                    ? 'border-primary-500 bg-primary-50'
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
+                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 bg-white dark:bg-gray-800'
                 }`}
               >
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
+                  <MapPin className="w-5 h-5 text-gray-400 dark:text-gray-500 mt-0.5" />
                   <div className="flex-1">
-                    <p className="font-medium text-gray-900">
+                    <p className="font-medium text-gray-900 dark:text-white">
                       {address.firstName} {address.lastName}
                       {address.label && (
-                        <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-sm">
+                        <span className="ml-2 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-sm">
                           {address.label}
                         </span>
                       )}
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
                       {address.street} {address.streetNumber}
                       {address.apartment && `, Int. ${address.apartment}`}
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
                       {address.neighborhood}, {address.city}, {address.state} {address.postalCode}
                     </p>
                   </div>
                   {address.isDefault && (
-                    <span className="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded-sm">
+                    <span className="text-xs bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 px-2 py-1 rounded-sm">
                       Predeterminada
                     </span>
                   )}
@@ -113,7 +113,7 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
                 setSelectedAddressId(null);
                 onChange({});
               }}
-              className="w-full p-3 rounded-lg border-2 border-dashed border-gray-300 text-gray-600 hover:border-primary-500 hover:text-primary-600 transition-colors text-sm font-medium"
+              className="w-full p-3 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-primary-500 dark:hover:border-primary-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm font-medium"
             >
               + Usar una dirección nueva
             </button>
@@ -123,8 +123,8 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
 
       {/* Contact Info */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-          <User className="w-5 h-5 text-primary-600" />
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+          <User className="w-5 h-5 text-primary-600 dark:text-primary-400" />
           Información de contacto
         </h3>
 
@@ -178,9 +178,9 @@ export default function ShippingForm({ value, onChange, errors }: ShippingFormPr
       </div>
 
       {/* Address */}
-      <div className="space-y-4 pt-6 border-t">
-        <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-          <Home className="w-5 h-5 text-primary-600" />
+      <div className="space-y-4 pt-6 border-t dark:border-gray-700">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+          <Home className="w-5 h-5 text-primary-600 dark:text-primary-400" />
           Dirección de envío
         </h3>
 

@@ -156,7 +156,7 @@ export default function RadioGroup({
         {label && (
           <p
             id={`${groupName}-label`}
-            className={`font-semibold text-gray-900 mb-3 ${labelSizeStyles[size]}`}
+            className={`font-semibold text-gray-900 dark:text-white mb-3 ${labelSizeStyles[size]}`}
           >
             {label}
           </p>
@@ -167,13 +167,13 @@ export default function RadioGroup({
 
         {/* Error message */}
         {error && (
-          <p className="text-sm text-red-600 mt-2" role="alert">
+          <p className="text-sm text-red-600 dark:text-red-400 mt-2" role="alert">
             {error}
           </p>
         )}
 
         {/* Hint text */}
-        {!error && hint && <p className="text-sm text-gray-500 mt-2">{hint}</p>}
+        {!error && hint && <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">{hint}</p>}
       </div>
     </RadioGroupContext.Provider>
   );
@@ -243,17 +243,21 @@ function RadioGroupOption({
           className={`
             ${sizeStyles[size].radio}
             text-primary-600
-            border-gray-300
+            border-gray-300 dark:border-gray-600
             focus:ring-primary-500
             focus:ring-2
-            focus:ring-offset-0
+            focus:ring-offset-0 dark:focus:ring-offset-gray-800
             mt-0.5
           `}
         />
         <div>
-          <span className={`${sizeStyles[size].text} text-gray-700`}>{children}</span>
+          <span className={`${sizeStyles[size].text} text-gray-700 dark:text-gray-200`}>
+            {children}
+          </span>
           {description && (
-            <div className={`${sizeStyles[size].description} text-gray-500 mt-0.5`}>
+            <div
+              className={`${sizeStyles[size].description} text-gray-500 dark:text-gray-400 mt-0.5`}
+            >
               {description}
             </div>
           )}
@@ -268,7 +272,7 @@ function RadioGroupOption({
       <label
         className={`
           relative flex items-start gap-4 p-4 rounded-xl border-2 transition-all
-          ${isSelected ? 'border-primary-500 bg-primary-50' : 'border-gray-200 hover:border-gray-300'}
+          ${isSelected ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 bg-white dark:bg-gray-800'}
           ${isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}
           ${className}
         `}
@@ -287,7 +291,7 @@ function RadioGroupOption({
           <div
             className={`
               shrink-0 w-10 h-10 rounded-lg flex items-center justify-center
-              ${isSelected ? 'bg-primary-100 text-primary-600' : 'bg-gray-100 text-gray-500'}
+              ${isSelected ? 'bg-primary-100 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400' : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'}
             `}
           >
             {icon}
@@ -297,13 +301,15 @@ function RadioGroupOption({
           <span
             className={`
               ${sizeStyles[size].text} font-medium block
-              ${isSelected ? 'text-primary-900' : 'text-gray-900'}
+              ${isSelected ? 'text-primary-900 dark:text-primary-100' : 'text-gray-900 dark:text-white'}
             `}
           >
             {children}
           </span>
           {description && (
-            <div className={`${sizeStyles[size].description} text-gray-500 mt-1`}>
+            <div
+              className={`${sizeStyles[size].description} text-gray-500 dark:text-gray-400 mt-1`}
+            >
               {description}
             </div>
           )}
@@ -312,7 +318,7 @@ function RadioGroupOption({
         <div
           className={`
             shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center
-            ${isSelected ? 'border-primary-600 bg-primary-600' : 'border-gray-300'}
+            ${isSelected ? 'border-primary-600 bg-primary-600' : 'border-gray-300 dark:border-gray-500'}
           `}
         >
           {isSelected && (
@@ -334,7 +340,7 @@ function RadioGroupOption({
           ${
             isSelected
               ? 'border-primary-600 bg-primary-600 text-white'
-              : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
+              : 'border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:border-gray-300 dark:hover:border-gray-500'
           }
           ${isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}
           ${className}

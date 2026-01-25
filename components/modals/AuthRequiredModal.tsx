@@ -9,6 +9,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { loginSchema, type LoginInput } from '@/validators';
 import { validate } from '@/validators/utils';
@@ -35,6 +36,7 @@ export default function AuthRequiredModal({
   description = 'Necesitas una cuenta para completar tu compra',
 }: AuthRequiredModalProps) {
   const { login } = useAuth();
+  const pathname = usePathname();
   const [formData, setFormData] = useState<LoginInput>({
     email: '',
     password: '',
@@ -188,7 +190,11 @@ export default function AuthRequiredModal({
           </div>
         </div>
 
-        <Link href={ROUTES.REGISTER} onClick={handleClose} className="block mt-4">
+        <Link
+          href={`${ROUTES.REGISTER}?returnTo=${encodeURIComponent(pathname)}`}
+          onClick={handleClose}
+          className="block mt-4"
+        >
           <Button variant="outline" size="md" fullWidth>
             <span className="flex items-center justify-center gap-2">
               <UserPlus className="w-4 h-4" />

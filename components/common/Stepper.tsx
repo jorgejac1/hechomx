@@ -7,7 +7,7 @@
 
 'use client';
 
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Check, type LucideIcon } from 'lucide-react';
 
 /**
@@ -115,18 +115,20 @@ const statusStyles: Record<
 > = {
   completed: {
     circle: 'bg-primary-600 text-white border-primary-600',
-    text: 'text-primary-600',
+    text: 'text-primary-600 dark:text-primary-400',
     connector: 'bg-primary-600',
   },
   current: {
-    circle: 'bg-white text-primary-600 border-primary-600 border-2',
-    text: 'text-gray-900',
-    connector: 'bg-gray-300',
+    circle:
+      'bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 border-primary-600 border-2',
+    text: 'text-gray-900 dark:text-white',
+    connector: 'bg-gray-300 dark:bg-gray-600',
   },
   upcoming: {
-    circle: 'bg-white text-gray-400 border-gray-300 border',
-    text: 'text-gray-500',
-    connector: 'bg-gray-300',
+    circle:
+      'bg-white dark:bg-gray-800 text-gray-400 dark:text-gray-500 border-gray-300 dark:border-gray-600 border',
+    text: 'text-gray-500 dark:text-gray-400',
+    connector: 'bg-gray-300 dark:bg-gray-600',
   },
 };
 
@@ -201,10 +203,27 @@ function Connector({ status, size, orientation }: ConnectorProps) {
   const sizes = sizeConfig[size];
   const styles = statusStyles[status];
 
+  // Vertical offset to align connector with center of step circles
+  // sm: 32px circle, 2px connector → (32-2)/2 = 15px
+  // md: 40px circle, 2px connector → (40-2)/2 = 19px
+  // lg: 48px circle, 4px connector → (48-4)/2 = 22px
+  const horizontalOffset: Record<StepperSize, string> = {
+    sm: 'mt-[15px]',
+    md: 'mt-[19px]',
+    lg: 'mt-[22px]',
+  };
+
+  // Negative right margin to extend connector into next step's container
+  const horizontalExtend: Record<StepperSize, string> = {
+    sm: '-mr-4',
+    md: '-mr-5',
+    lg: '-mr-6',
+  };
+
   if (orientation === 'horizontal') {
     return (
       <div
-        className={`flex-1 ${sizes.connector} ${styles.connector} transition-colors`}
+        className={`flex-1 min-w-4 ${sizes.connector} ${styles.connector} ${horizontalOffset[size]} ${horizontalExtend[size]} transition-colors`}
         aria-hidden="true"
       />
     );
@@ -262,10 +281,14 @@ function StepItem({
       <div className={orientation === 'horizontal' ? 'mt-2' : ''}>
         <p className={`${sizes.label} ${styles.text}`}>
           {step.label}
-          {step.optional && <span className="font-normal text-gray-400 ml-1">(Opcional)</span>}
+          {step.optional && (
+            <span className="font-normal text-gray-400 dark:text-gray-500 ml-1">(Opcional)</span>
+          )}
         </p>
         {step.description && (
-          <p className={`${sizes.description} text-gray-500 mt-0.5`}>{step.description}</p>
+          <p className={`${sizes.description} text-gray-500 dark:text-gray-400 mt-0.5`}>
+            {step.description}
+          </p>
         )}
       </div>
     </>
@@ -278,19 +301,19 @@ function StepItem({
 
   if (orientation === 'horizontal') {
     return (
-      <>
+      <div className="flex-1 flex items-start">
         {isClickable ? (
           <button
             type="button"
             onClick={onClick}
-            className={containerClasses}
+            className={`${containerClasses} shrink-0`}
             aria-label={`Ir al paso ${stepIndex + 1}: ${step.label}`}
           >
             {stepContent}
           </button>
         ) : (
           <div
-            className={containerClasses}
+            className={`${containerClasses} shrink-0`}
             aria-current={status === 'current' ? 'step' : undefined}
           >
             {stepContent}
@@ -303,7 +326,7 @@ function StepItem({
             orientation={orientation}
           />
         )}
-      </>
+      </div>
     );
   }
 
@@ -361,7 +384,7 @@ export default function Stepper({
     <nav
       aria-label="Progreso"
       className={`
-        ${orientation === 'horizontal' ? 'flex items-center' : 'flex flex-col'}
+        ${orientation === 'horizontal' ? 'flex items-start' : 'flex flex-col'}
         ${className}
       `}
     >

@@ -46,7 +46,7 @@ const ProductCardList = memo(function ProductCardList({ product }: ProductCardLi
       aria-label={`Producto: ${product.name}`}
     >
       {/* Image Section */}
-      <div className="relative w-full sm:w-52 h-48 sm:h-[212px] shrink-0 bg-gray-100">
+      <div className="relative w-full sm:w-52 h-48 sm:h-[212px] shrink-0 bg-gray-100 dark:bg-gray-700">
         <Link
           href={`/productos/${product.id}`}
           aria-label={`Ver detalles de ${product.name}`}
@@ -67,9 +67,9 @@ const ProductCardList = memo(function ProductCardList({ product }: ProductCardLi
               loading="lazy"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gray-200">
+            <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
               <svg
-                className="w-12 h-12 text-gray-400"
+                className="w-12 h-12 text-gray-400 dark:text-gray-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -118,8 +118,8 @@ const ProductCardList = memo(function ProductCardList({ product }: ProductCardLi
             className={`w-8 h-8 rounded-md flex items-center justify-center transition-all ${
               isComparing
                 ? 'bg-primary-600 text-white'
-                : 'bg-white border-2 border-gray-300 text-gray-600 hover:border-primary-500'
-            } focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2`}
+                : 'bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:border-primary-500 dark:hover:border-primary-400'
+            } focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800`}
             aria-label={
               isComparing
                 ? `Quitar ${product.name} de la comparación`
@@ -154,16 +154,18 @@ const ProductCardList = memo(function ProductCardList({ product }: ProductCardLi
         <div>
           {/* Title */}
           <Link href={`/productos/${product.id}`}>
-            <h3 className="text-lg sm:text-base font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors line-clamp-1">
+            <h3 className="text-lg sm:text-base font-bold text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-1">
               {product.name}
             </h3>
           </Link>
 
           {/* Description */}
-          <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
+          <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2">
+            {product.description}
+          </p>
 
           {/* Meta info */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-500 mb-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-3">
             <div className="flex items-center gap-1" aria-label={`Ubicación: ${product.state}`}>
               <svg
                 className="w-4 h-4"
@@ -205,10 +207,12 @@ const ProductCardList = memo(function ProductCardList({ product }: ProductCardLi
                 >
                   <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                 </svg>
-                <span className="font-semibold text-gray-900">{product.rating}</span>
+                <span className="font-semibold text-gray-900 dark:text-white">
+                  {product.rating}
+                </span>
               </div>
               {product.reviewCount && (
-                <span className="text-gray-500 text-sm">
+                <span className="text-gray-500 dark:text-gray-400 text-sm">
                   ({product.reviewCount} {product.reviewCount === 1 ? 'reseña' : 'reseñas'})
                 </span>
               )}
@@ -221,15 +225,18 @@ const ProductCardList = memo(function ProductCardList({ product }: ProductCardLi
           <div className="flex-1">
             <div className="flex items-baseline gap-2 mb-1">
               <span
-                className="text-2xl sm:text-xl font-bold text-gray-900"
+                className="text-2xl sm:text-xl font-bold text-gray-900 dark:text-white"
                 aria-label={`Precio: ${product.price} pesos mexicanos`}
               >
                 {formatCurrency(product.price)}
               </span>
-              <span className="text-sm font-normal text-gray-500">{product.currency}</span>
+              <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                {product.currency}
+              </span>
             </div>
-            <p className="text-xs text-gray-500">
-              Por <span className="font-medium">{product.maker}</span>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Por{' '}
+              <span className="font-medium text-gray-700 dark:text-gray-300">{product.maker}</span>
             </p>
           </div>
 

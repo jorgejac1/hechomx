@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { registerSchema, type RegisterInput } from '@/validators';
 import { validate } from '@/validators/utils';
@@ -25,6 +25,8 @@ import {
 
 export default function RegisterPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnTo = searchParams.get('returnTo');
   const { register, isAuthenticated, isLoading: authLoading } = useAuth();
   const [formData, setFormData] = useState<RegisterInput>({
     name: '',
@@ -43,9 +45,9 @@ export default function RegisterPage() {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated && !authLoading) {
-      router.replace(ROUTES.HOME);
+      router.replace(returnTo || ROUTES.HOME);
     }
-  }, [isAuthenticated, authLoading, router]);
+  }, [isAuthenticated, authLoading, router, returnTo]);
 
   // Show loading while checking auth
   if (authLoading) {
@@ -90,8 +92,8 @@ export default function RegisterPage() {
 
     try {
       await register(formData.name, formData.email, formData.password);
-      // Success! Redirect to home
-      router.push(ROUTES.HOME);
+      // Success! Redirect to returnTo URL or home
+      router.push(returnTo || ROUTES.HOME);
     } catch (error) {
       setRegisterError(error instanceof Error ? error.message : 'Error al crear la cuenta');
     } finally {

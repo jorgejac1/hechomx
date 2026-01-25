@@ -182,7 +182,7 @@ describe('Stepper', () => {
     it('should render horizontal layout by default', () => {
       const { container } = render(<Stepper steps={basicSteps} currentStep={0} />);
       const nav = container.querySelector('nav');
-      expect(nav).toHaveClass('flex', 'items-center');
+      expect(nav).toHaveClass('flex', 'items-start');
     });
 
     it('should render vertical layout', () => {
