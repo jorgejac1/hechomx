@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import Image from 'next/image';
 import MediaViewer from '@/components/common/media/MediaViewer';
 
 /**
@@ -116,7 +117,14 @@ export const InGalleryContext: Story = {
               index === 0 ? 'border-primary-600' : 'border-gray-200'
             }`}
           >
-            <img src={item.url} alt="" className="w-full h-full object-cover" />
+            <Image
+              src={item.url}
+              alt=""
+              width={64}
+              height={64}
+              className="w-full h-full object-cover"
+              unoptimized
+            />
           </div>
         ))}
       </div>

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import Image from 'next/image';
 import Carousel from '@/components/common/media/Carousel';
 
 /**
@@ -56,7 +57,16 @@ const sampleImages = [
 export const Default: Story = {
   args: {
     items: sampleImages,
-    renderItem: (url: string) => <img src={url} alt="Slide" className="w-full h-64 object-cover" />,
+    renderItem: (url: string) => (
+      <Image
+        src={url}
+        alt="Slide"
+        width={600}
+        height={400}
+        className="w-full h-64 object-cover"
+        unoptimized
+      />
+    ),
     className: 'w-[500px]',
   },
 };
@@ -65,7 +75,16 @@ export const Default: Story = {
 export const WithLoop: Story = {
   args: {
     items: sampleImages,
-    renderItem: (url: string) => <img src={url} alt="Slide" className="w-full h-64 object-cover" />,
+    renderItem: (url: string) => (
+      <Image
+        src={url}
+        alt="Slide"
+        width={600}
+        height={400}
+        className="w-full h-64 object-cover"
+        unoptimized
+      />
+    ),
     loop: true,
     className: 'w-[500px]',
   },
@@ -82,7 +101,16 @@ export const WithLoop: Story = {
 export const AutoPlay: Story = {
   args: {
     items: sampleImages,
-    renderItem: (url: string) => <img src={url} alt="Slide" className="w-full h-64 object-cover" />,
+    renderItem: (url: string) => (
+      <Image
+        src={url}
+        alt="Slide"
+        width={600}
+        height={400}
+        className="w-full h-64 object-cover"
+        unoptimized
+      />
+    ),
     autoPlay: true,
     autoPlayInterval: 2000,
     loop: true,
@@ -101,7 +129,16 @@ export const AutoPlay: Story = {
 export const NoControls: Story = {
   args: {
     items: sampleImages,
-    renderItem: (url: string) => <img src={url} alt="Slide" className="w-full h-64 object-cover" />,
+    renderItem: (url: string) => (
+      <Image
+        src={url}
+        alt="Slide"
+        width={600}
+        height={400}
+        className="w-full h-64 object-cover"
+        unoptimized
+      />
+    ),
     showControls: false,
     className: 'w-[500px]',
   },
@@ -118,7 +155,16 @@ export const NoControls: Story = {
 export const NoIndicators: Story = {
   args: {
     items: sampleImages,
-    renderItem: (url: string) => <img src={url} alt="Slide" className="w-full h-64 object-cover" />,
+    renderItem: (url: string) => (
+      <Image
+        src={url}
+        alt="Slide"
+        width={600}
+        height={400}
+        className="w-full h-64 object-cover"
+        unoptimized
+      />
+    ),
     showIndicators: false,
     className: 'w-[500px]',
   },
@@ -135,7 +181,16 @@ export const NoIndicators: Story = {
 export const Minimal: Story = {
   args: {
     items: sampleImages,
-    renderItem: (url: string) => <img src={url} alt="Slide" className="w-full h-64 object-cover" />,
+    renderItem: (url: string) => (
+      <Image
+        src={url}
+        alt="Slide"
+        width={600}
+        height={400}
+        className="w-full h-64 object-cover"
+        unoptimized
+      />
+    ),
     showControls: false,
     showIndicators: false,
     autoPlay: true,
@@ -166,7 +221,14 @@ export const ProductCards: Story = {
         items={products}
         renderItem={(item) => (
           <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md m-2">
-            <img src={item.image} alt={item.name} className="w-full h-48 object-cover" />
+            <Image
+              src={item.image}
+              alt={item.name}
+              width={300}
+              height={300}
+              className="w-full h-48 object-cover"
+              unoptimized
+            />
             <div className="p-4">
               <h3 className="font-semibold text-gray-900 dark:text-white">{item.name}</h3>
               <p className="text-primary-600 font-bold">{item.price}</p>
@@ -227,7 +289,14 @@ export const SingleItem: Story = {
   args: {
     items: ['https://picsum.photos/seed/single/600/400'],
     renderItem: (url: string) => (
-      <img src={url} alt="Single item" className="w-full h-64 object-cover" />
+      <Image
+        src={url}
+        alt="Single item"
+        width={600}
+        height={400}
+        className="w-full h-64 object-cover"
+        unoptimized
+      />
     ),
     className: 'w-[500px]',
   },

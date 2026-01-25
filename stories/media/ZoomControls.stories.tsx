@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { useState } from 'react';
+import Image from 'next/image';
 import ZoomControls from '@/components/common/media/ZoomControls';
 
 /**
@@ -168,14 +169,17 @@ function InteractiveZoomDemo() {
   return (
     <div className="bg-gray-900 p-4 rounded-lg">
       <div className="relative w-80 h-60 overflow-hidden bg-black rounded-lg mb-4">
-        <img
+        <Image
           src="https://picsum.photos/seed/zoom/600/400"
           alt="Zoomable"
+          width={600}
+          height={400}
           className="absolute top-1/2 left-1/2 transition-transform duration-200"
           style={{
             transform: `translate(-50%, -50%) scale(${zoom})`,
             maxWidth: 'none',
           }}
+          unoptimized
         />
       </div>
       <div className="flex justify-center">
@@ -242,10 +246,12 @@ export const InToolbarContext: Story = {
 export const BottomPositioned: Story = {
   render: () => (
     <div className="relative w-80 h-60 bg-gray-900 rounded-lg overflow-hidden">
-      <img
+      <Image
         src="https://picsum.photos/seed/bottom/600/400"
         alt=""
-        className="w-full h-full object-cover"
+        fill
+        className="object-cover"
+        unoptimized
       />
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
         <ZoomControls min={1} max={3} step={0.5} />
@@ -266,10 +272,12 @@ export const BottomPositioned: Story = {
 export const CornerPositioned: Story = {
   render: () => (
     <div className="relative w-80 h-60 bg-gray-900 rounded-lg overflow-hidden">
-      <img
+      <Image
         src="https://picsum.photos/seed/corner/600/400"
         alt=""
-        className="w-full h-full object-cover"
+        fill
+        className="object-cover"
+        unoptimized
       />
       <div className="absolute bottom-4 right-4">
         <ZoomControls min={1} max={3} step={0.5} showPercentage={false} />

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { useState } from 'react';
+import Image from 'next/image';
 import ThumbnailStrip from '@/components/common/media/ThumbnailStrip';
 
 /**
@@ -191,10 +192,13 @@ function InteractiveThumbnailStrip() {
         <p className="text-sm text-gray-600 dark:text-gray-400">
           Selected: <span className="font-bold">Image {currentIndex + 1}</span>
         </p>
-        <img
+        <Image
           src={sampleItems[currentIndex].url}
           alt={`Selected ${currentIndex + 1}`}
+          width={192}
+          height={192}
           className="w-48 h-48 object-cover rounded-lg mx-auto mt-2"
+          unoptimized
         />
       </div>
       <ThumbnailStrip
@@ -226,7 +230,14 @@ export const InGalleryLayout: Story = {
     return (
       <div className="flex gap-4">
         <div className="w-96 h-96 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
-          <img src={sampleItems[currentIndex].url} alt="" className="w-full h-full object-cover" />
+          <Image
+            src={sampleItems[currentIndex].url}
+            alt=""
+            width={384}
+            height={384}
+            className="w-full h-full object-cover"
+            unoptimized
+          />
         </div>
         <ThumbnailStrip
           items={sampleItems}
@@ -262,7 +273,14 @@ export const VerticalGalleryLeft: Story = {
           size="sm"
         />
         <div className="w-80 h-80 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
-          <img src={sampleItems[currentIndex].url} alt="" className="w-full h-full object-cover" />
+          <Image
+            src={sampleItems[currentIndex].url}
+            alt=""
+            width={320}
+            height={320}
+            className="w-full h-full object-cover"
+            unoptimized
+          />
         </div>
       </div>
     );
