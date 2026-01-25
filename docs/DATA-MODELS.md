@@ -371,6 +371,21 @@ interface AnalyticsData {
 }
 ```
 
+#### QuickEditData
+
+Data structure for quick inline product editing:
+
+```typescript
+interface QuickEditData {
+  /** Updated product name */
+  name: string;
+  /** Updated price in MXN */
+  price: number;
+  /** Updated stock quantity */
+  stock: number;
+}
+```
+
 ---
 
 ### SellerType

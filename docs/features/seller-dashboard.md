@@ -264,13 +264,45 @@ OverviewTab
 
 ### Product Actions
 
-| Action            | Description                 |
-| ----------------- | --------------------------- |
-| Add               | Open product form modal     |
-| Edit              | Load product data into form |
-| Delete            | Confirm and remove product  |
-| Publish/Unpublish | Toggle visibility           |
-| Duplicate         | Create copy of product      |
+| Action            | Description                    |
+| ----------------- | ------------------------------ |
+| Add               | Open product form modal        |
+| Edit              | Load product data into form    |
+| Quick Edit        | Inline edit name, price, stock |
+| Delete            | Confirm and remove product     |
+| Publish/Unpublish | Toggle visibility              |
+| Duplicate         | Create copy of product         |
+
+### Quick Edit Modal
+
+The Quick Edit feature allows sellers to update essential product details without leaving the dashboard:
+
+```tsx
+import QuickEditModal from '@/components/dashboard/QuickEditModal';
+
+<QuickEditModal
+  product={selectedProduct}
+  isOpen={isQuickEditOpen}
+  onClose={() => setIsQuickEditOpen(false)}
+  onSave={async (productId, data) => {
+    await updateProductQuick(productId, data, user.email);
+  }}
+/>;
+```
+
+**Editable Fields:**
+
+- Product name
+- Price (MXN)
+- Stock quantity
+
+**Features:**
+
+- Form validation with Spanish error messages
+- Save button disabled until changes detected
+- Loading state during save
+- Escape key to close
+- Dark mode support
 
 ### Bulk Actions
 
@@ -487,8 +519,84 @@ Sellers can earn achievements based on performance:
 | Top Products    | Best selling items         |
 | Traffic Sources | Where visitors come from   |
 
+### De Visita a Compra (Conversion Funnel)
+
+Visual funnel showing customer journey stages with conversion rates:
+
+```tsx
+import ConversionFunnel from '@/components/charts/ConversionFunnel';
+import { Eye, ShoppingCart, CreditCard, Package } from 'lucide-react';
+
+<ConversionFunnel
+  steps={[
+    { label: 'Visitas', value: 1250, icon: <Eye className="w-full h-full" />, variant: 'blue' },
+    {
+      label: 'Al carrito',
+      value: 180,
+      icon: <ShoppingCart className="w-full h-full" />,
+      variant: 'purple',
+    },
+    {
+      label: 'Checkout',
+      value: 85,
+      icon: <CreditCard className="w-full h-full" />,
+      variant: 'amber',
+    },
+    { label: 'Compras', value: 62, icon: <Package className="w-full h-full" />, variant: 'green' },
+  ]}
+  showPercentage={true}
+/>;
+```
+
+**Stages:**
+
+- **Visitas** - Total store/product page visits
+- **Al carrito** - Products added to cart
+- **Checkout** - Checkout process initiated
+- **Compras** - Completed purchases
+
+### Conversión por Producto
+
+Per-product conversion metrics table showing performance of each product:
+
+```tsx
+import ProductConversions from '@/components/dashboard/ProductConversions';
+
+<ProductConversions
+  products={[
+    {
+      productId: 'p1',
+      productName: 'Cojín Tejido Geométrico',
+      views: 890,
+      addToCart: 156,
+      purchases: 45,
+      viewToCartRate: 17.5,
+      cartToPurchaseRate: 28.8,
+    },
+    // ... more products
+  ]}
+/>;
+```
+
+**Metrics per Product:**
+
+| Metric           | Description                             |
+| ---------------- | --------------------------------------- |
+| Vistas           | Product page views                      |
+| Al carrito       | Times added to cart                     |
+| Compras          | Completed purchases                     |
+| Vista → Carrito  | View to add-to-cart conversion rate (%) |
+| Carrito → Compra | Cart to purchase conversion rate (%)    |
+
+**Color Thresholds:**
+
+- **View → Cart**: Green ≥15%, Yellow ≥10%, Red <10%
+- **Cart → Purchase**: Green ≥25%, Yellow ≥15%, Red <15%
+
 ### Charts Used
 
+- **ConversionFunnel** - Customer journey visualization
+- **ProductConversions** - Per-product metrics table
 - **DonutChart** - Category distribution
 - **HorizontalBarChart** - Top products
 - **ProgressStat** - Goals progress

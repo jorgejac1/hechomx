@@ -117,7 +117,7 @@ export default function Home() {
             Únete a nuestra plataforma y comparte tus creaciones con todo México
           </p>
           <Link
-            href="/vendedores"
+            href="/vender"
             className="inline-block bg-white text-primary-600 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base font-semibold hover:bg-primary-50 transition"
           >
             Comienza a Vender

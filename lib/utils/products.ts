@@ -269,3 +269,75 @@ export function clearDuplicateProduct(): void {
     console.error('[products] Error clearing duplicate product:', error);
   }
 }
+
+// ============================================
+// Quick Edit
+// ============================================
+
+/**
+ * Quick edit data for updating product essentials
+ */
+export interface QuickEditData {
+  name: string;
+  price: number;
+  stock: number;
+}
+
+/**
+ * Update product with quick edit data (name, price, stock)
+ * Works for both published products and drafts
+ * @param productId - The ID of the product to update
+ * @param data - Quick edit data (name, price, stock)
+ * @param sellerId - The seller's ID (email)
+ * @returns Updated product or null if not found
+ */
+export function updateProductQuick(
+  productId: string,
+  data: QuickEditData,
+  sellerId: string
+): DraftProduct | null {
+  try {
+    // First check published products
+    const publishedStored = localStorage.getItem(SELLER_PRODUCTS_KEY);
+    const allPublished: DraftProduct[] = publishedStored ? JSON.parse(publishedStored) : [];
+    const publishedIndex = allPublished.findIndex(
+      (p) => p.id === productId && p.sellerId === sellerId
+    );
+
+    if (publishedIndex !== -1) {
+      const updated: DraftProduct = {
+        ...allPublished[publishedIndex],
+        name: data.name,
+        price: data.price,
+        stock: data.stock,
+        updatedAt: new Date().toISOString(),
+      };
+      allPublished[publishedIndex] = updated;
+      localStorage.setItem(SELLER_PRODUCTS_KEY, JSON.stringify(allPublished));
+      return updated;
+    }
+
+    // Check drafts if not found in published
+    const draftStored = localStorage.getItem(DRAFT_PRODUCTS_KEY);
+    const allDrafts: DraftProduct[] = draftStored ? JSON.parse(draftStored) : [];
+    const draftIndex = allDrafts.findIndex((p) => p.id === productId && p.sellerId === sellerId);
+
+    if (draftIndex !== -1) {
+      const updated: DraftProduct = {
+        ...allDrafts[draftIndex],
+        name: data.name,
+        price: data.price,
+        stock: data.stock,
+        updatedAt: new Date().toISOString(),
+      };
+      allDrafts[draftIndex] = updated;
+      localStorage.setItem(DRAFT_PRODUCTS_KEY, JSON.stringify(allDrafts));
+      return updated;
+    }
+
+    return null;
+  } catch (error) {
+    console.error('[products] Error updating product:', error);
+    return null;
+  }
+}

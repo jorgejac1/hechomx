@@ -444,37 +444,65 @@ Individual tab content components:
 
 ---
 
-### ConversionFunnel
+### ConversionFunnel (De Visita a Compra)
 
-Visual funnel showing customer journey from visit to purchase.
+Visual funnel showing customer journey from visit to purchase. Title: "De Visita a Compra".
+
+**Location:** `components/charts/ConversionFunnel.tsx`
 
 ```tsx
-import ConversionFunnel from '@/components/dashboard/ConversionFunnel';
+import ConversionFunnel from '@/components/charts/ConversionFunnel';
+import { Eye, ShoppingCart, CreditCard, Package } from 'lucide-react';
 
 <ConversionFunnel
-  stages={[
-    { id: 'store_visits', label: 'Visitas a tienda', count: 1000, conversionFromPrevious: 100 },
-    { id: 'product_views', label: 'Vistas de producto', count: 600, conversionFromPrevious: 60 },
-    { id: 'add_to_cart', label: 'Agregados al carrito', count: 100, conversionFromPrevious: 16.7 },
-    { id: 'checkout_started', label: 'Checkout iniciado', count: 50, conversionFromPrevious: 50 },
-    { id: 'purchases', label: 'Compras completadas', count: 40, conversionFromPrevious: 80 },
+  steps={[
+    { label: 'Visitas', value: 1250, icon: <Eye className="w-full h-full" />, variant: 'blue' },
+    {
+      label: 'Al carrito',
+      value: 180,
+      icon: <ShoppingCart className="w-full h-full" />,
+      variant: 'purple',
+    },
+    {
+      label: 'Checkout',
+      value: 85,
+      icon: <CreditCard className="w-full h-full" />,
+      variant: 'amber',
+    },
+    { label: 'Compras', value: 62, icon: <Package className="w-full h-full" />, variant: 'green' },
   ]}
-  periodLabel="Esta semana"
+  showPercentage={true}
+  showConversionRate={true}
 />;
 ```
 
-| Prop          | Type            | Default          | Description                   |
-| ------------- | --------------- | ---------------- | ----------------------------- |
-| `stages`      | `FunnelStage[]` | -                | Array of funnel stages        |
-| `periodLabel` | `string`        | `'Este período'` | Time period label for display |
+| Prop                 | Type                        | Default            | Description                            |
+| -------------------- | --------------------------- | ------------------ | -------------------------------------- |
+| `steps`              | `FunnelStep[]`              | -                  | Array of funnel steps                  |
+| `showPercentage`     | `boolean`                   | `true`             | Show percentage relative to first step |
+| `showConversionRate` | `boolean`                   | `false`            | Show conversion rate between steps     |
+| `formatValue`        | `(value: number) => string` | `toLocaleString()` | Format function for values             |
+| `className`          | `string`                    | `''`               | Additional CSS classes                 |
+
+**FunnelStep Interface:**
+
+```typescript
+interface FunnelStep {
+  label: string;
+  value: number;
+  icon?: React.ReactNode;
+  variant?: 'gray' | 'blue' | 'purple' | 'green' | 'amber' | 'red';
+}
+```
 
 **Features:**
 
-- Visual progress bars with color gradient (blue → green)
-- Drop-off percentages between stages
-- Summary stats: cart abandonment, checkout rate, view-to-purchase
-- Color-coded conversion indicators (green ≥50%, yellow ≥25%, red <25%)
-- Responsive design with dark mode support
+- 4-step visual funnel with icons
+- Percentage display relative to first step
+- Optional conversion rates between steps
+- Color-coded variants (gray, blue, purple, green, amber, red)
+- Responsive grid layout (2 cols mobile, 4 cols desktop)
+- Dark mode support
 
 ---
 
@@ -511,6 +539,57 @@ import ProductConversions from '@/components/dashboard/ProductConversions';
 - Color-coded conversion rates (green/yellow/red thresholds)
 - Trend indicators comparing to average
 - Average summary at bottom
+
+---
+
+### QuickEditModal
+
+Inline modal for quick product editing from the dashboard.
+
+```tsx
+import QuickEditModal from '@/components/dashboard/QuickEditModal';
+
+const [editingProduct, setEditingProduct] = useState<SellerProduct | null>(null);
+
+const handleSave = async (productId: string, data: QuickEditData) => {
+  // Update product in localStorage or API
+  updateProductQuick(productId, data, user.email);
+};
+
+<QuickEditModal
+  product={editingProduct}
+  isOpen={editingProduct !== null}
+  onClose={() => setEditingProduct(null)}
+  onSave={handleSave}
+/>;
+```
+
+| Prop      | Type                                                        | Description                      |
+| --------- | ----------------------------------------------------------- | -------------------------------- |
+| `product` | `SellerProduct \| null`                                     | Product to edit                  |
+| `isOpen`  | `boolean`                                                   | Whether modal is visible         |
+| `onClose` | `() => void`                                                | Callback when modal should close |
+| `onSave`  | `(productId: string, data: QuickEditData) => Promise<void>` | Callback to save changes         |
+
+**QuickEditData Interface:**
+
+```typescript
+interface QuickEditData {
+  name: string;
+  price: number;
+  stock: number;
+}
+```
+
+**Features:**
+
+- Edit product name, price, and stock without leaving dashboard
+- Form validation with error messages
+- Disabled save button when no changes detected
+- Loading state during save
+- Keyboard navigation (Escape to close)
+- Dark mode support
+- Accessible with proper ARIA attributes
 
 ---
 
@@ -613,6 +692,86 @@ import { RankedList } from '@/components/charts';
   showRank
   showTrend
 />;
+```
+
+---
+
+### ProgressStat
+
+Progress bar with label and value display. Used for showing goal progress or metrics with targets.
+
+```tsx
+import ProgressStat from '@/components/charts/ProgressStat';
+
+<ProgressStat
+  label="Meta de ventas"
+  value={7500}
+  maxValue={10000}
+  formatValue={(v) => `$${v.toLocaleString()}`}
+  showPercentage={true}
+  color="purple"
+  size="md"
+/>;
+```
+
+| Prop             | Type                        | Default            | Description                   |
+| ---------------- | --------------------------- | ------------------ | ----------------------------- |
+| `label`          | `string`                    | -                  | Stat label                    |
+| `value`          | `number`                    | -                  | Current value                 |
+| `maxValue`       | `number`                    | -                  | Maximum/target value          |
+| `formatValue`    | `(value: number) => string` | `toLocaleString()` | Format function for values    |
+| `showPercentage` | `boolean`                   | `true`             | Show percentage next to value |
+| `color`          | `string`                    | `'purple'`         | Bar color variant             |
+| `size`           | `'sm' \| 'md' \| 'lg'`      | `'md'`             | Bar height variant            |
+| `className`      | `string`                    | `''`               | Additional CSS classes        |
+
+**Color Variants:** `purple`, `blue`, `green`, `amber`, `red`, `pink`
+
+**Size Variants:**
+
+- `sm`: 6px height
+- `md`: 8px height
+- `lg`: 12px height
+
+---
+
+### MultiProgressStat
+
+Multi-segment progress bar for showing multiple values in one bar.
+
+```tsx
+import { MultiProgressStat } from '@/components/charts/ProgressStat';
+
+<MultiProgressStat
+  label="Distribución de ventas"
+  segments={[
+    { value: 45, color: 'purple', label: 'Textiles' },
+    { value: 30, color: 'blue', label: 'Cerámica' },
+    { value: 25, color: 'green', label: 'Otros' },
+  ]}
+  total={100}
+  showLegend={true}
+  size="md"
+/>;
+```
+
+| Prop         | Type                     | Default | Description            |
+| ------------ | ------------------------ | ------- | ---------------------- |
+| `label`      | `string`                 | -       | Stat label             |
+| `segments`   | `MultiProgressSegment[]` | -       | Array of segments      |
+| `total`      | `number`                 | -       | Total/max value        |
+| `showLegend` | `boolean`                | `true`  | Show legend below bar  |
+| `size`       | `'sm' \| 'md' \| 'lg'`   | `'md'`  | Bar height variant     |
+| `className`  | `string`                 | `''`    | Additional CSS classes |
+
+**MultiProgressSegment Interface:**
+
+```typescript
+interface MultiProgressSegment {
+  value: number;
+  color: 'purple' | 'blue' | 'green' | 'amber' | 'red' | 'pink' | 'gray';
+  label?: string;
+}
 ```
 
 ---

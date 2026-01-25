@@ -174,7 +174,7 @@ export default function DealsSection() {
   };
 
   return (
-    <section className="py-8 sm:py-10 md:py-12 bg-white dark:bg-gray-900">
+    <section id="ofertas" className="py-8 sm:py-10 md:py-12 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - Mobile Optimized */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">

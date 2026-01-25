@@ -23,14 +23,16 @@ import {
   CheckSquare,
   Square,
   Minus,
+  Pencil,
 } from 'lucide-react';
 import { formatCurrency } from '@/lib';
 import { ROUTES } from '@/lib';
 import { SellerProduct } from '@/lib/types';
 import { useToast } from '@/contexts/ToastContext';
 import { useAuth } from '@/contexts/AuthContext';
-import { getPublishedProducts } from '@/lib/utils/products';
+import { getPublishedProducts, updateProductQuick } from '@/lib/utils/products';
 import type { DraftProduct } from '@/types/product';
+import QuickEditModal, { type QuickEditData } from '@/components/dashboard/QuickEditModal';
 
 /**
  * Convert a DraftProduct from localStorage to SellerProduct format
@@ -62,6 +64,7 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
   const { user } = useAuth();
   const [products, setProducts] = useState<SellerProduct[]>(initialProducts);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [editingProduct, setEditingProduct] = useState<SellerProduct | null>(null);
   const { showToast } = useToast();
 
   // Load products from localStorage and merge with initial products
@@ -167,6 +170,40 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
     setSelectedIds(new Set());
     showToast(
       `${count} producto${count > 1 ? 's' : ''} duplicado${count > 1 ? 's' : ''}`,
+      'success'
+    );
+  };
+
+  const handleQuickEdit = (product: SellerProduct) => {
+    setEditingProduct(product);
+  };
+
+  const handleQuickEditSave = async (productId: string, data: QuickEditData) => {
+    if (!user?.email) {
+      showToast('Debes iniciar sesión para editar productos', 'error');
+      return;
+    }
+
+    // Update in localStorage
+    const updated = updateProductQuick(productId, data, user.email);
+
+    // Update local state regardless of localStorage result (for mock products)
+    setProducts((prev) =>
+      prev.map((p) =>
+        p.id === productId
+          ? {
+              ...p,
+              name: data.name,
+              price: data.price,
+              stock: data.stock,
+              status: data.stock > 0 ? ('active' as const) : ('out_of_stock' as const),
+            }
+          : p
+      )
+    );
+
+    showToast(
+      updated ? 'Producto actualizado correctamente' : 'Producto actualizado (cambios locales)',
       'success'
     );
   };
@@ -312,7 +349,7 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 mb-3">
                     <span className="flex items-center gap-1">
                       <Eye className="w-3 h-3" />
                       {product.views} vistas
@@ -322,12 +359,29 @@ export default function ProductsTab({ products: initialProducts }: ProductsTabPr
                       {product.favorites}
                     </span>
                   </div>
+
+                  {/* Quick Edit Button */}
+                  <button
+                    onClick={() => handleQuickEdit(product)}
+                    className="w-full flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+                  >
+                    <Pencil className="w-4 h-4" />
+                    Edición Rápida
+                  </button>
                 </div>
               </div>
             );
           })}
         </div>
       )}
+
+      {/* Quick Edit Modal */}
+      <QuickEditModal
+        product={editingProduct}
+        isOpen={editingProduct !== null}
+        onClose={() => setEditingProduct(null)}
+        onSave={handleQuickEditSave}
+      />
 
       {/* Floating Bulk Action Bar */}
       {!noneSelected && (

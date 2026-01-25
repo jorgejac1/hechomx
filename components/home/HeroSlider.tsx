@@ -75,7 +75,7 @@ const SLIDES: Slide[] = [
     },
     secondaryCTA: {
       text: 'Conocer Más',
-      href: '#about',
+      href: '/nosotros',
     },
     theme: 'secondary',
   },
@@ -87,11 +87,11 @@ const SLIDES: Slide[] = [
     image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=1080&q=75',
     primaryCTA: {
       text: 'Vender en la Plataforma',
-      href: '/vendedores',
+      href: '/vender',
     },
     secondaryCTA: {
       text: 'Ver Beneficios',
-      href: '/vendedores#beneficios',
+      href: '/vender#beneficios',
     },
     theme: 'tertiary',
   },
@@ -107,7 +107,7 @@ const SLIDES: Slide[] = [
     },
     secondaryCTA: {
       text: 'Ver Ofertas',
-      href: '#ofertas',
+      href: '/#ofertas',
     },
     theme: 'primary',
   },
