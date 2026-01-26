@@ -20,7 +20,7 @@ interface BreadcrumbItem {
 
 interface ProductDetailWrapperProps {
   product: Product;
-  similarProducts: Product[];
+  allProducts: Product[];
   breadcrumbItems: BreadcrumbItem[];
   productJsonLd: ReturnType<typeof generateProductJsonLd>;
   breadcrumbJsonLd: ReturnType<typeof generateBreadcrumbJsonLd>;
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
 // Create a wrapper component that handles Suspense
 function ProductDetailWrapper({
   product,
-  similarProducts,
+  allProducts,
   breadcrumbItems,
   productJsonLd,
   breadcrumbJsonLd,
@@ -82,7 +82,7 @@ function ProductDetailWrapper({
           </div>
         </div>
 
-        <ProductDetailClient product={product} similarProducts={similarProducts} />
+        <ProductDetailClient product={product} allProducts={allProducts} />
       </div>
     </>
   );
@@ -97,9 +97,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   }
 
   const allProducts = getAllProducts();
-  const similarProducts = allProducts
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
 
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: 'Inicio', href: '/' },
@@ -147,7 +144,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     >
       <ProductDetailWrapper
         product={product}
-        similarProducts={similarProducts}
+        allProducts={allProducts}
         breadcrumbItems={breadcrumbItems}
         productJsonLd={productJsonLd}
         breadcrumbJsonLd={breadcrumbJsonLd}

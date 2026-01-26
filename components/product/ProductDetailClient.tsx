@@ -17,7 +17,7 @@ import ProductInfo from './ProductInfo';
 import ProductHighlights from './ProductHighlights';
 import SellerProfile from './SellerProfile';
 import ReviewsSection from './ReviewsSection';
-import SimilarProducts from './SimilarProducts';
+import ProductRecommendations from './ProductRecommendations';
 import ShippingReturns from './ShippingReturns';
 import StickyCartBar from './StickyCartBar';
 import ProductDescription from './ProductDescription';
@@ -29,14 +29,11 @@ import ProductDescription from './ProductDescription';
 interface ProductDetailClientProps {
   /** The main product to display */
   product: Product;
-  /** Array of similar products to show in recommendations section */
-  similarProducts: Product[];
+  /** All available products for recommendation calculations */
+  allProducts: Product[];
 }
 
-export default function ProductDetailClient({
-  product,
-  similarProducts,
-}: ProductDetailClientProps) {
+export default function ProductDetailClient({ product, allProducts }: ProductDetailClientProps) {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const { addToCart } = useCart();
 
@@ -110,12 +107,8 @@ export default function ProductDetailClient({
             />
           )}
 
-          {/* 7. Similar Products */}
-          {similarProducts.length > 0 && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6 lg:p-8">
-              <SimilarProducts products={similarProducts} category={product.category} />
-            </div>
-          )}
+          {/* 7. Product Recommendations */}
+          <ProductRecommendations currentProduct={product} allProducts={allProducts} />
         </div>
       </div>
 

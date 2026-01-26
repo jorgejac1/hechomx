@@ -99,6 +99,11 @@ flowchart TB
 │   ├── data/            # JSON mock data
 │   ├── types/           # TypeScript interfaces
 │   └── utils/           # Utility functions
+│       ├── orders.ts        # Order management
+│       ├── coupons.ts       # Coupon validation
+│       ├── recently-viewed.ts # Browsing history
+│       ├── recommendations.ts # Smart product recommendations
+│       └── search.ts        # Search with fuzzy matching
 │
 ├── services/            # Data abstraction layer
 │   └── settingsService.ts
@@ -252,6 +257,51 @@ Page Component
   </AuthProvider>
 </ThemeProvider>
 ```
+
+## Key Features
+
+### Product Recommendations
+
+Smart recommendation system with three strategies:
+
+```tsx
+// lib/utils/recommendations.ts
+const recommendations = getCombinedRecommendations(product, allProducts, {
+  similarLimit: 4, // Same category products
+  crossCategoryLimit: 4, // "You might also like"
+  recentlyViewedLimit: 4, // Browsing history
+});
+```
+
+Scoring factors:
+
+- Same category (10 points)
+- Same maker (8 points)
+- Same state/region (5 points)
+- Shared materials (4 points)
+- Similar price range (3 points)
+- Featured/verified status bonus
+
+### Search with Autocomplete
+
+Enhanced search with fuzzy matching and history:
+
+```tsx
+// lib/utils/search.ts
+const results = searchProducts(products, query, { limit: 6 });
+// Returns: { product, score, matchedFields }[]
+
+// Search history (localStorage)
+addToSearchHistory('alebrije');
+const history = getSearchHistory(); // Last 10 searches
+```
+
+Features:
+
+- Fuzzy matching with Levenshtein distance
+- Multi-field search (name, category, maker, state, materials)
+- Search history persistence
+- Debounced search (300ms)
 
 ## Performance Considerations
 

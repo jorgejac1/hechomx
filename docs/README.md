@@ -13,12 +13,13 @@
 
 ## Features Documentation
 
-| Feature                                            | Description                       |
-| -------------------------------------------------- | --------------------------------- |
-| [Authentication](./features/authentication.md)     | Auth system and user roles        |
-| [Cart & Checkout](./features/cart-checkout.md)     | Shopping cart and checkout flow   |
-| [Seller Dashboard](./features/seller-dashboard.md) | Seller tools and analytics        |
-| [Verification](./features/verification.md)         | 4-tier seller verification system |
+| Feature                                                          | Description                                 |
+| ---------------------------------------------------------------- | ------------------------------------------- |
+| [Authentication](./features/authentication.md)                   | Auth system and user roles                  |
+| [Cart & Checkout](./features/cart-checkout.md)                   | Shopping cart and checkout flow             |
+| [Seller Dashboard](./features/seller-dashboard.md)               | Seller tools and analytics                  |
+| [Verification](./features/verification.md)                       | 4-tier seller verification system           |
+| [Search & Recommendations](./features/search-recommendations.md) | Fuzzy search, autocomplete, recommendations |
 
 ## Guides
 
@@ -113,4 +114,4 @@ npm run size
 
 ---
 
-_Last updated: January 24, 2026_
+_Last updated: January 26, 2026_

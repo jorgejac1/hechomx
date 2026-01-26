@@ -200,6 +200,7 @@ components/
 │   ├── ReviewsSection.tsx
 │   ├── RatingBreakdown.tsx
 │   ├── SimilarProducts.tsx
+│   ├── ProductRecommendations.tsx  # Smart recommendations (similar, cross-category, recently viewed)
 │   ├── DeliveryEstimate.tsx
 │   ├── TrustIndicators.tsx
 │   ├── SellerProfile.tsx
@@ -373,7 +374,7 @@ components/
 │   └── MaintenanceProvider.tsx
 │
 └── ui/                     # UI components
-    └── SearchModal.tsx
+    └── SearchModal.tsx     # Enhanced search with autocomplete, fuzzy matching, history
 ```
 
 ### Component Patterns
@@ -484,6 +485,10 @@ lib/
 │   ├── validation.ts       # Validation helpers
 │   ├── orders.ts           # Order utilities
 │   ├── coupons.ts          # Coupon validation
+│   ├── recently-viewed.ts  # Browsing history tracking
+│   ├── recommendations.ts  # Smart product recommendations
+│   ├── search.ts           # Search with fuzzy matching and history
+│   ├── api-client.ts       # Typed fetch wrapper with error handling
 │   └── ...
 │
 └── api/                    # API utilities (future)
